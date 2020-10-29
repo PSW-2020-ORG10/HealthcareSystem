@@ -1,0 +1,199 @@
+﻿<UserControl x:Class="HCI_wireframe.FirstPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HCI_wireframe"
+        mc:Ignorable="d"
+         KeyDown="Window_KeyDown"
+        Loaded="Window_Loaded"
+        HorizontalAlignment ="Stretch"
+        VerticalAlignment="Stretch"
+       >
+
+    <UserControl.Background>
+        <ImageBrush ImageSource="/HCI_wireframe;component/View/Patient/Resources/5.jpg" Stretch="UniformToFill"/>
+    </UserControl.Background>
+    <UserControl.ToolTip>
+        <ToolTip Placement="Right" 
+             ToolTipService.PlacementRectangle="50,0,0,0"
+             HorizontalOffset="-200" 
+             VerticalOffset="20"
+             HasDropShadow="false"
+           
+             />
+    </UserControl.ToolTip>
+
+    <Grid>
+        <DockPanel>
+            <Menu DockPanel.Dock ="Top">
+                <Menu.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <DockPanel HorizontalAlignment="Stretch"></DockPanel>
+                    </ItemsPanelTemplate>
+                </Menu.ItemsPanel>
+
+                <MenuItem Header="File" InputGestureText="Ctrl" Name="File_Name">
+                    <MenuItem Header="Make an appointment" InputGestureText="Ctrl+M"></MenuItem>
+                    <MenuItem Header="Ask a question" InputGestureText="Ctrl+A"></MenuItem>
+                    <MenuItem Header="Fill in a questionarie" InputGestureText="Ctrl+F"></MenuItem>
+                    <MenuItem Header="Log out"  InputGestureText="Ctrl+D" ></MenuItem>
+                </MenuItem>
+
+                <MenuItem Header="Edit">
+                    <MenuItem Header="Account Settings"  InputGestureText="Ctrl + Q"></MenuItem>
+                    <MenuItem Header="Settings"  InputGestureText="Ctrl+W"></MenuItem>
+                </MenuItem>
+
+                <MenuItem Header="View">
+                    <MenuItem Header="My appointments"  InputGestureText="Ctrl+Z"></MenuItem>
+                    <MenuItem Header="Medical History"  InputGestureText="Ctrl+X"></MenuItem>
+                    <MenuItem Header="Medical therapy on a weekly basis"  InputGestureText="Ctrl+L"></MenuItem>
+                    <MenuItem Header="Emergency phone numbers"  InputGestureText="Ctrl+V"></MenuItem>
+                    <MenuItem Header="Notifications"  InputGestureText="Ctrl+N"></MenuItem>
+                </MenuItem>
+
+                <MenuItem Header="Help">
+                    <MenuItem Header="Help"  InputGestureText="Ctrl+K"></MenuItem>
+                </MenuItem>
+
+            </Menu>
+            <Grid DockPanel.Dock="Bottom" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+
+                <Button Grid.Row="3" Grid.Column="1" Height="35" Grid.ColumnSpan="2" Name="accountButton" IsKeyboardFocusedChanged="accountButton_IsKeyboardFocusedChanged"
+                        Click="accountButton_Click">Account Settings
+                    <Button.ToolTip>
+                        <ToolTip>
+                           
+                           Insight in personal information and posibility to change them
+                        </ToolTip>
+                    </Button.ToolTip>
+                </Button>
+                <Button Grid.Row="5" Grid.Column="1"  Height="35"  Grid.ColumnSpan="2"  Name="appointmentsButton" IsKeyboardFocusedChanged="accountButton_IsKeyboardFocusedChanged"
+                        Click="appointmentsButton_Click">My appointments
+                    <Button.ToolTip>
+                        <ToolTip>
+                            Insight in date and time of the appointments and posibility to change term or cancel it
+                        </ToolTip>
+                    </Button.ToolTip>
+                </Button>
+                <Button Grid.Row="7" Grid.Column="1"  Grid.ColumnSpan="2"   Height="35" Name="makeApButton" IsKeyboardFocusedChanged="accountButton_IsKeyboardFocusedChanged"
+                        Click="makeApButton_Click">Make an appointment
+                    <Button.ToolTip>
+                        <ToolTip>
+                            Making an appointment
+                        </ToolTip>
+                    </Button.ToolTip>
+                </Button>
+                <Button Grid.Row="9" Grid.Column="1"  Grid.ColumnSpan="2"  Name="historyButton"  Height="35"  IsKeyboardFocusedChanged="accountButton_IsKeyboardFocusedChanged"
+                        Click="historyButton_Click">Medical History
+                    <Button.ToolTip>
+                        <ToolTip>
+                            Insight in reports of previous appointments
+                        </ToolTip>
+                    </Button.ToolTip>
+                </Button>
+                <Button Grid.Row="3" Grid.Column="4"  Grid.ColumnSpan="2"  Name="weekButton"  Height="35"  IsKeyboardFocusedChanged="accountButton_IsKeyboardFocusedChanged"
+                        Click="weekButton_Click">Medical Therapy on a weekly basis
+                    <Button.ToolTip>
+                        <ToolTip>
+                            Medical therapy on a weekly basis will remind you on your therapy. You can see detailed therapy wor choosen week.
+                        </ToolTip>
+                    </Button.ToolTip>
+                </Button>
+                <Button Grid.Row="5" Grid.Column="4"  Grid.ColumnSpan="2"  Name="emergencyButton"  Height="35"  IsKeyboardFocusedChanged="accountButton_IsKeyboardFocusedChanged"
+                        Click="emergencyButton_Click">Emergency phone numbers
+                    <Button.ToolTip>
+                        <ToolTip>
+                            Insight in emergency phone numbers
+                        </ToolTip>
+                    </Button.ToolTip>
+                </Button>
+                <Button Grid.Row="7" Grid.Column="4"  Grid.ColumnSpan="2"  Name="notificationButton" Height="35"  IsKeyboardFocusedChanged="accountButton_IsKeyboardFocusedChanged"
+                        Click="notificationButton_Click">Notifications
+                    <Button.ToolTip>
+                        <ToolTip>
+                           Notifications include current viruses, aktuel events unexpectedly canceled appointments
+                        </ToolTip>
+                    </Button.ToolTip>
+                </Button>
+                <Button Grid.Row="9" Grid.Column="4"  Grid.ColumnSpan="2"  Name="questionButton"  Height="35" IsKeyboardFocusedChanged="accountButton_IsKeyboardFocusedChanged"
+                        Click="questionButton_Click">Ask a question
+                    <Button.ToolTip>
+                        <ToolTip>
+                           Ask a question and find out what you want
+                        </ToolTip>
+                    </Button.ToolTip>
+                </Button>
+                <Button Grid.Row="3" Grid.Column="7"  Grid.ColumnSpan="2"  Name="questionarieButton"  Height="35" IsKeyboardFocusedChanged="accountButton_IsKeyboardFocusedChanged"
+                        Click="questionarieButton_Click">Fill in a questionarie
+                    <Button.ToolTip>
+                        <ToolTip>
+                           Fill in a questionarie for a choosen doctor to help the clinic improve 
+                        </ToolTip>
+                    </Button.ToolTip>
+                </Button>
+                <Button Grid.Row="5" Grid.Column="7"  Grid.ColumnSpan="2"  Name="helpButton"  Height="35" IsKeyboardFocusedChanged="accountButton_IsKeyboardFocusedChanged"
+                        Click="helpButton_Click">Help
+                    <Button.ToolTip>
+                        <ToolTip>
+                           Detailed help for using the application
+                        </ToolTip>
+                    </Button.ToolTip>
+                </Button>
+                <Button Grid.Row="7" Grid.Column="7"  Grid.ColumnSpan="2"  Name="settingsButton"  Height="35" IsKeyboardFocusedChanged="accountButton_IsKeyboardFocusedChanged"
+                        Click="settingsButton_Click">Settings
+                    <Button.ToolTip>
+                        <ToolTip>
+                            Settings for some options
+                        </ToolTip>
+                    </Button.ToolTip>
+                </Button>
+
+                <Button Grid.Row="9" Grid.Column="7" Grid.ColumnSpan="2"   Name="logOutButton"  Height="35" IsKeyboardFocusedChanged="accountButton_IsKeyboardFocusedChanged"
+                        Click="logOutButton_Click">Log out
+                    <Button.ToolTip>
+                        <ToolTip>
+                            Log out after using the application
+                        </ToolTip>
+                    </Button.ToolTip>
+                </Button>
+
+              
+
+
+                <Label Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="3" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30">HEALTH CLINIC</Label>
+                <Label Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="3" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20">WELCOME!</Label>
+            </Grid>
+        </DockPanel>
+        <Grid x:Name="gridMain" Grid.ColumnSpan="12" Grid.RowSpan="17" Visibility="Visible"/>
+    </Grid >
+</UserControl>

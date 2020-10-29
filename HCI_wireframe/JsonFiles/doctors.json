@@ -1,0 +1,68 @@
+[
+  {
+    "speciality": null,
+    "Specialist": false,
+    "specialNotifications": [
+      "Patient - 5 -  I like the way you work. :)"
+    ],
+    "ordination": "Room 500",
+    "salary": 1500.0,
+    "city": "Novi Sad,Danila Kisa 7a,21000,Srbija",
+    "Email": "lidija@gmail.com",
+    "Password": "lidija123",
+    "FirstName": "Lidija",
+    "SecondName": "Vukovic",
+    "UniqueCitizensIdentityNumber": "2310789455555",
+    "DateOfBirth": "23/10/1998",
+    "PhoneNumber": "062589758",
+    "ID": 1
+  },
+  {
+    "speciality": null,
+    "Specialist": false,
+    "specialNotifications": null,
+    "ordination": "Room 600",
+    "salary": 1000.0,
+    "city": "Novi Sad, Mise Perica 2,21000,Srbija",
+    "Email": "natasa@gmail.com",
+    "Password": "natasa",
+    "FirstName": "Natasa",
+    "SecondName": "Savic",
+    "UniqueCitizensIdentityNumber": "1402999805021",
+    "DateOfBirth": "11/11/1988",
+    "PhoneNumber": "0659781655",
+    "ID": 3
+  },
+  {
+    "speciality": "kardiolog",
+    "Specialist": true,
+    "specialNotifications": null,
+    "ordination": "Operation room 20",
+    "salary": 2000.0,
+    "city": "Novi Sad, Radoslava Prodanovica 4, 21000, Srbija",
+    "Email": "paja@gmail.com",
+    "Password": "paja",
+    "FirstName": "Pavle",
+    "SecondName": "Savic",
+    "UniqueCitizensIdentityNumber": "45598745896548",
+    "DateOfBirth": "19/01/1971",
+    "PhoneNumber": "258522566",
+    "ID": 4
+  },
+  {
+    "speciality": "kardiolog",
+    "Specialist": true,
+    "specialNotifications": null,
+    "ordination": "Room 500",
+    "salary": 2050.0,
+    "city": "Novi Sad, Vase Stajica 5, 21000,Srbija",
+    "Email": "pera@gmail.com",
+    "Password": "pera",
+    "FirstName": "Pera",
+    "SecondName": "Peric",
+    "UniqueCitizensIdentityNumber": "1402999805025",
+    "DateOfBirth": "14/02/1999",
+    "PhoneNumber": "0652610775",
+    "ID": 2
+  }
+]

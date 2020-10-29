@@ -1,0 +1,267 @@
+[
+  {
+    "patient": {
+      "MedicalIDnumber": "6564",
+      "Allergie": "",
+      "City": "Novi Sad,Mise Dimitrivevica 2,2100,Srbija",
+      "guest": false,
+      "Email": "teodora@gmail.com",
+      "Password": "teodora123",
+      "RegisteredBySecretary": true,
+      "Notifications": [
+        "",
+        "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 15:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500"
+      ],
+      "FirstName": "Teodora",
+      "SecondName": "Kostic",
+      "UniqueCitizensIdentityNumber": "5658881212",
+      "DateOfBirth": "05/10/1989",
+      "PhoneNumber": "0654525896",
+      "ID": 1
+    },
+    "Date": "08/07/2020",
+    "Start": "11:00:00",
+    "End": "13:00:00",
+    "Responsable": {
+      "speciality": null,
+      "Specialist": false,
+      "specialNotifications": null,
+      "ordination": "Room 500",
+      "salary": 1500.0,
+      "city": "Novi Sad,Danila Kisa 7a,21000,Srbija",
+      "Email": "lidija@gmail.com",
+      "Password": "lidija",
+      "FirstName": "Lidija",
+      "SecondName": "Vukovic",
+      "UniqueCitizensIdentityNumber": "2310789458942",
+      "DateOfBirth": "23/10/1998",
+      "PhoneNumber": "062589758",
+      "ID": 1
+    },
+    "IdRoom": "Room500",
+    "OperationReferral": null,
+    "ID": 1
+  },
+  {
+    "patient": {
+      "MedicalIDnumber": "6598989",
+      "Allergie": "",
+      "City": "Beograd, Ive Andrica 5, 2100, Srbija",
+      "guest": false,
+      "Email": "uros@gmail.com",
+      "Password": "uros123",
+      "RegisteredBySecretary": true,
+      "Notifications": [
+        "",
+        "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 09:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
+        "Postovani, zakazana vam je novi pregled datuma : 07/07/2020 u 14:09:00 h kod lekara Pera Peric. Ordinacija: Room200"
+      ],
+      "FirstName": "Uros",
+      "SecondName": "Petrovic",
+      "UniqueCitizensIdentityNumber": "23656565521",
+      "DateOfBirth": "12/05/1985",
+      "PhoneNumber": "062323232",
+      "ID": 2
+    },
+    "Date": "07/07/2020",
+    "Start": "09:00:00",
+    "End": "11:00:00",
+    "Responsable": {
+      "speciality": "kardiolog",
+      "Specialist": true,
+      "specialNotifications": null,
+      "ordination": "Room 200",
+      "salary": 2000.0,
+      "city": "Novi Sad, Vase Stajica 5, 21000,Srbija",
+      "Email": "pera@gmail.com",
+      "Password": "pera",
+      "FirstName": "Pera",
+      "SecondName": "Peric",
+      "UniqueCitizensIdentityNumber": "1402999805021",
+      "DateOfBirth": "14/02/1999",
+      "PhoneNumber": "0652610775",
+      "ID": 2
+    },
+    "IdRoom": "Room200",
+    "OperationReferral": null,
+    "ID": 2
+  },
+  {
+    "patient": {
+      "MedicalIDnumber": "2321312",
+      "Allergie": "Penicilin",
+      "City": "Novi Sad, Masarikova 12, 21000, Srbbija",
+      "guest": false,
+      "Email": "mila@gmail.com",
+      "Password": "mila123",
+      "RegisteredBySecretary": false,
+      "Notifications": null,
+      "FirstName": "Mila",
+      "SecondName": "Stojakovic",
+      "UniqueCitizensIdentityNumber": "2313124",
+      "DateOfBirth": "05/05/1990",
+      "PhoneNumber": "34234",
+      "ID": 4
+    },
+    "Date": "30/06/2020",
+    "Start": "15:00:00",
+    "End": "16:00:00",
+    "Responsable": {
+      "speciality": "kardiolog",
+      "Specialist": true,
+      "specialNotifications": null,
+      "ordination": "Room 200",
+      "salary": 2000.0,
+      "city": "Novi Sad, Vase Stajica 5, 21000,Srbija",
+      "Email": "pera@gmail.com",
+      "Password": "pera",
+      "FirstName": "Pera",
+      "SecondName": "Peric",
+      "UniqueCitizensIdentityNumber": "1402999805021",
+      "DateOfBirth": "14/02/1999",
+      "PhoneNumber": "0652610775",
+      "ID": 2
+    },
+    "IdRoom": "Room200",
+    "OperationReferral": null,
+    "ID": 4
+  },
+  {
+    "patient": {
+      "MedicalIDnumber": "26356565",
+      "Allergie": "",
+      "City": "Nis, Ive Andrica 5, 2100, Srbija",
+      "guest": false,
+      "Email": "milica@gmail.com",
+      "Password": "milica123",
+      "RegisteredBySecretary": true,
+      "Notifications": [
+        ""
+      ],
+      "FirstName": "Milica",
+      "SecondName": "Petkovic",
+      "UniqueCitizensIdentityNumber": "5665659",
+      "DateOfBirth": "26/10/2020",
+      "PhoneNumber": "064229898",
+      "ID": 3
+    },
+    "Date": "15/07/2020",
+    "Start": "16:00:00",
+    "End": "17:00:00",
+    "Responsable": {
+      "speciality": null,
+      "Specialist": false,
+      "specialNotifications": [
+        "Questionarie: \nSatisfiction with application?  /  mark:  1\nSatisfiction with doctor?  /  mark:  3\nSatisfiction with doctor's knowledge?  /  mark:  3\nSatisfiction with clinic?  /  mark:  3\nSatisfiction with available terms for appointment?  /  mark:  4\nSatisfiction with the cleanness?  /  mark:  5\n",
+        "Patient - 1 -  I like the way you work."
+      ],
+      "ordination": "Room 500",
+      "salary": 1500.0,
+      "city": "Novi Sad,Danila Kisa 7a,21000,Srbija",
+      "Email": "lidija@gmail.com",
+      "Password": "lidija123",
+      "FirstName": "Lidija",
+      "SecondName": "Vukovic",
+      "UniqueCitizensIdentityNumber": "2310789455555",
+      "DateOfBirth": "23/10/1998",
+      "PhoneNumber": "062589758",
+      "ID": 1
+    },
+    "IdRoom": "Room500",
+    "OperationReferral": null,
+    "ID": 5
+  },
+  {
+    "patient": {
+      "MedicalIDnumber": "6598989",
+      "Allergie": "",
+      "City": "Beograd, Ive Andrica 5, 2100, Srbija",
+      "guest": false,
+      "Email": "uros@gmail.com",
+      "Password": "uros123",
+      "RegisteredBySecretary": true,
+      "Notifications": [
+        "",
+        "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 09:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
+        "Postovani, zakazana vam je novi pregled datuma : 07/07/2020 u 14:09:00 h kod lekara Pera Peric. Ordinacija: Room200"
+      ],
+      "FirstName": "Uros",
+      "SecondName": "Petrovic",
+      "UniqueCitizensIdentityNumber": "23656565521",
+      "DateOfBirth": "12/05/1985",
+      "PhoneNumber": "062323232",
+      "ID": 2
+    },
+    "Date": "25/06/2020",
+    "Start": "09:00:00",
+    "End": "11:00:00",
+    "Responsable": {
+      "speciality": "kardiolog",
+      "Specialist": true,
+      "specialNotifications": null,
+      "ordination": "Room 200",
+      "salary": 2000.0,
+      "city": "Novi Sad, Vase Stajica 5, 21000,Srbija",
+      "Email": "pera@gmail.com",
+      "Password": "pera",
+      "FirstName": "Pera",
+      "SecondName": "Peric",
+      "UniqueCitizensIdentityNumber": "1402999805021",
+      "DateOfBirth": "14/02/1999",
+      "PhoneNumber": "0652610775",
+      "ID": 2
+    },
+    "IdRoom": "Room200",
+    "OperationReferral": {
+      "medicine": "",
+      "takeMedicineUntil": "",
+      "quantityPerDay": 0,
+      "classify": "Operisan",
+      "comment": "Operacija je uspesno zavrsena.",
+      "ID": 1
+    },
+    "ID": 3
+  },
+  {
+    "patient": {
+      "MedicalIDnumber": "2321312",
+      "Allergie": "Penicilin",
+      "City": "Novi Sad, Masarikova 12, 21000, Srbbija",
+      "guest": false,
+      "Email": "mila@gmail.com",
+      "Password": "mila123",
+      "RegisteredBySecretary": false,
+      "Notifications": [
+        "Postovani, zakazana vam je novi pregled datuma : 15/07/2020 u 15:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500"
+      ],
+      "FirstName": "Mila",
+      "SecondName": "Stojakovic",
+      "UniqueCitizensIdentityNumber": "2313124",
+      "DateOfBirth": "05/05/1990",
+      "PhoneNumber": "34234",
+      "ID": 4
+    },
+    "Date": "01/07/2020",
+    "Start": "13:00:00",
+    "End": "15:00:00",
+    "Responsable": {
+      "speciality": null,
+      "Specialist": false,
+      "specialNotifications": null,
+      "ordination": "Room 600",
+      "salary": 1000.0,
+      "city": "Novi Sad, Mise Perica 2,21000,Srbija",
+      "Email": "natasa@gmail.com",
+      "Password": "natasa",
+      "FirstName": "Natasa",
+      "SecondName": "Savic",
+      "UniqueCitizensIdentityNumber": "1402999805021",
+      "DateOfBirth": "11/11/1988",
+      "PhoneNumber": "0659781655",
+      "ID": 3
+    },
+    "IdRoom": "Room600",
+    "OperationReferral": null,
+    "ID": 6
+  }
+]

@@ -1,0 +1,122 @@
+[
+  {
+    "room": [
+      "Magacin"
+    ],
+    "doctor": {
+      "speciality": null,
+      "Specialist": false,
+      "specialNotifications": [
+        "Questionarie: \nSatisfiction with application?  /  mark:  1\nSatisfiction with doctor?  /  mark:  3\nSatisfiction with doctor's knowledge?  /  mark:  3\nSatisfiction with clinic?  /  mark:  3\nSatisfiction with available terms for appointment?  /  mark:  4\nSatisfiction with the cleanness?  /  mark:  5\n",
+        "Patient - 1 -  I like the way you work."
+      ],
+      "ordination": "Room 500",
+      "salary": 1500.0,
+      "city": "Novi Sad,Danila Kisa 7a,21000,Srbija",
+      "Email": "lidija@gmail.com",
+      "Password": "lidija123",
+      "FirstName": "Lidija",
+      "SecondName": "Vukovic",
+      "UniqueCitizensIdentityNumber": "2310789455555",
+      "DateOfBirth": "23/10/1998",
+      "PhoneNumber": "062589758",
+      "ID": 1
+    },
+    "description": "penicilin",
+    "confirmed": true,
+    "Name": "Paracetamol",
+    "Quantity": 1,
+    "ID": 3
+  },
+  {
+    "room": [
+      "Magacin",
+      "Room 500",
+      "Operation room 30",
+      "Room 600"
+    ],
+    "doctor": {
+      "speciality": null,
+      "Specialist": false,
+      "specialNotifications": [
+        "Questionarie: \nSatisfiction with application?  /  mark:  1\nSatisfiction with doctor?  /  mark:  3\nSatisfiction with doctor's knowledge?  /  mark:  3\nSatisfiction with clinic?  /  mark:  3\nSatisfiction with available terms for appointment?  /  mark:  4\nSatisfiction with the cleanness?  /  mark:  5\n",
+        "Patient - 1 -  I like the way you work."
+      ],
+      "ordination": "Room 500",
+      "salary": 1500.0,
+      "city": "Novi Sad,Danila Kisa 7a,21000,Srbija",
+      "Email": "lidija@gmail.com",
+      "Password": "lidija123",
+      "FirstName": "Lidija",
+      "SecondName": "Vukovic",
+      "UniqueCitizensIdentityNumber": "2310789455555",
+      "DateOfBirth": "23/10/1998",
+      "PhoneNumber": "062589758",
+      "ID": 1
+    },
+    "description": "Insulin",
+    "confirmed": true,
+    "Name": "Analgin",
+    "Quantity": 1,
+    "ID": 2
+  },
+  {
+    "room": [
+      "Magacin"
+    ],
+    "doctor": {
+      "speciality": null,
+      "Specialist": false,
+      "specialNotifications": null,
+      "ordination": "Room 500",
+      "salary": 1500.0,
+      "city": "Novi Sad,Danila Kisa 7a,21000,Srbija",
+      "Email": "lidija@gmail.com",
+      "Password": "lidija",
+      "FirstName": "Lidija",
+      "SecondName": "Vukovic",
+      "UniqueCitizensIdentityNumber": "2310789458942",
+      "DateOfBirth": "23/10/1998",
+      "PhoneNumber": "062589758",
+      "ID": 1
+    },
+    "description": "Penicilin, Insulin",
+    "confirmed": true,
+    "Name": "Brufen",
+    "Quantity": 1,
+    "ID": 1
+  },
+  {
+    "room": [
+      "Magacin",
+      "Operation room 30",
+      "Operation room 20",
+      "Room 600"
+    ],
+    "doctor": {
+      "speciality": null,
+      "Specialist": false,
+      "specialNotifications": [
+        "Questionarie: \nSatisfiction with application?  /  mark:  1\nSatisfiction with doctor?  /  mark:  3\nSatisfiction with doctor's knowledge?  /  mark:  3\nSatisfiction with clinic?  /  mark:  3\nSatisfiction with available terms for appointment?  /  mark:  4\nSatisfiction with the cleanness?  /  mark:  5\n",
+        "Patient - 1 -  I like the way you work."
+      ],
+      "ordination": "Room 500",
+      "salary": 1500.0,
+      "city": "Novi Sad,Danila Kisa 7a,21000,Srbija",
+      "Email": "lidija@gmail.com",
+      "Password": "lidija123",
+      "FirstName": "Lidija",
+      "SecondName": "Vukovic",
+      "UniqueCitizensIdentityNumber": "2310789455555",
+      "DateOfBirth": "23/10/1998",
+      "PhoneNumber": "062589758",
+      "ID": 1
+    },
+    "description": "brufen",
+    "confirmed": true,
+    "Name": "Diklofenac",
+    "Quantity": 1,
+    "ID": 4
+  }
+  
+]

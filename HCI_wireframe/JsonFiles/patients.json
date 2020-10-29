@@ -1,0 +1,208 @@
+[
+  {
+    "MedicalIDnumber": "6598989",
+    "Allergie": "",
+    "City": "Beograd, Ive Andrica 5, 2100, Srbija",
+    "guest": false,
+    "Email": "uros@gmail.com",
+    "Password": "uros123",
+    "RegisteredBySecretary": true,
+    "Notifications": [
+      "",
+      "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 09:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
+      "Postovani, zakazana vam je novi pregled datuma : 07/07/2020 u 14:09:00 h kod lekara Pera Peric. Ordinacija: Room200",
+      "Postovani, zakazana Vam je nova operacija datuma : 07/07/2020 u 09:00:00 h, kod lekara Pera Peric Sala Room200",
+      "Postovani, zakazana vam je novi pregled datuma : 29/06/2020 u 10:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
+      "Postovani, zakazana vam je novi pregled datuma : 07/07/2020 u 13:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500"
+    ],
+    "FirstName": "Uros",
+    "SecondName": "Petrovic",
+    "UniqueCitizensIdentityNumber": "23656565521",
+    "DateOfBirth": "12/05/1985",
+    "PhoneNumber": "062323232",
+    "ID": 2
+  },
+  {
+    "MedicalIDnumber": "6564",
+    "Allergie": "Penicilin",
+    "City": "Novi Sad,Mise Dimitrivevica 2,2100,Srbijaa",
+    "guest": false,
+    "Email": "teodora@gmail.com",
+    "Password": "teodora123",
+    "RegisteredBySecretary": false,
+    "Notifications": [
+      "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 15:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
+      "Postovani, zakazana Vam je nova operacija datuma : 08/07/2020 u 11:00:00 h, kod lekara Lidija Vukovic Sala Room500",
+      "Doctor  Lidija Vukovic  - answer  -Thank you."
+    ],
+    "FirstName": "Teodora",
+    "SecondName": "Kostic",
+    "UniqueCitizensIdentityNumber": "5658881212",
+    "DateOfBirth": "05/10/1989",
+    "PhoneNumber": "062222222",
+    "ID": 1
+  },
+  {
+    "MedicalIDnumber": "1234597645",
+    "Allergie": "",
+    "City": "Novi Sad, Gogoljeva 12, 21000, Srbija",
+    "guest": false,
+    "Email": "ana123@gmail.com",
+    "Password": "ana123",
+    "RegisteredBySecretary": false,
+    "Notifications": null,
+    "FirstName": "Ana",
+    "SecondName": "Podrascanin",
+    "UniqueCitizensIdentityNumber": "56656590",
+    "DateOfBirth": "15/07/1999",
+    "PhoneNumber": "2143543",
+    "ID": 5
+  },
+  {
+    "MedicalIDnumber": "14722268",
+    "Allergie": "",
+    "City": "Nis, Ive Andrica 5, 2100, Srbija",
+    "guest": false,
+    "Email": "milica@gmail.com",
+    "Password": "milica123",
+    "RegisteredBySecretary": true,
+    "Notifications": [
+      "",
+      "Postovani, zakazana Vam je nova operacija datuma : 15/07/2020 u 16:00:00 h, kod lekara Lidija Vukovic Sala Room500",
+      "Postovani, zakazana vam je novi pregled datuma : 06/07/2020 u 12:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500"
+    ],
+    "FirstName": "Milica",
+    "SecondName": "Petkovic",
+    "UniqueCitizensIdentityNumber": "5665659",
+    "DateOfBirth": "26/10/2020",
+    "PhoneNumber": "064229898",
+    "ID": 3
+  },
+  {
+    "MedicalIDnumber": "2321312",
+    "Allergie": "Penicilin",
+    "City": "Novi Sad, Masarikova 12, 21000, Srbbija",
+    "guest": false,
+    "Email": "mila@gmail.com",
+    "Password": "mila123",
+    "RegisteredBySecretary": false,
+    "Notifications": [
+      "Postovani, zakazana vam je novi pregled datuma : 15/07/2020 u 15:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
+      "Postovani, zakazana Vam je nova operacija datuma : 01/07/2020 u 13:00:00 h, kod lekara Natasa Savic Sala Room600"
+    ],
+    "FirstName": "Mila",
+    "SecondName": "Stojakovic",
+    "UniqueCitizensIdentityNumber": "2313124",
+    "DateOfBirth": "05/05/1990",
+    "PhoneNumber": "34234",
+    "ID": 4
+  },
+  {
+    "MedicalIDnumber": "2656454545",
+    "Allergie": "",
+    "City": "Beograd, Ive Andrica 5, 2100, Srbija",
+    "guest": false,
+    "Email": "anaa@gmail.com",
+    "Password": "anastasija123",
+    "RegisteredBySecretary": true,
+    "Notifications": [
+      ""
+    ],
+    "FirstName": "Anastasija",
+    "SecondName": "Todic",
+    "UniqueCitizensIdentityNumber": "35658755",
+    "DateOfBirth": "05/07/1990",
+    "PhoneNumber": "062323232",
+    "ID": 6
+  },
+  {
+    "MedicalIDnumber": "05121212",
+    "Allergie": "",
+    "City": "Novi Sad, Futoska 5, 2100, Srbija",
+    "guest": true,
+    "Email": "8UNKNOWN",
+    "Password": "nopassword",
+    "RegisteredBySecretary": true,
+    "Notifications": [
+      ""
+    ],
+    "FirstName": "Teodor",
+    "SecondName": "Petrovic",
+    "UniqueCitizensIdentityNumber": "06556588151",
+    "DateOfBirth": "05/06/1985",
+    "PhoneNumber": "065451211820",
+    "ID": 8
+  },
+  {
+    "MedicalIDnumber": "1546932",
+    "Allergie": "",
+    "City": "Beograd, Kosovska 6, 2100, Srbija",
+    "guest": true,
+    "Email": "9UNKNOWN",
+    "Password": "nopassword",
+    "RegisteredBySecretary": true,
+    "Notifications": [
+      ""
+    ],
+    "FirstName": "Zorica",
+    "SecondName": "Ostojic",
+    "UniqueCitizensIdentityNumber": "266562",
+    "DateOfBirth": "16/09/1956",
+    "PhoneNumber": "065421218121",
+    "ID": 9
+  },
+  {
+    "MedicalIDnumber": "121548851",
+    "Allergie": "",
+    "City": "Novi Sad, Zorana Djindjica 6, 2100, Srbija",
+    "guest": true,
+    "Email": "10UNKNOWN",
+    "Password": "nopassword",
+    "RegisteredBySecretary": true,
+    "Notifications": [
+      ""
+    ],
+    "FirstName": "Uros",
+    "SecondName": "Kostic",
+    "UniqueCitizensIdentityNumber": "226558652",
+    "DateOfBirth": "15/10/1985",
+    "PhoneNumber": "06565421212",
+    "ID": 10
+  },
+  {
+    "MedicalIDnumber": "26665656",
+    "Allergie": "",
+    "City": "Beograd, Ive Andrica 5, 2100, Srbija",
+    "guest": false,
+    "Email": "miladin@gmail.com",
+    "Password": "miladin123",
+    "RegisteredBySecretary": true,
+    "Notifications": [
+      ""
+    ],
+    "FirstName": "Miladin",
+    "SecondName": "Todorovic",
+    "UniqueCitizensIdentityNumber": "26565655",
+    "DateOfBirth": "29/10/1997",
+    "PhoneNumber": "062323232",
+    "ID": 7
+  },
+  {
+    "MedicalIDnumber": "15889",
+    "Allergie": "",
+    "City": "Beograd, Laze Kostica 4, 2100, Srbija",
+    "guest": false,
+    "Email": "oliver@gmail.com",
+    "Password": "olivera123",
+    "RegisteredBySecretary": true,
+    "Notifications": [
+      ""
+    ],
+    "FirstName": "Olivera",
+    "SecondName": "Beric",
+    "UniqueCitizensIdentityNumber": "646412158",
+    "DateOfBirth": "15/10/2020",
+    "PhoneNumber": "0645148212",
+    "ID": 11
+  }
+]

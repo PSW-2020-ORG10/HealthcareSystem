@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="ProjekatHCI.Utisak"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ProjekatHCI"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="1000">
+    <Grid Background="AliceBlue" x:Name="Panel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid>
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                <ColumnDefinition Width="1.5*"></ColumnDefinition>
+
+            </Grid.ColumnDefinitions>
+
+
+            <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left" Margin="15,15,15,0" Width="204">
+                <Image  Source="/HCI_wireframe;component/View/Sekretar/Resources/sekretar.png" VerticalAlignment="Top" Height="205" RenderTransformOrigin="0.563,1.464"/>
+                <Label Content="SEKRETAR" HorizontalContentAlignment="Center" FontSize="13" FontWeight="Bold" Background="#FFE1F3E5" FontFamily="Sitka Small" Height="380" />
+                
+
+            </StackPanel>
+            <StackPanel  Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical"   Width="600" Height="465" Margin="80.4,40,70,95">
+
+
+                <TextBox Margin="155,0,191,0" FontSize="25" FontWeight="Bold" Height="45">
+
+                    Ostavite svoj utisak
+                </TextBox>
+                <TextBlock Margin="50,20,40,0" FontSize="17" TextWrapping="Wrap">
+                        Kao sekretar imate mogucnost zakazivanja, otkazivanja i izmene termina pregleda i oepracija. Takodje mozete da registirujete nove pacijente u sistem nase bolnice, kao i da evidentirate guest pacijente.
+                </TextBlock>
+
+                <TextBlock Margin="50,50,50,0" HorizontalAlignment="Center"  Text="Ocenite koliko ste zadovoljni radom naseg softvera:" FontSize="18" TextWrapping="Wrap" FontWeight="Bold" Height="49"></TextBlock>
+                <Grid Margin="30,0,30,0" Height="86">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition ></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Olicno" FontWeight="Bold" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="Vrlo dobro" FontWeight="Bold" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
+                    <TextBlock Grid.Row="0" Grid.Column="2" Text="Dobro" FontWeight="Bold" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
+                    <TextBlock Grid.Row="0" Grid.Column="3" Text="Zadovoljavajuce" FontWeight="Bold" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
+                    <TextBlock Grid.Row="0" Grid.Column="4" Text="Nezadovoljavajuce" FontWeight="Bold" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
+
+                    <RadioButton  ToolTip="Odlično" x:Name="odlBtn" Checked="RadioButton_Checked" Content="5" GroupName="Ocena" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <RadioButton ToolTip="Vrlo dobro" x:Name="vDbrBtn" Checked="RadioButton_Checked" GroupName="Ocena" Grid.Row="1" Content="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <RadioButton ToolTip="Dobro" GroupName="Ocena" x:Name="dbrbtn" Checked="RadioButton_Checked" Grid.Row="1" Content="3" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <RadioButton ToolTip="Delimično zadovoljavajuće" x:Name="dovbtn" Checked="RadioButton_Checked" GroupName="Ocena" Content="2" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <RadioButton ToolTip="Nezadovoljavajuće" x:Name="nedbtn" Checked="RadioButton_Checked" GroupName="Ocena" Grid.Row="1" Content="1" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                </Grid>
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                    <Button ToolTip="Kliknite za potvrdu ocenjivanja softvera" Content="Potvrdi" Click="Potvrdi_click" Width="106"></Button>
+                    <Button ToolTip="Klinite za odustanak od ocenjivanja" Content="Odustani" Click="Odustani_click" Width="112" Background="#FF8DBFE7"></Button>
+                </StackPanel>
+            </StackPanel>
+
+
+        </Grid>
+    </Grid>
+</UserControl>

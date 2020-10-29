@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="HCI_wireframe.View.Doktor.Operacija"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+               xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:HCI_wireframe.View.Doktor"
+             mc:Ignorable="d" 
+             d:DesignHeight="335" d:DesignWidth="609">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.5*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <TextBlock FontSize="20" Height="36">Evidentirajte operaciju</TextBlock>
+            <ComboBox x:Name="combo" Margin="0,0,0,0" HorizontalAlignment="Left" Width="224"></ComboBox>
+           
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+
+            <Label Content="Ime i prezime:" Margin="0,0,0,0" HorizontalAlignment="Left" FontSize="15" FontWeight="Medium" Width="143" />
+            <ComboBox x:Name="ListaPacijenata" ToolTip="Izaberite pacijenta"  Margin="0,-30,0,0" IsTextSearchEnabled="True" IsEditable="True" Width="270"  ></ComboBox>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="3">
+            <TextBox x:Name="oper" Text="Unesite izvestaj operacije" Height="95"/>
+        </StackPanel>
+        <StackPanel Grid.Row="4">
+            <Button x:Name="posalji" Content="Evidentiraj" Width="100" Margin="0,20,0,0" Click="posalji_Click"></Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

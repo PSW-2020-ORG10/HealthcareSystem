@@ -1,0 +1,210 @@
+[
+  {
+    "employeeFirst": "Lidija",
+    "employeeLast": "Vukovic",
+    "employeeID": "1",
+    "Date": "08/07/2020",
+    "OnDuty": true,
+    "shift": {
+      "StartTime": "08:00",
+      "EndTime": "16:00"
+    },
+    "soba": "Room 500",
+    "ID": 1
+  },
+  {
+    "employeeFirst": "Lidija",
+    "employeeLast": "Vukovic",
+    "employeeID": "1",
+    "Date": "29/06/2020",
+    "OnDuty": true,
+    "shift": {
+      "StartTime": "08:00",
+      "EndTime": "14:00"
+    },
+    "soba": "Room 500",
+    "ID": 3
+  },
+  {
+    "employeeFirst": "Natasa",
+    "employeeLast": "Savic",
+    "employeeID": "3",
+    "Date": "30/06/2020",
+    "OnDuty": false,
+    "shift": {
+      "StartTime": "15:00",
+      "EndTime": "22:00"
+    },
+    "soba": "Room 600",
+    "ID": 5
+  },
+  {
+    "employeeFirst": "Natasa",
+    "employeeLast": "Savic",
+    "employeeID": "3",
+    "Date": "01/07/2020",
+    "OnDuty": true,
+    "shift": {
+      "StartTime": "08:00",
+      "EndTime": "15:00"
+    },
+    "soba": "Room 600",
+    "ID": 6
+  },
+  {
+    "employeeFirst": "Natasa",
+    "employeeLast": "Savic",
+    "employeeID": "3",
+    "Date": "03/07/2020",
+    "OnDuty": true,
+    "shift": {
+      "StartTime": "10:00",
+      "EndTime": "20:00"
+    },
+    "soba": "Room 600",
+    "ID": 8
+  },
+  {
+    "employeeFirst": "Natasa",
+    "employeeLast": "Savic",
+    "employeeID": "3",
+    "Date": "04/07/2020",
+    "OnDuty": false,
+    "shift": {
+      "StartTime": "08:00",
+      "EndTime": "18:00"
+    },
+    "soba": "Room 600",
+    "ID": 9
+  },
+  {
+    "employeeFirst": "Natasa",
+    "employeeLast": "Savic",
+    "employeeID": "3",
+    "Date": "06/07/2020",
+    "OnDuty": true,
+    "shift": {
+      "StartTime": "10:00",
+      "EndTime": "22:00"
+    },
+    "soba": "Room 600",
+    "ID": 10
+  },
+  {
+    "employeeFirst": "Natasa",
+    "employeeLast": "Savic",
+    "employeeID": "3",
+    "Date": "08/07/2020",
+    "OnDuty": true,
+    "shift": {
+      "StartTime": "08:00",
+      "EndTime": "15:00"
+    },
+    "soba": "Room 600",
+    "ID": 11
+  },
+  {
+    "employeeFirst": "Lidija",
+    "employeeLast": "Vukovic",
+    "employeeID": "1",
+    "Date": "04/07/2020",
+    "OnDuty": true,
+    "shift": {
+      "StartTime": "08:00",
+      "EndTime": "16:00"
+    },
+    "soba": "Room 500",
+    "ID": 18
+  },
+  {
+    "employeeFirst": "Lidija",
+    "employeeLast": "Vukovic",
+    "employeeID": "1",
+    "Date": "06/07/2020",
+    "OnDuty": true,
+    "shift": {
+      "StartTime": "08:00",
+      "EndTime": "16:00"
+    },
+    "soba": "Room 500",
+    "ID": 19
+  },
+  {
+    "employeeFirst": "Lidija",
+    "employeeLast": "Vukovic",
+    "employeeID": "1",
+    "Date": "07/07/2020",
+    "OnDuty": true,
+    "shift": {
+      "StartTime": "08:00",
+      "EndTime": "16:00"
+    },
+    "soba": "Room 500",
+    "ID": 20
+  },
+  {
+    "employeeFirst": "Lidija",
+    "employeeLast": "Vukovic",
+    "employeeID": "1",
+    "Date": "03/07/2020",
+    "OnDuty": true,
+    "shift": {
+      "StartTime": "08:00",
+      "EndTime": "16:00"
+    },
+    "soba": "Room 500",
+    "ID": 21
+  },
+  {
+    "employeeFirst": "Lidija",
+    "employeeLast": "Vukovic",
+    "employeeID": "1",
+    "Date": "15/07/2020",
+    "OnDuty": false,
+    "shift": {
+      "StartTime": "08:00",
+      "EndTime": "18:00"
+    },
+    "soba": "Room 500",
+    "ID": 22
+  },
+  {
+    "employeeFirst": "Natasa",
+    "employeeLast": "Savic",
+    "employeeID": "3",
+    "Date": "15/07/2020",
+    "OnDuty": true,
+    "shift": {
+      "StartTime": "10:00",
+      "EndTime": "22:00"
+    },
+    "soba": "Room 600",
+    "ID": 10
+  },
+  {
+    "employeeFirst": "Lidija",
+    "employeeLast": "Vukovic",
+    "employeeID": "1",
+    "Date": "16/07/2020",
+    "OnDuty": false,
+    "shift": {
+      "StartTime": "08:00",
+      "EndTime": "20:00"
+    },
+    "soba": "Room 500",
+    "ID": 22
+  },
+  {
+    "employeeFirst": "Natasa",
+    "employeeLast": "Savic",
+    "employeeID": "3",
+    "Date": "16/07/2020",
+    "OnDuty": true,
+    "shift": {
+      "StartTime": "08:00",
+      "EndTime": "22:00"
+    },
+    "soba": "Room 600",
+    "ID": 10
+  }
+]

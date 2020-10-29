@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="Klinika.Feedback"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Klinika"
+             mc:Ignorable="d" 
+                    d:DesignHeight="335" d:DesignWidth="609">
+    <Grid x:Name="Panel">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <TextBlock FontSize="30" HorizontalAlignment="Center">Komentarisi</TextBlock>
+            
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+            <TextBlock FontSize="19">Ocenite koliko ste zadovoljni radom vase aplikacije.</TextBlock>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <RadioButton Content="1" x:Name="odlBtn" GroupName="radioGroup"  Checked="RadioButtonChecked" Margin ="80,0,0,0"></RadioButton>
+            <RadioButton Content="2" x:Name="vDbrBtn" GroupName="radioGroup" Checked="RadioButtonChecked" Margin ="80,0,0,0"></RadioButton>
+            <RadioButton Content="3" x:Name="dbrBtn" GroupName="radioGroup" Checked="RadioButtonChecked" Margin ="80,0,0,0" ></RadioButton>
+            <RadioButton Content="4" x:Name="dovBtn" GroupName="radioGroup"  Checked="RadioButtonChecked" Margin ="80,0,0,0"></RadioButton>
+            <RadioButton Content="5" x:Name="nedBtn" GroupName="radioGroup" Checked="RadioButtonChecked" Margin ="80,0,0,0"></RadioButton>
+        </StackPanel>
+        <StackPanel Grid.Row="3">
+            <Button x:Name="potvrdi" Content="Potvrdite svoj utisak" Margin="212,20,207,0" Height="35" Click="potvrdi_Click"> </Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="Klinika.Nalaz"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:Klinika"
+             mc:Ignorable="d" 
+             d:DesignHeight="335" d:DesignWidth="609">
+    <Grid  x:Name="Panel">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="1.4*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="0.2*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel>
+                <TextBlock FontSize="27" Margin="0,0,375,0">Specijalisticki nalaz</TextBlock>
+                <ComboBox x:Name="combo" Margin="0,0,0,0" HorizontalAlignment="Left" Width="224"></ComboBox>
+                
+                <DatePicker Name="dataPicker" Margin="480,-86,0,0" Height="24"></DatePicker>
+            </StackPanel>
+            <StackPanel Grid.Row="1">
+                <StackPanel Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,0,163,0">
+                    <Label Content="Ime i prezime:" HorizontalAlignment="Left" FontSize="15" FontWeight="Medium" Width="256" />
+
+                    <ComboBox x:Name="ListaPacijenata" ToolTip="Izaberite pacijenta" Margin="-80,0,50,0" IsTextSearchEnabled="True" IsEditable="True" Width="270" Background="#FFA8F196" ></ComboBox>
+                </StackPanel>
+                <StackPanel Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,0,163,0">
+                    <Label Content="Broj  zdrastvene knjizice:" HorizontalAlignment="Left" FontSize="15" FontWeight="Medium" />
+                    <TextBox x:Name="KnjizicaBox" ToolTip="Unesite broj zdravstvene knjižice pacijenta" FontSize="17" Width="268" VerticalAlignment="Stretch"  HorizontalAlignment="Right" />
+
+
+                </StackPanel>
+
+            </StackPanel>
+            <StackPanel Grid.Row="2" Margin="0,1,0,68" Grid.RowSpan="2">
+                <TextBox  x:Name="Dijagnoza" Height="50" Margin="0,0,306,0">Popunjen nalaz i dijagnoza pregledanog pacijenta</TextBox>
+                <Button Background="White" Content="Uvid u karton" Margin="462,-40,33,0" Click="Karton_click" Height="36"></Button>
+                <ComboBox Name="lekNaziv"  IsTextSearchEnabled="True" IsEditable="True" Width="270" />
+
+
+
+
+            </StackPanel>
+            <StackPanel Grid.Row="3" Grid.Column="0" Margin="0,20,0,0">
+                <RadioButton x:Name="Kucno"  Margin="0,10,60,1" Content="Poslati na kucno lecenje"></RadioButton>
+                <RadioButton x:Name="Operacija"  Margin="160,-14,50,1" Content="Upucen na operaciju"></RadioButton>
+                <RadioButton x:Name="DaljaL" Margin="300,-15,36,4" Content="Poslat na dalja lecenja"></RadioButton>
+                <RadioButton x:Name="Klinicko"  Margin="450,-17,10,4" Content="Klinicko lecenje"></RadioButton>
+                <RadioButton x:Name="Izlecen"  Margin="630,-18,70,4" Content="Izlecen"></RadioButton>
+                <RadioButton x:Name="Operisan" Content="Operisan"></RadioButton>
+            </StackPanel>
+            <StackPanel Grid.Row="4">
+
+                <Button Content="Potvrdi pregled" x:Name="pregled"  Margin="476,-20,19,0" Height="20" Click="pregled_Click" />
+
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

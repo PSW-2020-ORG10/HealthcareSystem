@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="WpfApp2.Rooms.EditRenovation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfApp2.Rooms"
+             xmlns:val="clr-namespace:WpfApp2.Validation"
+      
+             xmlns:val1="clr-namespace:HCI_wireframe.View.Manager.Validation"
+             mc:Ignorable="d" d:DesignWidth="370" Height="724.4">
+    <Grid x:Name="GridMain" Margin="0,0,-0.4,0.8">
+
+        <Grid.Background>
+            <ImageBrush ImageSource="/HCI_wireframe;component/View/Manager/Resources/slika1.png" />
+        </Grid.Background>
+        <Label Foreground="Black" Content="Edit renovation" HorizontalAlignment="Left" Margin="119,64,0,0" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
+        <Label Foreground="Black" Content="Choose start date" HorizontalAlignment="Left" Margin="46,184,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
+        <Label Foreground="Black" Content="Choose end date" HorizontalAlignment="Left" Margin="46,308,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
+
+        <Button Foreground="Black" Content="Save changes" HorizontalAlignment="Left" Margin="65,547,0,0" VerticalAlignment="Top" Width="231" Height="32" Click="Save" BorderThickness="0.5,1,1,1" Background="White" FontSize="14" FontWeight="Bold"/>
+        <Button Foreground="Black" Content="Cancel renovation" HorizontalAlignment="Left" Margin="65,613,0,0" VerticalAlignment="Top" Width="231" Height="32" Click="Cancel" BorderThickness="0.5,1,1,1" Background="White" FontWeight="Bold" FontSize="14"/>
+        <TextBox  x:Name="textBox" HorizontalAlignment="Left" Height="42" Margin="46,221,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="277">
+            
+        </TextBox>
+        <TextBox x:Name="textBox_Copy" HorizontalAlignment="Left" Height="42" Margin="46,356,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="277">
+           
+        </TextBox>
+    </Grid>
+</UserControl>

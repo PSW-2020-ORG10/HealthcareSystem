@@ -1,0 +1,126 @@
+﻿<Window x:Class="HCI_wireframe.RecommendAppointment"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HCI_wireframe"
+        mc:Ignorable="d"
+        Title="RecommendAppointment" Height="350" Width="550"
+           xmlns:val="clr-namespace:HCI_wireframe.Validation"
+        Loaded="Window_Loaded"
+        KeyDown="Window_KeyDown"
+        WindowStartupLocation="CenterScreen">
+    <Window.Background>
+        <ImageBrush ImageSource="/HCI_wireframe;component/View/Patient/Resources/5.jpg" Stretch="UniformToFill"/>
+    </Window.Background>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.Column ="2" Grid.ColumnSpan="7" Grid.RowSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15">Recommend me an appointment</Label>
+        <Button Grid.Row="1" Grid.Column ="10" Name="helpButton" IsKeyboardFocusedChanged="cancelButton_IsKeyboardFocusedChanged" Click="helpButton_Click">HELP
+            <Button.ToolTip>
+                <ToolTip>
+                    Press CTRL + H to view help
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+
+
+        <Label Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="2" VerticalAlignment="Center">Select priority
+        </Label>
+        <StackPanel Grid.Row="3" Grid.Column="5" Grid.ColumnSpan="3" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal" >
+            <RadioButton GroupName="RB" Content="DOCTOR" Name ="rb1Doctor" IsChecked="True"/>
+            <RadioButton GroupName="RB" Content="DATE" Name ="rb1Date" />
+        </StackPanel>
+
+        <Label Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="4" Grid.RowSpan="2" VerticalAlignment="Center" >Choose doctor
+        </Label>
+        <ComboBox Grid.Row="5" Grid.Column="5" Grid.ColumnSpan="5" Grid.RowSpan="2"  Height="30" Name="doctorCombo">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding DoctorName}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <Label Grid.Row="8" Grid.Column ="2" Grid.ColumnSpan="2" HorizontalAlignment="left"  Grid.RowSpan="2" VerticalAlignment="Center">Dates between </Label>
+
+        <TextBox  Validation.ErrorTemplate="{StaticResource errorTemplate}" Grid.Row="8" Grid.Column ="5" Grid.RowSpan="3" Grid.ColumnSpan="5" VerticalAlignment="Center" Style="{StaticResource placeHolder}" 
+                 Tag="dd/mm/yyyy.."  Height="27" Name="Date_TextBox" KeyDown="Window_KeyDown">
+            <TextBox.Text>
+                <Binding Path="Date" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:ValidationDate ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+        <TextBox Validation.ErrorTemplate="{StaticResource errorTemplate}" Grid.Row="10" Grid.Column ="5" Grid.RowSpan="2" Grid.ColumnSpan="5" VerticalAlignment="Center" Style="{StaticResource placeHolder}" Tag="dd/mm/yyyy.." 
+                  Height="27" Name="Date_TextBox2" KeyDown="Window_KeyDown">
+            <TextBox.Text>
+                <Binding Path="Date1" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:ValidationDate ValidationStep="RawProposedValue"/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+
+
+
+        <Button Grid.Row="14" Grid.Column="8" Name="confirmButton"  IsKeyboardFocusedChanged="cancelButton_IsKeyboardFocusedChanged" Click="confirmButton_Click">OK
+            <Button.ToolTip>
+                <ToolTip>
+                    Confirm and make an appointment
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+        <Button Grid.Row="14" Grid.Column="10" Name="cancelButton" IsKeyboardFocusedChanged="cancelButton_IsKeyboardFocusedChanged" Click="cancelButton_Click">Cancel
+            <Button.ToolTip>
+                <ToolTip>
+                    Cancel aking an appointment
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+
+
+        <Grid x:Name="gridMain" Grid.ColumnSpan="12" Grid.RowSpan="17" Visibility="Visible"/>
+    </Grid>
+
+</Window>

@@ -1,0 +1,79 @@
+[
+  {
+    "TypeOfRoom": "SecretarysRoom",
+    "equipment": [],
+    "medicine": [],
+    "forUse": true,
+    "ID": 2
+  },
+  {
+    "TypeOfRoom": "Room 600",
+    "equipment": [
+      "Table"
+    ],
+    "medicine": [
+      "Analgin",
+      "Diklofenac"
+    ],
+    "forUse": true,
+    "ID": 5
+  },
+  {
+    "TypeOfRoom": "Operation room 30",
+    "equipment": [
+      "Sizors"
+    ],
+    "medicine": [
+      "Analgin",
+      "Diklofenac"
+    ],
+    "forUse": true,
+    "ID": 7
+  },
+  {
+    "TypeOfRoom": "Room 500",
+    "equipment": [
+      "Sizors"
+    ],
+    "medicine": [
+      "Analgin"
+    ],
+    "forUse": true,
+    "ID": 3
+  },
+  {
+    "TypeOfRoom": "Operation room 200",
+    "equipment": [
+      "Bed"
+    ],
+    "medicine": [
+      "Diklofenac"
+    ],
+    "forUse": true,
+    "ID": 6
+  },
+  {
+    "TypeOfRoom": "Magacin",
+    "equipment": [
+      "Bed",
+      "Chair",
+      "Table"
+    ],
+    "medicine": [
+      "Brufen",
+      "Analgin",
+      "Paracetamol",
+      "Bromazepan",
+      "Diklofenac",
+      "Coldrex",
+      "Tylol",
+      "Tylol",
+      "lek1",
+      "lek",
+      "adasd",
+      "sdsd"
+    ],
+    "forUse": true,
+    "ID": 1
+  }
+]
