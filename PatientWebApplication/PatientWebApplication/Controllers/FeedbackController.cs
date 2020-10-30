@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PatientWebApplication.Models;
+using PatientWebApplication.Services;
 
 namespace PatientWebApplication.Controllers
 {
@@ -18,6 +19,17 @@ namespace PatientWebApplication.Controllers
             List<Feedback> result = new List<Feedback>();
             //Program.Feedback.ForEach(product => result.Add(ProductAdapter.ProductToProductDto(product)));
             return Ok(Program.Feedback);
+        }
+
+        [HttpPut("{id}")]       // PUT /api/feedback/2
+        public IActionResult Put(int id)
+        {
+            if (!FeedbackService.PublishFeedback(id))
+            {
+                return BadRequest();
+            }
+
+            return NoContent();
         }
     }
 }
