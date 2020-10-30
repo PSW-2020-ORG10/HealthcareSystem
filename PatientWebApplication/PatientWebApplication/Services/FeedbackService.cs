@@ -8,16 +8,16 @@ namespace PatientWebApplication.Services
 {
     public static class FeedbackService
     {
-        public static Boolean PublishFeedback(int id)
+        public static Feedback PublishFeedback(int id)
         {
             Feedback feedbackToPublish = Program.Feedback.Find(item => item.ID == id);
             if (feedbackToPublish == null)
             {
-                return false;
+                return feedbackToPublish;
             }
 
             feedbackToPublish.IsPublished = true;
-            return true;
+            return feedbackToPublish;
         }
     }
 }

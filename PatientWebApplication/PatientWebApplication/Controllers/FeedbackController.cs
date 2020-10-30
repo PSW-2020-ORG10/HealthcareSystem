@@ -24,12 +24,14 @@ namespace PatientWebApplication.Controllers
         [HttpPut("{id}")]       // PUT /api/feedback/2
         public IActionResult Put(int id)
         {
-            if (!FeedbackService.PublishFeedback(id))
+            Feedback feedback = FeedbackService.PublishFeedback(id);
+            if (feedback == null)
             {
                 return BadRequest();
             }
-
-            return NoContent();
+            else {
+                return Ok(feedback);
+            }
         }
     }
 }
