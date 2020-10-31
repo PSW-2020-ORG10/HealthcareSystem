@@ -1,16 +1,11 @@
 ﻿using Class_diagram.Model.Employee;
-using Class_diagram.Model.Patient;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HCI_wireframe.Model.Employee
 {
 
-   
-     public class EmployeeUser : User
+
+    public class EmployeeUser : User
     {
         public Double salary { get; set; }
        

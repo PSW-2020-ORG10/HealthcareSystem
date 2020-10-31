@@ -1,12 +1,6 @@
-﻿using Class_diagram.Model.Hospital;
-using Class_diagram.Model.Employee;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Class_diagram.Model.Patient;
 using HCI_wireframe.Model.Employee;
-using Class_diagram.Model.Doctor;
 
 namespace HCI_wireframe.Model.Doctor
 {

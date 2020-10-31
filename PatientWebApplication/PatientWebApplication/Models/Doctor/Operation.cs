@@ -5,7 +5,6 @@
  ***********************************************************************/
 
 using System;
-using Class_diagram.Model.Hospital;
 using Class_diagram.Model.Patient;
 using HCI_wireframe.Model.Doctor;
 
