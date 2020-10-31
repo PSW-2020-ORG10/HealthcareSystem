@@ -7,11 +7,10 @@
 using Class_diagram.Model.Patient;
 using System;
 using System.Collections.Generic;
-using System.Windows.Documents;
 
 namespace Class_diagram.Model.Hospital
 {
-   public class Room : Entity
+    public class Room : Entity
    {
        
         

@@ -5,10 +5,6 @@
  ***********************************************************************/
 
 using System;
-using Class_diagram.Model.Hospital;
-using Class_diagram.Model.Doctor;
-using Class_diagram.Model.Patient;
-using Class_diagram.Model.Employee;
 using HCI_wireframe.Model.Employee;
 
 namespace Class_diagram.Model.Secretary

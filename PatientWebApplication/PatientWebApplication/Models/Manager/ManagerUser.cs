@@ -1,10 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Class_diagram.Model.Employee;
-using Class_diagram.Model.Patient;
 using HCI_wireframe.Model.Employee;
 
 namespace Class_diagram.Model.Manager
