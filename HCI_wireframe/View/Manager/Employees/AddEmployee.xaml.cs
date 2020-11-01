@@ -66,7 +66,7 @@ namespace WpfApp2.Employees
                 PropertyChanged(this, new PropertyChangedEventArgs(name));
             }
         }
-        private int getNextID()
+        private int getNextid()
         {
             DoctorController rp = new DoctorController();
             SecretaryController sp = new SecretaryController();
@@ -76,16 +76,16 @@ namespace WpfApp2.Employees
            
             foreach (DoctorUser r in lista)
             {
-                if (r.ID > number)
+                if (r.id > number)
                 {
-                    number = r.ID;
+                    number = r.id;
                 }
             }
             foreach (SecretaryUser r in listaS)
             {
-                if (r.ID > number)
+                if (r.id > number)
                 {
-                    number = r.ID;
+                    number = r.id;
                 }
             }
 
@@ -104,7 +104,7 @@ namespace WpfApp2.Employees
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             DoctorController dc = new DoctorController();
-            id = getNextID();
+            id = getNextid();
             first = First.Text;
             last = Last.Text;
             dateTxt = Date.Text;
@@ -166,7 +166,7 @@ namespace WpfApp2.Employees
             if (Genral.IsChecked == true)
             {
                 Specijality.IsEnabled = false;
-                doctorUser = new DoctorUser(id, first, last, ucin, date, phone, email, pass, address, wage, false, null,null,s.TypeOfRoom);
+                doctorUser = new DoctorUser(id, first, last, ucin, date, phone, email, pass, address, wage, false, null,null,s.typeOfRoom);
 
                 Boolean isDoctorOk = DocContr.New(doctorUser);
                 if(isDoctorOk==false)
@@ -180,7 +180,7 @@ namespace WpfApp2.Employees
             if (Specialist.IsChecked == true)
             {
 
-                doctorUser = new DoctorUser(id, first, last, ucin, date, phone, email, pass, address, wage, true, spec, null,s.TypeOfRoom);
+                doctorUser = new DoctorUser(id, first, last, ucin, date, phone, email, pass, address, wage, true, spec, null,s.typeOfRoom);
 
 
                 Boolean isDoctorOk = DocContr.New(doctorUser);

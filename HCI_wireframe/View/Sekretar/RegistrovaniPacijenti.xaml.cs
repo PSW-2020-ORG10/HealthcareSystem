@@ -44,7 +44,7 @@ namespace ProjekatHCI
             {
                 if (ee.guest != true)
                 {
-                    pacijenti.Add(new PatientUser { ID = ee.ID, FirstName = ee.FirstName, SecondName = ee.SecondName, UniqueCitizensIdentityNumber = ee.UniqueCitizensIdentityNumber, DateOfBirth = ee.DateOfBirth, PhoneNumber = ee.PhoneNumber, MedicalIDnumber = ee.MedicalIDnumber, RegisteredBySecretary = ee.RegisteredBySecretary });
+                    pacijenti.Add(new PatientUser { id = ee.id, firstName = ee.firstName, secondName = ee.secondName, uniqueCitizensidentityNumber = ee.uniqueCitizensidentityNumber, dateOfBirth = ee.dateOfBirth, phoneNumber = ee.phoneNumber, medicalIdNumber = ee.medicalIdNumber, isRegisteredBySecretary = ee.isRegisteredBySecretary });
                 }
 
 
@@ -101,7 +101,7 @@ namespace ProjekatHCI
                     foreach (PatientUser anim in pacijenti)
                     {
 
-                    if (anim.FirstName.ToUpper().Contains(Pretraga.Text.ToUpper()) || anim.SecondName.ToUpper().Contains(Pretraga.Text.ToUpper()))
+                    if (anim.firstName.ToUpper().Contains(Pretraga.Text.ToUpper()) || anim.secondName.ToUpper().Contains(Pretraga.Text.ToUpper()))
                     {
                         if (anim.guest == false)
                         {

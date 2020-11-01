@@ -129,7 +129,7 @@
 
                         <DataTemplate>
 
-                            <TextBlock Foreground="Black" Text="{Binding TypeOfRoom}"/>
+                            <TextBlock Foreground="Black" Text="{Binding typeOfRoom}"/>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>

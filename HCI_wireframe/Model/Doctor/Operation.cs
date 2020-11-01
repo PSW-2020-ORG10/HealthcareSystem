@@ -15,25 +15,22 @@ namespace Class_diagram.Model.Doctor
     {
         public PatientUser patient { get; set; }
 
-        public String Date { get; set; }
-        public TimeSpan Start { get; set; }
-        public TimeSpan End { get; set; }
-        public DoctorUser Responsable { get; set; }
-        public String IdRoom { get; set; }
-        public Referral OperationReferral { get; set; }
-     public Operation() : base()
+        public String date { get; set; }
+        public TimeSpan start { get; set; }
+        public TimeSpan end { get; set; }
+        public DoctorUser isResponiable { get; set; }
+        public String idRoom { get; set; }
+        public Referral operationReferral { get; set; }
+        public Operation() : base()  {}
+        public Operation(int id, PatientUser patient, String date, TimeSpan start, TimeSpan end, DoctorUser isResponiable, String idRoom, Referral operationReferral) : base(id)
         {
-
-        }
-        public Operation(int id, PatientUser pat, String date, TimeSpan times, TimeSpan end, DoctorUser responsible, String room, Referral referral) : base(id)
-        {
-            this.patient = pat;
-            this.Date = date;
-            this.Start = times;
-            this.End = end;
-            this.Responsable = responsible;
-            this.IdRoom = room;
-            this.OperationReferral = referral;
+            this.patient = patient;
+            this.date = date;
+            this.start = start;
+            this.end = end;
+            this.isResponiable = isResponiable;
+            this.idRoom = idRoom;
+            this.operationReferral = operationReferral;
         }
 
         

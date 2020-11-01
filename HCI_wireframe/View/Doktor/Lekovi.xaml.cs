@@ -76,7 +76,7 @@ namespace Klinika
 
             foreach (Medicine ee in lista)
             {
-                doktori.Add(new Medicine { Name = ee.Name, Quantity = ee.Quantity, room = ee.room});
+                doktori.Add(new Medicine { name = ee.name, quantity = ee.quantity, room = ee.room});
 
 
 
@@ -109,7 +109,7 @@ namespace Klinika
                 foreach (Medicine anim in doktori)
                 {
 
-                    if (anim.Name.ToUpper().Contains(Pretraga.Text.ToUpper()))
+                    if (anim.name.ToUpper().Contains(Pretraga.Text.ToUpper()))
                     {
                         filterModeLisst.Add(anim);
                     }

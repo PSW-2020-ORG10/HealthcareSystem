@@ -179,7 +179,7 @@
             </PasswordBox.Style>
         </PasswordBox>
         <TextBox  Grid.Row="12" Grid.Column ="5" Grid.ColumnSpan="4" Height="28" Style="{StaticResource placeHolder}" 
-                Name="AllergieTextBox" >
+                Name="allergieTextBox" >
            
         </TextBox>
 

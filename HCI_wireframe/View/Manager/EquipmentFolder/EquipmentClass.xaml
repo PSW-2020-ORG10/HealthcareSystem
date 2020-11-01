@@ -21,7 +21,7 @@
 
                 <DataTemplate>
 
-                    <Button Click="Button_Click_2" Content="{Binding TypeOfRoom}"  Background="White"  Foreground="Black"  BorderBrush="{x:Null}"/>
+                    <Button Click="Button_Click_2" Content="{Binding typeOfRoom}"  Background="White"  Foreground="Black"  BorderBrush="{x:Null}"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
@@ -36,7 +36,7 @@
 
                 <DataTemplate>
 
-                    <Button Click="Button_Click_2" Content="{Binding TypeOfRoom}" Background="White" Foreground="Black" BorderBrush="{x:Null}" />
+                    <Button Content="{Binding typeOfRoom}" Background="White" Foreground="Black" BorderBrush="{x:Null}" />
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
@@ -46,7 +46,7 @@
 
                 <DataTemplate>
 
-                    <Button Click="Button_Click" Content="{Binding TypeOfRoom}" Background="White" Foreground="Black" BorderBrush="{x:Null}"/>
+                    <Button Click="Button_Click" Content="{Binding typeOfRoom}" Background="White" Foreground="Black" BorderBrush="{x:Null}"/>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>

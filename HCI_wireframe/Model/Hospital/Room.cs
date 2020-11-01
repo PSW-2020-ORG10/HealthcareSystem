@@ -13,30 +13,27 @@ namespace Class_diagram.Model.Hospital
 {
    public class Room : Entity
    {
-       
-        
-
-        public String TypeOfRoom { get; set; }
+        public String typeOfRoom { get; set; }
 
         public List<String> equipment { get; set; }
         public List<String> medicine { get; set; }
         public Boolean forUse { get; set; }
 
        
-        public Room(int ID, String type, Boolean forUse) : base(ID)
+        public Room(int id, String typeOfRoom, Boolean forUse) : base(id)
         {
            
-            this.TypeOfRoom = type;
+            this.typeOfRoom = typeOfRoom;
             this.forUse = forUse;
 
         }
 
 
-        public Room(int ID, String type, List<String> eqp,List<String> med, Boolean forUse) : base(ID)
+        public Room(int id, String typeOfRoom, List<String> equipment, List<String> medicine, Boolean forUse) : base(id)
         {
-            this.TypeOfRoom = type;
-            this.equipment = eqp;
-            this.medicine = med;
+            this.typeOfRoom = typeOfRoom;
+            this.equipment = equipment;
+            this.medicine = medicine;
             this.forUse = forUse;
         }
 

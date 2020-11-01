@@ -34,7 +34,7 @@ namespace WpfApp2.Rooms
         {
             InitializeComponent();
             r = room;
-            Type.Text = room.TypeOfRoom;
+            Type.Text = room.typeOfRoom;
          
         }
 
@@ -85,9 +85,9 @@ namespace WpfApp2.Rooms
 
             foreach(DoctorUser du in lista)
             {
-                if (du.ordination.Equals(r.TypeOfRoom))
+                if (du.ordination.Equals(r.typeOfRoom))
                 {
-                    MessageBox.Show("Please change ordination of doctor " + du.FirstName + " " + du.SecondName + ".", "Notification", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    MessageBox.Show("Please change ordination of doctor " + du.firstName + " " + du.secondName + ".", "Notification", MessageBoxButton.OK, MessageBoxImage.Exclamation);
 
                 }
             }
@@ -109,7 +109,7 @@ namespace WpfApp2.Rooms
 
             String type=Type.Text;
 
-            r.TypeOfRoom = type;
+            r.typeOfRoom = type;
 
             RoomController rc = new RoomController();
             rc.Update(r);

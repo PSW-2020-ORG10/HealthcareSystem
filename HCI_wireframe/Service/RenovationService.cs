@@ -14,7 +14,7 @@ using System.IO;
 
 namespace Class_diagram.Service
 {
-   public class RenovationService : bingPath, IService<Renovation>
+   public class RenovationService : BingPath, IService<Renovation>
     {
         public RenovationRepository renovationRepository;
         String b = bingPathToAppDir(@"JsonFiles\renovation.json");
@@ -31,7 +31,7 @@ namespace Class_diagram.Service
       
         public void Remove(Renovation renovation)
         {
-            renovationRepository.Delete(renovation.ID);
+            renovationRepository.Delete(renovation.id);
         }
       
         public List<Renovation> GetAll()
@@ -44,9 +44,9 @@ namespace Class_diagram.Service
             renovationRepository.New(renovation);
         }
 
-        public Renovation GetByID(int ID)
+        public Renovation GetByid(int id)
         {
-            return  renovationRepository.GetByID(ID);
+            return  renovationRepository.GetByid(id);
         }
     }
 }

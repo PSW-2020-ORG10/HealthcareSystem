@@ -67,7 +67,7 @@
             <Label Grid.Row="3" Grid.Column ="3" Grid.ColumnSpan="2" HorizontalAlignment="left" >Firstname</Label>
             <Label Grid.Row="4" Grid.Column ="3" Grid.ColumnSpan="2" HorizontalAlignment="left" >Secondname</Label>
             <Label Grid.Row="5" Grid.Column ="3" Grid.ColumnSpan="2" HorizontalAlignment="left" >UCIN</Label>
-            <Label Grid.Row="6" Grid.Column ="3" Grid.ColumnSpan="2" HorizontalAlignment="left" >Medical ID number</Label>
+            <Label Grid.Row="6" Grid.Column ="3" Grid.ColumnSpan="2" HorizontalAlignment="left" >Medical id number</Label>
             <Label Grid.Row="7" Grid.Column ="3" Grid.ColumnSpan="2" HorizontalAlignment="left" >Date of birth</Label>
         
             <Label Grid.Row="8" Grid.Column ="3" Grid.ColumnSpan="2" HorizontalAlignment="left" >City</Label>
@@ -112,11 +112,11 @@
             </TextBox.Text>
         </TextBox>
         <TextBox Validation.ErrorTemplate="{StaticResource errorTemplate}" Grid.Row="6" Grid.Column ="5" Grid.ColumnSpan="4" Height="28" Style="{StaticResource placeHolder}" 
-                 Tag="Enter your medical id number.." Name="MedicalIDnumber_TextBox" KeyDown="MedicalIDnumber_TextBox_KeyDown">
+                 Tag="Enter your medical id number.." Name="medicalIdNumber_TextBox" KeyDown="medicalIdNumber_TextBox_KeyDown">
             <TextBox.Text>
-                <Binding Path="MedicalId" UpdateSourceTrigger="PropertyChanged">
+                <Binding Path="Medicalid" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
-                        <val:ValidationMedicalId ValidationStep="RawProposedValue"/>
+                        <val:ValidationMedicalid ValidationStep="RawProposedValue"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
@@ -205,8 +205,8 @@
             </PasswordBox.Style>
         </PasswordBox>
 
-        <TextBox Name ="AllergieTextBox" Grid.Row="13" Grid.Column ="5" Grid.ColumnSpan="4" Height="28" Style="{StaticResource placeHolder}"  
-                 Tag="Enter medicine name" KeyDown="AllergieTextBox_KeyDown"
+        <TextBox Name ="allergieTextBox" Grid.Row="13" Grid.Column ="5" Grid.ColumnSpan="4" Height="28" Style="{StaticResource placeHolder}"  
+                 Tag="Enter medicine name" KeyDown="allergieTextBox_KeyDown"
                 >
            
         </TextBox>

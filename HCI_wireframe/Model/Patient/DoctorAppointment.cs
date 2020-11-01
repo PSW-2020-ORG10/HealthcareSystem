@@ -13,26 +13,24 @@ namespace Class_diagram.Model.Patient
 {
     public class DoctorAppointment : Entity
     {
-
-
         public List<Referral> referral { get; set; }
 
         public DoctorUser doctor { get; set; }
 
-        public TimeSpan Time { get; set; }
-        public String Date { get; set; }
+        public TimeSpan time { get; set; }
+        public String date { get; set; }
         public PatientUser patient { get; set; }
-        public String roomID { get; set; }
+        public String roomid { get; set; }
 
 
-        public DoctorAppointment(int id, TimeSpan time, String date, PatientUser pat, DoctorUser doc, List<Referral> referrals, String room) : base(id)
+        public DoctorAppointment(int id, TimeSpan time, String date, PatientUser patient, DoctorUser doctor, List<Referral> referrals, String roomid) : base(id)
         {
-            this.Time = time;
-            this.Date = date;
-            this.patient = pat;
-            this.doctor = doc;
+            this.time = time;
+            this.date = date;
+            this.patient = patient;
+            this.doctor = doctor;
             this.referral = referrals;
-            this.roomID = room;
+            this.roomid = roomid;
 
         }
 

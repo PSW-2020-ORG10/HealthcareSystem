@@ -44,7 +44,7 @@ namespace HCI_wireframe.View.Doktor
             public TimeSpan Time { get; set; }
 
             public String Date { get; set; }
-            public int IDapp { get; set; }
+            public int idapp { get; set; }
 
             public String ChangeName { get; set; }
             public String RemoveName { get; set; }
@@ -74,7 +74,7 @@ namespace HCI_wireframe.View.Doktor
 
             foreach (DoctorAppointment ee in AppointmentList)
             {
-                nalazi.Add(new DoctorAppointment { Time = ee.Time, Date = ee.Date, patient = ee.patient, doctor = ee.doctor});
+                nalazi.Add(new DoctorAppointment { time = ee.time, date = ee.date, patient = ee.patient, doctor = ee.doctor});
 
 
 

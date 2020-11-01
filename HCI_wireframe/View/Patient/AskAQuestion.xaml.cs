@@ -35,13 +35,13 @@ namespace HCI_wireframe
             }
 
         }
-        string myProperty = App.Current.Properties["PatientID"].ToString();
+        string myProperty = App.Current.Properties["Patientid"].ToString();
         public DoctorController doctorController;
         public PatientController patientController;
         public List<DoctorUser> listDoctors { get; set; }
         public List<PatientUser> listPatients { get; set; }
         public PatientUser Patient { get; set; }
-        public static int numberId = 0;
+        public static int numberid = 0;
         public AskAQuestion()
         {
             InitializeComponent(); this.DataContext = this;
@@ -55,15 +55,15 @@ namespace HCI_wireframe
             foreach (DoctorUser d in listDoctors)
             {
                 StringBuilder l = new StringBuilder();
-                l.Append(d.FirstName + " ");
-                l.Append(d.SecondName + " ");
-                l.Append(d.ID);
+                l.Append(d.firstName + " ");
+                l.Append(d.secondName + " ");
+                l.Append(d.id);
                 ListaDoktoriIme a = new ListaDoktoriIme();
                 a.DoctorName = l.ToString();
                 listDoctorsBinding.Add(a);
             }
 
-            Patient = patientController.GetByID(int.Parse(myProperty));
+            Patient = patientController.GetByid(int.Parse(myProperty));
 
             doctorCombo.ItemsSource = listDoctorsBinding;
         }
@@ -257,13 +257,13 @@ namespace HCI_wireframe
                 String[] delovi = imeDr.Split(' ');
 
                 int idDoktor = int.Parse(delovi[2]);
-                DoctorUser doctor = doctorController.GetByID(idDoktor);
+                DoctorUser doctor = doctorController.GetByid(idDoktor);
                 if (doctor.specialNotifications == null)
                 {
                     doctor.specialNotifications = new List<String>();
                 }
                 List<String> obavestenja = doctor.specialNotifications;
-                obavestenja.Add("Patient - " + Patient.ID + " -  " + textBloxk.Text);
+                obavestenja.Add("Patient - " + Patient.id + " -  " + textBloxk.Text);
                 doctor.specialNotifications = obavestenja;
                Boolean isDoctorOk= doctorController.Update(doctor);
                 if(isDoctorOk==false)

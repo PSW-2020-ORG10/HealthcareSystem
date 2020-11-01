@@ -36,16 +36,16 @@ namespace Klinika
 
             foreach (DoctorUser s in lista)
             {
-                if (s.Email.Equals(myProperty))
+                if (s.email.Equals(myProperty))
                 {
                     lekar = s;
-                    Ime.Text = lekar.FirstName.ToString();
-                    Prezime.Text = lekar.SecondName.ToString();
-                    Datum.Text = lekar.DateOfBirth.ToString();
+                    Ime.Text = lekar.firstName.ToString();
+                    Prezime.Text = lekar.secondName.ToString();
+                    Datum.Text = lekar.dateOfBirth.ToString();
                     Specijalnost.Text = "Hirurg";
-                    JMBG.Text = lekar.UniqueCitizensIdentityNumber.ToString();
+                    JMBG.Text = lekar.uniqueCitizensidentityNumber.ToString();
 
-                    email.Text = lekar.Email.ToString();
+                    email.Text = lekar.email.ToString();
                 }
 
 

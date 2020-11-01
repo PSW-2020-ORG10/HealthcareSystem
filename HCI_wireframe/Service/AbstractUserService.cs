@@ -22,7 +22,7 @@ namespace HCI_wireframe.Service
 
         public abstract Boolean Update(T entity);
 
-        public abstract T GetByID(int ID);
+        public abstract T GetByid(int id);
 
         public abstract void Remove(T entity);
 
@@ -36,11 +36,26 @@ namespace HCI_wireframe.Service
             Boolean foundWithinDoctors = isFoundInDoctors(email, ucin, user);
             Boolean foundWithinSecretaries = isFoundInSecretaries(email, ucin, user);
             Boolean foundWithinManagers = isFoundInManagers(email, ucin, user);
-            if(foundWithinPatients==false || foundWithinDoctors== false || foundWithinSecretaries== false || foundWithinManagers== false)
-            {
-                return false;
-            }
+            if(!foundWithinPatients || !foundWithinDoctors || !foundWithinSecretaries || !foundWithinManagers) return false;
             return true;
+        }
+
+        private bool areUCINsEqual(String firstUCIN,String secondUCIN)
+        {
+            if (firstUCIN.Equals(secondUCIN)) return true;
+            return false;
+        }
+
+        private bool areIDsEqual(int firstID, int secondID)
+        {
+            if (firstID==secondID) return true;
+            return false;
+        }
+
+        private bool areEmailsEqual(String firstEmail, String secondEmail)
+        {
+            if (firstEmail.Equals(secondEmail)) return true;
+            return false;
         }
 
         public bool isFoundInManagers(string email, string ucin, T user)
@@ -51,12 +66,9 @@ namespace HCI_wireframe.Service
 
             foreach (ManagerUser manager in listOfManagers)
             {
-                if (manager.ID != user.ID)
+                if (!areIDsEqual(manager.id, user.id) && (areUCINsEqual(manager.uniqueCitizensidentityNumber, ucin) || areEmailsEqual(manager.email, email)))
                 {
-                    if (manager.UniqueCitizensIdentityNumber.Equals(ucin) || manager.Email.Equals(email))
-                    {
-                        return false;
-                    }
+                    return false;
                 }
             }
 
@@ -72,12 +84,10 @@ namespace HCI_wireframe.Service
             List<SecretaryUser> listOfSecretaries = secretaryRepository.GetAll();
 
             foreach (SecretaryUser secretary in listOfSecretaries)
-            {if (secretary.ID != user.ID)
+            {
+                if (!areIDsEqual(secretary.id, user.id) && (areUCINsEqual(secretary.uniqueCitizensidentityNumber, ucin) || areEmailsEqual(secretary.email, email)))
                 {
-                    if (secretary.UniqueCitizensIdentityNumber.Equals(ucin) || secretary.Email.Equals(email))
-                    {
-                        return false;
-                    }
+                    return false;
                 }
             }
 
@@ -92,11 +102,9 @@ namespace HCI_wireframe.Service
 
             foreach (DoctorUser doctor in listOfDoctors)
             {
-                if(doctor.ID!=user.ID) {
-                    if (doctor.UniqueCitizensIdentityNumber.Equals(ucin) || doctor.Email.Equals(email))
-                    {
-                        return false;
-                    }
+                if (!areIDsEqual(doctor.id, user.id) && (areUCINsEqual(doctor.uniqueCitizensidentityNumber, ucin) || areEmailsEqual(doctor.email, email)))
+                {
+                    return false;
                 }
             }
 
@@ -110,12 +118,10 @@ namespace HCI_wireframe.Service
             List<PatientUser> listOfPatients = patientsRepository.GetAll();
 
             foreach (PatientUser patient in listOfPatients)
-            {if (patient.ID != user.ID)
+            {
+                if (!areIDsEqual(patient.id, user.id) && (areUCINsEqual(patient.uniqueCitizensidentityNumber, ucin) || areEmailsEqual(patient.email, email)))
                 {
-                    if (patient.Email.Equals(email) || patient.UniqueCitizensIdentityNumber.Equals(ucin))
-                    {
-                        return false;
-                    }
+                    return false;
                 }
             }
 

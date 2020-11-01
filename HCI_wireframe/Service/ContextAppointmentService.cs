@@ -32,9 +32,9 @@ namespace Class_diagram.Service
         {
             this.iStrategyAppointment.Update(appointment, operation);
         }
-        public void Remove(int appointmentID, int operatioID)
+        public void Remove(int appointmentid, int operatioid)
         {
-            this.iStrategyAppointment.Remove(appointmentID, operatioID);
+            this.iStrategyAppointment.Remove(appointmentid, operatioid);
         }
    
     }

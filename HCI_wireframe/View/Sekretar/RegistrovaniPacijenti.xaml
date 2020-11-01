@@ -18,14 +18,14 @@
             <DataGrid  x:Name="dataGridPacijenti" ItemsSource="{Binding registrovaniPacijenti}" IsReadOnly="True" 
                   SelectionMode="Single" AutoGenerateColumns="False" ScrollViewer.CanContentScroll="True" Margin="0,9.8,0,10" Grid.Row="1" >
                 <DataGrid.Columns>
-                    <DataGridTextColumn CanUserSort="True" IsReadOnly="True"  Header="Ime" Binding="{Binding FirstName}"/>
-                    <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Header="Prezime" Binding="{Binding SecondName}" />
-                    <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Header="Broj zdravstvene knjizice" Binding="{Binding MedicalIDnumber}"/>
-                    <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Header="Broj telefona" Binding="{Binding PhoneNumber}" />
+                    <DataGridTextColumn CanUserSort="True" IsReadOnly="True"  Header="Ime" Binding="{Binding firstName}"/>
+                    <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Header="Prezime" Binding="{Binding secondName}" />
+                    <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Header="Broj zdravstvene knjizice" Binding="{Binding medicalIdNumber}"/>
+                    <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Header="Broj telefona" Binding="{Binding phoneNumber}" />
 
-                    <DataGridTextColumn IsReadOnly="True" Header="Jedinstveni maticni broj" Binding="{Binding UniqueCitizensIdentityNumber}"></DataGridTextColumn>
-                    <DataGridTextColumn IsReadOnly="True" Header="Datum rodjenja" Binding="{Binding DateOfBirth}"></DataGridTextColumn>
-                    <DataGridCheckBoxColumn Header="Sekretar registrovao" Binding="{Binding RegisteredBySecretary}"/>
+                    <DataGridTextColumn IsReadOnly="True" Header="Jedinstveni maticni broj" Binding="{Binding uniqueCitizensidentityNumber}"></DataGridTextColumn>
+                    <DataGridTextColumn IsReadOnly="True" Header="Datum rodjenja" Binding="{Binding dateOfBirth}"></DataGridTextColumn>
+                    <DataGridCheckBoxColumn Header="Sekretar registrovao" Binding="{Binding isRegisteredBySecretary}"/>
                 </DataGrid.Columns>
             </DataGrid>
             <StackPanel Grid.Row="0" Background="#FFC6F7FC" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Orientation="Vertical">

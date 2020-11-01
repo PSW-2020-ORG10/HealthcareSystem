@@ -22,12 +22,12 @@
                   SelectionMode="Single" AutoGenerateColumns="False" ScrollViewer.CanContentScroll="True"
                   Height="335" VerticalAlignment="Top" HorizontalAlignment="Stretch" Grid.RowSpan="3">
             <DataGrid.Columns>
-                <DataGridTextColumn CanUserSort="True" IsReadOnly="True"  Header="Ime pacijenta" Binding="{Binding FirstName}"/>
-                <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Header="Prezime pacijenta" Binding="{Binding SecondName}" />
-                <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Header="Broj zdravstvene knjizice" Binding="{Binding MedicalIDnumber}"/>
-                <DataGridTextColumn CanUserSort="True" IsReadOnly="True"  Header="JMBG" Binding="{Binding UniqueCitizensIdentityNumber}"/>
-                <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Header="Broj telefona" Binding="{Binding PhoneNumber}" />
-                <DataGridTextColumn CanUserSort="True" IsReadOnly="True"  Header="Istorija bolesti" Binding="{Binding appointments}"/>
+                <DataGridTextColumn CanUserSort="True" IsReadOnly="True"  Header="Ime pacijenta" Binding="{Binding firstName}"/>
+                <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Header="Prezime pacijenta" Binding="{Binding secondName}" />
+                <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Header="Broj zdravstvene knjizice" Binding="{Binding medicalIdNumber}"/>
+                <DataGridTextColumn CanUserSort="True" IsReadOnly="True"  Header="JMBG" Binding="{Binding uniqueCitizensidentityNumber}"/>
+                <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Header="Broj telefona" Binding="{Binding phoneNumber}" />
+               
 
 
             </DataGrid.Columns>

@@ -20,34 +20,34 @@ namespace Class_diagram.Model.Patient
    
    public  class PatientUser : User
     {
-        public String MedicalIDnumber { get; set; }
+        public String medicalIdNumber { get; set; }
        
-        public String Allergie { get; set; }
-        public String City { get; set; }
+        public String allergie { get; set; }
+        public String city { get; set; }
         public Boolean guest { get; set; }
-        public String Email { get; set; }
-        public String Password { get; set; }
-        public Boolean RegisteredBySecretary { get; set; }
-        public List<String> Notifications { get; set; }
+        public String email { get; set; }
+        public String password { get; set; }
+        public Boolean isRegisteredBySecretary { get; set; }
+        public List<String> notifications { get; set; }
 
         public PatientUser() : base()
         {
 
         }
 
-        public PatientUser(int id, string name, string secondname, string ucin, String date, string phone, String medicalId, String allergie, String city, Boolean isGuest,
-            String email, String password, Boolean registredBySec, List<String>notifications)
+        public PatientUser(int id, string name, string secondname, string ucin, String date, string phone, String medicalid, String allergie, String city, Boolean guest,
+            String email, String password, Boolean isRegisteredBySecretary, List<String>notifications)
            : base(id, name, secondname, ucin, date, phone)
         {
-            this.MedicalIDnumber = medicalId;
+            this.medicalIdNumber = medicalid;
            
-            this.Allergie = allergie;
-            this.City = city;
-            this.guest = isGuest;
-            this.Email = email;
-            this.Password = password;
-            this.RegisteredBySecretary = registredBySec;
-            this.Notifications = notifications;
+            this.allergie = allergie;
+            this.city = city;
+            this.guest = guest;
+            this.email = email;
+            this.password = password;
+            this.isRegisteredBySecretary = isRegisteredBySecretary;
+            this.notifications = notifications;
         }
 
 

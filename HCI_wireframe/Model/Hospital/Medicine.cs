@@ -16,14 +16,14 @@ namespace Class_diagram.Model.Hospital
         public List<String> room { get; set; }
         public DoctorUser doctor { get; set; }
         public String description { get; set; }
-        public Boolean confirmed { get; set; }
+        public Boolean isConfirmed { get; set; }
 
-        public Medicine(int id, String name, int quantity, string description, List<String> r, DoctorUser dr, Boolean comf) : base(id, name, quantity, r)
+        public Medicine(int id, String name, int quantity, string description, List<String> room, DoctorUser doctor, Boolean isConfirmed) : base(id, name, quantity, room)
         {
-            this.doctor = dr;
+            this.doctor = doctor;
             this.description = description;
-            this.room = r;
-            this.confirmed = comf;
+            this.room = room;
+            this.isConfirmed = isConfirmed;
         }
         public Medicine()
         {

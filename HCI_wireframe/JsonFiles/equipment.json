@@ -3,35 +3,35 @@
     "room": [
       "Magacin"
     ],
-    "Name": "Chair",
-    "Quantity": 40,
-    "ID": 2
+    "name": "Chair",
+    "quantity": 40,
+    "id": 2
   },
   {
     "room": [
       "Magacin",
       "Operation room 20"
     ],
-    "Name": "Bed",
-    "Quantity": 60,
-    "ID": 1
+    "name": "Bed",
+    "quantity": 60,
+    "id": 1
   },
   {
     "room": [
       "Magacin",
       "Room 600"
     ],
-    "Name": "Table",
-    "Quantity": 55,
-    "ID": 3
+    "name": "Table",
+    "quantity": 55,
+    "id": 3
   },
   {
     "room": [
       "Operation room 30",
       "Room 500"
     ],
-    "Name": "Sizors",
-    "Quantity": 99,
-    "ID": 4
+    "name": "Sizors",
+    "quantity": 99,
+    "id": 4
   }
 ]

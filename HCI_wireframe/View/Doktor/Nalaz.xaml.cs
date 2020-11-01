@@ -54,18 +54,18 @@ namespace Klinika
 
             foreach (PatientUser ee in lista1)
             {
-                pacijenti.Add(new PatientUser { ID = ee.ID, FirstName = ee.FirstName, SecondName = ee.SecondName, UniqueCitizensIdentityNumber = ee.UniqueCitizensIdentityNumber, DateOfBirth = ee.DateOfBirth, PhoneNumber = ee.PhoneNumber, MedicalIDnumber = ee.MedicalIDnumber});
+                pacijenti.Add(new PatientUser { id = ee.id, firstName = ee.firstName, secondName = ee.secondName, uniqueCitizensidentityNumber = ee.uniqueCitizensidentityNumber, dateOfBirth = ee.dateOfBirth, phoneNumber = ee.phoneNumber, medicalIdNumber = ee.medicalIdNumber});
             }
             foreach (PatientUser regP in pacijenti)
             {
-                ListaPacijenata.Items.Add(regP.FirstName + " " + regP.SecondName + " " + regP.MedicalIDnumber);
+                ListaPacijenata.Items.Add(regP.firstName + " " + regP.secondName + " " + regP.medicalIdNumber);
 
 
 
             }
             foreach (DoctorAppointment ee in d)
             {
-                String datum = ee.Date;
+                String datum = ee.date;
                 String[] delovi = datum.Split('/');
                 int mesec = int.Parse(delovi[1]);
                 int dan = int.Parse(delovi[0]);
@@ -76,20 +76,20 @@ namespace Klinika
                 DateTime dt2 = DateTime.Now;
                 if (dt1.Date < dt2.Date)
                 {
-                    pregledi.Add(new DoctorAppointment { ID = ee.ID, patient = ee.patient, doctor = ee.doctor });
+                    pregledi.Add(new DoctorAppointment { id = ee.id, patient = ee.patient, doctor = ee.doctor });
                 }
             }
            
             foreach (DoctorAppointment preg in pregledi)
             {
-                combo.Items.Add(preg.ID + " " + preg.patient.FirstName+ " " + preg.patient.SecondName + " " + preg.doctor.FirstName + " " + preg.doctor.SecondName);
+                combo.Items.Add(preg.id + " " + preg.patient.firstName+ " " + preg.patient.secondName + " " + preg.doctor.firstName + " " + preg.doctor.secondName);
 
             }
             List<String> naziviLeka = new List<string>();
            lekovi = medicineController.GetAll();
             foreach(Medicine m in lekovi)
             {
-                naziviLeka.Add(m.Name);
+                naziviLeka.Add(m.name);
             }
             lekNaziv.ItemsSource = naziviLeka;
 
@@ -134,7 +134,7 @@ namespace Klinika
             PatientUser ovajPacijent = new PatientUser();
             foreach (PatientUser r1 in patientLista)
             {
-                if (r1.MedicalIDnumber.Equals(KnjizicaBox.Text.ToString()))
+                if (r1.medicalIdNumber.Equals(KnjizicaBox.Text.ToString()))
                 {
                     ovajPacijent = r1;
                 }
@@ -168,7 +168,7 @@ namespace Klinika
             List<DoctorUser> lista = dc.GetAll();
             foreach (DoctorUser s in lista)
             {
-                if (s.Email.Equals(prijavljen))
+                if (s.email.Equals(prijavljen))
                 {
                     ovaj = s;
                     
@@ -178,11 +178,11 @@ namespace Klinika
             String lekIzvucen = (String)lekNaziv.SelectedValue;
             foreach(Medicine m in lekovi)
             {
-                if( m.Name.Equals(lekIzvucen)) {
+                if( m.name.Equals(lekIzvucen)) {
                     lekm = m;
                 }
             }
-            String alergija = ovajPacijent.Allergie;
+            String alergija = ovajPacijent.allergie;
             String opisLeka = lekm.description;
             if(opisLeka.Contains(','))
             {
@@ -228,12 +228,12 @@ namespace Klinika
 
             foreach(DoctorAppointment doc in sviPregledi)
             {
-                if(neki.Equals(doc.ID.ToString()))
+                if(neki.Equals(doc.id.ToString()))
                 {
                     zaUpdate = doc;
                 }
             }
-            Console.WriteLine(zaUpdate.ID);
+            Console.WriteLine(zaUpdate.id);
             List<Referral> nalazi = new List<Referral>();
 
             nalazi = zaUpdate.referral;

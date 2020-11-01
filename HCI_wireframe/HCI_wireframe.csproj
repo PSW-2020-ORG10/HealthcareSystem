@@ -72,6 +72,7 @@
       <HintPath>packages\Syncfusion.Pdf.Net.Core.18.1.0.59\lib\netstandard2.0\Syncfusion.Pdf.Portable.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Text.Encoding.CodePages, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -135,13 +136,19 @@
     <Compile Include="Model\Employee\User.cs" />
     <Compile Include="Model\Hospital\Equipment.cs" />
     <Compile Include="Model\Hospital\Medicine.cs" />
+    <Compile Include="Model\Hospital\OfferedMedicine.cs" />
     <Compile Include="Model\Hospital\Renovation.cs" />
     <Compile Include="Model\Hospital\Room.cs" />
     <Compile Include="Model\Manager\ManagerUser.cs" />
+    <Compile Include="Model\Orders\DoctorOrder.cs" />
+    <Compile Include="Model\Orders\FinishedOrder.cs" />
+    <Compile Include="Model\Orders\ManagerOrder.cs" />
+    <Compile Include="Model\Orders\PharmacyOffer.cs" />
     <Compile Include="Model\Patient\DoctorAppointment.cs" />
     <Compile Include="Model\Patient\Entity.cs" />
     <Compile Include="Model\Patient\PatientUser.cs" />
     <Compile Include="Model\Patient\PhoneNumber.cs" />
+    <Compile Include="Model\Patient\Prescription.cs" />
     <Compile Include="Model\Patient\Question.cs" />
     <Compile Include="Model\Secretary\SecretaryUser.cs" />
     <Compile Include="Repository\AppointmentRepository.cs" />
@@ -160,7 +167,7 @@
     <Compile Include="Repository\RoomRepository.cs" />
     <Compile Include="Repository\SecretaryRepository.cs" />
     <Compile Include="Service\AbstractUserService.cs" />
-    <Compile Include="Service\bingPath.cs" />
+    <Compile Include="Service\BingPath.cs" />
     <Compile Include="Service\ContextAppointmentService.cs" />
     <Compile Include="Service\DoctorService.cs" />
     <Compile Include="Service\EmergencyPhonesService.cs" />

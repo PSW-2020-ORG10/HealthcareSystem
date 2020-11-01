@@ -45,7 +45,7 @@ namespace ProjekatHCI
             public TimeSpan Time { get; set; }
             public TimeSpan TimeEnd { get; set; }
             public String Date { get; set; }
-            public int IDapp { get; set; }
+            public int idapp { get; set; }
             public String PatientName { get; set; }
 
             public String ChangeName { get; set; }
@@ -125,7 +125,7 @@ namespace ProjekatHCI
             foreach (DoctorAppointment ee in AppointmentList)
             {
 
-                String datum = ee.Date;
+                String datum = ee.date;
                 String[] delovi = datum.Split('/');
                 int mesec = int.Parse(delovi[1]);
                 int dan = int.Parse(delovi[0]);
@@ -141,26 +141,26 @@ namespace ProjekatHCI
                     vrsta = 0;
                     DoctorUser doc = ee.doctor;
                     StringBuilder l = new StringBuilder();
-                    l.Append(doc.FirstName + " ");
-                    l.Append(doc.SecondName + " ");
+                    l.Append(doc.firstName + " ");
+                    l.Append(doc.secondName + " ");
                     l.Append(doc.speciality);
                     StringBuilder p = new StringBuilder();
                     PatientUser pat = ee.patient;
-                    p.Append(pat.FirstName + " ");
-                    p.Append(pat.SecondName);
+                    p.Append(pat.firstName + " ");
+                    p.Append(pat.secondName);
 
                     li.Add(new Lista
                     {
                         DoctorName = l.ToString(),
 
-                        IDapp = ee.ID,
-                        Time = ee.Time,
-                        TimeEnd = ee.Time + new TimeSpan(0,15,0),
-                        Date = ee.Date,
-                        ChangeName = "IZMENI " + ee.ID,
-                        RemoveName = "OTKAŽI " + ee.ID,
+                        idapp = ee.id,
+                        Time = ee.time,
+                        TimeEnd = ee.time + new TimeSpan(0,15,0),
+                        Date = ee.date,
+                        ChangeName = "IZMENI " + ee.id,
+                        RemoveName = "OTKAŽI " + ee.id,
                         PatientName = p.ToString(),
-                        Ordinacija = ee.roomID.ToString(),
+                        Ordinacija = ee.roomid.ToString(),
                         Pregled = true,
                         Operacija = false
 
@@ -193,7 +193,7 @@ namespace ProjekatHCI
             foreach (Operation ee in operationList)
             {
                 vrsta = 1;
-                String datum1 = ee.Date;
+                String datum1 = ee.date;
                 String[] delovi1 = datum1.Split('/');
                 int mesec1 = int.Parse(delovi1[1]);
                 int dan1 = int.Parse(delovi1[0]);
@@ -207,28 +207,28 @@ namespace ProjekatHCI
                 if (dt3.Date >= dt4.Date)
                 {
 
-                    DoctorUser doc = ee.Responsable;
+                    DoctorUser doc = ee.isResponiable;
                     StringBuilder l = new StringBuilder();
-                    l.Append(doc.FirstName + " ");
-                    l.Append(doc.SecondName+" ");
+                    l.Append(doc.firstName + " ");
+                    l.Append(doc.secondName+" ");
                     l.Append(doc.speciality);
                     StringBuilder p = new StringBuilder();
                     PatientUser pat = ee.patient;
-                    p.Append(pat.FirstName + " ");
-                    p.Append(pat.SecondName);
+                    p.Append(pat.firstName + " ");
+                    p.Append(pat.secondName);
 
                     li.Add(new Lista
                     {
                         DoctorName = l.ToString(),
 
-                        IDapp = ee.ID,
-                        Time = ee.Start,
-                        TimeEnd = ee.End,
-                        Date = ee.Date,
-                        ChangeName = "IZMENI " + ee.ID,
-                        RemoveName = "OTKAŽI " + ee.ID,
+                        idapp = ee.id,
+                        Time = ee.start,
+                        TimeEnd = ee.end,
+                        Date = ee.date,
+                        ChangeName = "IZMENI " + ee.id,
+                        RemoveName = "OTKAŽI " + ee.id,
                         PatientName = p.ToString(),
-                        Ordinacija = ee.Responsable.ordination.ToString(),
+                        Ordinacija = ee.isResponiable.ordination.ToString(),
                         Pregled = false,
                         Operacija = true
 
@@ -296,26 +296,26 @@ namespace ProjekatHCI
                     {
 
                         
-                        if (d.ID.ToString().Equals(id) && ss.Pregled == true)
+                        if (d.id.ToString().Equals(id) && ss.Pregled == true)
                         {
 
 
                             Console.WriteLine(id);
                             AppointmentList.Remove(d);
                             //patientController.update(ovajPacijent);
-                            epr.Delete(d.ID);
+                            epr.Delete(d.id);
                             PatientController patContr = new PatientController();
 
 
-                            if (d.patient.Notifications == null)
+                            if (d.patient.notifications == null)
                             {
-                                d.patient.Notifications = new List<string>();
+                                d.patient.notifications = new List<string>();
                             }
-                            List<String> notifications1 = d.patient.Notifications;
+                            List<String> notifications1 = d.patient.notifications;
                             // }
 
-                            notifications1.Add("Postovani, pregled zakazan za datum: " + d.Date + " i vreme " + d.Time + " je otkazan.");
-                            d.patient.Notifications = notifications1;
+                            notifications1.Add("Postovani, pregled zakazan za datum: " + d.date + " i vreme " + d.time + " je otkazan.");
+                            d.patient.notifications = notifications1;
 
 
 
@@ -327,7 +327,7 @@ namespace ProjekatHCI
                                 d.doctor.specialNotifications = new List<string>();
                             }
                             List<String> obavestenja = d.doctor.specialNotifications;
-                            obavestenja.Add("Postovani, pregled zakazan za datum: " + d.Date + " i vreme " + d.Time + " je otkazan.");
+                            obavestenja.Add("Postovani, pregled zakazan za datum: " + d.date + " i vreme " + d.time + " je otkazan.");
                             d.doctor.specialNotifications = obavestenja;
 
 
@@ -349,22 +349,22 @@ namespace ProjekatHCI
                     }
                     foreach (Operation d in operationList)
                     {
-                        if (d.ID.ToString().Equals(id) && ss.Operacija == true)
+                        if (d.id.ToString().Equals(id) && ss.Operacija == true)
                         {
                             operationList.Remove(d);
-                            oprep.Delete(d.ID);
+                            oprep.Delete(d.id);
                             operationList.Remove(d);
-                            oprep.Delete(d.ID);
+                            oprep.Delete(d.id);
 
-                            if (d.patient.Notifications == null)
+                            if (d.patient.notifications == null)
                             {
-                                d.patient.Notifications = new List<string>();
+                                d.patient.notifications = new List<string>();
                             }
-                            List<String> notifications1 = d.patient.Notifications;
+                            List<String> notifications1 = d.patient.notifications;
 
 
-                            notifications1.Add("Postovani, operacija zakazana za datum: " + d.Date + " i vreme " + d.Start + " je otkazana.");
-                            d.patient.Notifications = notifications1;
+                            notifications1.Add("Postovani, operacija zakazana za datum: " + d.date + " i vreme " + d.start + " je otkazana.");
+                            d.patient.notifications = notifications1;
 
 
 
@@ -375,13 +375,13 @@ namespace ProjekatHCI
 
 
 
-                            if (d.Responsable.specialNotifications == null)
+                            if (d.isResponiable.specialNotifications == null)
                             {
-                                d.Responsable.specialNotifications = new List<string>();
+                                d.isResponiable.specialNotifications = new List<string>();
                             }
-                            List<String> obavestenja = d.Responsable.specialNotifications;
-                            obavestenja.Add("Postovani,operacija zakazana za datum: " + d.Date + " i vreme " + d.Start + " je otkazana.");
-                            d.Responsable.specialNotifications = obavestenja;
+                            List<String> obavestenja = d.isResponiable.specialNotifications;
+                            obavestenja.Add("Postovani,operacija zakazana za datum: " + d.date + " i vreme " + d.start + " je otkazana.");
+                            d.isResponiable.specialNotifications = obavestenja;
 
 
 
@@ -389,7 +389,7 @@ namespace ProjekatHCI
 
                             DoctorController docContr1 = new DoctorController();
 
-                            docContr1.Update(d.Responsable);
+                            docContr1.Update(d.isResponiable);
                             var s = new ZakazivanjePregleda();
                             Panel.Children.Clear();
                             Panel.Children.Add(s);
@@ -448,26 +448,26 @@ namespace ProjekatHCI
 
                     foreach (DoctorAppointment d in AppointmentList)
                     {
-                        if (d.ID.ToString().Equals(id) && ss.Pregled == true)
+                        if (d.id.ToString().Equals(id) && ss.Pregled == true)
                         {
 
                             
                             Console.WriteLine(id);
                             AppointmentList.Remove(d);
                             //patientController.update(ovajPacijent);
-                            epr.Delete(d.ID);
+                            epr.Delete(d.id);
                             PatientController patContr = new PatientController();
                            
                            
-                            if (d.patient.Notifications == null)
+                            if (d.patient.notifications == null)
                             {
-                                d.patient.Notifications = new List<string>();
+                                d.patient.notifications = new List<string>();
                             }
-                            List<String> notifications1 = d.patient.Notifications;
+                            List<String> notifications1 = d.patient.notifications;
                             // }
 
-                            notifications1.Add("Postovani, pregled zakazan za datum: " + d.Date + " i vreme " + d.Time + " je otkazan.");
-                            d.patient.Notifications = notifications1;
+                            notifications1.Add("Postovani, pregled zakazan za datum: " + d.date + " i vreme " + d.time + " je otkazan.");
+                            d.patient.notifications = notifications1;
                            
 
 
@@ -479,7 +479,7 @@ namespace ProjekatHCI
                                 d.doctor.specialNotifications = new List<string>();
                             }
                             List<String> obavestenja = d.doctor.specialNotifications;
-                            obavestenja.Add("Postovani, pregled zakazan za datum: " + d.Date + " i vreme " + d.Time + " je otkazan.");
+                            obavestenja.Add("Postovani, pregled zakazan za datum: " + d.date + " i vreme " + d.time + " je otkazan.");
                             d.doctor.specialNotifications = obavestenja;
 
 
@@ -500,20 +500,20 @@ namespace ProjekatHCI
 
                     foreach (Operation d in operationList)
                     {
-                        if (d.ID.ToString().Equals(id) && ss.Operacija == true)
+                        if (d.id.ToString().Equals(id) && ss.Operacija == true)
                         {
                             operationList.Remove(d);
-                            oprep.Delete(d.ID);
+                            oprep.Delete(d.id);
                           
-                            if (d.patient.Notifications == null)
+                            if (d.patient.notifications == null)
                             {
-                                d.patient.Notifications = new List<string>();
+                                d.patient.notifications = new List<string>();
                             }
-                            List<String> notifications1 = d.patient.Notifications;
+                            List<String> notifications1 = d.patient.notifications;
                           
 
-                            notifications1.Add("Postovani, operacija zakazana za datum: " + d.Date + " i vreme " + d.Start + " je otkazana.");
-                            d.patient.Notifications = notifications1;
+                            notifications1.Add("Postovani, operacija zakazana za datum: " + d.date + " i vreme " + d.start + " je otkazana.");
+                            d.patient.notifications = notifications1;
 
 
 
@@ -524,13 +524,13 @@ namespace ProjekatHCI
 
 
 
-                            if (d.Responsable.specialNotifications == null)
+                            if (d.isResponiable.specialNotifications == null)
                             {
-                                d.Responsable.specialNotifications = new List<string>();
+                                d.isResponiable.specialNotifications = new List<string>();
                             }
-                            List<String> obavestenja = d.Responsable.specialNotifications;
-                            obavestenja.Add("Postovani,operacija zakazana za datum: " + d.Date + " i vreme " + d.Start + " je otkazana.");
-                            d.Responsable.specialNotifications = obavestenja;
+                            List<String> obavestenja = d.isResponiable.specialNotifications;
+                            obavestenja.Add("Postovani,operacija zakazana za datum: " + d.date + " i vreme " + d.start + " je otkazana.");
+                            d.isResponiable.specialNotifications = obavestenja;
 
 
 
@@ -538,7 +538,7 @@ namespace ProjekatHCI
 
                             DoctorController docContr1 = new DoctorController();
 
-                            docContr1.Update(d.Responsable);
+                            docContr1.Update(d.isResponiable);
                             var s = new PopunjeniTermini();
                             Panel.Children.Clear();
                             Panel.Children.Add(s);
@@ -580,7 +580,7 @@ namespace ProjekatHCI
                 {
 
 
-                    filtered.Add(new Lista { DoctorName = ee.DoctorName, IDapp = ee.IDapp, Time = ee.Time, Date = ee.Date, ChangeName = ee.ChangeName, RemoveName = ee.RemoveName, PatientName = ee.PatientName, Ordinacija = ee.Ordinacija, Pregled = ee.Pregled, Operacija = ee.Operacija });
+                    filtered.Add(new Lista { DoctorName = ee.DoctorName, idapp = ee.idapp, Time = ee.Time, Date = ee.Date, ChangeName = ee.ChangeName, RemoveName = ee.RemoveName, PatientName = ee.PatientName, Ordinacija = ee.Ordinacija, Pregled = ee.Pregled, Operacija = ee.Operacija });
 
 
                 }
@@ -609,7 +609,7 @@ namespace ProjekatHCI
                 {
 
 
-                    filtered.Add(new Lista { DoctorName = eee.DoctorName, IDapp = eee.IDapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
+                    filtered.Add(new Lista { DoctorName = eee.DoctorName, idapp = eee.idapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
 
 
 
@@ -634,7 +634,7 @@ namespace ProjekatHCI
                     {
 
 
-                        filtered.Add(new Lista { DoctorName = eee.DoctorName, IDapp = eee.IDapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
+                        filtered.Add(new Lista { DoctorName = eee.DoctorName, idapp = eee.idapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
 
 
                     }
@@ -658,7 +658,7 @@ namespace ProjekatHCI
                     {
 
 
-                        filtered.Add(new Lista { DoctorName = eee.DoctorName, IDapp = eee.IDapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
+                        filtered.Add(new Lista { DoctorName = eee.DoctorName, idapp = eee.idapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
 
 
                     }
@@ -683,7 +683,7 @@ namespace ProjekatHCI
                     {
 
 
-                        filtered.Add(new Lista { DoctorName = eee.DoctorName, IDapp = eee.IDapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
+                        filtered.Add(new Lista { DoctorName = eee.DoctorName, idapp = eee.idapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
 
 
                     }
@@ -706,7 +706,7 @@ namespace ProjekatHCI
                     {
 
 
-                        filtered.Add(new Lista { DoctorName = eee.DoctorName, IDapp = eee.IDapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
+                        filtered.Add(new Lista { DoctorName = eee.DoctorName, idapp = eee.idapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
 
 
                     }
@@ -729,7 +729,7 @@ namespace ProjekatHCI
                     {
 
 
-                        filtered.Add(new Lista { DoctorName = eee.DoctorName, IDapp = eee.IDapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
+                        filtered.Add(new Lista { DoctorName = eee.DoctorName, idapp = eee.idapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
 
 
                     }
@@ -752,7 +752,7 @@ namespace ProjekatHCI
                     {
 
 
-                        filtered.Add(new Lista { DoctorName = eee.DoctorName, IDapp = eee.IDapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
+                        filtered.Add(new Lista { DoctorName = eee.DoctorName, idapp = eee.idapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
 
 
                     }
@@ -775,7 +775,7 @@ namespace ProjekatHCI
                     {
 
 
-                        filtered.Add(new Lista { DoctorName = eee.DoctorName, IDapp = eee.IDapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
+                        filtered.Add(new Lista { DoctorName = eee.DoctorName, idapp = eee.idapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
 
 
                     }
@@ -798,7 +798,7 @@ namespace ProjekatHCI
                     {
 
 
-                        filtered.Add(new Lista { DoctorName = eee.DoctorName, IDapp = eee.IDapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
+                        filtered.Add(new Lista { DoctorName = eee.DoctorName, idapp = eee.idapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
 
 
                     }
@@ -821,7 +821,7 @@ namespace ProjekatHCI
                     {
 
 
-                        filtered.Add(new Lista { DoctorName = eee.DoctorName, IDapp = eee.IDapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
+                        filtered.Add(new Lista { DoctorName = eee.DoctorName, idapp = eee.idapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
 
 
                     }
@@ -844,7 +844,7 @@ namespace ProjekatHCI
                     {
 
 
-                        filtered.Add(new Lista { DoctorName = eee.DoctorName, IDapp = eee.IDapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
+                        filtered.Add(new Lista { DoctorName = eee.DoctorName, idapp = eee.idapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
 
 
                     }
@@ -893,12 +893,12 @@ namespace ProjekatHCI
                     int dan2 = int.Parse(delovi2[0]);
                     int godina2 = int.Parse(delovi2[2]);
 
-                    DateTime trazeniDatum = new DateTime(godina2, mesec2, dan2, 0, 0, 0);
-                    if (datumTermina == trazeniDatum)
+                    DateTime trazenidatum = new DateTime(godina2, mesec2, dan2, 0, 0, 0);
+                    if (datumTermina == trazenidatum)
                     {
 
 
-                        filtered.Add(new Lista { DoctorName = eee.DoctorName, IDapp = eee.IDapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
+                        filtered.Add(new Lista { DoctorName = eee.DoctorName, idapp = eee.idapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
 
 
                     }
@@ -918,7 +918,7 @@ namespace ProjekatHCI
                     List<Lista> filtered = new List<Lista>();
 
 
-                    filtered.Add(new Lista { DoctorName = eee.DoctorName, IDapp = eee.IDapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
+                    filtered.Add(new Lista { DoctorName = eee.DoctorName, idapp = eee.idapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
 
 
 

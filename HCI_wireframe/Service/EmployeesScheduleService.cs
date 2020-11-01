@@ -12,12 +12,14 @@ using HCI_wireframe.Service;
 using Klinika;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Windows.Controls;
 
 namespace Class_diagram.Service
 {
-   public class EmployeesScheduleService : bingPath, IService<Schedule>
+    public class EmployeesScheduleService : BingPath, IService<Schedule>
     {
         public EmployeesScheduleRepository employeesScheduleRepository;
         String path = bingPathToAppDir(@"JsonFiles\schedule.json");
@@ -38,82 +40,83 @@ namespace Class_diagram.Service
         {
             employeesScheduleRepository.Update(schedule);
         }
-      
+
         public void Remove(Schedule schedule)
         {
-            employeesScheduleRepository.Delete(schedule.ID);
+            employeesScheduleRepository.Delete(schedule.id);
         }
-      
+
         public List<Schedule> GetAll()
         {
             return employeesScheduleRepository.GetAll();
 
         }
+
+        private bool isScheduleForDoctor(Schedule schedule, DoctorUser doctor)
+        {
+            if (schedule.employeeid.Equals(doctor.id.ToString())) return true;
+            return false;
+        }
+
+        private Shift getScheduleShiftForDoctor(DoctorUser doctor, string date, Schedule schedule)
+        {
+            if (isScheduleForDoctor(schedule, doctor) && schedule.date.Equals(date)) return schedule.shift;
+            
+            return null;
+        }
+
         public Shift getShiftForDoctorForSpecificDay(string date, DoctorUser doctor)
         {
             List<Schedule> listOfSchedule = employeesScheduleRepository.GetAll();
-          
+
             foreach (Schedule schedule in listOfSchedule)
             {
-                if (schedule.employeeID.Equals(doctor.ID.ToString()))
-                {
-                    if (schedule.Date.Equals(date))
-                    {
-                        return schedule.shift;
-
-                    }
-                }
+                Shift scheduleShiftForDoctor = getScheduleShiftForDoctor(doctor, date, schedule);
+                if (scheduleShiftForDoctor != null) return scheduleShiftForDoctor;
             }
+
             return null;
         }
 
         public Boolean isTimeInGoodFormat(string start, string end)
         {
-            if(!Regex.Match(start, "^[0-9]{2}:[0-9]{2}$").Success || !Regex.Match(end, "^[0-9]{2}:[0-9]{2}$").Success) {
-                return false;
-            }
-
+            if (!Regex.Match(start, "^[0-9]{2}:[0-9]{2}$").Success || !Regex.Match(end, "^[0-9]{2}:[0-9]{2}$").Success) return false;
+            
             String[] startParts = start.Split(':');
             String[] endParts = end.Split(':');
-            int startIntPart1 = int.Parse(startParts[0]);
-            int startIntPart2 = int.Parse(startParts[1]);
-            int ensIntPart1 = int.Parse(endParts[0]);
-            int endtIntPart2 = int.Parse(endParts[1]);
-
-           
-            if(startIntPart1 > 23 || startIntPart2 > 60 || ensIntPart1>23 || endtIntPart2>60 || startIntPart1> ensIntPart1)
-            {
-                return false;
-            }
-
-
+         
+            if (int.Parse(startParts[0]) > 23 || int.Parse(startParts[1]) > 60 || int.Parse(endParts[0]) > 23 || int.Parse(endParts[1]) > 60 || int.Parse(startParts[0]) > int.Parse(endParts[0])) return false;
+            
             return true;
         }
 
         public bool isDoctorWorkingAtSpecifiedTime(string date, DoctorUser doctor, TimeSpan time)
         {
             Shift shift = getShiftForDoctorForSpecificDay(date, doctor);
-            String pocetak = shift.StartTime;
-            String kraj = shift.EndTime;
-            String[] deloviPocetak = pocetak.Split(':');
-            String[] deloviKraj = kraj.Split(':');
+        
+            int areSelectedTimeAndStartTimeOfShiftEqual = TimeSpan.Compare(time, getStartTime(shift.startTime));
+            int areSelectedTimeAndEndTimeOfShiftEqual = TimeSpan.Compare(time, getEndTime(shift.endTime));
 
-            TimeSpan pocetakTime = new TimeSpan(int.Parse(deloviPocetak[0]), int.Parse(deloviPocetak[1]), int.Parse("00"));
-            TimeSpan krajTime = new TimeSpan(int.Parse(deloviKraj[0]), int.Parse(deloviKraj[1]), int.Parse("00"));
-            int result3 = TimeSpan.Compare(time, pocetakTime);
-            int result4 = TimeSpan.Compare(time, krajTime);
-
-            if ((result3 == 1 && result4 == -1) || result3 ==0)
-            {
-               return true;
-            }
-
+            if ((areSelectedTimeAndStartTimeOfShiftEqual == 1 && areSelectedTimeAndEndTimeOfShiftEqual == -1) || areSelectedTimeAndStartTimeOfShiftEqual == 0) return true;
+            
             return false;
         }
 
-        public Schedule GetByID(int ID)
+        private TimeSpan getEndTime(string endTime)
         {
-           return employeesScheduleRepository.GetByID(ID);
+            String[] endParts = endTime.Split(':');
+            return new TimeSpan(int.Parse(endParts[0]), int.Parse(endParts[1]), int.Parse("00"));
+        }
+
+        private TimeSpan getStartTime(string startTime)
+        {
+            String[] startParst = startTime.Split(':');
+            return new TimeSpan(int.Parse(startParst[0]), int.Parse(startParst[1]), int.Parse("00"));
+        }
+
+        public Schedule GetByid(int id)
+        {
+            return employeesScheduleRepository.GetByid(id);
         }
     }
 }

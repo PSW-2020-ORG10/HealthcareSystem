@@ -17,9 +17,9 @@ namespace Class_diagram.Model.Manager
         }
 
         public ManagerUser(int id, string name, string secondname, string ucin, string date, string phone, string email, string pasword, string city,
-            double salary, List<String> spec) : base(id, name, secondname, ucin, date, phone, email, pasword, city, salary)
+            double salary, List<String> specialNotifications) : base(id, name, secondname, ucin, date, phone, email, pasword, city, salary)
         {
-            this.specialNotifications = spec;
+            this.specialNotifications = specialNotifications;
         }
 
     }

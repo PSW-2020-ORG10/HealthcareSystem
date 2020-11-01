@@ -59,9 +59,9 @@ namespace HCI_wireframe
             foreach (DoctorUser d in listDoctors)
             {
                 StringBuilder l = new StringBuilder();
-                l.Append(d.FirstName + " ");
-                l.Append(d.SecondName + " ");
-                l.Append(d.ID);
+                l.Append(d.firstName + " ");
+                l.Append(d.secondName + " ");
+                l.Append(d.id);
                 ListaDoktoriIme a = new ListaDoktoriIme();
                 a.DoctorName = l.ToString();
                 listDoctorsBinding.Add(a);
@@ -300,14 +300,14 @@ namespace HCI_wireframe
 
                 int idDoktor = int.Parse(delovi[2]);
 
-                DoctorUser doktorUpitnik = doctorController.GetByID(idDoktor);
+                DoctorUser doktorUpitnik = doctorController.GetByid(idDoktor);
              
 
                 StringBuilder sb = new StringBuilder();
                 sb.Append("Questionarie: \n");
                 foreach(Question q in QuestionList)
                 {
-                    sb.Append(q.Name + "  /  mark:  " + q.answer + "\n");
+                    sb.Append(q.name + "  /  mark:  " + q.answer + "\n");
                 }
                 String upitnik = sb.ToString();
                 Console.WriteLine(upitnik);

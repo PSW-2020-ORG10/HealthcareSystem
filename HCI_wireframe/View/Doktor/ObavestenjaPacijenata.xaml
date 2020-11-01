@@ -26,7 +26,7 @@
             </StackPanel>
          
             <StackPanel Margin="0,50,0,0">
-                <ComboBox Name="pacijentId" Margin="-340,0,0,0" Height="30" ToolTip="Pregledajte obavestenja" IsTextSearchEnabled="True" IsEditable="True" Width="270" >
+                <ComboBox Name="pacijentid" Margin="-340,0,0,0" Height="30" ToolTip="Pregledajte obavestenja" IsTextSearchEnabled="True" IsEditable="True" Width="270" >
 
                 </ComboBox>
                 <Label Content="Odgovori pacijentima" FontSize="16" HorizontalAlignment="Right" Margin="0,-30,15,0"></Label>

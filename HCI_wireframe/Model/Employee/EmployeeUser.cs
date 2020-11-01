@@ -16,14 +16,16 @@ namespace HCI_wireframe.Model.Employee
        
         public String city { get; set; }
 
-        public String Email { get; set; }
-        public String Password { get; set; }
+        public String email { get; set; }
+        public String password { get; set; }
+        public EmployeeUser() : base() { }
 
-        public EmployeeUser(int id, string name, string secondname, string ucin, string date, string phone, string email, string pasword, String city,
+
+        public EmployeeUser(int id, string name, string secondname, string ucin, string date, string phone, string email, string password, String city,
             Double salary) : base(id, name, secondname, ucin, date, phone)
         {
-            this.Email = email;
-            this.Password = pasword;
+            this.email = email;
+            this.password = password;
             this.city = city;
           
             this.salary = salary;
@@ -31,16 +33,13 @@ namespace HCI_wireframe.Model.Employee
 
         public EmployeeUser(int id, string name, string secondname, string ucin, string date, string phone, string email, string pasword) : base(id, name, secondname, ucin, date, phone)
         {
-            this.Email = email;
-            this.Password = pasword;
+            this.email = email;
+            this.password = pasword;
            
          
         }
 
-        public EmployeeUser() : base()
-        {
 
-        }
        
     }
 }

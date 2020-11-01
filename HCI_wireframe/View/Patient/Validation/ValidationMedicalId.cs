@@ -9,7 +9,7 @@ using System.Windows.Controls;
 
 namespace HCI_wireframe.Validation
 {
-    public class ValidationMedicalId : ValidationRule
+    public class ValidationMedicalid : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
@@ -23,7 +23,7 @@ namespace HCI_wireframe.Validation
                 {
                     return new ValidationResult(true, null);
                 }
-                return new ValidationResult(false, "Please enter a valid medical ID.");
+                return new ValidationResult(false, "Please enter a valid medical id.");
             }
             catch
             {

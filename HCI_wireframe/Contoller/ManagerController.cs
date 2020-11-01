@@ -39,9 +39,9 @@ namespace Class_diagram.Contoller
            return managerService.New(manager);
         }
 
-        public ManagerUser GetByID(int ID)
+        public ManagerUser GetByid(int id)
         {
-            return managerService.GetByID(ID);
+            return managerService.GetByid(id);
         }
 
         public void Remove(ManagerUser manager)

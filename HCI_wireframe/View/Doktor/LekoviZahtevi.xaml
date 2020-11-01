@@ -26,7 +26,7 @@
                   SelectionMode="Single" AutoGenerateColumns="False" ScrollViewer.CanContentScroll="True"
                    Grid.Row="1" >
                     <DataGrid.Columns>
-                        <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Width="122"  Header="Naziv novog leka" Binding="{Binding Name}"/>
+                        <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Width="122"  Header="Naziv novog leka" Binding="{Binding name}"/>
                         <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Width="122" Header="Sastav leka" Binding="{Binding description}" />
                         <DataGridTemplateColumn Header="Da li odobravate ovaj lek za upotrebu?">
                             <DataGridTemplateColumn.CellTemplate>

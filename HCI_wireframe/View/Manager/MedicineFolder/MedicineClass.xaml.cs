@@ -31,8 +31,8 @@ namespace WpfApp2.MedicineFolder
             InitializeComponent();
             eq = medicine;
 
-            name.Text = medicine.Name;
-            quantity.Text = medicine.Quantity.ToString();
+            name.Text = medicine.name;
+            quantity.Text = medicine.quantity.ToString();
             description.Text = medicine.description;
 
             RoomController RoomContr = new RoomController();
@@ -50,7 +50,7 @@ namespace WpfApp2.MedicineFolder
                     {
                         String soba = eq.room[i];
 
-                        if (soba.Equals(item.TypeOfRoom))
+                        if (soba.Equals(item.typeOfRoom))
                         {
                             sobeSaOpremom.Add(item);
                         }
@@ -65,7 +65,7 @@ namespace WpfApp2.MedicineFolder
                     bool postoji = false;
                     foreach (Room saOpremom in sobeSaOpremom)
                     {
-                        if (item.ID == saOpremom.ID)
+                        if (item.id == saOpremom.id)
                         {
                             postoji = true;
                         }
@@ -117,10 +117,10 @@ namespace WpfApp2.MedicineFolder
                 foreach (Room ee in lista)
                 {
 
-                    if (ee.TypeOfRoom.Equals(id))
+                    if (ee.typeOfRoom.Equals(id))
                     {
                         s = ee;
-                        s.medicine.Remove(eq.Name);
+                        s.medicine.Remove(eq.name);
 
                     }
 
@@ -156,7 +156,7 @@ namespace WpfApp2.MedicineFolder
                     {
                         String soba = eq.room[i];
 
-                        if (soba.Equals(item.TypeOfRoom))
+                        if (soba.Equals(item.typeOfRoom))
                         {
                             sobeSaOpremom.Add(item);
                         }
@@ -171,7 +171,7 @@ namespace WpfApp2.MedicineFolder
                     bool postoji = false;
                     foreach (Room saOpremom in sobeSaOpremom)
                     {
-                        if (item.ID == saOpremom.ID)
+                        if (item.id == saOpremom.id)
                         {
                             postoji = true;
                         }
@@ -226,10 +226,10 @@ namespace WpfApp2.MedicineFolder
             foreach (Room ee in lista)
             {
 
-                if (ee.TypeOfRoom.Equals(id))
+                if (ee.typeOfRoom.Equals(id))
                 {
                     s = ee;
-                    s.medicine.Add(eq.Name);
+                    s.medicine.Add(eq.name);
 
                 }
 
@@ -265,7 +265,7 @@ namespace WpfApp2.MedicineFolder
                     {
                         String soba = eq.room[i];
 
-                        if (soba.Equals(item.TypeOfRoom))
+                        if (soba.Equals(item.typeOfRoom))
                         {
                             sobeSaOpremom.Add(item);
                         }
@@ -280,7 +280,7 @@ namespace WpfApp2.MedicineFolder
                     bool postoji = false;
                     foreach (Room saOpremom in sobeSaOpremom)
                     {
-                        if (item.ID == saOpremom.ID)
+                        if (item.id == saOpremom.id)
                         {
                             postoji = true;
                         }
@@ -339,7 +339,7 @@ namespace WpfApp2.MedicineFolder
                 return;
             }
 
-            Medicine equ = new Medicine(eq.ID,name.Text,int.Parse(quantity.Text),description.Text,eq.room,eq.doctor, true);
+            Medicine equ = new Medicine(eq.id,name.Text,int.Parse(quantity.Text),description.Text,eq.room,eq.doctor, true);
 
             MedicineController EquipmentContr = new MedicineController();
 

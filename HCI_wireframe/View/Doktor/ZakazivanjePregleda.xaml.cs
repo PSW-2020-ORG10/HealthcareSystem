@@ -130,7 +130,7 @@ namespace HCI_wireframe.View.Doktor
 
             foreach (DoctorUser lekar in lista)
             {
-                ListaLekara.Items.Add(lekar.FirstName + " " + lekar.SecondName + " " + lekar.speciality + " " + lekar.Email + " " + lekar.ordination);
+                ListaLekara.Items.Add(lekar.firstName + " " + lekar.secondName + " " + lekar.speciality+ " " + lekar.email + " " + lekar.ordination);
 
             }
 
@@ -145,20 +145,20 @@ namespace HCI_wireframe.View.Doktor
 
             foreach (PatientUser ee in lista1)
             {
-                pacijenti.Add(new PatientUser { ID = ee.ID, FirstName = ee.FirstName, SecondName = ee.SecondName, UniqueCitizensIdentityNumber = ee.UniqueCitizensIdentityNumber, DateOfBirth = ee.DateOfBirth, PhoneNumber = ee.PhoneNumber, MedicalIDnumber = ee.MedicalIDnumber, RegisteredBySecretary = ee.RegisteredBySecretary });
+                pacijenti.Add(new PatientUser { id = ee.id, firstName = ee.firstName, secondName = ee.secondName, uniqueCitizensidentityNumber = ee.uniqueCitizensidentityNumber, dateOfBirth = ee.dateOfBirth, phoneNumber = ee.phoneNumber, medicalIdNumber = ee.medicalIdNumber, isRegisteredBySecretary = ee.isRegisteredBySecretary });
             }
             foreach (PatientUser regP in pacijenti)
             {
-                ListaPacijenata.Items.Add(regP.FirstName + " " + regP.SecondName + " " + regP.MedicalIDnumber);
+                ListaPacijenata.Items.Add(regP.firstName + " " + regP.secondName + " " + regP.medicalIdNumber);
 
 
 
             }
             foreach (PatientUser ee in lista1)
             {
-                if (ListaPacijenata.SelectedItem.Equals(ee.FirstName + " " + ee.SecondName + " " + ee.MedicalIDnumber))
+                if (ListaPacijenata.SelectedItem.Equals(ee.firstName + " " + ee.secondName + " " + ee.medicalIdNumber))
                 {
-                    KnjizicaBox.Text = ee.MedicalIDnumber;
+                    KnjizicaBox.Text = ee.medicalIdNumber;
 
                 }
             }
@@ -221,10 +221,10 @@ namespace HCI_wireframe.View.Doktor
             PatientUser ovajPacijent = new PatientUser();
             foreach (PatientUser r1 in patientLista)
             {
-                if (r1.MedicalIDnumber.Equals(KnjizicaBox.Text.ToString()))
+                if (r1.medicalIdNumber.Equals(KnjizicaBox.Text.ToString()))
                 {
                     ovajPacijent = r1;
-                    KnjizicaBox.Text = r1.MedicalIDnumber;
+                    KnjizicaBox.Text = r1.medicalIdNumber;
                 }
             }
 
@@ -238,7 +238,7 @@ namespace HCI_wireframe.View.Doktor
 
             foreach (DoctorUser d1 in doktori)
             {
-                if (d1.Email.Equals(emailLekarBox.Text.ToString()))
+                if (d1.email.Equals(emailLekarBox.Text.ToString()))
                 {
                     drOvaj = d1;
 
@@ -267,7 +267,7 @@ namespace HCI_wireframe.View.Doktor
             TimeSpan vremee = new TimeSpan(startIntPart1, startIntPart2, 00);
             TimeSpan vremee2 = new TimeSpan(ensIntPart1, endtIntPart2, 00);
 
-            int broj = getNextID();
+            int broj = getNextid();
 
             DoctorAppointment drap = new DoctorAppointment(broj, vremee, DatumBox.Text.ToString(), ovajPacijent, drOvaj, null, ordinacijaBox.Text);
 
@@ -283,7 +283,7 @@ namespace HCI_wireframe.View.Doktor
 
 
             String o = bingPathToAppDir(@"JsonFiles\operations.json");
-            int broj1 = getNextID1();
+            int broj1 = getNextid1();
             Operation op = new Operation(broj1, ovajPacijent, DatumBox.Text.ToString(), vremee, vremee2, drOvaj, ordinacijaBox.Text, null);
 
             OperationRepository opRep = new OperationRepository(o);
@@ -318,7 +318,7 @@ namespace HCI_wireframe.View.Doktor
                 /* foreach (DoctorAppointment dd in listaPregleda)
                  {
                      DoctorUser dr = dd.doctor;
-                     if (dr.ID == drOvaj.ID)
+                     if (dr.id == drOvaj.id)
                      {
                          if (dd.Date.Equals(DatumBox.Text))
                          {
@@ -342,8 +342,8 @@ namespace HCI_wireframe.View.Doktor
                   List<Operation> listaPregleda1 = apc1.GetAll();
                   foreach (Operation dd in listaPregleda1)
                   {
-                      DoctorUser dr = dd.Responsable;
-                      if (dr.ID == drOvaj.ID)
+                      DoctorUser dr = dd.isResponiable;
+                      if (dr.id == drOvaj.id)
                       {
                           if (dd.Date.Equals(DatumBox.Text))
                           {
@@ -375,7 +375,7 @@ namespace HCI_wireframe.View.Doktor
                 EmployeesScheduleController schCon = new EmployeesScheduleController();
                 List<Schedule> listaRasporeda = schCon.GetAll();
                 Shift smena = schCon.getShiftForDoctorForSpecificDay(DatumBox.Text, drOvaj);
-                if (smena == null || smena.StartTime == null || smena.EndTime == null)
+                if (smena == null || smena.startTime == null || smena.endTime == null)
                 {
                     MessageBox.Show("Trazeni termin nije dostupan.Lekar ne radi tog dana.", "Greska", MessageBoxButton.OK, MessageBoxImage.Error);
 
@@ -391,7 +391,7 @@ namespace HCI_wireframe.View.Doktor
                 /* foreach (Schedule s in listaRasporeda)
                  {
 
-                     if (s.employeeID.Equals(drOvaj.ID.ToString()))
+                     if (s.employeeid.Equals(drOvaj.id.ToString()))
                      {
                          if (s.Date.Equals(DatumBox.Text))
                          {
@@ -450,31 +450,31 @@ namespace HCI_wireframe.View.Doktor
 
                 //  foreach (PatientUser pat in lista)
                 // {
-                // if (pat.ID.Equals(d.patient.ID))
+                // if (pat.id.Equals(d.patient.id))
                 // {
-                id1 = drap.patient.ID;
-                ime = drap.patient.FirstName;
-                prezime = drap.patient.SecondName;
-                jmbg = drap.patient.UniqueCitizensIdentityNumber;
-                datumRodj = drap.patient.DateOfBirth;
-                brKnj = drap.patient.MedicalIDnumber;
-                brojTel = drap.patient.PhoneNumber;
+                id1 = drap.patient.id;
+                ime = drap.patient.firstName;
+                prezime = drap.patient.secondName;
+                jmbg = drap.patient.uniqueCitizensidentityNumber;
+                datumRodj = drap.patient.dateOfBirth;
+                brKnj = drap.patient.medicalIdNumber;
+                brojTel = drap.patient.phoneNumber;
                
-                alergije = drap.patient.Allergie;
-                grad = drap.patient.City;
-                email = drap.patient.Email;
+                alergije = drap.patient.allergie;
+                grad = drap.patient.city;
+                email = drap.patient.email;
                 guest = drap.patient.guest;
-                password = drap.patient.Password;
-                sekr = drap.patient.RegisteredBySecretary;
-                if (drap.patient.Notifications == null)
+                password = drap.patient.password;
+                sekr = drap.patient.isRegisteredBySecretary;
+                if (drap.patient.notifications == null)
                 {
-                    drap.patient.Notifications = new List<string>();
+                    drap.patient.notifications = new List<string>();
                 }
-                List<String> notifications = drap.patient.Notifications;
+                List<String> notifications = drap.patient.notifications;
                 // }
 
-                notifications.Add("Postovani, zakazana vam je novi pregled datuma : " + drap.Date + " u " + drap.Time + " h kod lekara " + drap.doctor.FirstName + " " + drap.doctor.SecondName + ". Ordinacija: " + drap.roomID);
-                drap.patient.Notifications = notifications;
+                notifications.Add("Postovani, zakazana vam je novi pregled datuma : " + drap.date + " u " + drap.time + " h kod lekara " + drap.doctor.firstName + " " + drap.doctor.secondName + ". Ordinacija: " + drap.roomid);
+                drap.patient.notifications = notifications;
                 // PatientUser rp = new PatientUser(id1, ime, prezime, jmbg, datumRodj, brojTel, brKnj, pitanja, alergije, grad, guest, email, password, sekr, notifications);
 
 
@@ -507,7 +507,7 @@ namespace HCI_wireframe.View.Doktor
                   foreach (DoctorAppointment dd in listaPregleda)
                   {
                       DoctorUser dr = dd.doctor;
-                      if (dr.ID == drOvaj.ID)
+                      if (dr.id == drOvaj.id)
                       {
                           if (dd.Date.Equals(DatumBox.Text))
                           {
@@ -539,8 +539,8 @@ namespace HCI_wireframe.View.Doktor
                 List<Operation> listaPregleda1 = apc1.GetAll();
                 foreach (Operation dd in listaPregleda1)
                 {
-                    DoctorUser dr = dd.Responsable;
-                    if (dr.ID == drOvaj.ID)
+                    DoctorUser dr = dd.isResponiable;
+                    if (dr.id == drOvaj.id)
                     {
                         if (dd.Date.Equals(DatumBox.Text))
                         {
@@ -583,7 +583,7 @@ namespace HCI_wireframe.View.Doktor
                 EmployeesScheduleController schCon = new EmployeesScheduleController();
                 List<Schedule> listaRasporeda = schCon.GetAll();
                 Shift smena = schCon.getShiftForDoctorForSpecificDay(DatumBox.Text, drOvaj);
-                if (smena == null || smena.StartTime == null || smena.EndTime == null)
+                if (smena == null || smena.startTime == null || smena.endTime == null)
                 {
                     MessageBox.Show("Trazeni termin nije dostupan.Lekar ne radi tog dana.", "Greska", MessageBoxButton.OK, MessageBoxImage.Error);
 
@@ -599,8 +599,8 @@ namespace HCI_wireframe.View.Doktor
                 }
 
 
-                String pocetak = smena.StartTime;
-                String kraj = smena.EndTime;
+                String pocetak = smena.startTime;
+                String kraj = smena.endTime;
                 String[] deloviPocetak = pocetak.Split(':');
                 String[] deloviKraj = kraj.Split(':');
 
@@ -624,7 +624,7 @@ namespace HCI_wireframe.View.Doktor
                  foreach (Schedule s in listaRasporeda)
                  {
 
-                     if (s.employeeID.Equals(drOvaj.ID.ToString()))
+                     if (s.employeeid.Equals(drOvaj.id.ToString()))
                      {
                          if (s.Date.Equals(DatumBox.Text))
                          {
@@ -678,28 +678,28 @@ namespace HCI_wireframe.View.Doktor
                 List<String> notifications = new List<String>();
                 //  foreach (PatientUser pat in lista)
                 // {
-                // if (pat.ID.Equals(d.patient.ID))
+                // if (pat.id.Equals(d.patient.id))
                 // {
-                id1 = op.patient.ID;
-                ime = op.patient.FirstName;
-                prezime = op.patient.SecondName;
-                jmbg = op.patient.UniqueCitizensIdentityNumber;
-                datumRodj = op.patient.DateOfBirth;
-                brojTel = op.patient.PhoneNumber;
+                id1 = op.patient.id;
+                ime = op.patient.firstName;
+                prezime = op.patient.secondName;
+                jmbg = op.patient.uniqueCitizensidentityNumber;
+                datumRodj = op.patient.dateOfBirth;
+                brojTel = op.patient.phoneNumber;
               
-                alergije = op.patient.Allergie;
-                grad = op.patient.City;
-                email = op.patient.Email;
+                alergije = op.patient.allergie;
+                grad = op.patient.city;
+                email = op.patient.email;
                 guest = op.patient.guest;
-                password = op.patient.Password;
-                sekr = op.patient.RegisteredBySecretary;
-                notifications = op.patient.Notifications;
+                password = op.patient.password;
+                sekr = op.patient.isRegisteredBySecretary;
+                notifications = op.patient.notifications;
                 // }
                 if (notifications == null)
                 {
                     notifications = new List<string>();
                 }
-                notifications.Add("Postovani, zakazana Vam je nova operacija datuma : " + op.Date + " u " + op.Start + " h, kod lekara " + op.Responsable.FirstName + " " + op.Responsable.SecondName + " Sala " + op.IdRoom);
+                notifications.Add("Postovani, zakazana Vam je nova operacija datuma : " + op.date + " u " + op.start + " h, kod lekara " + op.isResponiable.firstName + " " + op.isResponiable.secondName + " Sala " + op.idRoom);
 
                 PatientUser rp = new PatientUser(id1, ime, prezime, jmbg, datumRodj, brojTel, brKnj, alergije, grad, guest, email, password, sekr, notifications);
 
@@ -715,7 +715,7 @@ namespace HCI_wireframe.View.Doktor
 
         }
 
-        private int getNextID()
+        private int getNextid()
         {
             AppointmentController rp = new AppointmentController();
             List<DoctorAppointment> lista = rp.GetAll();
@@ -724,9 +724,9 @@ namespace HCI_wireframe.View.Doktor
 
             foreach (DoctorAppointment r in lista)
             {
-                if (r.ID > number)
+                if (r.id > number)
                 {
-                    number = r.ID;
+                    number = r.id;
                 }
             }
 
@@ -734,7 +734,7 @@ namespace HCI_wireframe.View.Doktor
             return number;
 
         }
-        private int getNextID1()
+        private int getNextid1()
         {
             OperationController rp = new OperationController();
             List<Operation> lista = rp.GetAll();
@@ -743,9 +743,9 @@ namespace HCI_wireframe.View.Doktor
 
             foreach (Operation r in lista)
             {
-                if (r.ID > number)
+                if (r.id > number)
                 {
-                    number = r.ID;
+                    number = r.id;
                 }
             }
 
@@ -909,7 +909,7 @@ namespace HCI_wireframe.View.Doktor
             String poruka = "";
             foreach (DoctorUser d1 in doktori)
             {
-                if (d1.Email.Equals(emailLekarBox.Text.ToString()))
+                if (d1.email.Equals(emailLekarBox.Text.ToString()))
                 {
                     drOvaj = d1;
 
@@ -920,12 +920,12 @@ namespace HCI_wireframe.View.Doktor
             Boolean duznost = false;
             foreach (Schedule rasp in raspored)
             {
-                if (rasp.employeeID.Equals(drOvaj.ID.ToString()))
+                if (rasp.employeeid.Equals(drOvaj.id.ToString()))
                 {
-                    if (DatumBox.Text.Equals(rasp.Date))
+                    if (DatumBox.Text.Equals(rasp.date))
                     {
                         duznost = true;
-                        poruka += "Lekar datuma " + rasp.Date + " radi od " + rasp.shift.StartTime + " do " + rasp.shift.EndTime + ".\n";
+                        poruka += "Lekar datuma " + rasp.date + " radi od " + rasp.shift.startTime + " do " + rasp.shift.endTime + ".\n";
 
 
                     }
@@ -943,25 +943,25 @@ namespace HCI_wireframe.View.Doktor
                 poruka += "Zauzeti termini su: \n";
                 foreach (DoctorAppointment d in pregledi)
                 {
-                    TimeSpan kraj = d.Time + new TimeSpan(0, 15, 0);
-                    if (d.doctor.ID.ToString().Equals(drOvaj.ID.ToString()))
+                    TimeSpan kraj = d.time + new TimeSpan(0, 15, 0);
+                    if (d.doctor.id.ToString().Equals(drOvaj.id.ToString()))
                     {
-                        if (d.Date.Equals(DatumBox.Text))
+                        if (d.date.Equals(DatumBox.Text))
                         {
 
-                            poruka += " " + d.Time + " - " + kraj + "\n";
+                            poruka += " " + d.time + " - " + kraj + "\n";
                         }
                     }
                 }
                 foreach (Operation d in operacije)
                 {
 
-                    if (d.Responsable.ID.ToString().Equals(drOvaj.ID.ToString()))
+                    if (d.isResponiable.id.ToString().Equals(drOvaj.id.ToString()))
                     {
-                        if (d.Date.Equals(DatumBox.Text))
+                        if (d.date.Equals(DatumBox.Text))
                         {
 
-                            poruka += " " + d.Start + " - " + d.End + "\n";
+                            poruka += " " + d.start + " - " + d.end + "\n";
                         }
                     }
                 }

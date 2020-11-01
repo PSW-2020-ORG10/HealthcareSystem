@@ -50,9 +50,9 @@ namespace WpfApp2.MedicineFolder
 
             foreach (Medicine ee in lista)
             {
-                if (!ee.confirmed)
+                if (!ee.isConfirmed)
                 {
-                    Medicine.Add(new Medicine { ID = ee.ID, Name = ee.Name, Quantity = ee.Quantity });
+                    Medicine.Add(new Medicine { id = ee.id, name = ee.name, quantity = ee.quantity });
                 }
 
 
@@ -100,7 +100,7 @@ namespace WpfApp2.MedicineFolder
             foreach (Medicine ee in lista)
             {
 
-                if (s.ID == ee.ID)
+                if (s.id == ee.id)
                 {
 
                     MedContr.Remove(ee);
@@ -113,9 +113,9 @@ namespace WpfApp2.MedicineFolder
             {
 
                
-                if (!ee.confirmed)
+                if (!ee.isConfirmed)
                 {
-                    Medicine.Add(new Medicine { ID = ee.ID, Name = ee.Name, Quantity = ee.Quantity });
+                    Medicine.Add(new Medicine { id = ee.id, name = ee.name, quantity = ee.quantity });
                 }
             }
 

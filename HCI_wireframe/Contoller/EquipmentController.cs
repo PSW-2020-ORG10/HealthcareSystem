@@ -46,9 +46,9 @@ namespace Class_diagram.Contoller
             equipmentService.Remove(equipment);
         }
 
-        public Equipment GetByID(int ID)
+        public Equipment GetByid(int id)
         {
-            return equipmentService.GetByID(ID);
+            return equipmentService.GetByid(id);
         }
     }
 }

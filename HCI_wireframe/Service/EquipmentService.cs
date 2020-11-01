@@ -10,11 +10,13 @@ using Class_diagram.Repository;
 using HCI_wireframe.Service;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
+using WpfApp2;
 
 namespace Class_diagram.Service
 {
-   public class EquipmentService : bingPath, IService<Equipment>
+    public class EquipmentService : BingPath, IService<Equipment>
     {
         public RoomRepository roomRepository;
         public EquipmentRepository equipmentRepository;
@@ -33,53 +35,77 @@ namespace Class_diagram.Service
 
             foreach (Equipment equipment in listOfEquipments)
             {
-                if (equipment.Name.ToLower().Equals(name.ToLower()))
-                {
-                    return false;
-                }
+                if (equipment.name.ToLower().Equals(name.ToLower())) return false;
             }
 
             return true;
         }
 
-        public void New(Equipment equipment)
+
+        private void addEquipmentIfRoomIsStorage(Equipment equipment, Room room)
+        {
+            if (room.typeOfRoom.Equals("Magacin"))
+            {
+                equipment.room.Add(room.typeOfRoom);
+                room.equipment.Add(equipment.name);
+                roomRepository.Update(room);
+            }
+        }
+
+        private void addEquipmentInStorages(Equipment equipment)
         {
             List<Room> listOfRooms = new List<Room>();
             listOfRooms = roomRepository.GetAll();
-            
+
             foreach (Room room in listOfRooms)
             {
-                if (room.TypeOfRoom.Equals("Magacin"))
-                {
-                    equipment.room.Add(room.TypeOfRoom);
-                    room.equipment.Add(equipment.Name);
-                    roomRepository.Update(room);
-                }
+                addEquipmentIfRoomIsStorage(equipment, room);
             }
+        }
+
+        public void New(Equipment equipment)
+        {
+            addEquipmentInStorages(equipment);
             equipmentRepository.New(equipment);
         }
-      
-      public void Update(Equipment equipment)
-      {
+
+        public void Update(Equipment equipment)
+        {
             equipmentRepository.Update(equipment);
-      }
-      
-      public void Remove(Equipment equipment)
-      {
-            List<Equipment> listOfEquipments = equipmentRepository.GetAll();
-
-            foreach (Equipment equipmentObject in listOfEquipments)
-            {
-                if (equipmentObject.ID == equipment.ID)
-                {
-                    equipmentRepository.Delete(equipment.ID);
-
-                }
-            }
-            removeEquipmentFromRoom(equipment);
         }
 
-        public void removeEquipmentFromRoom(Equipment equipment)
+        private void deleteIfEquipmentsEqual(Equipment firstEquipment, Equipment secondEquipment)
+        {
+            if (firstEquipment.id == secondEquipment.id)
+            {
+                equipmentRepository.Delete(firstEquipment.id);
+
+            }
+
+        }
+        public void Remove(Equipment equipment)
+        {
+            List<Equipment> listOfEquipments = equipmentRepository.GetAll();
+
+            foreach (Equipment equipmentIt in listOfEquipments)
+            {
+                deleteIfEquipmentsEqual(equipmentIt, equipment);
+            }
+            removeEquipmentFromAllRooms(equipment);
+        }
+
+        private void removeEquipmentFromSpecificRoom(Equipment equipment, Room room)
+        {
+            if (room.equipment.Contains(equipment.name))
+            {
+                room.equipment.Remove(equipment.name);
+                roomRepository.Update(room);
+            }
+        }
+
+
+
+        public void removeEquipmentFromAllRooms(Equipment equipment)
         {
            
             List<Room> listOfRooms = new List<Room>();
@@ -87,11 +113,7 @@ namespace Class_diagram.Service
 
             foreach (Room room in listOfRooms)
             {
-                if (room.equipment.Contains(equipment.Name))
-                {
-                    room.equipment.Remove(equipment.Name);
-                    roomRepository.Update(room);
-                }
+                removeEquipmentFromSpecificRoom(equipment,room);
             }
 
         }
@@ -102,9 +124,9 @@ namespace Class_diagram.Service
 
         }
 
-        public Equipment GetByID(int ID)
+        public Equipment GetByid(int id)
         {
-            return equipmentRepository.GetByID(ID);
+            return equipmentRepository.GetByid(id);
         }
     }
 }

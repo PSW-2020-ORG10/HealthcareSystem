@@ -38,14 +38,14 @@ namespace ProjekatHCI
 
             foreach (DoctorUser ee in lista)
             {
-                doktori.Add(new DoctorUser { ID = ee.ID, FirstName = ee.FirstName, SecondName = ee.SecondName, UniqueCitizensIdentityNumber = ee.UniqueCitizensIdentityNumber, DateOfBirth = ee.DateOfBirth, PhoneNumber = ee.PhoneNumber, Email = ee.Email, Password = ee.Password });
+                doktori.Add(new DoctorUser { id = ee.id, firstName = ee.firstName, secondName = ee.secondName, uniqueCitizensidentityNumber = ee.uniqueCitizensidentityNumber, dateOfBirth = ee.dateOfBirth, phoneNumber = ee.phoneNumber, email = ee.email, password = ee.password });
 
 
 
             }
             foreach (DoctorUser lekar in doktori)
             {
-                ListaLekara.Items.Add(lekar.FirstName + " " + lekar.SecondName + " " + "(" + lekar.speciality + ")" + lekar.Email);
+                ListaLekara.Items.Add(lekar.firstName + " " + lekar.secondName + " " + "(" + lekar.speciality + ")" + lekar.email);
 
             }
 
@@ -141,7 +141,7 @@ namespace ProjekatHCI
             StringBuilder sb = new StringBuilder();
             DoctorController doctorController = new DoctorController();
             List<DoctorUser> doktori = doctorController.GetAll();
-            DoctorUser trazeniDoktor = new DoctorUser();
+            DoctorUser trazenidoktor = new DoctorUser();
             List<DoctorAppointment> appointmentList = new List<DoctorAppointment>();
             AppointmentRepository epr = new AppointmentRepository(b);
 
@@ -150,9 +150,9 @@ namespace ProjekatHCI
 
             foreach (DoctorUser r in doktori)
             {
-                if (r.Email.Equals(emailLekara.Text.ToString()))
+                if (r.email.Equals(emailLekara.Text.ToString()))
                 {
-                    trazeniDoktor = r;
+                    trazenidoktor = r;
 
                 }
             }
@@ -161,10 +161,10 @@ namespace ProjekatHCI
             int broj = 0;
             foreach (DoctorAppointment d in appointmentList)
             {
-                if (d.doctor.Email.ToString().Equals(emailLekara.Text.ToString())) 
+                if (d.doctor.email.ToString().Equals(emailLekara.Text.ToString())) 
                 {
 
-                    String datum = d.Date;
+                    String datum = d.date;
                     String[] delovi = datum.Split('/');
                     int mesec = int.Parse(delovi[1]);
                     int dan = int.Parse(delovi[0]);
@@ -178,7 +178,7 @@ namespace ProjekatHCI
                     int dan2 = int.Parse(delovi2[0]);
                     int godina2 = int.Parse(delovi2[2]);
 
-                    DateTime pocetniDatum = new DateTime(godina2, mesec2, dan2, 0, 0, 0);
+                    DateTime pocetnidatum = new DateTime(godina2, mesec2, dan2, 0, 0, 0);
 
                     String unetDatum2 = datumDO.Text;
                     String[] delovi3 = unetDatum2.Split('/');
@@ -186,17 +186,17 @@ namespace ProjekatHCI
                     int dan3 = int.Parse(delovi3[0]);
                     int godina3 = int.Parse(delovi3[2]);
 
-                    DateTime krajnjiDatum = new DateTime(godina3, mesec3, dan3, 0, 0, 0);
+                    DateTime krajnjidatum = new DateTime(godina3, mesec3, dan3, 0, 0, 0);
 
-                    if (pocetniDatum < krajnjiDatum)
+                    if (pocetnidatum < krajnjidatum)
                     {
-                        if (datumPregleda < krajnjiDatum && datumPregleda > pocetniDatum)
+                        if (datumPregleda < krajnjidatum && datumPregleda > pocetnidatum)
                         {
 
-                            sb.Append("Datum pregleda: " + d.Date + "\n");
-                            sb.Append("Pregled zakazan za pacijenta: " + d.patient.FirstName + " " + d.patient.SecondName + "\n");
-                            sb.Append("Vreme u koje je pregled zakazan: " + d.Time.ToString() + "\n");
-                            sb.Append("Prostorija u kojoj je pregled zakazan: " + d.roomID + "\n");
+                            sb.Append("Datum pregleda: " + d.date + "\n");
+                            sb.Append("Pregled zakazan za pacijenta: " + d.patient.firstName + " " + d.patient.secondName + "\n");
+                            sb.Append("Vreme u koje je pregled zakazan: " + d.time.ToString() + "\n");
+                            sb.Append("Prostorija u kojoj je pregled zakazan: " + d.roomid + "\n");
                             sb.Append("*******************************************************************");
 
                         }

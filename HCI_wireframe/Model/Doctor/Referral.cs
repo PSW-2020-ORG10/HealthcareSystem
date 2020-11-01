@@ -18,14 +18,14 @@ namespace Class_diagram.Model.Doctor
         public String comment { get; set; }
 
         public Referral() : base() { }
-        public Referral(int id, String p, String take, int quantity, String treatment, String com) : base(id)
+        public Referral(int id, String medicine, String takeMedicineUntil, int quantityPerDay, String classify, String comment) : base(id)
 
         {
-            this.medicine = p;
-            this.takeMedicineUntil = take;
-            this.quantityPerDay = quantity;
-            this.classify = treatment;
-            this.comment = com;
+            this.medicine = medicine;
+            this.takeMedicineUntil = takeMedicineUntil;
+            this.quantityPerDay = quantityPerDay;
+            this.classify = classify;
+            this.comment = comment;
 
         }
     }

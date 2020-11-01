@@ -15,7 +15,7 @@ using System.IO;
 
 namespace Class_diagram.Service
 {
-   public class RoomService : bingPath, IService<Room>
+   public class RoomService : BingPath, IService<Room>
     {
         String path = bingPathToAppDir(@"JsonFiles\room.json");
         String path2 = bingPathToAppDir(@"JsonFiles\medicine.json");
@@ -32,76 +32,112 @@ namespace Class_diagram.Service
             equipmentRepository = new EquipmentRepository(path3);
         }
 
+        
         public Boolean isNameValid(String name)
         {
             List<Room> listOfRooms = GetAll();
 
             foreach (Room room in listOfRooms)
             {
-                if (room.TypeOfRoom.ToLower().Equals(name.ToLower()))
-                {
-                    return false;
-                }
+                if (room.typeOfRoom.ToLower().Equals(name.ToLower())) return false;
             }
-
             return true;
         }
 
         public void New(Room room)
-      {
-           
+        {
             roomRepository.New(room);
         }
       
       public void Update(Room room)
       {
             roomRepository.Update(room);
-        }
+       }
       
       public void Remove(Room room)
       {
-            removeRoomFromMedicine(room);
+            removeRoomFromAllMedicines(room);
 
-            removeRoomFromEquipment(room);
+            removeRoomFromAllEquipments(room);
 
-            removeRoomFromSchedule(room);
+            removeRoomFromAllSchedules(room);
             
-            roomRepository.Delete(room.ID);
+            roomRepository.Delete(room.id);
         }
 
-        public void removeRoomFromMedicine(Room room)
+
+        private Boolean isMedicineInRoom(Medicine medicine, Room room)
+        {
+            
+            if(medicine.room.Contains(room.typeOfRoom)) return true;
+            
+            return false;
+        }
+
+        private void removeRoomFromMedicine(Medicine medicine, Room room)
+        {
+            if (isMedicineInRoom(medicine, room))
+            {
+                 medicine.room.Remove(room.typeOfRoom);
+                medicineRepository.Update(medicine);   
+            }
+        }
+
+
+        public void removeRoomFromAllMedicines(Room room)
         {
             List<Medicine> listOfMedicines = new List<Medicine>();
             listOfMedicines = medicineRepository.GetAll();
 
             foreach (Medicine medicine in listOfMedicines)
             {
-
-                if (medicine.room.Contains(room.TypeOfRoom))
-                {
-
-                    medicine.room.Remove(room.TypeOfRoom);
-                    medicineRepository.Update(medicine);
-                }
+                removeRoomFromMedicine(medicine, room);
             }
         }
+
+
       
-        public void removeRoomFromEquipment(Room room)
+        private Boolean isEquipmentInRoom(Equipment equipment, Room room)
+        {
+
+            if (equipment.room.Contains(room.typeOfRoom)) return true;
+            
+            return false;
+        }
+
+        private void removeRoomFromEquipment(Equipment equipment, Room room)
+        {
+            if (isEquipmentInRoom(equipment, room))
+            {
+                equipment.room.Remove(room.typeOfRoom);
+                equipmentRepository.Update(equipment);
+
+            }
+        }
+
+        public void removeRoomFromAllEquipments(Room room)
         {
             List<Equipment> listOfEquipments = new List<Equipment>();
             listOfEquipments = equipmentRepository.GetAll();
 
             foreach (Equipment equipment in listOfEquipments)
             {
-                if (equipment.room.Contains(room.TypeOfRoom))
-                {
-                    equipment.room.Remove(room.TypeOfRoom);
-                    equipmentRepository.Update(equipment);
-                }
+                removeRoomFromEquipment(equipment, room);
             }
         }
 
-        public void removeRoomFromSchedule(Room room)
+
+       
+        private Boolean isScheduleForRoom(Schedule schedule, Room room)
+        {
+            if (schedule.room.Equals(room.typeOfRoom))  return true;
+            
+            return false;
+        }
+
+     
+
+        public void removeRoomFromAllSchedules(Room room)
         {
             EmployeesScheduleController employeesScheduleController = new EmployeesScheduleController();
             List<Schedule> listOfSchedules = new List<Schedule>();
@@ -109,13 +145,9 @@ namespace Class_diagram.Service
 
             foreach (Schedule schedule in listOfSchedules)
             {
-
-                if (schedule.soba.Equals(room.TypeOfRoom))
-                {
-                    employeesScheduleController.Remove(schedule);
-                }
+                if (isScheduleForRoom(schedule, room)) employeesScheduleController.Remove(schedule);
+                
             }
-
         }
 
         public List<Room> GetAll()
@@ -123,7 +155,7 @@ namespace Class_diagram.Service
             return roomRepository.GetAll();
         }
 
-        public Room GetByID(int ID)
+        public Room GetByid(int id)
         {
             throw new NotImplementedException();
         }

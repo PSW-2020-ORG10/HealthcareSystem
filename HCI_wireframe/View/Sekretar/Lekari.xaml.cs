@@ -45,7 +45,7 @@ namespace ProjekatHCI
 /*
             foreach (DoctorUser ee in lista)
             {
-                doktori.Add(new DoctorUser { ID = ee.ID, FirstName = ee.FirstName, SecondName = ee.SecondName, UniqueCitizensIdentityNumber = ee.UniqueCitizensIdentityNumber, DateOfBirth = ee.DateOfBirth, PhoneNumber = ee.PhoneNumber, Email = ee.Email, Password = ee.Password });
+                doktori.Add(new DoctorUser { id = ee.id, FirstName = ee.FirstName, SecondName = ee.SecondName, UniqueCitizensidentityNumber = ee.UniqueCitizensidentityNumber, DateOfBirth = ee.DateOfBirth, PhoneNumber = ee.PhoneNumber, Email = ee.Email, Password = ee.Password });
 
 
 
@@ -79,7 +79,7 @@ namespace ProjekatHCI
                 foreach (DoctorUser anim in lista)
                 {
 
-                    if (anim.FirstName.ToUpper().Contains(Pretraga.Text.ToUpper()) || anim.SecondName.ToUpper().Contains(Pretraga.Text.ToUpper()))
+                    if (anim.firstName.ToUpper().Contains(Pretraga.Text.ToUpper()) || anim.secondName.ToUpper().Contains(Pretraga.Text.ToUpper()))
                     {
                         filterModeLisst.Add(anim);
                     }

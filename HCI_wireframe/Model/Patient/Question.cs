@@ -9,12 +9,12 @@ namespace Class_diagram.Model.Patient
 {
     public class Question : Entity
     {
-        public String Name { get; set; }
+        public String name { get; set; }
         public String answer { get; set; }
-        public Question(int id, String name, String answ) : base(id)
+        public Question(int id, String name, String answer) : base(id)
         {
-            this.Name = name;
-            this.answer = answ;
+            this.name = name;
+            this.answer = answer;
         }
         public Question() : base() { }
     }

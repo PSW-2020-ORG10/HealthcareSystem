@@ -203,9 +203,9 @@ namespace ProjekatHCI
             ListaPacijenata.SelectedIndex = 0;
             foreach (PatientUser regP in pacijenti)
             {
-                if (regP.RegisteredBySecretary==true)
+                if (regP.isRegisteredBySecretary==true)
                 {
-                    ListaPacijenata.Items.Add(regP.FirstName + " " + regP.SecondName + " " + regP.ID.ToString());
+                    ListaPacijenata.Items.Add(regP.firstName + " " + regP.secondName + " " + regP.id.ToString());
                 }
 
 
@@ -217,19 +217,19 @@ namespace ProjekatHCI
             foreach (PatientUser s in pacijenti)
             {
                 
-                    if (s.ID.ToString().Equals(idPacijenta.Text))
+                    if (s.id.ToString().Equals(idPacijenta.Text))
                     {
                         pacijent = s;
-                        ImeBox.Text = s.FirstName.ToString();
-                        Prezime = s.SecondName.ToString();
-                        DatumRodjenja = s.DateOfBirth.ToString();
-                        Jmbg = s.UniqueCitizensIdentityNumber.ToString();
-                        BrKnjizice = s.MedicalIDnumber.ToString();
-                        Email = s.Email.ToString();
-                        Lozinka = s.Password.ToString();
-                        Lozinka2 = s.Password.ToString();
-                        AdresaBox.Text = s.City.ToString();
-                        brojTelefona = s.PhoneNumber.ToString();
+                        ImeBox.Text = s.firstName.ToString();
+                        Prezime = s.secondName.ToString();
+                        DatumRodjenja = s.dateOfBirth.ToString();
+                        Jmbg = s.uniqueCitizensidentityNumber.ToString();
+                        BrKnjizice = s.medicalIdNumber.ToString();
+                        Email = s.email.ToString();
+                        Lozinka = s.password.ToString();
+                        Lozinka2 = s.password.ToString();
+                        AdresaBox.Text = s.city.ToString();
+                        brojTelefona = s.phoneNumber.ToString();
 
 
                     }
@@ -254,16 +254,16 @@ namespace ProjekatHCI
                 int id = 0;
                 foreach (PatientUser sec in lista)
                 {
-                    if (sec.ID.ToString().Equals(idPacijenta.Text))
+                    if (sec.id.ToString().Equals(idPacijenta.Text))
                     {
-                        id = sec.ID;
+                        id = sec.id;
                         
-                        alergije = sec.Allergie;
+                        alergije = sec.allergie;
                       
                         guest = sec.guest;
                      
-                        sekr = sec.RegisteredBySecretary;
-                        notifications = sec.Notifications;
+                        sekr = sec.isRegisteredBySecretary;
+                        notifications = sec.notifications;
                     }
                 }
 
@@ -321,19 +321,19 @@ namespace ProjekatHCI
                 foreach (PatientUser s in pacijenti)
                 {
 
-                    if (s.ID.ToString().Equals(idPacijenta.Text))
+                    if (s.id.ToString().Equals(idPacijenta.Text))
                     {
                         pacijent = s;
-                        Ime = s.FirstName.ToString();
-                        Prezime = s.SecondName.ToString();
-                        DatumRodjenja = s.DateOfBirth.ToString();
-                        Jmbg = s.UniqueCitizensIdentityNumber.ToString();
-                        BrKnjizice = s.MedicalIDnumber.ToString();
-                        Email = s.Email.ToString();
-                        Lozinka = s.Password.ToString();
-                        Lozinka2 = s.Password.ToString();
-                        adresa = s.City.ToString();
-                        brojTelefona = s.PhoneNumber.ToString();
+                        Ime = s.firstName.ToString();
+                        Prezime = s.secondName.ToString();
+                        DatumRodjenja = s.dateOfBirth.ToString();
+                        Jmbg = s.uniqueCitizensidentityNumber.ToString();
+                        BrKnjizice = s.medicalIdNumber.ToString();
+                        Email = s.email.ToString();
+                        Lozinka = s.password.ToString();
+                        Lozinka2 = s.password.ToString();
+                        adresa = s.city.ToString();
+                        brojTelefona = s.phoneNumber.ToString();
 
 
                     }

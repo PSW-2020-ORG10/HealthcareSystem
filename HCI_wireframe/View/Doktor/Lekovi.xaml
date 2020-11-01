@@ -54,10 +54,9 @@
                   SelectionMode="Single" AutoGenerateColumns="False"  ScrollViewer.CanContentScroll="True"
                    VerticalAlignment="Top" HorizontalAlignment="Stretch">
                     <DataGrid.Columns>
-                        <DataGridTextColumn CanUserSort="True" IsReadOnly="True"  Header="Naziv leka" Width="160" Binding="{Binding Name}"/>
-                        <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Header="Kolicina(komada)" Width="160" Binding="{Binding Quantity}" />
+                        <DataGridTextColumn CanUserSort="True" IsReadOnly="True"  Header="Naziv leka" Width="160" Binding="{Binding name}"/>
+                        <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Header="Kolicina(komada)" Width="160" Binding="{Binding quantity}" />
                         <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Header="Prostorija" Width="160" Binding="{Binding room}"/>
-                        <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Header="Dnevna potrosnja" Width="160" Binding="{Binding dnevnaPotrosnja}"/>
 
 
 

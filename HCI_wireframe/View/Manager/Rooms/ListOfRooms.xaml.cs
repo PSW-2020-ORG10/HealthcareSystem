@@ -51,7 +51,7 @@ namespace WpfApp2
             foreach (Room ee in lista)
             {
 
-                li.Add(new Lista { Name = ee.TypeOfRoom });
+                li.Add(new Lista { Name = ee.typeOfRoom });
             }
             dataGridEquipment.ItemsSource = li;
         }
@@ -101,7 +101,7 @@ namespace WpfApp2
             foreach (Room ee in lista)
             {
                
-                if (ee.TypeOfRoom.Equals(id))
+                if (ee.typeOfRoom.Equals(id))
                 {
                     GridMain.Children.Clear();
                    

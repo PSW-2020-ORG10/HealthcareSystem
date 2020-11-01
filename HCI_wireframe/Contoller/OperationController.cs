@@ -27,9 +27,9 @@ namespace Class_diagram.Contoller
             return operationService.GetAll();
         }
 
-        public Operation GetByID(int id)
+        public Operation GetByid(int id)
         {
-            return operationService.GetByID(id);
+            return operationService.GetByid(id);
         }
 
         public void New(DoctorAppointment appointment, Operation operation)
@@ -37,9 +37,9 @@ namespace Class_diagram.Contoller
             contextAppointmentService.New(appointment, operation);
         }
 
-        public void Remove(int appointmentID, int operationID)
+        public void Remove(int appointmentid, int operationid)
         {
-            contextAppointmentService.Remove(appointmentID, operationID);
+            contextAppointmentService.Remove(appointmentid, operationid);
         }
 
         public void Update(DoctorAppointment appointment, Operation operation)
