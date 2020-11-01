@@ -5,6 +5,8 @@
 import axios from "axios";
 
 export const feedbackCreated = (feedback) => async (dispatch) => {
+    alert("dosao");
+    console.log(feedback.message);
     try {
         debugger;
         await axios.post("http://localhost:60198/api/feedback/" + feedback);

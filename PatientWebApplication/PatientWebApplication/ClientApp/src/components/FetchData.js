@@ -17,6 +17,7 @@ var React = require("react");
 var react_redux_1 = require("react-redux");
 var react_router_dom_1 = require("react-router-dom");
 var WeatherForecastsStore = require("../store/WeatherForecasts");
+var CreateForm_1 = require("../components/CreateForm");
 var FetchData = /** @class */ (function (_super) {
     __extends(FetchData, _super);
     function FetchData() {
@@ -32,6 +33,7 @@ var FetchData = /** @class */ (function (_super) {
     };
     FetchData.prototype.render = function () {
         return (React.createElement(React.Fragment, null,
+            React.createElement(CreateForm_1.default, null),
             React.createElement("h1", { id: "tabelLabel" }, "Weather forecast"),
             React.createElement("p", null, "This component demonstrates fetching data from the server and working with URL parameters."),
             this.renderForecastsTable(),
