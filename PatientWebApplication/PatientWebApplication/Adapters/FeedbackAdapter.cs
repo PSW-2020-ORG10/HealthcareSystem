@@ -1,9 +1,5 @@
-﻿using PatientWebApplication.Dtos;
-using PatientWebApplication.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Class_diagram.Model.Patient;
+using PatientWebApplication.Dtos;
 
 namespace PatientWebApplication.Adapters
 {
