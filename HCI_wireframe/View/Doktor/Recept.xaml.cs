@@ -46,11 +46,11 @@ namespace Klinika
 
             foreach (PatientUser ee in lista1)
             {
-                pacijenti.Add(new PatientUser { ID = ee.ID, FirstName = ee.FirstName, SecondName = ee.SecondName, UniqueCitizensIdentityNumber = ee.UniqueCitizensIdentityNumber, DateOfBirth = ee.DateOfBirth, PhoneNumber = ee.PhoneNumber, MedicalIDnumber = ee.MedicalIDnumber });
+                pacijenti.Add(new PatientUser { id = ee.id, firstName = ee.firstName, secondName = ee.secondName, uniqueCitizensidentityNumber = ee.uniqueCitizensidentityNumber, dateOfBirth = ee.dateOfBirth, phoneNumber = ee.phoneNumber, medicalIdNumber = ee.medicalIdNumber });
             }
             foreach (PatientUser regP in pacijenti)
             {
-                ListaPacijenata.Items.Add(regP.FirstName + " " + regP.SecondName + " " + regP.MedicalIDnumber);
+                ListaPacijenata.Items.Add(regP.firstName + " " + regP.secondName + " " + regP.medicalIdNumber);
 
 
 

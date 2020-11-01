@@ -204,21 +204,21 @@ namespace Klinika
 
             foreach (DoctorUser s in lista)
             {
-                if (s.Email.Equals(svojstvo))
+                if (s.email.Equals(svojstvo))
                 {
                     lekar = s;
-                    Ime = lekar.FirstName.ToString();
-                    Prezime = lekar.SecondName.ToString();
-                    DatumRodjenja = lekar.DateOfBirth.ToString();
-                    Jmbg = lekar.UniqueCitizensIdentityNumber.ToString();
+                    Ime = lekar.firstName.ToString();
+                    Prezime = lekar.secondName.ToString();
+                    DatumRodjenja = lekar.dateOfBirth.ToString();
+                    Jmbg = lekar.uniqueCitizensidentityNumber.ToString();
 
-                    BrTelefona = lekar.PhoneNumber.ToString();
-                    Email = lekar.Email.ToString();
-                    LozinkaBox.Text = lekar.Password;
-                    PotvLozinkaBox.Text = lekar.Password;
+                    BrTelefona = lekar.phoneNumber.ToString();
+                    Email = lekar.email.ToString();
+                    LozinkaBox.Text = lekar.password;
+                    PotvLozinkaBox.Text = lekar.password;
                     AdresaBox.Text = lekar.city;
-                    LozinkaBox.Text = lekar.Password;
-                    PotvLozinkaBox.Text = lekar.Password;
+                    LozinkaBox.Text = lekar.password;
+                    PotvLozinkaBox.Text = lekar.password;
 
                 }
             }
@@ -271,15 +271,15 @@ namespace Klinika
                 DoctorUser ovajDoktor = new DoctorUser();
                 foreach (DoctorUser sec in lista)
                 {
-                    if (sec.Email.Equals(EmailBox.Text))
+                    if (sec.email.Equals(EmailBox.Text))
                     {
-                        id = sec.ID;
+                        id = sec.id;
                         ovajDoktor = sec;
                     }
                 }
                
                 DoctorUser rp = new DoctorUser(id, ImeBox.Text, PrezimeBox.Text, JMBGBox.Text, DatumRodjBox.Text,
-                BrTelBox.Text, EmailBox.Text, LozinkaBox.Text, AdresaBox.Text, ovajDoktor.salary, ovajDoktor.Specialist,ovajDoktor.speciality, ovajDoktor.specialNotifications, ovajDoktor.ordination);
+                BrTelBox.Text, EmailBox.Text, LozinkaBox.Text, AdresaBox.Text, ovajDoktor.salary, ovajDoktor.isSpecialist,ovajDoktor.speciality, ovajDoktor.specialNotifications, ovajDoktor.ordination);
 
                 
 

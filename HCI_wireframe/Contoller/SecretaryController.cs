@@ -45,9 +45,9 @@ namespace Class_diagram.Contoller
             return secretaryService.GetAll();
         }
 
-        public SecretaryUser GetByID(int ID)
+        public SecretaryUser GetByid(int id)
         {
-            return secretaryService.GetByID(ID);
+            return secretaryService.GetByid(id);
         }
        
     }

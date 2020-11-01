@@ -24,7 +24,7 @@ namespace HCI_wireframe
     /// </summary>
     public partial class AccountSettings : UserControl
     {
-        string myProperty = App.Current.Properties["PatientID"].ToString();
+        string myProperty = App.Current.Properties["Patientid"].ToString();
         public PatientUser Patient { get; set; }
         public PatientController patientController;
         public List<PatientUser> listPatients;
@@ -38,19 +38,19 @@ namespace HCI_wireframe
             patientController = new PatientController();
             listPatients = patientController.GetAll();
 
-            Patient = patientController.GetByID(int.Parse(myProperty));
-            string grad = Patient.City;
+            Patient = patientController.GetByid(int.Parse(myProperty));
+            string grad = Patient.city;
                   
-            firstName_Text.Text = Patient.FirstName.ToString();
-            secondName_Text.Text = Patient.SecondName.ToString();
-            ucin_Text.Text = Patient.UniqueCitizensIdentityNumber.ToString();
-            medicalId_Text.Text = Patient.MedicalIDnumber.ToString();
-            date_Text.Text = Patient.DateOfBirth.ToString();
+            firstName_Text.Text = Patient.firstName.ToString();
+            secondName_Text.Text = Patient.secondName.ToString();
+            ucin_Text.Text = Patient.uniqueCitizensidentityNumber.ToString();
+            medicalid_Text.Text = Patient.medicalIdNumber.ToString();
+            date_Text.Text = Patient.dateOfBirth.ToString();
                   
             City_text.Text = grad;
                   
-            phone_text.Text = Patient.PhoneNumber.ToString();
-            email_text.Text = Patient.Email.ToString();
+            phone_text.Text = Patient.phoneNumber.ToString();
+            email_text.Text = Patient.email.ToString();
 
                 
                

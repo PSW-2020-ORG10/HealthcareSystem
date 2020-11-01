@@ -49,9 +49,9 @@ namespace Class_diagram.Contoller
             return doctorService.GetAll();
         }
 
-        public DoctorUser GetByID(int id)
+        public DoctorUser GetByid(int id)
         {
-            return doctorService.GetByID(id);
+            return doctorService.GetByid(id);
         }
         public Boolean doesDoctorHaveAnAppointmentAtSpecificTime(DoctorUser doctor, TimeSpan time, string date)
         {

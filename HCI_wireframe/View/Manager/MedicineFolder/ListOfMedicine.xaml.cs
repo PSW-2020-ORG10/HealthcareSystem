@@ -59,9 +59,9 @@ namespace WpfApp2
 
             foreach (Medicine ee in lista)
             {
-                if (ee.confirmed)
+                if (ee.isConfirmed)
                 {
-                    li.Add(new Lista { Name = ee.Name });
+                    li.Add(new Lista { Name = ee.name });
                 }
             }
             dataGridEquipment.ItemsSource = li;
@@ -131,8 +131,8 @@ namespace WpfApp2
 
             foreach (Medicine r in lekovi)
             {
-                sb.Append("Medicine:     " + r.Name + "\n");
-                sb.Append("Current quantity:     " + r.Quantity + "\n");
+                sb.Append("Medicine:     " + r.name + "\n");
+                sb.Append("Current quantity:     " + r.quantity + "\n");
                
                 sb.Append("\n --------------------------------------------- \n");
             }
@@ -169,7 +169,7 @@ namespace WpfApp2
             foreach (Medicine ee in lista)
             {
 
-                if (ee.Name.Equals(id))
+                if (ee.name.Equals(id))
                 {
                     GridMain.Children.Clear();
                     UserControl usc = new MedicineClass(ee);

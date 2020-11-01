@@ -35,7 +35,7 @@ namespace HCI_wireframe
         private String _firstaname;
         private String _secondname;
         private String _ucin;
-        private String _medicalID;
+        private String _medicalid;
         private String _date;
         private String _country;
         private String _city;
@@ -145,15 +145,15 @@ namespace HCI_wireframe
                 }
             }
         }
-        public String MedicalId
+        public String Medicalid
         {
-            get { return _medicalID; }
+            get { return _medicalid; }
             set
             {
-                if (value != _medicalID)
+                if (value != _medicalid)
                 {
-                    _medicalID = value;
-                    OnPropertyChanged("MedicalId");
+                    _medicalid = value;
+                    OnPropertyChanged("Medicalid");
                 }
             }
         }
@@ -247,14 +247,14 @@ namespace HCI_wireframe
            }
            else if (Keyboard.Modifiers == ModifierKeys.Control && e.Key == Key.RightCtrl && CreateButton.IsFocused)
            {
-               AllergieTextBox.Focus();
+               allergieTextBox.Focus();
            }
         else { }
 
 
         }
 
-        private int getNextID()
+        private int getNextid()
         {
             PatientController rp = new PatientController();
             List<PatientUser> lista = rp.GetAll();
@@ -263,9 +263,9 @@ namespace HCI_wireframe
 
             foreach(PatientUser r in lista)
             {
-                if(r.ID>number)
+                if(r.id>number)
                 {
-                    number = r.ID;
+                    number = r.id;
                 }
             }
 
@@ -280,7 +280,7 @@ namespace HCI_wireframe
               
                 !Regex.Match(Phone_TextBox.Text, @"^([0-9]+)$").Success || !Regex.Match(Ucin_TextBox.Text, @"^([0-9]+)$").Success ||
               
-                !Regex.Match(MedicalIDnumber_TextBox.Text, @"^([0-9]+)$").Success || !Regex.Match(Email_TextBox.Text, @"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$").Success ||
+                !Regex.Match(medicalIdNumber_TextBox.Text, @"^([0-9]+)$").Success || !Regex.Match(Email_TextBox.Text, @"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$").Success ||
                  !Regex.Match(Date_TextBox.Text, @"^([0-9]{2}/[0-9]{2}/[0-9]{4})$").Success) {
                 return false;
             }
@@ -306,7 +306,7 @@ namespace HCI_wireframe
         {
             if (FirstName_TextBox.Text.Equals("") || SecondName_TextBox.Text.Equals("") || Email_TextBox.Text.Equals("") || Phone_TextBox.Text.Equals("") ||
                          Date_TextBox.Text.Equals("") ||
-                       MedicalIDnumber_TextBox.Text.Equals("") || Ucin_TextBox.Text.Equals("") || City_TextBox.Text.Equals("") ||
+                       medicalIdNumber_TextBox.Text.Equals("") || Ucin_TextBox.Text.Equals("") || City_TextBox.Text.Equals("") ||
                        Password_PasswordBox.Password.Length.Equals("") || ConfirmPassword_PasswordBox.Password.Length.Equals("")) {
                 return false;
             }
@@ -332,7 +332,7 @@ namespace HCI_wireframe
        {
            if (e.Key == Key.LeftCtrl)
            {
-               MedicalIDnumber_TextBox.Focus();
+               medicalIdNumber_TextBox.Focus();
            }
            else if (e.Key == Key.RightCtrl)
            {
@@ -340,7 +340,7 @@ namespace HCI_wireframe
            }
        }
 
-       private void MedicalIDnumber_TextBox_KeyDown(object sender, KeyEventArgs e)
+       private void medicalIdNumber_TextBox_KeyDown(object sender, KeyEventArgs e)
        {
            if (e.Key == Key.LeftCtrl)
            {
@@ -389,7 +389,7 @@ namespace HCI_wireframe
                Password_PasswordBox.Focus();
            }
            else if (e.Key == Key.LeftCtrl) {
-               AllergieTextBox.Focus();
+               allergieTextBox.Focus();
            }
        }
 
@@ -462,7 +462,7 @@ namespace HCI_wireframe
             else
             {
                 PatientUser rp = new PatientUser(0, FirstName_TextBox.Text, SecondName_TextBox.Text, Ucin_TextBox.Text, Date_TextBox.Text,
-                    Phone_TextBox.Text, MedicalIDnumber_TextBox.Text, AllergieTextBox.Text,City_TextBox.Text,false, Email_TextBox.Text, Password_PasswordBox.Password, false, null);
+                    Phone_TextBox.Text, medicalIdNumber_TextBox.Text, allergieTextBox.Text,City_TextBox.Text,false, Email_TextBox.Text, Password_PasswordBox.Password, false, null);
 
 
                Boolean okNewPatient =  patientController.New(rp);
@@ -471,7 +471,7 @@ namespace HCI_wireframe
                     MessageBox.Show("Fields must be unique.\nCity must be in format : City, Street number, postal code, Country.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
-                App.Current.Properties["PatientID"] = rp.ID.ToString();
+                App.Current.Properties["Patientid"] = rp.id.ToString();
                 var usc = new FirstPage();
                 gridMain.Children.Clear();
                 gridMain.Children.Add(usc);
@@ -497,7 +497,7 @@ namespace HCI_wireframe
             return true;
         }
 
-        private void AllergieTextBox_KeyDown(object sender, KeyEventArgs e)
+        private void allergieTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.RightCtrl)
             {

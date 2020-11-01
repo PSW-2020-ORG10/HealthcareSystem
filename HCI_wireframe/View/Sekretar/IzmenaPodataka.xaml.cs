@@ -203,19 +203,17 @@ namespace ProjekatHCI
             List<SecretaryUser> lista = scon.GetAll();
 
             foreach (SecretaryUser s in lista)
-            {
-                if (s.Email.Equals(svojstvo))
-                {
+            {                {
                     sekretar = s;
-                    Ime = sekretar.FirstName.ToString();
-                    Prezime = sekretar.SecondName.ToString();
-                    DatumRodjenja = sekretar.DateOfBirth.ToString();
-                    JMBGBox.Text = sekretar.UniqueCitizensIdentityNumber.ToString();
+                    Ime = sekretar.firstName.ToString();
+                    Prezime = sekretar.secondName.ToString();
+                    DatumRodjenja = sekretar.dateOfBirth.ToString();
+                    JMBGBox.Text = sekretar.uniqueCitizensidentityNumber.ToString();
                     AdresaBox.Text = sekretar.city.ToString();
-                    BrojTelefona = sekretar.PhoneNumber.ToString();
-                    EmailBox.Text = sekretar.Email.ToString();
-                    LozinkaBox.Password = sekretar.Password;
-                    PotvLozinkaBox.Password = sekretar.Password;
+                    BrojTelefona = sekretar.phoneNumber.ToString();
+                    EmailBox.Text = sekretar.email.ToString();
+                    LozinkaBox.Password = sekretar.password;
+                    PotvLozinkaBox.Password = sekretar.password;
                     
                     if (sekretar.salary != null)
                     {
@@ -242,9 +240,9 @@ namespace ProjekatHCI
                 int id = 0;
                 foreach(SecretaryUser sec in lista)
                 {
-                    if(sec.Email.Equals(EmailBox.Text))
+                    if(sec.email.Equals(EmailBox.Text))
                     {
-                        id = sec.ID;
+                        id = sec.id;
                     }
                 }
                 int plata = int.Parse(PlataBox.Text);

@@ -13,24 +13,24 @@ namespace Class_diagram.Model.Hospital
    public class Equipment : Entity
    {
       public List<String> room { get; set; }
-        public String Name { get; set; }
-        public int Quantity { get; set; }
-
-        public Equipment(int id, String name, int quantity): base(id) {
-            
-            this.Name = name;
-            this.Quantity = quantity;
-        }
-        public Equipment(int id, String name, int quantity, List<String> r) : base(id)
-        {
-
-            this.Name = name;
-            this.Quantity = quantity;
-            this.room = r;
-        }
+        public String name { get; set; }
+        public int quantity { get; set; }
         public Equipment()
         {
         }
+        public Equipment(int id, String name, int quantity): base(id) {
+            
+            this.name = name;
+            this.quantity = quantity;
+        }
+        public Equipment(int id, String name, int quantity, List<String> room) : base(id)
+        {
+
+            this.name = name;
+            this.quantity = quantity;
+            this.room = room;
+        }
+     
 
   
     }

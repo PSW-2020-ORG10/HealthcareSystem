@@ -14,7 +14,7 @@ using System.Collections.Generic;
 using System.IO;
 namespace Class_diagram.Service
 {
-    public class OperationService : bingPath, IStrategyAppointment
+    public class OperationService : BingPath, IStrategyAppointment
     {
         public OperationRepository operationRepository;
         String path = bingPathToAppDir(@"JsonFiles\operations.json");
@@ -29,9 +29,9 @@ namespace Class_diagram.Service
             return operationRepository.GetAll();
         }
 
-        public Operation GetByID(int id)
+        public Operation GetByid(int id)
         {
-            return operationRepository.GetByID(id);
+            return operationRepository.GetByid(id);
         }
 
         public void New(DoctorAppointment appointment, Operation operation)
@@ -44,9 +44,9 @@ namespace Class_diagram.Service
             operationRepository.Update(operation);
         }
 
-        public void Remove(int appointmentID, int operationID)
+        public void Remove(int appointmentid, int operationid)
         {
-            operationRepository.Delete(operationID);
+            operationRepository.Delete(operationid);
         }
         public Boolean isTermNotAvailable(DoctorUser doctor, TimeSpan start,TimeSpan end , String dateToString, PatientUser patient)
         {
@@ -57,10 +57,7 @@ namespace Class_diagram.Service
             Boolean hasAppointmentPatient = patientController.doesPatientHaveAnAppointmentAtSpecificPeriod(start, end,dateToString, patient);
             Boolean hasOperationPatient = patientController.doesPatientHaveAnOperationAtSpecificPeriod(start,end,dateToString, patient);
             
-            if (hasAppointmentDoctor == true || hasAppointmentPatient == true || hasOperationDoctor == true || hasOperationPatient == true)
-            {
-                return true;
-            }
+            if (hasAppointmentDoctor || hasAppointmentPatient || hasOperationDoctor || hasOperationPatient) return true;
             return false;
         }
        

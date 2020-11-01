@@ -195,13 +195,13 @@ namespace HCI_wireframe.View.Patient
 
             foreach (PatientUser r1 in lista)
             {
-                if (r1.Password.Equals(Password_TextBox.Password) && r1.Email.Equals(Email_TextBox.Text) && r1.guest==false)
+                if (r1.password.Equals(Password_TextBox.Password) && r1.email.Equals(Email_TextBox.Text) && r1.guest==false)
                 {
                     gridMain.Children.Clear();
                     UserControl userCon = new FirstPage();
                     gridMain.Children.Add(userCon);
 
-                    App.Current.Properties["PatientID"] = r1.ID.ToString();
+                    App.Current.Properties["Patientid"] = r1.id.ToString();
                     return;
                 }
             }

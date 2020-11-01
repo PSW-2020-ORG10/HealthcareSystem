@@ -86,7 +86,7 @@ namespace HCI_wireframe
         public OperationController operationController { get; set; }
         public List<Operation> listOperations { get; set; }
         public List<DoctorUser> listDoctors { get; set; }
-        string myProperty = App.Current.Properties["PatientID"].ToString();
+        string myProperty = App.Current.Properties["Patientid"].ToString();
         public PatientController patientController { get; set; }
         public List<PatientUser>listPatients { get; set; }
         public PatientUser patient = new PatientUser();
@@ -108,12 +108,12 @@ namespace HCI_wireframe
             listOperations = operationController.GetAll();
 
             foreach (DoctorUser d in listDoctors)
-            {if (d.Specialist == false)
+            {if (d.isSpecialist == false)
                 {
                     StringBuilder l = new StringBuilder();
-                    l.Append(d.FirstName + " ");
-                    l.Append(d.SecondName + " ");
-                    l.Append(d.ID);
+                    l.Append(d.firstName + " ");
+                    l.Append(d.secondName + " ");
+                    l.Append(d.id);
                     ListaDoktoriCeloIme a = new ListaDoktoriCeloIme();
                     a.DoctorName = l.ToString();
                     mojaLista.Add(a);
@@ -247,7 +247,7 @@ namespace HCI_wireframe
 
 
 
-                DoctorUser doktorPregled = doctorController.GetByID(idDoktor);
+                DoctorUser doktorPregled = doctorController.GetByid(idDoktor);
 
                
                 if (rb1Date.IsChecked == true)
@@ -259,7 +259,7 @@ namespace HCI_wireframe
                     priority = "DOCTOR";
                 }
 
-                patient = patientController.GetByID(int.Parse(myProperty));
+                patient = patientController.GetByid(int.Parse(myProperty));
 
                 String datum = Date_TextBox.Text;
                 String[] delovi2 = datum.Split('/');
@@ -292,7 +292,7 @@ namespace HCI_wireframe
                     return;
                 }
 
-                String ime = doktorPregled.FirstName;
+                String ime = doktorPregled.firstName;
               
              
                DoctorAppointment pronadjesApp = appointmentController.RecommendAnAppointment(doktorPregled, dt1, dt2, patient);
@@ -314,7 +314,7 @@ namespace HCI_wireframe
                     }
                     else { }
                 }
-                String imeDoktora = doktorPregled.FirstName + " " + doktorPregled.SecondName;
+                String imeDoktora = doktorPregled.firstName + " " + doktorPregled.secondName;
                 if (pronadjesApp == null)
                 {
                     MessageBox.Show("Sorry\nAppointment is not found.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -322,7 +322,7 @@ namespace HCI_wireframe
                 else
                 {
                     DoctorUser doktorIme = pronadjesApp.doctor;
-                    string sMessageBoxText = "Do you want to schedule this appointment ? \n" + pronadjesApp.Date + "\n" + pronadjesApp.Time + "\n" + doktorIme.FirstName + " " + doktorIme.SecondName;
+                    string sMessageBoxText = "Do you want to schedule this appointment ? \n" + pronadjesApp.date + "\n" + pronadjesApp.time + "\n" + doktorIme.firstName + " " + doktorIme.secondName;
                     string sCaption = "New doctor appointment";
 
                     MessageBoxButton btnMessageBox = MessageBoxButton.YesNoCancel;
@@ -333,8 +333,8 @@ namespace HCI_wireframe
                     switch (rsltMessageBox)
                     {
                         case MessageBoxResult.Yes:
-                            id = getID();
-                            pronadjesApp.ID = id;
+                            id = getid();
+                            pronadjesApp.id = id;
                             appointmentController.New(pronadjesApp,null);
                          
                             MessageBox.Show(
@@ -355,15 +355,15 @@ namespace HCI_wireframe
                 }
             }
         }
-        private int getID()
+        private int getid()
         {
             int number = 0;
             
             foreach (DoctorAppointment appointment in listAppointments)
             {
-                 if(appointment.ID>number)
+                 if(appointment.id>number)
                 {
-                    number = appointment.ID;
+                    number = appointment.id;
                 }
             }
             

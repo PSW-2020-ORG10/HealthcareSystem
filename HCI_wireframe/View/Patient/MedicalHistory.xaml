@@ -129,7 +129,7 @@
                     
                 </DataGrid>
                 <Label Grid.Row="14" Grid.Column ="1" Grid.ColumnSpan="2" HorizontalAlignment="left" >Allergic to - </Label>
-                <TextBlock Name="AllergieText" Grid.Row="14" Grid.Column ="2" Grid.ColumnSpan="2" HorizontalAlignment="left" Width="200" Height="25" Background="White"></TextBlock>
+                <TextBlock Name="allergieText" Grid.Row="14" Grid.Column ="2" Grid.ColumnSpan="2" HorizontalAlignment="left" Width="200" Height="25" Background="White"></TextBlock>
 
 
             </Grid>

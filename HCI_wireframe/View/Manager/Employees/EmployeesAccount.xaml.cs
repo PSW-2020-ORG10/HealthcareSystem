@@ -42,15 +42,15 @@ namespace WpfApp2.Employees
         public EmployeesAccount(DoctorUser dok)
         {
             InitializeComponent();
-            first.AppendText(dok.FirstName);
-            last.AppendText(dok.SecondName);
-            date.AppendText(dok.DateOfBirth);
+            first.AppendText(dok.firstName);
+            last.AppendText(dok.secondName);
+            date.AppendText(dok.dateOfBirth);
             address.AppendText(dok.city);
-            ucinTxt.AppendText(dok.UniqueCitizensIdentityNumber);
-            email.AppendText(dok.Email);
+            ucinTxt.AppendText(dok.uniqueCitizensidentityNumber);
+            email.AppendText(dok.email);
           
-            phone.AppendText(dok.PhoneNumber);
-            pass.AppendText(dok.Password);
+            phone.AppendText(dok.phoneNumber);
+            pass.AppendText(dok.password);
             speci.AppendText(dok.speciality);
            hour.AppendText(dok.salary.ToString());
             
@@ -58,7 +58,7 @@ namespace WpfApp2.Employees
             du = dok;
             su = new SecretaryUser(0, "", "", "", "", "", "", "", "", 0,"");
 
-            if (!dok.Specialist)
+            if (!dok.isSpecialist)
             {
                 G.IsChecked = true;
                 speci.IsEnabled = false;
@@ -86,7 +86,7 @@ namespace WpfApp2.Employees
                     sobeSaOpremom.Add(item);
                 }
 
-                if (item.TypeOfRoom.Equals(dok.ordination))
+                if (item.typeOfRoom.Equals(dok.ordination))
                 {
                     doktorSoba = item;
                 }
@@ -103,7 +103,7 @@ namespace WpfApp2.Employees
                 {
 
 
-                    if (doctor.ordination.Equals(room.TypeOfRoom))
+                    if (doctor.ordination.Equals(room.typeOfRoom))
                     {
                         available = false;
 
@@ -127,15 +127,15 @@ namespace WpfApp2.Employees
           
             InitializeComponent();
             S.IsChecked = true;
-            first.AppendText(employee.FirstName);
-            last.AppendText(employee.SecondName);
-            date.AppendText(employee.DateOfBirth);
+            first.AppendText(employee.firstName);
+            last.AppendText(employee.secondName);
+            date.AppendText(employee.dateOfBirth);
             address.AppendText(employee.city);
-            ucinTxt.AppendText(employee.UniqueCitizensIdentityNumber);
-            email.AppendText(employee.Email);
+            ucinTxt.AppendText(employee.uniqueCitizensidentityNumber);
+            email.AppendText(employee.email);
            
-            phone.AppendText(employee.PhoneNumber);
-            pass.AppendText(employee.Password);
+            phone.AppendText(employee.phoneNumber);
+            pass.AppendText(employee.password);
             speci.AppendText("null");
             speci.IsEnabled = false;
             hour.AppendText(employee.salary.ToString());
@@ -157,7 +157,7 @@ namespace WpfApp2.Employees
             foreach (Room item in lista)
             {
                 
-                if (item.TypeOfRoom.Equals(employee.room))
+                if (item.typeOfRoom.Equals(employee.room))
                 {
                   
                     sekretarSoba = item;
@@ -187,15 +187,32 @@ namespace WpfApp2.Employees
                 s = (Room)Combo_Copy.Items.GetItemAt(Combo_Copy.SelectedIndex);
             }
 
+            List<Schedule> listOfSchedule = new List<Schedule>();
+            EmployeesScheduleController employeesSchedule = new EmployeesScheduleController();
 
-            if (du.FirstName != "")
+            listOfSchedule = employeesSchedule.GetAll();
+
+
+            foreach (Schedule schedule in listOfSchedule)
+            {
+
+                if (schedule.employeeid.Equals(du.id.ToString()))
+                {
+
+                    schedule.room = s.typeOfRoom;
+
+                    employeesSchedule.Update(schedule);
+                }
+            }
+
+            if (du.firstName != "")
             {
              
                 if (S.IsChecked == true)
                 {
                    
                     hours = hour.Text;
-                    ss = new SecretaryUser(du.ID, du.FirstName, du.SecondName, du.UniqueCitizensIdentityNumber, du.DateOfBirth, du.PhoneNumber, du.Email, du.Password, du.city, Double.Parse(hours),"SecretarysRoom");
+                    ss = new SecretaryUser(du.id, du.firstName, du.secondName, du.uniqueCitizensidentityNumber, du.dateOfBirth, du.phoneNumber, du.email, du.password, du.city, Double.Parse(hours),"SecretarysRoom");
                     DocContr.Remove(du);
                     SecContr.New(ss);
 
@@ -211,7 +228,7 @@ namespace WpfApp2.Employees
                 {
                     
                     hours = hour.Text;
-                    dd = new DoctorUser(du.ID, du.FirstName, du.SecondName, du.UniqueCitizensIdentityNumber, du.DateOfBirth, du.PhoneNumber, du.Email, du.Password, du.city, Double.Parse(hours), false, null, null,s.TypeOfRoom);
+                    dd = new DoctorUser(du.id, du.firstName, du.secondName, du.uniqueCitizensidentityNumber, du.dateOfBirth, du.phoneNumber, du.email, du.password, du.city, Double.Parse(hours), false, null, null,s.typeOfRoom);
                     DocContr.Update(dd);
 
                     GridMain.Children.Clear();
@@ -227,7 +244,7 @@ namespace WpfApp2.Employees
                   
                     hours = hour.Text;
                     spec = speci.Text;
-                    dd = new DoctorUser(du.ID, du.FirstName, du.SecondName, du.UniqueCitizensIdentityNumber, du.DateOfBirth, du.PhoneNumber, du.Email, du.Password, du.city, Double.Parse(hours), true, spec, null,s.TypeOfRoom);
+                    dd = new DoctorUser(du.id, du.firstName, du.secondName, du.uniqueCitizensidentityNumber, du.dateOfBirth, du.phoneNumber, du.email, du.password, du.city, Double.Parse(hours), true, spec, null,s.typeOfRoom);
                     DocContr.Update(dd);
 
                     GridMain.Children.Clear();
@@ -239,14 +256,14 @@ namespace WpfApp2.Employees
 
             }
 
-            if (su.FirstName != "")
+            if (su.firstName != "")
             {
               
                 if (S.IsChecked == true)
                 {
                     hours = hour.Text;
                    
-                    ss = new SecretaryUser(su.ID, su.FirstName, su.SecondName, su.UniqueCitizensIdentityNumber, su.DateOfBirth, su.PhoneNumber, su.Email, su.Password, su.city, Double.Parse(hours),"SecretarysRoom");
+                    ss = new SecretaryUser(su.id, su.firstName, su.secondName, su.uniqueCitizensidentityNumber, su.dateOfBirth, su.phoneNumber, su.email, su.password, su.city, Double.Parse(hours),"SecretarysRoom");
                     SecContr.Update(su);
 
                     GridMain.Children.Clear();
@@ -264,7 +281,7 @@ namespace WpfApp2.Employees
                     hours = hour.Text;
 
 
-                    dd = new DoctorUser(su.ID, su.FirstName, su.SecondName, su.UniqueCitizensIdentityNumber, su.DateOfBirth, su.PhoneNumber, su.Email, su.Password, su.city, Double.Parse(hours), false, null, null,s.TypeOfRoom);
+                    dd = new DoctorUser(su.id, su.firstName, su.secondName, su.uniqueCitizensidentityNumber, su.dateOfBirth, su.phoneNumber, su.email, su.password, su.city, Double.Parse(hours), false, null, null,s.typeOfRoom);
                     SecContr.Remove(su);
                     DocContr.New(dd);
 
@@ -281,7 +298,7 @@ namespace WpfApp2.Employees
                    
                     hours = hour.Text;
                     spec = speci.Text;
-                    dd = new DoctorUser(su.ID, su.FirstName, su.SecondName, su.UniqueCitizensIdentityNumber, su.DateOfBirth, su.PhoneNumber, su.Email, su.Password, su.city, Double.Parse(hours), true, spec, null,s.TypeOfRoom);
+                    dd = new DoctorUser(su.id, su.firstName, su.secondName, su.uniqueCitizensidentityNumber, su.dateOfBirth, su.phoneNumber, su.email, su.password, su.city, Double.Parse(hours), true, spec, null,s.typeOfRoom);
                     SecContr.Remove(su);
                     DocContr.New(dd);
 
@@ -321,12 +338,12 @@ namespace WpfApp2.Employees
         private void Button_Click_5(object sender, RoutedEventArgs e)
         {
 
-            if (!su.FirstName.Equals(""))
+            if (!su.firstName.Equals(""))
             {
                 SecContr.Remove(su);
             }
 
-            if (!du.FirstName.Equals(""))
+            if (!du.firstName.Equals(""))
             {
                 DocContr.Remove(du);
             }
@@ -353,7 +370,7 @@ namespace WpfApp2.Employees
             foreach (Room item in lista)
             {
 
-                if (item.TypeOfRoom.Equals("SecretarysRoom"))
+                if (item.typeOfRoom.Equals("SecretarysRoom"))
                 {
 
                     sekretarSoba = item;
@@ -405,7 +422,7 @@ namespace WpfApp2.Employees
                 {
 
 
-                    if (doctor.ordination.Equals(room.TypeOfRoom))
+                    if (doctor.ordination.Equals(room.typeOfRoom))
                     {
                         available = false;
 
@@ -457,7 +474,7 @@ namespace WpfApp2.Employees
                 {
 
 
-                    if (doctor.ordination.Equals(room.TypeOfRoom))
+                    if (doctor.ordination.Equals(room.typeOfRoom))
                     {
                         available = false;
 

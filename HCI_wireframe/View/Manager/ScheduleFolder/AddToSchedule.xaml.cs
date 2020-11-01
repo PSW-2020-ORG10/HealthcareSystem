@@ -80,9 +80,9 @@ namespace WpfApp2
             {
 
                 StringBuilder l = new StringBuilder();
-                l.Append(ee.ID + " ");
-                l.Append(ee.FirstName + " ");
-                l.Append(ee.SecondName);
+                l.Append(ee.id + " ");
+                l.Append(ee.firstName + " ");
+                l.Append(ee.secondName);
                 li.Add(new Lista { Name = l.ToString() });
                
             }
@@ -97,9 +97,9 @@ namespace WpfApp2
 
                
                 StringBuilder l = new StringBuilder();
-                l.Append(ee.ID + " ");
-                l.Append(ee.FirstName + " ");
-                l.Append(ee.SecondName);
+                l.Append(ee.id + " ");
+                l.Append(ee.firstName + " ");
+                l.Append(ee.secondName);
                 li.Add(new Lista { Name = l.ToString() });
 
             }
@@ -111,16 +111,16 @@ namespace WpfApp2
 
         }
 
-        private int getNextID()
+        private int getNextid()
         {
             EmployeesScheduleController rp = new EmployeesScheduleController();
             List<Schedule> lista = rp.GetAll();
             int number = 0;
             foreach (Schedule r in lista)
             {
-                if (r.ID > number)
+                if (r.id > number)
                 {
-                    number = r.ID;
+                    number = r.id;
                 }
             }
             number += 1;
@@ -180,7 +180,7 @@ namespace WpfApp2
             builder.Append(godinaNiz);
             String prosledjivanje = builder.ToString();
 
-            id = getNextID();
+            id = getNextid();
             start = Start.Text;
             end = End.Text;
 
@@ -236,7 +236,7 @@ namespace WpfApp2
             foreach (DoctorUser ee in lista)
             {
 
-                if ((ee.ID.ToString()).Equals(idEmployee[0]) && (ee.FirstName).Equals(idEmployee[1]) && (ee.SecondName).Equals(idEmployee[2]))
+                if ((ee.id.ToString()).Equals(idEmployee[0]) && (ee.firstName).Equals(idEmployee[1]) && (ee.secondName).Equals(idEmployee[2]))
                 {
 
                     doktor = ee;
@@ -246,7 +246,7 @@ namespace WpfApp2
 
 
 
-                    Schedule novo = new Schedule(id, doktor.ID.ToString(),prosledjivanje, yes, doktor.FirstName,doktor.SecondName, shift, doktor.ordination);
+                    Schedule novo = new Schedule(id, doktor.id.ToString(),prosledjivanje, yes, doktor.firstName,doktor.secondName, shift, doktor.ordination);
                   
                     SchDontr.New(novo);
 
@@ -257,11 +257,11 @@ namespace WpfApp2
             foreach (SecretaryUser ee in listaS)
             {
 
-                if ((ee.ID.ToString()).Equals(idEmployee[0]) && (ee.FirstName).Equals(idEmployee[1]) && (ee.SecondName).Equals(idEmployee[2]))
+                if ((ee.id.ToString()).Equals(idEmployee[0]) && (ee.firstName).Equals(idEmployee[1]) && (ee.secondName).Equals(idEmployee[2]))
                 {
 
                     secretary = ee;
-                    Schedule novo = new Schedule(id, secretary.ID.ToString(), prosledjivanje, yes, secretary.FirstName, secretary.SecondName, shift, secretary.room);
+                    Schedule novo = new Schedule(id, secretary.id.ToString(), prosledjivanje, yes, secretary.firstName, secretary.secondName, shift, secretary.room);
 
                     SchDontr.New(novo);
                 }

@@ -110,8 +110,8 @@
                   VerticalAlignment="Top" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="10" Grid.RowSpan="10" Height="800" Width="900" GridLinesVisibility="Vertical" HeadersVisibility="All" 
                           Background="LightGray" >
                     <DataGrid.Columns>
-                        <DataGridTextColumn  Binding ="{Binding Number}" FontSize="20" HeaderStyle="{StaticResource CenterGridHeaderStyle}" Width="*"  Header="Department"/>
-                        <DataGridTextColumn  Binding ="{Binding Name}" FontSize="20" Width="*" Header="Phone number"  HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                        <DataGridTextColumn  Binding ="{Binding number}" FontSize="20" HeaderStyle="{StaticResource CenterGridHeaderStyle}" Width="*"  Header="Department"/>
+                        <DataGridTextColumn  Binding ="{Binding name}" FontSize="20" Width="*" Header="Phone number"  HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
 
                     </DataGrid.Columns>
 

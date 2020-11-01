@@ -35,9 +35,9 @@ namespace Class_diagram.Contoller
         {
            return patientsService.Update(patient);
         }
-        public PatientUser GetByID(int id)
+        public PatientUser GetByid(int id)
         {
-            return patientsService.GetByID(id);
+            return patientsService.GetByid(id);
         }
       
 

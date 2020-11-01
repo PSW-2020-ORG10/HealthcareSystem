@@ -49,9 +49,9 @@ namespace Class_diagram.Contoller
 
           }
 
-        public Medicine GetByID(int ID)
+        public Medicine GetByid(int id)
         {
-           return medicineService.GetByID(ID);
+           return medicineService.GetByid(id);
         }
     }
 }

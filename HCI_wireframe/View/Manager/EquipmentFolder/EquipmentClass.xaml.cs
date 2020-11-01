@@ -41,8 +41,8 @@ namespace WpfApp2
             this.DataContext = this;
             eq = equipment;
 
-            name.Text = equipment.Name;
-            quantity.Text = equipment.Quantity.ToString();
+            name.Text = equipment.name;
+            quantity.Text = equipment.quantity.ToString();
             RoomController RoomContr = new RoomController();
             List<Room> lista = new List<Room>();
             lista = RoomContr.GetAll();
@@ -58,7 +58,7 @@ namespace WpfApp2
                     {
                         String soba = eq.room[i];
 
-                        if (soba.Equals(item.TypeOfRoom))
+                        if (soba.Equals(item.typeOfRoom))
                         {
                             sobeSaOpremom.Add(item);
                         }
@@ -73,7 +73,7 @@ namespace WpfApp2
                     bool postoji = false;
                 foreach (Room saOpremom in sobeSaOpremom)
                 {
-                    if (item.ID == saOpremom.ID)
+                    if (item.id == saOpremom.id)
                     {
                         postoji = true;
                     }
@@ -126,10 +126,10 @@ namespace WpfApp2
             foreach (Room ee in lista)
             {
                
-                    if (ee.TypeOfRoom.Equals(id))
+                    if (ee.typeOfRoom.Equals(id))
                 {
                     s = ee;
-                    s.equipment.Remove(eq.Name);
+                    s.equipment.Remove(eq.name);
 
                 }
 
@@ -165,7 +165,7 @@ namespace WpfApp2
                     {
                         String soba = eq.room[i];
 
-                        if (soba.Equals(item.TypeOfRoom))
+                        if (soba.Equals(item.typeOfRoom))
                         {
                             sobeSaOpremom.Add(item);
                         }
@@ -180,7 +180,7 @@ namespace WpfApp2
                     bool postoji = false;
                     foreach (Room saOpremom in sobeSaOpremom)
                     {
-                        if (item.ID == saOpremom.ID)
+                        if (item.id == saOpremom.id)
                         {
                             postoji = true;
                         }
@@ -248,7 +248,7 @@ namespace WpfApp2
             }
 
 
-            Equipment equ = new Equipment(eq.ID, name.Text, int.Parse(quantity.Text), eq.room);
+            Equipment equ = new Equipment(eq.id, name.Text, int.Parse(quantity.Text), eq.room);
 
             EquipmentController EquipmentContr = new EquipmentController();
 
@@ -279,10 +279,10 @@ namespace WpfApp2
             {
                 if (ee.forUse == true)
                 {
-                    if (ee.TypeOfRoom.Equals(id))
+                    if (ee.typeOfRoom.Equals(id))
                     {
                         s = ee;
-                        s.equipment.Add(eq.Name);
+                        s.equipment.Add(eq.name);
 
                     }
                 }
@@ -318,7 +318,7 @@ namespace WpfApp2
                     {
                         String soba = eq.room[i];
 
-                        if (soba.Equals(item.TypeOfRoom))
+                        if (soba.Equals(item.typeOfRoom))
                         {
                             sobeSaOpremom.Add(item);
                         }
@@ -333,7 +333,7 @@ namespace WpfApp2
                     bool postoji = false;
                     foreach (Room saOpremom in sobeSaOpremom)
                     {
-                        if (item.ID == saOpremom.ID)
+                        if (item.id == saOpremom.id)
                         {
                             postoji = true;
                         }

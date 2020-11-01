@@ -60,7 +60,7 @@ namespace ProjekatHCI
 
             /* foreach (Schedule ee in lista)
              {
-                rasporedi.Add(new Schedule { ID = ee.ID });
+                rasporedi.Add(new Schedule { id = ee.id });
 
 
 
@@ -97,7 +97,7 @@ namespace ProjekatHCI
                 foreach (Schedule anim in lista)
                 {
 
-                    if (anim.Date == datePicker.Text)
+                    if (anim.date == datePicker.Text)
                     {
                         filterModeLisst.Add(anim);
                     }
@@ -124,7 +124,7 @@ namespace ProjekatHCI
                 foreach (Schedule anim in lista)
                 {
 
-                    if (anim.employeeFirst.ToLower().StartsWith(pretragaText.Text.ToLower()) || anim.employeeLast.ToLower().StartsWith(pretragaText.Text.ToLower()) || anim.employeeID.ToString() == pretragaText.Text || anim.soba.ToLower().Equals(pretragaText.Text.ToLower()))
+                    if (anim.employeeFirst.ToLower().StartsWith(pretragaText.Text.ToLower()) || anim.employeeLast.ToLower().StartsWith(pretragaText.Text.ToLower()) || anim.employeeid.ToString() == pretragaText.Text || anim.room.ToLower().Equals(pretragaText.Text.ToLower()))
                     {
                         filterModeLisst.Add(anim);
                     }
