@@ -10,6 +10,7 @@ namespace PatientWebApplication.Dtos
         public String Message { get; set; }
         public Boolean IsPublic { get; set; }
         public Boolean IsAnonymous { get; set; }
+        public int PatientId { get; set; }
 
         public FeedbackDto() { }
     }

@@ -42,7 +42,7 @@ namespace PatientWebApplication.Controllers
             return Ok(result);
         }
 
-        [HttpPost]      // POST /api/feedback Request body: {"message": "message", "color": "blue", "price": 55.4}
+        [HttpPost]      // POST /api/feedback Request body: {"message": "Some message", "isPublic": true, "isAnonymous": false}
         public IActionResult Create(FeedbackDto dto)
         {
             if (dto.Message.Length <= 0)
