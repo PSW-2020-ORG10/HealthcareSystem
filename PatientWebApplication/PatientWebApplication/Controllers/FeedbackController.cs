@@ -17,9 +17,11 @@ namespace PatientWebApplication.Controllers
     public class FeedbackController : ControllerBase
     {
         private readonly MyDbContext dbContext;
+        private FeedbackService feedbackService;
         public FeedbackController(MyDbContext context)
         {
             this.dbContext = context;
+            feedbackService = new FeedbackService(context);
         }
 
         [HttpGet]       // GET /api/feedback
