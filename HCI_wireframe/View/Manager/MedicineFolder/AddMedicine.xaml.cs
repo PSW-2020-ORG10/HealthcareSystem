@@ -36,14 +36,14 @@ namespace WpfApp2.MedicineFolder
         public string bla;
 
         List<Lista> li = new List<Lista>();
-       
-        
+
+
         public class Lista
         {
 
             public string Name { get; set; }
 
-          
+
 
 
 
@@ -61,7 +61,7 @@ namespace WpfApp2.MedicineFolder
             DoctorController DoctorContr = new DoctorController();
             List<DoctorUser> lista = new List<DoctorUser>();
             lista = DoctorContr.GetAll();
-           
+
 
 
 
@@ -71,9 +71,9 @@ namespace WpfApp2.MedicineFolder
             {
 
                 StringBuilder l = new StringBuilder();
-                l.Append(ee.ID+" ");
-                l.Append(ee.FirstName + " ");
-                l.Append(ee.SecondName);
+                l.Append(ee.id + " ");
+                l.Append(ee.firstName + " ");
+                l.Append(ee.secondName);
                 li.Add(new Lista { Name = l.ToString() });
             }
 
@@ -81,7 +81,7 @@ namespace WpfApp2.MedicineFolder
 
 
             Combo.ItemsSource = li;
-    
+
         }
         protected virtual void OnPropertyChanged(string name)
         {
@@ -97,9 +97,9 @@ namespace WpfApp2.MedicineFolder
             int number = 0;
             foreach (Medicine r in lista)
             {
-                if (r.ID > number)
+                if (r.id > number)
                 {
-                    number = r.ID;
+                    number = r.id;
                 }
             }
             number += 1;
@@ -129,13 +129,13 @@ namespace WpfApp2.MedicineFolder
             Lista stt = (Lista)Combo.Items.GetItemAt(Combo.SelectedIndex);
 
             String[] str = stt.Name.Split(' ');
-          
+
 
             foreach (DoctorUser dok in listad)
             {
 
 
-                if (str[0].Equals(dok.ID.ToString()))
+                if (str[0].Equals(dok.id.ToString()))
                 {
 
                     doktor = dok;
@@ -145,8 +145,8 @@ namespace WpfApp2.MedicineFolder
 
 
             }
-       
-            if (name=="" || quantity=="" || description == "")
+
+            if (name == "" || quantity == "" || description == "")
             {
 
                 MessageBox.Show("Please, fill all fields!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -156,7 +156,7 @@ namespace WpfApp2.MedicineFolder
             List<String> rooms = new List<String>();
 
 
-          
+
             Room s = new Room();
             RoomController RoomContr = new RoomController();
             List<Room> l = new List<Room>();
@@ -164,7 +164,7 @@ namespace WpfApp2.MedicineFolder
             Medicine med = new Medicine();
 
             RequestMedicineController MedContr = new RequestMedicineController();
-           MedicineController MMedContr = new MedicineController();
+            MedicineController MMedContr = new MedicineController();
             List<Medicine> lista = new List<Medicine>();
             lista = MedContr.GetAll();
 
@@ -173,17 +173,17 @@ namespace WpfApp2.MedicineFolder
 
 
 
-           
-                if (!valid)
-                {
+
+            if (!valid)
+            {
 
 
-                    MessageBox.Show("Medicine with this name already exists", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
+                MessageBox.Show("Medicine with this name already exists", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
 
 
 
-                }
+            }
 
 
 
@@ -243,9 +243,9 @@ namespace WpfApp2.MedicineFolder
 
             Lista d = (Lista)Combo.SelectedItem;
             string deo = d.Name.ToString();
-         
-           
-         
+
+
+
         }
 
         private void Quantity_TextChanged(object sender, TextChangedEventArgs e)

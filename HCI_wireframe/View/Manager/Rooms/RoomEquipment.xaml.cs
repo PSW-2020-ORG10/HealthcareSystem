@@ -49,9 +49,9 @@ namespace WpfApp2.Rooms
              foreach (Equipment ee in lista)
              {
                 
-                 if (r.equipment.Contains(ee.Name))
+                 if (r.equipment.Contains(ee.name))
                  {
-                     li.Add(new Lista { Name = ee.Name });
+                     li.Add(new Lista { Name = ee.name });
                  }
              }
 

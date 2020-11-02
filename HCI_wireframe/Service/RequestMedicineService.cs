@@ -11,7 +11,7 @@ using HCI_wireframe.Model.Doctor;
 using HCI_wireframe.Repository;
 namespace HCI_wireframe.Service
 {
-    class RequestMedicineService : bingPath, IService<Medicine>
+    class RequestMedicineService : BingPath, IService<Medicine>
     {
         public RoomRepository roomRepository;
         public RequestMedicineRepository medicineRepository;
@@ -23,25 +23,45 @@ namespace HCI_wireframe.Service
             medicineRepository = new RequestMedicineRepository(path);
             roomRepository = new RoomRepository(path2);
         }
-    
-        public void New(Medicine medicine)
+
+        private Boolean isRoomStorage(Room room)
+        {
+            if(room.typeOfRoom.Equals("Magacin"))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private void addMedicineIfRoomIsStorage(Medicine medicine, Room room)
+        {
+            if (isRoomStorage(room))
+            {
+                medicine.room.Add(room.typeOfRoom);
+               
+                room.medicine.Add(medicine.name);
+                roomRepository.Update(room);
+                
+            }
+        }
+
+        private void addMedicineToStorages(Medicine medicine)
         {
             List<Room> listOfRooms = new List<Room>();
             listOfRooms = roomRepository.GetAll();
 
-
             foreach (Room room in listOfRooms)
             {
-                if (room.TypeOfRoom.Equals("Magacin"))
-                {
-                    medicine.room.Add(room.TypeOfRoom);
-                    room.medicine.Add(medicine.Name);
-                    roomRepository.Update(room);
-                }
+                addMedicineIfRoomIsStorage(medicine, room);
             }
-
+        }
+    
+        public void New(Medicine medicine)
+        {
+            addMedicineToStorages(medicine);
             medicineRepository.New(medicine);
         }
+
         public void Update(Medicine medicine)
         {
             medicineRepository.Update(medicine);
@@ -49,7 +69,7 @@ namespace HCI_wireframe.Service
         }
         public void Remove(Medicine medicine)
         {
-            medicineRepository.Delete(medicine.ID);
+            medicineRepository.Delete(medicine.id);
         }
        
       
@@ -59,9 +79,9 @@ namespace HCI_wireframe.Service
           
         }
 
-        public Medicine GetByID(int ID)
+        public Medicine GetByid(int id)
         {
-            throw new NotImplementedException();
+            return medicineRepository.GetByid(id);
         }
     }
 }

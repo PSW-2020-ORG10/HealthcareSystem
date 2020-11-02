@@ -48,7 +48,7 @@ namespace Klinika
             List<DoctorUser> listaDoktora = doctorController.GetAll();
             foreach (DoctorUser s in listaDoktora)
             {
-                if (s.Email.Equals(svojstvo))
+                if (s.email.Equals(svojstvo))
                 {
                     lekar = s;
 
@@ -66,12 +66,12 @@ namespace Klinika
             idSvihpacijenta = new List<int>();
             foreach(PatientUser pacijent in lista )
             {
-                idSvihpacijenta.Add(pacijent.ID);
+                idSvihpacijenta.Add(pacijent.id);
             }
 
 
             Obavestenja.ItemsSource = mojaObavestenja;
-            pacijentId.ItemsSource = idSvihpacijenta;
+            pacijentid.ItemsSource = idSvihpacijenta;
 
 
 
@@ -84,7 +84,7 @@ namespace Klinika
         private void isporuci_Click(object sender, RoutedEventArgs e)
         {
             String idPacijent = sender.ToString();
-            int idPacijentInt = (int)pacijentId.SelectedValue;
+            int idPacijentInt = (int)pacijentid.SelectedValue;
             Console.WriteLine(idPacijentInt);
             if (odg.Text.Equals("") || idPacijent.Equals(""))
             {
@@ -98,19 +98,19 @@ namespace Klinika
             PatientUser izabranPacijent = new PatientUser();
             foreach (PatientUser pacijent in lista)
             {
-                if(pacijent.ID==idPacijentInt)
+                if(pacijent.id==idPacijentInt)
                 {
                     izabranPacijent = pacijent;
                 }
             }
-            if(izabranPacijent.Notifications==null)
+            if(izabranPacijent.notifications==null)
             {
-                izabranPacijent.Notifications = new List<string>();
+                izabranPacijent.notifications = new List<string>();
             }
-            List<String> pacijentObavestenja = izabranPacijent.Notifications;
+            List<String> pacijentObavestenja = izabranPacijent.notifications;
 
-            pacijentObavestenja.Add("Doctor  " + lekar.FirstName + " " + lekar.SecondName + "  - answer  -" +odg.Text);
-            izabranPacijent.Notifications = pacijentObavestenja;
+            pacijentObavestenja.Add("Doctor  " + lekar.firstName + " " + lekar.secondName + "  - answer  -" +odg.Text);
+            izabranPacijent.notifications = pacijentObavestenja;
             cont.Update(izabranPacijent);
             
 

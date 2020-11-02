@@ -24,9 +24,9 @@ namespace Class_diagram.Contoller
             return questionarieService.GetAll();
         }
 
-        public Question GetByID(int ID)
+        public Question GetByid(int id)
         {
-            return questionarieService.GetByID(ID);
+            return questionarieService.GetByid(id);
         }
 
         public void New(Question entity)

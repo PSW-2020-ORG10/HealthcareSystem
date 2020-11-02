@@ -9,12 +9,12 @@ namespace Class_diagram.Model.Patient
 {
     public class PhoneNumber : Entity
     {
-        public int Number { get; set; }
-        public String Name { get; set; }
+        public int number { get; set; }
+        public String name { get; set; }
         public PhoneNumber(int id, int number, String name) : base(id)
         {
-            this.Number = number;
-            this.Name = name;
+            this.number = number;
+            this.name = name;
         }
         public PhoneNumber() { }
     }

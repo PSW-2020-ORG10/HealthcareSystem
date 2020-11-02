@@ -21,7 +21,7 @@
                   SelectionMode="Single" AutoGenerateColumns="False" ScrollViewer.CanContentScroll="True"
                   Height="400"  VerticalAlignment="Top" Grid.Row="1" IsTextSearchEnabled="True" SelectedItem="{Binding ChosenItem}" >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID"  Binding="{Binding Path=IDapp}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="id"  Binding="{Binding Path=idapp}"></DataGridTextColumn>
                     <DataGridTextColumn CanUserSort="True" IsReadOnly="True"  Header="Ime i prezime pacijena"  Binding="{Binding PatientName}"/>
 
 

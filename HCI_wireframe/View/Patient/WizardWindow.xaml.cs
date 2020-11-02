@@ -27,7 +27,7 @@ namespace HCI_wireframe.View.Patient
         {
             InitializeComponent();
            /* if (FirstNameTextBox.Text.Equals("") || SecondNameTextBox.Text.Equals("") || UCINTextBox.Text.Equals("") ||
-               MedicalIDTextBox.Text.Equals("") || DateTextBox.Text.Equals("") || CountryTextBox.Text.Equals("") ||
+               MedicalidTextBox.Text.Equals("") || DateTextBox.Text.Equals("") || CountryTextBox.Text.Equals("") ||
                CountryCodeTextBox.Text.Equals("") || CityTextBox.Text.Equals("") || CountryCodeTextBox.Text.Equals("") ||
               PhoneTextBox.Text.Equals("") || EmailTextBox.Text.Equals("") || PasswordTextBox.Text.Equals("") ||
               ConfirmPasswordTextBox.Text.Equals(""))
@@ -83,9 +83,9 @@ namespace HCI_wireframe.View.Patient
             }
         }
 
-        private void MedicalIDTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void MedicalidTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (String.IsNullOrEmpty(MedicalIDTextBox.Text))
+            if (String.IsNullOrEmpty(MedicalidTextBox.Text))
             {
                 Page1.CanSelectNextPage = false;
             }

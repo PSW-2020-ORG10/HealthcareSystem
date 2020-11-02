@@ -35,7 +35,7 @@ namespace HCI_wireframe
 
             }
         }
-            string myProperty = App.Current.Properties["PatientID"].ToString();
+            string myProperty = App.Current.Properties["Patientid"].ToString();
         public List<NotificationList> NotificationsListPatient { get; set; }
         public List<NotificationList> NotificationsList2 { get; }
 
@@ -51,13 +51,13 @@ namespace HCI_wireframe
             NotificationsList2 = new List<NotificationList>();
            listPatients = patientController.GetAll();
             PatientUser pacijent = new PatientUser();
-            pacijent = patientController.GetByID(int.Parse(myProperty));
-            if (pacijent.Notifications == null)
+            pacijent = patientController.GetByid(int.Parse(myProperty));
+            if (pacijent.notifications == null)
             {
-                pacijent.Notifications = new List<String>();
+                pacijent.notifications = new List<String>();
             }
             int idNumber = 1;
-            foreach(String notify in pacijent.Notifications)
+            foreach(String notify in pacijent.notifications)
             {
                 NotificationsListPatient.Add(new NotificationList
                 {

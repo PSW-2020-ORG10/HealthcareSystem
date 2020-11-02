@@ -12,7 +12,7 @@ namespace Class_diagram.Service
     public interface IStrategyAppointment
     {
         void New(DoctorAppointment appointment, Operation operation);
-        void Remove(int appointmentID, int operationID);
+        void Remove(int appointmentid, int operationid);
         void Update(DoctorAppointment appointment, Operation operation);
     }
 }

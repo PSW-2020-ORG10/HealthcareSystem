@@ -39,16 +39,16 @@ namespace WpfApp2.Rooms
             end = EndDate;
             
         }
-        private int getNextID()
+        private int getNextid()
         {
             RenovationController rp = new RenovationController();
             List<Renovation> lista = rp.GetAll();
             int number = 0;
             foreach (Renovation r in lista)
             {
-                if (r.ID > number)
+                if (r.id > number)
                 {
-                    number = r.ID;
+                    number = r.id;
                 }
             }
             number += 1;
@@ -98,7 +98,7 @@ namespace WpfApp2.Rooms
             string ee = end.ToString();
             string[] nize = ee.Split(' ');
 
-            int id = getNextID();
+            int id = getNextid();
 
             if(niz[0]=="" || nize[0] == "")
             {
@@ -107,7 +107,7 @@ namespace WpfApp2.Rooms
                 MessageBox.Show("Please, choose start and end date!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            Renovation med = new Renovation(id,r.TypeOfRoom, niz[0],nize[0]);
+            Renovation med = new Renovation(id,r.typeOfRoom, niz[0],nize[0]);
 
             RenovationController EqContr = new RenovationController();
 
@@ -116,7 +116,7 @@ namespace WpfApp2.Rooms
 
             EqContr.New(med);
 
-            Room ro = new Room(r.ID,r.TypeOfRoom,r.equipment,r.medicine, false);
+            Room ro = new Room(r.id,r.typeOfRoom,r.equipment,r.medicine, false);
             RoomController rC = new RoomController();
             rC.Update(ro);
 
@@ -129,10 +129,10 @@ namespace WpfApp2.Rooms
 
             foreach(DoctorUser doc in listad)
             {
-                if (doc.ordination.Equals(r.TypeOfRoom))
+                if (doc.ordination.Equals(r.typeOfRoom))
                 {
 
-                    MessageBox.Show("Please change ordination of doctor " + doc.FirstName + " " + doc.SecondName + " because of renovation.", "Notification", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    MessageBox.Show("Please change ordination of doctor " + doc.firstName + " " + doc.secondName + " because of renovation.", "Notification", MessageBoxButton.OK, MessageBoxImage.Exclamation);
 
                 }
             }

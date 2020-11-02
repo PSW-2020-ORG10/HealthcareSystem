@@ -40,11 +40,11 @@ namespace HCI_wireframe.View.Doktor
 
             foreach (PatientUser ee in lista1)
             {
-                pacijenti.Add(new PatientUser { ID = ee.ID, FirstName = ee.FirstName, SecondName = ee.SecondName, UniqueCitizensIdentityNumber = ee.UniqueCitizensIdentityNumber, DateOfBirth = ee.DateOfBirth, PhoneNumber = ee.PhoneNumber, MedicalIDnumber = ee.MedicalIDnumber });
+                pacijenti.Add(new PatientUser { id = ee.id, firstName = ee.firstName, secondName = ee.secondName, uniqueCitizensidentityNumber = ee.uniqueCitizensidentityNumber, dateOfBirth = ee.dateOfBirth, phoneNumber = ee.phoneNumber, medicalIdNumber = ee.medicalIdNumber });
             }
             foreach (PatientUser regP in pacijenti)
             {
-                ListaPacijenata.Items.Add(regP.FirstName + " " + regP.SecondName + " " + regP.MedicalIDnumber);
+                ListaPacijenata.Items.Add(regP.firstName + " " + regP.secondName + " " + regP.medicalIdNumber);
 
 
 
@@ -52,7 +52,7 @@ namespace HCI_wireframe.View.Doktor
             List<Operation> operacije = new List<Operation>();
             foreach (Operation ee in d)
             {
-                String datum = ee.Date;
+                String datum = ee.date;
                 String[] delovi = datum.Split('/');
                 int mesec = int.Parse(delovi[1]);
                 int dan = int.Parse(delovi[0]);
@@ -63,13 +63,13 @@ namespace HCI_wireframe.View.Doktor
                 DateTime dt2 = DateTime.Now;
                 if (dt1.Date < dt2.Date)
                 {
-                    operacije.Add(new Operation { ID = ee.ID, patient = ee.patient});
+                    operacije.Add(new Operation { id = ee.id, patient = ee.patient});
                 }
             }
 
             foreach (Operation preg in operacije)
             {
-                combo.Items.Add(preg.ID + " " + preg.patient.FirstName + " " + preg.patient.SecondName + " ");
+                combo.Items.Add(preg.id + " " + preg.patient.firstName + " " + preg.patient.secondName + " ");
 
             }
 
@@ -93,7 +93,7 @@ namespace HCI_wireframe.View.Doktor
             List<DoctorUser> lista = dc.GetAll();
             foreach (DoctorUser s in lista)
             {
-                if (s.Email.Equals(prijavljen))
+                if (s.email.Equals(prijavljen))
                 {
                     ovaj = s;
 
@@ -120,7 +120,7 @@ namespace HCI_wireframe.View.Doktor
 
             foreach (Operation doc in sviPregledi)
             {
-                if (neki.Equals(doc.ID.ToString()))
+                if (neki.Equals(doc.id.ToString()))
                 {
                     zaUpdate = doc;
                 }
@@ -128,7 +128,7 @@ namespace HCI_wireframe.View.Doktor
 
             Referral nalazi = new Referral();
 
-            nalazi = zaUpdate.OperationReferral;
+            nalazi = zaUpdate.operationReferral;
             if (nalazi == null)
             {
 
@@ -139,7 +139,7 @@ namespace HCI_wireframe.View.Doktor
             OperationController ap = new OperationController();
 
             
-            zaUpdate.OperationReferral = nalazi;
+            zaUpdate.operationReferral = nalazi;
       
             ap.Update(null, zaUpdate);
 

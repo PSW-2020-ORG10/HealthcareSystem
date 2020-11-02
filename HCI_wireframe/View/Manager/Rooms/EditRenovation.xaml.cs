@@ -49,11 +49,11 @@ namespace WpfApp2.Rooms
             foreach (Renovation renov in lista)
             {
               
-                if (renov.room.Equals(room.TypeOfRoom))
+                if (renov.room.Equals(room.typeOfRoom))
                 {
                    
-                   textBox.Text = renov.StartDate.ToString();
-                    textBox_Copy.Text = renov.EndDate;
+                   textBox.Text = renov.startDate.ToString();
+                    textBox_Copy.Text = renov.endDate;
 
                 }
             }
@@ -103,10 +103,10 @@ namespace WpfApp2.Rooms
 
             foreach (Renovation renov in lista)
             {
-                if (renov.room.Equals(r.TypeOfRoom))
+                if (renov.room.Equals(r.typeOfRoom))
                 {
 
-                    Renovation med = new Renovation(renov.ID, renov.room, textBox.Text, textBox_Copy.Text);
+                    Renovation med = new Renovation(renov.id, renov.room, textBox.Text, textBox_Copy.Text);
                     EqContr.Update(med);
                 }
             }
@@ -142,7 +142,7 @@ namespace WpfApp2.Rooms
 
             foreach (Renovation renov in lista)
             {
-                if (renov.room.Equals(r.TypeOfRoom))
+                if (renov.room.Equals(r.typeOfRoom))
                 {
                     r.forUse = true;
                     rc.Update(r);

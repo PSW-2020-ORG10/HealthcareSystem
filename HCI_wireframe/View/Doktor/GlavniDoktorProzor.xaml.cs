@@ -20,9 +20,9 @@ using HCI_wireframe.Model.Doctor;
 namespace Klinika
 {
 
-    /// Interaction logic for GlavniDoktorProzor.xaml
+    /// Interaction logic for GlavnidoktorProzor.xaml
 
-    public partial class GlavniDoktorProzor : Window, INotifyPropertyChanged
+    public partial class GlavnidoktorProzor : Window, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -34,7 +34,7 @@ namespace Klinika
             }
         }
 
-        public GlavniDoktorProzor()
+        public GlavnidoktorProzor()
         {
             InitializeComponent();
 
@@ -112,12 +112,12 @@ namespace Klinika
             foreach (DoctorUser ee in lista)
             {
                 
-                  if (ee.Email.Equals(EmailBox.Text))
+                  if (ee.email.Equals(EmailBox.Text))
                   {
-                      if (PasswordBox.Password.Equals(ee.Password))
+                      if (PasswordBox.Password.Equals(ee.password))
                       {
                           prijavljen = ee;
-                          App.Current.Properties["DoctorEmail"] = ee.Email;
+                          App.Current.Properties["DoctorEmail"] = ee.email;
                           this.Close();
                           Nalog main = new Nalog();
                           main.Show();

@@ -170,7 +170,7 @@ namespace HCI_wireframe.View.Sekretar
             
            
 
-            int broj = getNextID();
+            int broj = getNextid();
             String emaail = broj.ToString() + "UNKNOWN";
             List<String> notif = new List<string>();
             notif.Add("");
@@ -193,7 +193,7 @@ namespace HCI_wireframe.View.Sekretar
             Panel.Children.Add(usc);
 
         }
-        private int getNextID()
+        private int getNextid()
         {
             PatientController rp = new PatientController();
             List<PatientUser> lista = rp.GetAll();
@@ -202,9 +202,9 @@ namespace HCI_wireframe.View.Sekretar
 
             foreach (PatientUser r in lista)
             {
-                if (r.ID > number)
+                if (r.id > number)
                 {
-                    number = r.ID;
+                    number = r.id;
                 }
             }
 

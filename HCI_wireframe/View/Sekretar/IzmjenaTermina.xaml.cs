@@ -130,7 +130,7 @@ namespace HCI_wireframe.View.Sekretar
 
             foreach (DoctorUser lekar in lista)
             {
-                ListaLekara.Items.Add(lekar.FirstName + " " + lekar.SecondName + " " + lekar.speciality + " " + lekar.Email + " " + lekar.ordination);
+                ListaLekara.Items.Add(lekar.firstName + " " + lekar.secondName + " " + lekar.speciality + " " + lekar.email + " " + lekar.ordination);
 
             }
 
@@ -143,7 +143,7 @@ namespace HCI_wireframe.View.Sekretar
             List<DoctorAppointment> pregledi = apCon.GetAll();
             foreach(DoctorAppointment preg in pregledi)
             {
-                ListaTermina.ItemsSource = preg.Date + preg.Time + preg.doctor + preg.patient;
+                ListaTermina.ItemsSource = preg.date + preg.time + preg.doctor + preg.patient;
             }
 
 
@@ -151,20 +151,20 @@ namespace HCI_wireframe.View.Sekretar
 
             foreach (PatientUser ee in lista1)
             {
-                pacijenti.Add(new PatientUser { ID = ee.ID, FirstName = ee.FirstName, SecondName = ee.SecondName, UniqueCitizensIdentityNumber = ee.UniqueCitizensIdentityNumber, DateOfBirth = ee.DateOfBirth, PhoneNumber = ee.PhoneNumber, MedicalIDnumber = ee.MedicalIDnumber, RegisteredBySecretary = ee.RegisteredBySecretary });
+                pacijenti.Add(new PatientUser { id = ee.id, firstName = ee.firstName, secondName = ee.secondName, uniqueCitizensidentityNumber = ee.uniqueCitizensidentityNumber, dateOfBirth = ee.dateOfBirth, phoneNumber = ee.phoneNumber, medicalIdNumber = ee.medicalIdNumber, isRegisteredBySecretary = ee.isRegisteredBySecretary });
             }
             foreach (PatientUser regP in pacijenti)
             {
-                ListaPacijenata.Items.Add(regP.FirstName + " " + regP.SecondName + " " + regP.MedicalIDnumber);
+                ListaPacijenata.Items.Add(regP.firstName + " " + regP.secondName + " " + regP.medicalIdNumber);
 
 
 
             }
             foreach (PatientUser ee in lista1)
             {
-                if (ListaPacijenata.SelectedItem.Equals(ee.FirstName + " " + ee.SecondName + " " + ee.MedicalIDnumber))
+                if (ListaPacijenata.SelectedItem.Equals(ee.firstName + " " + ee.secondName + " " + ee.medicalIdNumber))
                 {
-                    KnjizicaBox.Text = ee.MedicalIDnumber;
+                    KnjizicaBox.Text = ee.medicalIdNumber;
 
                 }
             }
@@ -228,10 +228,10 @@ namespace HCI_wireframe.View.Sekretar
             PatientUser ovajPacijent = new PatientUser();
             foreach (PatientUser r1 in patientLista)
             {
-                if (r1.MedicalIDnumber.Equals(KnjizicaBox.Text.ToString()))
+                if (r1.medicalIdNumber.Equals(KnjizicaBox.Text.ToString()))
                 {
                     ovajPacijent = r1;
-                    KnjizicaBox.Text = r1.MedicalIDnumber;
+                    KnjizicaBox.Text = r1.medicalIdNumber;
                 }
             }
 
@@ -245,7 +245,7 @@ namespace HCI_wireframe.View.Sekretar
 
             foreach (DoctorUser d1 in doktori)
             {
-                if (d1.Email.Equals(emailLekarBox.Text.ToString()))
+                if (d1.email.Equals(emailLekarBox.Text.ToString()))
                 {
                     drOvaj = d1;
 
@@ -260,7 +260,7 @@ namespace HCI_wireframe.View.Sekretar
             TimeSpan vremee = new TimeSpan(int.Parse(deloviVreme[0]), int.Parse(deloviVreme[1]), 0);
             TimeSpan vremee2 = new TimeSpan(int.Parse(deloviVreme2[0]), int.Parse(deloviVreme2[1]), 0);
 
-            int broj = getNextID();
+            int broj = getNextid();
 
             DoctorAppointment drap = new DoctorAppointment(broj, vremee, DatumBox.Text.ToString(), ovajPacijent, drOvaj, null, ordinacijaBox.Text);
 
@@ -276,7 +276,7 @@ namespace HCI_wireframe.View.Sekretar
 
 
             String o = bingPathToAppDir(@"JsonFiles\operations.json");
-            int broj1 = getNextID1();
+            int broj1 = getNextid1();
             Operation op = new Operation(broj1, ovajPacijent, DatumBox.Text.ToString(), vremee, vremee2, drOvaj, ordinacijaBox.Text, null);
 
             OperationRepository opRep = new OperationRepository(o);
@@ -310,12 +310,12 @@ namespace HCI_wireframe.View.Sekretar
                 foreach (DoctorAppointment dd in listaPregleda)
                 {
                     DoctorUser dr = dd.doctor;
-                    if (dr.ID == drOvaj.ID)
+                    if (dr.id == drOvaj.id)
                     {
-                        if (dd.Date.Equals(DatumBox.Text))
+                        if (dd.date.Equals(DatumBox.Text))
                         {
-                            TimeSpan krajPr = dd.Time + new TimeSpan(0, 15, 0);
-                            int result = TimeSpan.Compare(vremee, dd.Time);
+                            TimeSpan krajPr = dd.time + new TimeSpan(0, 15, 0);
+                            int result = TimeSpan.Compare(vremee, dd.time);
                             int result1 = TimeSpan.Compare(vremee, krajPr);
                             if ((result == 1 && result1 == -1) || result == 0 || result1 == 0)
                             {
@@ -334,13 +334,13 @@ namespace HCI_wireframe.View.Sekretar
                 List<Operation> listaPregleda1 = apc1.GetAll();
                 foreach (Operation dd in listaPregleda1)
                 {
-                    DoctorUser dr = dd.Responsable;
-                    if (dr.ID == drOvaj.ID)
+                    DoctorUser dr = dd.isResponiable;
+                    if (dr.id == drOvaj.id)
                     {
-                        if (dd.Date.Equals(DatumBox.Text))
+                        if (dd.date.Equals(DatumBox.Text))
                         {
-                            int result = TimeSpan.Compare(vremee, dd.Start);
-                            int result1 = TimeSpan.Compare(vremee, dd.End);
+                            int result = TimeSpan.Compare(vremee, dd.start);
+                            int result1 = TimeSpan.Compare(vremee, dd.end);
                             if ((result == 1 && result1 == -1) || result == 0 || result1 == 0)
                             {
 
@@ -369,22 +369,22 @@ namespace HCI_wireframe.View.Sekretar
                 foreach (Schedule s in listaRasporeda)
                 {
 
-                    if (s.employeeID.Equals(drOvaj.ID.ToString()))
+                    if (s.employeeid.Equals(drOvaj.id.ToString()))
                     {
-                        if (s.Date.Equals(DatumBox.Text))
+                        if (s.date.Equals(DatumBox.Text))
                         {
                             smena = s.shift;
                         }
                     }
                 }
-                if (smena.StartTime == null || smena.EndTime == null)
+                if (smena.startTime == null || smena.endTime == null)
                 {
                     MessageBox.Show("Trazeni termin nije dostupan.Lekar ne radi tog dana.", "Greska", MessageBoxButton.OK, MessageBoxImage.Error);
 
                     return;
                 }
-                String pocetak = smena.StartTime;
-                String kraj = smena.EndTime;
+                String pocetak = smena.startTime;
+                String kraj = smena.endTime;
                 String[] deloviPocetak = pocetak.Split(':');
                 String[] deloviKraj = kraj.Split(':');
 
@@ -431,12 +431,12 @@ namespace HCI_wireframe.View.Sekretar
                 foreach (DoctorAppointment dd in listaPregleda)
                 {
                     DoctorUser dr = dd.doctor;
-                    if (dr.ID == drOvaj.ID)
+                    if (dr.id == drOvaj.id)
                     {
-                        if (dd.Date.Equals(DatumBox.Text))
+                        if (dd.date.Equals(DatumBox.Text))
                         {
-                            TimeSpan krajPr = dd.Time + new TimeSpan(0, 15, 0);
-                            int result = TimeSpan.Compare(vremee, dd.Time);
+                            TimeSpan krajPr = dd.time + new TimeSpan(0, 15, 0);
+                            int result = TimeSpan.Compare(vremee, dd.time);
                             int result1 = TimeSpan.Compare(vremee, krajPr);
                             if ((result == 1 && result1 == -1) || result == 0 || result1 == 0)
                             {
@@ -455,13 +455,13 @@ namespace HCI_wireframe.View.Sekretar
                 List<Operation> listaPregleda1 = apc1.GetAll();
                 foreach (Operation dd in listaPregleda1)
                 {
-                    DoctorUser dr = dd.Responsable;
-                    if (dr.ID == drOvaj.ID)
+                    DoctorUser dr = dd.isResponiable;
+                    if (dr.id == drOvaj.id)
                     {
-                        if (dd.Date.Equals(DatumBox.Text))
+                        if (dd.date.Equals(DatumBox.Text))
                         {
-                            int result = TimeSpan.Compare(vremee, dd.Start);
-                            int result1 = TimeSpan.Compare(vremee, dd.End);
+                            int result = TimeSpan.Compare(vremee, dd.start);
+                            int result1 = TimeSpan.Compare(vremee, dd.end);
                             if ((result == 1 && result1 == -1) || result == 0 || result1 == 0)
                             {
 
@@ -490,22 +490,22 @@ namespace HCI_wireframe.View.Sekretar
                 foreach (Schedule s in listaRasporeda)
                 {
 
-                    if (s.employeeID.Equals(drOvaj.ID.ToString()))
+                    if (s.employeeid.Equals(drOvaj.id.ToString()))
                     {
-                        if (s.Date.Equals(DatumBox.Text))
+                        if (s.date.Equals(DatumBox.Text))
                         {
                             smena = s.shift;
                         }
                     }
                 }
-                if (smena.StartTime == null || smena.EndTime == null)
+                if (smena.startTime == null || smena.endTime == null)
                 {
                     MessageBox.Show("Trazeni termin nije dostupan.Lekar ne radi tog dana.", "Greska", MessageBoxButton.OK, MessageBoxImage.Error);
 
                     return;
                 }
-                String pocetak = smena.StartTime;
-                String kraj = smena.EndTime;
+                String pocetak = smena.startTime;
+                String kraj = smena.endTime;
                 String[] deloviPocetak = pocetak.Split(':');
                 String[] deloviKraj = kraj.Split(':');
 
@@ -531,7 +531,7 @@ namespace HCI_wireframe.View.Sekretar
 
         }
 
-        private int getNextID()
+        private int getNextid()
         {
             AppointmentController rp = new AppointmentController();
             List<DoctorAppointment> lista = rp.GetAll();
@@ -540,9 +540,9 @@ namespace HCI_wireframe.View.Sekretar
 
             foreach (DoctorAppointment r in lista)
             {
-                if (r.ID > number)
+                if (r.id > number)
                 {
-                    number = r.ID;
+                    number = r.id;
                 }
             }
 
@@ -550,7 +550,7 @@ namespace HCI_wireframe.View.Sekretar
             return number;
 
         }
-        private int getNextID1()
+        private int getNextid1()
         {
             OperationController rp = new OperationController();
             List<Operation> lista = rp.GetAll();
@@ -559,9 +559,9 @@ namespace HCI_wireframe.View.Sekretar
 
             foreach (Operation r in lista)
             {
-                if (r.ID > number)
+                if (r.id > number)
                 {
-                    number = r.ID;
+                    number = r.id;
                 }
             }
 
@@ -636,7 +636,7 @@ namespace HCI_wireframe.View.Sekretar
 
             // foreach (RegistredPatient s in lista)
             //{
-            //  if (s.MedicalIDnumber.Equals(KnjizicaBox.Text))
+            //  if (s.medicalIdNumber.Equals(KnjizicaBox.Text))
             //{
 
 

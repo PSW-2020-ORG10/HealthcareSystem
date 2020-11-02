@@ -34,8 +34,8 @@ namespace HCI_wireframe
         public TimeSpan Time { get; set; }
         public DateTime DateT { get; set; }
         public String Date { get; set; }
-        public int IDapp { get; set; }
-        public int IDTabela { get; set; }
+        public int idapp { get; set; }
+        public int idTabela { get; set; }
 
         public String ReportName { get; set; }
         public String Type { get; set; }
@@ -48,7 +48,7 @@ namespace HCI_wireframe
     
     public partial class MedicalHistory : UserControl
     {
-        string myProperty = App.Current.Properties["PatientID"].ToString();
+        string myProperty = App.Current.Properties["Patientid"].ToString();
         public List<DoctorAppointment> AppointmentList { get; set; }
         public List<DoctorAppointment> AppointmentListAll { get; set; }
         public List<Operation> OperationListAll { get; set; }
@@ -76,15 +76,15 @@ namespace HCI_wireframe
             AppointmentList = new List<DoctorAppointment>();
             OperationList = new List<Operation>();
 
-            patient = patientController.GetByID(int.Parse(myProperty));
+            patient = patientController.GetByid(int.Parse(myProperty));
           
-            if (patient.Allergie != null)
+            if (patient.allergie != null)
             {
-                AllergieText.Text = patient.Allergie.ToString();
+                allergieText.Text = patient.allergie.ToString();
             }
             else
             {
-                AllergieText.Text = "";
+                allergieText.Text = "";
 
             }
           
@@ -98,7 +98,7 @@ namespace HCI_wireframe
                 foreach (DoctorAppointment doctorApp in AppointmentListAll)
                 {
                     PatientUser idPacijent = doctorApp.patient;
-                    if (idPacijent.ID == patient.ID)
+                    if (idPacijent.id == patient.id)
                     {
                         AppointmentList.Add(doctorApp);
                     }
@@ -106,7 +106,7 @@ namespace HCI_wireframe
                 foreach (Operation operationd in OperationListAll)
                 {
                     PatientUser idPacijent = operationd.patient;
-                    if (idPacijent.ID == patient.ID)
+                    if (idPacijent.id == patient.id)
                     {
                         OperationList.Add(operationd);
                     }
@@ -118,7 +118,7 @@ namespace HCI_wireframe
                 int num = 0;
                  foreach (DoctorAppointment d in AppointmentList)
                  {
-                     String datum = d.Date;
+                     String datum = d.date;
                      String[] delovi = datum.Split('/');
                      int mesec = int.Parse(delovi[1]);
                      int dan = int.Parse(delovi[0]);
@@ -131,16 +131,16 @@ namespace HCI_wireframe
                      {
                          DoctorUser doc = d.doctor;
                          StringBuilder l = new StringBuilder();
-                         l.Append(doc.FirstName + " ");
-                         l.Append(doc.SecondName);
+                         l.Append(doc.firstName + " ");
+                         l.Append(doc.secondName);
 
                          li.Add(new Lista
                          {
-                             IDTabela = num + 1,
+                             idTabela = num + 1,
                              DoctorName = l.ToString(),
-                             IDapp = d.ID,
-                             Time = d.Time,
-                             Date = d.Date,
+                             idapp = d.id,
+                             Time = d.time,
+                             Date = d.date,
                              DateT = dt1,
                              ReportName = "REPORT",
                              Type = "Regular appointment"
@@ -153,7 +153,7 @@ namespace HCI_wireframe
                 }
                 foreach (Operation operation in OperationList)
                 {
-                    String datum = operation.Date;
+                    String datum = operation.date;
                     String[] delovi = datum.Split('/');
                     int mesec = int.Parse(delovi[1]);
                     int dan = int.Parse(delovi[0]);
@@ -166,18 +166,18 @@ namespace HCI_wireframe
 
                     if (dt1.Date < dt2.Date)
                     {
-                        DoctorUser doc = operation.Responsable;
+                        DoctorUser doc = operation.isResponiable;
                         StringBuilder l = new StringBuilder();
-                        l.Append(doc.FirstName + " ");
-                        l.Append(doc.SecondName);
+                        l.Append(doc.firstName + " ");
+                        l.Append(doc.secondName);
 
                         li.Add(new Lista
                         {
-                            IDTabela = num + 1,
+                            idTabela = num + 1,
                             DoctorName = l.ToString(),
-                            IDapp = operation.ID,
-                            Time = operation.Start,
-                            Date = operation.Date,
+                            idapp = operation.id,
+                            Time = operation.start,
+                            Date = operation.date,
                             DateT = dt1,
                             ReportName = "REPORT",
 
@@ -190,7 +190,7 @@ namespace HCI_wireframe
                  List<Lista> SortedList = li.OrderBy(o => o.DateT).ToList();
                  foreach(Lista l in SortedList)
                  {
-                     l.IDTabela = num2 + 1;
+                     l.idTabela = num2 + 1;
                      num2 += 1;
                  }
                  AppLista = new List<Lista>();
@@ -363,7 +363,7 @@ namespace HCI_wireframe
         {
           
             Lista s = (Lista)medicalHistoryGrid.Items.GetItemAt(medicalHistoryGrid.SelectedIndex);
-            int id = s.IDapp;
+            int id = s.idapp;
             String tip = s.Type;
 
             string sMessageBoxText = "Do you want to see the report of appointment ?\n";
@@ -384,7 +384,7 @@ namespace HCI_wireframe
                         {
                             List<Referral> nalazi = d.referral;
                             
-                            if (d.ID == id)
+                            if (d.id == id)
                             {
                                
                                 if (nalazi == null)
@@ -422,11 +422,11 @@ namespace HCI_wireframe
                         foreach (Operation d in OperationList)
                         {
                             Referral nalazi = new Referral();
-                            nalazi = d.OperationReferral;
+                            nalazi = d.operationReferral;
 
-                            if (d.ID == id)
+                            if (d.id == id)
                             {
-                                Console.WriteLine("isti  ID");
+                                Console.WriteLine("isti  id");
                                 if (nalazi == null)
                                 {
                                     MessageBox.Show("There is no report for this appoitnment.");

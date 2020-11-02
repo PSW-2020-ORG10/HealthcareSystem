@@ -39,7 +39,7 @@ namespace HCI_wireframe.View.Doktor
             public TimeSpan Time { get; set; }
 
             public String Date { get; set; }
-            public int IDapp { get; set; }
+            public int idapp { get; set; }
             public String PatientName { get; set; }
 
             public String ChangeName { get; set; }
@@ -87,23 +87,23 @@ namespace HCI_wireframe.View.Doktor
                
                     DoctorUser doc = ee.doctor;
                     StringBuilder l = new StringBuilder();
-                    l.Append(doc.FirstName + " ");
-                    l.Append(doc.SecondName + " ");
+                    l.Append(doc.firstName + " ");
+                    l.Append(doc.secondName + " ");
                     l.Append(doc.speciality);
                     StringBuilder p = new StringBuilder();
                     PatientUser pat = ee.patient;
-                    p.Append(pat.FirstName + " ");
-                    p.Append(pat.SecondName);
+                    p.Append(pat.firstName + " ");
+                    p.Append(pat.secondName);
 
                     li.Add(new Lista
                     {
                         DoctorName = l.ToString(),
 
-                        IDapp = ee.ID,
-                        Time = ee.Time,
-                        Date = ee.Date,
-                        ChangeName = "IZMENI " + ee.ID,
-                        RemoveName = "OTKAŽI " + ee.ID,
+                        idapp = ee.id,
+                        Time = ee.time,
+                        Date = ee.date,
+                        ChangeName = "IZMENI " + ee.id,
+                        RemoveName = "OTKAŽI " + ee.id,
                         PatientName = p.ToString(),
                        // Ordinacija = ee.ordination.ToString(),
                         Pregled = true,
@@ -138,7 +138,7 @@ namespace HCI_wireframe.View.Doktor
             foreach (Operation ee in operationList)
             {
 
-                String datum1 = ee.Date;
+                String datum1 = ee.date;
                 String[] delovi1 = datum1.Split('/');
                 int mesec1 = int.Parse(delovi1[1]);
                 int dan1 = int.Parse(delovi1[0]);
@@ -152,27 +152,27 @@ namespace HCI_wireframe.View.Doktor
                 if (dt3.Date >= dt4.Date)
                 {
 
-                    DoctorUser doc = ee.Responsable;
+                    DoctorUser doc = ee.isResponiable;
                     StringBuilder l = new StringBuilder();
-                    l.Append(doc.FirstName + " ");
-                    l.Append(doc.SecondName + " ");
+                    l.Append(doc.firstName + " ");
+                    l.Append(doc.secondName + " ");
                     l.Append(doc.speciality);
                     StringBuilder p = new StringBuilder();
                     PatientUser pat = ee.patient;
-                    p.Append(pat.FirstName + " ");
-                    p.Append(pat.SecondName);
+                    p.Append(pat.firstName + " ");
+                    p.Append(pat.secondName);
 
                     li.Add(new Lista
                     {
                         DoctorName = l.ToString(),
 
-                        IDapp = ee.ID,
+                        idapp = ee.id,
                         //Time = ee.Time,
-                        Date = ee.Date,
-                        ChangeName = "IZMENI " + ee.ID,
-                        RemoveName = "OTKAŽI " + ee.ID,
+                        Date = ee.date,
+                        ChangeName = "IZMENI " + ee.id,
+                        RemoveName = "OTKAŽI " + ee.id,
                         PatientName = p.ToString(),
-                        Ordinacija = ee.IdRoom.ToString(),
+                        Ordinacija = ee.idRoom.ToString(),
                         Pregled = false,
                         Operacija = true
 
@@ -238,15 +238,15 @@ namespace HCI_wireframe.View.Doktor
                     foreach (DoctorAppointment d in AppointmentList)
                     {
 
-                        Console.WriteLine(d.ID);
-                        if (d.ID.ToString().Equals(id))
+                        Console.WriteLine(d.id);
+                        if (d.id.ToString().Equals(id))
                         {
 
 
                             Console.WriteLine(id);
                             AppointmentList.Remove(d);
                           
-                            epr.Delete(d.ID);
+                            epr.Delete(d.id);
                             var s = new ZakazivanjePregleda();
                             Panel.Children.Clear();
                             Panel.Children.Add(s);
@@ -258,10 +258,10 @@ namespace HCI_wireframe.View.Doktor
                     }
                     foreach (Operation op in operationList)
                     {
-                        if (op.ID.ToString().Equals(id))
+                        if (op.id.ToString().Equals(id))
                         {
                             operationList.Remove(op);
-                            oprep.Delete(op.ID);
+                            oprep.Delete(op.id);
                             var s = new ZakazivanjePregleda();
                             Panel.Children.Clear();
                             Panel.Children.Add(s);
@@ -319,14 +319,14 @@ namespace HCI_wireframe.View.Doktor
 
                     foreach (DoctorAppointment d in AppointmentList)
                     {
-                        if (d.ID.ToString().Equals(id))
+                        if (d.id.ToString().Equals(id))
                         {
 
 
                        
                             AppointmentList.Remove(d);
                             //patientController.update(ovajPacijent);
-                            epr.Delete(d.ID);
+                            epr.Delete(d.id);
                             var s = new RezervisaniiTermini();
                             Panel.Children.Clear();
                             Panel.Children.Add(s);
@@ -338,10 +338,10 @@ namespace HCI_wireframe.View.Doktor
 
                     foreach (Operation op in operationList)
                     {
-                        if (op.ID.ToString().Equals(id))
+                        if (op.id.ToString().Equals(id))
                         {
                             operationList.Remove(op);
-                            oprep.Delete(op.ID);
+                            oprep.Delete(op.id);
                             var s = new RezervisaniiTermini();
                             Panel.Children.Clear();
                             Panel.Children.Add(s);
@@ -383,7 +383,7 @@ namespace HCI_wireframe.View.Doktor
                 {
 
 
-                    filtered.Add(new Lista { DoctorName = ee.DoctorName, IDapp = ee.IDapp, Time = ee.Time, Date = ee.Date, ChangeName = ee.ChangeName, RemoveName = ee.RemoveName, PatientName = ee.PatientName, Ordinacija = ee.Ordinacija, Pregled = ee.Pregled, Operacija = ee.Operacija });
+                    filtered.Add(new Lista { DoctorName = ee.DoctorName, idapp = ee.idapp, Time = ee.Time, Date = ee.Date, ChangeName = ee.ChangeName, RemoveName = ee.RemoveName, PatientName = ee.PatientName, Ordinacija = ee.Ordinacija, Pregled = ee.Pregled, Operacija = ee.Operacija });
 
 
                 }
@@ -416,7 +416,7 @@ namespace HCI_wireframe.View.Doktor
                 {
 
 
-                    filtered.Add(new Lista { DoctorName = eee.DoctorName, IDapp = eee.IDapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
+                    filtered.Add(new Lista { DoctorName = eee.DoctorName, idapp = eee.idapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
 
 
 
@@ -441,7 +441,7 @@ namespace HCI_wireframe.View.Doktor
                     {
 
 
-                        filtered.Add(new Lista { DoctorName = eee.DoctorName, IDapp = eee.IDapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
+                        filtered.Add(new Lista { DoctorName = eee.DoctorName, idapp = eee.idapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
 
 
                     }
@@ -465,7 +465,7 @@ namespace HCI_wireframe.View.Doktor
                     {
 
 
-                        filtered.Add(new Lista { DoctorName = eee.DoctorName, IDapp = eee.IDapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
+                        filtered.Add(new Lista { DoctorName = eee.DoctorName, idapp = eee.idapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
 
 
                     }
@@ -490,7 +490,7 @@ namespace HCI_wireframe.View.Doktor
                     {
 
 
-                        filtered.Add(new Lista { DoctorName = eee.DoctorName, IDapp = eee.IDapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
+                        filtered.Add(new Lista { DoctorName = eee.DoctorName, idapp = eee.idapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
 
 
                     }
@@ -513,7 +513,7 @@ namespace HCI_wireframe.View.Doktor
                     {
 
 
-                        filtered.Add(new Lista { DoctorName = eee.DoctorName, IDapp = eee.IDapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
+                        filtered.Add(new Lista { DoctorName = eee.DoctorName, idapp = eee.idapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
 
 
                     }
@@ -536,7 +536,7 @@ namespace HCI_wireframe.View.Doktor
                     {
 
 
-                        filtered.Add(new Lista { DoctorName = eee.DoctorName, IDapp = eee.IDapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
+                        filtered.Add(new Lista { DoctorName = eee.DoctorName, idapp = eee.idapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
 
 
                     }
@@ -559,7 +559,7 @@ namespace HCI_wireframe.View.Doktor
                     {
 
 
-                        filtered.Add(new Lista { DoctorName = eee.DoctorName, IDapp = eee.IDapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
+                        filtered.Add(new Lista { DoctorName = eee.DoctorName, idapp = eee.idapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
 
 
                     }
@@ -582,7 +582,7 @@ namespace HCI_wireframe.View.Doktor
                     {
 
 
-                        filtered.Add(new Lista { DoctorName = eee.DoctorName, IDapp = eee.IDapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
+                        filtered.Add(new Lista { DoctorName = eee.DoctorName, idapp = eee.idapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
 
 
                     }
@@ -605,7 +605,7 @@ namespace HCI_wireframe.View.Doktor
                     {
 
 
-                        filtered.Add(new Lista { DoctorName = eee.DoctorName, IDapp = eee.IDapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
+                        filtered.Add(new Lista { DoctorName = eee.DoctorName, idapp = eee.idapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
 
 
                     }
@@ -628,7 +628,7 @@ namespace HCI_wireframe.View.Doktor
                     {
 
 
-                        filtered.Add(new Lista { DoctorName = eee.DoctorName, IDapp = eee.IDapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
+                        filtered.Add(new Lista { DoctorName = eee.DoctorName, idapp = eee.idapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
 
 
                     }
@@ -651,7 +651,7 @@ namespace HCI_wireframe.View.Doktor
                     {
 
 
-                        filtered.Add(new Lista { DoctorName = eee.DoctorName, IDapp = eee.IDapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
+                        filtered.Add(new Lista { DoctorName = eee.DoctorName, idapp = eee.idapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
 
 
                     }
@@ -700,12 +700,12 @@ namespace HCI_wireframe.View.Doktor
                     int dan2 = int.Parse(delovi2[0]);
                     int godina2 = int.Parse(delovi2[2]);
 
-                    DateTime trazeniDatum = new DateTime(godina2, mesec2, dan2, 0, 0, 0);
-                    if (datumTermina == trazeniDatum)
+                    DateTime trazenidatum = new DateTime(godina2, mesec2, dan2, 0, 0, 0);
+                    if (datumTermina == trazenidatum)
                     {
 
 
-                        filtered.Add(new Lista { DoctorName = eee.DoctorName, IDapp = eee.IDapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
+                        filtered.Add(new Lista { DoctorName = eee.DoctorName, idapp = eee.idapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
 
 
                     }
@@ -725,7 +725,7 @@ namespace HCI_wireframe.View.Doktor
                     List<Lista> filtered = new List<Lista>();
 
 
-                    filtered.Add(new Lista { DoctorName = eee.DoctorName, IDapp = eee.IDapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
+                    filtered.Add(new Lista { DoctorName = eee.DoctorName, idapp = eee.idapp, Time = eee.Time, Date = eee.Date, ChangeName = eee.ChangeName, RemoveName = eee.RemoveName, PatientName = eee.PatientName, Ordinacija = eee.Ordinacija, Pregled = eee.Pregled, Operacija = eee.Operacija });
 
 
 

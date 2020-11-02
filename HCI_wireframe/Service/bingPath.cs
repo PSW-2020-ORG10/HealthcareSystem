@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HCI_wireframe.Service
 {
-    public class bingPath
+    public class BingPath
     {
         public static string bingPathToAppDir(string localPath)
         {

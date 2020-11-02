@@ -123,12 +123,12 @@
                   VerticalAlignment="Top" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="10" Grid.RowSpan="10" Height="500" Width="800" GridLinesVisibility="Vertical" HeadersVisibility="All" 
                           Background="LightGray" >
                     <DataGrid.Columns>
-                        <DataGridTextColumn x:Name="Name_Question" FontSize="20" HeaderStyle="{StaticResource CenterGridHeaderStyle}"  Binding ="{Binding Name}" Width="6*"  Header=""/>
+                        <DataGridTextColumn x:Name="Name_Question" FontSize="20" HeaderStyle="{StaticResource CenterGridHeaderStyle}"  Binding ="{Binding name}" Width="6*"  Header=""/>
 
                         <DataGridTemplateColumn Header="POOR" Width="*" >
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <RadioButton  Name="poorQuestion" Checked="RadioButtonChecked" Content="1" GroupName="{Binding ID}" 
+                                    <RadioButton  Name="poorQuestion" Checked="RadioButtonChecked" Content="1" GroupName="{Binding id}" 
                                          HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -136,7 +136,7 @@
                         <DataGridTemplateColumn Header="FAIR" Width="*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <RadioButton Name="fairQuestion" Content="2" Checked="RadioButtonChecked" GroupName="{Binding ID}" 
+                                    <RadioButton Name="fairQuestion" Content="2" Checked="RadioButtonChecked" GroupName="{Binding id}" 
                                          HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -144,7 +144,7 @@
                         <DataGridTemplateColumn Header="OK" Width="*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <RadioButton Name="okQuestion" Content="3" Checked="RadioButtonChecked" GroupName="{Binding ID}" 
+                                    <RadioButton Name="okQuestion" Content="3" Checked="RadioButtonChecked" GroupName="{Binding id}" 
                                          HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -152,7 +152,7 @@
                         <DataGridTemplateColumn Header="GOOD" Width="*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <RadioButton Name="goodQuestion" Content="4" Checked="RadioButtonChecked" GroupName="{Binding ID}" 
+                                    <RadioButton Name="goodQuestion" Content="4" Checked="RadioButtonChecked" GroupName="{Binding id}" 
                                          HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -160,7 +160,7 @@
                         <DataGridTemplateColumn Header="GREAT" Width="*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <RadioButton Content="5" Name="greatQuestion" Checked="RadioButtonChecked" GroupName="{Binding ID}" 
+                                    <RadioButton Content="5" Name="greatQuestion" Checked="RadioButtonChecked" GroupName="{Binding id}" 
                                          HorizontalAlignment="Center" VerticalAlignment="Center" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

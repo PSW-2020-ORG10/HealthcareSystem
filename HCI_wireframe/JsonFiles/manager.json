@@ -7,7 +7,8 @@
       "Ocena sistema od strane doktora  \nPera Peric  - answer  -1",
       "Ocena sistema od strane sekretara  \nMladenka Kokanovic  - answer  -4",
       "Ocena sistema od strane sekretara  \nMladenka Kokanovic  - answer  -4",
-      "Ocena sistema od strane sekretara  \nMladenka Kokanovic  - answer  -5"
+      "Ocena sistema od strane sekretara  \nMladenka Kokanovic  - answer  -5",
+      "Ocena sistema od strane sekretara  \nMladenka Kokanovic  - answer  -3"
     ],
     "salary": 800.0,
     "city": "Novi Sad, Mise Perica 2,21000,Srbija",
@@ -15,9 +16,9 @@
     "Password": "luna",
     "FirstName": "Luna",
     "SecondName": "Zivkovic",
-    "UniqueCitizensIdentityNumber": "04/05/1979",
-    "DateOfBirth": "789546120003",
+    "UniqueCitizensidentityNumber": "789546120003",
+    "DateOfBirth": "04/05/1979",
     "PhoneNumber": "0652610777",
-    "ID": 1
+    "id": 1
   }
 ]

@@ -41,16 +41,16 @@ namespace WpfApp2
             InitializeComponent();
             this.DataContext = this;
         }
-        private int getNextID()
+        private int getNextid()
         {
             EquipmentController rp = new EquipmentController();
             List<Equipment> lista = rp.GetAll();
             int number = 0;
             foreach (Equipment r in lista)
             {
-                if (r.ID > number)
+                if (r.id > number)
                 {
-                    number = r.ID;
+                    number = r.id;
                 }
             }
             number += 1;
@@ -61,7 +61,7 @@ namespace WpfApp2
         {
             name = Name.Text;
             quantity = Quantity.Text;
-            id = getNextID();
+            id = getNextid();
 
             Regex regex1 = new Regex(@"^([0-9]+)$");
 

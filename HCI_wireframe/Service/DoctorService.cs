@@ -16,11 +16,13 @@ using HCI_wireframe.Service;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
+using System.Windows.Navigation;
 
 namespace Class_diagram.Service
 {
-   public class DoctorService : AbstractUserService<DoctorUser>
+    public class DoctorService : AbstractUserService<DoctorUser>
     {
         public OperationRepository operationRepository;
         public PatientsRepository patientsRepository;
@@ -42,7 +44,7 @@ namespace Class_diagram.Service
             operationRepository = new OperationRepository(path3);
             appointmentRepository = new AppointmentRepository(path4);
             employeesScheduleRepository = new EmployeesScheduleRepository(path5);
-           
+
         }
         public override List<DoctorUser> GetAll()
         {
@@ -51,7 +53,7 @@ namespace Class_diagram.Service
 
         public override Boolean New(DoctorUser doctor)
         {
-            if (isDataValid(doctor.Email, doctor.UniqueCitizensIdentityNumber,doctor) && isCityValid(doctor.city))
+            if (isDataValid(doctor.email, doctor.uniqueCitizensidentityNumber, doctor) && isCityValid(doctor.city))
             {
                 doctorRepository.New(doctor);
                 return true;
@@ -61,7 +63,7 @@ namespace Class_diagram.Service
 
         public override Boolean Update(DoctorUser doctor)
         {
-            if (isDataValid(doctor.Email, doctor.UniqueCitizensIdentityNumber,doctor) && isCityValid(doctor.city))
+            if (isDataValid(doctor.email, doctor.uniqueCitizensidentityNumber, doctor) && isCityValid(doctor.city))
             {
                 doctorRepository.Update(doctor);
                 return true;
@@ -69,71 +71,69 @@ namespace Class_diagram.Service
             return false;
         }
 
-        public override DoctorUser GetByID(int ID)
+        public override DoctorUser GetByid(int id)
         {
-            return doctorRepository.GetByID(ID);
+            return doctorRepository.GetByid(id);
         }
 
         public override void Remove(DoctorUser doctor)
         {
-            doctorRepository.Delete(doctor.ID);
+            doctorRepository.Delete(doctor.id);
             removeDoctorFromSchedule(doctor);
+        }
+
+        private List<Room> getRoomsForUse()
+        {
+            RoomController roomController = new RoomController();
+            List<Room> listOfRooms = new List<Room>();
+            listOfRooms = roomController.GetAll();
+
+            return listOfRooms.Where(room => (room.forUse)).ToList();
+        }
+
+        private bool isListOfDoctorsEmpty(List<DoctorUser> listOfObjects)
+        {
+            if (listOfObjects.Count == 0) return true;
+            return false;
+        }
+
+        private bool isOrdinationAvailable(Room room)
+        {
+            DoctorController doctorController = new DoctorController();
+            List<DoctorUser> listOfDoctors = doctorController.GetAll();
+
+            List<DoctorUser> doctorsWithFreeOrdination = listOfDoctors.Where(doctor => (doctor.ordination.Equals(room.typeOfRoom))).ToList();
+            return isListOfDoctorsEmpty(doctorsWithFreeOrdination);
         }
 
         public List<Room> getAvailableOrdinations()
         {
-
-            RoomController roomController = new RoomController();
-            List<Room> listOfRooms = new List<Room>();
-            listOfRooms = roomController.GetAll();
             List<Room> roomsForUse = new List<Room>();
-            List<Room> availableOrdinations = new List<Room>();
-            DoctorController doctorController = new DoctorController();
-            List<DoctorUser> listOfDoctors = doctorController.GetAll();
+            roomsForUse = getRoomsForUse();
 
-                foreach (Room room in listOfRooms)
-                {
-                    if (room.forUse == true)
-                    {
-                        roomsForUse.Add(room);
-           
-                    }
+            return roomsForUse.Where(room => (isOrdinationAvailable(room))).ToList();
 
-                }
+        }
 
-            foreach (Room room in roomsForUse)
-            {
-                bool available = true;
+        private bool isDoctorResposableForOperation(DoctorUser doctor, Operation operation)
+        {
+            if (operation.isResponiable.id.ToString().Equals(doctor.id.ToString())) return true;
+            return false;
+        }
 
-                foreach (DoctorUser doctor in listOfDoctors)
-                {
-                    if (doctor.ordination.Equals(room.TypeOfRoom))
-                    {
-                        available = false;
-                       
-                    }
-                }
-
-                if (available)
-                {
-                    availableOrdinations.Add(room);
-                }
-
-            }
-            return availableOrdinations;
-
+        private bool isDoctorResposableForAppointment(DoctorUser doctor, DoctorAppointment appointment)
+        {
+            if (appointment.doctor.id.ToString().Equals(doctor.id.ToString())) return true;
+            return false;
         }
 
         public void removeScheduledOperationsForDoctor(DoctorUser doctor)
         {
             List<Operation> listOfOperations = operationRepository.GetAll();
-                
-            foreach(Operation operation in listOfOperations)
+
+            foreach (Operation operation in listOfOperations)
             {
-                if (operation.Responsable.ID.ToString().Equals(doctor.ID.ToString()))
-                {
-                    listOfOperations.Remove(operation);
-                }
+                if (isDoctorResposableForOperation(doctor, operation))  listOfOperations.Remove(operation);
             }
         }
         public void removeScheduledAppointmentForDoctor(DoctorUser doctor)
@@ -142,180 +142,122 @@ namespace Class_diagram.Service
 
             foreach (DoctorAppointment appointment in listOfAppoinments)
             {
-                if (appointment.doctor.ID.ToString().Equals(doctor.ID.ToString()))
-                {
-                    listOfAppoinments.Remove(appointment);
-                }
+                if (isDoctorResposableForAppointment(doctor, appointment))  listOfAppoinments.Remove(appointment);
             }
+        }
+
+        private void findAndRemoveDoctorFromSchedule(DoctorUser doctor, DoctorUser doctorUser)
+        {
+            List<Schedule> listOfSchedule = new List<Schedule>();
+            listOfSchedule = employeesScheduleRepository.GetAll();
+
+            foreach (Schedule schedule in listOfSchedule)
+            {
+                if (schedule.employeeid.Equals(doctorUser.id.ToString()))  removeDoctorFromRepositories(schedule.id, doctor);
+            }
+        }
+
+
+        private void removeDoctorFromRepositories(int id, DoctorUser doctor)
+        {
+            employeesScheduleRepository.Delete(id);
+            removeScheduledOperationsForDoctor(doctor);
+            removeScheduledAppointmentForDoctor(doctor);
+        }
+
+        private bool isDoctorsEquals(DoctorUser firstDoctor, DoctorUser secondDoctor)
+        {
+            if (firstDoctor.id.ToString().Equals(secondDoctor.id.ToString())) return true;
+            return false;
         }
 
         public void removeDoctorFromSchedule(DoctorUser doctor)
         {
-            List<Schedule> listOfSchedule = new List<Schedule>();
-            listOfSchedule = employeesScheduleRepository.GetAll();
             List<DoctorUser> listOfDoctors = doctorRepository.GetAll();
-            
-          
+
             foreach (DoctorUser doctorUser in listOfDoctors)
             {
-                if (doctorUser.ID.ToString().Equals(doctor.ID.ToString()))
-                {
-                    foreach (Schedule schedule in listOfSchedule)
-                    {
-                        if (schedule.employeeID.Equals(doctorUser.ID.ToString()))
-                        {
-                            employeesScheduleRepository.Delete(schedule.ID);
-                            removeScheduledOperationsForDoctor(doctor);
-                            removeScheduledAppointmentForDoctor(doctor);
-                        }
-                    }
-                   
-                }
+                if (isDoctorsEquals(doctorUser, doctor)) findAndRemoveDoctorFromSchedule(doctor, doctorUser);
             }
 
         }
-
-
-        public bool doesDoctorHaveAnAppointmentAtSpecificPeriod(DoctorUser doctor, TimeSpan start, TimeSpan end, string dateToString)
+        public bool checkIfDoctorIsBusyForAppointment(DoctorAppointment appointment, TimeSpan selectedTime)
         {
-            bool zauzet = false;
-            
-            List<DoctorAppointment> listaPregleda = appointmentRepository.GetAll();
-            foreach (DoctorAppointment dd in listaPregleda)
-            {
-                DoctorUser dr = dd.doctor;
-                if (dr.ID == doctor.ID)
-                {
-                    if (dd.Date.Equals(dateToString))
-                    {
-                        TimeSpan time1 = TimeSpan.FromMinutes(15);
-                        TimeSpan krajPr = dd.Time.Add(time1);
-                        int result = TimeSpan.Compare(start, dd.Time);
-                        int result1 = TimeSpan.Compare(start, krajPr);
-                        if ((result == 1 && result1 == -1) || result == 0)
-                        {
-                            zauzet = true;
-                        }
-                        int rezultat = TimeSpan.Compare(end, dd.Time);
-                        int rezultat1 = TimeSpan.Compare(end, krajPr);
-                        if ((rezultat == 1 && rezultat1 == -1) || rezultat == 0)
-                        {
+            TimeSpan durationOfAppointment = TimeSpan.FromMinutes(15);
+            TimeSpan scheduledEndTime = appointment.time.Add(durationOfAppointment);
 
-                            zauzet = true;
-                        }
-                    }
-
-
-                }
-
-            }
-            return zauzet;
+            int areSelectedAndAppointmentTimeEqual = TimeSpan.Compare(selectedTime, appointment.time);
+            int areSelectedAndScheduledEndTimeEqual = TimeSpan.Compare(selectedTime, scheduledEndTime);
+            if ((areSelectedAndAppointmentTimeEqual == 1 && areSelectedAndScheduledEndTimeEqual == -1) || areSelectedAndAppointmentTimeEqual == 0) return true;
+            return false;
         }
 
-       public bool doesDoctorHaveAnOperationAtSpecificPeriod(DoctorUser doctor, TimeSpan start, TimeSpan end, string date)
-        {
-            bool zauzet = false;
-            
-            List<Operation> listOfOperation = operationRepository.GetAll();
-            foreach (Operation dd in listOfOperation)
-            {
-                DoctorUser dr = dd.Responsable;
-                if (dr.ID == doctor.ID)
-                {
-                    if (dd.Date.Equals(date))
-                    {
-                        int result = TimeSpan.Compare(start, dd.Start);
-                        int result1 = TimeSpan.Compare(start, dd.End);
-                        if ((result == 1 && result1 == -1) || result == 0)
-                        {
-
-                        
-                            zauzet = true;
-                        }
-                        int rezultat = TimeSpan.Compare(end, dd.Start);
-                        int rezultat1 = TimeSpan.Compare(end, dd.End);
-                        if ((rezultat == 1 && rezultat1 == -1) || rezultat == 0)
-                        {
-
-                           
-                            zauzet = true;
-                        }
-                    }
-
-
-
-
-                }
-            }
-            return zauzet;
-
-
-        }
-            
-    
         public Boolean doesDoctorHaveAnAppointmentAtSpecificTime(DoctorUser doctor, TimeSpan time, string date)
         {
-            
             List<DoctorAppointment> listOfAppointments = appointmentRepository.GetAll();
-            if (listOfAppointments == null)
-            {
-                listOfAppointments = new List<DoctorAppointment>();
-            }
+            if (listOfAppointments == null) listOfAppointments = new List<DoctorAppointment>();
+
             foreach (DoctorAppointment appointment in listOfAppointments)
             {
-
-                DoctorUser doktorOnAppointment = appointment.doctor;
-
-                if (doktorOnAppointment.ID == doctor.ID)
-                {
-
-                    if (appointment.Date.Equals(date))
-                    {
-                        TimeSpan time1 = TimeSpan.FromMinutes(15);
-                        TimeSpan krajPr = appointment.Time.Add(time1);
-                        int result = TimeSpan.Compare(time, appointment.Time);
-                        int result1 = TimeSpan.Compare(time, krajPr);
-                        if ((result == 1 && result1 == -1) || result == 0)
-                        {
-                            return true;
-                        }
-                    }
-                }
+                if (isDoctorsEquals(appointment.doctor, doctor) && areDatesEqual(appointment.date, date) && checkIfDoctorIsBusyForAppointment(appointment, time)) return true;
             }
             return false;
         }
-        
+
+        public bool doesDoctorHaveAnAppointmentAtSpecificPeriod(DoctorUser doctor, TimeSpan start, TimeSpan end, string date)
+        {
+            List<DoctorAppointment> listOfAppoinments = appointmentRepository.GetAll();
+            foreach (DoctorAppointment appointment in listOfAppoinments)
+            {
+                if (isDoctorsEquals(appointment.doctor,doctor) && areDatesEqual(appointment.date, date) && 
+                    (checkIfDoctorIsBusyForAppointment(appointment, start) || checkIfDoctorIsBusyForAppointment(appointment, end))) return true;
+                
+            }
+            return false;
+
+        }
+
+        public bool areDatesEqual(String firstDate,String secondDate)
+        {
+            if (firstDate.Equals(secondDate)) return true;
+            return false;
+        }
+
+        public bool checkIfDoctorIsBusyForOperation(Operation operation, TimeSpan selectedTime)
+        {
+            int areSelectedTimeAndOperationStartTimeEqual = TimeSpan.Compare(selectedTime, operation.start);
+            int areSelectedTimeAndOperationEndTimeEqual = TimeSpan.Compare(selectedTime, operation.end);
+            if ((areSelectedTimeAndOperationStartTimeEqual == 1 && areSelectedTimeAndOperationEndTimeEqual == -1) || areSelectedTimeAndOperationStartTimeEqual == 0) return true;
+            return false;
+        }
+
         public Boolean doesDoctorHaveAnOperationAtSpecificTime(DoctorUser doctor, TimeSpan time, string date)
         {
-            int result1 = 0;
-            int result2 = 0;
             List<Operation> listOfOperation = operationRepository.GetAll();
-            if (listOfOperation == null)
-            {
-                listOfOperation = new List<Operation>();
-            }
+            if (listOfOperation == null) listOfOperation = new List<Operation>();
             foreach (Operation operation in listOfOperation)
             {
-                DoctorUser doctorOnOperation = operation.Responsable;
-                if (doctorOnOperation.ID == doctor.ID)
+                DoctorUser doctorOnOperation = operation.isResponiable;
+                if (isDoctorsEquals(doctorOnOperation, doctor) && areDatesEqual(operation.date,date) && checkIfDoctorIsBusyForOperation(operation, time))
                 {
-                    if (operation.Date.Equals(date))
-                    {
-                        result1 = TimeSpan.Compare(operation.Start, time);
-                        result2 = TimeSpan.Compare(time, operation.End);
-
-                        if ((result1 == -1 && result2 == -1) || result1 == 0)
-                        {
-                            return true;
-                        }
-
-                    }
+                    return true; 
                 }
-
             }
             return false;
         }
 
-       
+        public bool doesDoctorHaveAnOperationAtSpecificPeriod(DoctorUser doctor, TimeSpan start, TimeSpan end, string date)
+        {
+            List<Operation> listOfOperation = operationRepository.GetAll();
+            foreach (Operation operation in listOfOperation)
+            {
+                DoctorUser doctorOnOperation = operation.isResponiable;
+                if (isDoctorsEquals(doctorOnOperation, doctor) && areDatesEqual(operation.date, date) && (checkIfDoctorIsBusyForOperation(operation, start) || checkIfDoctorIsBusyForOperation(operation, end)))
+                    return true;
+                }
+            return false;
+        }
+
+
     }
 }

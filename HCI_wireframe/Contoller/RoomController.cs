@@ -46,9 +46,9 @@ namespace Class_diagram.Contoller
             roomService.Remove(room);
         }
 
-        public Room GetByID(int ID)
+        public Room GetByid(int id)
         {
-            return roomService.GetByID(ID);
+            return roomService.GetByid(id);
         }
     }
 }

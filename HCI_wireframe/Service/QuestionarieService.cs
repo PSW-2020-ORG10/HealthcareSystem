@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.IO;
 namespace Class_diagram.Service
 {
-    public class QuestionarieService : bingPath, IService<Question>
+    public class QuestionarieService : BingPath, IService<Question>
     {
         public Repository.QuestionarieRepository questionarieRepository;
         String path = bingPathToAppDir(@"JsonFiles\questionary.json");
@@ -27,9 +27,9 @@ namespace Class_diagram.Service
         
         }
 
-        public Question GetByID(int ID)
+        public Question GetByid(int id)
         {
-            return questionarieRepository.GetByID(ID);
+            return questionarieRepository.GetByid(id);
         }
 
         public void New(Question entity)
@@ -39,7 +39,7 @@ namespace Class_diagram.Service
 
         public void Remove(Question entity)
         {
-            questionarieRepository.Delete(entity.ID);
+            questionarieRepository.Delete(entity.id);
         }
 
         public void Update(Question entity)

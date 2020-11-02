@@ -50,7 +50,7 @@ namespace ProjekatHCI
             List<SecretaryUser> lista = scon.GetAll();
             foreach (SecretaryUser s in lista)
             {
-                if (s.Email.Equals(svojstvo))
+                if (s.email.Equals(svojstvo))
                 {
                     sekretar = s;
                 }
@@ -86,7 +86,7 @@ namespace ProjekatHCI
                 }
                 List<String> obavestenja = user.specialNotifications;
 
-                obavestenja.Add("Ocena sistema od strane sekretara  \n" + sekretar.FirstName + " " + sekretar.SecondName + "  - answer  -" + ocena);
+                obavestenja.Add("Ocena sistema od strane sekretara  \n" + sekretar.firstName + " " + sekretar.secondName + "  - answer  -" + ocena);
                 user.specialNotifications = obavestenja;
                 cont.Update(user);
 

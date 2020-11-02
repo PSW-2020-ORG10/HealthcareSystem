@@ -23,9 +23,9 @@ namespace Class_diagram.Contoller
             return emergencyPhonesService.GetAll();
         }
 
-        public PhoneNumber GetByID(int ID)
+        public PhoneNumber GetByid(int id)
         {
-            return emergencyPhonesService.GetByID(ID);
+            return emergencyPhonesService.GetByid(id);
         }
 
         public void New(PhoneNumber entity)
