@@ -25,7 +25,7 @@ namespace PatientWebApplication
             services.AddControllersWithViews();
 
             services.AddDbContext<MyDbContext>(options =>
-            options.UseSqlServer(ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString")));
+            options.UseSqlServer(ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString")).UseLazyLoadingProxies());
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

@@ -211,7 +211,6 @@
     <Compile Include="Model\Hospital\Renovation.cs" />
     <Compile Include="Model\Hospital\Room.cs" />
     <Compile Include="Model\Manager\ManagerUser.cs" />
-    <Compile Include="Model\MyDbContext.cs" />
     <Compile Include="Model\Orders\DoctorOrder.cs" />
     <Compile Include="Model\Orders\FinishedOrder.cs" />
     <Compile Include="Model\Orders\ManagerOrder.cs" />
@@ -220,6 +219,7 @@
     <Compile Include="Model\Patient\Entity.cs" />
     <Compile Include="Model\Patient\Feedback.cs" />
     <Compile Include="Model\Patient\PatientUser.cs" />
+    <Compile Include="Model\Patient\PatientUserWeb.cs" />
     <Compile Include="Model\Patient\PhoneNumber.cs" />
     <Compile Include="Model\Patient\Prescription.cs" />
     <Compile Include="Model\Patient\Question.cs" />
