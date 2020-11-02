@@ -13,14 +13,14 @@ namespace Class_diagram.Model.Hospital
    {
       public String room { get; set; }
    
-      public String StartDate{ get; set; }
-      public String EndDate{ get; set; }
+      public String startDate{ get; set; }
+      public String endDate{ get; set; }
 
-      public Renovation(int id, String r, String start, String end) : base(id)
+      public Renovation(int id, String room, String startDate, String endDate) : base(id)
         {
-            this.room = r;
-            this.StartDate = start;
-            this.EndDate = end;
+            this.room = room;
+            this.startDate = startDate;
+            this.endDate = endDate;
         }
 
     public Renovation() : base()

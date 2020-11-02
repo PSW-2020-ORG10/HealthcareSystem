@@ -1,37 +1,13 @@
 [
   {
-    "TypeOfRoom": "SecretarysRoom",
+    "typeOfRoom": "SecretarysRoom",
     "equipment": [],
     "medicine": [],
     "forUse": true,
-    "ID": 2
+    "id": 2
   },
   {
-    "TypeOfRoom": "Room 600",
-    "equipment": [
-      "Table"
-    ],
-    "medicine": [
-      "Analgin",
-      "Diklofenac"
-    ],
-    "forUse": true,
-    "ID": 5
-  },
-  {
-    "TypeOfRoom": "Operation room 30",
-    "equipment": [
-      "Sizors"
-    ],
-    "medicine": [
-      "Analgin",
-      "Diklofenac"
-    ],
-    "forUse": true,
-    "ID": 7
-  },
-  {
-    "TypeOfRoom": "Room 500",
+    "typeOfRoom": "Operation room 30",
     "equipment": [
       "Sizors"
     ],
@@ -39,21 +15,41 @@
       "Analgin"
     ],
     "forUse": true,
-    "ID": 3
+    "id": 7
   },
   {
-    "TypeOfRoom": "Operation room 200",
+    "typeOfRoom": "Room 500",
+    "equipment": [
+      "Sizors"
+    ],
+    "medicine": [
+      "Analgin"
+    ],
+    "forUse": true,
+    "id": 3
+  },
+  {
+    "typeOfRoom": "Operation room 200",
     "equipment": [
       "Bed"
     ],
-    "medicine": [
-      "Diklofenac"
-    ],
+    "medicine": [],
     "forUse": true,
-    "ID": 6
+    "id": 6
   },
   {
-    "TypeOfRoom": "Magacin",
+    "typeOfRoom": "Room 600",
+    "equipment": [
+      "Table"
+    ],
+    "medicine": [
+      "Analgin"
+    ],
+    "forUse": true,
+    "id": 5
+  },
+  {
+    "typeOfRoom": "Magacin",
     "equipment": [
       "Bed",
       "Chair",
@@ -64,16 +60,15 @@
       "Analgin",
       "Paracetamol",
       "Bromazepan",
-      "Diklofenac",
       "Coldrex",
       "Tylol",
       "Tylol",
       "lek1",
       "lek",
-      "adasd",
-      "sdsd"
+      "lek",
+      "lek"
     ],
     "forUse": true,
-    "ID": 1
+    "id": 1
   }
 ]

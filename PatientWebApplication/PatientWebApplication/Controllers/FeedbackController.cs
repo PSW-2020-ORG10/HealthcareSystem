@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Class_diagram.Model.Patient;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using PatientWebApplication.Models;
 using PatientWebApplication.Services;
 
@@ -14,22 +14,22 @@ namespace PatientWebApplication.Controllers
     [ApiController]
     public class FeedbackController : ControllerBase
     {
+        private readonly MyDbContext dbContext;
+        private FeedbackService feedbackService;
+        public FeedbackController(MyDbContext context)
+        {
+            this.dbContext = context;
+            feedbackService = new FeedbackService(context);
+        }
+
         [HttpGet]       // GET /api/feedback
         public IActionResult Get()
         {
             List<Feedback> result = new List<Feedback>();
-            //Program.Feedback.ForEach(product => re sult.Add(ProductAdapter.ProductToProductDto(product)));
-            return Ok(Program.Feedback);
-        }
-
-        [HttpGet("published")]       // GET /api/feedback/published
-        public IActionResult GetPublished()
-        {
-            List<Feedback> result = FeedbackService.GetPublished();
+            dbContext.Feedbacks.ToList().ForEach(feedback => result.Add(feedback));
             
-            //Program.Feedback.ForEach(product => product.IsPublished ? result.Add(ProductAdapter.ProductToProductDto(product)) : result);
+            //Program.Feedback.ForEach(product => result.Add(ProductAdapter.ProductToProductDto(product)));
             return Ok(result);
         }
-
     }
 }

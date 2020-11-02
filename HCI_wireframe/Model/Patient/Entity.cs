@@ -14,8 +14,8 @@ namespace Class_diagram.Model.Patient
         public Entity() { }
         public Entity(int id )
         {
-            this.ID = id;
+            this.id = id;
         }
-        public int ID { get; set; }
+        public int id { get; set; }
     }
 }

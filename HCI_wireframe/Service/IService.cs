@@ -15,7 +15,7 @@ namespace HCI_wireframe.Service
 
         void Update(T entity);
 
-        T GetByID(int ID);
+        T GetByid(int id);
 
         void Remove(T entity);
     }

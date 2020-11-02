@@ -43,7 +43,7 @@ namespace Class_diagram.Repository
 
         public void New(T newEntity)
         {
-            newEntity.ID = generateID(newEntity);
+            newEntity.id = generateid(newEntity);
             List<T> list = GetAll();
             list.Add(newEntity);
             try
@@ -61,12 +61,12 @@ namespace Class_diagram.Repository
             }
         }
 
-        public T GetByID(int id)
+        public T GetByid(int id)
         {
             List<T> items = GetAll();
             foreach(T oneItem in items)
             {
-                if (oneItem.ID==id)
+                if (oneItem.id==id)
                 {
                     return oneItem;
                 }
@@ -100,7 +100,7 @@ namespace Class_diagram.Repository
             List<T> items = GetAll();
             foreach (T it in items)
             {
-                if (it.ID == updateEntity.ID)
+                if (it.id == updateEntity.id)
                 {
                     items.Remove(it);
                     items.Add(updateEntity);
@@ -115,7 +115,7 @@ namespace Class_diagram.Repository
             List<T> items = GetAll();
             foreach (T it in items)
             {
-                if (it.ID == id)
+                if (it.id == id)
                 {
                     items.Remove(it);
                     NewWithList(items);
@@ -124,14 +124,14 @@ namespace Class_diagram.Repository
             }
         }
 
-        public int generateID(T entity)
+        public int generateid(T entity)
         {    int number = 0;
             List<T> items = GetAll();
             foreach (T oneItem in items)
             {
-                if (oneItem.ID > number)
+                if (oneItem.id > number)
                 {
-                    number = oneItem.ID;
+                    number = oneItem.id;
                 }
             }
             number += 1;

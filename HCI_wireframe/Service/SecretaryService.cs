@@ -36,7 +36,7 @@ namespace Class_diagram.Service
 
         public override bool New(SecretaryUser secretary)
         {
-            if (isDataValid(secretary.Email, secretary.UniqueCitizensIdentityNumber,secretary) && isCityValid(secretary.city))
+            if (isDataValid(secretary.email, secretary.uniqueCitizensidentityNumber,secretary) && isCityValid(secretary.city))
             {
                 secretaryRepository.New(secretary);
                 return true;
@@ -46,7 +46,7 @@ namespace Class_diagram.Service
 
         public override bool Update(SecretaryUser secretary)
         {
-            if (isDataValid(secretary.Email, secretary.UniqueCitizensIdentityNumber,secretary) && isCityValid(secretary.city))
+            if (isDataValid(secretary.email, secretary.uniqueCitizensidentityNumber,secretary) && isCityValid(secretary.city))
             {
                 secretaryRepository.Update(secretary);
                 return true;
@@ -54,42 +54,52 @@ namespace Class_diagram.Service
             return false;
         }
 
-        public override SecretaryUser GetByID(int ID)
+        public override SecretaryUser GetByid(int id)
         {
-            return secretaryRepository.GetByID(ID);
+            return secretaryRepository.GetByid(id);
         }
 
         public override void Remove(SecretaryUser secretary)
         {
             removeSecretaryFromSchedule(secretary);
-            secretaryRepository.Delete(secretary.ID);
+            secretaryRepository.Delete(secretary.id);
+        }
+
+
+        private Boolean isScheduleForSecretary(Schedule schedule, SecretaryUser secretaryUser)
+        {
+            if(schedule.employeeFirst.Equals(secretaryUser.firstName)) return true;
+            
+            return false;
+        }
+
+        private void findAndDeleteScheduleForSecretary(SecretaryUser secretaryUser)
+        {
+            List<Schedule> listOfSchedule = new List<Schedule>();
+            listOfSchedule = employeesScheduleRepository.GetAll();
+
+            foreach (Schedule schedule in listOfSchedule)
+            {
+                if (isScheduleForSecretary(schedule, secretaryUser)) employeesScheduleRepository.Delete(schedule.id);
+            }
+        }
+
+        private Boolean areSecreatariesEqualByid(SecretaryUser firstSecretary, SecretaryUser secondSecretary)
+        {
+            if(firstSecretary.id.ToString().Equals(secondSecretary.id.ToString())) return true;
+            
+            return false;
         }
 
         public void removeSecretaryFromSchedule(SecretaryUser secretary)
         {
-            List<Schedule> listOfSchedule = new List<Schedule>();
-            listOfSchedule = employeesScheduleRepository.GetAll();
             List<SecretaryUser> listOfSecretaries = secretaryRepository.GetAll();
 
             foreach (SecretaryUser secretaryUser in listOfSecretaries)
             {
+                if (areSecreatariesEqualByid(secretaryUser, secretary)) findAndDeleteScheduleForSecretary(secretaryUser);
 
-                if (secretaryUser.ID.ToString().Equals(secretary.ID.ToString()))
-                {
-                    foreach (Schedule schedule in listOfSchedule)
-                    {
-
-                        if (schedule.employeeFirst.Equals(secretaryUser.FirstName))
-                        {
-                            employeesScheduleRepository.Delete(schedule.ID);
-
-                        }
-                    }
-                   
-
-                }
             }
-
         }
 
      

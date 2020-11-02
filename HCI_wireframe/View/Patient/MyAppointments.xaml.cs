@@ -40,8 +40,8 @@ namespace HCI_wireframe
 
             public String Datum { get; set; }
             public DateTime DateT { get; set; }
-            public int IDapp { get; set; }
-            public int IDTabela { get; set; }
+            public int idapp { get; set; }
+            public int idTabela { get; set; }
             public String Ordination { get; set; }
             public String ChangeName { get; set; }
             public String RemoveName { get; set; }
@@ -53,7 +53,7 @@ namespace HCI_wireframe
 
         }
 
-        string myProperty = App.Current.Properties["PatientID"].ToString();
+        string myProperty = App.Current.Properties["Patientid"].ToString();
         public List<DoctorAppointment> AppointmentList { get; set; }
         public List<DoctorAppointment> AppointmentListAll { get; set; }
         public List<Operation> OperationListAll { get; set; }
@@ -88,7 +88,7 @@ namespace HCI_wireframe
             patient = new PatientUser();
             List<Lista> li = new List<Lista>();
 
-            patient = patientController.GetByID(int.Parse(myProperty));
+            patient = patientController.GetByid(int.Parse(myProperty));
             if (AppointmentListAll == null)
             {
                 MessageBox.Show("You dont have any appointments!");
@@ -99,7 +99,7 @@ namespace HCI_wireframe
                 foreach (DoctorAppointment doctorApp in AppointmentListAll)
                 {
                     PatientUser idPacijent = doctorApp.patient;
-                    if (idPacijent.ID == patient.ID)
+                    if (idPacijent.id == patient.id)
                     {
                         AppointmentList.Add(doctorApp);
                     }
@@ -107,7 +107,7 @@ namespace HCI_wireframe
                 foreach(Operation operationd in OperationListAll)
                 {
                     PatientUser idPacijent = operationd.patient;
-                    if (idPacijent.ID == patient.ID)
+                    if (idPacijent.id == patient.id)
                     {
                         OperationList.Add(operationd);
                     }
@@ -118,7 +118,7 @@ namespace HCI_wireframe
                 }
                 foreach (DoctorAppointment d in AppointmentList)
                 {
-                    String datum = d.Date;
+                    String datum = d.date;
                     String[] delovi = datum.Split('/');
                     int mesec = int.Parse(delovi[1]);
                     int dan = int.Parse(delovi[0]);
@@ -133,17 +133,17 @@ namespace HCI_wireframe
                     {
                         DoctorUser doc = d.doctor;
                         StringBuilder l = new StringBuilder();
-                        l.Append(doc.FirstName + " ");
-                        l.Append(doc.SecondName);
+                        l.Append(doc.firstName + " ");
+                        l.Append(doc.secondName);
 
                         li.Add(new Lista
-                        {   IDTabela = 0,
+                        {   idTabela = 0,
                             DoctorName = l.ToString(),
-                            IDapp = d.ID,
-                            Time = d.Time,
+                            idapp = d.id,
+                            Time = d.time,
                             DateT = dt1,
-                            Datum = d.Date,
-                            Ordination = d.roomID,
+                            Datum = d.date,
+                            Ordination = d.roomid,
                             ChangeName = "CHANGE",
                             RemoveName = "REMOVE",
                             Type = "Regular appointment"
@@ -155,7 +155,7 @@ namespace HCI_wireframe
 
                 foreach(Operation operation in OperationList)
                 {
-                    String datum = operation.Date;
+                    String datum = operation.date;
                     String[] delovi = datum.Split('/');
                     int mesec = int.Parse(delovi[1]);
                     int dan = int.Parse(delovi[0]);
@@ -168,20 +168,20 @@ namespace HCI_wireframe
 
                     if (dt1.Date > dt2.Date)
                     {
-                        DoctorUser doc = operation.Responsable;
+                        DoctorUser doc = operation.isResponiable;
                         StringBuilder l = new StringBuilder();
-                        l.Append(doc.FirstName + " ");
-                        l.Append(doc.SecondName);
+                        l.Append(doc.firstName + " ");
+                        l.Append(doc.secondName);
 
                         li.Add(new Lista
                         {
-                            IDTabela = 0,
+                            idTabela = 0,
                             DoctorName = l.ToString(),
-                            IDapp = operation.ID,
-                            Time = operation.Start,
+                            idapp = operation.id,
+                            Time = operation.start,
                             DateT = dt1,
-                            Datum = operation.Date,
-                            Ordination = operation.IdRoom,
+                            Datum = operation.date,
+                            Ordination = operation.idRoom,
                             ChangeName = "CHANGE",
                             RemoveName = "REMOVE",
                              Type = "Operation"
@@ -194,7 +194,7 @@ namespace HCI_wireframe
                 List<Lista> SortedList = li.OrderBy(o => o.DateT).ToList();
                 foreach (Lista l in SortedList)
                 {
-                    l.IDTabela = num2 + 1;
+                    l.idTabela = num2 + 1;
                     num2 += 1;
                 }
                 AppLista = new List<Lista>();
@@ -361,7 +361,7 @@ namespace HCI_wireframe
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Lista ss = (Lista)myAppointmentGrid.Items.GetItemAt(myAppointmentGrid.SelectedIndex);
-            int id = ss.IDapp;
+            int id = ss.idapp;
             string sMessageBoxText = "Are you sure you want to DELETE appointment?";
             string sCaption = "Remove appointment";
 
@@ -374,14 +374,14 @@ namespace HCI_wireframe
                 case MessageBoxResult.Yes:
                     if (ss.Type.Equals("Regular appointment"))
                     {
-                        DoctorAppointment d = appointmentController.GetByID(id);
+                        DoctorAppointment d = appointmentController.GetByid(id);
 
-                        String datum = d.Date;
+                        String datum = d.date;
                         String[] delovi = datum.Split('/');
                         int mesec = int.Parse(delovi[1]);
                         int dan = int.Parse(delovi[0]);
                         int godina = int.Parse(delovi[2]);
-                        TimeSpan tm = d.Time;
+                        TimeSpan tm = d.time;
                         String vreme = tm.ToString();
                         String[] deloviVreme = vreme.Split(':');
                         int sat = int.Parse(deloviVreme[0]);
@@ -412,13 +412,13 @@ namespace HCI_wireframe
                     }
                     else if(ss.Type.Equals("Operation"))
                     {
-                        Operation operation = operationController.GetByID(id);
-                        String datum = operation.Date;
+                        Operation operation = operationController.GetByid(id);
+                        String datum = operation.date;
                         String[] delovi = datum.Split('/');
                         int mesec = int.Parse(delovi[1]);
                         int dan = int.Parse(delovi[0]);
                         int godina = int.Parse(delovi[2]);
-                        TimeSpan tm = operation.Start;
+                        TimeSpan tm = operation.start;
                         String vreme = tm.ToString();
                         String[] deloviVreme = vreme.Split(':');
                         int sat = int.Parse(deloviVreme[0]);
@@ -465,7 +465,7 @@ namespace HCI_wireframe
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             Lista ss = (Lista)myAppointmentGrid.Items.GetItemAt(myAppointmentGrid.SelectedIndex);
-            int id = ss.IDapp;
+            int id = ss.idapp;
 
             if(ss.Type.Equals("Operation"))
             {
@@ -483,14 +483,14 @@ namespace HCI_wireframe
             {
                 case MessageBoxResult.Yes:
                     
-                        DoctorAppointment d = appointmentController.GetByID(id);
+                        DoctorAppointment d = appointmentController.GetByid(id);
 
-                            String datum = d.Date;
+                            String datum = d.date;
                             String[] delovi = datum.Split('/');
                             int mesec = int.Parse(delovi[1]);
                             int dan = int.Parse(delovi[0]);
                             int godina = int.Parse(delovi[2]);
-                            TimeSpan tm = d.Time;
+                            TimeSpan tm = d.time;
                             String vreme = tm.ToString();
                             String[] deloviVreme = vreme.Split(':');
                             int sat = int.Parse(deloviVreme[0]);

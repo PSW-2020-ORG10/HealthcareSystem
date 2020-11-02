@@ -50,7 +50,7 @@ namespace HCI_wireframe.View.Manager
 
 
 
-                 if (ee.Password.Equals(Password.Password) && ee.Email.Equals(Username.Text))
+                 if (ee.password.Equals(Password.Password) && ee.email.Equals(Username.Text))
                  {
                      var s = new Window4();
                      this.Close();

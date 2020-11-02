@@ -51,7 +51,7 @@ namespace WpfApp2.View.Manager.ScheduleFolder
             foreach (Schedule ee in Schlista)
             {
 
-                Schedule.Add(new Schedule { ID=ee.ID, employeeID = ee.employeeID, Date =ee.Date,OnDuty=ee.OnDuty, employeeFirst=ee.employeeFirst,employeeLast=ee.employeeLast,shift=ee.shift,soba=ee.soba });
+                Schedule.Add(new Schedule { id=ee.id, employeeid = ee.employeeid, date =ee.date,isOnDuty=ee.isOnDuty, employeeFirst=ee.employeeFirst,employeeLast=ee.employeeLast,shift=ee.shift,room =ee.room });
 
 
                
@@ -95,7 +95,15 @@ namespace WpfApp2.View.Manager.ScheduleFolder
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             datum = DatePicker;
+
+            
             string d = datum.ToString();
+
+            if (d=="")
+            {
+                return;
+            }
+
             string[] niz = d.Split(' ');
             
 
@@ -130,10 +138,10 @@ namespace WpfApp2.View.Manager.ScheduleFolder
 
             foreach (Schedule ee in Schlista)
             {
-                if (ee.Date.Equals(builder.ToString()))
+                if (ee.date.Equals(builder.ToString()))
                 {
                    
-                    Schedule.Add(new Schedule { ID = ee.ID, employeeID = ee.employeeID, Date = ee.Date, OnDuty = ee.OnDuty, employeeFirst = ee.employeeFirst, employeeLast = ee.employeeLast, shift = ee.shift, soba = ee.soba });
+                    Schedule.Add(new Schedule { id = ee.id, employeeid = ee.employeeid, date = ee.date, isOnDuty = ee.isOnDuty, employeeFirst = ee.employeeFirst, employeeLast = ee.employeeLast, shift = ee.shift, room = ee.room });
                    
                 }
 
@@ -154,7 +162,7 @@ namespace WpfApp2.View.Manager.ScheduleFolder
             foreach (Schedule ee in Schlista)
             {
 
-                if (s.ID == ee.ID)
+                if (s.id == ee.id)
                 {
 
 
@@ -163,7 +171,7 @@ namespace WpfApp2.View.Manager.ScheduleFolder
                 }
                 else
                 {
-                    Schedule.Add(new Schedule { ID = ee.ID, employeeID = ee.employeeID, Date = ee.Date, OnDuty = ee.OnDuty,  employeeFirst = ee.employeeFirst, employeeLast = ee.employeeLast, shift = ee.shift, soba = ee.soba });
+                    Schedule.Add(new Schedule { id = ee.id, employeeid = ee.employeeid, date = ee.date, isOnDuty = ee.isOnDuty,  employeeFirst = ee.employeeFirst, employeeLast = ee.employeeLast, shift = ee.shift, room = ee.room });
                 }
             }
 

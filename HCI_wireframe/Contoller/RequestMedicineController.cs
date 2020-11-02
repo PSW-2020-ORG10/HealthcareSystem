@@ -34,9 +34,9 @@ namespace HCI_wireframe.Contoller
            return medicineService.GetAll();
         }
 
-        public Medicine GetByID(int ID)
+        public Medicine GetByid(int id)
         {
-            return medicineService.GetByID(ID);
+            return medicineService.GetByid(id);
         }
     }
 }

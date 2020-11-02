@@ -54,7 +54,7 @@ namespace Klinika
 
             foreach (DoctorUser s in lista)
             {
-                if (s.Email.Equals(svojstvo))
+                if (s.email.Equals(svojstvo))
                 {
                     lekar = s;
                 }
@@ -97,7 +97,7 @@ namespace Klinika
                 }
                 List<String> obavestenja = user.specialNotifications;
 
-                obavestenja.Add("Ocena sistema od strane doktora  \n" + lekar.FirstName + " " + lekar.SecondName + "  - answer  -" + ocena);
+                obavestenja.Add("Ocena sistema od strane doktora  \n" + lekar.firstName + " " + lekar.secondName + "  - answer  -" + ocena);
                 user.specialNotifications = obavestenja;
                 Boolean isOK = cont.Update(user);
                 if(isOK==false)

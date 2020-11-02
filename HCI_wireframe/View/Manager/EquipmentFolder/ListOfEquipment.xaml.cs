@@ -53,8 +53,8 @@ namespace WpfApp2
             
             foreach (Equipment ee in lista)
             {
-                //oprema.Add(new Equipment { ID=ee.ID, Name=ee.Name, Quantity=ee.Quantity});
-                li.Add(new Lista { Name = ee.Name});
+                //oprema.Add(new Equipment { id=ee.id, Name=ee.Name, Quantity=ee.Quantity});
+                li.Add(new Lista { Name = ee.name});
             }
             dataGridEquipment.ItemsSource = li;
         
@@ -87,7 +87,7 @@ namespace WpfApp2
             foreach (Equipment ee in lista)
             {
 
-                if (ee.Name.Equals(id))
+                if (ee.name.Equals(id))
                 {
                     GridMain.Children.Clear();
                     UserControl usc = new EquipmentClass(ee);

@@ -13,17 +13,19 @@ using HCI_wireframe.Service;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Media;
 using System.Text.RegularExpressions;
 
 namespace Class_diagram.Service
 {
-    public class PatientService: AbstractUserService<PatientUser>
+    public class PatientService : AbstractUserService<PatientUser>
     {
         PatientsRepository patientsRepository;
         String path = bingPathToAppDir(@"JsonFiles\patients.json");
- 
-        public PatientService() {
+
+        public PatientService()
+        {
             patientsRepository = new PatientsRepository(path);
         }
 
@@ -35,7 +37,7 @@ namespace Class_diagram.Service
 
         public override Boolean New(PatientUser patient)
         {
-            if (isDataValid(patient.Email, patient.UniqueCitizensIdentityNumber,patient) && isCityValid(patient.City) && isMedicalIdValid(patient.MedicalIDnumber,patient))
+            if (isDataValid(patient.email, patient.uniqueCitizensidentityNumber, patient) && isCityValid(patient.city) && isMedicalidValid(patient.medicalIdNumber, patient))
             {
                 patientsRepository.New(patient);
                 return true;
@@ -43,26 +45,25 @@ namespace Class_diagram.Service
             return false;
         }
 
-        private bool isMedicalIdValid(string medicalIDnumber,PatientUser patient)
+        private bool isListOfPatientsEmpty(List<PatientUser> patients)
         {
-            List<PatientUser> patients = GetAll();
-            foreach (PatientUser patient2 in patients)
-            {
-                if (patient.ID != patient2.ID)
-                {
-                    if (patient2.MedicalIDnumber.Equals(medicalIDnumber))
-                    {
-                        return false;
-                    }
-                }
-            }
+            if (patients.Count == 0) return true;
+            return false;
+        }
 
-            return true;
+        private bool isMedicalidValid(string medicalIdNumber, PatientUser patient)
+        {
+            List<PatientUser> patients = new List<PatientUser>();
+            patients = GetAll();
+
+            patients = patients.Where(patient2 => (patient.id != patient2.id && patient2.medicalIdNumber.Equals(medicalIdNumber))).ToList();
+            return isListOfPatientsEmpty(patients);
+
         }
 
         public override Boolean Update(PatientUser patient)
         {
-            if (isDataValid(patient.Email, patient.UniqueCitizensIdentityNumber,patient) && isCityValid(patient.City))
+            if (isDataValid(patient.email, patient.uniqueCitizensidentityNumber, patient) && isCityValid(patient.city))
             {
                 patientsRepository.Update(patient);
                 return true;
@@ -70,149 +71,106 @@ namespace Class_diagram.Service
             return false;
         }
 
-        public override PatientUser GetByID(int ID)
+        public override PatientUser GetByid(int id)
         {
-            return patientsRepository.GetByID(ID);
+            return patientsRepository.GetByid(id);
         }
 
         public override void Remove(PatientUser patient)
         {
-            patientsRepository.Delete(patient.ID);
+            patientsRepository.Delete(patient.id);
         }
+
+        private Boolean compareTimeForAppointment(TimeSpan time, DoctorAppointment appointment)
+        {
+            TimeSpan durationOfAppointment = TimeSpan.FromMinutes(15);
+            TimeSpan endTime = appointment.time.Add(durationOfAppointment);
+            int areSelectedAndAppointmentTimeEqual = TimeSpan.Compare(time, appointment.time);
+            int areSelectedAndEndTimeEqual = TimeSpan.Compare(time, endTime);
+            if ((areSelectedAndAppointmentTimeEqual == 1 && areSelectedAndEndTimeEqual == -1) || areSelectedAndAppointmentTimeEqual == 0) return true;
+            return false;
+        }
+
+        private bool arePatientsEquals(PatientUser firstPatient, PatientUser secondPatient)
+        {
+            if (firstPatient.id == secondPatient.id) return true;
+            return false;
+        }
+
         public Boolean doesPatientHaveAnAppointmentAtSpecificTime(TimeSpan time, string date, PatientUser patient)
         {
-           AppointmentController appointmentController = new AppointmentController();
+            AppointmentController appointmentController = new AppointmentController();
             List<DoctorAppointment> listOfAppointments = appointmentController.GetAll();
-            if (listOfAppointments == null)
-            {
-                listOfAppointments = new List<DoctorAppointment>();
-            }
+            if (listOfAppointments == null) listOfAppointments = new List<DoctorAppointment>();
+
             foreach (DoctorAppointment appointment in listOfAppointments)
             {
-                PatientUser patientOnAppointment = appointment.patient;
-                if (patient.ID == patientOnAppointment.ID)
-                {
-                    if (appointment.Date.Equals(date))
-                    {
-                        TimeSpan time1 = TimeSpan.FromMinutes(15);
-                        TimeSpan krajPr = appointment.Time.Add(time1);
-                        int result = TimeSpan.Compare(time, appointment.Time);
-                        int result1 = TimeSpan.Compare(time, krajPr);
-                        if ((result == 1 && result1 == -1) || result == 0)
-                        {
-                            return true;
-                        }
-                    }
-                }
+                if (arePatientsEquals(patient, appointment.patient) && appointment.date.Equals(date) && compareTimeForAppointment(time, appointment)) return true;
             }
             return false;
         }
 
         public bool doesPatientHaveAnAppointmentAtSpecificPeriod(TimeSpan start, TimeSpan end, string dateToString, PatientUser patient)
         {
-            bool zauzet = false;
-            AppointmentController appController = new AppointmentController();
+            bool busy = false;
+            AppointmentController appointmentController = new AppointmentController();
+            List<DoctorAppointment> listOfAppointments = appointmentController.GetAll();
 
-            List<DoctorAppointment> listaPregleda = appController.GetAll();
-            foreach (DoctorAppointment dd in listaPregleda)
+            foreach (DoctorAppointment appointment in listOfAppointments)
             {
-                PatientUser dr = dd.patient;
-                if (dr.ID == patient.ID)
+                PatientUser patientUser = appointment.patient;
+                if (arePatientsEquals(patientUser, patient) && appointment.date.Equals(dateToString))
                 {
-                    if (dd.Date.Equals(dateToString))
-                    {
-                        TimeSpan time1 = TimeSpan.FromMinutes(15);
-                        TimeSpan krajPr = dd.Time.Add(time1);
-                        int result = TimeSpan.Compare(start, dd.Time);
-                        int result1 = TimeSpan.Compare(start, krajPr);
-                        if ((result == 1 && result1 == -1) || result == 0)
-                        {
-                            zauzet = true;
-                        }
-                        int rezultat = TimeSpan.Compare(end, dd.Time);
-                        int rezultat1 = TimeSpan.Compare(end, krajPr);
-                        if ((rezultat == 1 && rezultat1 == -1) || rezultat == 0)
-                        {
-
-                            zauzet = true;
-                        }
-                    }
-
-
+                    busy = compareTimeForAppointment(start, appointment);
+                    if (!busy) busy = compareTimeForAppointment(end, appointment);
                 }
-
             }
-            return zauzet;
+            return busy;
         }
 
+        private Boolean compareTimeForOperation(TimeSpan time, TimeSpan start, TimeSpan end)
+        {
+            int result1 = TimeSpan.Compare(time, start);
+            int result2 = TimeSpan.Compare(time, end);
+            if ((result1 == 1 && result2 == -1) || result1 == 0)
+            {
+                return true;
+            }
+            return false;
+        }
         public bool doesPatientHaveAnOperationAtSpecificPeriod(TimeSpan start, TimeSpan end, string dateToString, PatientUser patient)
         {
-            bool zauzet = false;
+            bool busy = false;
             OperationController operationController = new OperationController();
-
             List<Operation> listOfOperation = operationController.GetAll();
-            foreach (Operation dd in listOfOperation)
+
+            foreach (Operation operation in listOfOperation)
             {
-                PatientUser dr = dd.patient;
-                if (dr.ID == patient.ID)
+                PatientUser dr = operation.patient;
+                if (dr.id == patient.id && operation.date.Equals(dateToString))
                 {
-                    if (dd.Date.Equals(dateToString))
-                    {
-                        int result = TimeSpan.Compare(start, dd.Start);
-                        int result1 = TimeSpan.Compare(start, dd.End);
-                        if ((result == 1 && result1 == -1) || result == 0)
-                        {
-                            zauzet = true;
-                        }
-                        int rezultat = TimeSpan.Compare(end, dd.Start);
-                        int rezultat1 = TimeSpan.Compare(end, dd.End);
-                        if ((rezultat == 1 && rezultat1 == -1) || rezultat == 0)
-                        {
-
-
-                            zauzet = true;
-                        }
-                    }
-
+                    busy = compareTimeForOperation(start, operation.start, operation.end);
+                    if (!busy) busy = compareTimeForOperation(end, operation.start, operation.end);
                 }
             }
-            return zauzet;
+            return busy;
 
         }
 
         public Boolean doesPatientHaveAnOperationAtSpecificTime(TimeSpan time, string date, PatientUser patient)
         {
             OperationController operationController = new OperationController();
-            int result1 = 0;
-            int result2 = 0;
-            List<Operation> listOfOperation =operationController.GetAll();
-            if (listOfOperation == null)
-            {
-                listOfOperation = new List<Operation>();
-            }
+            List<Operation> listOfOperation = operationController.GetAll();
+            if (listOfOperation == null) listOfOperation = new List<Operation>();
+            
             foreach (Operation operation in listOfOperation)
             {
-                PatientUser patientOnOperation = operation.patient;
-                if (patientOnOperation.ID == patient.ID)
-                {
-                    if (operation.Date.Equals(date))
-                    {
-                        result1 = TimeSpan.Compare(operation.Start, time);
-                        result2 = TimeSpan.Compare(time, operation.End);
-
-                        if ((result1 == -1 && result2 == -1) || result1 == 0)
-                        {
-                            return true;
-                        }
-
-                    }
-                }
-
+                if (operation.patient.id == patient.id && operation.date.Equals(date) && compareTimeForOperation(time, operation.start, operation.end)) return true;
             }
             return false;
         }
 
-     
+
     }
 }
 

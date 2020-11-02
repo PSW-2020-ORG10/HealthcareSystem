@@ -43,13 +43,13 @@
                             <SolidColorBrush Color="#FF2C2A2A"/>
                         </DataGrid.Background>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header=" Employee ID" Binding="{Binding employeeID}"/>
+                            <DataGridTextColumn Header=" Employee id" Binding="{Binding employeeid}"/>
                             <DataGridTextColumn Header="First Name" Binding="{Binding employeeFirst}" />
                             <DataGridTextColumn Header="Last Name" Binding="{Binding employeeLast}" />
-                            <DataGridTextColumn Header="Start time" Binding="{Binding shift.StartTime}" />
-                            <DataGridTextColumn Header="End time" Binding="{Binding shift.EndTime}" />
-                            <DataGridTextColumn Header="Room" Binding="{Binding soba}" />
-                            <DataGridTextColumn Header="On duty" Binding="{Binding OnDuty}"/>
+                            <DataGridTextColumn Header="Start time" Binding="{Binding shift.startTime}" />
+                            <DataGridTextColumn Header="End time" Binding="{Binding shift.endTime}" />
+                            <DataGridTextColumn Header="Room" Binding="{Binding room}" />
+                            <DataGridTextColumn Header="On duty" Binding="{Binding isOnDuty}"/>
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>

@@ -22,9 +22,9 @@
 
                     <DataGridTextColumn CanUserSort="True" IsReadOnly="True"  Header="Ime lekara"  Binding="{Binding employeeFirst}"/>
                     <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Header="Prezime lekara" Binding="{Binding employeeLast}" />
-                    <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Header="ID lekara" Binding="{Binding employeeID}" />
+                    <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Header="id lekara" Binding="{Binding employeeid}" />
                     <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Header="Datum" Binding="{Binding Date}"/>
-                    <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Header="Na duznosti" Binding="{Binding OnDuty}"/>
+                    <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Header="Na duznosti" Binding="{Binding isOnDuty}"/>
                     <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Header="Smena od" Binding="{Binding shift.StartTime}"/>
                     <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Header="Smena do" Binding="{Binding shift.EndTime}"/>
                     <DataGridTextColumn CanUserSort="True" IsReadOnly="True"  Header="Ordinacija" Binding="{Binding soba}" />

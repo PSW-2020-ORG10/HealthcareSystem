@@ -45,17 +45,17 @@ namespace WpfApp2.Employees
             foreach(ManagerUser user in lista)
             {
                 managerU = user;
-                id = user.ID;
-                first.Text = user.FirstName;
-                last.Text = user.SecondName;
-                datetxt.Text = user.DateOfBirth;
+                id = user.id;
+                first.Text = user.firstName;
+                last.Text = user.secondName;
+                datetxt.Text = user.dateOfBirth;
                 address.Text = user.city;
-                emailtxt.AppendText(user.Email.ToString());
+                emailtxt.AppendText(user.email.ToString());
               //  Console.WriteLine(user.Email);
-                phonetxt.Text = user.PhoneNumber;
-                ucinTxt.Text = user.UniqueCitizensIdentityNumber;
+                phonetxt.Text = user.phoneNumber;
+                ucinTxt.Text = user.uniqueCitizensidentityNumber;
                 hour.Text = user.salary.ToString();
-                pass.Text = user.Password;
+                pass.Text = user.password;
                 
             }
             
@@ -76,7 +76,7 @@ namespace WpfApp2.Employees
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            ManagerUser ss = new ManagerUser(managerU.ID, first.Text, last.Text, datetxt.Text, ucinTxt.Text, phonetxt.Text, emailtxt.Text, pass.Text, address.Text, Double.Parse(hour.Text), managerU.specialNotifications);
+            ManagerUser ss = new ManagerUser(managerU.id, first.Text, last.Text, ucinTxt.Text, datetxt.Text , phonetxt.Text, emailtxt.Text, pass.Text, address.Text, Double.Parse(hour.Text), managerU.specialNotifications);
             Console.WriteLine(id);
 
             mc.Update(ss);

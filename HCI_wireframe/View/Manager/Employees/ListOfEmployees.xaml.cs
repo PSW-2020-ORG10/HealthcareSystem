@@ -64,9 +64,9 @@ namespace WpfApp2
             {
              
                 StringBuilder l = new StringBuilder();
-                l.Append(ee.ID+" ");
-                l.Append(ee.FirstName+" ");
-                l.Append(ee.SecondName);
+                l.Append(ee.id+" ");
+                l.Append(ee.firstName+" ");
+                l.Append(ee.secondName);
                 li.Add(new Lista { Name = l.ToString() });
             }
 
@@ -84,9 +84,9 @@ namespace WpfApp2
 
                 // l.Add(new Lista { Name = ee.FirstName, Last = ee.SecondName });
                 StringBuilder l = new StringBuilder();
-                l.Append(ee.ID + " ");
-                l.Append(ee.FirstName + " ");
-                l.Append(ee.SecondName);
+                l.Append(ee.id + " ");
+                l.Append(ee.firstName + " ");
+                l.Append(ee.secondName);
                 li.Add(new Lista { Name = l.ToString() });
 
             }
@@ -136,7 +136,7 @@ namespace WpfApp2
             foreach (DoctorUser ee in lista)
             {
                
-                if ((ee.ID.ToString()).Equals(words1[1]) && (ee.FirstName).Equals(words1[2]) && (ee.SecondName).Equals(words1[3]))
+                if ((ee.id.ToString()).Equals(words1[1]) && (ee.firstName).Equals(words1[2]) && (ee.secondName).Equals(words1[3]))
                 {
                    
                     GridMain.Children.Clear();
@@ -148,7 +148,7 @@ namespace WpfApp2
 
             foreach (SecretaryUser ee in listaS)
             {
-                if ((ee.ID.ToString()).Equals(words1[1]) && (ee.FirstName).Equals(words1[2]) && (ee.SecondName).Equals(words1[3]))
+                if ((ee.id.ToString()).Equals(words1[1]) && (ee.firstName).Equals(words1[2]) && (ee.secondName).Equals(words1[3]))
                 {
                     GridMain.Children.Clear();
                     UserControl usc = new EmployeesAccount(ee);

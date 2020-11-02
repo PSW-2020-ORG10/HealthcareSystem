@@ -95,7 +95,7 @@ namespace HCI_wireframe
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
-        string myProperty = App.Current.Properties["PatientID"].ToString();
+        string myProperty = App.Current.Properties["Patientid"].ToString();
 
         public List<Integer> AppLista { get; set; }
         public PatientUser patient { get; set; }
@@ -134,12 +134,12 @@ namespace HCI_wireframe
            
             foreach (DoctorUser d in listDoctors)
             { 
-                if (d.Specialist == false)
+                if (d.isSpecialist == false)
                 {
                     StringBuilder l = new StringBuilder();
-                    l.Append(d.FirstName + " ");
-                    l.Append(d.SecondName + " ");
-                    l.Append(d.ID);
+                    l.Append(d.firstName + " ");
+                    l.Append(d.secondName + " ");
+                    l.Append(d.id);
                     Integer a = new Integer();
                     a.DoctorName = l.ToString();
                     listDoctorsBinding.Add(a);
@@ -147,11 +147,11 @@ namespace HCI_wireframe
             }
 
             doctorCombo.ItemsSource = listDoctorsBinding;
-            patient = patientController.GetByID(int.Parse(myProperty));
+            patient = patientController.GetByid(int.Parse(myProperty));
             foreach (DoctorAppointment doctorApp in AppointmentListAll)
             {
                 PatientUser idPacijent = doctorApp.patient;
-                if (idPacijent.ID == patient.ID)
+                if (idPacijent.id == patient.id)
                 {
                     listAppointments.Add(doctorApp);
                 }
@@ -360,16 +360,16 @@ namespace HCI_wireframe
             }
         }
 
-        private int getID()
+        private int getid()
         {
             int number = 0;
            
 
             foreach (DoctorAppointment r in listAppointments)
             {
-                if (r.ID > number)
+                if (r.id > number)
                 {
-                    number = r.ID;
+                    number = r.id;
 
                 }
                 number += 1;
@@ -452,7 +452,7 @@ namespace HCI_wireframe
                 int idDoktor = int.Parse(delovi[2]);
 
 
-                DoctorUser doktorPregled = doctorController.GetByID(idDoktor);
+                DoctorUser doktorPregled = doctorController.GetByid(idDoktor);
                
 
                 String konacnoVreme = "";
@@ -575,7 +575,7 @@ namespace HCI_wireframe
 
                 Shift smena = employeesScheduleController.getShiftForDoctorForSpecificDay(Date_TextBox.Text,doktorPregled);
 
-                if (smena == null || smena.StartTime == null || smena.EndTime == null)
+                if (smena == null || smena.startTime == null || smena.endTime == null)
                 {
                      MessageBox.Show("Doctor is not working that day.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                      Date_TextBox.Focus();
@@ -608,9 +608,9 @@ namespace HCI_wireframe
 
 
                     DoctorUser doktorPunoIme = dapp.doctor;
-                    String doktorPuno = doktorPunoIme.FirstName + " " + doktorPunoIme.SecondName;
+                    String doktorPuno = doktorPunoIme.firstName + " " + doktorPunoIme.secondName;
 
-                    MessageBox.Show("New appointment is scheduled\nTime     " + dapp.Time.ToString() + "\nDate      " + dapp.Date + "\nDoctor     " + doktorPuno, "SUCCESS");
+                    MessageBox.Show("New appointment is scheduled\nTime     " + dapp.time.ToString() + "\nDate      " + dapp.date + "\nDoctor     " + doktorPuno, "SUCCESS");
 
                 }
             

@@ -19,12 +19,12 @@
                   SelectionMode="Single"  AutoGenerateColumns="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  ScrollViewer.CanContentScroll="True" HorizontalScrollBarVisibility="Visible"
                    Grid.Row="1" >
                 <DataGrid.Columns>
-                    <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Header="Ime" Binding="{Binding FirstName}"/>
-                    <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Header="Prezime" Binding="{Binding SecondName}" />
-                    <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Header="Broj zdravstvene knjizice" Binding="{Binding MedicalIDnumber}"/>
-                    <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Header="Broj telefona" Binding="{Binding PhoneNumber}" />
-                    <DataGridTextColumn IsReadOnly="True" Header="Jedinstveni maticni broj" Binding="{Binding UniqueCitizensIdentityNumber}"></DataGridTextColumn>
-                    <DataGridTextColumn IsReadOnly="True" Header="Datum rodjenja" Binding="{Binding DateOfBirth}"></DataGridTextColumn>
+                    <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Header="Ime" Binding="{Binding firstName}"/>
+                    <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Header="Prezime" Binding="{Binding secondName}" />
+                    <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Header="Broj zdravstvene knjizice" Binding="{Binding medicalIdNumber}"/>
+                    <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Header="Broj telefona" Binding="{Binding phoneNumber}" />
+                    <DataGridTextColumn IsReadOnly="True" Header="Jedinstveni maticni broj" Binding="{Binding uniqueCitizensidentityNumber}"></DataGridTextColumn>
+                    <DataGridTextColumn IsReadOnly="True" Header="Datum rodjenja" Binding="{Binding dateOfBirth}"></DataGridTextColumn>
                
                 </DataGrid.Columns>
             </DataGrid>

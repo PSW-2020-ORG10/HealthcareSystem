@@ -17,31 +17,29 @@ namespace Class_diagram.Model.Employee
     {
         public String employeeFirst { get; set; }
         public String employeeLast { get; set; }
-        public String employeeID { get; set; }
+        public String employeeid { get; set; }
 
-        public String Date { get; set; }
-        public Boolean OnDuty { get; set; }
+        public String date { get; set; }
+        public Boolean isOnDuty { get; set; }
 
         public Shift shift { get; set; }
        
-        public String soba { get; set; }
+        public String room { get; set; }
+        public Schedule() : base() { }
 
 
-        public Schedule(int id, String employeeID, String dateOne, Boolean duty, String emplFirst, String emplLast, Shift shifts , String s) : base(id)
+        public Schedule(int id, String employeeid, String date, Boolean isOnDuty, String employeeFirst, String employeeLast, Shift shift, String room) : base(id)
         {
-            this.employeeID = employeeID;
-            this.Date = dateOne;
-            this.OnDuty = duty;
-            this.employeeFirst= emplFirst;
-            this.employeeLast = emplLast;
-            this.shift = shifts;
-            this.soba = s;
+            this.employeeid = employeeid;
+            this.date = date;
+            this.isOnDuty = isOnDuty;
+            this.employeeFirst= employeeFirst;
+            this.employeeLast = employeeLast;
+            this.shift = shift;
+            this.room = room;
         }
 
-        public Schedule() : base()
-        {
-        
-        }
+
 
     }
 }

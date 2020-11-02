@@ -65,7 +65,7 @@ namespace HCI_wireframe
 
         private void Doctor_Click(object sender, RoutedEventArgs e)
         {
-            var s = new GlavniDoktorProzor();
+            var s = new GlavnidoktorProzor();
             s.Show();
 
         }

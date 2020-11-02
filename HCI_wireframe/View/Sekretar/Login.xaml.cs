@@ -98,12 +98,12 @@ namespace ProjekatHCI
              foreach (SecretaryUser ee in lista)
             {
 
-             if (ee.Email.Equals(EmailBox.Text))
+             if (ee.email.Equals(EmailBox.Text))
             {
-                       if (PasswordBox.Password.Equals(ee.Password))
+                       if (PasswordBox.Password.Equals(ee.password))
                         {
                                     prijavljen = ee;
-                                     App.Current.Properties["SecretaryEmail"] = ee.Email;
+                                     App.Current.Properties["SecretaryEmail"] = ee.email;
                                     this.Close();
                                     MainWindowSekretar main = new MainWindowSekretar();
                                     main.Show();

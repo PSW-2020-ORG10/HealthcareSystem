@@ -32,7 +32,7 @@ namespace WpfApp2
         {
             name = Name.Text;
      
-            id = getNextID();
+            id = getNextid();
 
 
             if (name == "")
@@ -71,16 +71,16 @@ namespace WpfApp2
 
 
         }
-        private int getNextID()
+        private int getNextid()
         {
             RoomController rp = new RoomController();
             List<Room> lista = rp.GetAll();
             int number = 0;
             foreach (Room r in lista)
             {
-                if (r.ID > number)
+                if (r.id > number)
                 {
-                    number = r.ID;
+                    number = r.id;
                 }
             }
             number += 1;

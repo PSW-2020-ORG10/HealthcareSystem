@@ -12,23 +12,21 @@ namespace HCI_wireframe.Model.Doctor
 {
     public class DoctorUser : EmployeeUser
     {
-
-
-        public Boolean Specialist { get; set; }
+        public Boolean isSpecialist { get; set; }
        
         public List<String> specialNotifications { get; set; }
         public String ordination { get; set; }
 
-        public String speciality;
+        public String speciality { get; set; }
         public DoctorUser(int id, string name, string secondname, string ucin, string date, string phone, string email, string pasword, String city,
-             Double salary, Boolean specialist, String speciality,  List<String> spec, String ord) :
+             Double salary, Boolean isSpecialist, String speciality,  List<String> specialNotifications, String ordination) :
              base(id, name, secondname, ucin, date, phone, email, pasword, city, salary)
         {
-            this.Specialist = specialist;
+            this.isSpecialist = isSpecialist;
             this.speciality = speciality;
           
-            this.specialNotifications = spec;
-            this.ordination = ord;
+            this.specialNotifications = specialNotifications;
+            this.ordination = ordination;
 
         }
 

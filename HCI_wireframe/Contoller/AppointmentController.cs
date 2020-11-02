@@ -26,10 +26,10 @@ namespace Class_diagram.Contoller
         {
             contextAppointmentService.New(appointment, operation);
         }
-        public void Remove(int appointmentID, int operationID)
+        public void Remove(int appointmentid, int operationid)
         {
             
-            contextAppointmentService.Remove(appointmentID, operationID);
+            contextAppointmentService.Remove(appointmentid, operationid);
         }
         public void Update(DoctorAppointment appointment, Operation operation)
         { 
@@ -41,9 +41,9 @@ namespace Class_diagram.Contoller
             return regularAppointmentService.GetAll();
         }
 
-        public DoctorAppointment GetByID(int id)
+        public DoctorAppointment GetByid(int id)
         {
-            return regularAppointmentService.GetByID(id);
+            return regularAppointmentService.GetByid(id);
         }
 
         public Boolean isTermNotAvailable(DoctorUser doctor, TimeSpan time, String dateToString, PatientUser patient)

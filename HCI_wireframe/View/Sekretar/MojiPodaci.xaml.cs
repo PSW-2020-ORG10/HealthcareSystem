@@ -36,13 +36,13 @@ namespace ProjekatHCI
 
             foreach (SecretaryUser s in lista)
             {
-                if (s.Email.Equals(myProperty))
+                if (s.email.Equals(myProperty))
                 {
                     sekretar = s;
-                    ImeBox.Text = sekretar.FirstName.ToString();
-                    PrezimeBox.Text = sekretar.SecondName.ToString();
-                    DatumRodjBox.Text = sekretar.DateOfBirth.ToString();
-                    JMBGBox.Text = sekretar.UniqueCitizensIdentityNumber.ToString();
+                    ImeBox.Text = sekretar.firstName.ToString();
+                    PrezimeBox.Text = sekretar.secondName.ToString();
+                    DatumRodjBox.Text = sekretar.dateOfBirth.ToString();
+                    JMBGBox.Text = sekretar.uniqueCitizensidentityNumber.ToString();
                     if (sekretar.city.ToString() != null)
                     {
                         AdresaBox.Text = sekretar.city.ToString();
@@ -51,9 +51,9 @@ namespace ProjekatHCI
                     {
                         AdresaBox.Text = "";
                     }
-                    EmailBox.Text = sekretar.Email.ToString();
-                    LozinkaBox.Text = sekretar.Password;
-                    BrTelBox.Text = sekretar.PhoneNumber.ToString();
+                    EmailBox.Text = sekretar.email.ToString();
+                    LozinkaBox.Text = sekretar.password;
+                    BrTelBox.Text = sekretar.phoneNumber.ToString();
                 }
 
 

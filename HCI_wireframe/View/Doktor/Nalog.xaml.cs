@@ -119,7 +119,7 @@ namespace Klinika
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            GlavniDoktorProzor glavni = new GlavniDoktorProzor();
+            GlavnidoktorProzor glavni = new GlavnidoktorProzor();
             glavni.Show();
         }
 

@@ -216,7 +216,7 @@ namespace ProjekatHCI
 
 
                 
-                int broj = getNextID();
+                int broj = getNextid();
                 List<String> notif = new List<string>();
                 notif.Add("");
                 PatientUser rp =  new PatientUser(0, ImeBox.Text, PrezimeBox.Text, JMBGBox.Text, DatumRodjBox.Text,
@@ -252,7 +252,7 @@ namespace ProjekatHCI
             Panel.Children.Add(usc);
 
         }
-        private int getNextID()
+        private int getNextid()
         {
             PatientController rp = new PatientController();
             List<PatientUser> lista = rp.GetAll();
@@ -261,9 +261,9 @@ namespace ProjekatHCI
 
             foreach (PatientUser r in lista)
             {
-                if (r.ID > number)
+                if (r.id > number)
                 {
-                    number = r.ID;
+                    number = r.id;
                 }
             }
 

@@ -26,7 +26,7 @@ namespace HCI_wireframe.View.Patient
     /// </summary>
     public partial class EditAccount : UserControl
     {
-        string myProperty = App.Current.Properties["PatientID"].ToString();
+        string myProperty = App.Current.Properties["Patientid"].ToString();
         public PatientUser Patient { get; set; }
         public PatientController patientController;
         public EditAccount()
@@ -37,22 +37,22 @@ namespace HCI_wireframe.View.Patient
             patientController = new PatientController();
             List<PatientUser> lista = patientController.GetAll();
 
-            Patient = patientController.GetByID(int.Parse(myProperty));
+            Patient = patientController.GetByid(int.Parse(myProperty));
             
 
-            Firstname= Patient.FirstName.ToString();
-            Secondname = Patient.SecondName.ToString();
+            Firstname= Patient.firstName.ToString();
+            Secondname = Patient.secondName.ToString();
 
 
-            Date= Patient.DateOfBirth.ToString();
+            Date= Patient.dateOfBirth.ToString();
                  
-            City_TextBox.Text = Patient.City.ToString();
-            Phone = Patient.PhoneNumber.ToString();
-            Email = Patient.Email.ToString();
+            City_TextBox.Text = Patient.city.ToString();
+            Phone = Patient.phoneNumber.ToString();
+            Email = Patient.email.ToString();
                    
-            Password_PasswordBox.Password = Patient.Password.ToString();
-            ConfirmPassword_PasswordBox.Password = Patient.Password.ToString();
-            AllergieTextBox.Text = Patient.Allergie.ToString();
+            Password_PasswordBox.Password = Patient.password.ToString();
+            ConfirmPassword_PasswordBox.Password = Patient.password.ToString();
+            allergieTextBox.Text = Patient.allergie.ToString();
 
               
         }
@@ -71,7 +71,7 @@ namespace HCI_wireframe.View.Patient
         private String _firstaname;
         private String _secondname;
         private String _ucin;
-        private String _medicalID;
+        private String _medicalid;
         private String _date;
         private String _country;
         private String _city;
@@ -162,15 +162,15 @@ namespace HCI_wireframe.View.Patient
                 }
             }
         }
-        public String MedicalId
+        public String Medicalid
         {
-            get { return _medicalID; }
+            get { return _medicalid; }
             set
             {
-                if (value != _medicalID)
+                if (value != _medicalid)
                 {
-                    _medicalID = value;
-                    OnPropertyChanged("MedicalId");
+                    _medicalid = value;
+                    OnPropertyChanged("Medicalid");
                 }
             }
         }
@@ -420,9 +420,9 @@ namespace HCI_wireframe.View.Patient
             
             else
             {
-                PatientUser patiendEdited = new PatientUser(Patient.ID, FirstName_TextBox.Text, SecondName_TextBox.Text, Patient.UniqueCitizensIdentityNumber, Date_TextBox.Text,
-                    Phone_TextBox.Text, Patient.MedicalIDnumber, AllergieTextBox.Text, City_TextBox.Text, false,Email_TextBox.Text, Password_PasswordBox.Password,
-                    false,Patient.Notifications);
+                PatientUser patiendEdited = new PatientUser(Patient.id, FirstName_TextBox.Text, SecondName_TextBox.Text, Patient.uniqueCitizensidentityNumber, Date_TextBox.Text,
+                    Phone_TextBox.Text, Patient.medicalIdNumber, allergieTextBox.Text, City_TextBox.Text, false,Email_TextBox.Text, Password_PasswordBox.Password,
+                    false,Patient.notifications);
 
                
                Boolean isGoodUpdate =  patientController.Update(patiendEdited);

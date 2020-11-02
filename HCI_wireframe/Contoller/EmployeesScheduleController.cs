@@ -60,9 +60,9 @@ namespace Class_diagram.Contoller
             return employeesScheduleService.isTimeInGoodFormat(start, end);
         }
 
-        public Schedule GetByID(int ID)
+        public Schedule GetByid(int id)
         {
-            return employeesScheduleService.GetByID(ID);
+            return employeesScheduleService.GetByid(id);
         }
     }
 }

@@ -12,20 +12,20 @@ namespace Class_diagram.Model.Employee
 {
    public class User : Entity
    {
-        public String FirstName { get; set; }
-        public String SecondName { get; set; }
-        public String UniqueCitizensIdentityNumber { get; set; }
-        public String DateOfBirth { get; set; }
-        public String PhoneNumber { get; set; }
+        public String firstName { get; set; }
+        public String secondName { get; set; }
+        public String uniqueCitizensidentityNumber { get; set; }
+        public String dateOfBirth { get; set; }
+        public String phoneNumber { get; set; }
        
 
-        public User(int id, string name, string secondname, string ucin, string date, string phone) : base(id)
+        public User(int id, string firstName, string secondName, string uniqueCitizensidentityNumber, string dateOfBirth, string phoneNumber) : base(id)
         {
-            this.FirstName = name;
-            this.SecondName = secondname;
-            this.UniqueCitizensIdentityNumber = ucin;
-            this.DateOfBirth = date;
-            this.PhoneNumber = phone;
+            this.firstName = firstName;
+            this.secondName = secondName;
+            this.uniqueCitizensidentityNumber = uniqueCitizensidentityNumber;
+            this.dateOfBirth = dateOfBirth;
+            this.phoneNumber = phoneNumber;
         }
 
        

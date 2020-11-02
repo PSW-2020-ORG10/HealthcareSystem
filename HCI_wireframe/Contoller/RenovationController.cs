@@ -41,9 +41,9 @@ namespace Class_diagram.Contoller
             renovationService.New(renovation);
         }
 
-        public Renovation GetByID(int ID)
+        public Renovation GetByid(int id)
         {
-            return renovationService.GetByID(ID);
+            return renovationService.GetByid(id);
         }
     }
 }

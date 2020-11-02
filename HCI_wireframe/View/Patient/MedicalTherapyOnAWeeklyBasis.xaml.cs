@@ -25,7 +25,7 @@ namespace HCI_wireframe
     /// </summary>
     public partial class MedicalTherapyOnAWeeklyBasis : Window
     {
-        string myProperty = App.Current.Properties["PatientID"].ToString();
+        string myProperty = App.Current.Properties["Patientid"].ToString();
         PatientUser ovajPacijent = new PatientUser();
         public List<DoctorAppointment> AppointmentList { get; set; }
         public List<DoctorAppointment> AppointmentListAll { get; set; }
@@ -109,11 +109,11 @@ namespace HCI_wireframe
             AppointmentListAll =new List<DoctorAppointment>();
             AppointmentController appointmentController = new AppointmentController();
             AppointmentListAll = appointmentController.GetAll();
-            ovajPacijent = patientController.GetByID(int.Parse(myProperty));
+            ovajPacijent = patientController.GetByid(int.Parse(myProperty));
             foreach (DoctorAppointment doctorApp in AppointmentListAll)
             {
                 PatientUser idPacijent = doctorApp.patient;
-                if (idPacijent.ID == ovajPacijent.ID)
+                if (idPacijent.id == ovajPacijent.id)
                 {
                     AppointmentList.Add(doctorApp);
                 }
@@ -129,7 +129,7 @@ namespace HCI_wireframe
                 foreach (DoctorAppointment d in AppointmentList)
                 {
 
-                    String datum = d.Date;
+                    String datum = d.date;
                     String[] delovi = datum.Split('/');
                     int mesec = int.Parse(delovi[1]);
                     int dan = int.Parse(delovi[0]);

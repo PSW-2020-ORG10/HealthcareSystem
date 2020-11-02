@@ -6,20 +6,12 @@ using System.Threading.Tasks;
 
 namespace PatientWebApplication.Services
 {
-    public static class FeedbackService
+    public class FeedbackService
     {
-        public static List<Feedback> GetPublished()
+        private readonly MyDbContext dbContext;
+        public FeedbackService(MyDbContext context)
         {
-            List<Feedback> result = new List<Feedback>();
-            foreach (Feedback feedback in Program.Feedback)
-            {
-                if (feedback.IsPublished)
-                {
-                    result.Add(feedback);
-                }
-            }
-
-            return result;
+            dbContext = context;
         }
     }
 }

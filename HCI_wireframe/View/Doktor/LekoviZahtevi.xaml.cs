@@ -63,7 +63,7 @@ namespace Klinika
 
              foreach (Medicine ee in Tablete)
              {
-                 lekovi.Add(new Medicine { ID = ee.ID, Name = ee.Name, Quantity = ee.Quantity, description = ee.description, room = ee.room }) ;
+                 lekovi.Add(new Medicine { id = ee.id, name = ee.name, quantity = ee.quantity, description = ee.description, room = ee.room }) ;
 
                
             }
@@ -84,13 +84,13 @@ namespace Klinika
 
 
 
-            name = s.Name;
+            name = s.name;
             description = s.description;
             DoctorController doctorController = new DoctorController();
             List<DoctorUser> listaDoktora = doctorController.GetAll();
             foreach (DoctorUser d in listaDoktora)
             {
-                if (d.Email.Equals(svojstvo))
+                if (d.email.Equals(svojstvo))
                 {
                     lekar = d;
 
@@ -98,12 +98,12 @@ namespace Klinika
             }
 
 
-            //Medicine med = new Medicine(s.ID, name, s.Quantity, description, s.room, lekar, true);
+            //Medicine med = new Medicine(s.id, name, s.Quantity, description, s.room, lekar, true);
 
 
-            bool conf = s.confirmed;
+            bool conf = s.isConfirmed;
             conf = true;
-            s.confirmed = true;
+            s.isConfirmed = true;
             s.doctor = lekar;
 
 
@@ -126,16 +126,16 @@ namespace Klinika
             UserControl usc = new LekoviZahtevi();
             Panel.Children.Add(usc);
         }
-        private int getNextID()
+        private int getNextid()
         {
             MedicineController rp = new MedicineController();
             List<Medicine> lista = rp.GetAll();
             int number = 0;
             foreach (Medicine r in lista)
             {
-                if (r.ID > number)
+                if (r.id > number)
                 {
-                    number = r.ID;
+                    number = r.id;
                 }
             }
             number += 1;
@@ -150,13 +150,13 @@ namespace Klinika
 
 
 
-            name = s.Name;
+            name = s.name;
             description = s.description;
             DoctorController doctorController = new DoctorController();
             List<DoctorUser> listaDoktora = doctorController.GetAll();
             foreach (DoctorUser d in listaDoktora)
             {
-                if (d.Email.Equals(svojstvo))
+                if (d.email.Equals(svojstvo))
                 {
                     lekar = d;
 
@@ -164,8 +164,8 @@ namespace Klinika
             }
 
 
-            // Medicine med = new Medicine(s.ID, name, s.Quantity, description, s.room, lekar, false);
-            s.confirmed = false;
+            // Medicine med = new Medicine(s.id, name, s.Quantity, description, s.room, lekar, false);
+            s.isConfirmed = false;
             s.doctor = lekar;
             RequestMedicineController rq = new RequestMedicineController();
             rq.Remove(s);

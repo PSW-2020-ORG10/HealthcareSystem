@@ -53,8 +53,8 @@
                     <TextBlock Grid.Row="3"  Grid.Column="1" Text="UCIN:"/>
                     <TextBox Grid.Row="3" Grid.Column="2" Height="18" Grid.ColumnSpan="2" Name="UCINTextBox" TextChanged="UCINTextBox_TextChanged"/>
                     
-                    <TextBlock Grid.Row="4" Grid.Column="1" Text="Medical ID number:"/>
-                    <TextBox Grid.Row="4" Grid.Column="2" Height="18" Grid.ColumnSpan="2" Name="MedicalIDTextBox" TextChanged="MedicalIDTextBox_TextChanged"/>
+                    <TextBlock Grid.Row="4" Grid.Column="1" Text="Medical id number:"/>
+                    <TextBox Grid.Row="4" Grid.Column="2" Height="18" Grid.ColumnSpan="2" Name="MedicalidTextBox" TextChanged="MedicalidTextBox_TextChanged"/>
                     
                     <TextBlock Grid.Row="5" Grid.Column="1" Text="Date of birth:"/>
                     <TextBox Grid.Row="5" Grid.Column="2"  Height="18" Grid.ColumnSpan="2" Name="DateTextBox" TextChanged="DateTextBox_TextChanged"/>

@@ -19,12 +19,12 @@
                   SelectionMode="Single"  AutoGenerateColumns="False" ScrollViewer.CanContentScroll="True" IsTextSearchEnabled="False"
                    VerticalAlignment="Top" Grid.Row="1" HorizontalAlignment="Stretch" Height="323" Margin="0,0.2,-0.2,0"  >
             <DataGrid.Columns>
-                <DataGridTextColumn CanUserSort="True" IsReadOnly="True"  Header="Ime" Binding="{Binding FirstName}"/>
-                <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Header="Prezime" Binding="{Binding SecondName}" />
+                <DataGridTextColumn CanUserSort="True" IsReadOnly="True"  Header="Ime" Binding="{Binding firstName}"/>
+                <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Header="Prezime" Binding="{Binding secondName}" />
                     <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Header="Specijalizacija" Binding="{Binding speciality}"/>
-                <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Header="Broj telefona" Binding="{Binding PhoneNumber}" />
+                <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Header="Broj telefona" Binding="{Binding phoneNumber}" />
                     <DataGridTextColumn CanUserSort="True" IsReadOnly="True"  Header="Ordinacija" Binding="{Binding ordination}" />
-                    <DataGridTextColumn CanUserReorder="False" IsReadOnly="True" Header="E-mail" Binding="{Binding Email}"/>
+                    <DataGridTextColumn CanUserReorder="False" IsReadOnly="True" Header="E-mail" Binding="{Binding email}"/>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Orientation="Vertical" Grid.Row="0" Background="#FFC6F7FC" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >

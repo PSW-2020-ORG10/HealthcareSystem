@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using System.IO;
 namespace Class_diagram.Service
 {
-    public class EmergencyPhonesService : bingPath, IService<PhoneNumber>
+    public class EmergencyPhonesService : BingPath, IService<PhoneNumber>
     {
         public EmergencyPhonesRepository emergencyPhonesRepository;
         String path = bingPathToAppDir(@"JsonFiles\emergencyPhones.json");
@@ -29,9 +29,9 @@ namespace Class_diagram.Service
           
         }
 
-        public PhoneNumber GetByID(int ID)
+        public PhoneNumber GetByid(int id)
         {
-            return emergencyPhonesRepository.GetByID(ID);
+            return emergencyPhonesRepository.GetByid(id);
         }
 
         public void New(PhoneNumber entity)
@@ -41,7 +41,7 @@ namespace Class_diagram.Service
 
         public void Remove(PhoneNumber entity)
         {
-            emergencyPhonesRepository.Delete(entity.ID);
+            emergencyPhonesRepository.Delete(entity.id);
         }
 
         public void Update(PhoneNumber entity)

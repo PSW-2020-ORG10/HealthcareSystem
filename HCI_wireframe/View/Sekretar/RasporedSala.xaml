@@ -19,7 +19,7 @@
                   SelectionMode="Single"  AutoGenerateColumns="False" ScrollViewer.CanContentScroll="False" IsTextSearchEnabled="False"
                    VerticalAlignment="Top" Grid.Row="1" HorizontalAlignment="Stretch" Height="323" Margin="0,0.2,-0.2,0" >
             <DataGrid.Columns>
-                <DataGridTextColumn CanUserSort="True" IsReadOnly="True"  Header="ID prostorije" />
+                <DataGridTextColumn CanUserSort="True" IsReadOnly="True"  Header="id prostorije" />
                 <DataGridTextColumn CanUserSort="True" IsReadOnly="True" Header="Tip prostorije" />
                 <DataGridTextColumn Header="Slobodni termini"></DataGridTextColumn>
                 <DataGridTextColumn Header="Zauzeti termini"></DataGridTextColumn>
@@ -38,8 +38,8 @@
                     <ComboBoxItem>Ordinacija</ComboBoxItem>
                     <ComboBoxItem>Bolnicka soba</ComboBoxItem>
                 </ComboBox>
-                <Label FontSize="14" FontWeight="Medium" Margin="20,0,0,0" Foreground="Blue" Width="90">ID prostorije:</Label>
-                <TextBox ToolTip="Unesite ID prostorije čiji raspored želite da prikažete" x:Name="Lekar" Height="22" Margin="0,0,0,0" VerticalAlignment="Top"  Width="74" Foreground="Blue" />
+                <Label FontSize="14" FontWeight="Medium" Margin="20,0,0,0" Foreground="Blue" Width="90">id prostorije:</Label>
+                <TextBox ToolTip="Unesite id prostorije čiji raspored želite da prikažete" x:Name="Lekar" Height="22" Margin="0,0,0,0" VerticalAlignment="Top"  Width="74" Foreground="Blue" />
                 <materialDesign:PackIcon Kind="Search" HorizontalAlignment="Left" Foreground="Blue" Height="20" Width="25" RenderTransformOrigin="-11.392,0.01" />
 
             </StackPanel>
