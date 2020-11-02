@@ -9,6 +9,7 @@ using Class_diagram.Model.Employee;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Class_diagram.Model.Patient
 {enum Priority
@@ -28,6 +29,7 @@ namespace Class_diagram.Model.Patient
         public String email { get; set; }
         public String password { get; set; }
         public Boolean isRegisteredBySecretary { get; set; }
+        [NotMapped]
         public List<String> notifications { get; set; }
 
         public PatientUser() : base()

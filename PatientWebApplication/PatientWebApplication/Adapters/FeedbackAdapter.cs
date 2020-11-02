@@ -5,7 +5,7 @@ namespace PatientWebApplication.Adapters
 {
     public class FeedbackAdapter
     {
-        public static Feedback FeedbackDtoToFeedback(FeedbackDto dto, PatientUserWeb patient)
+        public static Feedback FeedbackDtoToFeedback(FeedbackDto dto, PatientUser patient)
         {
             Feedback feedback = new Feedback();
             feedback.Message = dto.Message;

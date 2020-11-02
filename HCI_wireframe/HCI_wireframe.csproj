@@ -219,7 +219,6 @@
     <Compile Include="Model\Patient\Entity.cs" />
     <Compile Include="Model\Patient\Feedback.cs" />
     <Compile Include="Model\Patient\PatientUser.cs" />
-    <Compile Include="Model\Patient\PatientUserWeb.cs" />
     <Compile Include="Model\Patient\PhoneNumber.cs" />
     <Compile Include="Model\Patient\Prescription.cs" />
     <Compile Include="Model\Patient\Question.cs" />

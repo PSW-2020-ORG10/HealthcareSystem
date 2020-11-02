@@ -11,16 +11,16 @@ namespace PatientWebApplication.Models
     public class MyDbContext : DbContext
     {
         public DbSet<Feedback> Feedbacks { get; set; }
-        public DbSet<PatientUserWeb> Patients { get; set; }
+        public DbSet<PatientUser> Patients { get; set; }
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
-        PatientUserWeb patient = new PatientUserWeb(1, "Pera", "Peric", "1234", "2/2/2020", "123", "1234", "Alergija", "Grad", false, "email", "pass", false);
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<PatientUserWeb>().HasData(
+            modelBuilder.Entity<PatientUser>().HasData(
 
-            patient
+           new PatientUser(1, "Pera", "Peric", "1234", "2/2/2020", "123", "1234", "Alergija", "Grad", false, "email", "pass", false, new List<string>())
 
 
            );

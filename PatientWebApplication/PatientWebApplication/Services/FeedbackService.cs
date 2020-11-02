@@ -21,7 +21,7 @@ namespace PatientWebApplication.Services
         //method for creating new feedback
         public Feedback Create(FeedbackDto dto)
         {
-            PatientUserWeb patient = new PatientUserWeb();
+            PatientUser patient = new PatientUser();
             if (dto.IsAnonymous == false)      //if patient is not anynomous add to feedback else skip
             {
                 patient = dbContext.Patients.SingleOrDefault(patient => patient.id == 1); // still no login, so patient set to created patient in database with id=1, this will be changed after

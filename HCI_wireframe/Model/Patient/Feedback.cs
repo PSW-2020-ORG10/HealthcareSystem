@@ -10,10 +10,10 @@ namespace Class_diagram.Model.Patient
         public Boolean IsPublished { get; set; }
         public Boolean IsPublic { get; set; }
         public Boolean IsAnonymous { get; set; }
-        public virtual PatientUserWeb Patient { get; set; }
+        public virtual PatientUser Patient { get; set; }
         public int PatientId { get; set; }
 
-        public Feedback(int id, string message, bool isPublished, bool isPublic, bool isAnonymous,  int patientId, PatientUserWeb patient) : base(id)
+        public Feedback(int id, string message, bool isPublished, bool isPublic, bool isAnonymous,  int patientId, PatientUser patient) : base(id)
         {
             Message = message;
             IsPublished = isPublished;
@@ -39,12 +39,12 @@ namespace Class_diagram.Model.Patient
             IsPublished = false;
             IsPublic = false;
             IsAnonymous = false;
-            Patient = new PatientUserWeb();
+            Patient = new PatientUser();
             PatientId = 0;
         }
 
         //This constructor is for creating feedback by patient without IsPublished
-        public Feedback(int id, string message, bool isPublic, bool isAnonymous,  int patientId, PatientUserWeb patient) : base(id)
+        public Feedback(int id, string message, bool isPublic, bool isAnonymous,  int patientId, PatientUser patient) : base(id)
         {
             Message = message;
             IsPublished = false;

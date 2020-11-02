@@ -45,7 +45,7 @@ namespace PatientWebApplication.Controllers
         [HttpPost]      // POST /api/feedback Request body: {"message": "Some message", "isPublic": true, "isAnonymous": false}
         public IActionResult Create(FeedbackDto dto)
         {
-            PatientUserWeb patient = dbContext.Patients.SingleOrDefault(patient => patient.id == 1);    // still no login, so patient set to created patient in database with id=1, this will be changed after
+            PatientUser patient = dbContext.Patients.SingleOrDefault(patient => patient.id == 1);    // still no login, so patient set to created patient in database with id=1, this will be changed after
             if (dto.Message.Length <= 0 || patient == null)
             {
                 return BadRequest();    // if any of the values is incorrect return bad request
