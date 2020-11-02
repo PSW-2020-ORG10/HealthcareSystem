@@ -40,11 +40,19 @@ namespace PatientWebApplication.Controllers
             if (dto.Message.Length <= 0)
             {
                 return BadRequest();    // if any of the values is incorrect return bad request
+            }
+
+            Feedback feedback = feedbackService.Create(dto);
+
+            if (feedback == null)
+            {
+                return BadRequest();
             } else
             {
-                FeedbackService.Create(dto);
                 return Ok();
             }
+            
+            
 
         }
     }

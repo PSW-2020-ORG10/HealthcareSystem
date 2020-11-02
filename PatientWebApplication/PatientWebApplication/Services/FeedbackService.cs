@@ -1,4 +1,7 @@
-﻿using PatientWebApplication.Models;
+﻿using Class_diagram.Model.Patient;
+using PatientWebApplication.Adapters;
+using PatientWebApplication.Dtos;
+using PatientWebApplication.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +15,14 @@ namespace PatientWebApplication.Services
         public FeedbackService(MyDbContext context)
         {
             dbContext = context;
+        }
+
+        public Feedback Create(FeedbackDto dto)
+        {
+            Feedback feedback = FeedbackAdapter.FeedbackDtoToFeedback(dto);
+            dbContext.Feedbacks.Add(feedback);
+            dbContext.SaveChanges();
+            return feedback;
         }
     }
 }
