@@ -24,13 +24,21 @@ namespace PatientWebApplication.Controllers
             feedbackService = new FeedbackService(context);
         }
 
+
         [HttpGet]       // GET /api/feedback
         public IActionResult Get()
         {
-            List<Feedback> result = new List<Feedback>();
-            dbContext.Feedbacks.ToList().ForEach(feedback => result.Add(feedback));
+
+            List<Feedback> result = feedbackService.GetAll();           
+            return Ok(result);
+        }
+
+
+        [HttpGet("published")]       // GET /api/feedback/published
+        public IActionResult GetPublished()
+        {
             
-            //Program.Feedback.ForEach(product => result.Add(ProductAdapter.ProductToProductDto(product)));
+            List<Feedback> result = feedbackService.GetPublished();           
             return Ok(result);
         }
 

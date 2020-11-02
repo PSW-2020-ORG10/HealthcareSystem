@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PatientWebApplication.Services
 {
-    public class FeedbackService
+    public class FeedbackService 
     {
         private readonly MyDbContext dbContext;
         public FeedbackService(MyDbContext context)
@@ -17,12 +17,34 @@ namespace PatientWebApplication.Services
             dbContext = context;
         }
 
+
         public Feedback Create(FeedbackDto dto)
         {
             Feedback feedback = FeedbackAdapter.FeedbackDtoToFeedback(dto);
             dbContext.Feedbacks.Add(feedback);
             dbContext.SaveChanges();
             return feedback;
+
+        //method for getting all feedback
+        public List<Feedback> GetAll()
+        {
+            List<Feedback> result = new List<Feedback>();
+            dbContext.Feedbacks.ToList().ForEach(feedback => result.Add(feedback));
+            return result;
+        }
+
+        //method for getting all published feedback
+        public List<Feedback> GetPublished() {
+            List<Feedback> result = new List<Feedback>();
+            foreach(Feedback feedback in dbContext.Feedbacks.ToList())
+            {
+                if (feedback.IsPublished)
+                {
+                    result.Add(feedback);
+                }
+            }
+            return result;
+
         }
     }
 }
