@@ -31,6 +31,7 @@ namespace PatientWebApplication.Services
             dbContext.SaveChanges();
             return feedback;
         }
+
         //method for getting all feedback
         public List<Feedback> GetAll()
         {
@@ -51,6 +52,19 @@ namespace PatientWebApplication.Services
             }
             return result;
 
+        }
+
+        //method for publishing feedback
+        public Feedback Publish(int id)
+        {
+            Feedback feedbackToPublish = dbContext.Feedbacks.SingleOrDefault(feedback => feedback.id == id);
+            if (feedbackToPublish == null)
+            {
+                return null;
+            }
+            feedbackToPublish.IsPublished = true;
+            dbContext.SaveChanges();
+            return feedbackToPublish;
         }
     }
 }

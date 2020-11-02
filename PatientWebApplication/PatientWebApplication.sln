@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatientWebApplication", "Pa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HCI_wireframe", "..\HCI_wireframe\HCI_wireframe.csproj", "{39880A4D-79CD-4464-943D-19ACA3E2604C}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "HealthCareDatabase", "HealthCareDatabase\HealthCareDatabase.sqlproj", "{16AF9A3B-82BD-4796-9BF4-D17F34560A01}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,12 +21,6 @@ Global
 		{39880A4D-79CD-4464-943D-19ACA3E2604C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39880A4D-79CD-4464-943D-19ACA3E2604C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39880A4D-79CD-4464-943D-19ACA3E2604C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{16AF9A3B-82BD-4796-9BF4-D17F34560A01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{16AF9A3B-82BD-4796-9BF4-D17F34560A01}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{16AF9A3B-82BD-4796-9BF4-D17F34560A01}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{16AF9A3B-82BD-4796-9BF4-D17F34560A01}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{16AF9A3B-82BD-4796-9BF4-D17F34560A01}.Release|Any CPU.Build.0 = Release|Any CPU
-		{16AF9A3B-82BD-4796-9BF4-D17F34560A01}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
