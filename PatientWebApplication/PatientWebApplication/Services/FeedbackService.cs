@@ -14,9 +14,17 @@ namespace PatientWebApplication.Services
         {
             dbContext = context;
         }
-    
 
-        public List<Feedback> GetPublishedFeedback() {
+        //method for getting all feedback
+        public List<Feedback> GetAll()
+        {
+            List<Feedback> result = new List<Feedback>();
+            dbContext.Feedbacks.ToList().ForEach(feedback => result.Add(feedback));
+            return result;
+        }
+
+        //method for getting all published feedback
+        public List<Feedback> GetPublished() {
             List<Feedback> result = new List<Feedback>();
             foreach(Feedback feedback in dbContext.Feedbacks.ToList())
             {
