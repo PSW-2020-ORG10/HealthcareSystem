@@ -31,5 +31,14 @@ namespace PatientWebApplication.Controllers
             //Program.Feedback.ForEach(product => result.Add(ProductAdapter.ProductToProductDto(product)));
             return Ok(result);
         }
+
+
+        [HttpGet("published")]       // GET /api/feedback
+        public IActionResult GetPublishedFeedback()
+        {
+            
+            List<Feedback> result = feedbackService.GetPublishedFeedback();           
+            return Ok(result);
+        }
     }
 }
