@@ -55,18 +55,11 @@ class CreateForm extends Component {
                 </label>
 
                     <br />
-                    <button className="btn btn-primary btn-lg" onClick={() => this.createFeedback(this.state.message, this.state.isAnonymous, this.state.isPublic)}>Create</button>
+                    <button className="btn btn-primary btn-lg" onClick={() => this.props.createFeedback(this.state.message, this.state.isAnonymous, this.state.isPublic)}>Create</button>
                 </form>
             </div>
         )
 
-    }
-
-    createFeedback(message, isAnonymous, isPublic) {
-        console.log(message);
-        console.log(isAnonymous);
-        console.log(isPublic);
-        feedbackCreated({ message, isAnonymous, isPublic });
     }
 }
 
@@ -74,4 +67,4 @@ const mapStateToProps = (state) => ({
 
 });
 
-export default CreateForm
+export default connect(mapStateToProps, { feedbackCreated })(CreateForm);

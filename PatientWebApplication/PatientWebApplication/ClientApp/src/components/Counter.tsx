@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { ApplicationState } from '../store';
 import * as CounterStore from '../store/Counter';
+import PublishButton from './PublishButton'
 
 type CounterProps =
     CounterStore.CounterState &
@@ -24,6 +25,7 @@ class Counter extends React.PureComponent<CounterProps> {
                     onClick={() => { this.props.increment(); }}>
                     Increment
                 </button>
+                <PublishButton feedbackId="1"></PublishButton>
             </React.Fragment>
         );
     }
