@@ -53,7 +53,7 @@ class CreateForm extends Component {
                 </label>
 
                     <br />
-                    <button className="btn btn-primary btn-lg" onClick={() => this.props.feedbackCreated(this.state)}>Create</button>
+                    <button disabled={!this.state.message} className="btn btn-primary btn-lg" onClick={() => this.props.feedbackCreated(this.state)}>Create</button>
                 </form>
             </div>
         )
