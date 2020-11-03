@@ -7,7 +7,6 @@
 import axios from "axios";
 
 export const feedbackCreated = (feedback) => async (dispatch) => {
-    alert("dosao");
     console.log(feedback.message);
     try {
         debugger;

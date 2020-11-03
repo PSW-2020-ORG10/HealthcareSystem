@@ -9,10 +9,6 @@ class CreateForm extends Component {
         isPublic: false
     };
 
-    constructor() {
-        super();
-    }
-
     handleChange=(event) => {
         const { name, value, type, checked } = event.target
         type === "checkbox" ? this.setState({
@@ -21,6 +17,8 @@ class CreateForm extends Component {
             [name]: value
         })
     }
+
+
     render() {
         return (
             <div>
@@ -55,7 +53,7 @@ class CreateForm extends Component {
                 </label>
 
                     <br />
-                    <button className="btn btn-primary btn-lg" onClick={() => this.props.createFeedback(this.state.message, this.state.isAnonymous, this.state.isPublic)}>Create</button>
+                    <button className="btn btn-primary btn-lg" onClick={() => this.props.feedbackCreated(this.state)}>Create</button>
                 </form>
             </div>
         )
