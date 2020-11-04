@@ -6,6 +6,9 @@ import { ApplicationState } from '../store';
 import * as WeatherForecastsStore from '../store/WeatherForecasts';
 import CreateForm from "../components/CreateForm";
 
+
+
+
 // At runtime, Redux will merge together...
 type WeatherForecastProps =
   WeatherForecastsStore.WeatherForecastsState // ... state we've requested from the Redux store
@@ -27,7 +30,8 @@ class FetchData extends React.PureComponent<WeatherForecastProps> {
   public render() {
     return (
         <React.Fragment>
-            <CreateForm/>
+            <h1>afasfa</h1>
+            <CreateForm />
         <h1 id="tabelLabel">Weather forecast</h1>
         <p>This component demonstrates fetching data from the server and working with URL parameters.</p>
         {this.renderForecastsTable()}

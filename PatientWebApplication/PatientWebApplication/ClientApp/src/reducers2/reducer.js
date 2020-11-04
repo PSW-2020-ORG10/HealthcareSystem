@@ -1,6 +1,7 @@
 ﻿import {
     FEEDBACK_CREATED,
-    FEEDBACK_PUBLISHED
+    FEEDBACK_PUBLISHED,
+    LOADED_PUBLISHED_FEEDBACK
 } from "../types2/types"
 
 function addFeedback(state=initialState, action) {
@@ -25,9 +26,19 @@ function updateObjectInArray(array, action) {
     })
 }
 
+function loadPublishedFeedback(state = initialState, action) {
+    return {
+        ...state,
+        publishedFeedbackList: action.payload,
+    };
+}
+
 const initialState = {
     feedbackList: [],
+    publishedFeedbackList: []
+  
 };
+
 
 function reducer(state = initialState, action) {
     switch (action.type) {
@@ -40,6 +51,12 @@ function reducer(state = initialState, action) {
             return {
                 ...state,
                 feedbackList: updateObjectInArray(state.feedbackList, action)
+            };
+        case LOADED_PUBLISHED_FEEDBACK:                      
+            return {
+                ...state,
+                publishedFeedbackList: action.payload
+               
             };
         default:
             return state;
