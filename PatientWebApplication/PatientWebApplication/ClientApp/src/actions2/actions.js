@@ -47,7 +47,6 @@ export const loadedPublishedFeedback = () => async (dispatch) => {
     try {
         debugger;
         const response = await axios.get("http://localhost:60198/api/feedback/published");        
-        console.log(response.data);
         debugger;
         dispatch({
             type: LOADED_PUBLISHED_FEEDBACK,

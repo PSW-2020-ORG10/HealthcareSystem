@@ -2,7 +2,7 @@
 import { loadedPublishedFeedback } from "../actions2/actions"
 import { connect } from "react-redux"
 
-class PublishedFeedback extends Component {
+class PublishedFeedbackTable extends Component {
     componentDidMount() {
         debugger;
         this.props.loadedPublishedFeedback();       
@@ -18,19 +18,19 @@ class PublishedFeedback extends Component {
 
             <div>
                 <table className='table publishedFeedback'>
-                    <tr>
-                        <th>id of feedback</th>
-                        <th>message</th>
-                    </tr>
-                    {feedbackList.map((f) => (
-                   
-                        <div className="check-flag">
-                            <tr>
-                                <td  >{f.id}</td >
-                                <td  >{f.message}</td >
-                            </tr>
-                        
-                    </div>
+                    <thead> 
+                        <tr>
+                            <th>id of feedback</th>
+                            <th>message</th>
+                        </tr>
+                    </thead>
+                {feedbackList.map((f) => ( 
+                    <tbody key={f.id}>
+                        <tr key={f.id}>
+                            <td  >{f.id}</td >
+                            <td  >{f.message}</td >
+                        </tr> 
+                    </tbody>
                 ))}
                 </table>
 
@@ -47,4 +47,4 @@ const mapStateToProps = (state) =>
     
     ({ publishedFeedbackList: state.reducer.publishedFeedbackList})
 
-export default connect(mapStateToProps, { loadedPublishedFeedback })(PublishedFeedback);
+export default connect(mapStateToProps, { loadedPublishedFeedback })(PublishedFeedbackTable);
