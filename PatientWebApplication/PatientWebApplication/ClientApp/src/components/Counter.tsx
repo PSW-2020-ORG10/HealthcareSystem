@@ -4,7 +4,7 @@ import { RouteComponentProps } from 'react-router';
 import { ApplicationState } from '../store';
 import * as CounterStore from '../store/Counter';
 import PublishButton from './PublishButton';
-import PublishedFeedback from './PublishedFeedback';
+import PublishedFeedback from './PublishedFeedbackTable';
 
 type CounterProps =
     CounterStore.CounterState &
