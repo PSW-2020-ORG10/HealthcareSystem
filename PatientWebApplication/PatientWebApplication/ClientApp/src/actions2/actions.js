@@ -44,11 +44,9 @@ export const feedbackPublished = (id) => async (dispatch) => {
 }; 
 
 export const loadedPublishedFeedback = () => async (dispatch) => {
-    alert("Publlished Feedback");
     try {
         debugger;
-        const response = await axios.get("http://localhost:60198/api/feedback/published");
-        alert("dosao111");
+        const response = await axios.get("http://localhost:60198/api/feedback/published");        
         console.log(response.data);
         debugger;
         dispatch({

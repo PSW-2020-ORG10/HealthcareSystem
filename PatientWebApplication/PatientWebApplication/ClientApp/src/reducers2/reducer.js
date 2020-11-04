@@ -29,13 +29,14 @@ function updateObjectInArray(array, action) {
 function loadPublishedFeedback(state = initialState, action) {
     return {
         ...state,
-        feedbackList: action.payload,
+        publishedFeedbackList: action.payload,
     };
 }
 
 const initialState = {
     feedbackList: [],
     publishedFeedbackList: []
+  
 };
 
 
@@ -51,9 +52,7 @@ function reducer(state = initialState, action) {
                 ...state,
                 feedbackList: updateObjectInArray(state.feedbackList, action)
             };
-        case LOADED_PUBLISHED_FEEDBACK:
-            alert("dosao2323");
-            console.log(action.payload);
+        case LOADED_PUBLISHED_FEEDBACK:                      
             return {
                 ...state,
                 publishedFeedbackList: action.payload
