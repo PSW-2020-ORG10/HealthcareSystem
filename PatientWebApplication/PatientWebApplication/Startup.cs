@@ -51,7 +51,7 @@ namespace PatientWebApplication
             }
 
             app.UseStaticFiles();
-            app.UseSpaStaticFiles();
+            //app.UseSpaStaticFiles();
 
             app.UseRouting();
 

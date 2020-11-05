@@ -61,6 +61,12 @@ namespace PatientWebApplication.Services
             if (feedbackToPublish == null)
             {
                 return null;
+            }else if(feedbackToPublish.IsPublic == false)
+            {
+                return null;
+            }else if(feedbackToPublish.IsPublished == true)
+            {
+                return null;
             }
             feedbackToPublish.IsPublished = true;
             dbContext.SaveChanges();
