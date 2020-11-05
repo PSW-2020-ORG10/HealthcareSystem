@@ -208,6 +208,7 @@
     <Compile Include="Model\Employee\User.cs" />
     <Compile Include="Model\Hospital\Equipment.cs" />
     <Compile Include="Model\Hospital\Medicine.cs" />
+    <Compile Include="Model\Hospital\ModelRoom.cs" />
     <Compile Include="Model\Hospital\OfferedMedicine.cs" />
     <Compile Include="Model\Hospital\Renovation.cs" />
     <Compile Include="Model\Hospital\Room.cs" />

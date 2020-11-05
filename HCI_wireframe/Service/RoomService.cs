@@ -8,6 +8,7 @@ using Class_diagram.Contoller;
 using Class_diagram.Model.Employee;
 using Class_diagram.Model.Hospital;
 using Class_diagram.Repository;
+using HCI_wireframe.Model.Hospital;
 using HCI_wireframe.Service;
 using System;
 using System.Collections.Generic;
@@ -69,7 +70,7 @@ namespace Class_diagram.Service
         private Boolean isMedicineInRoom(Medicine medicine, Room room)
         {
             
-            if(medicine.room.Contains(room.typeOfRoom)) return true;
+            if(medicine.room.Contains(new ModelRoom(room.typeOfRoom))) return true;
             
             return false;
         }
@@ -78,7 +79,7 @@ namespace Class_diagram.Service
         {
             if (isMedicineInRoom(medicine, room))
             {
-                 medicine.room.Remove(room.typeOfRoom);
+                 medicine.room.Remove(new ModelRoom(room.typeOfRoom));
                 medicineRepository.Update(medicine);   
             }
         }
@@ -100,7 +101,7 @@ namespace Class_diagram.Service
         private Boolean isEquipmentInRoom(Equipment equipment, Room room)
         {
 
-            if (equipment.room.Contains(room.typeOfRoom)) return true;
+            if (equipment.room.Contains(new ModelRoom(room.typeOfRoom))) return true;
             
             return false;
         }
@@ -109,7 +110,7 @@ namespace Class_diagram.Service
         {
             if (isEquipmentInRoom(equipment, room))
             {
-                equipment.room.Remove(room.typeOfRoom);
+                equipment.room.Remove(new ModelRoom(room.typeOfRoom));
                 equipmentRepository.Update(equipment);
 
             }

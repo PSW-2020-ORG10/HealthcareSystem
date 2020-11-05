@@ -1,7 +1,11 @@
 ﻿using Class_diagram.Model.Doctor;
+using Class_diagram.Model.Employee;
+using Class_diagram.Model.Hospital;
 using Class_diagram.Model.Patient;
 using HCI_wireframe;
 using HCI_wireframe.Model.Doctor;
+using HCI_wireframe.Model.Employee;
+using HCI_wireframe.Model.Hospital;
 using HCI_wireframe.Model.Patient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -22,6 +26,19 @@ namespace PatientWebApplication.Models
         public DbSet<Operation> Operations { get; set; }
         public DbSet<Referral> Referrals { get; set; }
 
+        public DbSet<Referral> Schedules { get; set; }
+
+        public DbSet<Referral> Shifts { get; set; }
+
+        public DbSet<OfferedMedicines> OfferedMedicines { get; set; }
+
+        public DbSet<Renovation> Renovation { get; set; }
+
+        public DbSet<Equipment> Equipment { get; set; }
+
+
+        public DbSet<ModelRoom> modelRooms { get; set; }
+
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -36,6 +53,10 @@ namespace PatientWebApplication.Models
 
            );
 
+
+
+
+
             List<DoctorNotification> doctorNotifications = new List<DoctorNotification>();
             doctorNotifications.Add(new DoctorNotification(3, "3. string", 1));
             modelBuilder.Entity<DoctorNotification>().HasData(
@@ -48,17 +69,17 @@ namespace PatientWebApplication.Models
             modelBuilder.Entity<DoctorUser>().HasData(
 
            new DoctorUser(1, "DoctorName", "DoctorSurname", "1234", "2/2/2020", "123", "email", "pass", "Grad",
-             200.0, false, "Specialty", new List < DoctorNotification >() , "Ordination 1")
-
-
-           ); 
-
-            modelBuilder.Entity<PatientUser>().HasData(
-
-           new PatientUser(1, "Pera", "Peric", "1234", "2/2/2020", "123", "1234", "Alergija", "Grad", false, "email", "pass", false, new List<ModelNotification>())
+             200.0, false, "Specialty", new List<DoctorNotification>(), "Ordination 1")
 
 
            );
+
+            modelBuilder.Entity<PatientUser>().HasData(
+
+            new PatientUser(1, "Pera", "Peric", "1234", "2/2/2020", "123", "1234", "Alergija", "Grad", false, "email", "pass", false, new List<ModelNotification>())
+
+
+            );
 
             modelBuilder.Entity<Feedback>().HasData(
 
@@ -79,7 +100,46 @@ namespace PatientWebApplication.Models
 
             new Operation(1, 1, "2/2/2020", new TimeSpan(), new TimeSpan(), 1, "room1", 1)
 
+            );
+
+
+
+            modelBuilder.Entity<Shift>().HasData(
+
+            new Shift(1, "Start time", "End time")
+
+            );
+
+            modelBuilder.Entity<Schedule>().HasData(
+
+            new Schedule(1, "1", "2/2/2020", false, "EmployeeName", "EmployeeSurname", 1, "1")
+
            );
+
+            modelBuilder.Entity<ModelRoom>().HasData(
+
+            new ModelRoom(1, "data", 1)
+
+            );
+
+            modelBuilder.Entity<Equipment>().HasData(
+
+            new Equipment(1, "Equipment name", 1, new List <ModelRoom>())
+
+            );
+
+            modelBuilder.Entity<OfferedMedicines>().HasData(
+
+            new OfferedMedicines(13, "OfferedMedicine", 2, "description", new List <ModelRoom>(), 1, false, 10.0)
+
+            );
+
+            modelBuilder.Entity<Renovation>().HasData(
+
+            new Renovation(1, "1", "Start date", "End Date")
+
+            );
+
         }
 
     }
