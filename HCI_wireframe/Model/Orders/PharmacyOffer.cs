@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace HCI_wireframe.Model.Orders
 {
-    class PharmacyOffer : Entity
+    public class PharmacyOffer : Entity
     {
         public String pharmacyName { get; set; }
-        public List<Medicine> ListOfMedicies { get; set; }
+        public virtual List<Medicine> ListOfMedicies { get; set; }
         public double summPriceOfMedications { get; set; }
 
         public PharmacyOffer() : base() { }

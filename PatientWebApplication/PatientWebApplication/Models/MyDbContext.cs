@@ -1,11 +1,15 @@
 ﻿using Class_diagram.Model.Doctor;
 using Class_diagram.Model.Employee;
 using Class_diagram.Model.Hospital;
+using Class_diagram.Model.Manager;
 using Class_diagram.Model.Patient;
+using Class_diagram.Model.Secretary;
 using HCI_wireframe;
 using HCI_wireframe.Model.Doctor;
 using HCI_wireframe.Model.Employee;
 using HCI_wireframe.Model.Hospital;
+using HCI_wireframe.Model.Manager;
+using HCI_wireframe.Model.Orders;
 using HCI_wireframe.Model.Patient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -38,6 +42,17 @@ namespace PatientWebApplication.Models
 
 
         public DbSet<ModelRoom> modelRooms { get; set; }
+        public DbSet<Room> Rooms { get; set; }
+        public DbSet<ManagerUser> ManagerUsers { get; set; }
+        public DbSet<DoctorsOrder> DoctorsOrders { get; set; }
+        public DbSet<FinishedOrder> FinishedOrders { get; set; }
+        public DbSet<ManagersOrder> ManagersOrders { get; set; }
+        public DbSet<PharmacyOffer> PharmacyOffers { get; set; }
+        public DbSet<DoctorAppointment> DoctorAppointments { get; set; }
+        public DbSet<PhoneNumber> PhoneNumbers { get; set; }
+        public DbSet<Prescription> Prescriptions { get; set; }
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<SecretaryUser> SecretaryUsers { get; set; }
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
@@ -137,6 +152,74 @@ namespace PatientWebApplication.Models
             modelBuilder.Entity<Renovation>().HasData(
 
             new Renovation(1, "1", "Start date", "End Date")
+
+            );
+
+            modelBuilder.Entity<Room>().HasData(
+
+            new Room(1, "typeOfRoom", new List < ModelEquipment >(), new List < ModelMedicine >(), true)
+
+            );
+
+            modelBuilder.Entity<ManagerUser>().HasData(
+
+            new ManagerUser(1, "Manager Name", "Manager Surname", "1234", "22/04/1993", "123","email", "pass", "Grad",
+            200, new List <ManagerNotification>())
+
+            );
+
+            modelBuilder.Entity<DoctorsOrder>().HasData(
+
+            new DoctorsOrder(1, false, new List <Medicine>(), new DateTime(), true)
+
+            );
+
+            modelBuilder.Entity<FinishedOrder>().HasData(
+
+            new FinishedOrder(1, new List <Medicine>())
+
+            );
+
+            modelBuilder.Entity<ManagersOrder>().HasData(
+
+            new ManagersOrder(1, true, new List <DoctorsOrder>(), new DateTime(), true)
+
+            );
+
+            modelBuilder.Entity<PharmacyOffer>().HasData(
+
+            new PharmacyOffer(1, "pharmacyName", new List < Medicine >(), 100.0)
+
+            );
+
+            modelBuilder.Entity<DoctorAppointment>().HasData(
+
+            new DoctorAppointment(1, new TimeSpan(), "22/04/2020", 1, 1, new List < Referral >(), "1")
+
+            );
+
+            modelBuilder.Entity<PhoneNumber>().HasData(
+
+            new PhoneNumber(1, 123, "Name")
+
+            );
+
+            modelBuilder.Entity<Prescription>().HasData(
+
+            new Prescription(1, 1, 1, true, "Comment")
+
+            );
+
+            modelBuilder.Entity<Question>().HasData(
+
+            new Question(1, "Name", "Answer")
+
+            );
+
+            modelBuilder.Entity<SecretaryUser>().HasData(
+
+            new SecretaryUser(1, "Secretary Name", "Secretary Surname", "1234", "12/12/2012", "123", "email", "pass", "Grad",
+            133, "Room")
 
             );
 

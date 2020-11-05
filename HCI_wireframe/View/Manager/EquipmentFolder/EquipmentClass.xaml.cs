@@ -129,7 +129,7 @@ namespace WpfApp2
                     if (ee.typeOfRoom.Equals(id))
                 {
                     s = ee;
-                    s.equipment.Remove(eq.name);
+                    s.equipment.Remove(new ModelEquipment(eq.name));
 
                 }
 
@@ -282,7 +282,7 @@ namespace WpfApp2
                     if (ee.typeOfRoom.Equals(id))
                     {
                         s = ee;
-                        s.equipment.Add(eq.name);
+                        s.equipment.Add(new ModelEquipment(eq.name));
 
                     }
                 }

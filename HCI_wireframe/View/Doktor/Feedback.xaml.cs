@@ -21,6 +21,7 @@ using Class_diagram.Repository;
 using HCI_wireframe;
 using HCI_wireframe.Model.Doctor;
 using HCI_wireframe.Model.Employee;
+using HCI_wireframe.Model.Manager;
 using HCI_wireframe.Repository;
 using Path = System.IO.Path;
 
@@ -93,11 +94,11 @@ namespace Klinika
             {
                 if (user.specialNotifications == null)
                 {
-                    user.specialNotifications = new List<string>();
+                    user.specialNotifications = new List<ManagerNotification>();
                 }
-                List<String> obavestenja = user.specialNotifications;
+                List<ManagerNotification> obavestenja = user.specialNotifications;
 
-                obavestenja.Add("Ocena sistema od strane doktora  \n" + lekar.firstName + " " + lekar.secondName + "  - answer  -" + ocena);
+                obavestenja.Add(new ManagerNotification("Ocena sistema od strane doktora  \n" + lekar.firstName + " " + lekar.secondName + "  - answer  -" + ocena));
                 user.specialNotifications = obavestenja;
                 Boolean isOK = cont.Update(user);
                 if(isOK==false)

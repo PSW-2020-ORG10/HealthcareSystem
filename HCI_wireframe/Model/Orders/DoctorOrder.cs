@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace HCI_wireframe.Model.Orders
 {
-    class DoctorsOrder : Entity
+    public class DoctorsOrder : Entity
     {
         public bool isUrgent { get; set; }
-        public List<Medicine> listOfMedicines { get; set; }
+        public virtual List<Medicine> listOfMedicines { get; set; }
         public DateTime date { get; set; }
         public bool isOrdered { get; set; }
 

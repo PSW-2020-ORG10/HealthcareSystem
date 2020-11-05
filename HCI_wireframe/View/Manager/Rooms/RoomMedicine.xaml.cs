@@ -1,5 +1,6 @@
 ﻿using Class_diagram.Contoller;
 using Class_diagram.Model.Hospital;
+using HCI_wireframe.Model.Hospital;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,7 +49,7 @@ namespace WpfApp2.Rooms
 
             foreach (Medicine ee in lista)
             {
-                if (r.medicine.Contains(ee.name))
+                if (r.medicine.Contains(new ModelMedicine(ee.name)))
                 {
                     li.Add(new Lista { Name = ee.name });
                 }

@@ -2,6 +2,7 @@
 using Class_diagram.Model.Manager;
 using Class_diagram.Model.Patient;
 using Class_diagram.Repository;
+using HCI_wireframe.Model.Manager;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -57,12 +58,12 @@ namespace WpfApp2
             {
                 if (ee.specialNotifications == null)
                 {
-                    ee.specialNotifications = new List<string>();
+                    ee.specialNotifications = new List<ManagerNotification>();
                 }
                 else
                 {
-                    foreach (String s in ee.specialNotifications)
-                        li.Add(new Lista { Name = s });
+                    foreach (ManagerNotification s in ee.specialNotifications)
+                        li.Add(new Lista { Name = s.ToString() });
                 }
             }
 
