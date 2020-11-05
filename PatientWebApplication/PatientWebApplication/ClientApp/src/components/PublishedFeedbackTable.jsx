@@ -16,23 +16,19 @@ class PublishedFeedbackTable extends Component {
         const feedbackList = this.props.publishedFeedbackList;       
         return (
 
-            <div>
-                <table className='table publishedFeedback'>
-                    <thead> 
-                        <tr>
-                            <th>id of feedback</th>
-                            <th>message</th>
-                        </tr>
-                    </thead>
-                {feedbackList.map((f) => ( 
-                    <tbody key={f.id}>
-                        <tr key={f.id}>
-                            <td  >{f.id}</td >
-                            <td  >{f.message}</td >
-                        </tr> 
-                    </tbody>
+            <div className="wrap">
+                {feedbackList.map((f) => (
+                    <div key={f.Id} className="item-row">
+                        <div className="check-flag">
+                            <span className="small-text-label">Id</span>
+                            <span className="small-text-label hours">Message</span>
+                            <span className="check-flag-label">{f.id}</span>
+                            <span className="check-flag-label">{f.message}</span>
+                        </div>
+                    </div>
                 ))}
-                </table>
+
+            
 
             </div>
             

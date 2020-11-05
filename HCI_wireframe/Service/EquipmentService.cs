@@ -48,7 +48,7 @@ namespace Class_diagram.Service
             if (room.typeOfRoom.Equals("Magacin"))
             {
                 equipment.room.Add(new ModelRoom(room.typeOfRoom));
-                room.equipment.Add(equipment.name);
+                room.equipment.Add(new ModelEquipment(equipment.name));
                 roomRepository.Update(room);
             }
         }
@@ -97,9 +97,9 @@ namespace Class_diagram.Service
 
         private void removeEquipmentFromSpecificRoom(Equipment equipment, Room room)
         {
-            if (room.equipment.Contains(equipment.name))
+            if (room.equipment.Contains(new ModelEquipment(equipment.name)))
             {
-                room.equipment.Remove(equipment.name);
+                room.equipment.Remove(new ModelEquipment(equipment.name));
                 roomRepository.Update(room);
             }
         }

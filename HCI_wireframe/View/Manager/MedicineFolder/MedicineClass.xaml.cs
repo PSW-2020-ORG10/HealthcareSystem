@@ -121,7 +121,7 @@ namespace WpfApp2.MedicineFolder
                     if (ee.typeOfRoom.Equals(id))
                     {
                         s = ee;
-                        s.medicine.Remove(eq.name);
+                        s.medicine.Remove(new ModelMedicine(eq.name));
 
                     }
 
@@ -230,7 +230,7 @@ namespace WpfApp2.MedicineFolder
                 if (ee.typeOfRoom.Equals(id))
                 {
                     s = ee;
-                    s.medicine.Add(eq.name);
+                    s.medicine.Add(new ModelMedicine(eq.name));
 
                 }
 

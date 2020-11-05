@@ -74,6 +74,9 @@ namespace PatientWebApplication.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int?>("DoctorAppointmentid")
+                        .HasColumnType("int");
+
                     b.Property<string>("classify")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -90,6 +93,8 @@ namespace PatientWebApplication.Migrations
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("id");
+
+                    b.HasIndex("DoctorAppointmentid");
 
                     b.ToTable("Referral");
 
@@ -237,6 +242,125 @@ namespace PatientWebApplication.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Class_diagram.Model.Hospital.Room", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<bool>("forUse")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("typeOfRoom")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Rooms");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1,
+                            forUse = true,
+                            typeOfRoom = "typeOfRoom"
+                        });
+                });
+
+            modelBuilder.Entity("Class_diagram.Model.Manager.ManagerUser", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("city")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("dateOfBirth")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("email")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("firstName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("password")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("phoneNumber")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<double>("salary")
+                        .HasColumnType("double");
+
+                    b.Property<string>("secondName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("uniqueCitizensidentityNumber")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("id");
+
+                    b.ToTable("ManagerUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1,
+                            city = "Grad",
+                            dateOfBirth = "22/04/1993",
+                            email = "email",
+                            firstName = "Manager Name",
+                            password = "pass",
+                            phoneNumber = "123",
+                            salary = 200.0,
+                            secondName = "Manager Surname",
+                            uniqueCitizensidentityNumber = "1234"
+                        });
+                });
+
+            modelBuilder.Entity("Class_diagram.Model.Patient.DoctorAppointment", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("date")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("doctorUserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("patientUserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("roomid")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<TimeSpan>("time")
+                        .HasColumnType("time(6)");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("doctorUserId");
+
+                    b.HasIndex("patientUserId");
+
+                    b.ToTable("DoctorAppointments");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1,
+                            date = "22/04/2020",
+                            doctorUserId = 1,
+                            patientUserId = 1,
+                            roomid = "1",
+                            time = new TimeSpan(0, 0, 0, 0, 0)
+                        });
+                });
+
             modelBuilder.Entity("Class_diagram.Model.Patient.Feedback", b =>
                 {
                     b.Property<int>("id")
@@ -368,6 +492,113 @@ namespace PatientWebApplication.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Class_diagram.Model.Patient.PhoneNumber", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("name")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("number")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.ToTable("PhoneNumbers");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1,
+                            name = "Name",
+                            number = 123
+                        });
+                });
+
+            modelBuilder.Entity("Class_diagram.Model.Patient.Question", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("answer")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("name")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Questions");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1,
+                            answer = "Answer",
+                            name = "Name"
+                        });
+                });
+
+            modelBuilder.Entity("Class_diagram.Model.Secretary.SecretaryUser", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("city")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("dateOfBirth")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("email")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("firstName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("password")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("phoneNumber")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("room")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<double>("salary")
+                        .HasColumnType("double");
+
+                    b.Property<string>("secondName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("uniqueCitizensidentityNumber")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("id");
+
+                    b.ToTable("SecretaryUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1,
+                            city = "Grad",
+                            dateOfBirth = "12/12/2012",
+                            email = "email",
+                            firstName = "Secretary Name",
+                            password = "pass",
+                            phoneNumber = "123",
+                            room = "Room",
+                            salary = 133.0,
+                            secondName = "Secretary Surname",
+                            uniqueCitizensidentityNumber = "1234"
+                        });
+                });
+
             modelBuilder.Entity("HCI_wireframe.Model.Doctor.DoctorNotification", b =>
                 {
                     b.Property<int>("id")
@@ -460,6 +691,44 @@ namespace PatientWebApplication.Migrations
                         });
                 });
 
+            modelBuilder.Entity("HCI_wireframe.Model.Hospital.ModelEquipment", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Data")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("RoomId");
+
+                    b.ToTable("ModelEquipment");
+                });
+
+            modelBuilder.Entity("HCI_wireframe.Model.Hospital.ModelMedicine", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Data")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("RoomId");
+
+                    b.ToTable("ModelMedicine");
+                });
+
             modelBuilder.Entity("HCI_wireframe.Model.Hospital.ModelRoom", b =>
                 {
                     b.Property<int>("id")
@@ -484,6 +753,130 @@ namespace PatientWebApplication.Migrations
                             id = 1,
                             Data = "data",
                             EquipmentId = 1
+                        });
+                });
+
+            modelBuilder.Entity("HCI_wireframe.Model.Manager.ManagerNotification", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Data")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("ManagerUserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("ManagerUserId");
+
+                    b.ToTable("ManagerNotification");
+                });
+
+            modelBuilder.Entity("HCI_wireframe.Model.Orders.DoctorsOrder", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ManagersOrderid")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("date")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("isOrdered")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("isUrgent")
+                        .HasColumnType("tinyint(1)");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("ManagersOrderid");
+
+                    b.ToTable("DoctorsOrders");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1,
+                            date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            isOrdered = true,
+                            isUrgent = false
+                        });
+                });
+
+            modelBuilder.Entity("HCI_wireframe.Model.Orders.FinishedOrder", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.ToTable("FinishedOrders");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1
+                        });
+                });
+
+            modelBuilder.Entity("HCI_wireframe.Model.Orders.ManagersOrder", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("date")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("isOrdered")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("isUrgent")
+                        .HasColumnType("tinyint(1)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("ManagersOrders");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1,
+                            date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            isOrdered = true,
+                            isUrgent = true
+                        });
+                });
+
+            modelBuilder.Entity("HCI_wireframe.Model.Orders.PharmacyOffer", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("pharmacyName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<double>("summPriceOfMedications")
+                        .HasColumnType("double");
+
+                    b.HasKey("id");
+
+                    b.ToTable("PharmacyOffers");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1,
+                            pharmacyName = "pharmacyName",
+                            summPriceOfMedications = 100.0
                         });
                 });
 
@@ -514,9 +907,53 @@ namespace PatientWebApplication.Migrations
                         });
                 });
 
-            modelBuilder.Entity("HCI_wireframe.Model.Hospital.OfferedMedicines", b =>
+            modelBuilder.Entity("HCI_wireframe.Model.Patient.Prescription", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("comment")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<bool>("isUsed")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int>("medicineId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("patientsid")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("medicineId");
+
+                    b.ToTable("Prescriptions");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1,
+                            comment = "Comment",
+                            isUsed = true,
+                            medicineId = 1,
+                            patientsid = 1
+                        });
+                });
+
+            modelBuilder.Entity("Class_diagram.Model.Hospital.Medicine", b =>
                 {
                     b.HasBaseType("Class_diagram.Model.Hospital.Equipment");
+
+                    b.Property<int?>("DoctorsOrderid")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("FinishedOrderid")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PharmacyOfferid")
+                        .HasColumnType("int");
 
                     b.Property<string>("description")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
@@ -527,10 +964,23 @@ namespace PatientWebApplication.Migrations
                     b.Property<bool>("isConfirmed")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<double>("price")
-                        .HasColumnType("double");
+                    b.HasIndex("DoctorsOrderid");
+
+                    b.HasIndex("FinishedOrderid");
+
+                    b.HasIndex("PharmacyOfferid");
 
                     b.HasIndex("doctorId");
+
+                    b.HasDiscriminator().HasValue("Medicine");
+                });
+
+            modelBuilder.Entity("HCI_wireframe.Model.Hospital.OfferedMedicines", b =>
+                {
+                    b.HasBaseType("Class_diagram.Model.Hospital.Medicine");
+
+                    b.Property<double>("price")
+                        .HasColumnType("double");
 
                     b.HasDiscriminator().HasValue("OfferedMedicines");
 
@@ -568,11 +1018,33 @@ namespace PatientWebApplication.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Class_diagram.Model.Doctor.Referral", b =>
+                {
+                    b.HasOne("Class_diagram.Model.Patient.DoctorAppointment", null)
+                        .WithMany("referral")
+                        .HasForeignKey("DoctorAppointmentid");
+                });
+
             modelBuilder.Entity("Class_diagram.Model.Employee.Schedule", b =>
                 {
                     b.HasOne("Class_diagram.Model.Employee.Shift", "shift")
                         .WithMany()
                         .HasForeignKey("shiftId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Class_diagram.Model.Patient.DoctorAppointment", b =>
+                {
+                    b.HasOne("HCI_wireframe.Model.Doctor.DoctorUser", "doctor")
+                        .WithMany()
+                        .HasForeignKey("doctorUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Class_diagram.Model.Patient.PatientUser", "patient")
+                        .WithMany()
+                        .HasForeignKey("patientUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -595,6 +1067,24 @@ namespace PatientWebApplication.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("HCI_wireframe.Model.Hospital.ModelEquipment", b =>
+                {
+                    b.HasOne("Class_diagram.Model.Hospital.Room", "Room")
+                        .WithMany("equipment")
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("HCI_wireframe.Model.Hospital.ModelMedicine", b =>
+                {
+                    b.HasOne("Class_diagram.Model.Hospital.Room", "Room")
+                        .WithMany("medicine")
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("HCI_wireframe.Model.Hospital.ModelRoom", b =>
                 {
                     b.HasOne("Class_diagram.Model.Hospital.Equipment", "Equipment")
@@ -602,6 +1092,22 @@ namespace PatientWebApplication.Migrations
                         .HasForeignKey("EquipmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("HCI_wireframe.Model.Manager.ManagerNotification", b =>
+                {
+                    b.HasOne("Class_diagram.Model.Manager.ManagerUser", "ManagerUser")
+                        .WithMany("specialNotifications")
+                        .HasForeignKey("ManagerUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("HCI_wireframe.Model.Orders.DoctorsOrder", b =>
+                {
+                    b.HasOne("HCI_wireframe.Model.Orders.ManagersOrder", null)
+                        .WithMany("listOfDoctorsOrders")
+                        .HasForeignKey("ManagersOrderid");
                 });
 
             modelBuilder.Entity("HCI_wireframe.Model.Patient.ModelNotification", b =>
@@ -613,8 +1119,29 @@ namespace PatientWebApplication.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("HCI_wireframe.Model.Hospital.OfferedMedicines", b =>
+            modelBuilder.Entity("HCI_wireframe.Model.Patient.Prescription", b =>
                 {
+                    b.HasOne("Class_diagram.Model.Hospital.Medicine", "medicine")
+                        .WithMany()
+                        .HasForeignKey("medicineId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Class_diagram.Model.Hospital.Medicine", b =>
+                {
+                    b.HasOne("HCI_wireframe.Model.Orders.DoctorsOrder", null)
+                        .WithMany("listOfMedicines")
+                        .HasForeignKey("DoctorsOrderid");
+
+                    b.HasOne("HCI_wireframe.Model.Orders.FinishedOrder", null)
+                        .WithMany("listOfMedicines")
+                        .HasForeignKey("FinishedOrderid");
+
+                    b.HasOne("HCI_wireframe.Model.Orders.PharmacyOffer", null)
+                        .WithMany("ListOfMedicies")
+                        .HasForeignKey("PharmacyOfferid");
+
                     b.HasOne("HCI_wireframe.Model.Doctor.DoctorUser", "doctor")
                         .WithMany()
                         .HasForeignKey("doctorId")

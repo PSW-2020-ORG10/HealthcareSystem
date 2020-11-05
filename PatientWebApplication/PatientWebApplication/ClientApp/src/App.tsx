@@ -6,11 +6,13 @@ import Counter from './components/Counter';
 import FetchData from './components/FetchData';
 
 import './custom.css'
+import PatientFeedback from './components/PatientFeedback';
 
 export default () => (
     <Layout>
         <Route exact path='/' component={Home} />
         <Route path='/counter' component={Counter} />
         <Route path='/fetch-data/:startDateIndex?' component={FetchData} />
+        <Route path='/patient-feedback' component={PatientFeedback} />
     </Layout>
 );

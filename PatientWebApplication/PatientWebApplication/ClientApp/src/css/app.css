@@ -95,15 +95,16 @@ body {
 --------------------------------------------------------------*/
 .header {
     padding-top: 40px;
-    /*background: #ed5928 url('../images/header-bg.jpg') no-repeat left bottom;*/
+    padding-bottom: 40px;
+    background: #66a4fa no-repeat left bottom;
     background-size: cover;
 }
 
 .header-blockquote {
     max-width: 520px;
-    margin-left: auto;
+    /*margin-left: auto;*/
     padding: 40px 0;
-    text-align: right;
+    text-align: left;
 }
 
 .header-quote {
@@ -293,6 +294,11 @@ body {
     padding: 40px 30px 30px;
     transition: 350ms ease-in-out;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+}
+
+.small-text-label-wrapper{
+    display:block;
+    position:relative;
 }
 
 .small-text-label {

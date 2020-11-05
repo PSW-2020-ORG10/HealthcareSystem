@@ -11,7 +11,7 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean }
     public render() {
         return (
             <header>
-                <Navbar className="navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3" light>
+                <Navbar className="navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow" light>
                     <Container>
                         <NavbarBrand tag={Link} to="/">PatientWebApplication</NavbarBrand>
                         <NavbarToggler onClick={this.toggle} className="mr-2"/>
@@ -25,6 +25,9 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean }
                                 </NavItem>
                                 <NavItem>
                                     <NavLink tag={Link} className="text-dark" to="/fetch-data">Fetch data</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink tag={Link} className="text-dark" to="/patient-feedback">Feedback</NavLink>
                                 </NavItem>
                             </ul>
                         </Collapse>

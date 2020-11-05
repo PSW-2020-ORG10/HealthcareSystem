@@ -40,7 +40,7 @@ namespace HCI_wireframe.Service
             {
                 medicine.room.Add(new ModelRoom(room.typeOfRoom));
                
-                room.medicine.Add(medicine.name);
+                room.medicine.Add(new ModelMedicine(medicine.name));
                 roomRepository.Update(room);
                 
             }

@@ -1,5 +1,6 @@
 ﻿using Class_diagram.Contoller;
 using Class_diagram.Model.Hospital;
+using HCI_wireframe.Model.Hospital;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,8 +42,8 @@ namespace WpfApp2
                 return;
             }
 
-            List<String> oprema = new List<String>();
-            List<String> medicines = new List<String>();
+            List<ModelEquipment> oprema = new List<ModelEquipment>();
+            List<ModelMedicine> medicines = new List<ModelMedicine>();
 
             Room med = new Room(id, name,oprema, medicines,true);
 
