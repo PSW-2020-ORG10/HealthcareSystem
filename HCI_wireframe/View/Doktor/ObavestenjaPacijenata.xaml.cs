@@ -61,7 +61,7 @@ namespace Klinika
             {
                 pitanja = new List<Question>();
             }
-            List<String> mojaObavestenja = lekar.specialNotifications;
+            List<DoctorNotification> mojaObavestenja = lekar.specialNotifications;
 
 
             idSvihpacijenta = new List<int>();

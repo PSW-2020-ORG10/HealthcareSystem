@@ -198,6 +198,7 @@
     <Compile Include="Contoller\RequestMedicineController.cs" />
     <Compile Include="Contoller\RoomController.cs" />
     <Compile Include="Contoller\SecretaryController.cs" />
+    <Compile Include="Model\Doctor\DoctorNotification.cs" />
     <Compile Include="Model\Doctor\DoctorUser.cs" />
     <Compile Include="Model\Doctor\Operation.cs" />
     <Compile Include="Model\Doctor\Referral.cs" />

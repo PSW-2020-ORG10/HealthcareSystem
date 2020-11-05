@@ -325,10 +325,10 @@ namespace ProjekatHCI
 
                             if (d.doctor.specialNotifications == null)
                             {
-                                d.doctor.specialNotifications = new List<string>();
+                                d.doctor.specialNotifications = new List<DoctorNotification>();
                             }
-                            List<String> obavestenja = d.doctor.specialNotifications;
-                            obavestenja.Add("Postovani, pregled zakazan za datum: " + d.date + " i vreme " + d.time + " je otkazan.");
+                            List<DoctorNotification> obavestenja = d.doctor.specialNotifications;
+                            obavestenja.Add(new DoctorNotification("Postovani, pregled zakazan za datum: " + d.date + " i vreme " + d.time + " je otkazan."));
                             d.doctor.specialNotifications = obavestenja;
 
 
@@ -378,10 +378,10 @@ namespace ProjekatHCI
 
                             if (d.isResponiable.specialNotifications == null)
                             {
-                                d.isResponiable.specialNotifications = new List<string>();
+                                d.isResponiable.specialNotifications = new List<DoctorNotification>();
                             }
-                            List<String> obavestenja = d.isResponiable.specialNotifications;
-                            obavestenja.Add("Postovani,operacija zakazana za datum: " + d.date + " i vreme " + d.start + " je otkazana.");
+                            List<DoctorNotification> obavestenja = d.isResponiable.specialNotifications;
+                            obavestenja.Add(new DoctorNotification("Postovani,operacija zakazana za datum: " + d.date + " i vreme " + d.start + " je otkazana."));
                             d.isResponiable.specialNotifications = obavestenja;
 
 
@@ -477,10 +477,10 @@ namespace ProjekatHCI
 
                             if (d.doctor.specialNotifications == null)
                             {
-                                d.doctor.specialNotifications = new List<string>();
+                                d.doctor.specialNotifications = new List<DoctorNotification>();
                             }
-                            List<String> obavestenja = d.doctor.specialNotifications;
-                            obavestenja.Add("Postovani, pregled zakazan za datum: " + d.date + " i vreme " + d.time + " je otkazan.");
+                            List<DoctorNotification> obavestenja = d.doctor.specialNotifications;
+                            obavestenja.Add(new DoctorNotification("Postovani, pregled zakazan za datum: " + d.date + " i vreme " + d.time + " je otkazan."));
                             d.doctor.specialNotifications = obavestenja;
 
 
@@ -527,10 +527,10 @@ namespace ProjekatHCI
 
                             if (d.isResponiable.specialNotifications == null)
                             {
-                                d.isResponiable.specialNotifications = new List<string>();
+                                d.isResponiable.specialNotifications = new List<DoctorNotification>();
                             }
-                            List<String> obavestenja = d.isResponiable.specialNotifications;
-                            obavestenja.Add("Postovani,operacija zakazana za datum: " + d.date + " i vreme " + d.start + " je otkazana.");
+                            List<DoctorNotification> obavestenja = d.isResponiable.specialNotifications;
+                            obavestenja.Add(new DoctorNotification("Postovani,operacija zakazana za datum: " + d.date + " i vreme " + d.start + " je otkazana."));
                             d.isResponiable.specialNotifications = obavestenja;
 
 
