@@ -18,6 +18,7 @@ using Class_diagram.Model.Patient;
 using Class_diagram.Repository;
 using HCI_wireframe;
 using HCI_wireframe.Model.Doctor;
+using HCI_wireframe.Model.Patient;
 using Path = System.IO.Path;
 
 namespace Klinika
@@ -105,11 +106,11 @@ namespace Klinika
             }
             if(izabranPacijent.notifications==null)
             {
-                izabranPacijent.notifications = new List<string>();
+                izabranPacijent.notifications = new List<ModelNotification>();
             }
-            List<String> pacijentObavestenja = izabranPacijent.notifications;
+            List<ModelNotification> pacijentObavestenja = izabranPacijent.notifications;
 
-            pacijentObavestenja.Add("Doctor  " + lekar.firstName + " " + lekar.secondName + "  - answer  -" +odg.Text);
+            pacijentObavestenja.Add(new ModelNotification("Doctor  " + lekar.firstName + " " + lekar.secondName + "  - answer  -" +odg.Text));
             izabranPacijent.notifications = pacijentObavestenja;
             cont.Update(izabranPacijent);
             

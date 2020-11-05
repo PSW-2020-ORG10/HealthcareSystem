@@ -6,6 +6,7 @@
 
 using Class_diagram.Model.Doctor;
 using Class_diagram.Model.Employee;
+using HCI_wireframe.Model.Patient;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -29,8 +30,7 @@ namespace Class_diagram.Model.Patient
         public String email { get; set; }
         public String password { get; set; }
         public Boolean isRegisteredBySecretary { get; set; }
-        [NotMapped]
-        public List<String> notifications { get; set; }
+        public virtual List<ModelNotification> notifications { get; set; }
 
         public PatientUser() : base()
         {
@@ -38,7 +38,7 @@ namespace Class_diagram.Model.Patient
         }
 
         public PatientUser(int id, string name, string secondname, string ucin, String date, string phone, String medicalid, String allergie, String city, Boolean guest,
-            String email, String password, Boolean isRegisteredBySecretary, List<String>notifications)
+            String email, String password, Boolean isRegisteredBySecretary, List<ModelNotification> notifications)
            : base(id, name, secondname, ucin, date, phone)
         {
             this.medicalIdNumber = medicalid;

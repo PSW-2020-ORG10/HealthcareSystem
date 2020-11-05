@@ -23,6 +23,7 @@ using Class_diagram.Model.Patient;
 using Class_diagram.Repository;
 using HCI_wireframe.Contoller;
 using HCI_wireframe.Model.Doctor;
+using HCI_wireframe.Model.Patient;
 using HCI_wireframe.View.Sekretar;
 
 using Path = System.IO.Path;
@@ -309,12 +310,12 @@ namespace ProjekatHCI
 
                             if (d.patient.notifications == null)
                             {
-                                d.patient.notifications = new List<string>();
+                                d.patient.notifications = new List<ModelNotification>();
                             }
-                            List<String> notifications1 = d.patient.notifications;
+                            List<ModelNotification> notifications1 = d.patient.notifications;
                             // }
 
-                            notifications1.Add("Postovani, pregled zakazan za datum: " + d.date + " i vreme " + d.time + " je otkazan.");
+                            notifications1.Add(new ModelNotification("Postovani, pregled zakazan za datum: " + d.date + " i vreme " + d.time + " je otkazan."));
                             d.patient.notifications = notifications1;
 
 
@@ -358,12 +359,12 @@ namespace ProjekatHCI
 
                             if (d.patient.notifications == null)
                             {
-                                d.patient.notifications = new List<string>();
+                                d.patient.notifications = new List<ModelNotification>();
                             }
-                            List<String> notifications1 = d.patient.notifications;
+                            List<ModelNotification> notifications1 = d.patient.notifications;
 
 
-                            notifications1.Add("Postovani, operacija zakazana za datum: " + d.date + " i vreme " + d.start + " je otkazana.");
+                            notifications1.Add(new ModelNotification("Postovani, operacija zakazana za datum: " + d.date + " i vreme " + d.start + " je otkazana."));
                             d.patient.notifications = notifications1;
 
 
@@ -461,12 +462,12 @@ namespace ProjekatHCI
                            
                             if (d.patient.notifications == null)
                             {
-                                d.patient.notifications = new List<string>();
+                                d.patient.notifications = new List<ModelNotification>();
                             }
-                            List<String> notifications1 = d.patient.notifications;
+                            List<ModelNotification> notifications1 = d.patient.notifications;
                             // }
 
-                            notifications1.Add("Postovani, pregled zakazan za datum: " + d.date + " i vreme " + d.time + " je otkazan.");
+                            notifications1.Add(new ModelNotification("Postovani, pregled zakazan za datum: " + d.date + " i vreme " + d.time + " je otkazan."));
                             d.patient.notifications = notifications1;
                            
 
@@ -507,12 +508,12 @@ namespace ProjekatHCI
                           
                             if (d.patient.notifications == null)
                             {
-                                d.patient.notifications = new List<string>();
+                                d.patient.notifications = new List<ModelNotification>();
                             }
-                            List<String> notifications1 = d.patient.notifications;
+                            List<ModelNotification> notifications1 = d.patient.notifications;
                           
 
-                            notifications1.Add("Postovani, operacija zakazana za datum: " + d.date + " i vreme " + d.start + " je otkazana.");
+                            notifications1.Add(new ModelNotification("Postovani, operacija zakazana za datum: " + d.date + " i vreme " + d.start + " je otkazana."));
                             d.patient.notifications = notifications1;
 
 
