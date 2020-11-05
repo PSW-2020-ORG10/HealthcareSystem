@@ -2,12 +2,12 @@
     FEEDBACK_CREATED,
     CREATE_ERROR,
     FEEDBACK_PUBLISHED,
+    LOADED_PUBLISHED_FEEDBACK,
     PUBLISH_ERROR
 } from "../types2/types"
 import axios from "axios";
 
 export const feedbackCreated = (feedback) => async (dispatch) => {
-    alert("dosao");
     console.log(feedback.message);
     try {
         debugger;
@@ -42,3 +42,20 @@ export const feedbackPublished = (id) => async (dispatch) => {
         });
     }
 }; 
+
+export const loadedPublishedFeedback = () => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.get("http://localhost:60198/api/feedback/published");        
+        debugger;
+        dispatch({
+            type: LOADED_PUBLISHED_FEEDBACK,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: PUBLISH_ERROR,
+            payload: console.log(e),
+        });
+    }
+};

@@ -1,6 +1,7 @@
 ﻿import React, { Component } from "react"
 import { feedbackCreated } from "../actions2/actions"
 import { connect } from "react-redux"
+import "../css/app.css"
 
 class CreateForm extends Component {
     state = {
@@ -8,10 +9,6 @@ class CreateForm extends Component {
         isAnonymous: false,
         isPublic: false
     };
-
-    constructor() {
-        super();
-    }
 
     handleChange=(event) => {
         const { name, value, type, checked } = event.target
@@ -21,42 +18,53 @@ class CreateForm extends Component {
             [name]: value
         })
     }
+
+
     render() {
         return (
             <div>
                 <form>
-                    <input
-                        type="text"
-                        value={this.state.message}
-                        name="message"
-                        placeholder="Message"
-                        onChange={this.handleChange}
-                    />
-                    <br />
-
-                    <label>
+                    <h2>Create Feedback</h2>
+                    <div className="field-wrap">
+                        <label className="label" htmlFor="">
+                            Title:
+                        </label>
                         <input
-                            type="checkbox"
-                            name="isAnonymous"
-                            checked={this.state.isAnonymous}
+                            className="field"
+                            type="text"
+                            value={this.state.message}
+                            name="message"
+                            placeholder="Message"
                             onChange={this.handleChange}
-                        /> Is anonymous?
-                    </label>
+                        />
+                    </div>
+                    
+                    <div className="field-wrap">
+                        <label className="label">
+                            <input
+                                type="checkbox"
+                                name="isAnonymous"
+                                checked={this.state.isAnonymous}
+                                onChange={this.handleChange}
+                            /> Is anonymous?
+                        </label>
+                    </div>
 
-                    <br />
+                    <div className="field-wrap">
+                        <label className="label">
+                            <input
+                                type="checkbox"
+                                name="isPublic"
+                                checked={this.state.isPublic}
+                                onChange={this.handleChange}
+                            /> Is public?
+                        </label>
+                     </div>
 
-                    <label>
-                        <input
-                            type="checkbox"
-                            name="isPublic"
-                            checked={this.state.isPublic}
-                            onChange={this.handleChange}
-                        /> Is public?
-                </label>
-
-                    <br />
-                    <button className="btn btn-primary btn-lg" onClick={() => this.props.createFeedback(this.state.message, this.state.isAnonymous, this.state.isPublic)}>Create</button>
-                </form>
+                    <div className="btn-wrap align-right">
+                        <button disabled={!this.state.message} className="btn" onClick={() => this.props.feedbackCreated(this.state)}>Create</button>
+                    </div>
+                 </form>
             </div>
         )
 
