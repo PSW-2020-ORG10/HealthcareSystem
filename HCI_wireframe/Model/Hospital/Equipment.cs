@@ -5,6 +5,7 @@
  ***********************************************************************/
 
 using Class_diagram.Model.Patient;
+using HCI_wireframe.Model.Hospital;
 using System;
 using System.Collections.Generic;
 
@@ -12,7 +13,7 @@ namespace Class_diagram.Model.Hospital
 {
    public class Equipment : Entity
    {
-      public List<String> room { get; set; }
+      public virtual List<ModelRoom> room { get; set; }
         public String name { get; set; }
         public int quantity { get; set; }
         public Equipment()
@@ -23,7 +24,7 @@ namespace Class_diagram.Model.Hospital
             this.name = name;
             this.quantity = quantity;
         }
-        public Equipment(int id, String name, int quantity, List<String> room) : base(id)
+        public Equipment(int id, String name, int quantity, List<ModelRoom> room) : base(id)
         {
 
             this.name = name;

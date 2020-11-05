@@ -7,6 +7,7 @@
 using Class_diagram.Contoller;
 using Class_diagram.Model.Hospital;
 using Class_diagram.Repository;
+using HCI_wireframe.Model.Hospital;
 using HCI_wireframe.Service;
 using System;
 using System.Collections.Generic;
@@ -46,7 +47,7 @@ namespace Class_diagram.Service
         {
             if (room.typeOfRoom.Equals("Magacin"))
             {
-                equipment.room.Add(room.typeOfRoom);
+                equipment.room.Add(new ModelRoom(room.typeOfRoom));
                 room.equipment.Add(equipment.name);
                 roomRepository.Update(room);
             }

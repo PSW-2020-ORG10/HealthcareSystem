@@ -1,6 +1,6 @@
 ﻿using Class_diagram.Contoller;
 using Class_diagram.Model.Hospital;
-
+using HCI_wireframe.Model.Hospital;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -56,7 +56,7 @@ namespace WpfApp2
                 {
                     for (int i = 0; i < eq.room.Count; i++)
                     {
-                        String soba = eq.room[i];
+                        ModelRoom soba = eq.room[i];
 
                         if (soba.Equals(item.typeOfRoom))
                         {
@@ -113,7 +113,7 @@ namespace WpfApp2
             string name1 = sender.ToString();
             string[] words = name1.Split(':');
 
-            string id = words[1].TrimEnd().TrimStart();
+            ModelRoom id = new ModelRoom(words[1].TrimEnd().TrimStart());
 
 
             eq.room.Remove(id);
@@ -163,7 +163,7 @@ namespace WpfApp2
                 {
                     for (int i = 0; i < eq.room.Count; i++)
                     {
-                        String soba = eq.room[i];
+                        ModelRoom soba = eq.room[i];
 
                         if (soba.Equals(item.typeOfRoom))
                         {
@@ -265,7 +265,7 @@ namespace WpfApp2
             string name1 = sender.ToString();
             string[] words = name1.Split(':');
 
-            string id = words[1].TrimEnd().TrimStart();
+            ModelRoom id = new ModelRoom(words[1].TrimEnd().TrimStart());
             
 
             eq.room.Add(id);
@@ -316,7 +316,7 @@ namespace WpfApp2
                 {
                     for (int i = 0; i < eq.room.Count; i++)
                     {
-                        String soba = eq.room[i];
+                        ModelRoom soba = eq.room[i];
 
                         if (soba.Equals(item.typeOfRoom))
                         {

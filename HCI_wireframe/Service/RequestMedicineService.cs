@@ -8,6 +8,7 @@ using Class_diagram.Contoller;
 using Class_diagram.Model.Hospital;
 using Class_diagram.Repository;
 using HCI_wireframe.Model.Doctor;
+using HCI_wireframe.Model.Hospital;
 using HCI_wireframe.Repository;
 namespace HCI_wireframe.Service
 {
@@ -37,7 +38,7 @@ namespace HCI_wireframe.Service
         {
             if (isRoomStorage(room))
             {
-                medicine.room.Add(room.typeOfRoom);
+                medicine.room.Add(new ModelRoom(room.typeOfRoom));
                
                 room.medicine.Add(medicine.name);
                 roomRepository.Update(room);
