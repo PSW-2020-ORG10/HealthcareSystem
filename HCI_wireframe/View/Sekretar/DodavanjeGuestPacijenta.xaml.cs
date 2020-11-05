@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using Class_diagram.Contoller;
 using Class_diagram.Model.Patient;
 using HCI_wireframe.Contoller;
+using HCI_wireframe.Model.Patient;
 using ProjekatHCI;
 
 namespace HCI_wireframe.View.Sekretar
@@ -172,8 +173,8 @@ namespace HCI_wireframe.View.Sekretar
 
             int broj = getNextid();
             String emaail = broj.ToString() + "UNKNOWN";
-            List<String> notif = new List<string>();
-            notif.Add("");
+            List<ModelNotification> notif = new List<ModelNotification>();
+            notif.Add(new ModelNotification(""));
             PatientUser rp = new PatientUser(0, ImeBox.Text, PrezimeBox.Text, JMBGBox.Text, DatumRodjBox.Text,
                      BrojTelefonaBox.Text, KnjizicaBox.Text,"",AdresaBox.Text,true,emaail,"nopassword",true,notif);
 

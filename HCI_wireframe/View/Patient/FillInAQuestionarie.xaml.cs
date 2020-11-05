@@ -309,11 +309,11 @@ namespace HCI_wireframe
                 {
                     sb.Append(q.name + "  /  mark:  " + q.answer + "\n");
                 }
-                String upitnik = sb.ToString();
+                DoctorNotification upitnik = new DoctorNotification(sb.ToString());
                 Console.WriteLine(upitnik);
                 if (doktorUpitnik.specialNotifications == null)
                 {
-                    doktorUpitnik.specialNotifications = new List<String>();
+                    doktorUpitnik.specialNotifications = new List<DoctorNotification>();
                 }
                 doktorUpitnik.specialNotifications.Add(upitnik);
                 doctorController.Update(doktorUpitnik);

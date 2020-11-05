@@ -198,6 +198,7 @@
     <Compile Include="Contoller\RequestMedicineController.cs" />
     <Compile Include="Contoller\RoomController.cs" />
     <Compile Include="Contoller\SecretaryController.cs" />
+    <Compile Include="Model\Doctor\DoctorNotification.cs" />
     <Compile Include="Model\Doctor\DoctorUser.cs" />
     <Compile Include="Model\Doctor\Operation.cs" />
     <Compile Include="Model\Doctor\Referral.cs" />
@@ -218,10 +219,12 @@
     <Compile Include="Model\Patient\DoctorAppointment.cs" />
     <Compile Include="Model\Patient\Entity.cs" />
     <Compile Include="Model\Patient\Feedback.cs" />
+    <Compile Include="Model\Patient\ModelNotification.cs" />
     <Compile Include="Model\Patient\PatientUser.cs" />
     <Compile Include="Model\Patient\PhoneNumber.cs" />
     <Compile Include="Model\Patient\Prescription.cs" />
     <Compile Include="Model\Patient\Question.cs" />
+    <Compile Include="Model\Patient\StringData.cs" />
     <Compile Include="Model\Secretary\SecretaryUser.cs" />
     <Compile Include="Repository\AppointmentRepository.cs" />
     <Compile Include="Repository\DoctorRepository.cs" />

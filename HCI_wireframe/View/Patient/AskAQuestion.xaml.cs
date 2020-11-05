@@ -260,10 +260,10 @@ namespace HCI_wireframe
                 DoctorUser doctor = doctorController.GetByid(idDoktor);
                 if (doctor.specialNotifications == null)
                 {
-                    doctor.specialNotifications = new List<String>();
+                    doctor.specialNotifications = new List<DoctorNotification>();
                 }
-                List<String> obavestenja = doctor.specialNotifications;
-                obavestenja.Add("Patient - " + Patient.id + " -  " + textBloxk.Text);
+                List<DoctorNotification> obavestenja = doctor.specialNotifications;
+                obavestenja.Add(new DoctorNotification("Patient - " + Patient.id + " -  " + textBloxk.Text));
                 doctor.specialNotifications = obavestenja;
                Boolean isDoctorOk= doctorController.Update(doctor);
                 if(isDoctorOk==false)
