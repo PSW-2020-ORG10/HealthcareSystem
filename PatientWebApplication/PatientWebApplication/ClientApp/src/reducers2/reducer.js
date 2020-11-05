@@ -1,7 +1,8 @@
 ﻿import {
     FEEDBACK_CREATED,
     FEEDBACK_PUBLISHED,
-    LOADED_PUBLISHED_FEEDBACK
+    LOADED_PUBLISHED_FEEDBACK,
+    LOADED_ALL_FEEDBACK
 } from "../types2/types"
 
 function addFeedback(state=initialState, action) {
@@ -57,6 +58,12 @@ function reducer(state = initialState, action) {
                 ...state,
                 publishedFeedbackList: action.payload
                
+            };
+        case LOADED_ALL_FEEDBACK:
+            return {
+                ...state,
+                feedbackList: action.payload
+
             };
         default:
             return state;

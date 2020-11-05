@@ -3,7 +3,9 @@
     CREATE_ERROR,
     FEEDBACK_PUBLISHED,
     LOADED_PUBLISHED_FEEDBACK,
-    PUBLISH_ERROR
+    PUBLISH_ERROR,
+    LOADED_ALL_FEEDBACK,
+    OBSERVE_ERROR
 } from "../types2/types"
 import axios from "axios";
 
@@ -55,6 +57,23 @@ export const loadedPublishedFeedback = () => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: PUBLISH_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const loadedAllFeedback = () => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.get("http://localhost:60198/api/feedback");
+        debugger;
+        dispatch({
+            type: LOADED_ALL_FEEDBACK,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: OBSERVE_ERROR,
             payload: console.log(e),
         });
     }

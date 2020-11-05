@@ -85,8 +85,8 @@ namespace PatientWebApplication.Models
 
             new Feedback(1, "First message", true, true, 1),
             new Feedback(2, "Second message", false, false, 1),
-            new Feedback(3, "Third message", true, false, 1)
-
+            new Feedback(3, "Third message", true, false, 1),
+            new Feedback(4, "Fourth message", true, false, 1)
 
            );
 

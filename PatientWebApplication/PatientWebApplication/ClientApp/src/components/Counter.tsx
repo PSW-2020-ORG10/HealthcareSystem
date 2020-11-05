@@ -5,6 +5,7 @@ import { ApplicationState } from '../store';
 import * as CounterStore from '../store/Counter';
 import PublishButton from './PublishButton';
 import PublishedFeedback from './PublishedFeedbackTable';
+import AllFeedbackTable from './AllFeedbackTable';
 
 type CounterProps =
     CounterStore.CounterState &
@@ -28,7 +29,9 @@ class Counter extends React.PureComponent<CounterProps> {
                     onClick={() => { this.props.increment(); }}>
                     Increment
                 </button>
-                <PublishButton feedbackId="1"></PublishButton>
+                
+                <h1>All feedback</h1>
+                <AllFeedbackTable />
             </React.Fragment>
         );
     }
