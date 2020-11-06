@@ -62,7 +62,7 @@ class CreateForm extends Component {
                      </div>
 
                     <div className="btn-wrap align-right">
-                        <button disabled={!this.state.message} className="btn" onClick={() => this.props.feedbackCreated(this.state)}>Create</button>
+                        <button disabled={!this.state.message} className="btn btn-primary" onClick={() => this.props.feedbackCreated(this.state)}>Create</button>
                     </div>
                  </form>
             </div>

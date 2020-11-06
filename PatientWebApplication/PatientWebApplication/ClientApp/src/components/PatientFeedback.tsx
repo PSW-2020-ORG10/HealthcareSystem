@@ -17,7 +17,8 @@ class PatientFeedback extends React.PureComponent<CounterProps> {
         return (
             <React.Fragment>
                 <Header title="Feedback" description="See what other users think about our hospital." />
-                <CreateForm/>
+                <CreateForm />
+                <h2>Published Feedback</h2>
                 <PublishedFeedbackTable/>
             </React.Fragment>
         );
