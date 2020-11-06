@@ -1,6 +1,8 @@
 ﻿import React, { Component } from "react"
 import { feedbackCreated } from "../actions/actions"
 import { connect } from "react-redux"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; 
 import "../css/app.css"
 
 class CreateForm extends Component {
@@ -46,7 +48,7 @@ class CreateForm extends Component {
                                 name="isAnonymous"
                                 checked={this.state.isAnonymous}
                                 onChange={this.handleChange}
-                            /> Is anonymous?
+                            /> Anonymous
                         </label>
                     </div>
 
@@ -57,18 +59,31 @@ class CreateForm extends Component {
                                 name="isPublic"
                                 checked={this.state.isPublic}
                                 onChange={this.handleChange}
-                            /> Is public?
+                            /> Public
                         </label>
                      </div>
 
                     <div className="btn-wrap align-right">
-                        <button disabled={!this.state.message} className="btn btn-primary" onClick={() => this.props.feedbackCreated(this.state)}>Create</button>
+                    <button disabled={!this.state.message} className="btn btn-primary" onClick={this.createFeedback.bind(this)}>Create</button>
                     </div>
                  
             </div>
         )
 
     }
+
+    createFeedback() {
+        toast.configure();
+
+        toast.success("Feedback successfully created!", {
+            position: toast.POSITION.TOP_RIGHT
+        });
+
+        this.setState({ message: "", isAnonymous: false, isPublic: false });
+
+        this.props.feedbackCreated(this.state)
+    }
+
 }
 
 const mapStateToProps = (state) => ({
