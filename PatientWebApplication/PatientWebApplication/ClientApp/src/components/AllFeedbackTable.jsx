@@ -1,5 +1,5 @@
 ﻿import React, { Component } from "react"
-import { loadedAllFeedback } from "../actions2/actions"
+import { loadedAllFeedback } from "../actions/actions"
 import { connect } from "react-redux"
 import PublishButton from "./PublishButton";
 

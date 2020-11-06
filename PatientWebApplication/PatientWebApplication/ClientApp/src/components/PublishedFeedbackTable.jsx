@@ -1,5 +1,5 @@
 ﻿import React, { Component } from "react"
-import { loadedPublishedFeedback } from "../actions2/actions"
+import { loadedPublishedFeedback } from "../actions/actions"
 import { connect } from "react-redux"
 
 class PublishedFeedbackTable extends Component {

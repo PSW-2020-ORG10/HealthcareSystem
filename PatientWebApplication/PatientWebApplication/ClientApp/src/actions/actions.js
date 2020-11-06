@@ -6,7 +6,7 @@
     PUBLISH_ERROR,
     LOADED_ALL_FEEDBACK,
     OBSERVE_ERROR
-} from "../types2/types"
+} from "../types/types"
 import axios from "axios";
 
 export const feedbackCreated = (feedback) => async (dispatch) => {

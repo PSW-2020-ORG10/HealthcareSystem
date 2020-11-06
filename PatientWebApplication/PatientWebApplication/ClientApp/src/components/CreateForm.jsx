@@ -1,5 +1,5 @@
 ﻿import React, { Component } from "react"
-import { feedbackCreated } from "../actions2/actions"
+import { feedbackCreated } from "../actions/actions"
 import { connect } from "react-redux"
 import "../css/app.css"
 
@@ -23,7 +23,7 @@ class CreateForm extends Component {
     render() {
         return (
             <div>
-                <form>
+                
                     <h2>Create Feedback</h2>
                     <div className="field-wrap">
                         <label className="label" htmlFor="">
@@ -64,7 +64,7 @@ class CreateForm extends Component {
                     <div className="btn-wrap align-right">
                         <button disabled={!this.state.message} className="btn btn-primary" onClick={() => this.props.feedbackCreated(this.state)}>Create</button>
                     </div>
-                 </form>
+                 
             </div>
         )
 

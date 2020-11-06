@@ -2,6 +2,7 @@
 using PatientWebApplication.Adapters;
 using PatientWebApplication.Dtos;
 using PatientWebApplication.Models;
+using PatientWebApplication.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,10 @@ namespace PatientWebApplication.Services
 {
     public class FeedbackService 
     {
-        private readonly MyDbContext dbContext;
+        private FeedbackRepository FeedbackRepository { get; set; }
         public FeedbackService(MyDbContext context)
         {
-            dbContext = context;
+            FeedbackRepository = new FeedbackRepository(context);
         }
 
         //method for creating new feedback
@@ -24,26 +25,22 @@ namespace PatientWebApplication.Services
             PatientUser patient = new PatientUser();
             if (dto.IsAnonymous == false)      //if patient is not anynomous add to feedback else skip
             {
-                patient = dbContext.Patients.SingleOrDefault(patient => patient.id == 1); // still no login, so patient set to created patient in database with id=1, this will be changed after
+                patient = FeedbackRepository.FindPatient();
             }
             Feedback feedback = FeedbackAdapter.FeedbackDtoToFeedback(dto, patient);
-            dbContext.Feedbacks.Add(feedback);
-            dbContext.SaveChanges();
-            return feedback;
+            return FeedbackRepository.Add(feedback);
         }
 
         //method for getting all feedback
         public List<Feedback> GetAll()
         {
-            List<Feedback> result = new List<Feedback>();
-            dbContext.Feedbacks.ToList().ForEach(feedback => result.Add(feedback));
-            return result;
+            return FeedbackRepository.GetAll();
         }
 
         //method for getting all published feedback
         public List<Feedback> GetPublished() {
             List<Feedback> result = new List<Feedback>();
-            foreach(Feedback feedback in dbContext.Feedbacks.ToList())
+            foreach(Feedback feedback in FeedbackRepository.GetAll())
             {
                 if (feedback.IsPublished)
                 {
@@ -57,7 +54,7 @@ namespace PatientWebApplication.Services
         //method for publishing feedback
         public Feedback Publish(int id)
         {
-            Feedback feedbackToPublish = dbContext.Feedbacks.SingleOrDefault(feedback => feedback.id == id);
+            Feedback feedbackToPublish = FeedbackRepository.Find(id);
             if (feedbackToPublish == null)
             {
                 return null;
@@ -68,9 +65,7 @@ namespace PatientWebApplication.Services
             {
                 return null;
             }
-            feedbackToPublish.IsPublished = true;
-            dbContext.SaveChanges();
-            return feedbackToPublish;
+            return FeedbackRepository.PublishFeedback(feedbackToPublish);
         }
     }
 }

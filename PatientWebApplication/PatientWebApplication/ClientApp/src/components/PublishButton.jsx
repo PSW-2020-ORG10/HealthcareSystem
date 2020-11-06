@@ -1,5 +1,5 @@
 ﻿import React, { Component } from "react"
-import { feedbackPublished } from "../actions2/actions"
+import { feedbackPublished } from "../actions/actions"
 import { connect } from "react-redux"
 import { ToastContainer, toast } from 'react-toastify'; 
 import 'react-toastify/dist/ReactToastify.css'; 

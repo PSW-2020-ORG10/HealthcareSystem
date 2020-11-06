@@ -22,7 +22,7 @@ var redux_1 = require("redux");
 var redux_thunk_1 = require("redux-thunk");
 var connected_react_router_1 = require("connected-react-router");
 var _1 = require("./");
-var reducer_1 = require("../reducers2/reducer");
+var reducer_1 = require("../reducers/reducer");
 function configureStore(history, initialState) {
     var middleware = [
         redux_thunk_1.default,

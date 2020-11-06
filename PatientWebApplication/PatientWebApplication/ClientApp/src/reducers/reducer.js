@@ -3,7 +3,7 @@
     FEEDBACK_PUBLISHED,
     LOADED_PUBLISHED_FEEDBACK,
     LOADED_ALL_FEEDBACK
-} from "../types2/types"
+} from "../types/types"
 
 function addFeedback(state=initialState, action) {
     return {
