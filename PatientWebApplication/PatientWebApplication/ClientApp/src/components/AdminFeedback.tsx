@@ -4,21 +4,19 @@ import { RouteComponentProps } from 'react-router';
 import { ApplicationState } from '../store';
 import * as CounterStore from '../store/Counter';
 import Header from './Header';
-import PublishedFeedbackTable from './PublishedFeedbackTable';
-import CreateForm from './CreateForm';
+import AllFeedbackTable from './AllFeedbackTable';
 
 type CounterProps =
     CounterStore.CounterState &
     typeof CounterStore.actionCreators &
     RouteComponentProps<{}>;
 
-class PatientFeedback extends React.PureComponent<CounterProps> {
+class AdminFeedback extends React.PureComponent<CounterProps> {
     public render() {
         return (
             <React.Fragment>
-                <Header title="Feedback" description="See what other users think about our hospital." />
-                <CreateForm/>
-                <PublishedFeedbackTable/>
+                <Header title="Feedback" description="See every feedback sent by users." />
+                <AllFeedbackTable />
             </React.Fragment>
         );
     }
@@ -27,4 +25,4 @@ class PatientFeedback extends React.PureComponent<CounterProps> {
 export default connect(
     (state: ApplicationState) => state.counter,
     CounterStore.actionCreators
-)(PatientFeedback);
+)(AdminFeedback);
