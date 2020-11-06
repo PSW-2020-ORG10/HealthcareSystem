@@ -22,7 +22,7 @@ function updateObjectInArray(array, action) {
         // Otherwise, this is the one we want - return an updated value
         return {
             ...item,
-            ...action.item
+            ...action.payload
         }
     })
 }
@@ -46,18 +46,18 @@ function reducer(state = initialState, action) {
         case FEEDBACK_CREATED:
             return {
                 ...state,
-                feedbackList: addFeedback(state, action),
+                feedbackList: state.feedbackList.concat(action.payload)
             };
         case FEEDBACK_PUBLISHED:
             return {
                 ...state,
+                publishedFeedbackList: state.publishedFeedbackList.concat(action.payload),
                 feedbackList: updateObjectInArray(state.feedbackList, action)
             };
         case LOADED_PUBLISHED_FEEDBACK:                      
             return {
                 ...state,
-                publishedFeedbackList: action.payload
-               
+                publishedFeedbackList: action.payload,
             };
         case LOADED_ALL_FEEDBACK:
             return {

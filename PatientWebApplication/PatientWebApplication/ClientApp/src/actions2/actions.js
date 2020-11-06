@@ -28,11 +28,8 @@ export const feedbackCreated = (feedback) => async (dispatch) => {
 }; 
 
 export const feedbackPublished = (id) => async (dispatch) => {
-    alert("Feedback publlished");
     try {
-        debugger;
         const response = await axios.put("http://localhost:60198/api/feedback/" + id);
-        debugger;
         dispatch({
             type: FEEDBACK_PUBLISHED,
             payload: response.data,
