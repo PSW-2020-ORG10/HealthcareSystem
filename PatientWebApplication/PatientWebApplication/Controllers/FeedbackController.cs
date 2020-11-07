@@ -12,16 +12,22 @@ using PatientWebApplication.Services;
 
 namespace PatientWebApplication.Controllers
 {
+    /// <summary>Class <c>FeedbackController</c> handles requests sent from client app.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class FeedbackController : ControllerBase
     {
         private readonly MyDbContext dbContext;
-        private FeedbackService feedbackService;
+        /// <value>Property <c>FeedbackService</c> represents the service used for handling business logic.</value>
+        private FeedbackService FeedbackService { get; set; }
+
+        /// <summary>This constructor injects the FeedbackController with matching FeedbackService.</summary>
+        /// <param name="context"><c>context</c> is type of <c>DbContext</c>, and it's used for accessing MYSQL database.</param>
         public FeedbackController(MyDbContext context)
         {
             this.dbContext = context;
-            feedbackService = new FeedbackService(context);
+            FeedbackService = new FeedbackService(context);
         }
 
 
@@ -29,7 +35,7 @@ namespace PatientWebApplication.Controllers
         public IActionResult Get()
         {
 
-            List<Feedback> result = feedbackService.GetAll();           
+            List<Feedback> result = FeedbackService.GetAll();           
             return Ok(result);
         }
 
@@ -38,7 +44,7 @@ namespace PatientWebApplication.Controllers
         public IActionResult GetPublished()
         {
             
-            List<Feedback> result = feedbackService.GetPublished();           
+            List<Feedback> result = FeedbackService.GetPublished();           
             return Ok(result);
         }
 
@@ -51,7 +57,7 @@ namespace PatientWebApplication.Controllers
                 return BadRequest();    // if any of the values is incorrect return bad request
             }
 
-            Feedback feedback = feedbackService.Create(dto);
+            Feedback feedback = FeedbackService.Create(dto);
 
             if (feedback == null)
             {
@@ -72,7 +78,7 @@ namespace PatientWebApplication.Controllers
             }
 
             // checking if feedback exists in database
-            Feedback result = feedbackService.Publish(id);
+            Feedback result = FeedbackService.Publish(id);
             if(result == null)
             {
                 return NotFound();
