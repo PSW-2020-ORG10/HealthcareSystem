@@ -1,3 +1,5 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +9,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
+using PatientWebApplication.Dtos;
 using PatientWebApplication.Models;
+using PatientWebApplication.Validators;
 
 namespace PatientWebApplication
 {
@@ -27,6 +31,17 @@ namespace PatientWebApplication
     .AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 );
+
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(new ValidationFilter());
+            })
+           .AddFluentValidation(options =>
+           {
+               options.RegisterValidatorsFromAssemblyContaining<Startup>();
+           });
+
+            
 
             services.AddDbContext<MyDbContext>(options =>
             options.UseMySql(ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString")).UseLazyLoadingProxies());

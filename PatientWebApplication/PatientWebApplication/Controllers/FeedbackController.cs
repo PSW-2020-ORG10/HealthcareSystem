@@ -9,6 +9,7 @@ using PatientWebApplication.Adapters;
 using PatientWebApplication.Dtos;
 using PatientWebApplication.Models;
 using PatientWebApplication.Services;
+using PatientWebApplication.Validators;
 
 namespace PatientWebApplication.Controllers
 {
@@ -51,8 +52,10 @@ namespace PatientWebApplication.Controllers
         [HttpPost]      // POST /api/feedback Request body: {"message": "Some message", "isPublic": true, "isAnonymous": false}
         public IActionResult Create(FeedbackDto dto)
         {
+            // validation in feedback validator, automatically called from startup
+
             PatientUser patient = dbContext.Patients.SingleOrDefault(patient => patient.id == 1);    // still no login, so patient set to created patient in database with id=1, this will be changed after
-            if (dto.Message.Length <= 0 || patient == null)
+            if (patient == null)
             {
                 return BadRequest();    // if any of the values is incorrect return bad request
             }
