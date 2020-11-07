@@ -4,7 +4,6 @@ import { RouteComponentProps } from 'react-router';
 import { ApplicationState } from '../store';
 import * as CounterStore from '../store/Counter';
 import Header from './Header';
-import PublishedFeedbackTable from './PublishedFeedbackTable';
 import CreateForm from './CreateForm';
 
 type CounterProps =
@@ -16,8 +15,8 @@ class PatientFeedback extends React.PureComponent<CounterProps> {
     public render() {
         return (
             <React.Fragment>
-                <Header title="Feedback" description="See what other users think about our hospital." />
-                <PublishedFeedbackTable/>
+                <Header title="Send feedback" description="Send your personal feedback." />
+                <CreateForm />
             </React.Fragment>
         );
     }
