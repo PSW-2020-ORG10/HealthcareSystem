@@ -33,7 +33,8 @@ namespace PatientWebApplication.Repositories
             patient = dbContext.Patients.SingleOrDefault(patient => patient.id == 1); // still no login, so patient set to created patient in database with id=1, this will be changed after
             return patient;
         }
-
+        /// <summary> This is method for getting all feedback. </summary>
+        /// <returns> List of all feedback representing all feedback in database. </returns>
         public List<Feedback> GetAll()
         {
             List<Feedback> result = new List<Feedback>();
