@@ -25,7 +25,7 @@ class CreateForm extends Component {
     render() {
         return (
             <div>
-                
+                <form>
                     <h2>Create Feedback</h2>
                     <div className="field-wrap">
                         <label className="label" htmlFor="">
@@ -66,7 +66,7 @@ class CreateForm extends Component {
                     <div className="btn-wrap align-right">
                     <button disabled={!this.state.message} className="btn btn-primary" onClick={this.createFeedback.bind(this)}>Create</button>
                     </div>
-                 
+                </form>
             </div>
         )
 
@@ -79,7 +79,7 @@ class CreateForm extends Component {
             position: toast.POSITION.TOP_RIGHT
         });
 
-        this.setState({ message: "", isAnonymous: false, isPublic: false });
+       
 
         this.props.feedbackCreated(this.state)
     }
