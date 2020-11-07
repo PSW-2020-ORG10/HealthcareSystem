@@ -20,6 +20,10 @@ namespace PatientWebApplication.Repositories
             this.dbContext = dbContext;
         }
 
+        /// <summary> This method creates <c>Feedback</c> of given <paramref name="feedback"/> and saves it into database. </summary>
+        /// <param name="feedback"><c>feedback</c> is feedback that needs to be created.
+        /// </param>
+        /// <returns> Feedback saved into database. </returns>
         public Feedback Add(Feedback feedback)
         {
             dbContext.Feedbacks.Add(feedback);

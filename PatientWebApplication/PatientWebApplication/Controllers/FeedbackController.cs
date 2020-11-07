@@ -51,6 +51,11 @@ namespace PatientWebApplication.Controllers
             return Ok(result);
         }
 
+
+        /// <summary> This method determines if <c>FeedbackDto</c> provided <paramref name="dto"/> is valid for creating by calling <c>FeedbackValidator</c> automatically and sends it to <c>FeedbackService</c>. </summary>
+        /// <param name="dto"><c>dto</c> is Data Transfer Object of a <c>Feedback</c> that contains <c>Message</c>, <c>IsPublic</c>, <c>IsAnonymous</c> and <c>PatientId</c>. 
+        /// </param>
+        /// <returns> if fields from <paramref name="dto"/> are not valid 404 Bad Request also if created feedback is not null 200 Ok else 404 Bad Request.</returns>
         [HttpPost]      // POST /api/feedback Request body: {"message": "Some message", "isPublic": true, "isAnonymous": false}
         public IActionResult Create(FeedbackDto dto)
         {
