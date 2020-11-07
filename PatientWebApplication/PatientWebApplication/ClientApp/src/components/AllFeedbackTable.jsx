@@ -21,9 +21,8 @@ class AllFeedbackTable extends Component {
                 <table className='table allFeedback'>
                     <thead>
                         <tr>
-                            <th>Id of feedback</th>
                             <th>Message</th>
-                            <th>IsPublic</th>
+                            <th>Created</th>
                             <th>Patient</th>
                             <th> </th>
                         </tr>
@@ -31,9 +30,8 @@ class AllFeedbackTable extends Component {
                     {feedbackList.map((f) => (
                         <tbody key={f.id}>
                             <tr key={f.id}>
-                                <td  >{f.id}</td >
                                 <td  >{f.message}</td >
-                                <td  >{f.isPublic ? "true" : "false"}</td >
+                                <td  > </td >
                                 <td  >{f.isAnonymous ? "ANONYMOUS" : [f.patient.firstName, ' ', f.patient.secondName].join('')}</td >
                                 <td  ><PublishButton feedback={f}> </PublishButton></td >
                             </tr>
