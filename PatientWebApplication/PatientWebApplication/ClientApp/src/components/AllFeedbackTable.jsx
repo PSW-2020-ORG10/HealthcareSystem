@@ -2,6 +2,9 @@
 import { loadedAllFeedback } from "../actions/actions"
 import { connect } from "react-redux"
 import PublishButton from "./PublishButton";
+import { wrap } from "module";
+
+
 
 class AllFeedbackTable extends Component {
     componentDidMount() {
@@ -18,22 +21,22 @@ class AllFeedbackTable extends Component {
         return (
 
             <div>
-                <table className='table allFeedback'>
+                <table className='table allFeedback' >
                     <thead>
                         <tr>
-                            <th>Message</th>
-                            <th>Created</th>
-                            <th>Patient</th>
+                            <th style={{ textAlign: "left" , width: '35%' }}> Message</th>
+                            <th style={{ textAlign: "center" }}>Created</th>
+                            <th style={{ textAlign: "center" }}>Patient</th>
                             <th> </th>
                         </tr>
                     </thead>
                     {feedbackList.map((f) => (
                         <tbody key={f.id}>
                             <tr key={f.id}>
-                                <td  >{f.message}</td >
-                                <td  > </td >
-                                <td  >{f.isAnonymous ? "ANONYMOUS" : [f.patient.firstName, ' ', f.patient.secondName].join('')}</td >
-                                <td  ><PublishButton feedback={f}> </PublishButton></td >
+                                <td style={{ flexWrap: "wrap", wordWrap: "break-word", wordBreak: "break-word", width: '35%' }}>{f.message}</td >
+                                <td style={{ textAlign: "center" }} > {f.date}</td >
+                                <td style={{ textAlign: "center" }}>{f.isAnonymous ? "ANONYMOUS" : [f.patient.firstName, ' ', f.patient.secondName].join('')}</td >
+                                <td style={{ textAlign: "center" }} ><PublishButton feedback={f}> </PublishButton></td >
                             </tr>
                         </tbody>
                     ))}
