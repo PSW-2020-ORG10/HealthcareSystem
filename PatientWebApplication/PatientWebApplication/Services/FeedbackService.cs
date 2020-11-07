@@ -24,11 +24,15 @@ namespace PatientWebApplication.Services
             FeedbackRepository = new FeedbackRepository(context);
         }
 
-        //method for creating new feedback
+
+        /// <summary> This method converts <c>FeedbackDto</c> <paramref name="dto"/> to <c>Feedback</c> using <c>FeedbackAdapter</c> and sends it to <c>FeedbackRepository</c>. </summary>
+        /// <param name="dto"><c>dto</c> is Data Transfer Object of a <c>Feedback</c> that contains <c>Message</c>, <c>IsPublic</c>, <c>IsAnonymous</c> and <c>PatientId</c>. 
+        /// </param>
+        /// <returns> succesfully created <c>Feedback</c>.</returns>
         public Feedback Create(FeedbackDto dto)
         {
             PatientUser patient = new PatientUser();
-            if (dto.IsAnonymous == false)      //if patient is not anynomous add to feedback else skip
+            if (dto.IsAnonymous == false)      
             {
                 patient = FeedbackRepository.FindPatient();
             }
