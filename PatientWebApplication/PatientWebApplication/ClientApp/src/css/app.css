@@ -311,6 +311,7 @@ body {
 
     .small-text-label.hours {
         right: 37px;
+        font-size: 14px;
     }
 
 .total {
@@ -343,6 +344,15 @@ body {
     color: #666;
     font-size: 25px;
     font-weight: 300;
+}
+
+.check-flag-textarea {
+    color: #666;
+    font-size: 25px;
+    font-weight: 300;
+    width:600px;
+    resize: none;
+    background: white;
 }
 
 .hours-box {

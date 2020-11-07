@@ -21,9 +21,9 @@ class PublishedFeedbackTable extends Component {
                     <div key={f.Id} className="item-row">
                         <div className="check-flag">
                             <span className="small-text-label">Name and Surname</span>
-                            <span className="small-text-label hours">Message</span>
+                            <span className="small-text-label hours">{this.formatDate(f.date)}</span>
                             <span className="check-flag-label">{f.isAnonymous ? "ANONYMOUS" : [f.patient.firstName, ' ', f.patient.secondName].join('')}</span>
-                            <span className="check-flag-label">{f.message}</span>
+                            <textarea className="check-flag-textarea" disabled rows={3}>{f.message}</textarea>
                         </div>
                     </div>
                 ))}
@@ -35,9 +35,12 @@ class PublishedFeedbackTable extends Component {
 
         );
     }
-        
-}
 
+    formatDate(dateString) {
+        var date = new Date(Date.parse(dateString));
+        return date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
+    }        
+}
 
 const mapStateToProps = (state) => 
     

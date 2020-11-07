@@ -5,14 +5,15 @@ import Home from './components/Home';
 import Counter from './components/Counter';
 import FetchData from './components/FetchData';
 import AdminFeedback from './components/AdminFeedback';
-
 import './custom.css'
 import PatientFeedback from './components/PatientFeedback';
+import CreateFeedback from './components/CreateFeedback';
 
 export default () => (
     <Layout>
         <Route exact path='/' component={Home} />
         <Route path='/patient-feedback' component={PatientFeedback} />
         <Route path='/admin-feedback' component={AdminFeedback} />
+        <Route path='/create-feedback' component={CreateFeedback} />
     </Layout>
 );
