@@ -33,6 +33,8 @@ namespace PatientWebApplication.Controllers
 
 
         [HttpGet]       // GET /api/feedback
+        /// <summary> This method is for getting all feedback. </summary>
+        /// <returns> List of all feedback. </returns>
         public IActionResult Get()
         {
 
