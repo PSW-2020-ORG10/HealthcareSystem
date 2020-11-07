@@ -11,9 +11,14 @@ using System.Threading.Tasks;
 
 namespace PatientWebApplication.Services
 {
+    /// <summary>Class <c>FeedbackService</c> handles feedback business logic.
+    /// </summary>
     public class FeedbackService 
     {
+        /// <value>Property <c>FeedbackRepository</c> represents the repository used for data access.</value>
         private FeedbackRepository FeedbackRepository { get; set; }
+        /// <summary>This constructor injects the FeedbackService with matching FeedbackRepository.</summary>
+        /// <param name="context"><c>context</c> is type of <c>DbContext</c>, and it's used for accessing MYSQL database.</param>
         public FeedbackService(MyDbContext context)
         {
             FeedbackRepository = new FeedbackRepository(context);
@@ -51,7 +56,10 @@ namespace PatientWebApplication.Services
 
         }
 
-        //method for publishing feedback
+        /// <summary> This method determines if <c>feedbackToPublish</c> is valid for publishing and sends it to <c>FeedbackRepository</c>. </summary>
+        /// <param name="id"><c>id</c> is <c>id</c> of a <c>Feedback</c> that needs to be published.
+        /// </param>
+        /// <returns>null if parameter <c>IsPublic</c> or <c>IsPublished</c> of <c>feedbackToPublish</c> is false; otherwise, succesfully published feedback. </returns>
         public Feedback Publish(int id)
         {
             Feedback feedbackToPublish = FeedbackRepository.Find(id);
