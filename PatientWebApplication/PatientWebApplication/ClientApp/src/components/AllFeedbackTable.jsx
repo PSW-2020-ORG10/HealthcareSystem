@@ -3,6 +3,7 @@ import { loadedAllFeedback } from "../actions/actions"
 import { connect } from "react-redux"
 import PublishButton from "./PublishButton";
 import { wrap } from "module";
+import { formatDate } from "../utilities/Utilities"
 
 
 
@@ -34,7 +35,7 @@ class AllFeedbackTable extends Component {
                         <tbody key={f.id}>
                             <tr key={f.id}>
                                 <td style={{ flexWrap: "wrap", wordWrap: "break-word", wordBreak: "break-word", width: '35%' }}>{f.message}</td >
-                                <td style={{ textAlign: "center" }} > {f.date}</td >
+                                <td style={{ textAlign: "center" }} > {formatDate(f.date)}</td >
                                 <td style={{ textAlign: "center" }}>{f.isAnonymous ? "ANONYMOUS" : [f.patient.firstName, ' ', f.patient.secondName].join('')}</td >
                                 <td style={{ textAlign: "center" }} ><PublishButton feedback={f}> </PublishButton></td >
                             </tr>
