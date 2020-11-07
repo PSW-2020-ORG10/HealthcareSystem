@@ -1,5 +1,6 @@
 ﻿using Class_diagram.Model.Patient;
 using PatientWebApplication.Dtos;
+using System;
 
 namespace PatientWebApplication.Adapters
 {
@@ -13,6 +14,7 @@ namespace PatientWebApplication.Adapters
             feedback.PatientId = patient.id;
             feedback.IsAnonymous = dto.IsAnonymous;
             feedback.IsPublic = dto.IsPublic;
+            feedback.Date = DateTime.Now;
             return feedback;
         }
 

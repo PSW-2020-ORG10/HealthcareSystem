@@ -25,7 +25,7 @@ class CreateForm extends Component {
     render() {
         return (
             <div>
-                <form>
+                <form action="http://localhost:60198/patient-feedback">
                     <h2>Create Feedback</h2>
                     <div className="field-wrap">
                         <label className="label" htmlFor="">
@@ -64,7 +64,7 @@ class CreateForm extends Component {
                      </div>
 
                     <div className="btn-wrap align-right">
-                    <button disabled={!this.state.message} className="btn btn-primary" onClick={this.createFeedback.bind(this)}>Create</button>
+                        <button disabled={!this.state.message || this.state.message.length > 140} className="btn btn-primary" onClick={this.createFeedback.bind(this)}>Create</button>
                     </div>
                 </form>
             </div>
