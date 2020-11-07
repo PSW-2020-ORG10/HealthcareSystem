@@ -56,7 +56,7 @@ namespace PatientWebApplication.Services
 
         }
 
-        /// <summary> This method determines if <c>feedbackToPublish</c> is valid for publishing and sends it to <c>FeedbackRepository</c>. </summary>
+        /// <summary> This method determines if feedback with id property that matches provided <paramref name="id"/> is valid for publishing and sends it to <c>FeedbackRepository</c>. </summary>
         /// <param name="id"><c>id</c> is <c>id</c> of a <c>Feedback</c> that needs to be published.
         /// </param>
         /// <returns>null if parameter <c>IsPublic</c> or <c>IsPublished</c> of <c>feedbackToPublish</c> is false; otherwise, succesfully published feedback. </returns>
