@@ -36,7 +36,9 @@ namespace PatientWebApplication.Services
             return FeedbackRepository.Add(feedback);
         }
 
-        //method for getting all feedback
+
+        /// <summary> This method is for getting all feedback and sends it to <c>FeedbackRepository</c>. </summary>
+        /// <returns> List of all feedback which contains all feedback. </returns>
         public List<Feedback> GetAll()
         {
             return FeedbackRepository.GetAll();
