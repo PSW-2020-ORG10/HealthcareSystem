@@ -30,12 +30,8 @@ namespace PatientWebApplication.Services
         /// </param>
         /// <returns> succesfully created <c>Feedback</c>.</returns>
         public Feedback Create(FeedbackDto dto)
-        {
-            PatientUser patient = new PatientUser();
-            if (dto.IsAnonymous == false)      
-            {
-                patient = FeedbackRepository.FindPatient();
-            }
+        { 
+            PatientUser patient = FeedbackRepository.FindPatient();
             Feedback feedback = FeedbackAdapter.FeedbackDtoToFeedback(dto, patient);
             return FeedbackRepository.Add(feedback);
         }

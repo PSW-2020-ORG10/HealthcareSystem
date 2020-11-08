@@ -13,6 +13,7 @@ namespace PatientWebApplication.Validators
         public FeedbackValidator()
         {
             RuleFor(f => f.Message).NotEmpty();
+            RuleFor(f => f.PatientId >= 0);
         }
     }
 }

@@ -66,7 +66,7 @@ namespace PatientWebApplication.Controllers
             PatientUser patient = dbContext.Patients.SingleOrDefault(patient => patient.id == 1);    // still no login, so patient set to created patient in database with id=1, this will be changed after
             if (patient == null)
             {
-                return BadRequest();    // if any of the values is incorrect return bad request
+                return BadRequest();    // if patient is not logged in
             }
 
             Feedback feedback = FeedbackService.Create(dto);
