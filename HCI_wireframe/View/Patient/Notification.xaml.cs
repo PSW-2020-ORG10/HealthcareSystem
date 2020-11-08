@@ -1,5 +1,6 @@
 ﻿using Class_diagram.Contoller;
 using Class_diagram.Model.Patient;
+using HCI_wireframe.Model.Patient;
 using HCI_wireframe.View.Patient;
 using System;
 using System.Collections.Generic;
@@ -54,15 +55,15 @@ namespace HCI_wireframe
             pacijent = patientController.GetByid(int.Parse(myProperty));
             if (pacijent.notifications == null)
             {
-                pacijent.notifications = new List<String>();
+                pacijent.notifications = new List<ModelNotification>();
             }
             int idNumber = 1;
-            foreach(String notify in pacijent.notifications)
+            foreach(ModelNotification notify in pacijent.notifications)
             {
                 NotificationsListPatient.Add(new NotificationList
                 {
                     number = idNumber,
-                    Name = notify
+                    Name = notify.Data
                 });
                 idNumber += 1;
             }

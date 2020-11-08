@@ -22,7 +22,8 @@ namespace Class_diagram.Model.Employee
         public String date { get; set; }
         public Boolean isOnDuty { get; set; }
 
-        public Shift shift { get; set; }
+        public int shiftId { get; set; }
+        public virtual Shift shift { get; set; }
        
         public String room { get; set; }
         public Schedule() : base() { }
@@ -36,6 +37,17 @@ namespace Class_diagram.Model.Employee
             this.employeeFirst= employeeFirst;
             this.employeeLast = employeeLast;
             this.shift = shift;
+            this.room = room;
+        }
+
+        public Schedule(int id, String employeeid, String date, Boolean isOnDuty, String employeeFirst, String employeeLast, int shiftId, String room) : base(id)
+        {
+            this.employeeid = employeeid;
+            this.date = date;
+            this.isOnDuty = isOnDuty;
+            this.employeeFirst = employeeFirst;
+            this.employeeLast = employeeLast;
+            this.shiftId = shiftId;
             this.room = room;
         }
 

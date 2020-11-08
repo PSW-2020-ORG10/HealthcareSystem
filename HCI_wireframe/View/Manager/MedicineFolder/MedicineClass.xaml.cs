@@ -1,5 +1,6 @@
 ﻿using Class_diagram.Contoller;
 using Class_diagram.Model.Hospital;
+using HCI_wireframe.Model.Hospital;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,13 +47,16 @@ namespace WpfApp2.MedicineFolder
             {
                 if (item.forUse == true)
                 {
-                    for (int i = 0; i < eq.room.Count; i++)
+                    if (eq.room != null)
                     {
-                        String soba = eq.room[i];
-
-                        if (soba.Equals(item.typeOfRoom))
+                        for (int i = 0; i < eq.room.Count; i++)
                         {
-                            sobeSaOpremom.Add(item);
+                            ModelRoom soba = eq.room[i];
+
+                            if (soba.Equals(item.typeOfRoom))
+                            {
+                                sobeSaOpremom.Add(item);
+                            }
                         }
                     }
                 }
@@ -104,7 +108,7 @@ namespace WpfApp2.MedicineFolder
                 string name1 = sender.ToString();
                 string[] words = name1.Split(':');
 
-                string id = words[1].TrimEnd().TrimStart();
+                ModelRoom id = new ModelRoom(words[1].TrimEnd().TrimStart());
 
 
                 eq.room.Remove(id);
@@ -120,7 +124,7 @@ namespace WpfApp2.MedicineFolder
                     if (ee.typeOfRoom.Equals(id))
                     {
                         s = ee;
-                        s.medicine.Remove(eq.name);
+                        s.medicine.Remove(new ModelMedicine(eq.name));
 
                     }
 
@@ -154,7 +158,7 @@ namespace WpfApp2.MedicineFolder
                 {
                     for (int i = 0; i < eq.room.Count; i++)
                     {
-                        String soba = eq.room[i];
+                        ModelRoom soba = eq.room[i];
 
                         if (soba.Equals(item.typeOfRoom))
                         {
@@ -213,7 +217,7 @@ namespace WpfApp2.MedicineFolder
             string name1 = sender.ToString();
             string[] words = name1.Split(':');
 
-            string id = words[1].TrimEnd().TrimStart();
+            ModelRoom id = new ModelRoom(words[1].TrimEnd().TrimStart());
 
 
             eq.room.Add(id);
@@ -229,7 +233,7 @@ namespace WpfApp2.MedicineFolder
                 if (ee.typeOfRoom.Equals(id))
                 {
                     s = ee;
-                    s.medicine.Add(eq.name);
+                    s.medicine.Add(new ModelMedicine(eq.name));
 
                 }
 
@@ -263,7 +267,7 @@ namespace WpfApp2.MedicineFolder
                 {
                     for (int i = 0; i < eq.room.Count; i++)
                     {
-                        String soba = eq.room[i];
+                        ModelRoom soba = eq.room[i];
 
                         if (soba.Equals(item.typeOfRoom))
                         {

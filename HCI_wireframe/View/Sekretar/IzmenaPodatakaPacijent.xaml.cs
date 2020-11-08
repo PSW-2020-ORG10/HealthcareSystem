@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Class_diagram.Contoller;
 using Class_diagram.Model.Patient;
+using HCI_wireframe.Model.Patient;
 
 namespace ProjekatHCI
 {
@@ -246,7 +247,7 @@ namespace ProjekatHCI
            
             Boolean guest = false;
             Boolean sekr = false;
-            List<String> notifications = new List<String>();
+            List<ModelNotification> notifications = new List<ModelNotification>();
             if ((LozinkaBox.Text.Equals(PotvLozinkaBox.Text)))
             {
                 PatientController secContr = new PatientController();
@@ -270,7 +271,7 @@ namespace ProjekatHCI
                 PatientController rpcontroller = new PatientController();
                 if(notifications == null)
                 {
-                    notifications = new List<string>();
+                    notifications = new List<ModelNotification>();
                 }
 
                 PatientUser rp = new PatientUser(id, ImeBox.Text, PrezimeBox.Text, JMBGBox.Text, DatumRodjBox.Text,

@@ -1,5 +1,6 @@
 ﻿using Class_diagram.Contoller;
 using Class_diagram.Model.Hospital;
+using HCI_wireframe.Model.Hospital;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -92,7 +93,7 @@ namespace WpfApp2
            
 
 
-            List<String> rooms = new List<String>();
+            List<ModelRoom> rooms = new List<ModelRoom>();
 
            
 

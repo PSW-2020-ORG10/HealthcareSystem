@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using Class_diagram.Contoller;
 using Class_diagram.Model.Patient;
 using HCI_wireframe.Contoller;
+using HCI_wireframe.Model.Patient;
 
 namespace ProjekatHCI
 {
@@ -217,8 +218,8 @@ namespace ProjekatHCI
 
                 
                 int broj = getNextid();
-                List<String> notif = new List<string>();
-                notif.Add("");
+                List<ModelNotification> notif = new List<ModelNotification>();
+                notif.Add(new ModelNotification(""));
                 PatientUser rp =  new PatientUser(0, ImeBox.Text, PrezimeBox.Text, JMBGBox.Text, DatumRodjBox.Text,
                         BrojTelefonaBox.Text, KnjizicaBox.Text,"" ,AdresaBox.Text,false, EmailBox.Text, LozinkaBox.Password, true,notif);
 

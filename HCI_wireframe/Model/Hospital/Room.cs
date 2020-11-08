@@ -5,6 +5,7 @@
  ***********************************************************************/
 
 using Class_diagram.Model.Patient;
+using HCI_wireframe.Model.Hospital;
 using System;
 using System.Collections.Generic;
 using System.Windows.Documents;
@@ -15,8 +16,8 @@ namespace Class_diagram.Model.Hospital
    {
         public String typeOfRoom { get; set; }
 
-        public List<String> equipment { get; set; }
-        public List<String> medicine { get; set; }
+        public virtual List<ModelEquipment> equipment { get; set; }
+        public virtual List<ModelMedicine> medicine { get; set; }
         public Boolean forUse { get; set; }
 
        
@@ -29,7 +30,7 @@ namespace Class_diagram.Model.Hospital
         }
 
 
-        public Room(int id, String typeOfRoom, List<String> equipment, List<String> medicine, Boolean forUse) : base(id)
+        public Room(int id, String typeOfRoom, List<ModelEquipment> equipment, List<ModelMedicine> medicine, Boolean forUse) : base(id)
         {
             this.typeOfRoom = typeOfRoom;
             this.equipment = equipment;

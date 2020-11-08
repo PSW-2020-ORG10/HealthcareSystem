@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace HCI_wireframe.Model.Orders
 {
-    class FinishedOrder : Entity
+    public class FinishedOrder : Entity
     {
-        public List<Medicine> listOfMedicines { get; set; }
+        public virtual List<Medicine> listOfMedicines { get; set; }
 
         public FinishedOrder() : base() { }
 

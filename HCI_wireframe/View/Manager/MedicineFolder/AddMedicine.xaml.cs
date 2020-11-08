@@ -19,6 +19,7 @@ using HCI_wireframe.Model.Doctor;
 using System.Reflection;
 using HCI_wireframe.Contoller;
 using System.Text.RegularExpressions;
+using HCI_wireframe.Model.Hospital;
 
 namespace WpfApp2.MedicineFolder
 {
@@ -153,7 +154,7 @@ namespace WpfApp2.MedicineFolder
                 return;
             }
 
-            List<String> rooms = new List<String>();
+            List<ModelRoom> rooms = new List<ModelRoom>();
 
 
 

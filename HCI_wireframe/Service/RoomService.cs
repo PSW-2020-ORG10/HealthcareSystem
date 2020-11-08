@@ -8,6 +8,7 @@ using Class_diagram.Contoller;
 using Class_diagram.Model.Employee;
 using Class_diagram.Model.Hospital;
 using Class_diagram.Repository;
+using HCI_wireframe.Model.Hospital;
 using HCI_wireframe.Service;
 using System;
 using System.Collections.Generic;
@@ -68,18 +69,30 @@ namespace Class_diagram.Service
 
         private Boolean isMedicineInRoom(Medicine medicine, Room room)
         {
-            
-            if(medicine.room.Contains(room.typeOfRoom)) return true;
-            
+            foreach (ModelRoom modelRoom in medicine.room)
+            {
+                if (modelRoom.Data.Equals(room.typeOfRoom))
+                {
+                    return true;
+                }
+            }
+
             return false;
+
         }
 
         private void removeRoomFromMedicine(Medicine medicine, Room room)
         {
             if (isMedicineInRoom(medicine, room))
             {
-                 medicine.room.Remove(room.typeOfRoom);
-                medicineRepository.Update(medicine);   
+                foreach (ModelRoom modelRoom in medicine.room)
+                {
+                    if (modelRoom.Data.Equals(room.typeOfRoom))
+                    {
+                        medicine.room.Remove(modelRoom);
+                        medicineRepository.Update(medicine);
+                    }
+                } 
             }
         }
 
@@ -99,9 +112,14 @@ namespace Class_diagram.Service
       
         private Boolean isEquipmentInRoom(Equipment equipment, Room room)
         {
+            foreach (ModelRoom modelRoom in equipment.room)
+            {
+                if (modelRoom.Data.Equals(room.typeOfRoom))
+                {
+                    return true;
+                }
+            }
 
-            if (equipment.room.Contains(room.typeOfRoom)) return true;
-            
             return false;
         }
 
@@ -109,8 +127,14 @@ namespace Class_diagram.Service
         {
             if (isEquipmentInRoom(equipment, room))
             {
-                equipment.room.Remove(room.typeOfRoom);
-                equipmentRepository.Update(equipment);
+                foreach (ModelRoom modelRoom in equipment.room)
+                {
+                    if (modelRoom.Data.Equals(room.typeOfRoom))
+                    {
+                        equipment.room.Remove(modelRoom);
+                        equipmentRepository.Update(equipment);
+                    }
+                }
 
             }
         }

@@ -9,6 +9,7 @@ using Class_diagram.Model.Doctor;
 using Class_diagram.Model.Hospital;
 using Class_diagram.Repository;
 using HCI_wireframe.Model.Doctor;
+using HCI_wireframe.Model.Hospital;
 using HCI_wireframe.Service;
 using System;
 using System.Collections.Generic;
@@ -59,11 +60,15 @@ namespace Class_diagram.Service
 
         }
         private void removeMedicineFromSpecificRoom(Room room, Medicine medicine,RoomController roomController){
-            if (room.medicine.Contains(medicine.name))
+            foreach (ModelMedicine modelMedicine in room.medicine)
             {
-                room.medicine.Remove(medicine.name);
-                 roomController.Update(room);
+                if (modelMedicine.Data.Equals(medicine.name))
+                {
+                    room.medicine.Remove(modelMedicine);
+                    roomController.Update(room);
+                }
             }
+
         }
         public void removeMedicineFromAllRoom(Medicine medicine)
         {

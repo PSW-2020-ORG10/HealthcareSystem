@@ -28,6 +28,7 @@ using HCI_wireframe.Repository;
 using Path = System.IO.Path;
 
 using Klinika;
+using HCI_wireframe.Model.Patient;
 
 namespace HCI_wireframe.View.Doktor
 {
@@ -468,12 +469,12 @@ namespace HCI_wireframe.View.Doktor
                 sekr = drap.patient.isRegisteredBySecretary;
                 if (drap.patient.notifications == null)
                 {
-                    drap.patient.notifications = new List<string>();
+                    drap.patient.notifications = new List<ModelNotification>();
                 }
-                List<String> notifications = drap.patient.notifications;
+                List<ModelNotification> notifications = drap.patient.notifications;
                 // }
 
-                notifications.Add("Postovani, zakazana vam je novi pregled datuma : " + drap.date + " u " + drap.time + " h kod lekara " + drap.doctor.firstName + " " + drap.doctor.secondName + ". Ordinacija: " + drap.roomid);
+                notifications.Add(new ModelNotification("Postovani, zakazana vam je novi pregled datuma : " + drap.date + " u " + drap.time + " h kod lekara " + drap.doctor.firstName + " " + drap.doctor.secondName + ". Ordinacija: " + drap.roomid));
                 drap.patient.notifications = notifications;
                 // PatientUser rp = new PatientUser(id1, ime, prezime, jmbg, datumRodj, brojTel, brKnj, pitanja, alergije, grad, guest, email, password, sekr, notifications);
 
@@ -675,7 +676,7 @@ namespace HCI_wireframe.View.Doktor
                 String email = "";
                 String password = "";
                 Boolean sekr = false;
-                List<String> notifications = new List<String>();
+                List<ModelNotification> notifications = new List<ModelNotification>();
                 //  foreach (PatientUser pat in lista)
                 // {
                 // if (pat.id.Equals(d.patient.id))
@@ -697,9 +698,9 @@ namespace HCI_wireframe.View.Doktor
                 // }
                 if (notifications == null)
                 {
-                    notifications = new List<string>();
+                    notifications = new List<ModelNotification>();
                 }
-                notifications.Add("Postovani, zakazana Vam je nova operacija datuma : " + op.date + " u " + op.start + " h, kod lekara " + op.isResponiable.firstName + " " + op.isResponiable.secondName + " Sala " + op.idRoom);
+                notifications.Add(new ModelNotification("Postovani, zakazana Vam je nova operacija datuma : " + op.date + " u " + op.start + " h, kod lekara " + op.isResponiable.firstName + " " + op.isResponiable.secondName + " Sala " + op.idRoom));
 
                 PatientUser rp = new PatientUser(id1, ime, prezime, jmbg, datumRodj, brojTel, brKnj, alergije, grad, guest, email, password, sekr, notifications);
 

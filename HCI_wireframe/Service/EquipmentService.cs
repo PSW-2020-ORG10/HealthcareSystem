@@ -7,6 +7,7 @@
 using Class_diagram.Contoller;
 using Class_diagram.Model.Hospital;
 using Class_diagram.Repository;
+using HCI_wireframe.Model.Hospital;
 using HCI_wireframe.Service;
 using System;
 using System.Collections.Generic;
@@ -46,8 +47,8 @@ namespace Class_diagram.Service
         {
             if (room.typeOfRoom.Equals("Magacin"))
             {
-                equipment.room.Add(room.typeOfRoom);
-                room.equipment.Add(equipment.name);
+                equipment.room.Add(new ModelRoom(room.typeOfRoom));
+                room.equipment.Add(new ModelEquipment(equipment.name));
                 roomRepository.Update(room);
             }
         }
@@ -96,10 +97,13 @@ namespace Class_diagram.Service
 
         private void removeEquipmentFromSpecificRoom(Equipment equipment, Room room)
         {
-            if (room.equipment.Contains(equipment.name))
+            foreach (ModelEquipment modelEquipment in room.equipment)
             {
-                room.equipment.Remove(equipment.name);
-                roomRepository.Update(room);
+                if (modelEquipment.Data.Equals(equipment.name))
+                {
+                    room.equipment.Remove(modelEquipment);
+                    roomRepository.Update(room);
+                }
             }
         }
 

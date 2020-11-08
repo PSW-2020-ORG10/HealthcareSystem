@@ -23,6 +23,7 @@ using Class_diagram.Model.Patient;
 using Class_diagram.Repository;
 using HCI_wireframe.Contoller;
 using HCI_wireframe.Model.Doctor;
+using HCI_wireframe.Model.Patient;
 using HCI_wireframe.View.Sekretar;
 
 using Path = System.IO.Path;
@@ -121,59 +122,61 @@ namespace ProjekatHCI
 
             }
 
-
-            foreach (DoctorAppointment ee in AppointmentList)
+            if (AppointmentList != null)
             {
-
-                String datum = ee.date;
-                String[] delovi = datum.Split('/');
-                int mesec = int.Parse(delovi[1]);
-                int dan = int.Parse(delovi[0]);
-                int godina = int.Parse(delovi[2]);
-
-                DateTime dt1 = new DateTime(godina, mesec, dan, 0, 0, 0);
-
-                DateTime dt2 = DateTime.Now;
-
-
-                if (dt1.Date >= dt2.Date)
+                foreach (DoctorAppointment ee in AppointmentList)
                 {
-                    vrsta = 0;
-                    DoctorUser doc = ee.doctor;
-                    StringBuilder l = new StringBuilder();
-                    l.Append(doc.firstName + " ");
-                    l.Append(doc.secondName + " ");
-                    l.Append(doc.speciality);
-                    StringBuilder p = new StringBuilder();
-                    PatientUser pat = ee.patient;
-                    p.Append(pat.firstName + " ");
-                    p.Append(pat.secondName);
 
-                    li.Add(new Lista
+                    String datum = ee.date;
+                    String[] delovi = datum.Split('/');
+                    int mesec = int.Parse(delovi[1]);
+                    int dan = int.Parse(delovi[0]);
+                    int godina = int.Parse(delovi[2]);
+
+                    DateTime dt1 = new DateTime(godina, mesec, dan, 0, 0, 0);
+
+                    DateTime dt2 = DateTime.Now;
+
+
+                    if (dt1.Date >= dt2.Date)
                     {
-                        DoctorName = l.ToString(),
+                        vrsta = 0;
+                        DoctorUser doc = ee.doctor;
+                        StringBuilder l = new StringBuilder();
+                        l.Append(doc.firstName + " ");
+                        l.Append(doc.secondName + " ");
+                        l.Append(doc.speciality);
+                        StringBuilder p = new StringBuilder();
+                        PatientUser pat = ee.patient;
+                        p.Append(pat.firstName + " ");
+                        p.Append(pat.secondName);
 
-                        idapp = ee.id,
-                        Time = ee.time,
-                        TimeEnd = ee.time + new TimeSpan(0,15,0),
-                        Date = ee.date,
-                        ChangeName = "IZMENI " + ee.id,
-                        RemoveName = "OTKAŽI " + ee.id,
-                        PatientName = p.ToString(),
-                        Ordinacija = ee.roomid.ToString(),
-                        Pregled = true,
-                        Operacija = false
+                        li.Add(new Lista
+                        {
+                            DoctorName = l.ToString(),
 
-                    });
+                            idapp = ee.id,
+                            Time = ee.time,
+                            TimeEnd = ee.time + new TimeSpan(0, 15, 0),
+                            Date = ee.date,
+                            ChangeName = "IZMENI " + ee.id,
+                            RemoveName = "OTKAŽI " + ee.id,
+                            PatientName = p.ToString(),
+                            Ordinacija = ee.roomid.ToString(),
+                            Pregled = true,
+                            Operacija = false
+
+                        });
 
 
+
+
+                    }
+
+                    AppLista = li;
 
 
                 }
-
-                AppLista = li;
-                
-
             }
             String o = bingPathToAppDir(@"JsonFiles\operations.json");
 
@@ -309,12 +312,12 @@ namespace ProjekatHCI
 
                             if (d.patient.notifications == null)
                             {
-                                d.patient.notifications = new List<string>();
+                                d.patient.notifications = new List<ModelNotification>();
                             }
-                            List<String> notifications1 = d.patient.notifications;
+                            List<ModelNotification> notifications1 = d.patient.notifications;
                             // }
 
-                            notifications1.Add("Postovani, pregled zakazan za datum: " + d.date + " i vreme " + d.time + " je otkazan.");
+                            notifications1.Add(new ModelNotification("Postovani, pregled zakazan za datum: " + d.date + " i vreme " + d.time + " je otkazan."));
                             d.patient.notifications = notifications1;
 
 
@@ -324,10 +327,10 @@ namespace ProjekatHCI
 
                             if (d.doctor.specialNotifications == null)
                             {
-                                d.doctor.specialNotifications = new List<string>();
+                                d.doctor.specialNotifications = new List<DoctorNotification>();
                             }
-                            List<String> obavestenja = d.doctor.specialNotifications;
-                            obavestenja.Add("Postovani, pregled zakazan za datum: " + d.date + " i vreme " + d.time + " je otkazan.");
+                            List<DoctorNotification> obavestenja = d.doctor.specialNotifications;
+                            obavestenja.Add(new DoctorNotification("Postovani, pregled zakazan za datum: " + d.date + " i vreme " + d.time + " je otkazan."));
                             d.doctor.specialNotifications = obavestenja;
 
 
@@ -358,12 +361,12 @@ namespace ProjekatHCI
 
                             if (d.patient.notifications == null)
                             {
-                                d.patient.notifications = new List<string>();
+                                d.patient.notifications = new List<ModelNotification>();
                             }
-                            List<String> notifications1 = d.patient.notifications;
+                            List<ModelNotification> notifications1 = d.patient.notifications;
 
 
-                            notifications1.Add("Postovani, operacija zakazana za datum: " + d.date + " i vreme " + d.start + " je otkazana.");
+                            notifications1.Add(new ModelNotification("Postovani, operacija zakazana za datum: " + d.date + " i vreme " + d.start + " je otkazana."));
                             d.patient.notifications = notifications1;
 
 
@@ -377,10 +380,10 @@ namespace ProjekatHCI
 
                             if (d.isResponiable.specialNotifications == null)
                             {
-                                d.isResponiable.specialNotifications = new List<string>();
+                                d.isResponiable.specialNotifications = new List<DoctorNotification>();
                             }
-                            List<String> obavestenja = d.isResponiable.specialNotifications;
-                            obavestenja.Add("Postovani,operacija zakazana za datum: " + d.date + " i vreme " + d.start + " je otkazana.");
+                            List<DoctorNotification> obavestenja = d.isResponiable.specialNotifications;
+                            obavestenja.Add(new DoctorNotification("Postovani,operacija zakazana za datum: " + d.date + " i vreme " + d.start + " je otkazana."));
                             d.isResponiable.specialNotifications = obavestenja;
 
 
@@ -461,12 +464,12 @@ namespace ProjekatHCI
                            
                             if (d.patient.notifications == null)
                             {
-                                d.patient.notifications = new List<string>();
+                                d.patient.notifications = new List<ModelNotification>();
                             }
-                            List<String> notifications1 = d.patient.notifications;
+                            List<ModelNotification> notifications1 = d.patient.notifications;
                             // }
 
-                            notifications1.Add("Postovani, pregled zakazan za datum: " + d.date + " i vreme " + d.time + " je otkazan.");
+                            notifications1.Add(new ModelNotification("Postovani, pregled zakazan za datum: " + d.date + " i vreme " + d.time + " je otkazan."));
                             d.patient.notifications = notifications1;
                            
 
@@ -476,10 +479,10 @@ namespace ProjekatHCI
 
                             if (d.doctor.specialNotifications == null)
                             {
-                                d.doctor.specialNotifications = new List<string>();
+                                d.doctor.specialNotifications = new List<DoctorNotification>();
                             }
-                            List<String> obavestenja = d.doctor.specialNotifications;
-                            obavestenja.Add("Postovani, pregled zakazan za datum: " + d.date + " i vreme " + d.time + " je otkazan.");
+                            List<DoctorNotification> obavestenja = d.doctor.specialNotifications;
+                            obavestenja.Add(new DoctorNotification("Postovani, pregled zakazan za datum: " + d.date + " i vreme " + d.time + " je otkazan."));
                             d.doctor.specialNotifications = obavestenja;
 
 
@@ -507,12 +510,12 @@ namespace ProjekatHCI
                           
                             if (d.patient.notifications == null)
                             {
-                                d.patient.notifications = new List<string>();
+                                d.patient.notifications = new List<ModelNotification>();
                             }
-                            List<String> notifications1 = d.patient.notifications;
+                            List<ModelNotification> notifications1 = d.patient.notifications;
                           
 
-                            notifications1.Add("Postovani, operacija zakazana za datum: " + d.date + " i vreme " + d.start + " je otkazana.");
+                            notifications1.Add(new ModelNotification("Postovani, operacija zakazana za datum: " + d.date + " i vreme " + d.start + " je otkazana."));
                             d.patient.notifications = notifications1;
 
 
@@ -526,10 +529,10 @@ namespace ProjekatHCI
 
                             if (d.isResponiable.specialNotifications == null)
                             {
-                                d.isResponiable.specialNotifications = new List<string>();
+                                d.isResponiable.specialNotifications = new List<DoctorNotification>();
                             }
-                            List<String> obavestenja = d.isResponiable.specialNotifications;
-                            obavestenja.Add("Postovani,operacija zakazana za datum: " + d.date + " i vreme " + d.start + " je otkazana.");
+                            List<DoctorNotification> obavestenja = d.isResponiable.specialNotifications;
+                            obavestenja.Add(new DoctorNotification("Postovani,operacija zakazana za datum: " + d.date + " i vreme " + d.start + " je otkazana."));
                             d.isResponiable.specialNotifications = obavestenja;
 
 

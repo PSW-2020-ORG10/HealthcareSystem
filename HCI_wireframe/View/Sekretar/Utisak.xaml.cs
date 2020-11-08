@@ -19,6 +19,7 @@ using Class_diagram.Model.Manager;
 using Class_diagram.Model.Secretary;
 using Class_diagram.Repository;
 using HCI_wireframe;
+using HCI_wireframe.Model.Manager;
 using Path = System.IO.Path;
 
 namespace ProjekatHCI
@@ -82,11 +83,11 @@ namespace ProjekatHCI
             {
                 if (user.specialNotifications == null)
                 {
-                    user.specialNotifications = new List<string>();
+                    user.specialNotifications = new List<ManagerNotification> ();
                 }
-                List<String> obavestenja = user.specialNotifications;
+                List<ManagerNotification> obavestenja = user.specialNotifications;
 
-                obavestenja.Add("Ocena sistema od strane sekretara  \n" + sekretar.firstName + " " + sekretar.secondName + "  - answer  -" + ocena);
+                obavestenja.Add(new ManagerNotification("Ocena sistema od strane sekretara  \n" + sekretar.firstName + " " + sekretar.secondName + "  - answer  -" + ocena));
                 user.specialNotifications = obavestenja;
                 cont.Update(user);
 
