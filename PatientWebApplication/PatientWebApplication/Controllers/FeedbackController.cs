@@ -56,7 +56,7 @@ namespace PatientWebApplication.Controllers
         /// <summary> This method determines if <c>FeedbackDto</c> provided <paramref name="dto"/> is valid for creating by calling <c>FeedbackValidator</c> automatically and sends it to <c>FeedbackService</c>. </summary>
         /// <param name="dto"><c>dto</c> is Data Transfer Object of a <c>Feedback</c> that contains <c>Message</c>, <c>IsPublic</c>, <c>IsAnonymous</c> and <c>PatientId</c>. 
         /// </param>
-        /// <returns> if fields from <paramref name="dto"/> are not valid 404 Bad Request also if created feedback is not null 200 Ok else 404 Bad Request.</returns>
+        /// <returns> if fields from <paramref name="dto"/> are not valid 400 Bad Request also if created feedback is not null 200 Ok else 404 Bad Request.</returns>
         [HttpPost]      // POST /api/feedback Request body: {"message": "Some message", "isPublic": true, "isAnonymous": false}
         public IActionResult Create(FeedbackDto dto)
         {
@@ -79,6 +79,11 @@ namespace PatientWebApplication.Controllers
             }
 
         }
+
+        /// <summary> This method determines if provided <paramref name="id"/> of feedback is valid, if <c>True</c> it sends it to <c>FeedbackService</c> to check out further business logic. </summary>
+        /// <param name="id"><c>id</c> is id of feedback that needs to be published. 
+        /// </param>
+        /// <returns> If <paramref name="id"/> is not valid returns 400 Bad Request; if business logic is not valid, returns 404 Not Found, if feedback is successfully published, returns 200 OK with published feedback</returns>
 
         [HttpPut("{id}")]       // PUT /api/feedback/{id}
         public IActionResult Put(int id)

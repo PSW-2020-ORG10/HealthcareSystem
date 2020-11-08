@@ -20,6 +20,8 @@ using System.Threading.Tasks;
 
 namespace PatientWebApplication.Models
 {
+    /// <summary>Class <c>MyDbContext</c> works with database as a part of <c>EntityFrameworkCore</c>.
+    /// </summary>
     public class MyDbContext : DbContext
     {
         public DbSet<Feedback> Feedbacks { get; set; }

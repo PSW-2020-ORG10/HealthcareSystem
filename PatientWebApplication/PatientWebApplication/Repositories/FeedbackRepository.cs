@@ -31,6 +31,8 @@ namespace PatientWebApplication.Repositories
             return feedback;
         }
 
+        /// <summary> Not finished. Need login. </summary>
+        /// <returns> Found patinet if search was successfully; otherwise, default Patient object. </returns>
         public PatientUser FindPatient() // Needs login
         {
             PatientUser patient = new PatientUser();
