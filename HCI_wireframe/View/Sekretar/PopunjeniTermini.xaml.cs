@@ -122,59 +122,61 @@ namespace ProjekatHCI
 
             }
 
-
-            foreach (DoctorAppointment ee in AppointmentList)
+            if (AppointmentList != null)
             {
-
-                String datum = ee.date;
-                String[] delovi = datum.Split('/');
-                int mesec = int.Parse(delovi[1]);
-                int dan = int.Parse(delovi[0]);
-                int godina = int.Parse(delovi[2]);
-
-                DateTime dt1 = new DateTime(godina, mesec, dan, 0, 0, 0);
-
-                DateTime dt2 = DateTime.Now;
-
-
-                if (dt1.Date >= dt2.Date)
+                foreach (DoctorAppointment ee in AppointmentList)
                 {
-                    vrsta = 0;
-                    DoctorUser doc = ee.doctor;
-                    StringBuilder l = new StringBuilder();
-                    l.Append(doc.firstName + " ");
-                    l.Append(doc.secondName + " ");
-                    l.Append(doc.speciality);
-                    StringBuilder p = new StringBuilder();
-                    PatientUser pat = ee.patient;
-                    p.Append(pat.firstName + " ");
-                    p.Append(pat.secondName);
 
-                    li.Add(new Lista
+                    String datum = ee.date;
+                    String[] delovi = datum.Split('/');
+                    int mesec = int.Parse(delovi[1]);
+                    int dan = int.Parse(delovi[0]);
+                    int godina = int.Parse(delovi[2]);
+
+                    DateTime dt1 = new DateTime(godina, mesec, dan, 0, 0, 0);
+
+                    DateTime dt2 = DateTime.Now;
+
+
+                    if (dt1.Date >= dt2.Date)
                     {
-                        DoctorName = l.ToString(),
+                        vrsta = 0;
+                        DoctorUser doc = ee.doctor;
+                        StringBuilder l = new StringBuilder();
+                        l.Append(doc.firstName + " ");
+                        l.Append(doc.secondName + " ");
+                        l.Append(doc.speciality);
+                        StringBuilder p = new StringBuilder();
+                        PatientUser pat = ee.patient;
+                        p.Append(pat.firstName + " ");
+                        p.Append(pat.secondName);
 
-                        idapp = ee.id,
-                        Time = ee.time,
-                        TimeEnd = ee.time + new TimeSpan(0,15,0),
-                        Date = ee.date,
-                        ChangeName = "IZMENI " + ee.id,
-                        RemoveName = "OTKAŽI " + ee.id,
-                        PatientName = p.ToString(),
-                        Ordinacija = ee.roomid.ToString(),
-                        Pregled = true,
-                        Operacija = false
+                        li.Add(new Lista
+                        {
+                            DoctorName = l.ToString(),
 
-                    });
+                            idapp = ee.id,
+                            Time = ee.time,
+                            TimeEnd = ee.time + new TimeSpan(0, 15, 0),
+                            Date = ee.date,
+                            ChangeName = "IZMENI " + ee.id,
+                            RemoveName = "OTKAŽI " + ee.id,
+                            PatientName = p.ToString(),
+                            Ordinacija = ee.roomid.ToString(),
+                            Pregled = true,
+                            Operacija = false
+
+                        });
 
 
+
+
+                    }
+
+                    AppLista = li;
 
 
                 }
-
-                AppLista = li;
-                
-
             }
             String o = bingPathToAppDir(@"JsonFiles\operations.json");
 

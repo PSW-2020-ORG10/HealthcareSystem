@@ -27,9 +27,7 @@
       "email": "uros@gmail.com",
       "password": "uros123",
       "isRegisteredBySecretary": true,
-      "notifications": [
-        ""
-      ],
+      "notifications": null,
       "firstName": "Uros",
       "secondName": "Petrovic",
       "uniqueCitizensidentityNumber": "23656565521",
@@ -68,9 +66,7 @@
       "email": "uros@gmail.com",
       "password": "uros123",
       "isRegisteredBySecretary": true,
-      "notifications": [
-        ""
-      ],
+      "notifications": null,
       "firstName": "Uros",
       "secondName": "Petrovic",
       "uniqueCitizensidentityNumber": "23656565521",
@@ -109,9 +105,7 @@
       "email": "teodora@gmail.com",
       "password": "teodora123",
       "isRegisteredBySecretary": true,
-      "notifications": [
-        ""
-      ],
+      "notifications": null,
       "firstName": "Teodora",
       "secondName": "Kostic",
       "uniqueCitizensidentityNumber": "5658881212",
@@ -126,10 +120,7 @@
     "referral": null,
     "doctor": {
       "isSpecialist": false,
-      "specialNotifications": [
-        "Questionarie: \nSatisfiction with application?  /  mark:  1\nSatisfiction with doctor?  /  mark:  3\nSatisfiction with doctor's knowledge?  /  mark:  3\nSatisfiction with clinic?  /  mark:  3\nSatisfiction with available terms for appointment?  /  mark:  4\nSatisfiction with the cleanness?  /  mark:  5\n",
-        "Patient - 1 -  I like the way you work."
-      ],
+      "specialNotifications": null,
       "ordination": "Room 500",
       "speciality": null,
       "salary": 1500.0,
@@ -153,11 +144,7 @@
       "email": "teodora@gmail.com",
       "password": "teodora123",
       "isRegisteredBySecretary": false,
-      "notifications": [
-        "",
-        "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 15:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana Vam je nova operacija datuma : 08/07/2020 u 11:00:00 h, kod lekara Lidija Vukovic Sala Room500"
-      ],
+      "notifications": null,
       "firstName": "Teodora",
       "secondName": "Kostic",
       "uniqueCitizensidentityNumber": "5658881212",
@@ -172,10 +159,7 @@
     "referral": null,
     "doctor": {
       "isSpecialist": false,
-      "specialNotifications": [
-        "Questionarie: \nSatisfiction with application?  /  mark:  1\nSatisfiction with doctor?  /  mark:  3\nSatisfiction with doctor's knowledge?  /  mark:  3\nSatisfiction with clinic?  /  mark:  3\nSatisfiction with available terms for appointment?  /  mark:  4\nSatisfiction with the cleanness?  /  mark:  5\n",
-        "Patient - 1 -  I like the way you work."
-      ],
+      "specialNotifications": null,
       "ordination": "Room 500",
       "speciality": null,
       "salary": 1500.0,
@@ -199,11 +183,7 @@
       "email": "teodora@gmail.com",
       "password": "teodora123",
       "isRegisteredBySecretary": false,
-      "notifications": [
-        "",
-        "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 15:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana Vam je nova operacija datuma : 08/07/2020 u 11:00:00 h, kod lekara Lidija Vukovic Sala Room500"
-      ],
+      "notifications": null,
       "firstName": "Teodora",
       "secondName": "Kostic",
       "uniqueCitizensidentityNumber": "5658881212",
@@ -242,11 +222,7 @@
       "email": "teodora@gmail.com",
       "password": "teodora123",
       "isRegisteredBySecretary": false,
-      "notifications": [
-        "",
-        "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 15:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana Vam je nova operacija datuma : 08/07/2020 u 11:00:00 h, kod lekara Lidija Vukovic Sala Room500"
-      ],
+      "notifications": null,
       "firstName": "Teodora",
       "secondName": "Kostic",
       "uniqueCitizensidentityNumber": "5658881212",
@@ -285,11 +261,7 @@
       "email": "teodora@gmail.com",
       "password": "teodora123",
       "isRegisteredBySecretary": false,
-      "notifications": [
-        "",
-        "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 15:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana Vam je nova operacija datuma : 08/07/2020 u 11:00:00 h, kod lekara Lidija Vukovic Sala Room500"
-      ],
+      "notifications": null,
       "firstName": "Teodora",
       "secondName": "Kostic",
       "uniqueCitizensidentityNumber": "5658881212",
@@ -304,10 +276,7 @@
     "referral": null,
     "doctor": {
       "isSpecialist": false,
-      "specialNotifications": [
-        "Questionarie: \nSatisfiction with application?  /  mark:  1\nSatisfiction with doctor?  /  mark:  3\nSatisfiction with doctor's knowledge?  /  mark:  3\nSatisfiction with clinic?  /  mark:  3\nSatisfiction with available terms for appointment?  /  mark:  4\nSatisfiction with the cleanness?  /  mark:  5\n",
-        "Patient - 1 -  I like the way you work."
-      ],
+      "specialNotifications": null,
       "ordination": "Room 500",
       "speciality": null,
       "salary": 1500.0,
@@ -331,11 +300,7 @@
       "email": "teodora@gmail.com",
       "password": "teodora123",
       "isRegisteredBySecretary": false,
-      "notifications": [
-        "",
-        "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 15:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana Vam je nova operacija datuma : 08/07/2020 u 11:00:00 h, kod lekara Lidija Vukovic Sala Room500"
-      ],
+      "notifications": null,
       "firstName": "Teodora",
       "secondName": "Kostic",
       "uniqueCitizensidentityNumber": "5658881212",
@@ -374,10 +339,7 @@
       "email": "uros@gmail.com",
       "password": "uros123",
       "isRegisteredBySecretary": true,
-      "notifications": [
-        "",
-        "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 09:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500"
-      ],
+      "notifications": null,
       "firstName": "Uros",
       "secondName": "Petrovic",
       "uniqueCitizensidentityNumber": "23656565521",
@@ -392,10 +354,7 @@
     "referral": null,
     "doctor": {
       "isSpecialist": false,
-      "specialNotifications": [
-        "Questionarie: \nSatisfiction with application?  /  mark:  1\nSatisfiction with doctor?  /  mark:  3\nSatisfiction with doctor's knowledge?  /  mark:  3\nSatisfiction with clinic?  /  mark:  3\nSatisfiction with available terms for appointment?  /  mark:  4\nSatisfiction with the cleanness?  /  mark:  5\n",
-        "Patient - 1 -  I like the way you work."
-      ],
+      "specialNotifications": null,
       "ordination": "Room 500",
       "speciality": null,
       "salary": 1500.0,
@@ -419,12 +378,7 @@
       "email": "uros@gmail.com",
       "password": "uros123",
       "isRegisteredBySecretary": true,
-      "notifications": [
-        "",
-        "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 09:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana vam je novi pregled datuma : 07/07/2020 u 14:09:00 h kod lekara Pera Peric. Ordinacija: Room200",
-        "Postovani, zakazana Vam je nova operacija datuma : 07/07/2020 u 09:00:00 h, kod lekara Pera Peric Sala Room200"
-      ],
+      "notifications": null,
       "firstName": "Uros",
       "secondName": "Petrovic",
       "uniqueCitizensidentityNumber": "23656565521",
@@ -439,10 +393,7 @@
     "referral": null,
     "doctor": {
       "isSpecialist": false,
-      "specialNotifications": [
-        "Questionarie: \nSatisfiction with application?  /  mark:  1\nSatisfiction with doctor?  /  mark:  3\nSatisfiction with doctor's knowledge?  /  mark:  3\nSatisfiction with clinic?  /  mark:  3\nSatisfiction with available terms for appointment?  /  mark:  4\nSatisfiction with the cleanness?  /  mark:  5\n",
-        "Patient - 1 -  I like the way you work."
-      ],
+      "specialNotifications": null,
       "ordination": "Room 500",
       "speciality": null,
       "salary": 1500.0,
@@ -466,13 +417,7 @@
       "email": "uros@gmail.com",
       "password": "uros123",
       "isRegisteredBySecretary": true,
-      "notifications": [
-        "",
-        "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 09:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana vam je novi pregled datuma : 07/07/2020 u 14:09:00 h kod lekara Pera Peric. Ordinacija: Room200",
-        "Postovani, zakazana Vam je nova operacija datuma : 07/07/2020 u 09:00:00 h, kod lekara Pera Peric Sala Room200",
-        "Postovani, zakazana vam je novi pregled datuma : 29/06/2020 u 10:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500"
-      ],
+      "notifications": null,
       "firstName": "Uros",
       "secondName": "Petrovic",
       "uniqueCitizensidentityNumber": "23656565521",
@@ -496,10 +441,7 @@
     ],
     "doctor": {
       "isSpecialist": false,
-      "specialNotifications": [
-        "Questionarie: \nSatisfiction with application?  /  mark:  1\nSatisfiction with doctor?  /  mark:  3\nSatisfiction with doctor's knowledge?  /  mark:  3\nSatisfiction with clinic?  /  mark:  3\nSatisfiction with available terms for appointment?  /  mark:  4\nSatisfiction with the cleanness?  /  mark:  5\n",
-        "Patient - 1 -  I like the way you work."
-      ],
+      "specialNotifications": null,
       "ordination": "Room 500",
       "speciality": null,
       "salary": 1500.0,
@@ -523,11 +465,7 @@
       "email": "teodora@gmail.com",
       "password": "teodora123",
       "isRegisteredBySecretary": false,
-      "notifications": [
-        "",
-        "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 15:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana Vam je nova operacija datuma : 08/07/2020 u 11:00:00 h, kod lekara Lidija Vukovic Sala Room500"
-      ],
+      "notifications": null,
       "firstName": "Teodora",
       "secondName": "Kostic",
       "uniqueCitizensidentityNumber": "5658881212",
@@ -551,10 +489,7 @@
     ],
     "doctor": {
       "isSpecialist": false,
-      "specialNotifications": [
-        "Questionarie: \nSatisfiction with application?  /  mark:  1\nSatisfiction with doctor?  /  mark:  3\nSatisfiction with doctor's knowledge?  /  mark:  3\nSatisfiction with clinic?  /  mark:  3\nSatisfiction with available terms for appointment?  /  mark:  4\nSatisfiction with the cleanness?  /  mark:  5\n",
-        "Patient - 1 -  I like the way you work."
-      ],
+      "specialNotifications": null,
       "ordination": "Room 500",
       "speciality": null,
       "salary": 1500.0,
@@ -578,13 +513,7 @@
       "email": "uros@gmail.com",
       "password": "uros123",
       "isRegisteredBySecretary": true,
-      "notifications": [
-        "",
-        "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 09:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana vam je novi pregled datuma : 07/07/2020 u 14:09:00 h kod lekara Pera Peric. Ordinacija: Room200",
-        "Postovani, zakazana Vam je nova operacija datuma : 07/07/2020 u 09:00:00 h, kod lekara Pera Peric Sala Room200",
-        "Postovani, zakazana vam je novi pregled datuma : 29/06/2020 u 10:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500"
-      ],
+      "notifications": null,
       "firstName": "Uros",
       "secondName": "Petrovic",
       "uniqueCitizensidentityNumber": "23656565521",
@@ -608,10 +537,7 @@
     ],
     "doctor": {
       "isSpecialist": false,
-      "specialNotifications": [
-        "Questionarie: \nSatisfiction with application?  /  mark:  1\nSatisfiction with doctor?  /  mark:  3\nSatisfiction with doctor's knowledge?  /  mark:  3\nSatisfiction with clinic?  /  mark:  3\nSatisfiction with available terms for appointment?  /  mark:  4\nSatisfiction with the cleanness?  /  mark:  5\n",
-        "Patient - 1 -  I like the way you work."
-      ],
+      "specialNotifications": null,
       "ordination": "Room 500",
       "speciality": null,
       "salary": 1500.0,
@@ -659,10 +585,7 @@
     ],
     "doctor": {
       "isSpecialist": false,
-      "specialNotifications": [
-        "Questionarie: \nSatisfiction with application?  /  mark:  1\nSatisfiction with doctor?  /  mark:  3\nSatisfiction with doctor's knowledge?  /  mark:  3\nSatisfiction with clinic?  /  mark:  3\nSatisfiction with available terms for appointment?  /  mark:  4\nSatisfiction with the cleanness?  /  mark:  5\n",
-        "Patient - 1 -  I like the way you work."
-      ],
+      "specialNotifications": null,
       "ordination": "Room 500",
       "speciality": null,
       "salary": 1500.0,
@@ -686,13 +609,7 @@
       "email": "uros@gmail.com",
       "password": "uros123",
       "isRegisteredBySecretary": true,
-      "notifications": [
-        "",
-        "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 09:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana vam je novi pregled datuma : 07/07/2020 u 14:09:00 h kod lekara Pera Peric. Ordinacija: Room200",
-        "Postovani, zakazana Vam je nova operacija datuma : 07/07/2020 u 09:00:00 h, kod lekara Pera Peric Sala Room200",
-        "Postovani, zakazana vam je novi pregled datuma : 29/06/2020 u 10:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500"
-      ],
+      "notifications": null,
       "firstName": "Uros",
       "secondName": "Petrovic",
       "uniqueCitizensidentityNumber": "23656565521",
@@ -707,10 +624,7 @@
     "referral": null,
     "doctor": {
       "isSpecialist": false,
-      "specialNotifications": [
-        "Questionarie: \nSatisfiction with application?  /  mark:  1\nSatisfiction with doctor?  /  mark:  3\nSatisfiction with doctor's knowledge?  /  mark:  3\nSatisfiction with clinic?  /  mark:  3\nSatisfiction with available terms for appointment?  /  mark:  4\nSatisfiction with the cleanness?  /  mark:  5\n",
-        "Patient - 1 -  I like the way you work."
-      ],
+      "specialNotifications": null,
       "ordination": "Room 500",
       "speciality": null,
       "salary": 1500.0,
@@ -734,11 +648,7 @@
       "email": "teodora@gmail.com",
       "password": "teodora123",
       "isRegisteredBySecretary": false,
-      "notifications": [
-        "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 15:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana Vam je nova operacija datuma : 08/07/2020 u 11:00:00 h, kod lekara Lidija Vukovic Sala Room500",
-        "Doctor  Lidija Vukovic  - answer  -Thank you."
-      ],
+      "notifications": null,
       "firstName": "Teodora",
       "secondName": "Kostic",
       "uniqueCitizensidentityNumber": "5658881212",
@@ -777,11 +687,7 @@
       "email": "teodora@gmail.com",
       "password": "teodora123",
       "isRegisteredBySecretary": false,
-      "notifications": [
-        "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 15:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana Vam je nova operacija datuma : 08/07/2020 u 11:00:00 h, kod lekara Lidija Vukovic Sala Room500",
-        "Doctor  Lidija Vukovic  - answer  -Thank you."
-      ],
+      "notifications": null,
       "firstName": "Teodora",
       "secondName": "Kostic",
       "uniqueCitizensidentityNumber": "5658881212",
@@ -820,10 +726,7 @@
       "email": "milica@gmail.com",
       "password": "milica123",
       "isRegisteredBySecretary": true,
-      "notifications": [
-        "",
-        "Postovani, zakazana Vam je nova operacija datuma : 15/07/2020 u 16:00:00 h, kod lekara Lidija Vukovic Sala Room500"
-      ],
+      "notifications": null,
       "firstName": "Milica",
       "secondName": "Petkovic",
       "uniqueCitizensidentityNumber": "5665659",
@@ -838,10 +741,7 @@
     "referral": null,
     "doctor": {
       "isSpecialist": false,
-      "specialNotifications": [
-        "Questionarie: \nSatisfiction with application?  /  mark:  1\nSatisfiction with doctor?  /  mark:  3\nSatisfiction with doctor's knowledge?  /  mark:  3\nSatisfiction with clinic?  /  mark:  3\nSatisfiction with available terms for appointment?  /  mark:  4\nSatisfiction with the cleanness?  /  mark:  5\n",
-        "Patient - 1 -  I like the way you work."
-      ],
+      "specialNotifications": null,
       "ordination": "Room 500",
       "speciality": null,
       "salary": 1500.0,
@@ -865,10 +765,7 @@
       "email": "milica@gmail.com",
       "password": "milica123",
       "isRegisteredBySecretary": true,
-      "notifications": [
-        "",
-        "Postovani, zakazana Vam je nova operacija datuma : 15/07/2020 u 16:00:00 h, kod lekara Lidija Vukovic Sala Room500"
-      ],
+      "notifications": null,
       "firstName": "Milica",
       "secondName": "Petkovic",
       "uniqueCitizensidentityNumber": "5665659",
@@ -883,10 +780,7 @@
     "referral": null,
     "doctor": {
       "isSpecialist": false,
-      "specialNotifications": [
-        "Questionarie: \nSatisfiction with application?  /  mark:  1\nSatisfiction with doctor?  /  mark:  3\nSatisfiction with doctor's knowledge?  /  mark:  3\nSatisfiction with clinic?  /  mark:  3\nSatisfiction with available terms for appointment?  /  mark:  4\nSatisfiction with the cleanness?  /  mark:  5\n",
-        "Patient - 1 -  I like the way you work."
-      ],
+      "specialNotifications": null,
       "ordination": "Room 500",
       "speciality": null,
       "salary": 1500.0,
@@ -910,11 +804,7 @@
       "email": "teodora@gmail.com",
       "password": "teodora123",
       "isRegisteredBySecretary": false,
-      "notifications": [
-        "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 15:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana Vam je nova operacija datuma : 08/07/2020 u 11:00:00 h, kod lekara Lidija Vukovic Sala Room500",
-        "Doctor  Lidija Vukovic  - answer  -Thank you."
-      ],
+      "notifications": null,
       "firstName": "Teodora",
       "secondName": "Kostic",
       "uniqueCitizensidentityNumber": "5658881212",
@@ -953,11 +843,7 @@
       "email": "teodora@gmail.com",
       "password": "teodora123",
       "isRegisteredBySecretary": false,
-      "notifications": [
-        "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 15:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana Vam je nova operacija datuma : 08/07/2020 u 11:00:00 h, kod lekara Lidija Vukovic Sala Room500",
-        "Doctor  Lidija Vukovic  - answer  -Thank you."
-      ],
+      "notifications": null,
       "firstName": "Teodora",
       "secondName": "Kostic",
       "uniqueCitizensidentityNumber": "5658881212",
@@ -996,13 +882,7 @@
       "email": "uros@gmail.com",
       "password": "uros123",
       "isRegisteredBySecretary": true,
-      "notifications": [
-        "",
-        "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 09:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana vam je novi pregled datuma : 07/07/2020 u 14:09:00 h kod lekara Pera Peric. Ordinacija: Room200",
-        "Postovani, zakazana Vam je nova operacija datuma : 07/07/2020 u 09:00:00 h, kod lekara Pera Peric Sala Room200",
-        "Postovani, zakazana vam je novi pregled datuma : 29/06/2020 u 10:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500"
-      ],
+      "notifications": null,
       "firstName": "Uros",
       "secondName": "Petrovic",
       "uniqueCitizensidentityNumber": "23656565521",
@@ -1017,10 +897,7 @@
     "referral": null,
     "doctor": {
       "isSpecialist": false,
-      "specialNotifications": [
-        "Questionarie: \nSatisfiction with application?  /  mark:  1\nSatisfiction with doctor?  /  mark:  3\nSatisfiction with doctor's knowledge?  /  mark:  3\nSatisfiction with clinic?  /  mark:  3\nSatisfiction with available terms for appointment?  /  mark:  4\nSatisfiction with the cleanness?  /  mark:  5\n",
-        "Patient - 1 -  I like the way you work."
-      ],
+      "specialNotifications": null,
       "ordination": "Room 500",
       "speciality": null,
       "salary": 1500.0,
@@ -1044,13 +921,7 @@
       "email": "uros@gmail.com",
       "password": "uros123",
       "isRegisteredBySecretary": true,
-      "notifications": [
-        "",
-        "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 09:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana vam je novi pregled datuma : 07/07/2020 u 14:09:00 h kod lekara Pera Peric. Ordinacija: Room200",
-        "Postovani, zakazana Vam je nova operacija datuma : 07/07/2020 u 09:00:00 h, kod lekara Pera Peric Sala Room200",
-        "Postovani, zakazana vam je novi pregled datuma : 29/06/2020 u 10:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500"
-      ],
+      "notifications": null,
       "firstName": "Uros",
       "secondName": "Petrovic",
       "uniqueCitizensidentityNumber": "23656565521",
@@ -1065,10 +936,7 @@
     "referral": null,
     "doctor": {
       "isSpecialist": false,
-      "specialNotifications": [
-        "Questionarie: \nSatisfiction with application?  /  mark:  1\nSatisfiction with doctor?  /  mark:  3\nSatisfiction with doctor's knowledge?  /  mark:  3\nSatisfiction with clinic?  /  mark:  3\nSatisfiction with available terms for appointment?  /  mark:  4\nSatisfiction with the cleanness?  /  mark:  5\n",
-        "Patient - 1 -  I like the way you work."
-      ],
+      "specialNotifications": null,
       "ordination": "Room 500",
       "speciality": null,
       "salary": 1500.0,
@@ -1092,13 +960,7 @@
       "email": "uros@gmail.com",
       "password": "uros123",
       "isRegisteredBySecretary": true,
-      "notifications": [
-        "",
-        "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 09:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana vam je novi pregled datuma : 07/07/2020 u 14:09:00 h kod lekara Pera Peric. Ordinacija: Room200",
-        "Postovani, zakazana Vam je nova operacija datuma : 07/07/2020 u 09:00:00 h, kod lekara Pera Peric Sala Room200",
-        "Postovani, zakazana vam je novi pregled datuma : 29/06/2020 u 10:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500"
-      ],
+      "notifications": null,
       "firstName": "Uros",
       "secondName": "Petrovic",
       "uniqueCitizensidentityNumber": "23656565521",
@@ -1137,11 +999,7 @@
       "email": "teodora@gmail.com",
       "password": "teodora123",
       "isRegisteredBySecretary": false,
-      "notifications": [
-        "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 15:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana Vam je nova operacija datuma : 08/07/2020 u 11:00:00 h, kod lekara Lidija Vukovic Sala Room500",
-        "Doctor  Lidija Vukovic  - answer  -Thank you."
-      ],
+      "notifications": null,
       "firstName": "Teodora",
       "secondName": "Kostic",
       "uniqueCitizensidentityNumber": "5658881212",
@@ -1180,11 +1038,7 @@
       "email": "teodora@gmail.com",
       "password": "teodora123",
       "isRegisteredBySecretary": false,
-      "notifications": [
-        "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 15:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana Vam je nova operacija datuma : 08/07/2020 u 11:00:00 h, kod lekara Lidija Vukovic Sala Room500",
-        "Doctor  Lidija Vukovic  - answer  -Thank you."
-      ],
+      "notifications": null,
       "firstName": "Teodora",
       "secondName": "Kostic",
       "uniqueCitizensidentityNumber": "5658881212",
@@ -1223,11 +1077,7 @@
       "email": "teodora@gmail.com",
       "password": "teodora123",
       "isRegisteredBySecretary": false,
-      "notifications": [
-        "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 15:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana Vam je nova operacija datuma : 08/07/2020 u 11:00:00 h, kod lekara Lidija Vukovic Sala Room500",
-        "Doctor  Lidija Vukovic  - answer  -Thank you."
-      ],
+      "notifications": null,
       "firstName": "Teodora",
       "secondName": "Kostic",
       "uniqueCitizensidentityNumber": "5658881212",
@@ -1266,11 +1116,7 @@
       "email": "teodora@gmail.com",
       "password": "teodora123",
       "isRegisteredBySecretary": false,
-      "notifications": [
-        "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 15:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana Vam je nova operacija datuma : 08/07/2020 u 11:00:00 h, kod lekara Lidija Vukovic Sala Room500",
-        "Doctor  Lidija Vukovic  - answer  -Thank you."
-      ],
+      "notifications": null,
       "firstName": "Teodora",
       "secondName": "Kostic",
       "uniqueCitizensidentityNumber": "5658881212",
@@ -1285,10 +1131,7 @@
     "referral": null,
     "doctor": {
       "isSpecialist": false,
-      "specialNotifications": [
-        "Questionarie: \nSatisfiction with application?  /  mark:  1\nSatisfiction with doctor?  /  mark:  3\nSatisfiction with doctor's knowledge?  /  mark:  3\nSatisfiction with clinic?  /  mark:  3\nSatisfiction with available terms for appointment?  /  mark:  4\nSatisfiction with the cleanness?  /  mark:  5\n",
-        "Patient - 1 -  I like the way you work."
-      ],
+      "specialNotifications": null,
       "ordination": "Room 500",
       "speciality": null,
       "salary": 1500.0,
@@ -1312,13 +1155,7 @@
       "email": "uros@gmail.com",
       "password": "uros123",
       "isRegisteredBySecretary": true,
-      "notifications": [
-        "",
-        "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 09:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana vam je novi pregled datuma : 07/07/2020 u 14:09:00 h kod lekara Pera Peric. Ordinacija: Room200",
-        "Postovani, zakazana Vam je nova operacija datuma : 07/07/2020 u 09:00:00 h, kod lekara Pera Peric Sala Room200",
-        "Postovani, zakazana vam je novi pregled datuma : 29/06/2020 u 10:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500"
-      ],
+      "notifications": null,
       "firstName": "Uros",
       "secondName": "Petrovic",
       "uniqueCitizensidentityNumber": "23656565521",
@@ -1333,9 +1170,7 @@
     "referral": null,
     "doctor": {
       "isSpecialist": false,
-      "specialNotifications": [
-        "Patient - 5 -  I like the way you work. :)"
-      ],
+      "specialNotifications": null,
       "ordination": "Room 500",
       "speciality": null,
       "salary": 1500.0,
@@ -1359,10 +1194,7 @@
       "email": "milica@gmail.com",
       "password": "milica123",
       "isRegisteredBySecretary": true,
-      "notifications": [
-        "",
-        "Postovani, zakazana Vam je nova operacija datuma : 15/07/2020 u 16:00:00 h, kod lekara Lidija Vukovic Sala Room500"
-      ],
+      "notifications": null,
       "firstName": "Milica",
       "secondName": "Petkovic",
       "uniqueCitizensidentityNumber": "5665659",
@@ -1401,14 +1233,7 @@
       "email": "uros@gmail.com",
       "password": "uros123",
       "isRegisteredBySecretary": true,
-      "notifications": [
-        "",
-        "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 09:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana vam je novi pregled datuma : 07/07/2020 u 14:09:00 h kod lekara Pera Peric. Ordinacija: Room200",
-        "Postovani, zakazana Vam je nova operacija datuma : 07/07/2020 u 09:00:00 h, kod lekara Pera Peric Sala Room200",
-        "Postovani, zakazana vam je novi pregled datuma : 29/06/2020 u 10:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana vam je novi pregled datuma : 07/07/2020 u 13:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500"
-      ],
+      "notifications": null,
       "firstName": "Uros",
       "secondName": "Petrovic",
       "uniqueCitizensidentityNumber": "23656565521",
@@ -1447,11 +1272,7 @@
       "email": "teodora@gmail.com",
       "password": "teodora123",
       "isRegisteredBySecretary": false,
-      "notifications": [
-        "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 15:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana Vam je nova operacija datuma : 08/07/2020 u 11:00:00 h, kod lekara Lidija Vukovic Sala Room500",
-        "Doctor  Lidija Vukovic  - answer  -Thank you."
-      ],
+      "notifications": null,
       "firstName": "Teodora",
       "secondName": "Kostic",
       "uniqueCitizensidentityNumber": "5658881212",
@@ -1529,11 +1350,7 @@
       "email": "milica@gmail.com",
       "password": "milica123",
       "isRegisteredBySecretary": true,
-      "notifications": [
-        "",
-        "Postovani, zakazana Vam je nova operacija datuma : 15/07/2020 u 16:00:00 h, kod lekara Lidija Vukovic Sala Room500",
-        "Postovani, zakazana vam je novi pregled datuma : 06/07/2020 u 12:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500"
-      ],
+      "notifications": null,
       "firstName": "Milica",
       "secondName": "Petkovic",
       "uniqueCitizensidentityNumber": "5665659",
@@ -1572,15 +1389,7 @@
       "email": "uros@gmail.com",
       "password": "uros123",
       "isRegisteredBySecretary": true,
-      "notifications": [
-        "",
-        "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 09:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana vam je novi pregled datuma : 07/07/2020 u 14:09:00 h kod lekara Pera Peric. Ordinacija: Room200",
-        "Postovani, zakazana Vam je nova operacija datuma : 07/07/2020 u 09:00:00 h, kod lekara Pera Peric Sala Room200",
-        "Postovani, zakazana vam je novi pregled datuma : 29/06/2020 u 10:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana vam je novi pregled datuma : 07/07/2020 u 13:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana vam je novi pregled datuma : 16/11/2020 u 14:09:00 h kod lekara Natasa Savic. Ordinacija: Room600"
-      ],
+      "notifications": null,
       "firstName": "Uros",
       "secondName": "Petrovic",
       "uniqueCitizensidentityNumber": "23656565521",
@@ -1595,9 +1404,7 @@
     "referral": null,
     "doctor": {
       "isSpecialist": false,
-      "specialNotifications": [
-        "Patient - 5 -  I like the way you work. :)"
-      ],
+      "specialNotifications": null,
       "ordination": "Room 500",
       "speciality": null,
       "salary": 1500.0,
@@ -1621,15 +1428,7 @@
       "email": "uros@gmail.com",
       "password": "uros123",
       "isRegisteredBySecretary": true,
-      "notifications": [
-        "",
-        "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 09:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana vam je novi pregled datuma : 07/07/2020 u 14:09:00 h kod lekara Pera Peric. Ordinacija: Room200",
-        "Postovani, zakazana Vam je nova operacija datuma : 07/07/2020 u 09:00:00 h, kod lekara Pera Peric Sala Room200",
-        "Postovani, zakazana vam je novi pregled datuma : 29/06/2020 u 10:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana vam je novi pregled datuma : 07/07/2020 u 13:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana vam je novi pregled datuma : 16/11/2020 u 14:09:00 h kod lekara Natasa Savic. Ordinacija: Room600"
-      ],
+      "notifications": null,
       "firstName": "Uros",
       "secondName": "Petrovic",
       "uniqueCitizensidentityNumber": "23656565521",
@@ -1668,10 +1467,7 @@
       "email": "mila@gmail.com",
       "password": "mila123",
       "isRegisteredBySecretary": false,
-      "notifications": [
-        "Postovani, zakazana vam je novi pregled datuma : 15/07/2020 u 15:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana Vam je nova operacija datuma : 01/07/2020 u 13:00:00 h, kod lekara Natasa Savic Sala Room600"
-      ],
+      "notifications": null,
       "firstName": "Mila",
       "secondName": "Stojakovic",
       "uniqueCitizensidentityNumber": "2313124",
@@ -1710,15 +1506,7 @@
       "email": "uros@gmail.com",
       "password": "uros123",
       "isRegisteredBySecretary": true,
-      "notifications": [
-        "",
-        "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 09:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana vam je novi pregled datuma : 07/07/2020 u 14:09:00 h kod lekara Pera Peric. Ordinacija: Room200",
-        "Postovani, zakazana Vam je nova operacija datuma : 07/07/2020 u 09:00:00 h, kod lekara Pera Peric Sala Room200",
-        "Postovani, zakazana vam je novi pregled datuma : 29/06/2020 u 10:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana vam je novi pregled datuma : 07/07/2020 u 13:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana vam je novi pregled datuma : 16/11/2020 u 14:09:00 h kod lekara Natasa Savic. Ordinacija: Room600"
-      ],
+      "notifications": null,
       "firstName": "Uros",
       "secondName": "Petrovic",
       "uniqueCitizensidentityNumber": "23656565521",
@@ -1733,9 +1521,7 @@
     "referral": null,
     "doctor": {
       "isSpecialist": false,
-      "specialNotifications": [
-        "Patient - 5 -  I like the way you work. :)"
-      ],
+      "specialNotifications": null,
       "ordination": "Room 500",
       "speciality": null,
       "salary": 1500.0,
@@ -1759,9 +1545,7 @@
       "email": "8UNKNOWN",
       "password": "nopassword",
       "isRegisteredBySecretary": true,
-      "notifications": [
-        ""
-      ],
+      "notifications": null,
       "firstName": "Teodor",
       "secondName": "Petrovic",
       "uniqueCitizensidentityNumber": "06556588151",
@@ -1776,9 +1560,7 @@
     "referral": null,
     "doctor": {
       "isSpecialist": false,
-      "specialNotifications": [
-        "Patient - 5 -  I like the way you work. :)"
-      ],
+      "specialNotifications": null,
       "ordination": "Room 500",
       "speciality": null,
       "salary": 1500.0,
@@ -1802,9 +1584,7 @@
       "email": "9UNKNOWN",
       "password": "nopassword",
       "isRegisteredBySecretary": true,
-      "notifications": [
-        ""
-      ],
+      "notifications": null,
       "firstName": "Zorica",
       "secondName": "Ostojic",
       "uniqueCitizensidentityNumber": "266562",
@@ -1819,9 +1599,7 @@
     "referral": null,
     "doctor": {
       "isSpecialist": false,
-      "specialNotifications": [
-        "Patient - 5 -  I like the way you work. :)"
-      ],
+      "specialNotifications": null,
       "ordination": "Room 500",
       "speciality": null,
       "salary": 1500.0,
@@ -1845,15 +1623,7 @@
       "email": "uros@gmail.com",
       "password": "uros123",
       "isRegisteredBySecretary": true,
-      "notifications": [
-        "",
-        "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 09:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana vam je novi pregled datuma : 07/07/2020 u 14:09:00 h kod lekara Pera Peric. Ordinacija: Room200",
-        "Postovani, zakazana Vam je nova operacija datuma : 07/07/2020 u 09:00:00 h, kod lekara Pera Peric Sala Room200",
-        "Postovani, zakazana vam je novi pregled datuma : 29/06/2020 u 10:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana vam je novi pregled datuma : 07/07/2020 u 13:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana vam je novi pregled datuma : 16/11/2020 u 14:09:00 h kod lekara Natasa Savic. Ordinacija: Room600"
-      ],
+      "notifications": null,
       "firstName": "Uros",
       "secondName": "Petrovic",
       "uniqueCitizensidentityNumber": "23656565521",
@@ -1911,9 +1681,7 @@
     "referral": null,
     "doctor": {
       "isSpecialist": false,
-      "specialNotifications": [
-        "Patient - 5 -  I like the way you work. :)"
-      ],
+      "specialNotifications": null,
       "ordination": "Room 500",
       "speciality": null,
       "salary": 1500.0,
@@ -1954,9 +1722,7 @@
     "referral": null,
     "doctor": {
       "isSpecialist": false,
-      "specialNotifications": [
-        "Patient - 5 -  I like the way you work. :)"
-      ],
+      "specialNotifications": null,
       "ordination": "Room 500",
       "speciality": null,
       "salary": 1500.0,
@@ -1980,12 +1746,7 @@
       "email": "teodora@gmail.com",
       "password": "teodora123",
       "isRegisteredBySecretary": false,
-      "notifications": [
-        "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 15:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana Vam je nova operacija datuma : 08/07/2020 u 11:00:00 h, kod lekara Lidija Vukovic Sala Room500",
-        "Doctor  Lidija Vukovic  - answer  -Thank you.",
-        "Postovani, zakazana vam je novi pregled datuma : 16/11/2020 u 14:09:00 h kod lekara Natasa Savic. Ordinacija: Room600"
-      ],
+      "notifications": null,
       "firstName": "Teodora",
       "secondName": "Kostic",
       "uniqueCitizensidentityNumber": "5658881212",
@@ -2000,9 +1761,7 @@
     "referral": null,
     "doctor": {
       "isSpecialist": false,
-      "specialNotifications": [
-        "Patient - 5 -  I like the way you work. :)"
-      ],
+      "specialNotifications": null,
       "ordination": "Room 500",
       "speciality": null,
       "salary": 1500.0,
@@ -2026,12 +1785,7 @@
       "email": "teodora@gmail.com",
       "password": "teodora123",
       "isRegisteredBySecretary": false,
-      "notifications": [
-        "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 15:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana Vam je nova operacija datuma : 08/07/2020 u 11:00:00 h, kod lekara Lidija Vukovic Sala Room500",
-        "Doctor  Lidija Vukovic  - answer  -Thank you.",
-        "Postovani, zakazana vam je novi pregled datuma : 16/11/2020 u 14:09:00 h kod lekara Natasa Savic. Ordinacija: Room600"
-      ],
+      "notifications": null,
       "firstName": "Teodora",
       "secondName": "Kostic",
       "uniqueCitizensidentityNumber": "5658881212",
@@ -2111,9 +1865,7 @@
       "email": "miladin@gmail.com",
       "password": "miladin123",
       "isRegisteredBySecretary": true,
-      "notifications": [
-        ""
-      ],
+      "notifications": null,
       "firstName": "Miladin",
       "secondName": "Todorovic",
       "uniqueCitizensidentityNumber": "26565655",
@@ -2193,15 +1945,7 @@
       "email": "uros@gmail.com",
       "password": "uros123",
       "isRegisteredBySecretary": true,
-      "notifications": [
-        "",
-        "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 09:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana vam je novi pregled datuma : 07/07/2020 u 14:09:00 h kod lekara Pera Peric. Ordinacija: Room200",
-        "Postovani, zakazana Vam je nova operacija datuma : 07/07/2020 u 09:00:00 h, kod lekara Pera Peric Sala Room200",
-        "Postovani, zakazana vam je novi pregled datuma : 29/06/2020 u 10:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana vam je novi pregled datuma : 07/07/2020 u 13:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-        "Postovani, zakazana vam je novi pregled datuma : 16/11/2020 u 14:09:00 h kod lekara Natasa Savic. Ordinacija: Room600"
-      ],
+      "notifications": null,
       "firstName": "Uros",
       "secondName": "Petrovic",
       "uniqueCitizensidentityNumber": "23656565521",

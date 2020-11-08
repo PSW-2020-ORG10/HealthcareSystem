@@ -7,12 +7,7 @@
     "Email": "teodora@gmail.com",
     "Password": "teodora123",
     "isRegisteredBySecretary": false,
-    "Notifications": [
-      "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 15:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-      "Postovani, zakazana Vam je nova operacija datuma : 08/07/2020 u 11:00:00 h, kod lekara Lidija Vukovic Sala Room500",
-      "Doctor  Lidija Vukovic  - answer  -Thank you.",
-      "Postovani, zakazana vam je novi pregled datuma : 16/11/2020 u 14:09:00 h kod lekara Natasa Savic. Ordinacija: Room600"
-    ],
+    "Notifications": null,
     "FirstName": "Teodora",
     "SecondName": "Kostic",
     "UniqueCitizensidentityNumber": "5658881212",
@@ -28,9 +23,7 @@
     "Email": "ana123@gmail.com",
     "Password": "ana123",
     "isRegisteredBySecretary": false,
-    "Notifications": [
-      "Postovani, zakazana vam je novi pregled datuma : 16/11/2020 u 14:09:00 h kod lekara Natasa Savic. Ordinacija: Room600"
-    ],
+    "Notifications": null,
     "FirstName": "Ana",
     "SecondName": "Podrascanin",
     "UniqueCitizensidentityNumber": "56656590",
@@ -46,12 +39,7 @@
     "Email": "milica@gmail.com",
     "Password": "milica123",
     "isRegisteredBySecretary": true,
-    "Notifications": [
-      "",
-      "Postovani, zakazana Vam je nova operacija datuma : 15/07/2020 u 16:00:00 h, kod lekara Lidija Vukovic Sala Room500",
-      "Postovani, zakazana vam je novi pregled datuma : 06/07/2020 u 12:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-      "Postovani, zakazana vam je novi pregled datuma : 16/11/2020 u 20:09:00 h kod lekara Natasa Savic. Ordinacija: Room600"
-    ],
+    "Notifications": null,
     "FirstName": "Milica",
     "SecondName": "Petkovic",
     "UniqueCitizensidentityNumber": "5665659",
@@ -67,11 +55,7 @@
     "Email": "mila@gmail.com",
     "Password": "mila123",
     "isRegisteredBySecretary": false,
-    "Notifications": [
-      "Postovani, zakazana vam je novi pregled datuma : 15/07/2020 u 15:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-      "Postovani, zakazana Vam je nova operacija datuma : 01/07/2020 u 13:00:00 h, kod lekara Natasa Savic Sala Room600",
-      "Postovani, zakazana vam je novi pregled datuma : 16/11/2020 u 08:00:00 h kod lekara Natasa Savic. Ordinacija: Room600"
-    ],
+    "Notifications": null,
     "FirstName": "Mila",
     "SecondName": "Stojakovic",
     "UniqueCitizensidentityNumber": "2313124",
@@ -87,10 +71,7 @@
     "Email": "anaa@gmail.com",
     "Password": "anastasija123",
     "isRegisteredBySecretary": true,
-    "Notifications": [
-      "",
-      "Postovani, zakazana Vam je nova operacija datuma : 16/11/2020 u 10:00:00 h, kod lekara Lidija Vukovic Sala Room500"
-    ],
+    "Notifications": null,
     "FirstName": "Anastasija",
     "SecondName": "Todic",
     "UniqueCitizensidentityNumber": "35658755",
@@ -106,10 +87,7 @@
     "Email": "8UNKNOWN",
     "Password": "nopassword",
     "isRegisteredBySecretary": true,
-    "Notifications": [
-      "",
-      "Postovani, zakazana vam je novi pregled datuma : 16/11/2020 u 10:10:00 h kod lekara Lidija Vukovic. Ordinacija: Room500"
-    ],
+    "Notifications": null,
     "FirstName": "Teodor",
     "SecondName": "Petrovic",
     "UniqueCitizensidentityNumber": "06556588151",
@@ -125,10 +103,7 @@
     "Email": "9UNKNOWN",
     "Password": "nopassword",
     "isRegisteredBySecretary": true,
-    "Notifications": [
-      "",
-      "Postovani, zakazana vam je novi pregled datuma : 16/11/2020 u 10:08:00 h kod lekara Lidija Vukovic. Ordinacija: Room500"
-    ],
+    "Notifications": null,
     "FirstName": "Zorica",
     "SecondName": "Ostojic",
     "UniqueCitizensidentityNumber": "266562",
@@ -144,10 +119,7 @@
     "Email": "10UNKNOWN",
     "Password": "nopassword",
     "isRegisteredBySecretary": true,
-    "Notifications": [
-      "",
-      "Postovani, zakazana vam je novi pregled datuma : 18/11/2020 u 10:00:00 h kod lekara Natasa Savic. Ordinacija: Room600"
-    ],
+    "Notifications": null,
     "FirstName": "Uros",
     "SecondName": "Kostic",
     "UniqueCitizensidentityNumber": "226558652",
@@ -163,10 +135,7 @@
     "Email": "miladin@gmail.com",
     "Password": "miladin123",
     "isRegisteredBySecretary": true,
-    "Notifications": [
-      "",
-      "Postovani, zakazana vam je novi pregled datuma : 18/11/2020 u 11:00:00 h kod lekara Natasa Savic. Ordinacija: Room600"
-    ],
+    "Notifications": null,
     "FirstName": "Miladin",
     "SecondName": "Todorovic",
     "UniqueCitizensidentityNumber": "26565655",
@@ -182,10 +151,7 @@
     "Email": "oliver@gmail.com",
     "Password": "olivera123",
     "isRegisteredBySecretary": true,
-    "Notifications": [
-      "",
-      "Postovani, zakazana vam je novi pregled datuma : 18/11/2020 u 13:00:00 h kod lekara Natasa Savic. Ordinacija: Room600"
-    ],
+    "Notifications": null,
     "FirstName": "Olivera",
     "SecondName": "Beric",
     "UniqueCitizensidentityNumber": "646412158",
@@ -201,16 +167,7 @@
     "Email": "uros@gmail.com",
     "Password": "uros123",
     "isRegisteredBySecretary": true,
-    "Notifications": [
-      "",
-      "Postovani, zakazana vam je novi pregled datuma : 08/07/2020 u 09:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-      "Postovani, zakazana vam je novi pregled datuma : 07/07/2020 u 14:09:00 h kod lekara Pera Peric. Ordinacija: Room200",
-      "Postovani, zakazana Vam je nova operacija datuma : 07/07/2020 u 09:00:00 h, kod lekara Pera Peric Sala Room200",
-      "Postovani, zakazana vam je novi pregled datuma : 29/06/2020 u 10:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-      "Postovani, zakazana vam je novi pregled datuma : 07/07/2020 u 13:00:00 h kod lekara Lidija Vukovic. Ordinacija: Room500",
-      "Postovani, zakazana vam je novi pregled datuma : 16/11/2020 u 14:09:00 h kod lekara Natasa Savic. Ordinacija: Room600",
-      "Postovani, zakazana vam je novi pregled datuma : 18/11/2020 u 14:00:00 h kod lekara Natasa Savic. Ordinacija: Room600"
-    ],
+    "Notifications": null,
     "FirstName": "Uros",
     "SecondName": "Petrovic",
     "UniqueCitizensidentityNumber": "23656565521",
