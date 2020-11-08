@@ -25,13 +25,17 @@ namespace PatientWebApplication.Services
         }
 
 
-        /// <summary> This method converts <c>FeedbackDto</c> <paramref name="dto"/> to <c>Feedback</c> using <c>FeedbackAdapter</c> and sends it to <c>FeedbackRepository</c>. </summary>
+        /// <summary> This method converts <paramref name="dto"/> to <c>Feedback</c> using <c>FeedbackAdapter</c> and sends it to <c>FeedbackRepository</c>. </summary>
         /// <param name="dto"><c>dto</c> is Data Transfer Object of a <c>Feedback</c> that contains <c>Message</c>, <c>IsPublic</c>, <c>IsAnonymous</c> and <c>PatientId</c>. 
         /// </param>
-        /// <returns> succesfully created <c>Feedback</c>.</returns>
+        /// <returns>if patient exists returns successfully created feedback; otherwise, return <c>null</c></returns>
         public Feedback Create(FeedbackDto dto)
         { 
             PatientUser patient = FeedbackRepository.FindPatient();
+            if(patient == null)
+            {
+                return null;
+            }
             Feedback feedback = FeedbackAdapter.FeedbackDtoToFeedback(dto, patient);
             return FeedbackRepository.Add(feedback);
         }
@@ -44,30 +48,50 @@ namespace PatientWebApplication.Services
             return FeedbackRepository.GetAll();
         }
 
-        /// <summary> This method is calling <c>FeedbackRepository</c> to get list of <c>Feedback</c> where paramter <c>IsPublished</c> is true. </summary>
+        /// <summary> This method is calling <c>FeedbackRepository</c> to get list of all published <c>Feedback</c>. </summary>
         /// <returns> List of all published feedback. </returns>
         public List<Feedback> GetPublished() {
             return FeedbackRepository.GetPublished();
         }
 
-        /// <summary> This method determines if feedback with id property that matches provided <paramref name="id"/> is valid for publishing and sends it to <c>FeedbackRepository</c>. </summary>
+        /// <summary> This method calls <c>CheckForPublishing</c>, if feedback with provided <paramref name="id"/> is valid it sends it to <c>FeedbackRepository</c>. </summary>
         /// <param name="id"><c>id</c> is <c>id</c> of a <c>Feedback</c> that needs to be published.
         /// </param>
-        /// <returns>null if parameter <c>IsPublic</c> or <c>IsPublished</c> of <c>feedbackToPublish</c> is false; otherwise, succesfully published feedback. </returns>
+        /// <returns>null if feedback is not valid; otherwise, succesfully published feedback. </returns>
         public Feedback Publish(int id)
         {
-            Feedback feedbackToPublish = FeedbackRepository.Find(id);
-            if (feedbackToPublish == null)
-            {
-                return null;
-            }else if(feedbackToPublish.IsPublic == false)
-            {
-                return null;
-            }else if(feedbackToPublish.IsPublished == true)
+            Feedback feedbackToPublish = CheckForPublishing(id);
+            if(feedbackToPublish == null)
             {
                 return null;
             }
+
             return FeedbackRepository.PublishFeedback(feedbackToPublish);
+        }
+
+        /// <summary> This method determines if feedback with id property that matches provided <paramref name="id"/> is valid for publishing. </summary>
+        /// <param name="id"><c>id</c> is <c>id</c> of a <c>Feedback</c> that needs to be published.
+        /// </param>
+        /// <returns>null if parameter <c>IsPublic</c> or <c>IsPublished</c> of <c>feedbackToPublish</c> is false; otherwise, succesfully found feedback that satisfies business logic. </returns>
+        private Feedback CheckForPublishing(int id)
+        {
+            Feedback feedback = FeedbackRepository.Find(id);
+            if (feedback == null)
+            {
+                return null;
+            }
+            else if (feedback.IsPublic == false)
+            {
+                return null;
+            }
+            else if (feedback.IsPublished == true)
+            {
+                return null;
+            }
+            else
+            {
+                return feedback;
+            }
         }
     }
 }

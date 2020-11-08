@@ -19,7 +19,6 @@ namespace PatientWebApplication.Controllers
     [ApiController]
     public class FeedbackController : ControllerBase
     {
-        private readonly MyDbContext dbContext;
         /// <value>Property <c>FeedbackService</c> represents the service used for handling business logic.</value>
         private FeedbackService FeedbackService { get; set; }
 
@@ -27,7 +26,6 @@ namespace PatientWebApplication.Controllers
         /// <param name="context"><c>context</c> is type of <c>DbContext</c>, and it's used for accessing MYSQL database.</param>
         public FeedbackController(MyDbContext context)
         {
-            this.dbContext = context;
             FeedbackService = new FeedbackService(context);
         }
 
@@ -42,7 +40,7 @@ namespace PatientWebApplication.Controllers
         }
 
 
-        /// <summary> This method is calling <c>FeedbackService</c> to get list of <c>Feedback</c> where paramter <c>IsPublished</c> is true. </summary>
+        /// <summary> This method is calling <c>FeedbackService</c> to get list of all published <c>Feedback</c>. </summary>
         /// <returns> 200 Ok with list of published feedback. </returns>
         [HttpGet("published")]       // GET /api/feedback/published
         public IActionResult GetPublished()
@@ -53,7 +51,8 @@ namespace PatientWebApplication.Controllers
         }
 
 
-        /// <summary> This method determines if <c>FeedbackDto</c> provided <paramref name="dto"/> is valid for creating by calling <c>FeedbackValidator</c> automatically and sends it to <c>FeedbackService</c>. </summary>
+        /// <summary> This method determines if <c>FeedbackDto</c> provided <paramref name="dto"/> is valid for creating by calling <c>FeedbackValidator</c>
+        /// automatically and sends it to <c>FeedbackService</c>. </summary>
         /// <param name="dto"><c>dto</c> is Data Transfer Object of a <c>Feedback</c> that contains <c>Message</c>, <c>IsPublic</c>, <c>IsAnonymous</c> and <c>PatientId</c>. 
         /// </param>
         /// <returns> if fields from <paramref name="dto"/> are not valid 400 Bad Request also if created feedback is not null 200 Ok else 404 Bad Request.</returns>
@@ -61,12 +60,6 @@ namespace PatientWebApplication.Controllers
         public IActionResult Create(FeedbackDto dto)
         {
             // validation in feedback validator, automatically called from startup
-
-            PatientUser patient = dbContext.Patients.SingleOrDefault(patient => patient.id == 1);    // still no login, so patient set to created patient in database with id=1, this will be changed after
-            if (patient == null)
-            {
-                return BadRequest();    // if patient is not logged in
-            }
 
             Feedback feedback = FeedbackService.Create(dto);
 

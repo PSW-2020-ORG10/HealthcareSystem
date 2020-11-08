@@ -23,7 +23,7 @@ namespace PatientWebApplication.Adapters
         }
 
         /// <summary>This method creates <c>FeedbackDto</c> from provided <paramref name="feedback"/>.</summary>
-        /// <param name="feedback"><c>feedback</c> is <c>Feedback</c> that will be trasnfered to <c>FeedbackDto</c>.</param>
+        /// <param name="feedback"><c>feedback</c> is <c>Feedback</c> that will be transfered to <c>FeedbackDto</c>.</param>
         /// <returns> created <c>FeedbackDto</c> </returns>
         public static FeedbackDto FeedbackToFeedbackDto(Feedback feedback)
         {

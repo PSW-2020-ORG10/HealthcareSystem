@@ -20,8 +20,8 @@ namespace PatientWebApplication.Repositories
             this.dbContext = dbContext;
         }
 
-        /// <summary> This method creates <c>Feedback</c> of given <paramref name="feedback"/> and saves it into database. </summary>
-        /// <param name="feedback"><c>feedback</c> is feedback that needs to be created.
+        /// <summary> This method saves provided <paramref name="feedback"/> to database. </summary>
+        /// <param name="feedback"><c>feedback</c> is feedback that needs to be saved into database.
         /// </param>
         /// <returns> Feedback saved into database. </returns>
         public Feedback Add(Feedback feedback)
@@ -32,24 +32,23 @@ namespace PatientWebApplication.Repositories
         }
 
         /// <summary> Not finished. Need login. </summary>
-        /// <returns> Found patinet if search was successfully; otherwise, default Patient object. </returns>
+        /// <returns> Found patient if search was successful; otherwise, default Patient object. </returns>
         public PatientUser FindPatient() // Needs login
         {
             PatientUser patient = new PatientUser();
             patient = dbContext.Patients.SingleOrDefault(patient => patient.id == 1); // still no login, so patient set to created patient in database with id=1, this will be changed after
             return patient;
         }
-        /// <summary> This is method for getting all <c>Feedback</c>. </summary>
-        /// <returns> List of all feedback if search was successfull; otherwise, empty list. </returns>
+        /// <summary> This is method gets all <c>Feedback</c>. </summary>
+        /// <returns> List of all feedback from database. </returns>
         public List<Feedback> GetAll()
         {
-            List<Feedback> result = new List<Feedback>();
-            dbContext.Feedbacks.ToList().ForEach(feedback => result.Add(feedback));
-            return result;
+             
+            return dbContext.Feedbacks.ToList();
         }
 
         /// <summary> This method searches for list of <c>Feedback</c> where paramter <c>IsPublished</c> is true.  </summary>
-        /// <returns> List of all published feedback if search was successfull; otherwise, empty list. </returns>
+        /// <returns> List of all published feedback from database.</returns>
         public List<Feedback> GetPublished()
         {           
             return dbContext.Feedbacks.ToList().FindAll(feedback => feedback.IsPublished); 
@@ -58,7 +57,7 @@ namespace PatientWebApplication.Repositories
         /// <summary> This method searches for feedback based on <paramref name="id"/>. </summary>
         /// <param name="id"><c>id</c> is <c>id</c> of a <c>Feedback</c> that needs to be found.
         /// </param>
-        /// <returns> Found feedback if search was successfully; otherwise, default Feedback object. </returns>
+        /// <returns> Found feedback if search was successful; otherwise, default Feedback object. </returns>
         public Feedback Find(int id)
         {
             return dbContext.Feedbacks.SingleOrDefault(feedback => feedback.id == id);
