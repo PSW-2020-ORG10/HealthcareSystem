@@ -60,11 +60,15 @@ namespace Class_diagram.Service
 
         }
         private void removeMedicineFromSpecificRoom(Room room, Medicine medicine,RoomController roomController){
-            if (room.medicine.Contains(new ModelMedicine(medicine.name)))
+            foreach (ModelMedicine modelMedicine in room.medicine)
             {
-                room.medicine.Remove(new ModelMedicine(medicine.name));
-                 roomController.Update(room);
+                if (modelMedicine.Data.Equals(medicine.name))
+                {
+                    room.medicine.Remove(modelMedicine);
+                    roomController.Update(room);
+                }
             }
+
         }
         public void removeMedicineFromAllRoom(Medicine medicine)
         {

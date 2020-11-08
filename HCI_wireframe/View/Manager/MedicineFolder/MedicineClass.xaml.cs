@@ -47,13 +47,16 @@ namespace WpfApp2.MedicineFolder
             {
                 if (item.forUse == true)
                 {
-                    for (int i = 0; i < eq.room.Count; i++)
+                    if (eq.room != null)
                     {
-                        ModelRoom soba = eq.room[i];
-
-                        if (soba.Equals(item.typeOfRoom))
+                        for (int i = 0; i < eq.room.Count; i++)
                         {
-                            sobeSaOpremom.Add(item);
+                            ModelRoom soba = eq.room[i];
+
+                            if (soba.Equals(item.typeOfRoom))
+                            {
+                                sobeSaOpremom.Add(item);
+                            }
                         }
                     }
                 }

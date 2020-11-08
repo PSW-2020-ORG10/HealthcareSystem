@@ -1,17 +1,9 @@
 [
   {
-    "room": [
-      "Magacin",
-      "Room 500",
-      "Operation room 30",
-      "Room 600"
-    ],
+    "room": null,
     "doctor": {
       "isSpecialist": false,
-      "specialNotifications": [
-        "Questionarie: \nSatisfiction with application?  /  mark:  1\nSatisfiction with doctor?  /  mark:  3\nSatisfiction with doctor's knowledge?  /  mark:  3\nSatisfiction with clinic?  /  mark:  3\nSatisfiction with available terms for appointment?  /  mark:  4\nSatisfiction with the cleanness?  /  mark:  5\n",
-        "Patient - 1 -  I like the way you work."
-      ],
+      "specialNotifications": null,
       "ordination": "Room 500",
       "speciality": null,
       "salary": 1500.0,
@@ -32,9 +24,7 @@
     "id": 2
   },
   {
-    "room": [
-      "Magacin"
-    ],
+    "room": null,
     "doctor": {
       "isSpecialist": false,
       "specialNotifications": null,
@@ -58,15 +48,10 @@
     "id": 1
   },
   {
-    "room": [
-      "Magacin"
-    ],
+    "room": null,
     "doctor": {
       "isSpecialist": false,
-      "specialNotifications": [
-        "Questionarie: \nSatisfiction with application?  /  mark:  1\nSatisfiction with doctor?  /  mark:  3\nSatisfiction with doctor's knowledge?  /  mark:  3\nSatisfiction with clinic?  /  mark:  3\nSatisfiction with available terms for appointment?  /  mark:  4\nSatisfiction with the cleanness?  /  mark:  5\n",
-        "Patient - 1 -  I like the way you work."
-      ],
+      "specialNotifications": null,
       "ordination": "Room 500",
       "speciality": null,
       "salary": 1500.0,

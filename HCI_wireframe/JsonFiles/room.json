@@ -1,73 +1,43 @@
 [
   {
     "typeOfRoom": "SecretarysRoom",
-    "equipment": [],
-    "medicine": [],
+    "equipment": null,
+    "medicine": null,
     "forUse": true,
     "id": 2
   },
   {
     "typeOfRoom": "Operation room 30",
-    "equipment": [
-      "Sizors"
-    ],
-    "medicine": [
-      "Analgin"
-    ],
+    "equipment": null,
+    "medicine": null,
     "forUse": true,
     "id": 7
   },
   {
     "typeOfRoom": "Room 500",
-    "equipment": [
-      "Sizors"
-    ],
-    "medicine": [
-      "Analgin"
-    ],
+    "equipment": null,
+    "medicine": null,
     "forUse": true,
     "id": 3
   },
   {
     "typeOfRoom": "Operation room 200",
-    "equipment": [
-      "Bed"
-    ],
-    "medicine": [],
+    "equipment": null,
+    "medicine": null,
     "forUse": true,
     "id": 6
   },
   {
     "typeOfRoom": "Room 600",
-    "equipment": [
-      "Table"
-    ],
-    "medicine": [
-      "Analgin"
-    ],
+    "equipment": null,
+    "medicine": null,
     "forUse": true,
     "id": 5
   },
   {
     "typeOfRoom": "Magacin",
-    "equipment": [
-      "Bed",
-      "Chair",
-      "Table"
-    ],
-    "medicine": [
-      "Brufen",
-      "Analgin",
-      "Paracetamol",
-      "Bromazepan",
-      "Coldrex",
-      "Tylol",
-      "Tylol",
-      "lek1",
-      "lek",
-      "lek",
-      "lek"
-    ],
+    "equipment": null,
+    "medicine": null,
     "forUse": true,
     "id": 1
   }

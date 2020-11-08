@@ -97,10 +97,13 @@ namespace Class_diagram.Service
 
         private void removeEquipmentFromSpecificRoom(Equipment equipment, Room room)
         {
-            if (room.equipment.Contains(new ModelEquipment(equipment.name)))
+            foreach (ModelEquipment modelEquipment in room.equipment)
             {
-                room.equipment.Remove(new ModelEquipment(equipment.name));
-                roomRepository.Update(room);
+                if (modelEquipment.Data.Equals(equipment.name))
+                {
+                    room.equipment.Remove(modelEquipment);
+                    roomRepository.Update(room);
+                }
             }
         }
 

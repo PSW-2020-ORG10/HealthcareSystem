@@ -1,35 +1,24 @@
 [
   {
-    "room": [
-      "Magacin"
-    ],
+    "room": null,
     "name": "Chair",
     "quantity": 40,
     "id": 2
   },
   {
-    "room": [
-      "Magacin",
-      "Operation room 20"
-    ],
+    "room": null,
     "name": "Bed",
     "quantity": 60,
     "id": 1
   },
   {
-    "room": [
-      "Magacin",
-      "Room 600"
-    ],
+    "room": null,
     "name": "Table",
     "quantity": 55,
     "id": 3
   },
   {
-    "room": [
-      "Operation room 30",
-      "Room 500"
-    ],
+    "room": null,
     "name": "Sizors",
     "quantity": 99,
     "id": 4

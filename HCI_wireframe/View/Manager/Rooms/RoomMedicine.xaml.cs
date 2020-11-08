@@ -49,9 +49,12 @@ namespace WpfApp2.Rooms
 
             foreach (Medicine ee in lista)
             {
-                if (r.medicine.Contains(new ModelMedicine(ee.name)))
+                if (r.medicine != null)
                 {
-                    li.Add(new Lista { Name = ee.name });
+                    if (r.medicine.Contains(new ModelMedicine(ee.name)))
+                    {
+                        li.Add(new Lista { Name = ee.name });
+                    }
                 }
             }
 
