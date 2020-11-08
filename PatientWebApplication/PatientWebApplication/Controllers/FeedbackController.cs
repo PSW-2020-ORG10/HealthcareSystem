@@ -31,10 +31,9 @@ namespace PatientWebApplication.Controllers
             FeedbackService = new FeedbackService(context);
         }
 
-
+        /// <summary> This method is calling <c>FeedbackService</c> to get list of all <c>Feedback</c>.  </summary>
+        /// <returns> 200 Ok with list of all feedback. </returns>
         [HttpGet]       // GET /api/feedback
-        /// <summary> This method is for getting all feedback. </summary>
-        /// <returns> List of all feedback. </returns>
         public IActionResult Get()
         {
 
