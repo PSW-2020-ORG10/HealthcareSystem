@@ -48,18 +48,10 @@ namespace PatientWebApplication.Services
             return FeedbackRepository.GetAll();
         }
 
-        //method for getting all published feedback
+        /// <summary> This method is calling <c>FeedbackRepository</c> to get list of <c>Feedback</c> where paramter <c>IsPublished</c> is true. </summary>
+        /// <returns> List of all published feedback. </returns>
         public List<Feedback> GetPublished() {
-            List<Feedback> result = new List<Feedback>();
-            foreach(Feedback feedback in FeedbackRepository.GetAll())
-            {
-                if (feedback.IsPublished)
-                {
-                    result.Add(feedback);
-                }
-            }
-            return result;
-
+            return FeedbackRepository.GetPublished();
         }
 
         /// <summary> This method determines if feedback with id property that matches provided <paramref name="id"/> is valid for publishing and sends it to <c>FeedbackRepository</c>. </summary>

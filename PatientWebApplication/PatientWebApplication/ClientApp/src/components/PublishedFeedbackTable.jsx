@@ -20,7 +20,7 @@ class PublishedFeedbackTable extends Component {
             <div className="wrap">
                 {feedbackList.map((f) => (
                     <div key={f.Id} className="item-row">
-                        <div className="check-flag">
+                        <div key={f.Id} className="check-flag">
                             <span className="small-text-label">Name and Surname</span>
                             <span className="small-text-label hours">{ formatDate(f.date) }</span>
                             <span className="check-flag-label">{f.isAnonymous ? "ANONYMOUS" : [f.patient.firstName, ' ', f.patient.secondName].join('')}</span>
@@ -28,10 +28,10 @@ class PublishedFeedbackTable extends Component {
                         </div>
                     </div>
                 ))}
-
+            </div>
             
 
-            </div>
+            
             
 
         );

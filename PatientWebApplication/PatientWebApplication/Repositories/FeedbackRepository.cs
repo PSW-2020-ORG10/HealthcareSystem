@@ -46,6 +46,13 @@ namespace PatientWebApplication.Repositories
             return result;
         }
 
+        /// <summary> This method searches for list of <c>Feedback</c> where paramter <c>IsPublished</c> is true.  </summary>
+        /// <returns> List of all published feedback if search was successfull; otherwise, empty list. </returns>
+        public List<Feedback> GetPublished()
+        {           
+            return dbContext.Feedbacks.ToList().FindAll(feedback => feedback.IsPublished); 
+        }
+
         /// <summary> This method searches for feedback based on <paramref name="id"/>. </summary>
         /// <param name="id"><c>id</c> is <c>id</c> of a <c>Feedback</c> that needs to be found.
         /// </param>
