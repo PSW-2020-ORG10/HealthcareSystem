@@ -1,4 +1,5 @@
 ﻿export function formatDate(dateString) {
     var date = new Date(Date.parse(dateString));
-    return date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
+    var month = date.getMonth() + 1;
+    return date.getDate() + "/" + month + "/" + date.getFullYear();
 }     

@@ -26,7 +26,7 @@ class CreateForm extends Component {
         return (
             <div>
                 <form action="http://localhost:60198/patient-feedback">
-                    <h2>Create Feedback</h2>
+                    
                     <div className="field-wrap">
                         <label className="label" htmlFor="">
                             Title:
