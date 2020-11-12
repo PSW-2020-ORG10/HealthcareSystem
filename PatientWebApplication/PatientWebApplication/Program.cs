@@ -1,14 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Class_diagram.Model.Patient;
-using Klinika;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Feedback = Class_diagram.Model.Patient.Feedback;
 
 namespace PatientWebApplication
 {
