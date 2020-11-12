@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Class_diagram.Model.Patient;
-using Microsoft.AspNetCore.Http;
+﻿using System.Collections.Generic;
+using HealthClinic.CL.DbContextModel;
+using HealthClinic.CL.Dtos;
+using HealthClinic.CL.Model.Patient;
+using HealthClinic.CL.Services;
 using Microsoft.AspNetCore.Mvc;
-using PatientWebApplication.Adapters;
-using PatientWebApplication.Dtos;
-using PatientWebApplication.Models;
-using PatientWebApplication.Services;
-using PatientWebApplication.Validators;
 
 namespace PatientWebApplication.Controllers
 {

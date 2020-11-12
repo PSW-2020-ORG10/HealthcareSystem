@@ -1,10 +1,5 @@
-﻿using Class_diagram.Model.Patient;
-using FluentValidation;
-using PatientWebApplication.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using FluentValidation;
+using HealthClinic.CL.Dtos;
 
 namespace PatientWebApplication.Validators
 {
