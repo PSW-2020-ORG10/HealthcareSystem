@@ -13,5 +13,13 @@ namespace HealthClinic.CL.Dtos
         public int PatientId { get; set; }
 
         public FeedbackDto() { }
+
+        public FeedbackDto(string message, bool isPublic, bool isAnonymous, int patientId)
+        {
+            Message = message;
+            IsPublic = isPublic;
+            IsAnonymous = isAnonymous;
+            PatientId = patientId;
+        }
     }
 }

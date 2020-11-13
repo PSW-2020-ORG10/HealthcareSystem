@@ -12,13 +12,7 @@ namespace HealthClinic.CL.Adapters
         /// <returns> created <c>Feedback</c> </returns>
         public static Feedback FeedbackDtoToFeedback(FeedbackDto dto, PatientUser patient)
         {
-            Feedback feedback = new Feedback();
-            feedback.Message = dto.Message;
-            feedback.Patient = patient;
-            feedback.PatientId = patient.id;
-            feedback.IsAnonymous = dto.IsAnonymous;
-            feedback.IsPublic = dto.IsPublic;
-            feedback.Date = DateTime.Now;
+            Feedback feedback = new Feedback(dto.Message, dto.IsPublic, dto.IsAnonymous, DateTime.Now, patient.id, patient);
             return feedback;
         }
 
@@ -27,11 +21,7 @@ namespace HealthClinic.CL.Adapters
         /// <returns> created <c>FeedbackDto</c> </returns>
         public static FeedbackDto FeedbackToFeedbackDto(Feedback feedback)
         {
-            FeedbackDto dto = new FeedbackDto();
-            dto.Message = feedback.Message;
-            dto.IsAnonymous = feedback.IsAnonymous;
-            dto.IsPublic = feedback.IsPublic;
-            dto.PatientId = feedback.Patient.id;
+            FeedbackDto dto = new FeedbackDto(feedback.Message, feedback.IsPublic, feedback.IsAnonymous, feedback.Patient.id);
             return dto;
         }
     }
