@@ -58,6 +58,17 @@ namespace HealthClinic.CL.Model.Patient
             PatientId = patientId;
         }
 
+        public Feedback(string message, bool isPublic, bool isAnonymous, DateTime date, int patientId, PatientUser patient) : base()
+        {
+            Message = message;
+            IsPublished = false;
+            IsPublic = isPublic;
+            IsAnonymous = isAnonymous;
+            Date = date;
+            Patient = patient;
+            PatientId = patientId;
+        }
+
 
     }
 }
