@@ -31,9 +31,7 @@ namespace PatientWebApplication.Controllers
         [HttpGet]       // GET /api/prescription
         public IActionResult Get()
         {
-
-            List<Prescription> result = PrescriptionService.GetAll();
-            return Ok(result);
+            return Ok(PrescriptionService.GetAll());
         }
 
         /// <summary> This method is calling <c>PrescriptionService</c> to get list of all patient <c>Prescription</c>. </summary>
@@ -41,8 +39,7 @@ namespace PatientWebApplication.Controllers
         [HttpGet("patient")]       // GET /api/prescription/patient
         public IActionResult GetPrescriptionsForPatient()
         { 
-            List<Prescription> result = PrescriptionService.GetPrescriptionsForPatient(1); //idPatient set to 1 no login, change after
-            return Ok(result);
+            return Ok(PrescriptionService.GetPrescriptionsForPatient(1)); //idPatient set to 1 no login, change after
         }
     }
 }
