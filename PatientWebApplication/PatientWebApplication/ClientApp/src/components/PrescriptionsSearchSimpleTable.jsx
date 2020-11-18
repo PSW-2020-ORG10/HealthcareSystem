@@ -31,9 +31,13 @@ class PrescriptionsSearchSimpleTable extends Component {
                     {patientPrescriptionsList.map((f) => (
                         <tbody key={f.id}>
                             <tr key={f.id}>
-                                {f.medicines !== undefined ? f.medicines.map((m) => (
-                                    [medicines, m.id].join('    ')
-                                )) : medicines = "Empty"}
+                                <td style={{ textAlign: "center" }} >
+                                    {f.medicines !== undefined ? f.medicines.map((m, i) => (
+                                        f.medicines.length === i + 1 ? 
+                                            [medicines, m.name, ''].join('') :
+                                        [medicines, m.name, ', '].join('')
+                                    )) : medicines = "Empty"}
+                                </td>
                                 <td style={{ textAlign: "center" }} > {f.isUsed ? "Used" : "Not used"}</td >
                                 <td style={{ textAlign: "center" }}>{f.comment}</td >
                             </tr>
