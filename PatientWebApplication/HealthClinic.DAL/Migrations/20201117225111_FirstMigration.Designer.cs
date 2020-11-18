@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HealthClinic.CL.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20201112185108_FirstMigration")]
+    [Migration("20201117225111_FirstMigration")]
     partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -846,15 +846,10 @@ namespace HealthClinic.CL.Migrations
                     b.Property<bool>("isUsed")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("medicineId")
-                        .HasColumnType("int");
-
                     b.Property<int>("patientsid")
                         .HasColumnType("int");
 
                     b.HasKey("id");
-
-                    b.HasIndex("medicineId");
 
                     b.ToTable("Prescriptions");
 
@@ -864,7 +859,6 @@ namespace HealthClinic.CL.Migrations
                             id = 1,
                             comment = "Comment",
                             isUsed = true,
-                            medicineId = 1,
                             patientsid = 1
                         });
                 });
@@ -964,6 +958,9 @@ namespace HealthClinic.CL.Migrations
                     b.Property<int?>("PharmacyOfferid")
                         .HasColumnType("int");
 
+                    b.Property<int>("PrescriptionId")
+                        .HasColumnType("int");
+
                     b.Property<string>("description")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -979,9 +976,23 @@ namespace HealthClinic.CL.Migrations
 
                     b.HasIndex("PharmacyOfferid");
 
+                    b.HasIndex("PrescriptionId");
+
                     b.HasIndex("doctorId");
 
                     b.HasDiscriminator().HasValue("Medicine");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 22,
+                            name = "Medicine Name",
+                            quantity = 2,
+                            PrescriptionId = 1,
+                            description = "Medicine Description",
+                            doctorId = 1,
+                            isConfirmed = false
+                        });
                 });
 
             modelBuilder.Entity("HealthClinic.CL.Model.Hospital.OfferedMedicines", b =>
@@ -999,6 +1010,7 @@ namespace HealthClinic.CL.Migrations
                             id = 13,
                             name = "OfferedMedicine",
                             quantity = 2,
+                            PrescriptionId = 1,
                             description = "description",
                             doctorId = 1,
                             isConfirmed = false,
@@ -1128,15 +1140,6 @@ namespace HealthClinic.CL.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("HealthClinic.CL.Model.Patient.Prescription", b =>
-                {
-                    b.HasOne("HealthClinic.CL.Model.Hospital.Medicine", "medicine")
-                        .WithMany()
-                        .HasForeignKey("medicineId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("HealthClinic.CL.Model.Hospital.Medicine", b =>
                 {
                     b.HasOne("HealthClinic.CL.Model.Orders.DoctorsOrder", null)
@@ -1150,6 +1153,12 @@ namespace HealthClinic.CL.Migrations
                     b.HasOne("HealthClinic.CL.Model.Orders.PharmacyOffer", null)
                         .WithMany("ListOfMedicies")
                         .HasForeignKey("PharmacyOfferid");
+
+                    b.HasOne("HealthClinic.CL.Model.Patient.Prescription", "Prescription")
+                        .WithMany("Medicenes")
+                        .HasForeignKey("PrescriptionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("HealthClinic.CL.Model.Doctor.DoctorUser", "doctor")
                         .WithMany()

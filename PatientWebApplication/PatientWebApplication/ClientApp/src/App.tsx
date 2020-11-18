@@ -8,6 +8,7 @@ import AdminFeedback from './components/AdminFeedback';
 import './custom.css'
 import PatientFeedback from './components/PatientFeedback';
 import CreateFeedback from './components/CreateFeedback';
+import PrescriptionsSimple from './components/PrescriptionsSimple';
 
 export default () => (
     <Layout>
@@ -15,5 +16,6 @@ export default () => (
         <Route path='/patient-feedback' component={PatientFeedback} />
         <Route path='/admin-feedback' component={AdminFeedback} />
         <Route path='/create-feedback' component={CreateFeedback} />
+        <Route path='/prescriptions-simple' component={PrescriptionsSimple} />
     </Layout>
 );
