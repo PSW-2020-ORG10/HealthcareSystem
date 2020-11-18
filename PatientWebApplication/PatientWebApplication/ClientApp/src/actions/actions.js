@@ -5,7 +5,11 @@
     LOADED_PUBLISHED_FEEDBACK,
     PUBLISH_ERROR,
     LOADED_ALL_FEEDBACK,
-    OBSERVE_ERROR
+    OBSERVE_ERROR,
+    LOADED_ALL_PRESCRIPTIONS,
+    OBSERVE_PRESCRIPTIONS_ERROR,
+    LOADED_ALL_PATIENT_PRESCRIPTIONS,
+    OBSERVE_PATIENT_PRESCRIPTIONS_ERROR
 } from "../types/types"
 import axios from "axios";
 
@@ -71,6 +75,40 @@ export const loadedAllFeedback = () => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: OBSERVE_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const loadedAllPrescriptions = () => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.get("http://localhost:60198/api/prescription");
+        debugger;
+        dispatch({
+            type: LOADED_ALL_PRESCRIPTIONS,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: OBSERVE_PRESCRIPTIONS_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const loadedAllPatientPrescriptions = () => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.get("http://localhost:60198/api/prescription/patient");
+        debugger;
+        dispatch({
+            type: LOADED_ALL_PATIENT_PRESCRIPTIONS,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: OBSERVE_PATIENT_PRESCRIPTIONS_ERROR,
             payload: console.log(e),
         });
     }

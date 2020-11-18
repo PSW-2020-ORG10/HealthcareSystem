@@ -46,6 +46,7 @@ namespace HealthClinic.CL.DbContextModel
         public DbSet<Prescription> Prescriptions { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<SecretaryUser> SecretaryUsers { get; set; }
+        public DbSet<Medicine> Medicines { get; set; }
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
@@ -84,8 +85,8 @@ namespace HealthClinic.CL.DbContextModel
 
             modelBuilder.Entity<PatientUser>().HasData(
 
-            new PatientUser(1, "Pera", "Peric", "1234", "2/2/2020", "123", "1234", "Alergija", "Grad", false, "email", "pass", false, new List<ModelNotification>())
-
+            new PatientUser(1, "Pera", "Peric", "1234", "2/2/2020", "123", "1234", "Alergija", "Grad", false, "email", "pass", false, new List<ModelNotification>()),
+            new PatientUser(2, "Mika", "Mikic", "3322", "2/2/2020", "333", "3322", "Alergija", "Grad", false, "email", "pass", false, new List<ModelNotification>())
 
             );
 
@@ -138,7 +139,7 @@ namespace HealthClinic.CL.DbContextModel
 
             modelBuilder.Entity<OfferedMedicines>().HasData(
 
-            new OfferedMedicines(13, "OfferedMedicine", 2, "description", new List <ModelRoom>(), 1, false, 10.0)
+            new OfferedMedicines(13, "OfferedMedicine", 2, "description", new List <ModelRoom>(), 1, false, 10.0, 1)
 
             );
 
@@ -197,9 +198,19 @@ namespace HealthClinic.CL.DbContextModel
 
             );
 
+           
+            modelBuilder.Entity<Medicine>().HasData(
+
+             new Medicine(22, "Medicine Name", 2, "Medicine Description", new List<ModelRoom>(), 1, false, 1)
+
+
+            );
+
+
             modelBuilder.Entity<Prescription>().HasData(
 
-            new Prescription(1, 1, 1, true, "Comment")
+            new Prescription(1, 1, new List<Medicine>(), true, "Comment"),
+            new Prescription(2, 2, null, true, "Some text")
 
             );
 

@@ -2,7 +2,9 @@
     FEEDBACK_CREATED,
     FEEDBACK_PUBLISHED,
     LOADED_PUBLISHED_FEEDBACK,
-    LOADED_ALL_FEEDBACK
+    LOADED_ALL_FEEDBACK,
+    LOADED_ALL_PRESCRIPTIONS,
+    LOADED_ALL_PATIENT_PRESCRIPTIONS
 } from "../types/types"
 
 function addFeedback(state=initialState, action) {
@@ -36,7 +38,9 @@ function loadPublishedFeedback(state = initialState, action) {
 
 const initialState = {
     feedbackList: [],
-    publishedFeedbackList: []
+    publishedFeedbackList: [],
+    prescriptionsList: [],
+    patientPrescriptionsList: []
   
 };
 
@@ -63,6 +67,18 @@ function reducer(state = initialState, action) {
             return {
                 ...state,
                 feedbackList: action.payload
+
+            };
+        case LOADED_ALL_PRESCRIPTIONS:
+            return {
+                ...state,
+                prescriptionsList: action.payload
+
+            };
+        case LOADED_ALL_PATIENT_PRESCRIPTIONS:
+            return {
+                ...state,
+                patientPrescriptionsList: action.payload
 
             };
         default:

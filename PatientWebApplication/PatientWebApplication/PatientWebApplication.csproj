@@ -33,7 +33,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\components\PrescriptionsSimple.tsx" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\HealthClinic.DAL\HealthClinic.CL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\components\PrescriptionsSimple.tsx" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
