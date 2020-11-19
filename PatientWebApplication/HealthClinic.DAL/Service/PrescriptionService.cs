@@ -15,13 +15,12 @@ namespace HealthClinic.CL.Service
     public class PrescriptionService
     {
         /// <value>Property <c>PrescriptionRepository</c> represents the repository used for data access.</value>
-        private PrescriptionRepository PrescriptionRepository { get; set; }
+        private IPrescriptionRepository PrescriptionRepository { get; set; }
 
         /// <summary>This constructor injects the PrescriptionService with matching PrescriptionRepository.</summary>
-        /// <param name="context"><c>context</c> is type of <c>DbContext</c>, and it's used for accessing MYSQL database.</param>
-        public PrescriptionService(MyDbContext context)
+        public PrescriptionService(IPrescriptionRepository prescriptionRepository)
         {
-            PrescriptionRepository = new PrescriptionRepository(context);
+            PrescriptionRepository = prescriptionRepository;
         }
 
         /// <summary> This method is calling <c>PrescriptionRepository</c> to get list of all<c>Prescription</c>. </summary>
