@@ -28,10 +28,9 @@ namespace PatientWebApplication.Controllers
             {
                 return BadRequest();
             }
-            else
-            {
-                return Ok();
-            }
+           
+            return Ok();
+            
 
         }
 

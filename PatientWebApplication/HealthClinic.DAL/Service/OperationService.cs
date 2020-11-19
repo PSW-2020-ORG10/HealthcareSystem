@@ -51,10 +51,8 @@ namespace HealthClinic.CL.Service
             DoctorController doctorController = new DoctorController();
             Boolean hasAppointmentDoctor = doctorController.doesDoctorHaveAnAppointmentAtSpecificPeriod(doctor, start, end, dateToString);
             Boolean hasOperationDoctor = doctorController.doesDoctorHaveAnOperationAtSpecificPerod(doctor, start, end, dateToString);
-            //Boolean hasAppointmentPatient = patientController.doesPatientHaveAnAppointmentAtSpecificPeriod(start, end,dateToString, patient);
-            //Boolean hasOperationPatient = patientController.doesPatientHaveAnOperationAtSpecificPeriod(start,end,dateToString, patient);
-
-            if (hasAppointmentDoctor /*|| hasAppointmentPatient*/ || hasOperationDoctor /*|| hasOperationPatient*/) return true;
+            
+            if (hasAppointmentDoctor || hasOperationDoctor ) return true;
             return false;
         }
        

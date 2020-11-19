@@ -33,8 +33,7 @@ namespace HealthClinic.CL.Service
 
         public DoctorService()
         {
-            doctorRepository = new DoctorRepository(path);
-           // patientsRepository = new PatientsRepository(path2);
+            doctorRepository = new DoctorRepository(path);          
             operationRepository = new OperationRepository(path3);
             appointmentRepository = new AppointmentRepository(path4);
             employeesScheduleRepository = new EmployeesScheduleRepository(path5);
