@@ -139,10 +139,10 @@ namespace HealthClinic.CL.Service
         {
             Boolean hasAppointmentDoctor = doctorController.doesDoctorHaveAnAppointmentAtSpecificTime(doctor, time, dateToString);
             Boolean hasOperationDoctor = doctorController.doesDoctorHaveAnOperationAtSpecificTime(doctor, time, dateToString);
-            Boolean hasAppointmentPatient = patientController.doesPatientHaveAnAppointmentAtSpecificTime(time, dateToString, patient);
-            Boolean hasOperationPatient = patientController.doesPatientHaveAnOperationAtSpecificTime(time, dateToString, patient);
+            //Boolean hasAppointmentPatient = patientController.doesPatientHaveAnAppointmentAtSpecificTime(time, dateToString, patient);
+            //Boolean hasOperationPatient = patientController.doesPatientHaveAnOperationAtSpecificTime(time, dateToString, patient);
 
-            if (hasAppointmentDoctor == true || hasAppointmentPatient == true || hasOperationDoctor == true || hasOperationPatient == true) return true;
+            if (hasAppointmentDoctor == true /*|| hasAppointmentPatient == true */|| hasOperationDoctor == true /*|| hasOperationPatient == true*/) return true;
 
             return false;
         }

@@ -5,6 +5,7 @@
  ***********************************************************************/
 
 using HealthClinic.CL.Contoller;
+using HealthClinic.CL.DbContextModel;
 using HealthClinic.CL.Model.Doctor;
 using HealthClinic.CL.Model.Patient;
 using HealthClinic.CL.Repository;
@@ -14,68 +15,72 @@ using System.Linq;
 
 namespace HealthClinic.CL.Service
 {
-    public class PatientService : AbstractUserService<PatientUser>
+    public class PatientService 
     {
-        PatientsRepository patientsRepository;
-        String path = bingPathToAppDir(@"JsonFiles\patients.json");
-
-        public PatientService()
+        private PatientsRepository patientsRepository { get; set; }
+        /// <summary>This constructor injects the FeedbackService with matching FeedbackRepository.</summary>
+        /// <param name="context"><c>context</c> is type of <c>DbContext</c>, and it's used for accessing MYSQL database.</param>
+        public PatientService(MyDbContext context)
         {
-            patientsRepository = new PatientsRepository(path);
+            patientsRepository = new PatientsRepository(context);
         }
 
-
-        public override List<PatientUser> GetAll()
+        public PatientUser Create(PatientUser patientUser)
         {
-            return patientsRepository.GetAll();
+            return patientsRepository.Add(patientUser);
         }
 
-        public override Boolean New(PatientUser patient)
-        {
-            if (isDataValid(patient.email, patient.uniqueCitizensidentityNumber, patient) && isCityValid(patient.city) && isMedicalidValid(patient.medicalIdNumber, patient))
-            {
-                patientsRepository.New(patient);
-                return true;
-            }
-            return false;
-        }
+        /*  public override List<PatientUser> GetAll()
+          {
+              return patientsRepository.GetAll();
+          }
 
-        private bool isListOfPatientsEmpty(List<PatientUser> patients)
-        {
-            if (patients.Count == 0) return true;
-            return false;
-        }
+          public override Boolean New(PatientUser patient)
+          {
+              if (isDataValid(patient.email, patient.uniqueCitizensidentityNumber, patient) && isCityValid(patient.city) && isMedicalidValid(patient.medicalIdNumber, patient))
+              {
+                  patientsRepository.New(patient);
+                  return true;
+              }
+              return false;
+          }
 
-        private bool isMedicalidValid(string medicalIdNumber, PatientUser patient)
-        {
-            List<PatientUser> patients = new List<PatientUser>();
-            patients = GetAll();
+          private bool isListOfPatientsEmpty(List<PatientUser> patients)
+          {
+              if (patients.Count == 0) return true;
+              return false;
+          }
 
-            patients = patients.Where(patient2 => (patient.id != patient2.id && patient2.medicalIdNumber.Equals(medicalIdNumber))).ToList();
-            return isListOfPatientsEmpty(patients);
+          private bool isMedicalidValid(string medicalIdNumber, PatientUser patient)
+          {
+              List<PatientUser> patients = new List<PatientUser>();
+              patients = GetAll();
 
-        }
+              patients = patients.Where(patient2 => (patient.id != patient2.id && patient2.medicalIdNumber.Equals(medicalIdNumber))).ToList();
+              return isListOfPatientsEmpty(patients);
 
-        public override Boolean Update(PatientUser patient)
-        {
-            if (isDataValid(patient.email, patient.uniqueCitizensidentityNumber, patient) && isCityValid(patient.city))
-            {
-                patientsRepository.Update(patient);
-                return true;
-            }
-            return false;
-        }
+          }
 
-        public override PatientUser GetByid(int id)
-        {
-            return patientsRepository.GetByid(id);
-        }
+          public override Boolean Update(PatientUser patient)
+          {
+              if (isDataValid(patient.email, patient.uniqueCitizensidentityNumber, patient) && isCityValid(patient.city))
+              {
+                  patientsRepository.Update(patient);
+                  return true;
+              }
+              return false;
+          }
 
-        public override void Remove(PatientUser patient)
-        {
-            patientsRepository.Delete(patient.id);
-        }
+          public override PatientUser GetByid(int id)
+          {
+              return patientsRepository.GetByid(id);
+          }
 
+          public override void Remove(PatientUser patient)
+          {
+              patientsRepository.Delete(patient.id);
+          }*/
+/*
         private Boolean compareTimeForAppointment(TimeSpan time, DoctorAppointment appointment)
         {
             TimeSpan durationOfAppointment = TimeSpan.FromMinutes(15);
@@ -164,7 +169,7 @@ namespace HealthClinic.CL.Service
             }
             return false;
         }
-
+*/
 
     }
 }

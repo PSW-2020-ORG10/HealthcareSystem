@@ -188,7 +188,7 @@ namespace HealthClinic.CL.Migrations
 
                     b.HasIndex("DoctorAppointmentid");
 
-                    b.ToTable("Referral");
+                    b.ToTable("Referrals");
 
                     b.HasData(
                         new
@@ -233,7 +233,7 @@ namespace HealthClinic.CL.Migrations
 
                     b.HasIndex("shiftId");
 
-                    b.ToTable("Schedule");
+                    b.ToTable("Schedules");
 
                     b.HasData(
                         new
@@ -263,7 +263,7 @@ namespace HealthClinic.CL.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Shift");
+                    b.ToTable("Shifts");
 
                     b.HasData(
                         new
@@ -483,7 +483,7 @@ namespace HealthClinic.CL.Migrations
                     b.HasData(
                         new
                         {
-                            id = 1,
+                            id = 17,
                             city = "Grad",
                             dateOfBirth = "22/04/1993",
                             email = "email",
@@ -636,7 +636,7 @@ namespace HealthClinic.CL.Migrations
                             id = 1,
                             date = "22/04/2020",
                             doctorUserId = 1,
-                            patientUserId = 1,
+                            patientUserId = 2,
                             roomid = "1",
                             time = new TimeSpan(0, 0, 0, 0, 0)
                         });
@@ -751,6 +751,9 @@ namespace HealthClinic.CL.Migrations
                     b.Property<string>("allergie")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<string>("bornIn")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<string>("city")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -760,16 +763,28 @@ namespace HealthClinic.CL.Migrations
                     b.Property<string>("email")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<string>("exLastname")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<string>("firstName")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<bool>("guest")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<bool>("isMarried")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<bool>("isRegisteredBySecretary")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<bool>("isVerified")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<string>("medicalIdNumber")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("parentName")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("password")
@@ -793,13 +808,18 @@ namespace HealthClinic.CL.Migrations
                         {
                             id = 1,
                             allergie = "Alergija",
+                            bornIn = "Grad2",
                             city = "Grad",
                             dateOfBirth = "2/2/2020",
                             email = "email",
-                            firstName = "Pera",
+                            exLastname = "",
+                            firstName = "Pera2",
                             guest = false,
+                            isMarried = false,
                             isRegisteredBySecretary = false,
+                            isVerified = false,
                             medicalIdNumber = "1234",
+                            parentName = "Roditelj",
                             password = "pass",
                             phoneNumber = "123",
                             secondName = "Peric",
@@ -809,17 +829,22 @@ namespace HealthClinic.CL.Migrations
                         {
                             id = 2,
                             allergie = "Alergija",
+                            bornIn = "Grad2",
                             city = "Grad",
                             dateOfBirth = "2/2/2020",
                             email = "email",
-                            firstName = "Mika",
+                            exLastname = "",
+                            firstName = "Pera3",
                             guest = false,
+                            isMarried = false,
                             isRegisteredBySecretary = false,
-                            medicalIdNumber = "3322",
+                            isVerified = false,
+                            medicalIdNumber = "1234",
+                            parentName = "Roditelj",
                             password = "pass",
-                            phoneNumber = "333",
-                            secondName = "Mikic",
-                            uniqueCitizensidentityNumber = "3322"
+                            phoneNumber = "123",
+                            secondName = "Peric",
+                            uniqueCitizensidentityNumber = "1234"
                         });
                 });
 
@@ -1176,7 +1201,7 @@ namespace HealthClinic.CL.Migrations
                         .HasForeignKey("PharmacyOfferid");
 
                     b.HasOne("HealthClinic.CL.Model.Patient.Prescription", "Prescription")
-                        .WithMany("Medicenes")
+                        .WithMany("Medicines")
                         .HasForeignKey("PrescriptionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

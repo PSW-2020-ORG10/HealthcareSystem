@@ -1,12 +1,22 @@
-﻿using HealthClinic.CL.Model.Patient;
+﻿using HealthClinic.CL.DbContextModel;
+using HealthClinic.CL.Model.Patient;
 
 namespace HealthClinic.CL.Repository
 {
-    public class PatientsRepository : GenericFileRepository<PatientUser>
+    public class PatientsRepository 
     {
-        public PatientsRepository(string filePath) : base(filePath) { }
+        private readonly MyDbContext dbContext;
+        public PatientsRepository(MyDbContext dbContext)
+        {
+            this.dbContext = dbContext;
+        }
 
-        public PatientsRepository() : base() { }
+        public PatientUser Add(PatientUser patient)
+        {
+            dbContext.Patients.Add(patient);
+            dbContext.SaveChanges();
+            return patient;
+        }
 
     }
 
