@@ -39,6 +39,10 @@ namespace HealthClinic.CL.Service
             return PrescriptionRepository.GetPrescriptionsForPatient(idPatient);
         }
 
+        /// <summary> This method is calling searchForComments, searchForUsed, searchForMedicines to get list of filtered <c>Prescription</c> of logged patient. </summary>
+        /// /// <param name="prescriptionSearchDto"><c>prescriptionSearchDto</c> is Data Transfer Object of a <c>Prescription</c> that is beomg used to filter precriptions.
+        /// </param>
+        /// <returns> List of filtered patient prescriptions. </returns>
         public List<Prescription> SimpleSearchPrescriptions(PrescriptionSearchDto prescriptionSearchDto)
         {
             List<Prescription> prescriptions = GetPrescriptionsForPatient(1);
@@ -53,6 +57,12 @@ namespace HealthClinic.CL.Service
 
         }
 
+        /// <summary> This method is getting list of filtered <c>Prescription</c> of logged patient by parameter <c>IsUsed</c>. </summary>
+        /// /// <param name="prescriptions"><c>prescriptions</c> is List of presciptions that matches search fields.
+        /// </param>
+        /// /// <param name="prescriptionSearchDto"><c>prescriptionSearchDto</c> is Data Transfer Object of a <c>Prescription</c> that is beomg used to filter precriptions.
+        /// </param>
+        /// <returns> List of filtered patient prescriptions. </returns>
         private List<Prescription> searchForUsed(List<Prescription> prescriptions, PrescriptionSearchDto prescriptionSearchDto)
         {
             if (!prescriptionSearchDto.IsUsed.Equals(""))
@@ -63,6 +73,12 @@ namespace HealthClinic.CL.Service
             return prescriptions;
         }
 
+        /// <summary> This method is getting list of filtered <c>Prescription</c> of logged patient by parameter <c>Comment</c>. </summary>
+        /// /// <param name="prescriptions"><c>prescriptions</c> is List of presciptions that matches search fields.
+        /// </param>
+        /// /// <param name="prescriptionSearchDto"><c>prescriptionSearchDto</c> is Data Transfer Object of a <c>Prescription</c> that is beomg used to filter precriptions.
+        /// </param>
+        /// <returns> List of filtered patient prescriptions. </returns>
         private List<Prescription> searchForComments(List<Prescription> prescriptions, PrescriptionSearchDto prescriptionSearchDto)
         {
             if (!prescriptionSearchDto.Comment.Equals(""))
@@ -73,11 +89,16 @@ namespace HealthClinic.CL.Service
             return prescriptions;
         }
 
+        /// <summary> This method is getting list of filtered <c>Prescription</c> of logged patient by parameter <c>Messages</c>. </summary>
+        /// /// <param name="prescriptions"><c>prescriptions</c> is List of presciptions that matches search fields.
+        /// </param>
+        /// /// <param name="prescriptionSearchDto"><c>prescriptionSearchDto</c> is Data Transfer Object of a <c>Prescription</c> that is beomg used to filter precriptions.
+        /// </param>
+        /// <returns> List of filtered patient prescriptions. </returns>
         private List<Prescription> searchForMedicines(List<Prescription> prescriptions, PrescriptionSearchDto prescriptionSearchDto)
         {
             if (!prescriptionSearchDto.Medicines.Equals(""))
             {
-                List<Prescription> prescriptionsToReturn = new List<Prescription>();
 
                 prescriptions = prescriptions.Where(prescription => prescription.Medicines.Any(medicine => medicine.name.Equals(prescriptionSearchDto.Medicines))).ToList();
           
