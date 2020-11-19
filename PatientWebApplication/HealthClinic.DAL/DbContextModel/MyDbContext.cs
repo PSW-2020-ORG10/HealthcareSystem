@@ -23,9 +23,11 @@ namespace HealthClinic.CL.DbContextModel
         public DbSet<Operation> Operations { get; set; }
         public DbSet<Referral> Referrals { get; set; }
 
-        public DbSet<Referral> Schedules { get; set; }
+        public DbSet<Schedule> Schedules { get; set; }
 
-        public DbSet<Referral> Shifts { get; set; }
+        
+
+        public DbSet<Shift> Shifts { get; set; }
 
         public DbSet<OfferedMedicines> OfferedMedicines { get; set; }
 
@@ -52,7 +54,7 @@ namespace HealthClinic.CL.DbContextModel
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            PatientUser patient = new PatientUser(1, "Pera", "Peric", "1234", "2/2/2020", "123", "1234", "Alergija", "Grad", false, "email", "pass", false, new List<ModelNotification>());
+            PatientUser patient = new PatientUser(1, "Pera", "Peric", "1234", "2/2/2020", "123", "1234", "Alergija", "Grad", false, "email", "pass", false,"Grad2", "Roditelj");
             List<ModelNotification> patientNotifications = new List<ModelNotification>();
             patientNotifications.Add(new ModelNotification(3, "3. string", 1));
             modelBuilder.Entity<ModelNotification>().HasData(
@@ -85,8 +87,8 @@ namespace HealthClinic.CL.DbContextModel
 
             modelBuilder.Entity<PatientUser>().HasData(
 
-            new PatientUser(1, "Pera", "Peric", "1234", "2/2/2020", "123", "1234", "Alergija", "Grad", false, "email", "pass", false, new List<ModelNotification>()),
-            new PatientUser(2, "Mika", "Mikic", "3322", "2/2/2020", "333", "3322", "Alergija", "Grad", false, "email", "pass", false, new List<ModelNotification>())
+            new PatientUser(1, "Pera2", "Peric", "1234", "2/2/2020", "123", "1234", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj"),
+            new PatientUser(2, "Pera3", "Peric", "1234", "2/2/2020", "123", "1234", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj")
 
             );
 
@@ -157,7 +159,7 @@ namespace HealthClinic.CL.DbContextModel
 
             modelBuilder.Entity<ManagerUser>().HasData(
 
-            new ManagerUser(1, "Manager Name", "Manager Surname", "1234", "22/04/1993", "123","email", "pass", "Grad",
+            new ManagerUser(17, "Manager Name", "Manager Surname", "1234", "22/04/1993", "123","email", "pass", "Grad",
             200, new List <ManagerNotification>())
 
             );
@@ -188,7 +190,7 @@ namespace HealthClinic.CL.DbContextModel
 
             modelBuilder.Entity<DoctorAppointment>().HasData(
 
-            new DoctorAppointment(1, new TimeSpan(), "22/04/2020", 1, 1, new List < Referral >(), "1")
+            new DoctorAppointment(1, new TimeSpan(), "22/04/2020", 2, 1, new List < Referral >(), "1")
 
             );
 
@@ -227,6 +229,8 @@ namespace HealthClinic.CL.DbContextModel
 
             );
 
+            
+            
         }
 
     }
