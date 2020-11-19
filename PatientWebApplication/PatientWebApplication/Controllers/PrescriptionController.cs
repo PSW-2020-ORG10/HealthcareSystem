@@ -43,6 +43,10 @@ namespace PatientWebApplication.Controllers
             return Ok(PrescriptionService.GetPrescriptionsForPatient(1)); //idPatient set to 1 no login, change after
         }
 
+        /// <summary> This method is calling <c>PrescriptionService</c> to get list of all patient <c>Prescription</c> that matches <c>Prescription dto</c>. </summary>
+        /// <param name="dto"><c>dto</c> is Data Transfer Object of a <c>Prescription</c> that contains <c>Medicines</c>, <c>IsUsed</c>, <c>Comment</c> and will be used for filtering prescriptions. 
+        /// </param>
+        /// <returns> 200 Ok with list of filtered patient prescriptions. </returns>
         [HttpPost("search")]
         public IActionResult SimpleSearchPrescriptions(PrescriptionSearchDto dto)
         {
