@@ -28,11 +28,11 @@ namespace HealthClinic.CL.Service
         }
         public Boolean isDataValid(String email, String ucin,T user)
         {
-           // Boolean foundWithinPatients = isFoundInPatients(email, ucin,user);
+           
             Boolean foundWithinDoctors = isFoundInDoctors(email, ucin, user);
             Boolean foundWithinSecretaries = isFoundInSecretaries(email, ucin, user);
             Boolean foundWithinManagers = isFoundInManagers(email, ucin, user);
-            if(/*!foundWithinPatients || */!foundWithinDoctors || !foundWithinSecretaries || !foundWithinManagers) return false;
+            if(!foundWithinDoctors || !foundWithinSecretaries || !foundWithinManagers) return false;
             return true;
         }
 
@@ -107,22 +107,7 @@ namespace HealthClinic.CL.Service
             return true;
         }
 
-       /* public Boolean isFoundInPatients(string email, string ucin, T user)
-        {
-            String path = bingPathToAppDir(@"JsonFiles\patients.json");
-            PatientsRepository patientsRepository = new PatientsRepository(path);
-            List<PatientUser> listOfPatients = patientsRepository.GetAll();
-
-            foreach (PatientUser patient in listOfPatients)
-            {
-                if (!areIDsEqual(patient.id, user.id) && (areUCINsEqual(patient.uniqueCitizensidentityNumber, ucin) || areEmailsEqual(patient.email, email)))
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }*/
+      
 
         public static string bingPathToAppDir(string localPath)
         {
