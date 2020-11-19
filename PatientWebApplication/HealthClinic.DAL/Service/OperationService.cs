@@ -45,16 +45,16 @@ namespace HealthClinic.CL.Service
         {
             operationRepository.Delete(operationid);
         }
-        public Boolean isTermNotAvailable(DoctorUser doctor, TimeSpan start,TimeSpan end , String dateToString, PatientUser patient)
+        public Boolean isTermNotAvailable(DoctorUser doctor, TimeSpan start, TimeSpan end, String dateToString, PatientUser patient)
         {
             PatientController patientController = new PatientController();
             DoctorController doctorController = new DoctorController();
-            Boolean hasAppointmentDoctor = doctorController.doesDoctorHaveAnAppointmentAtSpecificPeriod(doctor, start, end,dateToString);
-            Boolean hasOperationDoctor = doctorController.doesDoctorHaveAnOperationAtSpecificPerod(doctor, start, end,dateToString);
-            Boolean hasAppointmentPatient = patientController.doesPatientHaveAnAppointmentAtSpecificPeriod(start, end,dateToString, patient);
-            Boolean hasOperationPatient = patientController.doesPatientHaveAnOperationAtSpecificPeriod(start,end,dateToString, patient);
-            
-            if (hasAppointmentDoctor || hasAppointmentPatient || hasOperationDoctor || hasOperationPatient) return true;
+            Boolean hasAppointmentDoctor = doctorController.doesDoctorHaveAnAppointmentAtSpecificPeriod(doctor, start, end, dateToString);
+            Boolean hasOperationDoctor = doctorController.doesDoctorHaveAnOperationAtSpecificPerod(doctor, start, end, dateToString);
+            //Boolean hasAppointmentPatient = patientController.doesPatientHaveAnAppointmentAtSpecificPeriod(start, end,dateToString, patient);
+            //Boolean hasOperationPatient = patientController.doesPatientHaveAnOperationAtSpecificPeriod(start,end,dateToString, patient);
+
+            if (hasAppointmentDoctor /*|| hasAppointmentPatient*/ || hasOperationDoctor /*|| hasOperationPatient*/) return true;
             return false;
         }
        
