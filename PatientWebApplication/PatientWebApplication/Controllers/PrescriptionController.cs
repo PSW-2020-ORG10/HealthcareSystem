@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HealthClinic.CL.DbContextModel;
+using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Patient;
 using HealthClinic.CL.Service;
 using Microsoft.AspNetCore.Http;
@@ -40,6 +41,12 @@ namespace PatientWebApplication.Controllers
         public IActionResult GetPrescriptionsForPatient()
         { 
             return Ok(PrescriptionService.GetPrescriptionsForPatient(1)); //idPatient set to 1 no login, change after
+        }
+
+        [HttpPost("search")]
+        public IActionResult SimpleSearchPrescriptions(PrescriptionSearchDto dto)
+        {
+            return Ok(PrescriptionService.SimpleSearchPrescriptions(dto));
         }
     }
 }
