@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using HealthClinic.CL.DbContextModel;
 using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Patient;
+using HealthClinic.CL.Repository;
 using HealthClinic.CL.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,10 +22,9 @@ namespace PatientWebApplication.Controllers
         private PrescriptionService PrescriptionService { get; set; }
 
         /// <summary>This constructor injects the PrescriptionController with matching PrescriptionService.</summary>
-        /// <param name="context"><c>context</c> is type of <c>DbContext</c>, and it's used for accessing MYSQL database.</param>
-        public PrescriptionController(MyDbContext context)
+         public PrescriptionController()
         {
-            PrescriptionService = new PrescriptionService(context);
+            PrescriptionService = new PrescriptionService(new PrescriptionRepository());
         }
 
         /// <summary> This method is calling <c>PrescriptionService</c> to get list of all <c>Prescription</c>.  </summary>

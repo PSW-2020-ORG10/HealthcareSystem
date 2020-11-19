@@ -1,5 +1,6 @@
 ﻿using HealthClinic.CL.DbContextModel;
 using HealthClinic.CL.Model.Patient;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,16 +10,16 @@ namespace HealthClinic.CL.Repository
 {
     /// <summary>Class <c>PrescriptionRepository</c> handles database data access.
     /// </summary>
-    public class PrescriptionRepository
+    public class PrescriptionRepository : IPrescriptionRepository
     {
         /// <summary>Instance variable <c>dbContext</c> represents the object that works with MYSQL database data.  </summary>
         private readonly MyDbContext dbContext;
 
         /// <summary>This constructor injects the PrescriptionRepository with provided <paramref name="dbContext"/>.</summary>
-        /// <param name="dbContext"><c>context</c> is type of <c>DbContext</c>, and it's used for accessing MYSQL database.</param>
-        public PrescriptionRepository(MyDbContext dbContext)
+         public PrescriptionRepository()
         {
-            this.dbContext = dbContext;
+            var options = new DbContextOptionsBuilder<MyDbContext>().UseMySql("Server=localhost;port=3306;Database=MYSQLHealtcareDB;user=root;password=root").UseLazyLoadingProxies().Options;
+            this.dbContext = new MyDbContext(options);
         }
 
         /// <summary> This is method gets all <c>Prescription</c>. </summary>
