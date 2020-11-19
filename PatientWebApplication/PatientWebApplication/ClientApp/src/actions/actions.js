@@ -9,7 +9,9 @@
     LOADED_ALL_PRESCRIPTIONS,
     OBSERVE_PRESCRIPTIONS_ERROR,
     LOADED_ALL_PATIENT_PRESCRIPTIONS,
-    OBSERVE_PATIENT_PRESCRIPTIONS_ERROR
+    OBSERVE_PATIENT_PRESCRIPTIONS_ERROR,
+    SIMPLE_SEARCH_PATIENT_PRESCRIPTIONS,
+    SIMPLE_SEARCH_PRESCRIPTIONS_ERROR
 } from "../types/types"
 import axios from "axios";
 
@@ -109,6 +111,24 @@ export const loadedAllPatientPrescriptions = () => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: OBSERVE_PATIENT_PRESCRIPTIONS_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const simpleSearchPatientPrescriptions = (prescription) => async (dispatch) => {
+    console.log(prescription.medicines)
+    try {
+        debugger;
+        const response = await axios.post("http://localhost:60198/api/prescription/search", prescription);
+        debugger;
+        dispatch({
+            type: SIMPLE_SEARCH_PATIENT_PRESCRIPTIONS,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: SIMPLE_SEARCH_PRESCRIPTIONS_ERROR,
             payload: console.log(e),
         });
     }

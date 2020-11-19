@@ -4,7 +4,8 @@
     LOADED_PUBLISHED_FEEDBACK,
     LOADED_ALL_FEEDBACK,
     LOADED_ALL_PRESCRIPTIONS,
-    LOADED_ALL_PATIENT_PRESCRIPTIONS
+    LOADED_ALL_PATIENT_PRESCRIPTIONS,
+    SIMPLE_SEARCH_PATIENT_PRESCRIPTIONS
 } from "../types/types"
 
 function addFeedback(state=initialState, action) {
@@ -76,6 +77,12 @@ function reducer(state = initialState, action) {
 
             };
         case LOADED_ALL_PATIENT_PRESCRIPTIONS:
+            return {
+                ...state,
+                patientPrescriptionsList: action.payload
+
+            };
+        case SIMPLE_SEARCH_PATIENT_PRESCRIPTIONS:
             return {
                 ...state,
                 patientPrescriptionsList: action.payload
