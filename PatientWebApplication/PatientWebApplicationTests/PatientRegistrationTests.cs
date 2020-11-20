@@ -19,10 +19,9 @@ namespace PatientWebApplicationTests
 
             PatientService service = new PatientService(CreateStubRepository());
 
-            PatientDto dto = new PatientDto("Pera2", "Peric", "Male", "1234", "11/11/2000", "1231412", "21312312", "Alergija", "Grad", "email@gmail.com", "pass", false, "Grad2", "Roditelj", "", "");
+            
 
-
-            PatientUser patient =  service.Create(dto);
+            PatientUser patient =  service.Create(new PatientDto("Pera2", "Peric", "Male", "1234", "11/11/2000", "1231412", "21312312", "Alergija", "Grad", "email@gmail.com", "pass", false, "Grad2", "Roditelj", "", ""));
             patient.ShouldNotBeNull();
 
         }    
