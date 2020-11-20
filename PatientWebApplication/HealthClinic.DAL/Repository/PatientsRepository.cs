@@ -21,6 +21,18 @@ namespace HealthClinic.CL.Repository
             return patient;
         }
 
+        public PatientUser Find(int id)
+        {
+            return dbContext.Patients.SingleOrDefault(patient => patient.id == id);
+        }
+
+        public PatientUser Validate(PatientUser patient)
+        {
+            patient.isVerified = true;
+            dbContext.SaveChanges();
+            return patient;
+        }
+        
         public List<PatientUser> GetAll()
         {
             return dbContext.Patients.ToList();

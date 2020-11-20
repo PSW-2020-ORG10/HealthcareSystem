@@ -19,7 +19,7 @@ namespace PatientWebApplication.Controllers
 
         public PatientUserController()
         {
-            PatientService = new PatientService(new PatientsRepository());
+            PatientService = new PatientService(new PatientsRepository(), new EmailVerificationService());
         }
 
         [HttpPost]
@@ -36,7 +36,23 @@ namespace PatientWebApplication.Controllers
 
         }
 
+        [HttpGet("{id}")]       // GET /api/patientuser/{id}
+        public IActionResult Validate(int id)
+        {
+            if (id < 0)
+            {
+                return BadRequest();
+            }
 
+            // checking if feedback exists in database
+            PatientUser result = PatientService.Validate(id);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Redirect("http://localhost:60198");
+
+        }
 
     }
 }

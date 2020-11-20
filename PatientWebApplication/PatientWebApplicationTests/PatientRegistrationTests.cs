@@ -16,8 +16,8 @@ namespace PatientWebApplicationTests
         [Fact]
         public void Create_Registration_Successfuly()
         {
-
-            PatientService service = new PatientService(CreateStubRepository());
+            var mockVerify = new Mock<IEmailVerificationService>();
+            PatientService service = new PatientService(CreateStubRepository(), mockVerify.Object);
 
             
 

@@ -124,6 +124,24 @@ namespace HealthClinic.CL.Model.Patient
             this.exLastname = "";
             this.file = file;
         }
+
+        public PatientUser(PatientUser patient)
+           : base(patient.id, patient.firstName, patient.secondName, patient.uniqueCitizensidentityNumber, patient.dateOfBirth, patient.phoneNumber)
+        {
+            this.medicalIdNumber = patient.medicalIdNumber;
+            this.isVerified = true;
+            this.allergie = patient.allergie;
+            this.city = patient.city;
+            this.guest = patient.guest;
+            this.email = patient.email;
+            this.password = patient.password;
+            this.isRegisteredBySecretary = patient.isRegisteredBySecretary;
+            this.notifications = patient.notifications;
+            this.isMarried = patient.isMarried;
+            this.bornIn = patient.bornIn;
+            this.parentName = patient.parentName;
+            this.exLastname = patient.exLastname;
+        }
     }
 
 

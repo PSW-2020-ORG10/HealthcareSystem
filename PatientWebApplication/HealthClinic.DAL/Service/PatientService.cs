@@ -14,27 +14,42 @@ using HealthClinic.CL.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 
 namespace HealthClinic.CL.Service
 {
     public class PatientService : IPatientService
     {
-        private IPatientsRepository patientsRepository { get; set; }
+        private IPatientsRepository PatientsRepository { get; set; }
+        private IEmailVerificationService EmailVerificationService { get; set; }
 
-        public PatientService(IPatientsRepository ipatientsRepository)
+        public PatientService(IPatientsRepository patientsRepository, IEmailVerificationService emailVerificationService)
         {
-            patientsRepository = ipatientsRepository;
+            PatientsRepository = patientsRepository;
+            EmailVerificationService = emailVerificationService;
         }
 
         public PatientUser Create(PatientDto patientDto)
         {
-            
-            return patientsRepository.Add(PatientAdapter.PatientDtoToPatient(patientDto));
+            PatientUser patient = PatientsRepository.Add(PatientAdapter.PatientDtoToPatient(patientDto));
+            EmailVerificationService.SendVerificationMail(new MailAddress(patient.email), patient.id);
+            return patient;
+        }
+
+        public PatientUser Validate(int id)
+        {
+            PatientUser patient = PatientsRepository.Find(id);
+            if(patient != null)
+            {
+                return PatientsRepository.Validate(patient);
+            }
+
+            return null;
         }
 
         public List<PatientUser> GetAll()
         {
-            return patientsRepository.GetAll();
+            return PatientsRepository.GetAll();
         }
 
     }
