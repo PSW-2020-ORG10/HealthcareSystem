@@ -9,7 +9,7 @@ class RegisterPatient extends Component {
     state = {
         firstName: "",
         secondName: "",       
-        gender: "",
+        gender: "Male",
         uniqueCitizensidentityNumber: "",
         dateOfBirth: "",
         phoneNumber: "",
@@ -78,7 +78,7 @@ class RegisterPatient extends Component {
 
                         <select
                             className="field"
-                            value={this.state.gender}
+                            defaultValue={this.state.gender}
                             onChange={this.handleChange}
                             name="gender"
                         >

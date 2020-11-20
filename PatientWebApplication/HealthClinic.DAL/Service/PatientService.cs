@@ -31,8 +31,9 @@ namespace HealthClinic.CL.Service
 
         public PatientUser Create(PatientDto patientDto)
         {
-            EmailVerificationService.SendVerificationMail(new MailAddress(patientUser.email), patientUser.id);
-            return patientsRepository.Add(PatientAdapter.PatientDtoToPatient(patientDto));
+            PatientUser patient = PatientsRepository.Add(PatientAdapter.PatientDtoToPatient(patientDto));
+            EmailVerificationService.SendVerificationMail(new MailAddress(patient.email), patient.id);
+            return patient;
         }
 
         public PatientUser Validate(int id)
@@ -48,7 +49,7 @@ namespace HealthClinic.CL.Service
 
         public List<PatientUser> GetAll()
         {
-            return patientsRepository.GetAll();
+            return PatientsRepository.GetAll();
         }
 
     }
