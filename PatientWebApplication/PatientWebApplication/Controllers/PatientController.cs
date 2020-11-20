@@ -1,5 +1,7 @@
 ﻿using HealthClinic.CL.DbContextModel;
+using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Patient;
+using HealthClinic.CL.Repository;
 using HealthClinic.CL.Service;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -15,16 +17,16 @@ namespace PatientWebApplication.Controllers
     {
         private PatientService PatientService { get; set; }
 
-        public PatientUserController(MyDbContext context)
+        public PatientUserController()
         {
-            PatientService = new PatientService(context);
+            PatientService = new PatientService(new PatientsRepository());
         }
 
         [HttpPost]
-        public IActionResult Create(PatientUser patientUser)
+        public IActionResult Create(PatientDto patientDto)
         {
-
-            if (PatientService.Create(patientUser) == null)
+           
+            if (PatientService.Create(patientDto) == null)
             {
                 return BadRequest();
             }

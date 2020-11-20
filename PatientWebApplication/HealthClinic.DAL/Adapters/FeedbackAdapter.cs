@@ -1,6 +1,7 @@
 ﻿using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Patient;
 using System;
+using System.Collections.Generic;
 
 namespace HealthClinic.CL.Adapters
 {
@@ -22,5 +23,7 @@ namespace HealthClinic.CL.Adapters
         {
             return new FeedbackDto(feedback.Message, feedback.IsPublic, feedback.IsAnonymous, feedback.Patient.id);
         }
+
+       
     }
 }

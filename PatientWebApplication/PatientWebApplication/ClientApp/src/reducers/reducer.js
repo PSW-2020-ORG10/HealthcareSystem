@@ -4,7 +4,8 @@
     LOADED_PUBLISHED_FEEDBACK,
     LOADED_ALL_FEEDBACK,
     LOADED_ALL_PRESCRIPTIONS,
-    LOADED_ALL_PATIENT_PRESCRIPTIONS
+    LOADED_ALL_PATIENT_PRESCRIPTIONS,
+    PATIENT_REGISTERED
 } from "../types/types"
 
 function addFeedback(state=initialState, action) {
@@ -40,7 +41,8 @@ const initialState = {
     feedbackList: [],
     publishedFeedbackList: [],
     prescriptionsList: [],
-    patientPrescriptionsList: []
+    patientPrescriptionsList: [],
+    patientList: []
   
 };
 
@@ -81,6 +83,11 @@ function reducer(state = initialState, action) {
                 patientPrescriptionsList: action.payload
 
             };
+        case PATIENT_REGISTERED:
+            return {
+                ...state,
+                feedbackList: state.patientList.concat(action.payload)
+            }
         default:
             return state;
     }

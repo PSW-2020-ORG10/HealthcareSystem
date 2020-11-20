@@ -9,7 +9,8 @@
     LOADED_ALL_PRESCRIPTIONS,
     OBSERVE_PRESCRIPTIONS_ERROR,
     LOADED_ALL_PATIENT_PRESCRIPTIONS,
-    OBSERVE_PATIENT_PRESCRIPTIONS_ERROR
+    OBSERVE_PATIENT_PRESCRIPTIONS_ERROR,
+    PATIENT_REGISTERED
 } from "../types/types"
 import axios from "axios";
 
@@ -113,3 +114,20 @@ export const loadedAllPatientPrescriptions = () => async (dispatch) => {
         });
     }
 };
+
+export const patientRegistered = (patient) => async (dispatch) => {
+    try {
+        debugger;
+        await axios.post("http://localhost:60198/api/patientuser/", patient);
+        debugger;
+        dispatch({
+            type: PATIENT_REGISTERED,
+            payload: patient,
+        });
+    } catch (e) {
+        dispatch({
+            type: CREATE_ERROR,
+            payload: console.log(e),
+        });
+    }
+}; 
