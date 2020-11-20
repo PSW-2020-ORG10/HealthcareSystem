@@ -33,17 +33,63 @@ namespace HealthClinic.CL.Model.Patient
         public String bornIn { get; set; }
         public String parentName { get; set; }
         public String exLastname { get; set; }
+        public String gender { get; set; }
+        public String file { get; set; }
 
         public PatientUser() : base()
         {
 
         }
        
-        public PatientUser(int id, string name, string secondname, string ucin, String date, string phone, String medicalid, String allergie, String city, Boolean guest,
-            String email, String password, Boolean isRegisteredBySecretary, List<ModelNotification> notifications, bool isMarried, string bornIn, string parentName, string exLastname)
+        public PatientUser(int id, string name, string secondname, string gender, string ucin, String date, string phone, String medicalid, String allergie, String city, Boolean guest,
+            String email, String password, Boolean isRegisteredBySecretary, List<ModelNotification> notifications, bool isMarried, string bornIn, string parentName, string exLastname, string file)
            : base(id, name, secondname, ucin, date, phone)
         {
             this.medicalIdNumber = medicalid;
+            isVerified = false;
+            this.gender = gender;
+            this.allergie = allergie;
+            this.city = city;
+            this.guest = guest;
+            this.email = email;
+            this.password = password;
+            this.isRegisteredBySecretary = isRegisteredBySecretary;
+            this.notifications = notifications;
+            this.isMarried = isMarried;
+            this.bornIn = bornIn;
+            this.parentName = parentName;
+            this.exLastname = exLastname;
+            this.file = file;
+        }
+        public PatientUser(int id, string name, string secondname, string gender, string ucin, String date, string phone, String medicalid, String allergie, String city, Boolean guest,
+            String email, String password, bool isMarried, string bornIn, string parentName, string file)
+           : base(id, name, secondname, ucin, date, phone)
+        {
+            this.medicalIdNumber = medicalid;
+            isVerified = false;
+            this.gender = gender;
+            this.allergie = allergie;
+            this.city = city;
+            this.guest = guest;
+            this.email = email;
+            this.password = password;
+            this.isRegisteredBySecretary = isRegisteredBySecretary;
+            this.notifications = notifications;
+            this.isMarried = isMarried;
+            this.bornIn = bornIn;
+            this.parentName = parentName;
+            this.exLastname = "";
+            this.file = file;
+        }
+      
+
+
+        public PatientUser(string name, string secondname, string gender, string ucin, String date, string phone, String allergie, String city, Boolean guest,
+             String email, String password, Boolean isRegisteredBySecretary, List<ModelNotification> notifications, bool isMarried, string bornIn, string parentName, string exLastname, string file)
+            : base(name, secondname, ucin, date, phone)
+        {
+           
+            this.gender = gender;
             isVerified = false;
             this.allergie = allergie;
             this.city = city;
@@ -56,40 +102,27 @@ namespace HealthClinic.CL.Model.Patient
             this.bornIn = bornIn;
             this.parentName = parentName;
             this.exLastname = exLastname;
+            this.file = file;
         }
-
-        public PatientUser(int id, string name, string secondname, string ucin, String date, string phone, String medicalid, String allergie, String city, Boolean guest,
-            String email, String password, bool isMarried, string bornIn, string parentName, string exLastname)
-           : base(id, name, secondname, ucin, date, phone)
+        public PatientUser(string name, string secondname, string gender, string ucin, String date, string phone, String allergie, String city, Boolean guest,
+           String email, String password, bool isMarried, string bornIn, string parentName, string file)
+          : base(name, secondname, ucin, date, phone)
         {
-            this.medicalIdNumber = medicalid;
+            
             isVerified = false;
+            this.gender = gender;
             this.allergie = allergie;
             this.city = city;
             this.guest = guest;
             this.email = email;
             this.password = password;
-            this.isMarried = isMarried;
-            this.bornIn = bornIn;
-            this.parentName = parentName;
-            this.exLastname = exLastname;
-        }
-
-        public PatientUser(int id, string name, string secondname, string ucin, String date, string phone, String medicalid, String allergie, String city, Boolean guest,
-            String email, String password, bool isMarried, string bornIn, string parentName)
-           : base(id, name, secondname, ucin, date, phone)
-        {
-            this.medicalIdNumber = medicalid;
-            isVerified = false;
-            this.allergie = allergie;
-            this.city = city;
-            this.guest = guest;
-            this.email = email;
-            this.password = password;
+            this.isRegisteredBySecretary = isRegisteredBySecretary;
+            this.notifications = notifications;
             this.isMarried = isMarried;
             this.bornIn = bornIn;
             this.parentName = parentName;
             this.exLastname = "";
+            this.file = file;
         }
 
         public PatientUser(PatientUser patient)

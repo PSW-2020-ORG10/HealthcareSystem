@@ -54,7 +54,7 @@ namespace HealthClinic.CL.DbContextModel
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            PatientUser patient = new PatientUser(1, "Pera", "Peric", "1234", "2/2/2020", "123", "1234", "Alergija", "Grad", false, "email", "pass", false,"Grad2", "Roditelj");
+            PatientUser patient = new PatientUser(1, "Pera", "Peric","Male", "1234", "2/2/2020", "123","213", "Alergija", "Grad", false, "email", "pass", false,"Grad2", "Roditelj",null);
             List<ModelNotification> patientNotifications = new List<ModelNotification>();
             patientNotifications.Add(new ModelNotification(3, "3. string", 1));
             modelBuilder.Entity<ModelNotification>().HasData(
@@ -87,8 +87,8 @@ namespace HealthClinic.CL.DbContextModel
 
             modelBuilder.Entity<PatientUser>().HasData(
 
-            new PatientUser(1, "Pera2", "Peric", "1234", "2/2/2020", "123", "1234", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj"),
-            new PatientUser(2, "Pera3", "Peric", "1234", "2/2/2020", "123", "1234", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj")
+            new PatientUser(1, "Pera2", "Peric","Male", "1234", "2/2/2020", "123", "212313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null),
+            new PatientUser(2, "Pera3", "Peric", "Female", "1234", "2/2/2020", "123", "2112313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null)
 
             );
 

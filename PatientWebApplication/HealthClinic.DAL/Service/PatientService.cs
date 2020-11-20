@@ -4,8 +4,10 @@
  * Purpose: Definition of the Class Service.PatientService
  ***********************************************************************/
 
+using HealthClinic.CL.Adapters;
 using HealthClinic.CL.Contoller;
 using HealthClinic.CL.DbContextModel;
+using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Doctor;
 using HealthClinic.CL.Model.Patient;
 using HealthClinic.CL.Repository;
@@ -16,7 +18,7 @@ using System.Net.Mail;
 
 namespace HealthClinic.CL.Service
 {
-    public class PatientService 
+    public class PatientService : IPatientService
     {
         private IPatientsRepository PatientsRepository { get; set; }
         private IEmailVerificationService EmailVerificationService { get; set; }
@@ -27,10 +29,10 @@ namespace HealthClinic.CL.Service
             EmailVerificationService = emailVerificationService;
         }
 
-        public PatientUser Create(PatientUser patientUser)
+        public PatientUser Create(PatientDto patientDto)
         {
             EmailVerificationService.SendVerificationMail(new MailAddress(patientUser.email), patientUser.id);
-            return PatientsRepository.Add(patientUser);
+            return patientsRepository.Add(PatientAdapter.PatientDtoToPatient(patientDto));
         }
 
         public PatientUser Validate(int id)
@@ -40,11 +42,13 @@ namespace HealthClinic.CL.Service
             {
                 return PatientsRepository.Validate(patient);
             }
-            else
-            {
-                return null;
-            }
-            
+
+            return null;
+        }
+
+        public List<PatientUser> GetAll()
+        {
+            return patientsRepository.GetAll();
         }
 
     }

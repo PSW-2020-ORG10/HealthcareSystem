@@ -26,6 +26,15 @@ namespace HealthClinic.CL.Model.Employee
             this.phoneNumber = phoneNumber;
         }
 
+        public User(string firstName, string secondName, string uniqueCitizensidentityNumber, string dateOfBirth, string phoneNumber) : base()
+        {
+            this.firstName = firstName;
+            this.secondName = secondName;
+            this.uniqueCitizensidentityNumber = uniqueCitizensidentityNumber;
+            this.dateOfBirth = dateOfBirth;
+            this.phoneNumber = phoneNumber;
+        }
+
 
         public User() : base()
         {

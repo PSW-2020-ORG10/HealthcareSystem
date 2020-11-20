@@ -1,4 +1,5 @@
 ﻿using HealthClinic.CL.DbContextModel;
+using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Patient;
 using HealthClinic.CL.Repository;
 using HealthClinic.CL.Service;
@@ -22,10 +23,10 @@ namespace PatientWebApplication.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(PatientUser patientUser)
+        public IActionResult Create(PatientDto patientDto)
         {
-
-            if (PatientService.Create(patientUser) == null)
+           
+            if (PatientService.Create(patientDto) == null)
             {
                 return BadRequest();
             }
