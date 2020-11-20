@@ -11,7 +11,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using HealthClinic.CL.Model.Patient;
-using PatientWebApplication.Controllers;
 using HealthClinic.CL.Adapters;
 
 namespace IntegrationWithPharmacies
@@ -23,9 +22,7 @@ namespace IntegrationWithPharmacies
 
     public static void Main(string[] args)
         {
-
-
-
+            CreateHostBuilder(args).Build().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
