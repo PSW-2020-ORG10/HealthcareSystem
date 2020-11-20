@@ -28,8 +28,8 @@ namespace HealthClinic.CL.Service
 
         public PatientUser Create(PatientDto patientDto)
         {
-            PatientUser patientUser = PatientAdapter.PatientDtoToPatient(patientDto);
-            return patientsRepository.Add(patientUser);
+            
+            return patientsRepository.Add(PatientAdapter.PatientDtoToPatient(patientDto));
         }
 
         public List<PatientUser> GetAll()
