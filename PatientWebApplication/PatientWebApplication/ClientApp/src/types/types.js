@@ -10,3 +10,6 @@ export const OBSERVE_PRESCRIPTIONS_ERROR = "prescriptionsOservedError";
 export const LOADED_ALL_PATIENT_PRESCRIPTIONS = "loadedAllPatientPrescriptions";
 export const OBSERVE_PATIENT_PRESCRIPTIONS_ERROR = "patientPrescriptionsOservedError";
 export const PATIENT_REGISTERED = "patientRegistered";
+export const SIMPLE_SEARCH_PATIENT_PRESCRIPTIONS = "simpleSearchPatientPrescriptions";
+export const SIMPLE_SEARCH_PRESCRIPTIONS_ERROR = "simpleSearchPrescriptionsError";
+

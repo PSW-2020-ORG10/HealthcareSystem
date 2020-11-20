@@ -5,7 +5,9 @@
     LOADED_ALL_FEEDBACK,
     LOADED_ALL_PRESCRIPTIONS,
     LOADED_ALL_PATIENT_PRESCRIPTIONS,
-    PATIENT_REGISTERED
+    PATIENT_REGISTERED,
+    SIMPLE_SEARCH_PATIENT_PRESCRIPTIONS
+
 } from "../types/types"
 
 function addFeedback(state=initialState, action) {
@@ -83,11 +85,20 @@ function reducer(state = initialState, action) {
                 patientPrescriptionsList: action.payload
 
             };
+
         case PATIENT_REGISTERED:
             return {
                 ...state,
                 feedbackList: state.patientList.concat(action.payload)
             }
+
+        case SIMPLE_SEARCH_PATIENT_PRESCRIPTIONS:
+            return {
+                ...state,
+                patientPrescriptionsList: action.payload
+
+            };
+
         default:
             return state;
     }
