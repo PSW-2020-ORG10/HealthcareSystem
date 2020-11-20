@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HealthClinic.DAL\HealthClinic.CL.csproj" />
     <ProjectReference Include="..\PatientWebApplication\PatientWebApplication.csproj" />
   </ItemGroup>
 
