@@ -235,7 +235,7 @@ class RegisterPatient extends Component {
 
                     <div className="field-wrap">
                         <label className="label" htmlFor="">
-                            Lastname before marriage:
+                            Maiden name:
                         </label>
                         <input
                             className="field"

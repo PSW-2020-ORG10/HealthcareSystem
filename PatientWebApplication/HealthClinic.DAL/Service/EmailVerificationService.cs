@@ -40,9 +40,6 @@ namespace HealthClinic.CL.Service
             return new MailMessage(senderAddress, recipientAddress)
             {
                 Subject = "Verification of HealthClinic account.",
-                //Body = "To verify your HealtClinic account please click on link below.\n" +
-                //        "http://localhost:60198/api/patientuser/" + id
-                //Body = "<h3> To verify your HealtClinic account please click on link below.</h3><a href=\"http://localhost:60198/api/patientuser/" + id + "\"> Link to verify </a>"  
                 Body = body
             };
         }
