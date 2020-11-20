@@ -27,12 +27,12 @@ namespace IntegrationWithPharmacies.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
-            var rng = new Random();
+            var randomNumber = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
+                TemperatureC = randomNumber.Next(-20, 55),
+                Summary = Summaries[randomNumber.Next(Summaries.Length)]
             })
             .ToArray();
         }
