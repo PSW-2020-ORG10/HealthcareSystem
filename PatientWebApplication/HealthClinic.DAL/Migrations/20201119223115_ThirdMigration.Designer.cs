@@ -3,14 +3,16 @@ using System;
 using HealthClinic.CL.DbContextModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HealthClinic.CL.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201119223115_ThirdMigration")]
+    partial class ThirdMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -766,9 +768,6 @@ namespace HealthClinic.CL.Migrations
                     b.Property<string>("exLastname")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("file")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
                     b.Property<string>("firstName")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -818,14 +817,13 @@ namespace HealthClinic.CL.Migrations
                             city = "Grad",
                             dateOfBirth = "2/2/2020",
                             email = "email",
-                            exLastname = "",
                             firstName = "Pera2",
                             gender = "Male",
                             guest = false,
                             isMarried = false,
                             isRegisteredBySecretary = false,
                             isVerified = false,
-                            medicalIdNumber = "212313",
+                            medicalIdNumber = "1234",
                             parentName = "Roditelj",
                             password = "pass",
                             phoneNumber = "123",
@@ -840,14 +838,13 @@ namespace HealthClinic.CL.Migrations
                             city = "Grad",
                             dateOfBirth = "2/2/2020",
                             email = "email",
-                            exLastname = "",
                             firstName = "Pera3",
                             gender = "Female",
                             guest = false,
                             isMarried = false,
                             isRegisteredBySecretary = false,
                             isVerified = false,
-                            medicalIdNumber = "2112313",
+                            medicalIdNumber = "1234",
                             parentName = "Roditelj",
                             password = "pass",
                             phoneNumber = "123",

@@ -9,6 +9,7 @@ import './custom.css'
 import PatientFeedback from './components/PatientFeedback';
 import CreateFeedback from './components/CreateFeedback';
 import PrescriptionsSimple from './components/PrescriptionsSimple';
+import RegistrationOfPatient from './components/PatientRegister';
 
 export default () => (
     <Layout>
@@ -17,5 +18,6 @@ export default () => (
         <Route path='/admin-feedback' component={AdminFeedback} />
         <Route path='/create-feedback' component={CreateFeedback} />
         <Route path='/prescriptions-simple' component={PrescriptionsSimple} />
+        <Route path='/register-patient' component={RegistrationOfPatient} />
     </Layout>
 );
