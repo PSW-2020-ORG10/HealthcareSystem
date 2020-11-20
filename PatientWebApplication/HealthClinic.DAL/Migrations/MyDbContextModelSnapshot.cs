@@ -934,6 +934,31 @@ namespace HealthClinic.CL.Migrations
                         });
                 });
 
+            modelBuilder.Entity("HealthClinic.CL.Model.Pharmacy.RegistrationInPharmacy", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("apiKey")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("pharmacyId")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Registrations");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1,
+                            apiKey = "Api key",
+                            pharmacyId = 1
+                        });
+                });
+
             modelBuilder.Entity("HealthClinic.CL.Model.Secretary.SecretaryUser", b =>
                 {
                     b.Property<int>("id")
