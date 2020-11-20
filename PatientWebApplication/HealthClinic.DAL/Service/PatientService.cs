@@ -12,24 +12,40 @@ using HealthClinic.CL.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 
 namespace HealthClinic.CL.Service
 {
     public class PatientService 
     {
-        private PatientsRepository patientsRepository { get; set; }
-        
-        public PatientService(MyDbContext context)
+        private IPatientsRepository PatientsRepository { get; set; }
+        private IEmailVerificationService EmailVerificationService { get; set; }
+
+        public PatientService(IPatientsRepository patientsRepository, IEmailVerificationService emailVerificationService)
         {
-            patientsRepository = new PatientsRepository(context);
+            PatientsRepository = patientsRepository;
+            EmailVerificationService = emailVerificationService;
         }
 
         public PatientUser Create(PatientUser patientUser)
         {
-            return patientsRepository.Add(patientUser);
+            EmailVerificationService.SendVerificationMail(new MailAddress(patientUser.email), patientUser.id);
+            return PatientsRepository.Add(patientUser);
         }
 
-        
+        public PatientUser Validate(int id)
+        {
+            PatientUser patient = PatientsRepository.Find(id);
+            if(patient != null)
+            {
+                return PatientsRepository.Validate(patient);
+            }
+            else
+            {
+                return null;
+            }
+            
+        }
 
     }
 }
