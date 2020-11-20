@@ -4,6 +4,7 @@ using HealthClinic.CL.Model.Hospital;
 using HealthClinic.CL.Model.Manager;
 using HealthClinic.CL.Model.Orders;
 using HealthClinic.CL.Model.Patient;
+using HealthClinic.CL.Model.Pharmacy;
 using HealthClinic.CL.Model.Secretary;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -49,6 +50,7 @@ namespace HealthClinic.CL.DbContextModel
         public DbSet<Question> Questions { get; set; }
         public DbSet<SecretaryUser> SecretaryUsers { get; set; }
         public DbSet<Medicine> Medicines { get; set; }
+        public DbSet<RegistrationInPharmacy> Registrations { get; set; }
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
@@ -229,8 +231,13 @@ namespace HealthClinic.CL.DbContextModel
 
             );
 
-            
-            
+            modelBuilder.Entity<RegistrationInPharmacy>().HasData(
+
+            new RegistrationInPharmacy(1, 1, "Api key")
+
+            );
+
+
         }
 
     }

@@ -7,6 +7,6 @@ namespace IntegrationWithPharmacies
 {
     public abstract class AbstractFactory
     {
-        public abstract IPharmacy getIPharmacy(String pharmacyApiKey);
+          public abstract IPharmacy getIPharmacy(String pharmacyApiKey);
     }
 }
