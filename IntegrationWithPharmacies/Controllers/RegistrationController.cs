@@ -20,7 +20,6 @@ namespace IntegrationWithPharmacies.Controllers
     {
         private RegistrationInPharmacyService registrationInPharmacyService { get; set; }
 
-        public RegistrationController() { }
         public RegistrationController(MyDbContext context)
         {
             registrationInPharmacyService = new RegistrationInPharmacyService(context);
