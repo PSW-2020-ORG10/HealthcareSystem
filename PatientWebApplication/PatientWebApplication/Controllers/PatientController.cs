@@ -42,27 +42,14 @@ namespace PatientWebApplication.Controllers
         [HttpPost("image")]
         public IActionResult SaveImg([FromForm] FileModel file)
         {
-
-
-
-
-            try
-            {
-                string path = Directory.GetParent(Directory.GetCurrentDirectory()).FullName + "\\HealthClinic.DAL\\wwwroot\\" + file.FileName;
-
-
-                using (Stream stream = new FileStream(path, FileMode.Create))
-                {
-                    file.FormFile.CopyTo(stream);
-                }
-                return Ok(path);
-            }
-            catch (Exception)
+            string pathToReturn = PatientService.ImageToSave(file);
+            if (pathToReturn == null)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
-
             }
 
+            return Ok(pathToReturn);
+        
 
         }
 

@@ -47,20 +47,15 @@ class RegisterPatient extends Component {
     handleChange2 = async(event) => {
         this.setState({
             fileUrl: URL.createObjectURL(event.target.files[0]),
-            //file: event.target.files[0],
-            //fileName: event.target.files[0].name,
+            
 
         })
         const formData = new FormData();
-        //debugger;
+        
         formData.append("formFile", event.target.files[0]);
         formData.append("fileName", event.target.files[0].name);
 
-        //this.state.patient.fileModel = formData;
-
-        //console.log(this.state.patient);
-
-        //this.props.patientRegistered(this.state.patient)
+        
 
         var dummyThis = this;
         try {
@@ -72,14 +67,14 @@ class RegisterPatient extends Component {
                 headers: { 'Content-Type': 'multipart/form-data' }
             })
                 .then(function (response) {
-                    //handle success
+                    
                     var patient = { ...dummyThis.state.patient };
                     patient.file = response.data;
                     dummyThis.setState({ patient });
                     console.log(response);
                 })
                 .catch(function (response) {
-                    //handle error
+                    
                     console.log(response);
 
 
@@ -172,10 +167,10 @@ class RegisterPatient extends Component {
 
 
     render() {
-       
+        
         return (
             <div>
-                
+                <form action="http://localhost:60198/register-patient">
 
                     <div className="field-wrap">
                         <label className="label" htmlFor="">
@@ -241,6 +236,7 @@ class RegisterPatient extends Component {
                             type="text"
                             value={this.state.patient.dateOfBirth}
                             name="dateOfBirth"
+                            placeholder="mm/dd/yyyy"
                             onChange={(e) => this.updateBirthday(e)}
                         />
                     </div>
@@ -267,6 +263,7 @@ class RegisterPatient extends Component {
                             type="text"
                             value={this.state.patient.email}
                             name="email"
+                            placeholder="email@address.com"
                             onChange={(e) => this.updateEmail(e)}
                         />
                     </div>
@@ -386,7 +383,7 @@ class RegisterPatient extends Component {
                     <div className="btn-wrap align-right">
                         <button disabled={!this.state.patient.firstName || !this.state.patient.secondName || !this.state.patient.allergie || !this.state.patient.bornIn || !this.state.patient.city || !this.state.patient.dateOfBirth || !this.state.patient.email || !this.state.patient.medicalIdNumber || !this.state.patient.parentName || !this.state.patient.password || !this.state.patient.phoneNumber || !this.state.patient.uniqueCitizensidentityNumber} className="btn btn-primary" onClick={this.createRegistration.bind(this)}>Register</button>
                     </div>
-               
+                </form>
             </div>
         )
     }

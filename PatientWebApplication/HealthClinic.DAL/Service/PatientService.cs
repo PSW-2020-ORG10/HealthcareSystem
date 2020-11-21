@@ -53,11 +53,14 @@ namespace HealthClinic.CL.Service
             return PatientsRepository.GetAll();
         }
 
-        public string SaveImage(FileModel file)
+
+        public string ImageToSave(FileModel file)
         {
             try
-            {                
+            {
                 string path = Directory.GetParent(Directory.GetCurrentDirectory()).FullName + "\\HealthClinic.DAL\\wwwroot\\" + file.FileName;
+
+
                 using (Stream stream = new FileStream(path, FileMode.Create))
                 {
                     file.FormFile.CopyTo(stream);
@@ -66,9 +69,10 @@ namespace HealthClinic.CL.Service
             }
             catch (Exception)
             {
+                return null;
 
-                return "";
             }
+
         }
 
     }
