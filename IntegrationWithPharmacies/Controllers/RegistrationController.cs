@@ -28,16 +28,13 @@ namespace IntegrationWithPharmacies.Controllers
         [HttpGet]   // GET /api/registration
         public IActionResult Get()
         {
-            List<RegistrationInPharmacy> result = registrationInPharmacyService.GetAll();
-            return Ok(result);
+            return Ok(registrationInPharmacyService.GetAll());
         }
 
         [HttpPost]      // POST /api/registration Request body: {"pharmacyId": "Some number", "apiKey": "Some api key"}
         public IActionResult Create(RegistrationInPharmacyDto dto)
         {
-            RegistrationInPharmacy registration = registrationInPharmacyService.Create(dto);
-
-            if (registration == null) return BadRequest();
+            if (registrationInPharmacyService.Create(dto) == null) return BadRequest();
 
             return Ok();
         }
