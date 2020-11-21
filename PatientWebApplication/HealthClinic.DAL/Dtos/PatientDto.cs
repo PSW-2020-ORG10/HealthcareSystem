@@ -1,4 +1,5 @@
 ﻿using HealthClinic.CL.Model.Employee;
+using HealthClinic.CL.Model.Patient;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,14 +20,14 @@ namespace HealthClinic.CL.Dtos
         public String bornIn { get; set; }
         public String parentName { get; set; }
         public String exLastname { get; set; }
-        public String file { get; set; }
+        public string file { get; set; }
         public String gender { get; set; }
 
         public PatientDto()
         {   
         }
 
-        public PatientDto(string name, string secondname, string gender, string ucin, String date, string phone, String medicalid, string allergie, string city, string email, string password, bool isMarried, string bornIn, string parentName, string exLastname,string file) : base(name, secondname, ucin, date, phone)
+        public PatientDto(string name, string secondname, string gender, string ucin, String date, string phone, String medicalid, string allergie, string city, string email, string password, bool isMarried, string bornIn, string parentName, string exLastname, string file) : base(name, secondname, ucin, date, phone)
         {
 
             this.medicalIdNumber = medicalid;
