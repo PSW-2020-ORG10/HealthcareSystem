@@ -1,0 +1,241 @@
+﻿import React, { Component } from "react"
+import { loadedAllPatientPrescriptions, advancedSearchPatientPrescriptions } from "../actions/actions"
+import { connect } from "react-redux"
+import { wrap } from "module";
+
+class PrescriptionsSearchAdvancedTable extends Component {
+    state = {
+        medicines: "",
+        isUsed: "",
+        comment: "",
+        doctor: "",
+        searchFields: [],
+        first: "",
+        firstRole: "",
+        rest: [],
+        restRoles: [],
+        forAdding: -1,
+        valueForArrays: "",
+        valueForOperators: "",
+        logicOperators: [],
+        objectToSend: {}
+    };
+
+    addSearchField = (event) => {
+        event.preventDefault()
+        if (this.state.forAdding < 2) {
+            let searchFields = this.state.searchFields.concat([''])
+            this.setState(prevState => {
+                return {
+                    searchFields: searchFields,
+                    forAdding: prevState.forAdding + 1
+                }
+            });
+        }
+    }
+
+    handleChange = (event) => {
+        const { name, value, type, checked } = event.target
+        type === "checkbox" ? this.setState({
+            [name]: checked
+        }) : this.setState({
+            [name]: value,
+            first: value
+        })
+    }
+
+    handleChangeRole = (event) => {
+        const { name, value, type, checked } = event.target
+        type === "checkbox" ? this.setState({
+            [name]: checked
+        }) : this.setState({
+            [name]: value,
+            firstRole: value
+        })
+    }
+
+    handleLogicOperators = (event) => {
+        const { name, value, type, checked } = event.target
+        let logicOperators = this.state.logicOperators
+        logicOperators[this.state.forAdding] = value
+        this.setState({
+            logicOperators: logicOperators,
+            [name]: value
+        })
+    }
+
+    setDefaultValue = (event) => {
+        let logicOperators = this.state.logicOperators
+        logicOperators[this.state.forAdding] = "and"
+        this.setState({
+            logicOperators: logicOperators
+        })
+    }
+
+    handleArrays = (event) => {
+        const { name, value, type, checked } = event.target
+        let rest = this.state.rest
+        rest[this.state.forAdding] = value
+        this.setState({
+            rest: rest,
+            [name]: value
+        })
+    }
+
+    handleArraysRoles = (event) => {
+        const { name, value, type, checked } = event.target
+        let restRoles = this.state.restRoles
+        restRoles[this.state.forAdding] = value
+        this.setState({
+            restRoles: restRoles,
+            [name]: value
+        })
+    }
+
+    componentDidMount() {
+        debugger;
+        this.props.advancedSearchPatientPrescriptions(this.state);
+    }
+
+    render() {
+        debugger;
+        if (this.props.patientPrescriptionsList === undefined) {
+
+            return null;
+        }
+
+        const patientPrescriptionsList = this.props.patientPrescriptionsList;
+        let medicines = ""
+        return (
+
+
+            <div>
+                <div className="field-wrap">
+                    <td>
+                        <select
+                            className="field"
+                            value={this.state.firstRole}
+                            onChange={this.handleChangeRole}
+                            name="first"
+                       
+                        >
+                            <option value="medicines">Medicines </option>
+                            <option value="isUsed">Used </option>
+                            <option value="comment">Comment </option>
+                            <option value="doctor">Doctor</option>
+                        </select>
+                     </td>
+                    <td>
+                        <input
+                            className="field"
+                            type="text"
+                            
+                            name={this.state.first}
+                            onChange={this.handleChange}
+                         />
+                    </td>
+                </div>
+
+
+
+
+
+                <div>
+                    {this.state.searchFields.map((searchFields, index) => (
+                        <div className="field-wrap" key={index}>
+                            <td>
+                                <select
+                                    defaultValue="and"
+                                    className="field"
+                                    onChange={this.handleLogicOperators}
+                                    name="valueForOperators"
+                                    value={this.state.logicOperators[index]}
+                                    
+                                >
+                                    <option value="and">And</option>
+                                    <option value="or">Or</option> 
+                                </select>
+                            </td>
+                            <td>
+                                <select
+                                    className="field"
+                                    onChange={this.handleArraysRoles}
+                                    name="valueForArrays"
+                                    value={this.state.restRoles[index]}
+                                >
+                                    <option value="medicines">Medicines </option>
+                                    <option value="isUsed">Used </option>
+                                    <option value="comment">Comment </option>
+                                    <option value="doctor">Doctor</option>
+                                </select>
+                            </td>
+                            <td>
+                            <input
+                                className="field" 
+                                    type="text"
+                                    name={this.state.rest[index]}
+                                    onChange={this.handleArrays}
+                                />
+                            </td>
+                        </div>
+                    ))}
+                    <button className="btn btn-primary" onClick={this.addSearchField}>Add New Field</button>
+                </div>
+
+                <div className="btn-wrap align-right">
+                    <button className="btn btn-primary" onClick={this.searchPrescriptions.bind(this)}>Search</button>
+                </div>
+
+                <table className='table allPrescriptions' >
+                    <thead>
+                        <tr>
+                            <th style={{ textAlign: "left" }}>Medicine</th>
+                            <th style={{ textAlign: "center" }}>Is Used</th>
+                            <th style={{ textAlign: "center" }}>Comment</th>
+                            <th style={{ textAlign: "center" }}>Doctor</th>
+                        </tr>
+                    </thead>
+                    {patientPrescriptionsList.map((f) => (
+                        <tbody key={f.id}>
+                            <tr key={f.id}>
+                                <td style={{ textAlign: "left" }} >
+                                    {f.medicines !== undefined ? f.medicines.map((m, i) => (
+                                        f.medicines.length === i + 1 ?
+                                            [medicines, m.name, ''].join('') :
+                                            [medicines, m.name, ', '].join('')
+                                    )) : medicines = "Empty"}
+                                </td>
+                                <td style={{ textAlign: "center" }} > {f.isUsed ? "Used" : "Not used"}</td >
+                                <td style={{ textAlign: "center" }}>{f.comment}</td >
+                                <td style={{ textAlign: "center" }}>{f.doctor.firstName + " " + f.doctor.secondName}</td >
+                            </tr>
+                        </tbody>
+                    ))}
+                </table>
+
+            </div>
+
+
+        );
+    }
+
+    searchPrescriptions() {
+        alert(this.state.firstRole)
+        alert(this.state.first)
+        alert(this.state.restRoles)
+        alert(this.state.rest)
+        alert(this.state.logicOperators)
+        this.props.advancedSearchPatientPrescriptions({ firstRole: this.state.firstRole, first: this.state.first, restRoles: this.state.restRoles, rest: this.state.rest, logicOperators: this.state.logicOperators })
+    }
+
+
+
+
+}
+
+
+const mapStateToProps = (state) =>
+
+    ({ patientPrescriptionsList: state.reducer.patientPrescriptionsList })
+
+export default connect(mapStateToProps, { loadedAllPatientPrescriptions, advancedSearchPatientPrescriptions })(PrescriptionsSearchAdvancedTable);

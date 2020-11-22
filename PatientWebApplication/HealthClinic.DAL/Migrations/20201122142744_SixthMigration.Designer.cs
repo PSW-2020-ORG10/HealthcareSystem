@@ -3,14 +3,16 @@ using System;
 using HealthClinic.CL.DbContextModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HealthClinic.CL.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201122142744_SixthMigration")]
+    partial class SixthMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -890,6 +892,9 @@ namespace HealthClinic.CL.Migrations
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("DoctorUserid")
+                        .HasColumnType("int");
+
                     b.Property<string>("comment")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -901,7 +906,7 @@ namespace HealthClinic.CL.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("DoctorId");
+                    b.HasIndex("DoctorUserid");
 
                     b.ToTable("Prescriptions");
 
@@ -1228,11 +1233,9 @@ namespace HealthClinic.CL.Migrations
 
             modelBuilder.Entity("HealthClinic.CL.Model.Patient.Prescription", b =>
                 {
-                    b.HasOne("HealthClinic.CL.Model.Doctor.DoctorUser", "Doctor")
+                    b.HasOne("HealthClinic.CL.Model.Doctor.DoctorUser", "DoctorUser")
                         .WithMany()
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DoctorUserid");
                 });
 
             modelBuilder.Entity("HealthClinic.CL.Model.Hospital.Medicine", b =>

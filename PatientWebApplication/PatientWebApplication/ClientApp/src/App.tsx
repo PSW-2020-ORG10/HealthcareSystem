@@ -10,6 +10,7 @@ import PatientFeedback from './components/PatientFeedback';
 import CreateFeedback from './components/CreateFeedback';
 import PrescriptionsSimple from './components/PrescriptionsSimple';
 import RegistrationOfPatient from './components/PatientRegister';
+import PrescriptionsAdvanced from './components/PrescriptionsAdvanced';
 
 export default () => (
     <Layout>
@@ -19,5 +20,6 @@ export default () => (
         <Route path='/create-feedback' component={CreateFeedback} />
         <Route path='/prescriptions-simple' component={PrescriptionsSimple} />
         <Route path='/register-patient' component={RegistrationOfPatient} />
+        <Route path='/prescriptions-advanced' component={PrescriptionsAdvanced} />
     </Layout>
 );

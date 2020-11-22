@@ -52,9 +52,153 @@ namespace HealthClinic.CL.Service
             prescriptions = searchForUsed(prescriptions, prescriptionSearchDto);
 
             prescriptions = searchForMedicines(prescriptions, prescriptionSearchDto);
-       
+
+            prescriptions = searchForDoctor(prescriptions, prescriptionSearchDto);
+
             return prescriptions;
 
+        }
+
+        public List<Prescription> AdvancedSearchPrescriptions(PrescriptionAdvancedSearchDto dto)
+        {
+            List<Prescription> prescriptions = GetPrescriptionsForPatient(1);
+
+            List<Prescription> firstPrescriptions = searchForFirstParameter(prescriptions, dto);
+
+            List<Prescription> finalPrescriptions = searchForOtherParameters(prescriptions, dto, firstPrescriptions);
+
+            return finalPrescriptions;
+        }
+
+        private List<Prescription> searchForOtherParameters(List<Prescription> prescriptions, PrescriptionAdvancedSearchDto dto, List<Prescription> firstPrescriptions)
+        {
+            List<Prescription> othersPrescriptions = new List<Prescription>();
+
+            List<Prescription> finalPrescriptions = firstPrescriptions;
+
+            for (int i = 0; i < dto.RestRoles.Length; i++)
+            {
+                if (dto.RestRoles[i].Equals("medicines"))
+                {
+                    othersPrescriptions = searchForMedicinesAdvanced(prescriptions, dto.Rest[i]);
+                }
+                else if (dto.RestRoles[i].Equals("comment"))
+                {
+                    othersPrescriptions = searchForCommentsAdvanced(prescriptions, dto.Rest[i]);
+                }
+                else if (dto.RestRoles[i].Equals("isUsed"))
+                {
+                    othersPrescriptions = searchForUsedAdvanced(prescriptions, dto.Rest[i]);
+                }
+                else
+                {
+                    othersPrescriptions = searchForDoctorAdvanced(prescriptions, dto.Rest[i]);
+                }
+
+                if (i == 0)
+                {
+                    if (dto.LogicOperators[i].Equals("or"))
+                    {
+                        finalPrescriptions = othersPrescriptions.Union(firstPrescriptions).ToList();
+                    } else
+                    {
+                        finalPrescriptions = othersPrescriptions.Intersect(firstPrescriptions).ToList();
+                    }
+                } else
+                {
+                    if (dto.LogicOperators[i].Equals("or"))
+                    {
+                        finalPrescriptions = othersPrescriptions.Union(finalPrescriptions).ToList();
+                    }
+                    else
+                    {
+                        finalPrescriptions = othersPrescriptions.Intersect(finalPrescriptions).ToList();
+                    }
+                }
+
+                
+            }
+
+            return finalPrescriptions;
+        }
+
+        private List<Prescription> searchForFirstParameter(List<Prescription> prescriptions, PrescriptionAdvancedSearchDto dto)
+        {
+            List<Prescription> firstPrescriptions = new List<Prescription>();
+            if (dto.FirstRole.Equals("medicines"))
+            {
+                firstPrescriptions = searchForMedicinesAdvanced(prescriptions, dto.First);
+            }
+            else if (dto.FirstRole.Equals("comment"))
+            {
+                firstPrescriptions = searchForCommentsAdvanced(prescriptions, dto.First);
+            }
+            else if (dto.FirstRole.Equals("isUsed"))
+            {
+                firstPrescriptions = searchForUsedAdvanced(prescriptions, dto.First);
+            }
+            else
+            {
+                firstPrescriptions = searchForDoctorAdvanced(prescriptions, dto.First);
+            }
+
+            return firstPrescriptions;
+        }
+
+        private List<Prescription> searchForDoctorAdvanced(List<Prescription> prescriptions, String searchField)
+        {
+            if (!searchField.Equals(""))
+            {
+                prescriptions = prescriptions.FindAll(prescription => prescription.Doctor.firstName.Equals(searchField) || prescription.Doctor.secondName.Equals(searchField) || prescription.Doctor.DoctorFullName().Equals(searchField));
+            }
+
+            return prescriptions;
+        }
+
+        private List<Prescription> searchForUsedAdvanced(List<Prescription> prescriptions, String searchField)
+        {
+            if (!searchField.Equals(""))
+            {
+                prescriptions = prescriptions.FindAll(prescription => prescription.isUsed.ToString().Equals(searchField));
+            }
+
+            return prescriptions;
+        }
+
+        private List<Prescription> searchForCommentsAdvanced(List<Prescription> prescriptions, String searchField)
+        {
+            if (!searchField.Equals(""))
+            {
+                prescriptions = prescriptions.FindAll(prescription => prescription.comment.Equals(searchField));
+            }
+
+            return prescriptions;
+        }
+
+        private List<Prescription> searchForMedicinesAdvanced(List<Prescription> prescriptions, String searchField)
+        {
+            if (!searchField.Equals(""))
+            {
+                prescriptions = prescriptions.Where(prescription => prescription.Medicines.Any(medicine => medicine.name.Equals(searchField))).ToList();
+            }
+
+            return prescriptions;
+        }
+
+        /// <summary> This method is getting list of filtered <c>Prescription</c> of logged patient by parameter <c>Doctor</c>. </summary>
+        /// /// <param name="prescriptions"><c>prescriptions</c> is List of presciptions that matches search fields.
+        /// </param>
+        /// /// <param name="prescriptionSearchDto"><c>prescriptionSearchDto</c> is Data Transfer Object of a <c>Prescription</c> that is beomg used to filter precriptions.
+        /// </param>
+        /// <returns> List of filtered patient prescriptions. </returns>
+        private List<Prescription> searchForDoctor(List<Prescription> prescriptions, PrescriptionSearchDto prescriptionSearchDto)
+        {
+            if (!prescriptionSearchDto.Doctor.Equals(""))
+            {
+                prescriptions = prescriptions.FindAll(prescription => prescription.Doctor.firstName.Equals(prescriptionSearchDto.Doctor) || prescription.Doctor.secondName.Equals(prescriptionSearchDto.Doctor) || prescription.Doctor.DoctorFullName().Equals(prescriptionSearchDto.Doctor));
+            }
+
+            return prescriptions;
         }
 
         /// <summary> This method is getting list of filtered <c>Prescription</c> of logged patient by parameter <c>IsUsed</c>. </summary>

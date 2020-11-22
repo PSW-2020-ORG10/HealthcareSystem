@@ -213,8 +213,8 @@ namespace HealthClinic.CL.DbContextModel
 
             modelBuilder.Entity<Prescription>().HasData(
 
-            new Prescription(1, 1, new List<Medicine>(), true, "Comment"),
-            new Prescription(2, 2, null, true, "Some text")
+            new Prescription(1, 1, new List<Medicine>(), true, "Comment", 1),
+            new Prescription(2, 2, null, true, "Some text", 1)
 
             );
 

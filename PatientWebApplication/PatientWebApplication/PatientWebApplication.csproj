@@ -34,6 +34,7 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\components\PatientRegister.tsx" />
+    <None Remove="ClientApp\src\components\PrescriptionsAdvanced.tsx" />
     <None Remove="ClientApp\src\components\PrescriptionsSimple.tsx" />
   </ItemGroup>
 
@@ -43,6 +44,7 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\components\PatientRegister.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\components\PrescriptionsAdvanced.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\PrescriptionsSimple.tsx" />
   </ItemGroup>
 

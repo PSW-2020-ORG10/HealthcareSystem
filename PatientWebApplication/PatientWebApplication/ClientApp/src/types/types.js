@@ -12,4 +12,6 @@ export const OBSERVE_PATIENT_PRESCRIPTIONS_ERROR = "patientPrescriptionsOservedE
 export const PATIENT_REGISTERED = "patientRegistered";
 export const SIMPLE_SEARCH_PATIENT_PRESCRIPTIONS = "simpleSearchPatientPrescriptions";
 export const SIMPLE_SEARCH_PRESCRIPTIONS_ERROR = "simpleSearchPrescriptionsError";
+export const ADVANCED_SEARCH_PATIENT_PRESCRIPTIONS = "advancedSearchPatientPrescriptions";
+export const ADVANCED_SEARCH_PRESCRIPTIONS_ERROR = "advancedSearchPrescriptionsError";
 
