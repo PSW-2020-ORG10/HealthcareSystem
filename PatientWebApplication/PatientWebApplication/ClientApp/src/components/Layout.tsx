@@ -8,6 +8,7 @@ import AdminFeedback from './AdminFeedback';
 import CreateFeedback from './CreateFeedback';
 import PrescriptionsSimple from './PrescriptionsSimple';
 import RegistrationOfPatient from './PatientRegister';
+import MyInformation from './MyInformation';
 
 export default (props: { children: React.ReactNode }) => (
     <React.Fragment>
@@ -19,6 +20,7 @@ export default (props: { children: React.ReactNode }) => (
             <Route path='/create-feedback' component={CreateFeedback} />
             <Route path='/prescriptions-simple' component={PrescriptionsSimple} />
             <Route path='/register-patient' component={RegistrationOfPatient} />
+            <Route path='/my-information' component={MyInformation} />
         </Container>
     </React.Fragment>
 );

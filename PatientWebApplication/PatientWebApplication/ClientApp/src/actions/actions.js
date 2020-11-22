@@ -12,8 +12,9 @@
     OBSERVE_PATIENT_PRESCRIPTIONS_ERROR,
     PATIENT_REGISTERED,
     SIMPLE_SEARCH_PATIENT_PRESCRIPTIONS,
-    SIMPLE_SEARCH_PRESCRIPTIONS_ERROR
-
+    SIMPLE_SEARCH_PRESCRIPTIONS_ERROR,
+    FIND_ONE_PATIENT,
+    FIND_ONE_PATIENT_ERROR
 } from "../types/types"
 import axios from "axios";
 
@@ -154,3 +155,23 @@ export const simpleSearchPatientPrescriptions = (prescription) => async (dispatc
     }
 };
 
+export const findOnePatient = (id) => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.get("http://localhost:60198/api/patientuser/getone", {
+            params: {
+                id: id
+            }
+        });
+        debugger;
+        dispatch({
+            type: FIND_ONE_PATIENT,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: FIND_ONE_PATIENT_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
