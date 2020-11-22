@@ -27,8 +27,6 @@ namespace PatientWebApplication.Controllers
         [HttpPost]
         public IActionResult Create(PatientDto patientDto)
         {
-
-            
             if (PatientService.Create(patientDto) == null)
             {
                 return BadRequest();
