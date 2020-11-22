@@ -75,6 +75,12 @@ namespace HealthClinic.CL.Service
 
         }
 
+        public PatientUser GetOne(int id)
+        {
+            return PatientsRepository.FindOne(id);
+        }
+
+
     }
 }
 

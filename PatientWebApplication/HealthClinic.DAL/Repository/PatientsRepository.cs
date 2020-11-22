@@ -37,7 +37,10 @@ namespace HealthClinic.CL.Repository
         {
             return dbContext.Patients.ToList();
         }
-
+        public PatientUser FindOne(int id)
+        {
+            return dbContext.Patients.SingleOrDefault(PatientUser => PatientUser.id == id);
+        }
     }
 
 }

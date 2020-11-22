@@ -6,7 +6,8 @@
     LOADED_ALL_PRESCRIPTIONS,
     LOADED_ALL_PATIENT_PRESCRIPTIONS,
     PATIENT_REGISTERED,
-    SIMPLE_SEARCH_PATIENT_PRESCRIPTIONS
+    SIMPLE_SEARCH_PATIENT_PRESCRIPTIONS,
+    FIND_ONE_PATIENT
 
 } from "../types/types"
 
@@ -44,7 +45,8 @@ const initialState = {
     publishedFeedbackList: [],
     prescriptionsList: [],
     patientPrescriptionsList: [],
-    patientList: []
+    patientList: [],
+    patientInformationList: []
   
 };
 
@@ -98,7 +100,12 @@ function reducer(state = initialState, action) {
                 patientPrescriptionsList: action.payload
 
             };
+        case FIND_ONE_PATIENT:
+            return {
+                ...state,
+                patientInformationList: action.payload
 
+            };
         default:
             return state;
     }
