@@ -3,9 +3,11 @@ using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Patient;
 using HealthClinic.CL.Repository;
 using HealthClinic.CL.Service;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -25,7 +27,6 @@ namespace PatientWebApplication.Controllers
         [HttpPost]
         public IActionResult Create(PatientDto patientDto)
         {
-           
             if (PatientService.Create(patientDto) == null)
             {
                 return BadRequest();
@@ -33,6 +34,20 @@ namespace PatientWebApplication.Controllers
            
             return Ok();
             
+
+        }
+
+        [HttpPost("image")]
+        public IActionResult SaveImg([FromForm] FileModel file)
+        {
+            string pathToReturn = PatientService.ImageToSave(file);
+            if (pathToReturn == null)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+
+            return Ok(pathToReturn);
+        
 
         }
 

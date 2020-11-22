@@ -13,6 +13,7 @@ using HealthClinic.CL.Model.Patient;
 using HealthClinic.CL.Repository;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Mail;
 
@@ -50,6 +51,28 @@ namespace HealthClinic.CL.Service
         public List<PatientUser> GetAll()
         {
             return PatientsRepository.GetAll();
+        }
+
+
+        public string ImageToSave(FileModel file)
+        {
+            try
+            {
+                string path = Directory.GetParent(Directory.GetCurrentDirectory()).FullName + "\\HealthClinic.DAL\\wwwroot\\" + file.FileName;
+
+
+                using (Stream stream = new FileStream(path, FileMode.Create))
+                {
+                    file.FormFile.CopyTo(stream);
+                }
+                return path;
+            }
+            catch (Exception)
+            {
+                return null;
+
+            }
+
         }
 
     }

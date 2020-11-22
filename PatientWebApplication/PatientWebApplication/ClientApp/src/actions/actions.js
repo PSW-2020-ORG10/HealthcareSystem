@@ -122,7 +122,7 @@ export const loadedAllPatientPrescriptions = () => async (dispatch) => {
 export const patientRegistered = (patient) => async (dispatch) => {
     try {
         debugger;
-        await axios.post("http://localhost:60198/api/patientuser/", patient);
+        await axios.post("http://localhost:60198/api/patientuser", patient);
         debugger;
         dispatch({
             type: PATIENT_REGISTERED,

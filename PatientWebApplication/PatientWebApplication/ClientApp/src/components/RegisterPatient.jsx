@@ -1,5 +1,6 @@
 ﻿import React, { Component } from "react"
 import { patientRegistered } from "../actions/actions"
+import axios from "axios";
 import { connect } from "react-redux"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -7,45 +8,169 @@ import "../css/app.css"
 
 class RegisterPatient extends Component {
     state = {
-        firstName: "",
-        secondName: "",       
-        gender: "Male",
-        uniqueCitizensidentityNumber: "",
-        dateOfBirth: "",
-        phoneNumber: "",
-        medicalIdNumber: "",
-        allergie: "",
-        city: "",
-        email: "",
-        password: "",
-        isMarried: false,
-        bornIn: "",
-        parentName: "",
-        exLastname: "",
-        file: null
+        patient: {
+            firstName: "",
+            secondName: "",
+            gender: "Male",
+            uniqueCitizensidentityNumber: "",
+            dateOfBirth: "",
+            phoneNumber: "",
+            medicalIdNumber: "",
+            allergie: "",
+            city: "",
+            email: "",
+            password: "",
+            isMarried: false,
+            bornIn: "",
+            parentName: "",
+            exLastname: "",
+            file: ""
+        },
+        file: null,
+        fileName: "",
+        fileUrl: null
                 
     };
 
     handleChange = (event) => {
-        const { name, value, type, checked } = event.target
+        var { name, value, type, checked } = event.target
+        name = "this.state.patient." + name
+        console.log(this.state.patient.firstName)
+        console.log(name)
         type === "checkbox" ? this.setState({
             [name]: checked
         }) : this.setState({
             [name]: value
         })
     }
-
-    handleChange2 = (event) => {
+    
+    handleChange2 = async(event) => {
         this.setState({
-            file: URL.createObjectURL(event.target.files[0])
+            fileUrl: URL.createObjectURL(event.target.files[0]),
+            
+
         })
+        const formData = new FormData();
+        
+        formData.append("formFile", event.target.files[0]);
+        formData.append("fileName", event.target.files[0].name);
+
+        
+
+        var dummyThis = this;
+        try {
+            const res = await axios({
+
+                method: 'post',
+                url: 'http://localhost:60198/api/patientuser/image',
+                data: formData,
+                headers: { 'Content-Type': 'multipart/form-data' }
+            })
+                .then(function (response) {
+                    
+                    var patient = { ...dummyThis.state.patient };
+                    patient.file = response.data;
+                    dummyThis.setState({ patient });
+                    console.log(response);
+                })
+                .catch(function (response) {
+                    
+                    console.log(response);
+
+
+
+
+
+
+                });
+            console.log(res);
+        } catch (ex) {
+            console.log(ex);
+        }
+    }
+    updateFirstName(evt) {
+        var patient = { ...this.state.patient };
+        patient.firstName = evt.target.value;
+        this.setState({ patient });
     }
 
+    updateSurname(evt) {
+        var patient = { ...this.state.patient };
+        patient.secondName = evt.target.value;
+        this.setState({ patient });
+    }
+    updateGender(evt) {
+        var patient = { ...this.state.patient };
+        patient.gender = evt.target.value;
+        this.setState({ patient });
+    }
+    updateMedId(evt) {
+        var patient = { ...this.state.patient };
+        patient.medicalIdNumber = evt.target.value;
+        this.setState({ patient });
+    }
+    updateBirthday(evt) {
+        var patient = { ...this.state.patient };
+        patient.dateOfBirth = evt.target.value;
+        this.setState({ patient });
+    }
+    updateCity(evt) {
+        var patient = { ...this.state.patient };
+        patient.city = evt.target.value;
+        this.setState({ patient });
+    }
+    updateEmail(evt) {
+        var patient = { ...this.state.patient };
+        patient.email = evt.target.value;
+        this.setState({ patient });
+    }
+    updatePassword(evt) {
+        var patient = { ...this.state.patient };
+        patient.password = evt.target.value;
+        this.setState({ patient });
+    }
+    updatePhone(evt) {
+        var patient = { ...this.state.patient };
+        patient.phoneNumber = evt.target.value;
+        this.setState({ patient });
+    }
+    updateBorn(evt) {
+        var patient = { ...this.state.patient };
+        patient.bornIn = evt.target.value;
+        this.setState({ patient });
+    }
+    updateParent(evt) {
+        var patient = { ...this.state.patient };
+        patient.parentName = evt.target.value;
+        this.setState({ patient });
+    }
+    updateAllergie(evt) {
+        var patient = { ...this.state.patient };
+        patient.allergie = evt.target.value;
+        this.setState({ patient });
+    }
+    updateUcin(evt) {
+        var patient = { ...this.state.patient };
+        patient.uniqueCitizensidentityNumber = evt.target.value;
+        this.setState({ patient });
+    }
+    updateMarried(evt) {
+        var patient = { ...this.state.patient };
+        patient.isMarried = evt.target.checked;
+        this.setState({ patient });
+    }
+    updateMaiden(evt) {
+        var patient = { ...this.state.patient };
+        patient.exLastname = evt.target.value;
+        this.setState({ patient });
+    }
+
+
     render() {
-       
+        
         return (
             <div>
-                <form>
+                <form action="http://localhost:60198/register-patient">
 
                     <div className="field-wrap">
                         <label className="label" htmlFor="">
@@ -54,9 +179,9 @@ class RegisterPatient extends Component {
                         <input
                             className="field"
                             type="text"
-                            value={this.state.firstName}
+                            value={this.state.patient.firstName}
                             name="firstName"                          
-                            onChange={this.handleChange}
+                            onChange={(e)=>this.updateFirstName(e)}
                         />
                     </div>
 
@@ -67,9 +192,9 @@ class RegisterPatient extends Component {
                         <input
                             className="field"
                             type="text"
-                            value={this.state.secondName}
+                            value={this.state.patient.secondName}
                             name="secondName"
-                            onChange={this.handleChange}
+                            onChange={(e) => this.updateSurname(e)}
                         />
                     </div>
 
@@ -78,8 +203,8 @@ class RegisterPatient extends Component {
 
                         <select
                             className="field"
-                            defaultValue={this.state.gender}
-                            onChange={this.handleChange}
+                            defaultValue={this.state.patient.gender}
+                            onChange={(e) => this.updateGender(e)}
                             name="gender"
                         >
                             
@@ -95,9 +220,9 @@ class RegisterPatient extends Component {
                         <input
                             className="field"
                             type="text"
-                            value={this.state.medicalIdNumber}
+                            value={this.state.patient.medicalIdNumber}
                             name="medicalIdNumber"
-                            onChange={this.handleChange}
+                            onChange={(e) => this.updateMedId(e)}
                         />
                     </div>
                  
@@ -109,22 +234,23 @@ class RegisterPatient extends Component {
                         <input
                             className="field"
                             type="text"
-                            value={this.state.dateOfBirth}
+                            value={this.state.patient.dateOfBirth}
                             name="dateOfBirth"
-                            onChange={this.handleChange}
+                            placeholder="mm/dd/yyyy"
+                            onChange={(e) => this.updateBirthday(e)}
                         />
                     </div>
 
                     <div className="field-wrap">
                         <label className="label" htmlFor="">
-                            City:
+                            Address:
                         </label>
                         <input
                             className="field"
                             type="text"
-                            value={this.state.city}
+                            value={this.state.patient.city}
                             name="city"
-                            onChange={this.handleChange}
+                            onChange={(e) => this.updateCity(e)}
                         />
                     </div>
 
@@ -135,9 +261,10 @@ class RegisterPatient extends Component {
                         <input
                             className="field"
                             type="text"
-                            value={this.state.email}
+                            value={this.state.patient.email}
                             name="email"
-                            onChange={this.handleChange}
+                            placeholder="email@address.com"
+                            onChange={(e) => this.updateEmail(e)}
                         />
                     </div>
 
@@ -148,35 +275,35 @@ class RegisterPatient extends Component {
                         <input
                             className="field"
                             type="text"
-                            value={this.state.password}
+                            value={this.state.patient.password}
                             name="password"
-                            onChange={this.handleChange}
+                            onChange={(e) => this.updatePassword(e)}
                         />
                     </div>
 
                     <div className="field-wrap">
                         <label className="label" htmlFor="">
-                            Phone:
+                            Phone number:
                         </label>
                         <input
                             className="field"
                             type="text"
-                            value={this.state.phoneNumber}
+                            value={this.state.patient.phoneNumber}
                             name="phoneNumber"
-                            onChange={this.handleChange}
+                            onChange={(e) => this.updatePhone(e)}
                         />
                     </div>
 
                     <div className="field-wrap">
                         <label className="label" htmlFor="">
-                            Born in:
+                            Place of birth:
                         </label>
                         <input
                             className="field"
                             type="text"
-                            value={this.state.bornIn}
+                            value={this.state.patient.bornIn}
                             name="bornIn"
-                            onChange={this.handleChange}
+                            onChange={(e) => this.updateBorn(e)}
                         />
                     </div>
 
@@ -187,9 +314,9 @@ class RegisterPatient extends Component {
                         <input
                             className="field"
                             type="text"
-                            value={this.state.parentName}
+                            value={this.state.patient.parentName}
                             name="parentName"
-                            onChange={this.handleChange}
+                            onChange={(e) => this.updateParent(e)}
                         />
                     </div>
 
@@ -200,9 +327,9 @@ class RegisterPatient extends Component {
                         <input
                             className="field"
                             type="text"
-                            value={this.state.allergie}
+                            value={this.state.patient.allergie}
                             name="allergie"
-                            onChange={this.handleChange}
+                            onChange={(e) => this.updateAllergie(e)}
                         />
                     </div>
                    
@@ -214,9 +341,9 @@ class RegisterPatient extends Component {
                         <input
                             className="field"
                             type="text"
-                            value={this.state.uniqueCitizensidentityNumber}
+                            value={this.state.patient.uniqueCitizensidentityNumber}
                             name="uniqueCitizensidentityNumber"
-                            onChange={this.handleChange}
+                            onChange={(e) => this.updateUcin(e)}
                         />
                     </div>
 
@@ -227,8 +354,8 @@ class RegisterPatient extends Component {
                             <input
                                 type="checkbox"
                                 name="isMarried"
-                                checked={this.state.isMarried}
-                                onChange={this.handleChange}
+                                checked={this.state.patient.isMarried}
+                                onChange={(e) => this.updateMarried(e)}
                             /> Married
                         </label>
                     </div>
@@ -240,37 +367,44 @@ class RegisterPatient extends Component {
                         <input
                             className="field"
                             type="text"
-                            value={this.state.exLastname}
+                            value={this.state.patient.exLastname}
                             name="exLastname"
-                            disabled={((this.state.gender.toString() === "Female") && (this.state.isMarried)) ? "" : "disabled"} 
-                            onChange={this.handleChange}
+                            disabled={((this.state.patient.gender.toString() === "Female") && (this.state.patient.isMarried)) ? "" : "disabled"} 
+                            onChange={(e) => this.updateMaiden(e)}
                         />
                     </div>
 
                     <div>
                         <input type="file" onChange={this.handleChange2} />
-                        <img src={this.state.file} className="photo" />
+                        <img src={this.state.fileUrl} className="photo" />
                     </div>
 
                     
                     <div className="btn-wrap align-right">
-                        <button disabled={!this.state.firstName || !this.state.secondName || !this.state.allergie || !this.state.bornIn || !this.state.city || !this.state.dateOfBirth || !this.state.email || !this.state.medicalIdNumber || !this.state.parentName || !this.state.password || !this.state.phoneNumber || !this.state.uniqueCitizensidentityNumber} className="btn btn-primary" onClick={this.createRegistration.bind(this)}>Register</button>
+                        <button disabled={!this.state.patient.firstName || !this.state.patient.secondName || !this.state.patient.allergie || !this.state.patient.bornIn || !this.state.patient.city || !this.state.patient.dateOfBirth || !this.state.patient.email || !this.state.patient.medicalIdNumber || !this.state.patient.parentName || !this.state.patient.password || !this.state.patient.phoneNumber || !this.state.patient.uniqueCitizensidentityNumber} className="btn btn-primary" onClick={this.createRegistration.bind(this)}>Register</button>
                     </div>
                 </form>
             </div>
         )
     }
 
-    createRegistration() {
+    createRegistration(){
         toast.configure();
 
         toast.success("Registration successful!", {
             position: toast.POSITION.TOP_RIGHT
         });
 
+       
 
+        
 
-        this.props.patientRegistered(this.state)
+        console.log(this.state.patient);
+
+        this.props.patientRegistered(this.state.patient)
+        
+         
+       
     }
 
 }
