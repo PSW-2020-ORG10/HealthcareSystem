@@ -10,5 +10,6 @@ namespace HealthClinic.CL.Repository
         PatientUser Validate(PatientUser patient);
         List<PatientUser> GetAll();
         PatientUser FindOne(int id);
+      
     }
 }

@@ -7,6 +7,11 @@ namespace HealthClinic.CL.Model.Patient
 {
     public class Survey : Entity
     {
+        //for patients
+        public virtual PatientUser patient { get; set; }
+
+        public int patientId { get; set; }
+
         //for doctors
         public virtual DoctorUser doctor { get; set; }
 
@@ -46,10 +51,9 @@ namespace HealthClinic.CL.Model.Patient
             
         }
 
-
-
-        public Survey(int doctorId, int doctorsProfessionalism, int doctorsPoliteness, int doctorsTechnicality, int doctorsSkill, int doctorsKnowledge, int doctorsWorkingPace, int medicalStaffsProfessionalism, int medicalStaffsPoliteness, int medicalStaffsTechnicality, int medicalStaffsSkill, int medicalStaffsKnowledge, int medicalStaffsWorkingPace, int hospitalEnvironment, int hospitalEquipment, int hospitalHygiene, int hospitalPrices, int hospitalWaitingTime) : base()
+        public Survey(int patientId, int doctorId, int doctorsProfessionalism, int doctorsPoliteness, int doctorsTechnicality, int doctorsSkill, int doctorsKnowledge, int doctorsWorkingPace, int medicalStaffsProfessionalism, int medicalStaffsPoliteness, int medicalStaffsTechnicality, int medicalStaffsSkill, int medicalStaffsKnowledge, int medicalStaffsWorkingPace, int hospitalEnvironment, int hospitalEquipment, int hospitalHygiene, int hospitalPrices, int hospitalWaitingTime) : base()
         {
+            this.patientId = patientId;
             this.doctorId = doctorId;
             this.doctorsProfessionalism = doctorsProfessionalism;
             this.doctorsPoliteness = doctorsPoliteness;
@@ -70,8 +74,9 @@ namespace HealthClinic.CL.Model.Patient
             this.hospitalWaitingTime = hospitalWaitingTime;
         }
 
-        public Survey(int id, int doctorId, int doctorsProfessionalism, int doctorsPoliteness, int doctorsTechnicality, int doctorsSkill, int doctorsKnowledge, int doctorsWorkingPace, int medicalStaffsProfessionalism, int medicalStaffsPoliteness, int medicalStaffsTechnicality, int medicalStaffsSkill, int medicalStaffsKnowledge, int medicalStaffsWorkingPace, int hospitalEnvironment, int hospitalEquipment, int hospitalHygiene, int hospitalPrices, int hospitalWaitingTime) : base(id)
+        public Survey(int id, int patientId, int doctorId, int doctorsProfessionalism, int doctorsPoliteness, int doctorsTechnicality, int doctorsSkill, int doctorsKnowledge, int doctorsWorkingPace, int medicalStaffsProfessionalism, int medicalStaffsPoliteness, int medicalStaffsTechnicality, int medicalStaffsSkill, int medicalStaffsKnowledge, int medicalStaffsWorkingPace, int hospitalEnvironment, int hospitalEquipment, int hospitalHygiene, int hospitalPrices, int hospitalWaitingTime) : base(id)
         {
+            this.patientId = patientId;
             this.doctorId = doctorId;
             this.doctorsProfessionalism = doctorsProfessionalism;
             this.doctorsPoliteness = doctorsPoliteness;

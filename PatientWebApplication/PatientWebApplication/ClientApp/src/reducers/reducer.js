@@ -7,7 +7,9 @@
     LOADED_ALL_PATIENT_PRESCRIPTIONS,
     PATIENT_REGISTERED,
     SIMPLE_SEARCH_PATIENT_PRESCRIPTIONS,
-    FIND_ONE_PATIENT
+    FIND_ONE_PATIENT,
+    SURVEY_CREATED,
+    LOADED_APPOINTMENTSURVEY
 
 } from "../types/types"
 
@@ -46,7 +48,9 @@ const initialState = {
     prescriptionsList: [],
     patientPrescriptionsList: [],
     patientList: [],
-    patientInformationList: []
+    patientInformationList: [],
+    appointmentSurveyList: [],
+    surveyList: []
   
 };
 
@@ -106,6 +110,16 @@ function reducer(state = initialState, action) {
                 patientInformationList: action.payload
 
             };
+        case SURVEY_CREATED:
+            return {
+                ...state,
+                feedbackList: state.surveyList.concat(action.payload)
+            };
+        case LOADED_APPOINTMENTSURVEY:
+            return {
+                ...state,
+                appointmentSurveyList : action.payload
+            }; 
         default:
             return state;
     }
