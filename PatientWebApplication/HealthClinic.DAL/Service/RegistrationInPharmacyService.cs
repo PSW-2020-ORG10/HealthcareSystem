@@ -48,8 +48,7 @@ namespace HealthClinic.CL.Service
 
         public RegistrationInPharmacy getPharmacyApiKey(String apiKey)
         {
-            List<RegistrationInPharmacy> registrationInPharmacies = IRegistrationRepository.GetAll();
-            foreach (RegistrationInPharmacy registration in registrationInPharmacies)
+            foreach (RegistrationInPharmacy registration in IRegistrationRepository.GetAll())
             {
                 if (registration.apiKey.Equals(apiKey))  return registration; 
             }
