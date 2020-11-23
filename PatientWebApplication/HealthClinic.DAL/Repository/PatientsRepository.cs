@@ -37,7 +37,14 @@ namespace HealthClinic.CL.Repository
         {
             return dbContext.Patients.ToList();
         }
-
+        /// <summary> This method searches for patient based on <paramref name="id"/>. </summary>
+        /// <param name="id"><c>id</c> is <c>id</c> of a <c>PatientUser/c> that needs to be found.
+        /// </param>
+        /// <returns> Found patient if search was successful; otherwise, default PatientUser object.</returns>
+        public PatientUser FindOne(int id)
+        {
+            return dbContext.Patients.SingleOrDefault(PatientUser => PatientUser.id == id);
+        }
     }
 
 }
