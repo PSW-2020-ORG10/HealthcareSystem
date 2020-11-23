@@ -12,11 +12,16 @@ namespace HealthClinic.CL.Service
     public class RegistrationInPharmacyService
     {
         public RegistrationInPharmacyRepository RegistrationInPharmacyRepository { get; }
+        private IRegistrationInPharmacyRepository IRegistrationRepository { get; set; }
         public RegistrationInPharmacyService() { }
-
+    
         public RegistrationInPharmacyService(MyDbContext context)
         {
             RegistrationInPharmacyRepository = new RegistrationInPharmacyRepository(context);
+        }
+        public RegistrationInPharmacyService(IRegistrationInPharmacyRepository registrationRepository)
+        {
+            IRegistrationRepository = registrationRepository;
         }
         public List<RegistrationInPharmacy> GetAll()
         {
@@ -25,17 +30,30 @@ namespace HealthClinic.CL.Service
         public RegistrationInPharmacy Create(RegistrationInPharmacyDto dto)
         {
             RegistrationInPharmacy registration = RegistrationInPharmacyAdapter.RegistrationDtoToRegistration(dto);
-
-            return RegistrationInPharmacyRepository.Create(registration);
+            if (isApiKeyUnique(registration.apiKey))  return RegistrationInPharmacyRepository.Create(registration); 
+             return null;
+        }
+        public bool isApiKeyUnique(String apiKey)
+        {
+            foreach(RegistrationInPharmacy registration in GetAll())
+            {
+                if (registration.apiKey.Equals(apiKey)) return false;
+            }
+            return true;
+        }
+        public List<RegistrationInPharmacy> GetAllForStub()
+        {
+            return IRegistrationRepository.GetAll();
         }
 
-        public RegistrationInPharmacy getApiKey(int pharmacyId)
+        public RegistrationInPharmacy getPharmacyApiKey(String apiKey)
         {
-            return RegistrationInPharmacyRepository.getApiKey(pharmacyId);
-        }
-        public RegistrationInPharmacy getPharmacyId(String apiKey)
-        {
-            return RegistrationInPharmacyRepository.getPharmacyId(apiKey);
+            List<RegistrationInPharmacy> registrationInPharmacies = IRegistrationRepository.GetAll();
+            foreach (RegistrationInPharmacy registration in registrationInPharmacies)
+            {
+                if (registration.apiKey.Equals(apiKey))  return registration; 
+            }
+            return null;
         }
 
     }
