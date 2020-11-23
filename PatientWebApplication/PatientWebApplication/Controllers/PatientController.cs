@@ -81,7 +81,7 @@ namespace PatientWebApplication.Controllers
         [HttpGet("getOne")]
         public IActionResult GetOne(int id)
         {
-            PatientUser patient = PatientService.GetOne(7);
+            PatientUser patient = PatientService.GetOne(8);
             if (id < 0 && patient == null)
             {
                 return BadRequest();
