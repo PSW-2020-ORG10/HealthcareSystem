@@ -32,12 +32,13 @@ namespace IntegrationWithPharmacies.Controllers
         }
 
         [HttpPost]      // POST /api/registration Request body: {"pharmacyId": "Some number", "apiKey": "Some api key"}
-        public IActionResult Create(RegistrationInPharmacyDto dto)
+        public IActionResult Post(RegistrationInPharmacyDto dto)
         {
             if (registrationInPharmacyService.Create(dto) == null) return BadRequest();
 
             return Ok();
         }
+
 
     }
 }

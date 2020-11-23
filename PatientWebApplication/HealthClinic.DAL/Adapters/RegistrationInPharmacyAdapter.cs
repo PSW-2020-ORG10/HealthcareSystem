@@ -10,7 +10,7 @@ namespace HealthClinic.CL.Adapters
     {
         public static RegistrationInPharmacy RegistrationDtoToRegistration(RegistrationInPharmacyDto dto)
         {
-            return new RegistrationInPharmacy(1, dto.pharmacyId, dto.apiKey);
+            return new RegistrationInPharmacy(12, dto.pharmacyId, dto.apiKey);
         }
 
         public static RegistrationInPharmacyDto RegistrationToRegistrationDto(RegistrationInPharmacy registration)

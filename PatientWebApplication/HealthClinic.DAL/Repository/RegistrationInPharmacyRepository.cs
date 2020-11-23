@@ -7,7 +7,7 @@ using System.Text;
 
 namespace HealthClinic.CL.Repository
 {
-    public class RegistrationInPharmacyRepository
+    public class RegistrationInPharmacyRepository : IRegistrationInPharmacyRepository 
     {
         private MyDbContext dbContext;
 
@@ -25,13 +25,13 @@ namespace HealthClinic.CL.Repository
         {
             return dbContext.Registrations.ToList();
         }
-        public RegistrationInPharmacy getApiKey(int pharmacyId)
+       
+        public RegistrationInPharmacy getPharmacyApiKey(String apiKey)
         {
-            return dbContext.Registrations.SingleOrDefault(registration => registration.pharmacyId == pharmacyId);
+            Console.WriteLine(dbContext.Registrations.ToList().SingleOrDefault(registration => registration.apiKey == apiKey));
+            return dbContext.Registrations.ToList().SingleOrDefault(registration => registration.apiKey == apiKey);
         }
-        public RegistrationInPharmacy getPharmacyId(String apiKey)
-        {
-            return dbContext.Registrations.SingleOrDefault(registration => registration.apiKey == apiKey);
-        }
+
+        
     }
 }
