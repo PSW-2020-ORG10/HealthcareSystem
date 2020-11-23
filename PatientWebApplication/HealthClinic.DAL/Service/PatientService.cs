@@ -54,18 +54,16 @@ namespace HealthClinic.CL.Service
         }
 
 
-        public string ImageToSave(FileModel file)
+        public string ImageToSave(string path, FileModel file)
         {
             try
             {
-                string path = Directory.GetParent(Directory.GetCurrentDirectory()).FullName + "\\HealthClinic.DAL\\wwwroot\\" + file.FileName;
-
-
-                using (Stream stream = new FileStream(path, FileMode.Create))
+                string fullPath = path + "\\images\\" + file.FileName;
+                using (Stream stream = new FileStream(fullPath, FileMode.Create))
                 {
                     file.FormFile.CopyTo(stream);
                 }
-                return path;
+                return file.FileName;
             }
             catch (Exception)
             {
@@ -74,7 +72,9 @@ namespace HealthClinic.CL.Service
             }
 
         }
-
+        /// <summary> This method is calling <c>PatientRepository</c> to find one patient using <paramref name="id"/>. </summary>
+        /// <param name="id"><c>id</c> is <c>id</c> of a <c>PatientUser</c> that needs to be found.
+        /// <returns>One patient</returns>
         public PatientUser GetOne(int id)
         {
             return PatientsRepository.FindOne(id);
