@@ -59,6 +59,10 @@ namespace HealthClinic.CL.Service
 
         }
 
+        /// <summary> This method is calling searchForFirstParameter, searchForOtherParameters to get list of filtered <c>Prescription</c> of logged patient. </summary>
+        /// /// <param name="dto"><c>PrescriptionAdvancedSearchDto</c> is Data Transfer Object of a <c>Prescription</c> that is beomg used to filter precriptions.
+        /// </param>
+        /// <returns> List of filtered patient prescriptions. </returns>
         public List<Prescription> AdvancedSearchPrescriptions(PrescriptionAdvancedSearchDto dto)
         {
             List<Prescription> prescriptions = GetPrescriptionsForPatient(1);
@@ -78,48 +82,55 @@ namespace HealthClinic.CL.Service
 
             for (int i = 0; i < dto.RestRoles.Length; i++)
             {
-                if (dto.RestRoles[i].Equals("medicines"))
-                {
-                    othersPrescriptions = searchForMedicinesAdvanced(prescriptions, dto.Rest[i]);
-                }
-                else if (dto.RestRoles[i].Equals("comment"))
-                {
-                    othersPrescriptions = searchForCommentsAdvanced(prescriptions, dto.Rest[i]);
-                }
-                else if (dto.RestRoles[i].Equals("isUsed"))
-                {
-                    othersPrescriptions = searchForUsedAdvanced(prescriptions, dto.Rest[i]);
-                }
-                else
-                {
-                    othersPrescriptions = searchForDoctorAdvanced(prescriptions, dto.Rest[i]);
-                }
+                othersPrescriptions = searchForOtherRoles(dto.RestRoles[i], dto.Rest[i], prescriptions, othersPrescriptions);
 
+                
                 if (i == 0)
                 {
-                    if (dto.LogicOperators[i].Equals("or"))
-                    {
-                        finalPrescriptions = othersPrescriptions.Union(firstPrescriptions).ToList();
-                    } else
-                    {
-                        finalPrescriptions = othersPrescriptions.Intersect(firstPrescriptions).ToList();
-                    }
+                    finalPrescriptions = searchForLogicOperators(dto.LogicOperators[i], othersPrescriptions, firstPrescriptions);            
                 } else
                 {
-                    if (dto.LogicOperators[i].Equals("or"))
-                    {
-                        finalPrescriptions = othersPrescriptions.Union(finalPrescriptions).ToList();
-                    }
-                    else
-                    {
-                        finalPrescriptions = othersPrescriptions.Intersect(finalPrescriptions).ToList();
-                    }
+                    finalPrescriptions = searchForLogicOperators(dto.LogicOperators[i], othersPrescriptions, finalPrescriptions);   
                 }
 
                 
             }
 
             return finalPrescriptions;
+        }
+
+        private List<Prescription> searchForLogicOperators(string logicOperator, List<Prescription> othersPrescriptions, List<Prescription> finalPrescriptions)
+        {
+            if (logicOperator.Equals("or"))
+            {
+                finalPrescriptions = othersPrescriptions.Union(finalPrescriptions).ToList();
+            }
+            else
+            {
+                finalPrescriptions = othersPrescriptions.Intersect(finalPrescriptions).ToList();
+            }
+            return finalPrescriptions;
+        }
+
+        private List<Prescription> searchForOtherRoles(string restRole, string rest, List<Prescription> prescriptions, List<Prescription> othersPrescriptions)
+        {
+            if (restRole.Equals("medicines"))
+            {
+                othersPrescriptions = searchForMedicinesAdvanced(prescriptions, rest);
+            }
+            else if (restRole.Equals("comment"))
+            {
+                othersPrescriptions = searchForCommentsAdvanced(prescriptions, rest);
+            }
+            else if (restRole.Equals("isUsed"))
+            {
+                othersPrescriptions = searchForUsedAdvanced(prescriptions, rest);
+            }
+            else
+            {
+                othersPrescriptions = searchForDoctorAdvanced(prescriptions, rest);
+            }
+            return othersPrescriptions;
         }
 
         private List<Prescription> searchForFirstParameter(List<Prescription> prescriptions, PrescriptionAdvancedSearchDto dto)

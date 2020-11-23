@@ -23,15 +23,13 @@ class PrescriptionsSearchAdvancedTable extends Component {
 
     addSearchField = (event) => {
         event.preventDefault()
-        if (this.state.forAdding < 2) {
-            let searchFields = this.state.searchFields.concat([''])
-            this.setState(prevState => {
-                return {
-                    searchFields: searchFields,
-                    forAdding: prevState.forAdding + 1
-                }
-            });
-        }
+        let searchFields = this.state.searchFields.concat([''])
+        this.setState(prevState => {
+            return {
+                searchFields: searchFields,
+                forAdding: prevState.forAdding + 1
+            }
+        });   
     }
 
     handleChange = (event) => {
@@ -64,7 +62,7 @@ class PrescriptionsSearchAdvancedTable extends Component {
         })
     }
 
-    setDefaultValue = (event) => {
+    setDefaultValue = () => {
         let logicOperators = this.state.logicOperators
         logicOperators[this.state.forAdding] = "and"
         this.setState({
@@ -145,7 +143,7 @@ class PrescriptionsSearchAdvancedTable extends Component {
                         <div className="field-wrap" key={index}>
                             <td>
                                 <select
-                                    defaultValue="and"
+                                    defaultValue={this.setDefaultValue}
                                     className="field"
                                     onChange={this.handleLogicOperators}
                                     name="valueForOperators"
@@ -220,11 +218,6 @@ class PrescriptionsSearchAdvancedTable extends Component {
     }
 
     searchPrescriptions() {
-        alert(this.state.firstRole)
-        alert(this.state.first)
-        alert(this.state.restRoles)
-        alert(this.state.rest)
-        alert(this.state.logicOperators)
         this.props.advancedSearchPatientPrescriptions({ firstRole: this.state.firstRole, first: this.state.first, restRoles: this.state.restRoles, rest: this.state.rest, logicOperators: this.state.logicOperators })
     }
 
