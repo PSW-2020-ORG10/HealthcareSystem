@@ -64,7 +64,7 @@ class CreateSurveyForm extends Component {
                             onChange={this.handleChange}
                             name="doctorId">
                             {appointmentSurveyList.map(fbb =>
-                                <option key={fbb.id} value={fbb.doctorUserId}>{fbb.doctor.firstName + ' ' + fbb.doctor.secondName + ', on date: ' + fbb.date}</option>
+                                <option key={fbb.id} value={fbb.doctorUserId}>{fbb.doctor.firstName + ' ' + fbb.doctor.secondName + ', for appointment on date: ' + fbb.date}</option>
                             )};
                         </select>
                     </div>
