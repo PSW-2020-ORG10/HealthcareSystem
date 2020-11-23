@@ -3,6 +3,7 @@ using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Patient;
 using HealthClinic.CL.Repository;
 using HealthClinic.CL.Service;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -18,10 +19,14 @@ namespace PatientWebApplication.Controllers
     public class PatientUserController : ControllerBase
     {
         private PatientService PatientService { get; set; }
+        private IWebHostEnvironment _env;
 
-        public PatientUserController()
+
+
+        public PatientUserController(IWebHostEnvironment env)
         {
             PatientService = new PatientService(new PatientsRepository(), new EmailVerificationService());
+            _env = env;
         }
 
         [HttpPost]
@@ -40,13 +45,14 @@ namespace PatientWebApplication.Controllers
         [HttpPost("image")]
         public IActionResult SaveImg([FromForm] FileModel file)
         {
-            string pathToReturn = PatientService.ImageToSave(file);
-            if (pathToReturn == null)
+            string path = _env.WebRootPath;
+            string fileName = PatientService.ImageToSave(path, file);
+            if (fileName == null)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
-            return Ok(pathToReturn);
+            return Ok(fileName);
         
 
         }
@@ -66,6 +72,21 @@ namespace PatientWebApplication.Controllers
                 return NotFound();
             }
             return Redirect("http://localhost:60198");
+
+        }
+        /// <summary> This method is calling <c>PatientService</c> to get one <c>PatientUser</c>. </summary>
+        /// <param name="id"><c>id</c> is id of patient that needs to be found. 
+        /// <returns> If <paramref name="id"/>and patient is not valid returns 400 Bad Request; if patient is successfully found, returns 200 OK with found patient.</returns>
+
+        [HttpGet("getOne")]
+        public IActionResult GetOne(int id)
+        {
+            PatientUser patient = PatientService.GetOne(8);
+            if (id < 0 && patient == null)
+            {
+                return BadRequest();
+            }
+            return Ok(patient);
 
         }
 

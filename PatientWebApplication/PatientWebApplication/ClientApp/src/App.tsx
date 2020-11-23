@@ -11,6 +11,7 @@ import CreateFeedback from './components/CreateFeedback';
 import PrescriptionsSimple from './components/PrescriptionsSimple';
 import RegistrationOfPatient from './components/PatientRegister';
 import PrescriptionsAdvanced from './components/PrescriptionsAdvanced';
+import MyInformation from './components/MyInformation';
 
 export default () => (
     <Layout>
@@ -21,5 +22,6 @@ export default () => (
         <Route path='/prescriptions-simple' component={PrescriptionsSimple} />
         <Route path='/register-patient' component={RegistrationOfPatient} />
         <Route path='/prescriptions-advanced' component={PrescriptionsAdvanced} />
+        <Route path='/my-information' component={MyInformation} />
     </Layout>
 );

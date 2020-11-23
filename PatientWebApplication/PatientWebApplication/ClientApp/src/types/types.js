@@ -14,4 +14,6 @@ export const SIMPLE_SEARCH_PATIENT_PRESCRIPTIONS = "simpleSearchPatientPrescript
 export const SIMPLE_SEARCH_PRESCRIPTIONS_ERROR = "simpleSearchPrescriptionsError";
 export const ADVANCED_SEARCH_PATIENT_PRESCRIPTIONS = "advancedSearchPatientPrescriptions";
 export const ADVANCED_SEARCH_PRESCRIPTIONS_ERROR = "advancedSearchPrescriptionsError";
+export const FIND_ONE_PATIENT = "findOnePatient";
+export const FIND_ONE_PATIENT_ERROR = "findOnePatientError";
 
