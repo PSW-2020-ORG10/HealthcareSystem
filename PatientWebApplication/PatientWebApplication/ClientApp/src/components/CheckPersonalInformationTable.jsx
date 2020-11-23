@@ -6,7 +6,7 @@ import { wrap } from "module";
 class CheckPersonalInformationTable extends Component {
     componentDidMount() {
         debugger;
-        this.props.findOnePatient(7);
+        this.props.findOnePatient(8);
     }
     render() {
         debugger;

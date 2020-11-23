@@ -58,8 +58,7 @@ namespace HealthClinic.CL.Service
         {
             try
             {
-                string fullPath = path + "\\images\\" + file.FileName;
-                using (Stream stream = new FileStream(fullPath, FileMode.Create))
+                using (Stream stream = new FileStream(path + "\\images\\" + file.FileName, FileMode.Create))
                 {
                     file.FormFile.CopyTo(stream);
                 }
