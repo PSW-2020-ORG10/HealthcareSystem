@@ -41,6 +41,9 @@ namespace IntegrationWithPharmacies
                 {
                     message = JsonConvert.DeserializeObject<Message>(jsonMessage, new MyDateTimeConverter());
                 }
+
+
+
                 Console.WriteLine(" Primljena poruka {0}", message);
                 Program.ListOfMessages.Add(message);
             };
