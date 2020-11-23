@@ -28,7 +28,6 @@ namespace HealthClinic.CL.Repository
        
         public RegistrationInPharmacy getPharmacyApiKey(String apiKey)
         {
-            Console.WriteLine(dbContext.Registrations.ToList().SingleOrDefault(registration => registration.apiKey == apiKey));
             return dbContext.Registrations.ToList().SingleOrDefault(registration => registration.apiKey == apiKey);
         }
 
