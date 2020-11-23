@@ -6,7 +6,7 @@ import { wrap } from "module";
 class CheckPersonalInformationTable extends Component {
     componentDidMount() {
         debugger;
-        this.props.findOnePatient(1);
+        this.props.findOnePatient(7);
     }
     render() {
         debugger;
@@ -22,8 +22,11 @@ class CheckPersonalInformationTable extends Component {
                 <table className='table patientInformation' >
                     <tbody>
                         <tr>
-                            <th style={{ textAlign: "center", width: "700px" }}>Image:</th>
-                            
+                            <th style={{ textAlign: "left", width: "700px", marginTop:'400px' }}></th>
+                            <td >
+                                <img  src={'images/' + patientInformationList.file} />
+
+                            </td>
                         </tr>
                         <tr>
                             <th style={{ textAlign: "center", width: "700px" }}>Name:</th>
@@ -39,15 +42,15 @@ class CheckPersonalInformationTable extends Component {
                         </tr>
                         <tr>
                             <th style={{ textAlign: "center" }} > Date of Birth:</th >
-                            <td style={{ textAlign: "justify", }}>{patientInformationList.dateOfBirth}</td >
+                            <td style={{ textAlign: "justify" }}>{patientInformationList.dateOfBirth}</td >
                         </tr>
                         <tr>
                             <th style={{ textAlign: "center" }} >Parent's name:</th >
-                            <td style={{ textAlign: "justify", }}>{patientInformationList.parentName}</td >
+                            <td style={{ textAlign: "justify" }}>{patientInformationList.parentName}</td >
                         </tr>
                         <tr>
                             <th style={{ textAlign: "center" }} >Phone number:</th >
-                            <td style={{ textAlign: "justify", }}>{patientInformationList.phoneNumber}</td >
+                            <td style={{ textAlign: "justify" }}>{patientInformationList.phoneNumber}</td >
                         </tr>
                         <tr>
                             <th style={{ textAlign: "center", width: "700px" }}>Email:</th>
@@ -59,32 +62,32 @@ class CheckPersonalInformationTable extends Component {
                         </tr>
                         <tr>
                             <th style={{ textAlign: "center" }} > Address:</th >
-                            <td style={{ textAlign: "justify", }}>{patientInformationList.city}</td >
+                            <td style={{ textAlign: "justify" }}>{patientInformationList.city}</td >
                         </tr>
 
                         <tr>
                             <th style={{ textAlign: "center" }} > Known allergies:</th >
-                            <td style={{ textAlign: "justify", }}>{patientInformationList.allergie}</td >
+                            <td style={{ textAlign: "justify" }}>{patientInformationList.allergie}</td >
                         </tr>
                         <tr>
                             <th style={{ textAlign: "center" }} >Phone number:</th >
-                            <td style={{ textAlign: "justify", }}>{patientInformationList.phoneNumber}</td >
+                            <td style={{ textAlign: "justify" }}>{patientInformationList.phoneNumber}</td >
                         </tr>
                         <tr>
                             <th style={{ textAlign: "center" }} >Gender:</th >
-                            <td style={{ textAlign: "justify", }}>{patientInformationList.gender}</td >
+                            <td style={{ textAlign: "justify" }}>{patientInformationList.gender}</td >
                         </tr>
                         <tr>
                             <th style={{ textAlign: "center" }} > Place of birth:</th >
-                            <td style={{ textAlign: "justify", }}>{patientInformationList.bornIn}</td >
+                            <td style={{ textAlign: "justify" }}>{patientInformationList.bornIn}</td >
                         </tr>
                         <tr>
                             <th style={{ textAlign: "center" }} >Is married:</th >
-                            <td style={{ textAlign: "justify", }}>{patientInformationList.isMarried ? "MARRIED" : "NOT MARRIED"}</td >
+                            <td style={{ textAlign: "justify" }}>{patientInformationList.isMarried ? "MARRIED" : "NOT MARRIED"}</td >
                         </tr>
                         <tr>
                             <th style={{ textAlign: "center" }} >Maiden name:</th >
-                            <td style={{ textAlign: "justify", }}>{patientInformationList.exLastname}</td >
+                            <td style={{ textAlign: "justify" }}>{patientInformationList.exLastname}</td >
                         </tr>
                     </tbody>
 

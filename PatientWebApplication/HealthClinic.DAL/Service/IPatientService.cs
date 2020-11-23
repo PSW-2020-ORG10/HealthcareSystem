@@ -15,7 +15,7 @@ namespace HealthClinic.CL.Service
         PatientUser Create(PatientDto patientDto);
         List<PatientUser> GetAll();
 
-        string ImageToSave(FileModel file);
+        string ImageToSave(string path, FileModel file);
 
         PatientUser GetOne(int id);
     }
