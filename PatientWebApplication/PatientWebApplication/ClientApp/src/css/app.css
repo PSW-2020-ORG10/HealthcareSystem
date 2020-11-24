@@ -219,11 +219,31 @@ body {
     font-size: 20px;
 }
 
+.field-date {
+    width: 45% !important;
+    display: inline !important;
+}
+
+.field-end {
+    float: right;
+}
+
 .label {
     display: block;
     color: #999;
     padding-bottom: 5px;
     text-transform: uppercase;
+}
+
+.label-date {
+    display: inline !important;
+    right: 0;
+}
+
+.label-end {
+    float: right;
+    text-align: center;
+    margin-top: 15px;
 }
 
 @media only screen and (max-width: 600px) {

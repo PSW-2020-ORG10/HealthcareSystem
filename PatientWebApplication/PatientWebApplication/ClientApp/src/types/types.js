@@ -14,4 +14,9 @@ export const SIMPLE_SEARCH_PATIENT_PRESCRIPTIONS = "simpleSearchPatientPrescript
 export const SIMPLE_SEARCH_PRESCRIPTIONS_ERROR = "simpleSearchPrescriptionsError";
 export const FIND_ONE_PATIENT = "findOnePatient";
 export const FIND_ONE_PATIENT_ERROR = "findOnePatientError";
+export const LOADED_ALL_PATIENT_REPORTS = "loadedAllReports";
+export const OBSERVE_PATIENT_REPORTS_ERROR = "patientReportsObservedError";
+export const SIMPLE_SEARCH_APPOINTMENTS_DONE = "simpleSearchAppointmentsDone";
+export const SIMPLE_SEARCH_APPOINTMENTS_ERROR = "simpleSearchAppointmentssError";
+
 

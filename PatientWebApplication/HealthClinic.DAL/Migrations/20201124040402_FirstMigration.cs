@@ -102,7 +102,9 @@ namespace HealthClinic.CL.Migrations
                     isMarried = table.Column<bool>(nullable: false),
                     bornIn = table.Column<string>(nullable: true),
                     parentName = table.Column<string>(nullable: true),
-                    exLastname = table.Column<string>(nullable: true)
+                    exLastname = table.Column<string>(nullable: true),
+                    gender = table.Column<string>(nullable: true),
+                    file = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -164,6 +166,20 @@ namespace HealthClinic.CL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Questions", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Registrations",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    pharmacyId = table.Column<int>(nullable: false),
+                    apiKey = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Registrations", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -299,24 +315,24 @@ namespace HealthClinic.CL.Migrations
                 {
                     id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    doctorUserId = table.Column<int>(nullable: false),
-                    time = table.Column<TimeSpan>(nullable: false),
-                    date = table.Column<string>(nullable: true),
-                    patientUserId = table.Column<int>(nullable: false),
-                    roomid = table.Column<string>(nullable: true)
+                    DoctorUserId = table.Column<int>(nullable: false),
+                    Start = table.Column<TimeSpan>(nullable: false),
+                    Date = table.Column<string>(nullable: true),
+                    PatientUserId = table.Column<int>(nullable: false),
+                    RoomId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DoctorAppointments", x => x.id);
                     table.ForeignKey(
-                        name: "FK_DoctorAppointments_Doctors_doctorUserId",
-                        column: x => x.doctorUserId,
+                        name: "FK_DoctorAppointments_Doctors_DoctorUserId",
+                        column: x => x.DoctorUserId,
                         principalTable: "Doctors",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_DoctorAppointments_Patients_patientUserId",
-                        column: x => x.patientUserId,
+                        name: "FK_DoctorAppointments_Patients_PatientUserId",
+                        column: x => x.PatientUserId,
                         principalTable: "Patients",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -341,6 +357,36 @@ namespace HealthClinic.CL.Migrations
                     table.ForeignKey(
                         name: "FK_Feedbacks_Patients_PatientId",
                         column: x => x.PatientId,
+                        principalTable: "Patients",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Operations",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    DoctorUserId = table.Column<int>(nullable: false),
+                    Start = table.Column<TimeSpan>(nullable: false),
+                    Date = table.Column<string>(nullable: true),
+                    PatientUserId = table.Column<int>(nullable: false),
+                    RoomId = table.Column<string>(nullable: true),
+                    end = table.Column<TimeSpan>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Operations", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_Operations_Doctors_DoctorUserId",
+                        column: x => x.DoctorUserId,
+                        principalTable: "Doctors",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Operations_Patients_PatientUserId",
+                        column: x => x.PatientUserId,
                         principalTable: "Patients",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -495,17 +541,41 @@ namespace HealthClinic.CL.Migrations
                     quantityPerDay = table.Column<int>(nullable: false),
                     classify = table.Column<string>(nullable: true),
                     comment = table.Column<string>(nullable: true),
-                    DoctorAppointmentid = table.Column<int>(nullable: true)
+                    AppointmentId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Referrals", x => x.id);
                     table.ForeignKey(
-                        name: "FK_Referrals_DoctorAppointments_DoctorAppointmentid",
-                        column: x => x.DoctorAppointmentid,
+                        name: "FK_Referrals_DoctorAppointments_AppointmentId",
+                        column: x => x.AppointmentId,
                         principalTable: "DoctorAppointments",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OperationReferrals",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    medicine = table.Column<string>(nullable: true),
+                    takeMedicineUntil = table.Column<string>(nullable: true),
+                    quantityPerDay = table.Column<int>(nullable: false),
+                    classify = table.Column<string>(nullable: true),
+                    comment = table.Column<string>(nullable: true),
+                    OperationId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OperationReferrals", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_OperationReferrals_Operations_OperationId",
+                        column: x => x.OperationId,
+                        principalTable: "Operations",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -528,47 +598,14 @@ namespace HealthClinic.CL.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Operations",
-                columns: table => new
-                {
-                    id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    PatientUserId = table.Column<int>(nullable: false),
-                    date = table.Column<string>(nullable: true),
-                    start = table.Column<TimeSpan>(nullable: false),
-                    end = table.Column<TimeSpan>(nullable: false),
-                    DoctorUserId = table.Column<int>(nullable: false),
-                    idRoom = table.Column<string>(nullable: true),
-                    OperationReferralId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Operations", x => x.id);
-                    table.ForeignKey(
-                        name: "FK_Operations_Doctors_DoctorUserId",
-                        column: x => x.DoctorUserId,
-                        principalTable: "Doctors",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Operations_Referrals_OperationReferralId",
-                        column: x => x.OperationReferralId,
-                        principalTable: "Referrals",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Operations_Patients_PatientUserId",
-                        column: x => x.PatientUserId,
-                        principalTable: "Patients",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.InsertData(
                 table: "Doctors",
                 columns: new[] { "id", "city", "dateOfBirth", "email", "firstName", "isSpecialist", "ordination", "password", "phoneNumber", "salary", "secondName", "speciality", "uniqueCitizensidentityNumber" },
-                values: new object[] { 1, "Grad", "2/2/2020", "email", "DoctorName", false, "Ordination 1", "pass", "123", 200.0, "DoctorSurname", "Specialty", "1234" });
+                values: new object[,]
+                {
+                    { 1, "Grad", "2/2/2020", "email", "Jovan", false, "Ordination 1", "pass", "123", 200.0, "Jovanovic", "Specialty", "1234" },
+                    { 2, "Grad", "2/2/2020", "email", "Marko", false, "Ordination 1", "pass", "123", 200.0, "Markovic", "Specialty", "1234" }
+                });
 
             migrationBuilder.InsertData(
                 table: "DoctorsOrders",
@@ -597,11 +634,11 @@ namespace HealthClinic.CL.Migrations
 
             migrationBuilder.InsertData(
                 table: "Patients",
-                columns: new[] { "id", "allergie", "bornIn", "city", "dateOfBirth", "email", "exLastname", "firstName", "guest", "isMarried", "isRegisteredBySecretary", "isVerified", "medicalIdNumber", "parentName", "password", "phoneNumber", "secondName", "uniqueCitizensidentityNumber" },
+                columns: new[] { "id", "allergie", "bornIn", "city", "dateOfBirth", "email", "exLastname", "file", "firstName", "gender", "guest", "isMarried", "isRegisteredBySecretary", "isVerified", "medicalIdNumber", "parentName", "password", "phoneNumber", "secondName", "uniqueCitizensidentityNumber" },
                 values: new object[,]
                 {
-                    { 1, "Alergija", "Grad2", "Grad", "2/2/2020", "email", "", "Pera2", false, false, false, false, "1234", "Roditelj", "pass", "123", "Peric", "1234" },
-                    { 2, "Alergija", "Grad2", "Grad", "2/2/2020", "email", "", "Pera3", false, false, false, false, "1234", "Roditelj", "pass", "123", "Peric", "1234" }
+                    { 1, "Alergija", "Grad2", "Grad", "2/2/2020", "email", "", null, "Pera2", "Male", false, false, false, false, "212313", "Roditelj", "pass", "123", "Peric", "1234" },
+                    { 2, "Alergija", "Grad2", "Grad", "2/2/2020", "email", "", null, "Pera3", "Female", false, false, false, false, "2112313", "Roditelj", "pass", "123", "Peric", "1234" }
                 });
 
             migrationBuilder.InsertData(
@@ -629,9 +666,9 @@ namespace HealthClinic.CL.Migrations
                 values: new object[] { 1, "Answer", "Name" });
 
             migrationBuilder.InsertData(
-                table: "Referrals",
-                columns: new[] { "id", "DoctorAppointmentid", "classify", "comment", "medicine", "quantityPerDay", "takeMedicineUntil" },
-                values: new object[] { 1, null, "classify", "comment", "Medicine", 3, "Take medicine until" });
+                table: "Registrations",
+                columns: new[] { "id", "apiKey", "pharmacyId" },
+                values: new object[] { 1, "Api key", 1 });
 
             migrationBuilder.InsertData(
                 table: "Renovation",
@@ -655,8 +692,12 @@ namespace HealthClinic.CL.Migrations
 
             migrationBuilder.InsertData(
                 table: "DoctorAppointments",
-                columns: new[] { "id", "date", "doctorUserId", "patientUserId", "roomid", "time" },
-                values: new object[] { 1, "22/04/2020", 1, 2, "1", new TimeSpan(0, 0, 0, 0, 0) });
+                columns: new[] { "id", "Date", "DoctorUserId", "PatientUserId", "RoomId", "Start" },
+                values: new object[,]
+                {
+                    { 1, "22/04/2020", 1, 2, "1", new TimeSpan(0, 0, 0, 0, 0) },
+                    { 2, "07/01/2020", 2, 2, "1", new TimeSpan(0, 0, 0, 0, 0) }
+                });
 
             migrationBuilder.InsertData(
                 table: "DoctorNotifications",
@@ -686,8 +727,12 @@ namespace HealthClinic.CL.Migrations
 
             migrationBuilder.InsertData(
                 table: "Operations",
-                columns: new[] { "id", "DoctorUserId", "OperationReferralId", "PatientUserId", "date", "end", "idRoom", "start" },
-                values: new object[] { 1, 1, 1, 1, "2/2/2020", new TimeSpan(0, 0, 0, 0, 0), "room1", new TimeSpan(0, 0, 0, 0, 0) });
+                columns: new[] { "id", "Date", "DoctorUserId", "PatientUserId", "RoomId", "Start", "end" },
+                values: new object[,]
+                {
+                    { 1, "20/02/2020", 1, 2, "room1", new TimeSpan(0, 0, 0, 0, 0), new TimeSpan(0, 0, 0, 0, 0) },
+                    { 2, "03/10/2020", 2, 2, "room1", new TimeSpan(0, 0, 0, 0, 0), new TimeSpan(0, 0, 0, 0, 0) }
+                });
 
             migrationBuilder.InsertData(
                 table: "PatientNotifications",
@@ -704,15 +749,30 @@ namespace HealthClinic.CL.Migrations
                 columns: new[] { "id", "Data", "EquipmentId" },
                 values: new object[] { 1, "data", 1 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_DoctorAppointments_doctorUserId",
-                table: "DoctorAppointments",
-                column: "doctorUserId");
+            migrationBuilder.InsertData(
+                table: "OperationReferrals",
+                columns: new[] { "id", "OperationId", "classify", "comment", "medicine", "quantityPerDay", "takeMedicineUntil" },
+                values: new object[] { 2, 1, "Operation", "comment", "Operation Medicine", 3, "Take medicine until" });
+
+            migrationBuilder.InsertData(
+                table: "Referrals",
+                columns: new[] { "id", "AppointmentId", "classify", "comment", "medicine", "quantityPerDay", "takeMedicineUntil" },
+                values: new object[] { 1, 1, "classify", "comment", "Medicine", 3, "Take medicine until" });
+
+            migrationBuilder.InsertData(
+                table: "Referrals",
+                columns: new[] { "id", "AppointmentId", "classify", "comment", "medicine", "quantityPerDay", "takeMedicineUntil" },
+                values: new object[] { 2, 1, "Appointment", "comment", "Medicine2", 3, "Take medicine until" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_DoctorAppointments_patientUserId",
+                name: "IX_DoctorAppointments_DoctorUserId",
                 table: "DoctorAppointments",
-                column: "patientUserId");
+                column: "DoctorUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DoctorAppointments_PatientUserId",
+                table: "DoctorAppointments",
+                column: "PatientUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DoctorNotifications_DoctorUserId",
@@ -775,14 +835,15 @@ namespace HealthClinic.CL.Migrations
                 column: "EquipmentId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_OperationReferrals_OperationId",
+                table: "OperationReferrals",
+                column: "OperationId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Operations_DoctorUserId",
                 table: "Operations",
                 column: "DoctorUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Operations_OperationReferralId",
-                table: "Operations",
-                column: "OperationReferralId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Operations_PatientUserId",
@@ -795,9 +856,9 @@ namespace HealthClinic.CL.Migrations
                 column: "PatientUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Referrals_DoctorAppointmentid",
+                name: "IX_Referrals_AppointmentId",
                 table: "Referrals",
-                column: "DoctorAppointmentid");
+                column: "AppointmentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Schedules_shiftId",
@@ -826,7 +887,7 @@ namespace HealthClinic.CL.Migrations
                 name: "modelRooms");
 
             migrationBuilder.DropTable(
-                name: "Operations");
+                name: "OperationReferrals");
 
             migrationBuilder.DropTable(
                 name: "PatientNotifications");
@@ -836,6 +897,12 @@ namespace HealthClinic.CL.Migrations
 
             migrationBuilder.DropTable(
                 name: "Questions");
+
+            migrationBuilder.DropTable(
+                name: "Referrals");
+
+            migrationBuilder.DropTable(
+                name: "Registrations");
 
             migrationBuilder.DropTable(
                 name: "Renovation");
@@ -856,7 +923,10 @@ namespace HealthClinic.CL.Migrations
                 name: "Equipment");
 
             migrationBuilder.DropTable(
-                name: "Referrals");
+                name: "Operations");
+
+            migrationBuilder.DropTable(
+                name: "DoctorAppointments");
 
             migrationBuilder.DropTable(
                 name: "Shifts");
@@ -874,16 +944,13 @@ namespace HealthClinic.CL.Migrations
                 name: "Prescriptions");
 
             migrationBuilder.DropTable(
-                name: "DoctorAppointments");
-
-            migrationBuilder.DropTable(
-                name: "ManagersOrders");
-
-            migrationBuilder.DropTable(
                 name: "Doctors");
 
             migrationBuilder.DropTable(
                 name: "Patients");
+
+            migrationBuilder.DropTable(
+                name: "ManagersOrders");
         }
     }
 }
