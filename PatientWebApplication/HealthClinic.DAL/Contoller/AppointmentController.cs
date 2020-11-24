@@ -5,6 +5,7 @@
  ***********************************************************************/
 using HealthClinic.CL.Model.Doctor;
 using HealthClinic.CL.Model.Patient;
+using HealthClinic.CL.Repository;
 using HealthClinic.CL.Service;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace HealthClinic.CL.Contoller
 
         public AppointmentController()
         {
-            regularAppointmentService = new RegularAppointmentService();
+            regularAppointmentService = new RegularAppointmentService(new AppointmentRepository());
             contextAppointmentService = new ContextAppointmentService(regularAppointmentService);
         }
         public void New(DoctorAppointment appointment, Operation operation)
@@ -39,9 +40,10 @@ namespace HealthClinic.CL.Contoller
             return regularAppointmentService.GetAll();
         }
 
-        public DoctorAppointment GetByid(int id)
+        //        public DoctorAppointment GetByid(int id)
+        public void GetByid(int id)
         {
-            return regularAppointmentService.GetByid(id);
+ //           return regularAppointmentService.GetByid(id);
         }
 
         public Boolean isTermNotAvailable(DoctorUser doctor, TimeSpan time, String dateToString, PatientUser patient)

@@ -4,26 +4,28 @@
  * Purpose: Definition of the Class Service.RegularAppointmentService
  ***********************************************************************/
 using HealthClinic.CL.Contoller;
+using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Doctor;
 using HealthClinic.CL.Model.Employee;
 using HealthClinic.CL.Model.Patient;
 using HealthClinic.CL.Repository;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace HealthClinic.CL.Service
 {
     public class RegularAppointmentService : BingPath, IStrategyAppointment
     {
-        public AppointmentRepository appointmentRepository;
+        private IAppointmentRepository _appointmentRepository;
         public DoctorController doctorController;
         public EmployeesScheduleController employeesScheduleController;
         public PatientController patientController;
         String path = bingPathToAppDir(@"JsonFiles\appointments.json");
 
-        public RegularAppointmentService()
+        public RegularAppointmentService(IAppointmentRepository appointmentRepository)
         {
-            appointmentRepository = new AppointmentRepository(path);
+            this._appointmentRepository = appointmentRepository;
             doctorController = new DoctorController();
             employeesScheduleController = new EmployeesScheduleController();
             patientController = new PatientController();
@@ -31,26 +33,31 @@ namespace HealthClinic.CL.Service
 
         public List<DoctorAppointment> GetAll()
         {
-            return appointmentRepository.GetAll();
+            return _appointmentRepository.GetAll();
         }
 
         public void New(DoctorAppointment appointment, Operation operation)
         {
-            appointmentRepository.New(appointment);
+            _appointmentRepository.New(appointment);
         }
 
         public void Update(DoctorAppointment appointment, Operation operation)
         {
-            appointmentRepository.Update(appointment);
+            _appointmentRepository.Update(appointment);
         }
-        public void Remove(int appointmentid, int operationid)
+        public void Remove(int appointmentid)
         {
-            appointmentRepository.Delete(appointmentid);
+            _appointmentRepository.Delete(appointmentid);
         }
 
         public DoctorAppointment GetByid(int id)
         {
-            return appointmentRepository.GetByid(id);
+            return _appointmentRepository.GetByid(id);
+        }
+
+        public List<DoctorAppointment> GetAppointmentsForPatient(int id)
+        {
+            return _appointmentRepository.GetAppointmentsForPatient(id);
         }
 
         public DoctorAppointment RecommendAnAppointment(DoctorUser doctor, DateTime date1, DateTime date2, PatientUser patient)
@@ -143,6 +150,63 @@ namespace HealthClinic.CL.Service
             if (hasAppointmentDoctor == true || hasOperationDoctor == true ) return true;
 
             return false;
+        }
+
+        public List<DoctorAppointment> SimpleSearchAppointments(AppointmentReportSearchDto appointmentReportSearchDto)
+        {
+            List<DoctorAppointment> appointments = GetAppointmentsForPatient(2);
+
+            appointments = SearchForDate(appointments, appointmentReportSearchDto);
+
+            appointments = SearchForDoctorNameAndSurname(appointments, appointmentReportSearchDto);
+
+            appointments = SearchForAppointmentType(appointments, appointmentReportSearchDto);
+
+            return appointments;
+
+        }
+
+        private List<DoctorAppointment> SearchForDoctorNameAndSurname(List<DoctorAppointment> appointments, AppointmentReportSearchDto appointmentSearchDto)
+        {
+            if (!appointmentSearchDto.DoctorNameAndSurname.Equals(""))
+            {
+                appointments = appointments.FindAll(appointment => appointment.Doctor.firstName.Contains(appointmentSearchDto.DoctorNameAndSurname) || appointment.Doctor.secondName.Contains(appointmentSearchDto.DoctorNameAndSurname));
+            }
+
+            return appointments;
+        }
+
+        private List<DoctorAppointment> SearchForDate(List<DoctorAppointment> appointments, AppointmentReportSearchDto appointmentSearchDto)
+        {
+            if (!appointmentSearchDto.Start.Equals("") && !appointmentSearchDto.End.Equals(""))
+            {
+                DateTime startDate = DateTime.ParseExact(appointmentSearchDto.Start, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                DateTime endDate = DateTime.ParseExact(appointmentSearchDto.End, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                appointments = appointments.FindAll(appointment => startDate <= DateTime.ParseExact(appointment.Date, "dd/MM/yyyy", CultureInfo.InvariantCulture) && DateTime.ParseExact(appointment.Date, "dd/MM/yyyy", CultureInfo.InvariantCulture) <= endDate);
+            }
+            else if (appointmentSearchDto.Start.Equals("") && !appointmentSearchDto.End.Equals(""))
+            {
+                DateTime endDate = DateTime.ParseExact(appointmentSearchDto.End, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                appointments = appointments.FindAll(appointment => DateTime.ParseExact(appointment.Date, "dd/MM/yyyy", CultureInfo.InvariantCulture) <= endDate);
+            }
+            else if(!appointmentSearchDto.Start.Equals("") && appointmentSearchDto.End.Equals(""))
+            {
+                DateTime startDate = DateTime.ParseExact(appointmentSearchDto.Start, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                appointments = appointments.FindAll(appointment => startDate <= DateTime.ParseExact(appointment.Date, "dd/MM/yyyy", CultureInfo.InvariantCulture));
+            }
+            
+            return appointments;
+
+        }
+
+        private List<DoctorAppointment> SearchForAppointmentType(List<DoctorAppointment> appointments, AppointmentReportSearchDto appointmentSearchDto)
+        {
+            if (appointmentSearchDto.AppointmentType.Equals("") || appointmentSearchDto.AppointmentType.Equals("Appointment"))
+            {
+                return appointments;
+            }
+
+            return new List<DoctorAppointment>();
         }
 
     }

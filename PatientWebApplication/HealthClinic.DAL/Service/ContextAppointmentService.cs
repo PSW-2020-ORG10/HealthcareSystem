@@ -33,7 +33,7 @@ namespace HealthClinic.CL.Service
         }
         public void Remove(int appointmentid, int operatioid)
         {
-            this.iStrategyAppointment.Remove(appointmentid, operatioid);
+            this.iStrategyAppointment.Remove(appointmentid);
         }
    
     }

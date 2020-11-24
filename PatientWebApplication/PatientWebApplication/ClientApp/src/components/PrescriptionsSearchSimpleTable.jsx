@@ -11,6 +11,7 @@ class PrescriptionsSearchSimpleTable extends Component {
     };
 
     handleChange = (event) => {
+        debugger;
         const { name, value, type, checked } = event.target
         type === "checkbox" ? this.setState({
             [name]: checked
