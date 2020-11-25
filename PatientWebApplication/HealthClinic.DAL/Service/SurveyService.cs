@@ -21,5 +21,11 @@ namespace HealthClinic.CL.Service
         {                   
             return SurveyRepository.Add(SurveyAdapter.SurveyDtoToSurvey(surveyDto));
         }
+
+        public List<Survey> GetAllSurveysForPatientId(int id)
+        {
+            return SurveyRepository.GetAllSurveysForPatientId(id);
+        }
+
     }
 }

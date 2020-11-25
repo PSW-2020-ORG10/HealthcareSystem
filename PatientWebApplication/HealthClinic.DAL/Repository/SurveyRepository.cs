@@ -4,6 +4,7 @@ using HealthClinic.CL.Model.Patient;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace HealthClinic.CL.Repository
@@ -23,5 +24,16 @@ namespace HealthClinic.CL.Repository
             dbContext.SaveChanges();
             return survey;
         }
+
+        public List<Survey> GetAll()
+        {
+            return dbContext.Surveys.ToList();
+        }
+
+        public List<Survey> GetAllSurveysForPatientId(int id)
+        {
+            return dbContext.Surveys.ToList().FindAll(survey => survey.patientId == id);
+        }
+
     }
 }

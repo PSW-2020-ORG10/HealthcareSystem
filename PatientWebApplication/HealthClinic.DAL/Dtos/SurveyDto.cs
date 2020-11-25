@@ -8,7 +8,7 @@ namespace HealthClinic.CL.Dtos
     {
         public int patientId { get; set; }
 
-        public int doctorId { get; set; }
+        public int appointmentId { get; set; }
 
         public int doctorsProfessionalism { get; set; }
         public int doctorsPoliteness { get; set; }
@@ -44,10 +44,10 @@ namespace HealthClinic.CL.Dtos
 
         }
 
-        public SurveyDto(int patientId, int doctorId, int doctorsProfessionalism, int doctorsPoliteness, int doctorsTechnicality, int doctorsSkill, int doctorsKnowledge, int doctorsWorkingPace, int medicalStaffsProfessionalism, int medicalStaffsPoliteness, int medicalStaffsTechnicality, int medicalStaffsSkill, int medicalStaffsKnowledge, int medicalStaffsWorkingPace, int hospitalEnvironment, int hospitalEquipment, int hospitalHygiene, int hospitalPrices, int hospitalWaitingTime) : base()
+        public SurveyDto(int patientId, int appointmentId, int doctorsProfessionalism, int doctorsPoliteness, int doctorsTechnicality, int doctorsSkill, int doctorsKnowledge, int doctorsWorkingPace, int medicalStaffsProfessionalism, int medicalStaffsPoliteness, int medicalStaffsTechnicality, int medicalStaffsSkill, int medicalStaffsKnowledge, int medicalStaffsWorkingPace, int hospitalEnvironment, int hospitalEquipment, int hospitalHygiene, int hospitalPrices, int hospitalWaitingTime) : base()
         {
             this.patientId = patientId;
-            this.doctorId = doctorId;
+            this.appointmentId = appointmentId;
             this.doctorsProfessionalism = doctorsProfessionalism;
             this.doctorsPoliteness = doctorsPoliteness;
             this.doctorsTechnicality = doctorsTechnicality;

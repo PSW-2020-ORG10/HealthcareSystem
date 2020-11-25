@@ -29,15 +29,24 @@ namespace PatientWebApplication.Controllers
             {
                 return BadRequest();
             }
-            return Ok();
+            return Redirect("http://localhost:60198");
         }
 
         [HttpGet]      
         public IActionResult Get()
         {
-
-            List<DoctorAppointment> result = AppointmentSurveyRepository.GetAll();
-            return Ok(result);
+            //List<DoctorAppointment> result = null;
+            List<DoctorAppointment> allValidAppointments = AppointmentSurveyRepository.GetAll();
+            List<Survey> allValidSurveys = SurveyService.GetAllSurveysForPatientId(1);
+            //List<DoctorAppointment> allUnvalidAppointments = new List<DoctorAppointment>();
+            List<int> allUnvalidAppointments = new List<int>();
+            foreach (Survey survey in allValidSurveys) {
+                allUnvalidAppointments.Add(survey.appointmentId);
+            }
+            //allValidAppointments.Except(allUnvalidAppointments);
+            allValidAppointments = allValidAppointments.Where(p => !allUnvalidAppointments.Any(p2 => p2 == p.id)).ToList();
+            // Console.WriteLine(allValidAppointments);
+            return Ok(allValidAppointments);
         }
 
 

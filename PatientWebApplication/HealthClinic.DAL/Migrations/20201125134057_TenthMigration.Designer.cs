@@ -3,14 +3,16 @@ using System;
 using HealthClinic.CL.DbContextModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HealthClinic.CL.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201125134057_TenthMigration")]
+    partial class TenthMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -686,51 +688,6 @@ namespace HealthClinic.CL.Migrations
                             id = 3,
                             date = "05/07/2019",
                             doctorUserId = 3,
-                            patientUserId = 1,
-                            roomid = "1",
-                            time = new TimeSpan(0, 0, 0, 0, 0)
-                        },
-                        new
-                        {
-                            id = 4,
-                            date = "04/02/2019",
-                            doctorUserId = 1,
-                            patientUserId = 1,
-                            roomid = "1",
-                            time = new TimeSpan(0, 0, 0, 0, 0)
-                        },
-                        new
-                        {
-                            id = 5,
-                            date = "11/01/2016",
-                            doctorUserId = 2,
-                            patientUserId = 1,
-                            roomid = "1",
-                            time = new TimeSpan(0, 0, 0, 0, 0)
-                        },
-                        new
-                        {
-                            id = 6,
-                            date = "09/01/2014",
-                            doctorUserId = 3,
-                            patientUserId = 1,
-                            roomid = "1",
-                            time = new TimeSpan(0, 0, 0, 0, 0)
-                        },
-                        new
-                        {
-                            id = 7,
-                            date = "07/02/2011",
-                            doctorUserId = 3,
-                            patientUserId = 1,
-                            roomid = "1",
-                            time = new TimeSpan(0, 0, 0, 0, 0)
-                        },
-                        new
-                        {
-                            id = 8,
-                            date = "01/03/2020",
-                            doctorUserId = 2,
                             patientUserId = 1,
                             roomid = "1",
                             time = new TimeSpan(0, 0, 0, 0, 0)

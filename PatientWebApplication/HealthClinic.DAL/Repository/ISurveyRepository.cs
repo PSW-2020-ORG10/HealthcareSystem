@@ -9,5 +9,6 @@ namespace HealthClinic.CL.Repository
     public interface ISurveyRepository
     {
         Survey Add(Survey survey);
+        List<Survey> GetAllSurveysForPatientId(int id);
     }
 }
