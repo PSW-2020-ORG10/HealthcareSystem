@@ -16,7 +16,7 @@ class PrescriptionsAdvanced extends React.PureComponent<CounterProps> {
     public render() {
         return (
             <React.Fragment>
-                <Header title="Simple Prescriptions Search" description="Search prescriptions." />
+                <Header title="Advanced Prescriptions Search" description="Search prescriptions." />
                 <PrescriptionsSearchAdvancedTable />
             </React.Fragment>
         );

@@ -74,6 +74,14 @@ namespace HealthClinic.CL.Service
             return finalPrescriptions;
         }
 
+        /// <summary> This method is getting list of filtered <c>Prescription</c> that match list of parameters in <c>PrescriptionAdvnacedSearchDto</c></summary>
+        /// <param name="prescriptions"> List of all <c>Prescription</c> of logged user.
+        /// </param>
+        /// <param name="dto"><c>PrescriptionAdvancedSearchDto</c> is Data Transfer Object of a <c>Prescription</c> that is beomg used to filter precriptions.
+        /// </param>
+        /// <param name="firstPrescriptions"> List of <c>Prescription</c> that contains prescriptions that matches first parameter.
+        /// </param>
+        /// <returns> List of filtered patient prescriptions. </returns>
         private List<Prescription> searchForOtherParameters(List<Prescription> prescriptions, PrescriptionAdvancedSearchDto dto, List<Prescription> firstPrescriptions)
         {
             List<Prescription> othersPrescriptions = new List<Prescription>();
@@ -83,28 +91,14 @@ namespace HealthClinic.CL.Service
             for (int i = 0; i < dto.RestRoles.Length; i++)
             {
                 othersPrescriptions = searchForOtherRoles(dto.RestRoles[i], dto.Rest[i], prescriptions, othersPrescriptions);
-
-                if (i >= dto.LogicOperators.Length)
+             
+                if (i == 0)
                 {
-                    if (i == 0)
-                    {
-                        finalPrescriptions = searchForLogicOperators("and", othersPrescriptions, firstPrescriptions);
-                    }
-                    else
-                    {
-                        finalPrescriptions = searchForLogicOperators("and", othersPrescriptions, finalPrescriptions);
-                    }
+                    finalPrescriptions = searchForLogicOperators(dto.LogicOperators[i], othersPrescriptions, firstPrescriptions);
                 }
                 else
                 {
-                    if (i == 0)
-                    {
-                        finalPrescriptions = searchForLogicOperators(dto.LogicOperators[i], othersPrescriptions, firstPrescriptions);
-                    }
-                    else
-                    {
-                        finalPrescriptions = searchForLogicOperators(dto.LogicOperators[i], othersPrescriptions, finalPrescriptions);
-                    }
+                    finalPrescriptions = searchForLogicOperators(dto.LogicOperators[i], othersPrescriptions, finalPrescriptions);
                 }
             }
 
@@ -113,10 +107,6 @@ namespace HealthClinic.CL.Service
 
         private List<Prescription> searchForLogicOperators(string logicOperator, List<Prescription> othersPrescriptions, List<Prescription> finalPrescriptions)
         {
-            if (logicOperator == null)
-            {
-                logicOperator = "and";
-            }
 
             if (logicOperator.Equals("or"))
             {
