@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HealthClinic.CL.Adapters;
 using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Repository;
 using HealthClinic.CL.Service;
@@ -22,13 +23,13 @@ namespace PatientWebApplication.Controllers
         [HttpGet("{id}")]
         public IActionResult GetOperations(int id)
         {
-            return Ok(this.operationService.GetOperationsForPatient(id));
+            return Ok(new OperationAdapter().ConvertOperationListToOperationDtoList(this.operationService.GetOperationsForPatient(id)));
         }
 
         [HttpPost("search")]
         public IActionResult SimpleSearchOperations(AppointmentReportSearchDto dto)
         {
-            return Ok(this.operationService.SimpleSearchOperations(dto));
+            return Ok(new OperationAdapter().ConvertOperationListToOperationDtoList(this.operationService.SimpleSearchOperations(dto)));
         }
     }
 }

@@ -3,6 +3,7 @@
  * Author:  Tamara
  * Purpose: Definition of the Class Service.RegularAppointmentService
  ***********************************************************************/
+using HealthClinic.CL.Adapters;
 using HealthClinic.CL.Contoller;
 using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Doctor;
@@ -154,7 +155,7 @@ namespace HealthClinic.CL.Service
 
         public List<DoctorAppointment> SimpleSearchAppointments(AppointmentReportSearchDto appointmentReportSearchDto)
         {
-            List<DoctorAppointment> appointments = GetAppointmentsForPatient(2);
+            List<DoctorAppointment> appointments = GetAppointmentsForPatient(appointmentReportSearchDto.PatientId);
 
             appointments = SearchForDate(appointments, appointmentReportSearchDto);
 

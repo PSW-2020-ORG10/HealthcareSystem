@@ -3,6 +3,7 @@
  * Author:  Tamara
  * Purpose: Definition of the Class Contoller.OperationService2
  ***********************************************************************/
+using HealthClinic.CL.Adapters;
 using HealthClinic.CL.Contoller;
 using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Doctor;
@@ -65,7 +66,7 @@ namespace HealthClinic.CL.Service
 
         public List<Operation> SimpleSearchOperations(AppointmentReportSearchDto appointmentReportSearchDto)
         {
-            List<Operation> operations = GetOperationsForPatient(2);
+            List<Operation> operations = GetOperationsForPatient(appointmentReportSearchDto.PatientId);
 
             operations = SearchForDate(operations, appointmentReportSearchDto);
 

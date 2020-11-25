@@ -108,15 +108,15 @@ namespace HealthClinic.CL.DbContextModel
 
             modelBuilder.Entity<Referral>().HasData(
 
-            new Referral(1, "Medicine", "Take medicine until", 3, "classify", "comment", 1),
-            new Referral(2, "Medicine2", "Take medicine until", 3, "Appointment", "comment", 1)
+            new Referral(1, "Aspirin", "25/02/2020", 3, "classify", "Patient had slight heart arrhythmia.", 1),
+            new Referral(2, "Brufen", "11/05/2020", 1, "Appointment", "Patient had cold.", 2)
 
            );
 
             modelBuilder.Entity<OperationReferral>().HasData(
 
-            new OperationReferral(1, "Operation Medicine", "Take medicine until", 3, "Operation", "comment", 1),
-            new OperationReferral(2, "Operation Medicine", "Take medicine until", 3, "Operation", "comment", 1)
+            new OperationReferral(1, "Hemomycin", "15/09/2020", 1, "Operation", "Operation was successfull.", 1),
+            new OperationReferral(2, "Amoxicillin", "18/10/2020", 3, "Operation", "Patient lost a lot of blood.", 2)
 
           );
 

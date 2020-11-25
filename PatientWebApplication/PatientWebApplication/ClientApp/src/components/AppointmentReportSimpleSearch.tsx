@@ -15,7 +15,7 @@ class AppointmentReportSimpleSearch extends React.PureComponent<CounterProps> {
     public render() {
         return (
             <React.Fragment>
-                <Header title="Simple Prescriptions Search" description="Search prescriptions." />
+                <Header title="Simple Appointments Search" description="Search appointments." />
                 <AppointmentReportSimpleSearchTable/>
             </React.Fragment>
         );

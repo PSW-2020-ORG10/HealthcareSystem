@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HealthClinic.CL.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20201124040402_FirstMigration")]
+    [Migration("20201125230419_FirstMigration")]
     partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -219,20 +219,20 @@ namespace HealthClinic.CL.Migrations
                             id = 1,
                             OperationId = 1,
                             classify = "Operation",
-                            comment = "comment",
-                            medicine = "Operation Medicine",
-                            quantityPerDay = 3,
-                            takeMedicineUntil = "Take medicine until"
+                            comment = "Operation was successfull.",
+                            medicine = "Hemomycin",
+                            quantityPerDay = 1,
+                            takeMedicineUntil = "15/09/2020"
                         },
                         new
                         {
                             id = 2,
-                            OperationId = 1,
+                            OperationId = 2,
                             classify = "Operation",
-                            comment = "comment",
-                            medicine = "Operation Medicine",
+                            comment = "Patient lost a lot of blood.",
+                            medicine = "Amoxicillin",
                             quantityPerDay = 3,
-                            takeMedicineUntil = "Take medicine until"
+                            takeMedicineUntil = "18/10/2020"
                         });
                 });
 
@@ -272,20 +272,20 @@ namespace HealthClinic.CL.Migrations
                             id = 1,
                             AppointmentId = 1,
                             classify = "classify",
-                            comment = "comment",
-                            medicine = "Medicine",
+                            comment = "Patient had slight heart arrhythmia.",
+                            medicine = "Aspirin",
                             quantityPerDay = 3,
-                            takeMedicineUntil = "Take medicine until"
+                            takeMedicineUntil = "25/02/2020"
                         },
                         new
                         {
                             id = 2,
-                            AppointmentId = 1,
+                            AppointmentId = 2,
                             classify = "Appointment",
-                            comment = "comment",
-                            medicine = "Medicine2",
-                            quantityPerDay = 3,
-                            takeMedicineUntil = "Take medicine until"
+                            comment = "Patient had cold.",
+                            medicine = "Brufen",
+                            quantityPerDay = 1,
+                            takeMedicineUntil = "11/05/2020"
                         });
                 });
 
