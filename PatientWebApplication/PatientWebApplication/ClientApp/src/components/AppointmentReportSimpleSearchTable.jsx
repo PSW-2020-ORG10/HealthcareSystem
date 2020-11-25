@@ -4,7 +4,9 @@ import { connect } from "react-redux"
 import { wrap } from "module";
 import axios from "axios";
 import ReferralModal from "./ReferralModal"
-import { Button } from 'react-bootstrap';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; 
+import { showErrorToast, checkDateFormat } from "../utilities/Utilities"
 
 class AppointmentReportSimpleSearchTable extends Component {
     state = {
@@ -12,6 +14,10 @@ class AppointmentReportSimpleSearchTable extends Component {
         End: "",
         DoctorNameAndSurname: "",
         AppointmentType: "",
+        PatientId: 2,
+        Referral: null,
+        Date: "",
+        modalShow: false
     };
 
     componentDidMount() {
@@ -34,8 +40,8 @@ class AppointmentReportSimpleSearchTable extends Component {
         const patientAppointments = this.props.patientAppointments;
         debugger;
         return (
-            
             <div>
+                {this.state.modalShow ? <ReferralModal show={this.state.modalShow} referral={this.state.Referral} date={this.state.Date} onShowChange={this.displayModal.bind(this)} /> : null}
                 <div className="field-wrap">
                     <label className="label" htmlFor="">
                         Doctor name and surname:
@@ -58,7 +64,7 @@ class AppointmentReportSimpleSearchTable extends Component {
                         type="text"
                         value={this.state.Start}
                         name="Start"
-
+                        placeholder="dd/MM/yyyy"
                         onChange={this.handleChange}
                     />
                      <input
@@ -66,7 +72,7 @@ class AppointmentReportSimpleSearchTable extends Component {
                         type="text"
                         value={this.state.End}
                         name="End"
-
+                        placeholder="dd/MM/yyyy"
                         onChange={this.handleChange}
                     />
                     <label className="label label-date label-end">to: </label>
@@ -89,8 +95,11 @@ class AppointmentReportSimpleSearchTable extends Component {
                 </div>
 
                 <div className="btn-wrap align-right">
-                    <button className="btn btn-primary" onClick={this.searchAppointments.bind(this)}>Search</button>
+                    <button className="btn btn-primary btn-block btn-lg" onClick={this.searchAppointments.bind(this)}>Search</button>
                 </div>
+
+                <br>
+                </br>
 
                 <table className='table allPrescriptions' >
                     <thead>
@@ -101,11 +110,12 @@ class AppointmentReportSimpleSearchTable extends Component {
                         </tr>
                     </thead>
                     {patientAppointments.map((f) => (
-                        <tbody key={f.id, f.operationReferral}>
-                            <tr key={f.id, f.operationReferral}>
-                                <td style={{ textAlign: "left" }} >{f.doctor.firstName + " " + f.doctor.secondName}</td>
+                        <tbody key={f}>
+                            <tr key={f}>
+                                <td style={{ textAlign: "left" }} >{f.doctorNameAndSurname}</td>
                                 <td style={{ textAlign: "center" }} > {this.checkType(f)}</td >
                                 <td style={{ textAlign: "center" }}>{f.date}</td >
+                                <td style={{ textAlign: "right" }}><button onClick={() => { this.displayModal(f) }} className="btn btn-primary">Details</button></td >
                             </tr>
                         </tbody>
                     ))}
@@ -116,6 +126,21 @@ class AppointmentReportSimpleSearchTable extends Component {
 
         );
         
+    }
+
+    displayModal(f) {
+        debugger;
+        console.log(f)
+        this.setState({ modalShow: !this.state.modalShow })
+        if (f === undefined) {
+            return;
+        }
+        else if (typeof f.referral !== 'undefined') {
+            this.setState({ Referral: f.referral[0], Date: f.date })
+        }
+        else if (typeof f.operationReferral !== 'undefined') {
+            this.setState({ Referral: f.operationReferral, Date: f.date })
+        }
     }
 
     checkType(f) {
@@ -132,8 +157,14 @@ class AppointmentReportSimpleSearchTable extends Component {
     }
 
     searchAppointments() {
-        console.log(this.state);
-        this.props.simpleSearchAppointments(this.state)
+        debugger;
+        if (this.state.Start !== "" && checkDateFormat(this.state.Start)) {
+            showErrorToast()
+        }
+        else if (this.state.End !== "" && checkDateFormat(this.state.End)) {
+            showErrorToast()
+        }
+        this.props.simpleSearchAppointments({ Start: this.state.Start, End: this.state.End, DoctorNameAndSurname: this.state.DoctorNameAndSurname, AppointmentType: this.state.AppointmentType, PatientId: this.state.PatientId })
     }
 
 }

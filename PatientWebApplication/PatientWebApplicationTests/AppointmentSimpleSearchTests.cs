@@ -19,7 +19,7 @@ namespace PatientWebApplicationTests
 
             RegularAppointmentService service = new RegularAppointmentService(CreateAppointmentStubRepository());
 
-            List<DoctorAppointment> foundAppointments = service.SimpleSearchAppointments(new AppointmentReportSearchDto("Per", "20/07/2020", "25/08/2020", "Appointment"));
+            List<DoctorAppointment> foundAppointments = service.SimpleSearchAppointments(new AppointmentReportSearchDto("Per", "20/07/2020", "25/08/2020", "Appointment", 2));
 
             foundAppointments.ShouldHaveSingleItem();
         }
@@ -30,7 +30,7 @@ namespace PatientWebApplicationTests
 
             RegularAppointmentService service = new RegularAppointmentService(CreateAppointmentStubRepository());
 
-            List<DoctorAppointment> foundAppointments = service.SimpleSearchAppointments(new AppointmentReportSearchDto("", "", "", "Operation"));
+            List<DoctorAppointment> foundAppointments = service.SimpleSearchAppointments(new AppointmentReportSearchDto("", "", "", "Operation", 2));
 
             foundAppointments.ShouldBeEmpty();
         }
@@ -40,7 +40,7 @@ namespace PatientWebApplicationTests
         {
             RegularAppointmentService service = new RegularAppointmentService(CreateAppointmentStubRepository());
 
-            List<DoctorAppointment> foundAppointments = service.SimpleSearchAppointments(new AppointmentReportSearchDto("", "", "22/11/2020", "Appointment"));
+            List<DoctorAppointment> foundAppointments = service.SimpleSearchAppointments(new AppointmentReportSearchDto("", "", "22/11/2020", "Appointment", 2));
 
             foundAppointments.ShouldNotBeEmpty();
 
@@ -51,7 +51,7 @@ namespace PatientWebApplicationTests
         {
             RegularAppointmentService service = new RegularAppointmentService(CreateAppointmentStubRepository());
 
-            List<DoctorAppointment> foundAppointments = service.SimpleSearchAppointments(new AppointmentReportSearchDto("", "22/01/2020", "", "Appointment"));
+            List<DoctorAppointment> foundAppointments = service.SimpleSearchAppointments(new AppointmentReportSearchDto("", "22/01/2020", "", "Appointment", 2));
 
             foundAppointments.ShouldNotBeEmpty();
 
@@ -63,7 +63,7 @@ namespace PatientWebApplicationTests
 
             OperationService service = new OperationService(CreateOperationStubRepository());
 
-            List<Operation> foundOperations = service.SimpleSearchOperations(new AppointmentReportSearchDto("Per", "20/02/2020", "21/05/2020", "Operation"));
+            List<Operation> foundOperations = service.SimpleSearchOperations(new AppointmentReportSearchDto("Per", "20/02/2020", "21/05/2020", "Operation", 2));
 
             foundOperations.ShouldHaveSingleItem();
         }
@@ -74,7 +74,7 @@ namespace PatientWebApplicationTests
 
             OperationService service = new OperationService(CreateOperationStubRepository());
 
-            List<Operation> foundOperations = service.SimpleSearchOperations(new AppointmentReportSearchDto("", "", "", "Appointment"));
+            List<Operation> foundOperations = service.SimpleSearchOperations(new AppointmentReportSearchDto("", "", "", "Appointment", 2));
 
             foundOperations.ShouldBeEmpty();
         }
@@ -84,7 +84,7 @@ namespace PatientWebApplicationTests
         {
             OperationService service = new OperationService(CreateOperationStubRepository());
 
-            List<Operation> foundOperations = service.SimpleSearchOperations(new AppointmentReportSearchDto("", "", "22/11/2020", "Operation"));
+            List<Operation> foundOperations = service.SimpleSearchOperations(new AppointmentReportSearchDto("", "", "22/11/2020", "Operation", 2));
 
             foundOperations.ShouldNotBeEmpty();
 
@@ -95,7 +95,7 @@ namespace PatientWebApplicationTests
         {
             OperationService service = new OperationService(CreateOperationStubRepository());
 
-            List<Operation> foundAppointments = service.SimpleSearchOperations(new AppointmentReportSearchDto("", "22/03/2020", "", "Operation"));
+            List<Operation> foundAppointments = service.SimpleSearchOperations(new AppointmentReportSearchDto("", "22/03/2020", "", "Operation", 2));
 
             foundAppointments.ShouldNotBeEmpty();
 

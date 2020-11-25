@@ -25,7 +25,7 @@ var AppointmentReportSimpleSearch = /** @class */ (function (_super) {
     }
     AppointmentReportSimpleSearch.prototype.render = function () {
         return (React.createElement(React.Fragment, null,
-            React.createElement(Header_1.default, { title: "Simple Prescriptions Search", description: "Search prescriptions." }),
+            React.createElement(Header_1.default, { title: "Simple Appointments Search", description: "Search appointments." }),
             React.createElement(AppointmentReportSimpleSearchTable_1.default, null)));
     };
     return AppointmentReportSimpleSearch;

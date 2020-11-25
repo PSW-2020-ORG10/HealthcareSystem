@@ -752,17 +752,20 @@ namespace HealthClinic.CL.Migrations
             migrationBuilder.InsertData(
                 table: "OperationReferrals",
                 columns: new[] { "id", "OperationId", "classify", "comment", "medicine", "quantityPerDay", "takeMedicineUntil" },
-                values: new object[] { 2, 1, "Operation", "comment", "Operation Medicine", 3, "Take medicine until" });
+                values: new object[,]
+                {
+                    { 1, 1, "Operation", "Operation was successfull.", "Hemomycin", 1, "15/09/2020" },
+                    { 2, 2, "Operation", "Patient lost a lot of blood.", "Amoxicillin", 3, "18/10/2020" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Referrals",
                 columns: new[] { "id", "AppointmentId", "classify", "comment", "medicine", "quantityPerDay", "takeMedicineUntil" },
-                values: new object[] { 1, 1, "classify", "comment", "Medicine", 3, "Take medicine until" });
-
-            migrationBuilder.InsertData(
-                table: "Referrals",
-                columns: new[] { "id", "AppointmentId", "classify", "comment", "medicine", "quantityPerDay", "takeMedicineUntil" },
-                values: new object[] { 2, 1, "Appointment", "comment", "Medicine2", 3, "Take medicine until" });
+                values: new object[,]
+                {
+                    { 1, 1, "classify", "Patient had slight heart arrhythmia.", "Aspirin", 3, "25/02/2020" },
+                    { 2, 2, "Appointment", "Patient had cold.", "Brufen", 1, "11/05/2020" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_DoctorAppointments_DoctorUserId",
