@@ -3,6 +3,7 @@ import { loadedAllPatientPrescriptions, advancedSearchPatientPrescriptions } fro
 import { connect } from "react-redux"
 import { wrap } from "module";
 
+
 class PrescriptionsSearchAdvancedTable extends Component {
     state = {
         medicines: "",
@@ -18,7 +19,8 @@ class PrescriptionsSearchAdvancedTable extends Component {
         valueForArrays: "",
         valueForOperators: "",
         logicOperators: [],
-        objectToSend: {}
+        objectToSend: {},
+        defaultLogicOperator: "and"
     };
 
     addSearchField = (event) => {
@@ -63,6 +65,7 @@ class PrescriptionsSearchAdvancedTable extends Component {
     }
 
     setDefaultValue = () => {
+        alert("usao")
         let logicOperators = this.state.logicOperators
         logicOperators[this.state.forAdding] = "and"
         this.setState({
@@ -143,7 +146,8 @@ class PrescriptionsSearchAdvancedTable extends Component {
                         <div className="field-wrap" key={index}>
                             <td>
                                 <select
-                                    defaultValue={this.setDefaultValue}
+                                    options={this.state.defaultLogicOperator}
+                                    defaultValue={this.state.defaultLogicOperator}
                                     className="field"
                                     onChange={this.handleLogicOperators}
                                     name="valueForOperators"
@@ -218,6 +222,7 @@ class PrescriptionsSearchAdvancedTable extends Component {
     }
 
     searchPrescriptions() {
+        alert(this.state.logicOperators)
         this.props.advancedSearchPatientPrescriptions({ firstRole: this.state.firstRole, first: this.state.first, restRoles: this.state.restRoles, rest: this.state.rest, logicOperators: this.state.logicOperators })
     }
 
