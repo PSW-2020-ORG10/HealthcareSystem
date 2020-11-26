@@ -173,22 +173,37 @@ namespace HealthClinic.CL.Service
         {
             if (!UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.Start) && !UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.End))
             {
-                DateTime startDate = DateTime.ParseExact(appointmentSearchDto.Start, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                DateTime endDate = DateTime.ParseExact(appointmentSearchDto.End, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                appointments = appointments.FindAll(appointment => startDate <= DateTime.ParseExact(appointment.Date, "dd/MM/yyyy", CultureInfo.InvariantCulture) && DateTime.ParseExact(appointment.Date, "dd/MM/yyyy", CultureInfo.InvariantCulture) <= endDate);
+                appointments = GetAppointmentsBetweenDates(appointmentSearchDto.Start, appointmentSearchDto.End, appointments);
             }
             else if (UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.Start) && !UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.End))
             {
-                DateTime endDate = DateTime.ParseExact(appointmentSearchDto.End, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                appointments = appointments.FindAll(appointment => DateTime.ParseExact(appointment.Date, "dd/MM/yyyy", CultureInfo.InvariantCulture) <= endDate);
+                appointments = GetAppointmentsBeforeDate(appointmentSearchDto.End, appointments);
             }
             else if(!UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.Start) && UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.End))
             {
-                DateTime startDate = DateTime.ParseExact(appointmentSearchDto.Start, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                appointments = appointments.FindAll(appointment => startDate <= DateTime.ParseExact(appointment.Date, "dd/MM/yyyy", CultureInfo.InvariantCulture));
+                appointments = GetAppointmentsAfterDate(appointmentSearchDto.Start, appointments);
             }
             return appointments;
 
+        }
+
+        private List<DoctorAppointment> GetAppointmentsBetweenDates(String start, String end, List<DoctorAppointment> appointments)
+        {
+            DateTime startDate = UtilityMethods.ParseDateInCorrectFormat(start);
+            DateTime endDate = UtilityMethods.ParseDateInCorrectFormat(end);
+            return appointments.FindAll(appointment => startDate <= UtilityMethods.ParseDateInCorrectFormat(appointment.Date) && UtilityMethods.ParseDateInCorrectFormat(appointment.Date) <= endDate);
+        }
+
+        private List<DoctorAppointment> GetAppointmentsBeforeDate(String date, List<DoctorAppointment> appointments)
+        {
+            DateTime endDate = UtilityMethods.ParseDateInCorrectFormat(date);
+            return appointments.FindAll(appointment => UtilityMethods.ParseDateInCorrectFormat(appointment.Date) <= endDate);
+        }
+
+        private List<DoctorAppointment> GetAppointmentsAfterDate(String date, List<DoctorAppointment> appointments)
+        {
+            DateTime startDate = UtilityMethods.ParseDateInCorrectFormat(date);
+            return appointments.FindAll(appointment => startDate <= UtilityMethods.ParseDateInCorrectFormat(appointment.Date));
         }
 
         private List<DoctorAppointment> SearchForAppointmentType(List<DoctorAppointment> appointments, AppointmentReportSearchDto appointmentSearchDto)

@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using HealthClinic.CL.Dtos;
+using HealthClinic.CL.Utility;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -12,13 +13,12 @@ namespace PatientWebApplication.Validators
     {
         public AppointmentReportSearchValidator()
         {
-            var date = new DateTime();
-            When(f => !f.Start.Equals(""), () =>
+            When(f => !UtilityMethods.CheckIfStringIsEmpty(f.Start), () =>
             {
-                RuleFor(f => DateTime.TryParseExact(f.Start, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date)).Equal(true);
+                RuleFor(f => UtilityMethods.TryParseDateInCorrectFormat(f.Start)).Equal(true);
             });
-            When(f => !f.End.Equals(""), () => {
-                RuleFor(f => DateTime.TryParseExact(f.End, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date)).Equal(true);
+            When(f => !UtilityMethods.CheckIfStringIsEmpty(f.End), () => {
+                RuleFor(f => UtilityMethods.TryParseDateInCorrectFormat(f.End)).Equal(true);
             });
         }
     }
