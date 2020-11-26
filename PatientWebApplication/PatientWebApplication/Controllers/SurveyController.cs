@@ -35,12 +35,8 @@ namespace PatientWebApplication.Controllers
 
         [HttpGet]      
         public IActionResult Get()
-        {       
-            List<DoctorAppointment> allValidAppointments = regularAppointmentService.GetAppointmentsForPatient(1);          
-            allValidAppointments = SurveyService.FindAllValidAppointments(allValidAppointments);
-            return Ok(allValidAppointments);
+        {                  
+            return Ok(regularAppointmentService.FindAllValidAppointments(regularAppointmentService.GetAppointmentsForPatient(1), SurveyService.GetAllSurveysForPatientId(1)));
         }
-
-       
     }
 }
