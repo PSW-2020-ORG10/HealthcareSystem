@@ -150,6 +150,9 @@ class PrescriptionsSearchAdvancedTable extends Component {
                             onChange={this.handleChange}
                          />
                     </td>
+                    <td>
+                        <button className="btn btn-primary" onClick={this.addSearchField}>Add New Field</button>
+                    </td>
                 </div>
 
 
@@ -194,11 +197,10 @@ class PrescriptionsSearchAdvancedTable extends Component {
                             </td>
                         </div>
                     ))}
-                    <button className="btn btn-primary" onClick={this.addSearchField}>Add New Field</button>
                 </div>
 
                 <div className="btn-wrap align-right">
-                    <button className="btn btn-primary" /*disabled={this.state.defaultLogicOperator.length <= this.state.forAdding || this.state.restRoles.length <= this.state.forAdding}*/ onClick={this.searchPrescriptions.bind(this)}>Search</button>
+                    <button className="btn btn-primary btn-block btn-lg mb-4" /*disabled={this.state.defaultLogicOperator.length <= this.state.forAdding || this.state.restRoles.length <= this.state.forAdding}*/ onClick={this.searchPrescriptions.bind(this)}>Search</button>
                 </div>
 
                 <table className='table allPrescriptions' >

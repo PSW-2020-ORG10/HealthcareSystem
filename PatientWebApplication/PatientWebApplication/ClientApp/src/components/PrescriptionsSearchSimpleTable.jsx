@@ -93,7 +93,7 @@ class PrescriptionsSearchSimpleTable extends Component {
                     </div>
 
                     <div className="btn-wrap align-right">
-                        <button className="btn btn-primary" onClick={this.searchPrescriptions.bind(this)}>Search</button>
+                    <button className="btn btn-primary btn-block btn-lg mb-4" onClick={this.searchPrescriptions.bind(this)}>Search</button>
                     </div>
                 
                 <table className='table allPrescriptions' >
