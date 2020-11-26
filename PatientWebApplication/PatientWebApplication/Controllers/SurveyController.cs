@@ -16,11 +16,10 @@ namespace PatientWebApplication.Controllers
     {
         private SurveyService SurveyService { get; set; }
         private RegularAppointmentService regularAppointmentService { get; set; }
-        private AppointmentSurveyRepository AppointmentSurveyRepository { get; set; }
+        
         public SurveyController()
         {
             SurveyService = new SurveyService(new SurveyRepository());
-            AppointmentSurveyRepository = new AppointmentSurveyRepository();
             regularAppointmentService = new RegularAppointmentService(new AppointmentRepository());
         }
 
