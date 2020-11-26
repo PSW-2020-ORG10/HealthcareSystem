@@ -3,27 +3,32 @@
  * Author:  Tamara
  * Purpose: Definition of the Class Service.RegularAppointmentService
  ***********************************************************************/
+using Castle.Core.Internal;
+using HealthClinic.CL.Adapters;
 using HealthClinic.CL.Contoller;
+using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Doctor;
 using HealthClinic.CL.Model.Employee;
 using HealthClinic.CL.Model.Patient;
 using HealthClinic.CL.Repository;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using HealthClinic.CL.Utility;
 
 namespace HealthClinic.CL.Service
 {
     public class RegularAppointmentService : BingPath, IStrategyAppointment
     {
-        public AppointmentRepository appointmentRepository;
+        private IAppointmentRepository _appointmentRepository;
         public DoctorController doctorController;
         public EmployeesScheduleController employeesScheduleController;
         public PatientController patientController;
         String path = bingPathToAppDir(@"JsonFiles\appointments.json");
 
-        public RegularAppointmentService()
+        public RegularAppointmentService(IAppointmentRepository appointmentRepository)
         {
-            appointmentRepository = new AppointmentRepository(path);
+            this._appointmentRepository = appointmentRepository;
             doctorController = new DoctorController();
             employeesScheduleController = new EmployeesScheduleController();
             patientController = new PatientController();
@@ -31,26 +36,31 @@ namespace HealthClinic.CL.Service
 
         public List<DoctorAppointment> GetAll()
         {
-            return appointmentRepository.GetAll();
+            return _appointmentRepository.GetAll();
         }
 
         public void New(DoctorAppointment appointment, Operation operation)
         {
-            appointmentRepository.New(appointment);
+            _appointmentRepository.New(appointment);
         }
 
         public void Update(DoctorAppointment appointment, Operation operation)
         {
-            appointmentRepository.Update(appointment);
+            _appointmentRepository.Update(appointment);
         }
-        public void Remove(int appointmentid, int operationid)
+        public void Remove(int appointmentid)
         {
-            appointmentRepository.Delete(appointmentid);
+            _appointmentRepository.Delete(appointmentid);
         }
 
         public DoctorAppointment GetByid(int id)
         {
-            return appointmentRepository.GetByid(id);
+            return _appointmentRepository.GetByid(id);
+        }
+
+        public List<DoctorAppointment> GetAppointmentsForPatient(int id)
+        {
+            return _appointmentRepository.GetAppointmentsForPatient(id);
         }
 
         public DoctorAppointment RecommendAnAppointment(DoctorUser doctor, DateTime date1, DateTime date2, PatientUser patient)
@@ -143,6 +153,71 @@ namespace HealthClinic.CL.Service
             if (hasAppointmentDoctor == true || hasOperationDoctor == true ) return true;
 
             return false;
+        }
+
+        public List<DoctorAppointment> SimpleSearchAppointments(AppointmentReportSearchDto appointmentReportSearchDto)
+        {
+            return SearchForAppointmentType(SearchForDoctorNameAndSurname(SearchForDate(GetAppointmentsForPatient(appointmentReportSearchDto.PatientId), appointmentReportSearchDto), appointmentReportSearchDto), appointmentReportSearchDto);
+        }
+
+        private List<DoctorAppointment> SearchForDoctorNameAndSurname(List<DoctorAppointment> appointments, AppointmentReportSearchDto appointmentSearchDto)
+        {
+            if (!UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.DoctorNameAndSurname))
+            {
+                appointments = appointments.FindAll(appointment => appointment.Doctor.firstName.Contains(appointmentSearchDto.DoctorNameAndSurname) || appointment.Doctor.secondName.Contains(appointmentSearchDto.DoctorNameAndSurname));
+            }
+            return appointments;
+        }
+
+        private List<DoctorAppointment> SearchForDate(List<DoctorAppointment> appointments, AppointmentReportSearchDto appointmentSearchDto)
+        {
+            if (!UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.Start) && !UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.End))
+            {
+                appointments = GetAppointmentsBetweenDates(appointmentSearchDto.Start, appointmentSearchDto.End, appointments);
+            }
+            else if (UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.Start) && !UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.End))
+            {
+                appointments = GetAppointmentsBeforeDate(appointmentSearchDto.End, appointments);
+            }
+            else if(!UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.Start) && UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.End))
+            {
+                appointments = GetAppointmentsAfterDate(appointmentSearchDto.Start, appointments);
+            }
+            return appointments;
+
+        }
+
+        private List<DoctorAppointment> GetAppointmentsBetweenDates(String start, String end, List<DoctorAppointment> appointments)
+        {
+            DateTime startDate = UtilityMethods.ParseDateInCorrectFormat(start);
+            DateTime endDate = UtilityMethods.ParseDateInCorrectFormat(end);
+            return appointments.FindAll(appointment => startDate <= UtilityMethods.ParseDateInCorrectFormat(appointment.Date) && UtilityMethods.ParseDateInCorrectFormat(appointment.Date) <= endDate);
+        }
+
+        private List<DoctorAppointment> GetAppointmentsBeforeDate(String date, List<DoctorAppointment> appointments)
+        {
+            DateTime endDate = UtilityMethods.ParseDateInCorrectFormat(date);
+            return appointments.FindAll(appointment => UtilityMethods.ParseDateInCorrectFormat(appointment.Date) <= endDate);
+        }
+
+        private List<DoctorAppointment> GetAppointmentsAfterDate(String date, List<DoctorAppointment> appointments)
+        {
+            DateTime startDate = UtilityMethods.ParseDateInCorrectFormat(date);
+            return appointments.FindAll(appointment => startDate <= UtilityMethods.ParseDateInCorrectFormat(appointment.Date));
+        }
+
+        private List<DoctorAppointment> SearchForAppointmentType(List<DoctorAppointment> appointments, AppointmentReportSearchDto appointmentSearchDto)
+        {
+            if (UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.AppointmentType) || CheckIfAppointment(appointmentSearchDto.AppointmentType))
+            {
+                return appointments;
+            }
+            return new List<DoctorAppointment>();
+        }
+
+        private Boolean CheckIfAppointment(String stringToCheck)
+        {
+            return stringToCheck.Equals("Appointment");
         }
 
     }

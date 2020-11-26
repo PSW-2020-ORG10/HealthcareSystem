@@ -16,7 +16,9 @@
     ADVANCED_SEARCH_PATIENT_PRESCRIPTIONS,
     ADVANCED_SEARCH_PRESCRIPTIONS_ERROR,
     FIND_ONE_PATIENT,
-    FIND_ONE_PATIENT_ERROR
+    FIND_ONE_PATIENT_ERROR,
+    LOADED_ALL_PATIENT_REPORTS,
+    OBSERVE_PATIENT_REPORTS_ERROR,
 } from "../types/types"
 import axios from "axios";
 
@@ -191,6 +193,53 @@ export const advancedSearchPatientPrescriptions = (prescription) => async (dispa
     } catch (e) {
         dispatch({
             type: ADVANCED_SEARCH_PRESCRIPTIONS_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+export const loadedAllPatientReports = (patientId) => async (dispatch) => {
+    try {
+        axios.all(  [axios.get('http://localhost:60198/api/doctorappointment/' + patientId),
+                     axios.get('http://localhost:60198/api/operation/' + patientId)])
+                        .then(axios.spread((firstResponse, secondResponse) => {
+                            debugger;
+                            var appointments = []
+                            firstResponse.data.forEach(element => appointments.push(element));
+                            secondResponse.data.forEach(element => appointments.push(element));
+                            console.log(appointments)
+                            dispatch({
+                                type: LOADED_ALL_PATIENT_REPORTS,
+                                payload: appointments,
+                            })
+                        }))
+                        .catch(error => console.log(error))
+    } catch (e) {
+        dispatch({
+            type: OBSERVE_PATIENT_REPORTS_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const simpleSearchAppointments  = (searchDto) => async (dispatch) => {
+    try {
+        axios.all([axios.post('http://localhost:60198/api/doctorappointment/search', searchDto),
+            axios.post('http://localhost:60198/api/operation/search',  searchDto)])
+            .then(axios.spread((firstResponse, secondResponse) => {
+                debugger;
+                var appointments = []
+                firstResponse.data.forEach(element => appointments.push(element));
+                secondResponse.data.forEach(element => appointments.push(element));
+                console.log(appointments)
+                dispatch({
+                    type: LOADED_ALL_PATIENT_REPORTS,
+                    payload: appointments,
+                })
+            }))
+            .catch(error => console.log(error))
+    } catch (e) {
+        dispatch({
+            type: OBSERVE_PATIENT_REPORTS_ERROR,
             payload: console.log(e),
         });
     }

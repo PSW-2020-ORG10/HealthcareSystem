@@ -8,8 +8,8 @@
     PATIENT_REGISTERED,
     SIMPLE_SEARCH_PATIENT_PRESCRIPTIONS,
     ADVANCED_SEARCH_PATIENT_PRESCRIPTIONS,
-    FIND_ONE_PATIENT
-
+    FIND_ONE_PATIENT,
+    LOADED_ALL_PATIENT_REPORTS
 } from "../types/types"
 
 function addFeedback(state=initialState, action) {
@@ -47,8 +47,8 @@ const initialState = {
     prescriptionsList: [],
     patientPrescriptionsList: [],
     patientList: [],
-    patientInformationList: []
-  
+    patientInformationList: [],
+    patientAppointments: []
 };
 
 
@@ -112,6 +112,11 @@ function reducer(state = initialState, action) {
                 ...state,
                 patientInformationList: action.payload
 
+            };
+        case LOADED_ALL_PATIENT_REPORTS:
+            return {
+                ...state,
+                patientAppointments: action.payload
             };
         default:
             return state;
