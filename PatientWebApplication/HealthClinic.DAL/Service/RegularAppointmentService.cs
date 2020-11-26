@@ -155,16 +155,7 @@ namespace HealthClinic.CL.Service
 
         public List<DoctorAppointment> SimpleSearchAppointments(AppointmentReportSearchDto appointmentReportSearchDto)
         {
-            List<DoctorAppointment> appointments = GetAppointmentsForPatient(appointmentReportSearchDto.PatientId);
-
-            appointments = SearchForDate(appointments, appointmentReportSearchDto);
-
-            appointments = SearchForDoctorNameAndSurname(appointments, appointmentReportSearchDto);
-
-            appointments = SearchForAppointmentType(appointments, appointmentReportSearchDto);
-
-            return appointments;
-
+            return SearchForAppointmentType(SearchForDoctorNameAndSurname(SearchForDate(GetAppointmentsForPatient(appointmentReportSearchDto.PatientId), appointmentReportSearchDto), appointmentReportSearchDto), appointmentReportSearchDto);
         }
 
         private List<DoctorAppointment> SearchForDoctorNameAndSurname(List<DoctorAppointment> appointments, AppointmentReportSearchDto appointmentSearchDto)
