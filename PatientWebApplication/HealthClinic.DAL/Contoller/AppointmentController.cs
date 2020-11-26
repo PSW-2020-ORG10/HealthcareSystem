@@ -40,10 +40,9 @@ namespace HealthClinic.CL.Contoller
             return regularAppointmentService.GetAll();
         }
 
-        //        public DoctorAppointment GetByid(int id)
-        public void GetByid(int id)
+        public DoctorAppointment DoctorAppointment(int id)
         {
- //           return regularAppointmentService.GetByid(id);
+            return regularAppointmentService.GetByid(id);
         }
 
         public Boolean isTermNotAvailable(DoctorUser doctor, TimeSpan time, String dateToString, PatientUser patient)

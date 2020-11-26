@@ -95,7 +95,7 @@ class AppointmentReportSimpleSearchTable extends Component {
                 </div>
 
                 <div className="btn-wrap align-right">
-                    <button className="btn btn-primary btn-block btn-lg" onClick={this.searchAppointments.bind(this)}>Search</button>
+                    <button className="btn btn-primary btn-block btn-lg mb-4" onClick={this.searchAppointments.bind(this)}>Search</button>
                 </div>
 
                 <br>
@@ -107,6 +107,7 @@ class AppointmentReportSimpleSearchTable extends Component {
                             <th style={{ textAlign: "left" }}>Doctor</th>
                             <th style={{ textAlign: "center" }}>Type</th>
                             <th style={{ textAlign: "center" }}>Date</th>
+                            <th style={{ textAlign: "center" }}></th>
                         </tr>
                     </thead>
                     {patientAppointments.map((f) => (

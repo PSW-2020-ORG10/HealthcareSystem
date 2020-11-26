@@ -21,7 +21,6 @@ namespace HealthClinic.CL.Adapters
             {
                 appointmentsDto.Add(adapter.AppointmentToAppointmenDto(appointment));
             }
-
             return appointmentsDto;
         }
     }

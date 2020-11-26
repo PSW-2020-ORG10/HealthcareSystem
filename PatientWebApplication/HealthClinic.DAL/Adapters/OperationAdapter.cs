@@ -21,7 +21,6 @@ namespace HealthClinic.CL.Adapters
             {
                 operationsDto.Add(adapter.OperationToOperationDto(operation));
             }
-
             return operationsDto;
         }
     }
