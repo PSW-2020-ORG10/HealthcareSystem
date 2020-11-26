@@ -3,6 +3,7 @@
  * Author:  Tamara
  * Purpose: Definition of the Class Service.RegularAppointmentService
  ***********************************************************************/
+using Castle.Core.Internal;
 using HealthClinic.CL.Adapters;
 using HealthClinic.CL.Contoller;
 using HealthClinic.CL.Dtos;
@@ -13,6 +14,7 @@ using HealthClinic.CL.Repository;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using HealthClinic.CL.Utility;
 
 namespace HealthClinic.CL.Service
 {
@@ -160,45 +162,47 @@ namespace HealthClinic.CL.Service
 
         private List<DoctorAppointment> SearchForDoctorNameAndSurname(List<DoctorAppointment> appointments, AppointmentReportSearchDto appointmentSearchDto)
         {
-            if (!appointmentSearchDto.DoctorNameAndSurname.Equals(""))
+            if (!UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.DoctorNameAndSurname))
             {
                 appointments = appointments.FindAll(appointment => appointment.Doctor.firstName.Contains(appointmentSearchDto.DoctorNameAndSurname) || appointment.Doctor.secondName.Contains(appointmentSearchDto.DoctorNameAndSurname));
             }
-
             return appointments;
         }
 
         private List<DoctorAppointment> SearchForDate(List<DoctorAppointment> appointments, AppointmentReportSearchDto appointmentSearchDto)
         {
-            if (!appointmentSearchDto.Start.Equals("") && !appointmentSearchDto.End.Equals(""))
+            if (!UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.Start) && !UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.End))
             {
                 DateTime startDate = DateTime.ParseExact(appointmentSearchDto.Start, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 DateTime endDate = DateTime.ParseExact(appointmentSearchDto.End, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 appointments = appointments.FindAll(appointment => startDate <= DateTime.ParseExact(appointment.Date, "dd/MM/yyyy", CultureInfo.InvariantCulture) && DateTime.ParseExact(appointment.Date, "dd/MM/yyyy", CultureInfo.InvariantCulture) <= endDate);
             }
-            else if (appointmentSearchDto.Start.Equals("") && !appointmentSearchDto.End.Equals(""))
+            else if (UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.Start) && !UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.End))
             {
                 DateTime endDate = DateTime.ParseExact(appointmentSearchDto.End, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 appointments = appointments.FindAll(appointment => DateTime.ParseExact(appointment.Date, "dd/MM/yyyy", CultureInfo.InvariantCulture) <= endDate);
             }
-            else if(!appointmentSearchDto.Start.Equals("") && appointmentSearchDto.End.Equals(""))
+            else if(!UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.Start) && UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.End))
             {
                 DateTime startDate = DateTime.ParseExact(appointmentSearchDto.Start, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 appointments = appointments.FindAll(appointment => startDate <= DateTime.ParseExact(appointment.Date, "dd/MM/yyyy", CultureInfo.InvariantCulture));
             }
-            
             return appointments;
 
         }
 
         private List<DoctorAppointment> SearchForAppointmentType(List<DoctorAppointment> appointments, AppointmentReportSearchDto appointmentSearchDto)
         {
-            if (appointmentSearchDto.AppointmentType.Equals("") || appointmentSearchDto.AppointmentType.Equals("Appointment"))
+            if (UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.AppointmentType) || CheckIfAppointment(appointmentSearchDto.AppointmentType))
             {
                 return appointments;
             }
-
             return new List<DoctorAppointment>();
+        }
+
+        private Boolean CheckIfAppointment(String stringToCheck)
+        {
+            return stringToCheck.Equals("Appointment");
         }
 
     }
