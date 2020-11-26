@@ -20,7 +20,7 @@ namespace IntegrationWithPharmacies.FileProtocol
 
         public void UploadFile(string localFilePath, string remoteFilePath)
         {
-            using var client = new SftpClient("192.168.56.1", 22, "tester", "password");
+            using var client = new SftpClient("192.168.0.28", 22, "tester", "password");
             //using var client = new SftpClient(new PasswordConnectionInfo("192.168.56.1", "tester", "password"));
             try
             {
@@ -33,7 +33,8 @@ namespace IntegrationWithPharmacies.FileProtocol
             catch (Exception exception)
             {
                 _logger.LogError(exception, $"Failed in uploading file [{localFilePath}] to [{remoteFilePath}]");
-                Console.WriteLine("*************************");
+                Console.WriteLine(exception);
+         
             }
             finally
             {

@@ -3,14 +3,16 @@ using System;
 using HealthClinic.CL.DbContextModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HealthClinic.CL.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201126164720_eightMigration")]
+    partial class eightMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -584,39 +586,6 @@ namespace HealthClinic.CL.Migrations
                         });
                 });
 
-            modelBuilder.Entity("HealthClinic.CL.Model.Orders.MedicineForOrdering", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("description")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("name")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<int>("orderId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("id");
-
-                    b.ToTable("MedicinesForOrdering");
-
-                    b.HasData(
-                        new
-                        {
-                            id = 100,
-                            description = "Medicine description",
-                            name = "Medicine name",
-                            orderId = 1,
-                            quantity = 1
-                        });
-                });
-
             modelBuilder.Entity("HealthClinic.CL.Model.Orders.PharmacyOffer", b =>
                 {
                     b.Property<int>("id")
@@ -1107,6 +1076,30 @@ namespace HealthClinic.CL.Migrations
                             description = "Medicine Description",
                             doctorId = 1,
                             isConfirmed = false
+                        });
+                });
+
+            modelBuilder.Entity("HealthClinic.CL.Model.Orders.MedicineForOrdering", b =>
+                {
+                    b.HasBaseType("HealthClinic.CL.Model.Hospital.Equipment");
+
+                    b.Property<string>("description")
+                        .HasColumnName("MedicineForOrdering_description")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("orderId")
+                        .HasColumnType("int");
+
+                    b.HasDiscriminator().HasValue("MedicineForOrdering");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 100,
+                            name = "Medicine name",
+                            quantity = 1,
+                            description = "Medicine description",
+                            orderId = 1
                         });
                 });
 

@@ -7,7 +7,10 @@
         <button v-on:click="saveApiKey">Save api key</button>
         <label v-if="unique">Successfully saved api key!</label>
         <label v-if="notUnique">This api key already exists!</label>
-       
+        <button v-on:click="getReport">Report about consumption of medicine</button>
+        <label v-if="sent">Successfully sent report about consumption!</label>
+        <label v-if="notSent">Error!Report about consumption can't be sent!</label>
+
     </div>
 </template>
 
@@ -18,7 +21,9 @@
                 pharmacyApiKey: "",
                 unique: false,
                 notUnique: false,
-                emptyStringError : false
+                emptyStringError: false,
+                sent: false,
+                notSent: false
             }
         },
         mounted() {
@@ -36,6 +41,7 @@
                 this.axios.post('api/registration/', pharmacy)
                     .then(res => {
                         this.unique = true;
+                        this.notUnique = false;
                         console.log(res);
                     })
                     .catch(res => {
@@ -44,7 +50,22 @@
                         console.log(res);
                     })
 
+            },
+            getReport: function () { 
+                this.axios.get('api/report/')
+                    .then(res => {
+                        this.sent = true;
+                        this.notSent = false;
+                        console.log(res);
+                    })
+                    .catch(res => {
+                        this.sent = false;
+                        this.notSent = true;
+                        console.log(res);
+                    })
+
             }
+
         }
 
     }

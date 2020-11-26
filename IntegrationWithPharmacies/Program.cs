@@ -23,34 +23,7 @@ namespace IntegrationWithPharmacies
     public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
-            var config = new SftpConfig
-            {
-                Host = "192.168.0.28",
-                Port = 22,
-                UserName = "tester",
-                Password = "password"
-            };
-            var sftpService = new SftpService(new NullLogger<SftpService>(), config);
-            /*
-            // list files
-            var files = sftpService.ListAllFiles("/pub/example");
-            foreach (var file in files)
-            {
-                if (file.IsDirectory)
-                {
-                    Console.WriteLine($"Directory: [{file.FullName}]");
-                }
-                else if (file.IsRegularFile)
-                {
-                    Console.WriteLine($"File: [{file.FullName}]");
-                }
-            }
-            */
-            // upload a file // not working for this demo SFTP server due to readonly permission
-           // Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory);
-            var testFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "test.txt");
-           // var testFile = @"D:\FAKULTET\4. GODINA\Projektovanje softvera\ProjekatPsw\test.txt";
-            sftpService.UploadFile(testFile, @"\public\test.txt");
+            
           
         }
 

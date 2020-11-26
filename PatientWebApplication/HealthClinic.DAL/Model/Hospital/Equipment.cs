@@ -30,7 +30,11 @@ namespace HealthClinic.CL.Model.Hospital
             this.quantity = quantity;
             this.room = room;
         }
-
+        public Equipment(string name, int quantity) : base()
+        {
+            this.name = name;
+            this.quantity = quantity;
+        }
 
 
     }

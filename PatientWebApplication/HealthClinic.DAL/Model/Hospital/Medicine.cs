@@ -14,7 +14,6 @@ namespace HealthClinic.CL.Model.Hospital
     public class Medicine : Equipment
     {
         public List<ModelRoom> room { get; set; }
-
         public int doctorId { get; set; }
         public virtual DoctorUser doctor { get; set; }
         public string description { get; set; }
@@ -57,7 +56,7 @@ namespace HealthClinic.CL.Model.Hospital
             this.PrescriptionId = prescription.id;
         }
 
-        public Medicine()
+        public Medicine() : base()
         {
         }
     }

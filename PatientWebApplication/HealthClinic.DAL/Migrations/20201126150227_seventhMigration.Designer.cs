@@ -3,14 +3,16 @@ using System;
 using HealthClinic.CL.DbContextModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HealthClinic.CL.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201126150227_seventhMigration")]
+    partial class seventhMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -581,39 +583,6 @@ namespace HealthClinic.CL.Migrations
                             date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             isOrdered = true,
                             isUrgent = true
-                        });
-                });
-
-            modelBuilder.Entity("HealthClinic.CL.Model.Orders.MedicineForOrdering", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("description")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("name")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<int>("orderId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("id");
-
-                    b.ToTable("MedicinesForOrdering");
-
-                    b.HasData(
-                        new
-                        {
-                            id = 100,
-                            description = "Medicine description",
-                            name = "Medicine name",
-                            orderId = 1,
-                            quantity = 1
                         });
                 });
 

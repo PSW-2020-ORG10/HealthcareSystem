@@ -10,7 +10,9 @@ namespace HealthClinic.CL.Adapters
     {
         public static RegistrationInPharmacy RegistrationDtoToRegistration(RegistrationInPharmacyDto dto)
         {
-            return new RegistrationInPharmacy(12, dto.pharmacyId, dto.apiKey);
+            var randomNumber = new Random();
+          
+            return new RegistrationInPharmacy(randomNumber.Next(5, 1000), dto.pharmacyId, dto.apiKey);
         }
 
         public static RegistrationInPharmacyDto RegistrationToRegistrationDto(RegistrationInPharmacy registration)
