@@ -23,6 +23,7 @@ namespace HealthClinic.CL.DbContextModel
         public DbSet<DoctorNotification> DoctorNotifications { get; set; }
         public DbSet<Operation> Operations { get; set; }
         public DbSet<Referral> Referrals { get; set; }
+        public DbSet<OperationReferral> OperationReferrals { get; set; }
 
         public DbSet<Schedule> Schedules { get; set; }
 
@@ -111,13 +112,22 @@ namespace HealthClinic.CL.DbContextModel
 
             modelBuilder.Entity<Referral>().HasData(
 
-            new Referral(1, "Medicine", "Take medicine until", 3, "classify", "comment")
+            new Referral(1, "Aspirin", "25/02/2020", 3, "classify", "Patient had slight heart arrhythmia.", 1),
+            new Referral(2, "Brufen", "11/05/2020", 1, "Appointment", "Patient had cold.", 2)
 
            );
 
+            modelBuilder.Entity<OperationReferral>().HasData(
+
+            new OperationReferral(1, "Hemomycin", "15/09/2020", 1, "Operation", "Operation was successfull.", 1),
+            new OperationReferral(2, "Amoxicillin", "18/10/2020", 3, "Operation", "Patient lost a lot of blood.", 2)
+
+          );
+
             modelBuilder.Entity<Operation>().HasData(
 
-            new Operation(1, 1, "2/2/2020", new TimeSpan(), new TimeSpan(), 1, "room1", 1)
+            new Operation(1, 2, "20/02/2020", new TimeSpan(), new TimeSpan(), 1, "room1"),
+            new Operation(2, 2, "03/10/2020", new TimeSpan(), new TimeSpan(), 2, "room1")
 
             );
 

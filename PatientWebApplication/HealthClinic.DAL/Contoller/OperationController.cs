@@ -5,6 +5,7 @@
  ***********************************************************************/
 using HealthClinic.CL.Model.Doctor;
 using HealthClinic.CL.Model.Patient;
+using HealthClinic.CL.Repository;
 using HealthClinic.CL.Service;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace HealthClinic.CL.Contoller
 
         public OperationController()
         {
-            operationService = new OperationService();
+            operationService = new OperationService(new OperationRepository());
             contextAppointmentService = new ContextAppointmentService(operationService);
         }
 
