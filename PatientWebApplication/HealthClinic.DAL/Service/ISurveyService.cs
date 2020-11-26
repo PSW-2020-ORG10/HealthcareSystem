@@ -10,5 +10,7 @@ namespace HealthClinic.CL.Service
     {
         Survey Create(SurveyDto surveyDto);
         List<Survey> GetAllSurveysForPatientId(int id);
+
+        List<DoctorAppointment> FindAllValidAppointments(List<DoctorAppointment> allValidAppointments);      
     }
 }

@@ -69,7 +69,7 @@ class CreateSurveyForm extends Component {
 
         return (
             <div>
-                <form>
+                
                     <h2 className="label"></h2>
                     <h2 className="label">RATE DOCTORS: </h2>
                     <div className="field-wrap">
@@ -924,7 +924,7 @@ class CreateSurveyForm extends Component {
                     <div className="btn-wrap align-right">
                         <button disabled={this.state.appointmentId==0} className="btn btn-primary" onClick={this.createSurvey.bind(this)}>Create</button>
                     </div>
-                </form>
+                
             </div>
         )
 
@@ -938,6 +938,7 @@ class CreateSurveyForm extends Component {
         });
 
         this.props.surveyCreated(this.state)
+        window.location.href = "http://localhost:60198";
     }
 
 }
