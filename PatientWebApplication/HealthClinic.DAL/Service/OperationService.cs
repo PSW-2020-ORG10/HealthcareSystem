@@ -9,6 +9,7 @@ using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Doctor;
 using HealthClinic.CL.Model.Patient;
 using HealthClinic.CL.Repository;
+using HealthClinic.CL.Utility;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -66,59 +67,52 @@ namespace HealthClinic.CL.Service
 
         public List<Operation> SimpleSearchOperations(AppointmentReportSearchDto appointmentReportSearchDto)
         {
-            List<Operation> operations = GetOperationsForPatient(appointmentReportSearchDto.PatientId);
-
-            operations = SearchForDate(operations, appointmentReportSearchDto);
-
-            operations = SearchForDoctorNameAndSurname(operations, appointmentReportSearchDto);
-
-            operations = SearchForAppointmentType(operations, appointmentReportSearchDto);
-
-            return operations;
-
+            return SearchForAppointmentType(SearchForDoctorNameAndSurname(SearchForDate(GetOperationsForPatient(appointmentReportSearchDto.PatientId), appointmentReportSearchDto),appointmentReportSearchDto),appointmentReportSearchDto);
         }
 
         private List<Operation> SearchForDoctorNameAndSurname(List<Operation> operations, AppointmentReportSearchDto appointmentSearchDto)
         {
-            if (!appointmentSearchDto.DoctorNameAndSurname.Equals(""))
+            if (!UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.DoctorNameAndSurname))
             {
                 operations = operations.FindAll(operation => operation.Doctor.firstName.Contains(appointmentSearchDto.DoctorNameAndSurname) || operation.Doctor.secondName.Contains(appointmentSearchDto.DoctorNameAndSurname));
             }
-
             return operations;
         }
 
         private List<Operation> SearchForDate(List<Operation> operations, AppointmentReportSearchDto appointmentSearchDto)
         {
-            if (!appointmentSearchDto.Start.Equals("") && !appointmentSearchDto.End.Equals(""))
+            if (!UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.Start) && !UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.End))
             {
                 DateTime startDate = DateTime.ParseExact(appointmentSearchDto.Start, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 DateTime endDate = DateTime.ParseExact(appointmentSearchDto.End, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 operations = operations.FindAll(operation => startDate <= DateTime.ParseExact(operation.Date, "dd/MM/yyyy", CultureInfo.InvariantCulture) && DateTime.ParseExact(operation.Date, "dd/MM/yyyy", CultureInfo.InvariantCulture) <= endDate);
             }
-            else if (appointmentSearchDto.Start.Equals("") && !appointmentSearchDto.End.Equals(""))
+            else if (UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.Start) && !UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.End))
             {
                 DateTime endDate = DateTime.ParseExact(appointmentSearchDto.End, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 operations = operations.FindAll(operation => DateTime.ParseExact(operation.Date, "dd/MM/yyyy", CultureInfo.InvariantCulture) <= endDate);
             }
-            else if (!appointmentSearchDto.Start.Equals("") && appointmentSearchDto.End.Equals(""))
+            else if (!UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.Start) && UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.End))
             {
                 DateTime startDate = DateTime.ParseExact(appointmentSearchDto.Start, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 operations = operations.FindAll(operation => startDate <= DateTime.ParseExact(operation.Date, "dd/MM/yyyy", CultureInfo.InvariantCulture));
             }
-
             return operations;
 
         }
 
         private List<Operation> SearchForAppointmentType(List<Operation> operations, AppointmentReportSearchDto appointmentSearchDto)
         {
-            if (appointmentSearchDto.AppointmentType.Equals("") || appointmentSearchDto.AppointmentType.Equals("Operation"))
+            if (UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.AppointmentType) || CheckIfOperation(appointmentSearchDto.AppointmentType) )
             {
                 return operations;
             }
-
             return new List<Operation>();
+        }
+
+        private Boolean CheckIfOperation(String stringToCheck)
+        {
+            return stringToCheck.Equals("Operation");
         }
 
     }
