@@ -735,74 +735,74 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
-                            date = "22/04/2020",
-                            doctorUserId = 1,
-                            patientUserId = 1,
-                            roomid = "1",
-                            time = new TimeSpan(0, 0, 0, 0, 0)
+                            Date = "22/04/2020",
+                            DoctorUserId = 1,
+                            PatientUserId = 1,
+                            RoomId = "1",
+                            Start = new TimeSpan(0, 0, 0, 0, 0)
                         },
                         new
                         {
                             id = 2,
-                            date = "20/11/2017",
-                            doctorUserId = 2,
-                            patientUserId = 1,
-                            roomid = "1",
-                            time = new TimeSpan(0, 0, 0, 0, 0)
+                            Date = "20/11/2017",
+                            DoctorUserId = 2,
+                            PatientUserId = 1,
+                            RoomId = "1",
+                            Start = new TimeSpan(0, 0, 0, 0, 0)
                         },
                         new
                         {
                             id = 3,
-                            date = "05/07/2019",
-                            doctorUserId = 3,
-                            patientUserId = 1,
-                            roomid = "1",
-                            time = new TimeSpan(0, 0, 0, 0, 0)
+                            Date = "05/07/2019",
+                            DoctorUserId = 3,
+                            PatientUserId = 1,
+                            RoomId = "1",
+                            Start = new TimeSpan(0, 0, 0, 0, 0)
                         },
                         new
                         {
                             id = 4,
-                            date = "04/02/2019",
-                            doctorUserId = 1,
-                            patientUserId = 1,
-                            roomid = "1",
-                            time = new TimeSpan(0, 0, 0, 0, 0)
+                            Date = "04/02/2019",
+                            DoctorUserId = 1,
+                            PatientUserId = 1,
+                            RoomId = "1",
+                            Start = new TimeSpan(0, 0, 0, 0, 0)
                         },
                         new
                         {
                             id = 5,
-                            date = "11/01/2016",
-                            doctorUserId = 2,
-                            patientUserId = 1,
-                            roomid = "1",
-                            time = new TimeSpan(0, 0, 0, 0, 0)
+                            Date = "11/01/2016",
+                            DoctorUserId = 2,
+                            PatientUserId = 1,
+                            RoomId = "1",
+                            Start = new TimeSpan(0, 0, 0, 0, 0)
                         },
                         new
                         {
                             id = 6,
-                            date = "09/01/2014",
-                            doctorUserId = 3,
-                            patientUserId = 1,
-                            roomid = "1",
-                            time = new TimeSpan(0, 0, 0, 0, 0)
+                            Date = "09/01/2014",
+                            DoctorUserId = 3,
+                            PatientUserId = 1,
+                            RoomId = "1",
+                            Start = new TimeSpan(0, 0, 0, 0, 0)
                         },
                         new
                         {
                             id = 7,
-                            date = "07/02/2011",
-                            doctorUserId = 3,
-                            patientUserId = 1,
-                            roomid = "1",
-                            time = new TimeSpan(0, 0, 0, 0, 0)
+                            Date = "07/02/2011",
+                            DoctorUserId = 3,
+                            PatientUserId = 1,
+                            RoomId = "1",
+                            Start = new TimeSpan(0, 0, 0, 0, 0)
                         },
                         new
                         {
                             id = 8,
-                            date = "01/03/2020",
-                            doctorUserId = 2,
-                            patientUserId = 1,
-                            roomid = "1",
-                            time = new TimeSpan(0, 0, 0, 0, 0)
+                            Date = "01/03/2020",
+                            DoctorUserId = 2,
+                            PatientUserId = 1,
+                            RoomId = "1",
+                            Start = new TimeSpan(0, 0, 0, 0, 0)
                         });
                 });
 

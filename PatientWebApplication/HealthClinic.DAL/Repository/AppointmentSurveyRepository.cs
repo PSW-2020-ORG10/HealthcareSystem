@@ -21,7 +21,7 @@ namespace HealthClinic.CL.Repository
 
         public List<DoctorAppointment> GetAll()
         {
-            return dbContext.DoctorAppointments.ToList().FindAll(appointment => appointment.patientUserId == 1);
+            return dbContext.DoctorAppointments.ToList().FindAll(appointment => appointment.PatientUserId == 1);
         }
     }
 }
