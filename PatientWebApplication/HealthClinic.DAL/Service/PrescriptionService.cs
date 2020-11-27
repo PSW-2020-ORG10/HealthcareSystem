@@ -81,54 +81,22 @@ namespace HealthClinic.CL.Service
 
         private List<Prescription> searchForLogicOperators(string logicOperator, List<Prescription> othersPrescriptions, List<Prescription> finalPrescriptions)
         {
-            if (logicOperator.Equals("or"))
-            {
-                return othersPrescriptions.Union(finalPrescriptions).ToList();
-            }
-            else
-            {
-                return othersPrescriptions.Intersect(finalPrescriptions).ToList();
-            }
+            return logicOperator.Equals("or") ? othersPrescriptions.Union(finalPrescriptions).ToList() : othersPrescriptions.Intersect(finalPrescriptions).ToList();
         }
 
         private List<Prescription> searchForOtherParameters(string otherParameter, string otherValue, List<Prescription> prescriptions)
         {
-            if (otherParameter.Equals("medicines"))
-            {
-               return searchForMedicinesAdvanced(prescriptions, otherValue);
-            }
-            else if (otherParameter.Equals("comment"))
-            {
-                return searchForCommentsAdvanced(prescriptions, otherValue);
-            }
-            else if (otherParameter.Equals("isUsed"))
-            {
-                return searchForUsedAdvanced(prescriptions, otherValue);
-            }
-            else
-            {
-                return searchForDoctorAdvanced(prescriptions, otherValue);
-            }
+            return otherParameter.Equals("medicines") ? searchForMedicinesAdvanced(prescriptions, otherValue) : 
+                otherParameter.Equals("comment") ? searchForCommentsAdvanced(prescriptions, otherValue) : 
+                otherParameter.Equals("isUsed") ? searchForUsedAdvanced(prescriptions, otherValue) : 
+                searchForDoctorAdvanced(prescriptions, otherValue);
         }
 
         private List<Prescription> searchForFirstParameter(List<Prescription> prescriptions, PrescriptionAdvancedSearchDto dto)
         {
-            if (dto.FirstRole.Equals("medicines") || UtilityMethods.CheckIfStringIsEmpty(dto.FirstRole))
-            {
-                return searchForMedicinesAdvanced(prescriptions, dto.First);
-            }
-            else if (dto.FirstRole.Equals("comment"))
-            {
-                return searchForCommentsAdvanced(prescriptions, dto.First);
-            }
-            else if (dto.FirstRole.Equals("isUsed"))
-            {
-                return searchForUsedAdvanced(prescriptions, dto.First);
-            }
-            else
-            {
-                return searchForDoctorAdvanced(prescriptions, dto.First);
-            }
+            return dto.FirstRole.Equals("medicines") || UtilityMethods.CheckIfStringIsEmpty(dto.FirstRole) ? searchForMedicinesAdvanced(prescriptions, dto.First) :
+                dto.FirstRole.Equals("comment") ? searchForCommentsAdvanced(prescriptions, dto.First) :
+                dto.FirstRole.Equals("isUsed") ? searchForUsedAdvanced(prescriptions, dto.First) : searchForDoctorAdvanced(prescriptions, dto.First);
         }
 
         private List<Prescription> searchForDoctorAdvanced(List<Prescription> prescriptions, String searchField)
@@ -229,9 +197,7 @@ namespace HealthClinic.CL.Service
         {
             if (!UtilityMethods.CheckIfStringIsEmpty(prescriptionSearchDto.Medicines))
             {
-
                 prescriptions = prescriptions.Where(prescription => prescription.Medicines.Any(medicine => medicine.name.Contains(prescriptionSearchDto.Medicines))).ToList();
-          
             }
 
             return prescriptions;
