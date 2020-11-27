@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HealthClinic.CL.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20201126161158_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20201127121700_NewMigration")]
+    partial class NewMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -739,16 +739,16 @@ namespace HealthClinic.CL.Migrations
                             id = 1,
                             Date = "22/04/2020",
                             DoctorUserId = 1,
-                            PatientUserId = 1,
+                            PatientUserId = 2,
                             RoomId = "1",
                             Start = new TimeSpan(0, 0, 0, 0, 0)
                         },
                         new
                         {
                             id = 2,
-                            Date = "20/11/2017",
+                            Date = "07/01/2020",
                             DoctorUserId = 2,
-                            PatientUserId = 1,
+                            PatientUserId = 2,
                             RoomId = "1",
                             Start = new TimeSpan(0, 0, 0, 0, 0)
                         },
@@ -801,6 +801,24 @@ namespace HealthClinic.CL.Migrations
                         {
                             id = 8,
                             Date = "01/03/2020",
+                            DoctorUserId = 2,
+                            PatientUserId = 1,
+                            RoomId = "1",
+                            Start = new TimeSpan(0, 0, 0, 0, 0)
+                        },
+                        new
+                        {
+                            id = 9,
+                            Date = "14/03/2016",
+                            DoctorUserId = 1,
+                            PatientUserId = 1,
+                            RoomId = "1",
+                            Start = new TimeSpan(0, 0, 0, 0, 0)
+                        },
+                        new
+                        {
+                            id = 10,
+                            Date = "11/11/2030",
                             DoctorUserId = 2,
                             PatientUserId = 1,
                             RoomId = "1",
@@ -1053,6 +1071,9 @@ namespace HealthClinic.CL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
+
                     b.Property<string>("comment")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -1064,22 +1085,42 @@ namespace HealthClinic.CL.Migrations
 
                     b.HasKey("id");
 
+                    b.HasIndex("DoctorId");
+
                     b.ToTable("Prescriptions");
 
                     b.HasData(
                         new
                         {
-                            id = 1,
-                            comment = "Comment",
+                            id = 5,
+                            DoctorId = 1,
+                            comment = "Use every day",
+                            isUsed = false,
+                            patientsid = 1
+                        },
+                        new
+                        {
+                            id = 6,
+                            DoctorId = 1,
+                            comment = "When needed",
+                            isUsed = true,
+                            patientsid = 2
+                        },
+                        new
+                        {
+                            id = 7,
+                            DoctorId = 2,
+                            comment = "On every 12 hours",
                             isUsed = true,
                             patientsid = 1
                         },
                         new
                         {
-                            id = 2,
-                            comment = "Some text",
+                            id = 8,
+                            DoctorId = 1,
+                            comment = "After lunch",
                             isUsed = true,
-                            patientsid = 2
+                            patientsid = 1
                         });
                 });
 
@@ -1327,11 +1368,41 @@ namespace HealthClinic.CL.Migrations
                     b.HasData(
                         new
                         {
-                            id = 22,
-                            name = "Medicine Name",
+                            id = 51,
+                            name = "Pancef",
+                            quantity = 44,
+                            PrescriptionId = 5,
+                            description = "For temperature",
+                            doctorId = 1,
+                            isConfirmed = false
+                        },
+                        new
+                        {
+                            id = 52,
+                            name = "Defrinol",
                             quantity = 2,
-                            PrescriptionId = 1,
-                            description = "Medicine Description",
+                            PrescriptionId = 7,
+                            description = "For headache",
+                            doctorId = 1,
+                            isConfirmed = false
+                        },
+                        new
+                        {
+                            id = 53,
+                            name = "Brufen",
+                            quantity = 2,
+                            PrescriptionId = 8,
+                            description = "For illness",
+                            doctorId = 1,
+                            isConfirmed = false
+                        },
+                        new
+                        {
+                            id = 54,
+                            name = "Paracetamol",
+                            quantity = 4,
+                            PrescriptionId = 6,
+                            description = "For illness",
                             doctorId = 1,
                             isConfirmed = false
                         });
@@ -1345,19 +1416,6 @@ namespace HealthClinic.CL.Migrations
                         .HasColumnType("double");
 
                     b.HasDiscriminator().HasValue("OfferedMedicines");
-
-                    b.HasData(
-                        new
-                        {
-                            id = 13,
-                            name = "OfferedMedicine",
-                            quantity = 2,
-                            PrescriptionId = 1,
-                            description = "description",
-                            doctorId = 1,
-                            isConfirmed = false,
-                            price = 10.0
-                        });
                 });
 
             modelBuilder.Entity("HealthClinic.CL.Model.Doctor.DoctorNotification", b =>
@@ -1483,6 +1541,15 @@ namespace HealthClinic.CL.Migrations
                     b.HasOne("HealthClinic.CL.Model.Patient.PatientUser", "PatientUser")
                         .WithMany("notifications")
                         .HasForeignKey("PatientUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("HealthClinic.CL.Model.Patient.Prescription", b =>
+                {
+                    b.HasOne("HealthClinic.CL.Model.Doctor.DoctorUser", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

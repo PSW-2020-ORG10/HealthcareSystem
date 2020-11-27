@@ -13,6 +13,8 @@
     PATIENT_REGISTERED,
     SIMPLE_SEARCH_PATIENT_PRESCRIPTIONS,
     SIMPLE_SEARCH_PRESCRIPTIONS_ERROR,
+    ADVANCED_SEARCH_PATIENT_PRESCRIPTIONS,
+    ADVANCED_SEARCH_PRESCRIPTIONS_ERROR,
     FIND_ONE_PATIENT,
     FIND_ONE_PATIENT_ERROR,
     SURVEY_CREATED,
@@ -180,6 +182,23 @@ export const findOnePatient = (id) => async (dispatch) => {
     }
 };
 
+export const advancedSearchPatientPrescriptions = (prescription) => async (dispatch) => {
+    console.log(prescription.medicines)
+    try {
+        debugger;
+        const response = await axios.post("http://localhost:60198/api/prescription/advancedsearch", prescription);
+        debugger;
+        dispatch({
+            type: ADVANCED_SEARCH_PATIENT_PRESCRIPTIONS,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: ADVANCED_SEARCH_PRESCRIPTIONS_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
 export const loadedAllPatientReports = (patientId) => async (dispatch) => {
     try {
         axios.all(  [axios.get('http://localhost:60198/api/doctorappointment/' + patientId),

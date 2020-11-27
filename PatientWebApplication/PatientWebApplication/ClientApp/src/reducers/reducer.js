@@ -7,6 +7,7 @@
     LOADED_ALL_PATIENT_PRESCRIPTIONS,
     PATIENT_REGISTERED,
     SIMPLE_SEARCH_PATIENT_PRESCRIPTIONS,
+    ADVANCED_SEARCH_PATIENT_PRESCRIPTIONS,
     FIND_ONE_PATIENT,
     SURVEY_CREATED,
     LOADED_APPOINTMENTSURVEY,
@@ -99,6 +100,12 @@ function reducer(state = initialState, action) {
             }
 
         case SIMPLE_SEARCH_PATIENT_PRESCRIPTIONS:
+            return {
+                ...state,
+                patientPrescriptionsList: action.payload
+
+            };
+        case ADVANCED_SEARCH_PATIENT_PRESCRIPTIONS:
             return {
                 ...state,
                 patientPrescriptionsList: action.payload

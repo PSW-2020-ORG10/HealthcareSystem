@@ -12,17 +12,39 @@ using Xunit;
 
 namespace PatientWebApplicationTests
 {
-    public class PrescriptionsSimpleSearch
+    public class PrescriptionsAdvancedSearchTests
     {
         [Fact]
         public void Find_Prescriptions()
         {
-            
+
             PrescriptionService service = new PrescriptionService(CreateStubRepository());
 
-            List<Prescription> foundPrescriptions = service.SimpleSearchPrescriptions(new PrescriptionSearchDto("Medicine Name", "", "Comment", ""));
+            List<Prescription> foundPrescriptions = service.AdvancedSearchPrescriptions(new PrescriptionAdvancedSearchDto("medicines", "Medicine Name", new string[] { }, new string[] { }, new string[] { }));
 
             foundPrescriptions.ShouldHaveSingleItem();
+        }
+
+        [Fact]
+        public void Find_Prescriptions_OR()
+        {
+
+            PrescriptionService service = new PrescriptionService(CreateStubRepository());
+
+            List<Prescription> foundPrescriptions = service.AdvancedSearchPrescriptions(new PrescriptionAdvancedSearchDto("medicines", "Medicine Name", new string[1] { "comment" }, new string[1] { "Comment" }, new string[1] { "or" }));
+
+            foundPrescriptions.ShouldHaveSingleItem();
+        }
+
+        [Fact]
+        public void Find_No_Prescriptions_AND()
+        {
+
+            PrescriptionService service = new PrescriptionService(CreateStubRepository());
+
+            List<Prescription> foundPrescriptions = service.AdvancedSearchPrescriptions(new PrescriptionAdvancedSearchDto("medicines", "Medicine Name", new string[1] { "comment" }, new string[1] { "Comment23" }, new string[1] { "and" }));
+
+            foundPrescriptions.ShouldBeEmpty();
         }
 
         [Fact]
@@ -31,7 +53,7 @@ namespace PatientWebApplicationTests
 
             PrescriptionService service = new PrescriptionService(CreateStubRepository());
 
-            List<Prescription> foundPrescriptions = service.SimpleSearchPrescriptions(new PrescriptionSearchDto("", "False", "", ""));
+            List<Prescription> foundPrescriptions = service.AdvancedSearchPrescriptions(new PrescriptionAdvancedSearchDto("medicines", "Medicine Name23", new string[] { }, new string[] { }, new string[] { }));
 
             foundPrescriptions.ShouldBeEmpty();
         }
@@ -41,7 +63,7 @@ namespace PatientWebApplicationTests
         {
             PrescriptionService service = new PrescriptionService(CreateStubRepository());
 
-            List<Prescription> foundPrescriptions = service.SimpleSearchPrescriptions(new PrescriptionSearchDto("", "", "", ""));
+            List<Prescription> foundPrescriptions = service.AdvancedSearchPrescriptions(new PrescriptionAdvancedSearchDto("", "", new string[] { }, new string[] { }, new string[] { }));
 
             foundPrescriptions.ShouldNotBeEmpty();
         }

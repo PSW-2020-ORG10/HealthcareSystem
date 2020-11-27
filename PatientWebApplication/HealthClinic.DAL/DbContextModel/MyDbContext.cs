@@ -157,11 +157,6 @@ namespace HealthClinic.CL.DbContextModel
 
             );
 
-            modelBuilder.Entity<OfferedMedicines>().HasData(
-
-            new OfferedMedicines(13, "OfferedMedicine", 2, "description", new List <ModelRoom>(), 1, false, 10.0, 1)
-
-            );
 
             modelBuilder.Entity<Renovation>().HasData(
 
@@ -229,8 +224,10 @@ namespace HealthClinic.CL.DbContextModel
 
            
             modelBuilder.Entity<Medicine>().HasData(
-
-             new Medicine(22, "Medicine Name", 2, "Medicine Description", new List<ModelRoom>(), 1, false, 1)
+            new Medicine(51, "Pancef", 44, "For temperature", new List<ModelRoom>(), 1, false, 5),
+            new Medicine(52, "Defrinol", 2, "For headache", new List<ModelRoom>(), 1, false, 7),
+            new Medicine(53, "Brufen", 2, "For illness", new List<ModelRoom>(), 1, false, 8),
+            new Medicine(54, "Paracetamol", 4, "For illness", new List<ModelRoom>(), 1, false, 6)
 
 
             );
@@ -238,8 +235,12 @@ namespace HealthClinic.CL.DbContextModel
 
             modelBuilder.Entity<Prescription>().HasData(
 
-            new Prescription(1, 1, new List<Medicine>(), true, "Comment"),
-            new Prescription(2, 2, null, true, "Some text")
+            new Prescription(5, 1, new List<Medicine>(), false, "Use every day", 1),
+            new Prescription(6, 2, new List<Medicine>(), true, "When needed", 1),
+            new Prescription(7, 1, new List<Medicine>(), true, "On every 12 hours", 2),
+            new Prescription(8, 1, new List<Medicine>(), true, "After lunch", 1)
+
+
 
             );
 
