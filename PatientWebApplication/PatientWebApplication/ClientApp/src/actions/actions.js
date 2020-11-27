@@ -18,7 +18,9 @@
     SURVEY_CREATED,
     LOADED_APPOINTMENTSURVEY,
     LOADED_ALL_PATIENT_REPORTS,
-    OBSERVE_PATIENT_REPORTS_ERROR
+    OBSERVE_PATIENT_REPORTS_ERROR,
+    LOADED_ALL_RATES,
+    LOADED_ALL_DOCTOR_RATES
 } from "../types/types"
 import axios from "axios";
 
@@ -253,6 +255,40 @@ export const surveyCreated = (survey) => async (dispatch) => {
         dispatch({
             type: SURVEY_CREATED,
             payload: survey,
+        });
+    } catch (e) {
+        dispatch({
+            type: OBSERVE_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const loadedAllRates = () => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.get("http://localhost:60198/api/survey/getRates");
+        debugger;
+        dispatch({
+            type: LOADED_ALL_RATES,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: OBSERVE_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const loadedAllDoctorRates = () => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.get("http://localhost:60198/api/survey/getDoctorRates");
+        debugger;
+        dispatch({
+            type: LOADED_ALL_DOCTOR_RATES,
+            payload: response.data,
         });
     } catch (e) {
         dispatch({

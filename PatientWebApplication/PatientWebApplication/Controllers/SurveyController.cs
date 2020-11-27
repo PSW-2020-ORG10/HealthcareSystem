@@ -38,5 +38,27 @@ namespace PatientWebApplication.Controllers
         {                  
             return Ok(regularAppointmentService.FindAllValidAppointments(regularAppointmentService.GetAppointmentsForPatient(1), SurveyService.GetAllSurveysForPatientId(1)));
         }
+
+        [HttpGet("getRates")]
+        public IActionResult GetRates()
+        {
+            SurveyAverageDto surveyAverage = SurveyService.GetAllAverageRates(SurveyService.GetAll());
+            if (surveyAverage == null)
+            {
+                return BadRequest();
+            }
+            return Ok(surveyAverage);
+        }
+
+        [HttpGet("getDoctorRates")]
+        public IActionResult GetDoctorRates()
+        {
+            List<SurveyDoctorAverageDto> surveyDoctorAverage = SurveyService.GetAllDoctorAverageRates(SurveyService.GetAll());
+            if (surveyDoctorAverage == null)
+            {
+                return BadRequest();
+            }
+            return Ok(surveyDoctorAverage);
+        }
     }
 }

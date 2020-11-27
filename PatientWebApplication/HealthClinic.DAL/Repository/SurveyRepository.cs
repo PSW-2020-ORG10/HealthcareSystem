@@ -17,7 +17,6 @@ namespace HealthClinic.CL.Repository
             this.dbContext = new MyDbContext(new DbContextOptionsBuilder<MyDbContext>().UseMySql("Server=localhost;port=3306;Database=MYSQLHealtcareDB;user=root;password=root").UseLazyLoadingProxies().Options);
         }
        
-
         public Survey Add(Survey survey)
         {
             dbContext.Surveys.Add(survey);
@@ -34,6 +33,5 @@ namespace HealthClinic.CL.Repository
         {
             return dbContext.Surveys.ToList().FindAll(survey => survey.patientId == id);
         }
-
     }
 }

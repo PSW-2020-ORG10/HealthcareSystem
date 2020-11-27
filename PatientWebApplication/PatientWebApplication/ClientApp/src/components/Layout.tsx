@@ -11,6 +11,8 @@ import AppointmentReportSimpleSearch from './AppointmentReportSimpleSearch';
 import RegistrationOfPatient from './PatientRegister';
 import MyInformation from './MyInformation';
 import CreateSurvey from './CreateSurvey';
+import DoctorRates from './DoctorRates';
+import AllRates from './AllRates';
 
 export default (props: { children: React.ReactNode }) => (
     <React.Fragment>
@@ -25,6 +27,8 @@ export default (props: { children: React.ReactNode }) => (
             <Route path='/register-patient' component={RegistrationOfPatient} />
             <Route path='/my-information' component={MyInformation} />
             <Route path='/create-survey' component={CreateSurvey} />
+            <Route path='/rates-doctor' component={DoctorRates} />
+            <Route path='/rates-general' component={AllRates} />
         </Container>
     </React.Fragment>
 );

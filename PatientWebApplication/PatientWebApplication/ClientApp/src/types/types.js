@@ -20,5 +20,10 @@ export const LOADED_ALL_PATIENT_REPORTS = "loadedAllReports";
 export const OBSERVE_PATIENT_REPORTS_ERROR = "patientReportsObservedError";
 export const SIMPLE_SEARCH_APPOINTMENTS_DONE = "simpleSearchAppointmentsDone";
 export const SIMPLE_SEARCH_APPOINTMENTS_ERROR = "simpleSearchAppointmentssError";
+export const LOADED_ALL_RATES = "loadedAllRates";
+export const LOADED_ALL_DOCTOR_RATES = "loadedAllDoctorRates";
+
+
+
 
 

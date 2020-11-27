@@ -10,7 +10,9 @@
     FIND_ONE_PATIENT,
     SURVEY_CREATED,
     LOADED_APPOINTMENTSURVEY,
-    LOADED_ALL_PATIENT_REPORTS
+    LOADED_ALL_PATIENT_REPORTS,
+    LOADED_ALL_RATES,
+    LOADED_ALL_DOCTOR_RATES
 } from "../types/types"
 
 function addFeedback(state=initialState, action) {
@@ -51,7 +53,9 @@ const initialState = {
     patientInformationList: [],
     appointmentSurveyList: [],
     surveyList: [], 
-    patientAppointments: []
+    patientAppointments: [],
+    doctorRatesList: [],
+    allRates: {}
 };
 
 
@@ -124,6 +128,17 @@ function reducer(state = initialState, action) {
             return {
                 ...state,
                 patientAppointments: action.payload
+            };
+        case LOADED_ALL_RATES:
+            debugger;
+            return {
+                ...state,
+               allRates: action.payload
+            };
+        case LOADED_ALL_DOCTOR_RATES:
+            return {
+                ...state,
+                doctorRatesList: action.payload
             };
         default:
             return state;
