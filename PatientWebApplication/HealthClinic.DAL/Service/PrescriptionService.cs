@@ -45,17 +45,7 @@ namespace HealthClinic.CL.Service
         /// <returns> List of filtered patient prescriptions. </returns>
         public List<Prescription> SimpleSearchPrescriptions(PrescriptionSearchDto prescriptionSearchDto)
         {
-            List<Prescription> prescriptions = GetPrescriptionsForPatient(1);
-
-            prescriptions = searchForComments(prescriptions, prescriptionSearchDto);
-
-            prescriptions = searchForUsed(prescriptions, prescriptionSearchDto);
-
-            prescriptions = searchForMedicines(prescriptions, prescriptionSearchDto);
-
-            prescriptions = searchForDoctor(prescriptions, prescriptionSearchDto);
-
-            return prescriptions;
+            return searchForDoctor(searchForMedicines(searchForUsed(searchForComments(GetPrescriptionsForPatient(1), prescriptionSearchDto), prescriptionSearchDto), prescriptionSearchDto), prescriptionSearchDto);
 
         }
 
@@ -65,13 +55,7 @@ namespace HealthClinic.CL.Service
         /// <returns> List of filtered patient prescriptions. </returns>
         public List<Prescription> AdvancedSearchPrescriptions(PrescriptionAdvancedSearchDto dto)
         {
-            List<Prescription> prescriptions = GetPrescriptionsForPatient(1);
-
-            List<Prescription> firstPrescriptions = searchForFirstParameter(prescriptions, dto);
-
-            List<Prescription> finalPrescriptions = searchForOtherParameters(prescriptions, dto, firstPrescriptions);
-
-            return finalPrescriptions;
+            return searchForOtherParameters(GetPrescriptionsForPatient(1), dto, searchForFirstParameter(GetPrescriptionsForPatient(1), dto));
         }
 
         /// <summary> This method is getting list of filtered <c>Prescription</c> that match list of parameters in <c>PrescriptionAdvnacedSearchDto</c></summary>
@@ -84,13 +68,11 @@ namespace HealthClinic.CL.Service
         /// <returns> List of filtered patient prescriptions. </returns>
         private List<Prescription> searchForOtherParameters(List<Prescription> prescriptions, PrescriptionAdvancedSearchDto dto, List<Prescription> firstPrescriptions)
         {
-            List<Prescription> othersPrescriptions = new List<Prescription>();
-
             List<Prescription> finalPrescriptions = firstPrescriptions;
 
             for (int i = 0; i < dto.RestRoles.Length; i++)
             {
-                othersPrescriptions = searchForOtherRoles(dto.RestRoles[i], dto.Rest[i], prescriptions, othersPrescriptions);
+                List<Prescription> othersPrescriptions = searchForOtherParameters(dto.RestRoles[i], dto.Rest[i], prescriptions);
              
                 if (i == 0)
                 {
@@ -107,60 +89,54 @@ namespace HealthClinic.CL.Service
 
         private List<Prescription> searchForLogicOperators(string logicOperator, List<Prescription> othersPrescriptions, List<Prescription> finalPrescriptions)
         {
-
             if (logicOperator.Equals("or"))
             {
-                finalPrescriptions = othersPrescriptions.Union(finalPrescriptions).ToList();
+                return othersPrescriptions.Union(finalPrescriptions).ToList();
             }
             else
             {
-                finalPrescriptions = othersPrescriptions.Intersect(finalPrescriptions).ToList();
+                return othersPrescriptions.Intersect(finalPrescriptions).ToList();
             }
-            return finalPrescriptions;
         }
 
-        private List<Prescription> searchForOtherRoles(string restRole, string rest, List<Prescription> prescriptions, List<Prescription> othersPrescriptions)
+        private List<Prescription> searchForOtherParameters(string otherParameter, string otherValue, List<Prescription> prescriptions)
         {
-            if (restRole.Equals("medicines"))
+            if (otherParameter.Equals("medicines"))
             {
-                othersPrescriptions = searchForMedicinesAdvanced(prescriptions, rest);
+               return searchForMedicinesAdvanced(prescriptions, otherValue);
             }
-            else if (restRole.Equals("comment"))
+            else if (otherParameter.Equals("comment"))
             {
-                othersPrescriptions = searchForCommentsAdvanced(prescriptions, rest);
+                return searchForCommentsAdvanced(prescriptions, otherValue);
             }
-            else if (restRole.Equals("isUsed"))
+            else if (otherParameter.Equals("isUsed"))
             {
-                othersPrescriptions = searchForUsedAdvanced(prescriptions, rest);
+                return searchForUsedAdvanced(prescriptions, otherValue);
             }
             else
             {
-                othersPrescriptions = searchForDoctorAdvanced(prescriptions, rest);
+                return searchForDoctorAdvanced(prescriptions, otherValue);
             }
-            return othersPrescriptions;
         }
 
         private List<Prescription> searchForFirstParameter(List<Prescription> prescriptions, PrescriptionAdvancedSearchDto dto)
         {
-            List<Prescription> firstPrescriptions = new List<Prescription>();
             if (dto.FirstRole.Equals("medicines") || dto.FirstRole.Equals(""))
             {
-                firstPrescriptions = searchForMedicinesAdvanced(prescriptions, dto.First);
+                return searchForMedicinesAdvanced(prescriptions, dto.First);
             }
             else if (dto.FirstRole.Equals("comment"))
             {
-                firstPrescriptions = searchForCommentsAdvanced(prescriptions, dto.First);
+                return searchForCommentsAdvanced(prescriptions, dto.First);
             }
             else if (dto.FirstRole.Equals("isUsed"))
             {
-                firstPrescriptions = searchForUsedAdvanced(prescriptions, dto.First);
+                return searchForUsedAdvanced(prescriptions, dto.First);
             }
             else
             {
-                firstPrescriptions = searchForDoctorAdvanced(prescriptions, dto.First);
+                return searchForDoctorAdvanced(prescriptions, dto.First);
             }
-
-            return firstPrescriptions;
         }
 
         private List<Prescription> searchForDoctorAdvanced(List<Prescription> prescriptions, String searchField)
