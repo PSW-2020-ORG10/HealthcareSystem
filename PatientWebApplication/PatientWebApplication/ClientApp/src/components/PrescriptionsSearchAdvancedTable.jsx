@@ -2,6 +2,7 @@
 import { loadedAllPatientPrescriptions, advancedSearchPatientPrescriptions } from "../actions/actions"
 import { connect } from "react-redux"
 import { wrap } from "module";
+import { showErrorToastIsUsed, checkIsUsed } from "../utilities/Utilities"
 
 
 class PrescriptionsSearchAdvancedTable extends Component {
@@ -237,7 +238,26 @@ class PrescriptionsSearchAdvancedTable extends Component {
     }
 
     searchPrescriptions() {
-        this.props.advancedSearchPatientPrescriptions({ firstRole: this.state.firstRole, first: this.state.first, restRoles: this.state.restRoles, rest: this.state.rest, logicOperators: this.state.logicOperators })
+        var flag = 0;
+
+        if (this.state.firstRole == "isUsed") {
+            if (this.state.first !== "" && !checkIsUsed(this.state.first)) {
+                showErrorToastIsUsed()
+                flag = 1
+            }
+        }
+
+        for (var i = 0; i < this.state.restRoles.length; i++) {
+            if (this.state.restRoles[i] == "isUsed") {
+                if (this.state.rest[i] !== "" && !checkIsUsed(this.state.rest[i])) {
+                    showErrorToastIsUsed()
+                    flag = 1
+                }
+            }
+        }
+        if (flag == 0) {
+            this.props.advancedSearchPatientPrescriptions({ firstRole: this.state.firstRole, first: this.state.first, restRoles: this.state.restRoles, rest: this.state.rest, logicOperators: this.state.logicOperators })
+        }
     }
 
 

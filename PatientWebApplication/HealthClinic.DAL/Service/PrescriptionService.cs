@@ -3,6 +3,7 @@ using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Hospital;
 using HealthClinic.CL.Model.Patient;
 using HealthClinic.CL.Repository;
+using HealthClinic.CL.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,23 +69,14 @@ namespace HealthClinic.CL.Service
         /// <returns> List of filtered patient prescriptions. </returns>
         private List<Prescription> searchForOtherParameters(List<Prescription> prescriptions, PrescriptionAdvancedSearchDto dto, List<Prescription> firstPrescriptions)
         {
-            List<Prescription> finalPrescriptions = firstPrescriptions;
-
-            for (int i = 0; i < dto.RestRoles.Length; i++)
+           for (int i = 0; i < dto.RestRoles.Length; i++)
             {
                 List<Prescription> othersPrescriptions = searchForOtherParameters(dto.RestRoles[i], dto.Rest[i], prescriptions);
-             
-                if (i == 0)
-                {
-                    finalPrescriptions = searchForLogicOperators(dto.LogicOperators[i], othersPrescriptions, firstPrescriptions);
-                }
-                else
-                {
-                    finalPrescriptions = searchForLogicOperators(dto.LogicOperators[i], othersPrescriptions, finalPrescriptions);
-                }
+
+                firstPrescriptions = searchForLogicOperators(dto.LogicOperators[i], othersPrescriptions, firstPrescriptions);           
             }
 
-            return finalPrescriptions;
+            return firstPrescriptions;
         }
 
         private List<Prescription> searchForLogicOperators(string logicOperator, List<Prescription> othersPrescriptions, List<Prescription> finalPrescriptions)
@@ -121,7 +113,7 @@ namespace HealthClinic.CL.Service
 
         private List<Prescription> searchForFirstParameter(List<Prescription> prescriptions, PrescriptionAdvancedSearchDto dto)
         {
-            if (dto.FirstRole.Equals("medicines") || dto.FirstRole.Equals(""))
+            if (dto.FirstRole.Equals("medicines") || UtilityMethods.CheckIfStringIsEmpty(dto.FirstRole))
             {
                 return searchForMedicinesAdvanced(prescriptions, dto.First);
             }
@@ -141,7 +133,7 @@ namespace HealthClinic.CL.Service
 
         private List<Prescription> searchForDoctorAdvanced(List<Prescription> prescriptions, String searchField)
         {
-            if (!searchField.Equals(""))
+            if (!UtilityMethods.CheckIfStringIsEmpty(searchField))
             {
                 prescriptions = prescriptions.FindAll(prescription => prescription.Doctor.firstName.Contains(searchField) || prescription.Doctor.secondName.Contains(searchField) || prescription.Doctor.DoctorFullName().Contains(searchField));
             }
@@ -151,7 +143,7 @@ namespace HealthClinic.CL.Service
 
         private List<Prescription> searchForUsedAdvanced(List<Prescription> prescriptions, String searchField)
         {
-            if (!searchField.Equals(""))
+            if (!UtilityMethods.CheckIfStringIsEmpty(searchField))
             {
                 prescriptions = prescriptions.FindAll(prescription => prescription.isUsed.ToString().Contains(searchField));
             }
@@ -161,7 +153,7 @@ namespace HealthClinic.CL.Service
 
         private List<Prescription> searchForCommentsAdvanced(List<Prescription> prescriptions, String searchField)
         {
-            if (!searchField.Equals(""))
+            if (!UtilityMethods.CheckIfStringIsEmpty(searchField))
             {
                 prescriptions = prescriptions.FindAll(prescription => prescription.comment.Contains(searchField));
             }
@@ -171,7 +163,7 @@ namespace HealthClinic.CL.Service
 
         private List<Prescription> searchForMedicinesAdvanced(List<Prescription> prescriptions, String searchField)
         {
-            if (!searchField.Equals(""))
+            if (!UtilityMethods.CheckIfStringIsEmpty(searchField))
             {
                 prescriptions = prescriptions.Where(prescription => prescription.Medicines.Any(medicine => medicine.name.Contains(searchField))).ToList();
             }
@@ -187,7 +179,7 @@ namespace HealthClinic.CL.Service
         /// <returns> List of filtered patient prescriptions. </returns>
         private List<Prescription> searchForDoctor(List<Prescription> prescriptions, PrescriptionSearchDto prescriptionSearchDto)
         {
-            if (!prescriptionSearchDto.Doctor.Equals(""))
+            if (!UtilityMethods.CheckIfStringIsEmpty(prescriptionSearchDto.Doctor))
             {
                 prescriptions = prescriptions.FindAll(prescription => prescription.Doctor.firstName.Contains(prescriptionSearchDto.Doctor) || prescription.Doctor.secondName.Contains(prescriptionSearchDto.Doctor) || prescription.Doctor.DoctorFullName().Contains(prescriptionSearchDto.Doctor));
             }
@@ -203,7 +195,7 @@ namespace HealthClinic.CL.Service
         /// <returns> List of filtered patient prescriptions. </returns>
         private List<Prescription> searchForUsed(List<Prescription> prescriptions, PrescriptionSearchDto prescriptionSearchDto)
         {
-            if (!prescriptionSearchDto.IsUsed.Equals(""))
+            if (!UtilityMethods.CheckIfStringIsEmpty(prescriptionSearchDto.IsUsed))
             {
                 prescriptions = prescriptions.FindAll(prescription => prescription.isUsed.ToString().Contains(prescriptionSearchDto.IsUsed));
             }
@@ -219,7 +211,7 @@ namespace HealthClinic.CL.Service
         /// <returns> List of filtered patient prescriptions. </returns>
         private List<Prescription> searchForComments(List<Prescription> prescriptions, PrescriptionSearchDto prescriptionSearchDto)
         {
-            if (!prescriptionSearchDto.Comment.Equals(""))
+            if (!UtilityMethods.CheckIfStringIsEmpty(prescriptionSearchDto.Comment))
             {
                 prescriptions = prescriptions.FindAll(prescription => prescription.comment.Contains(prescriptionSearchDto.Comment));
             }
@@ -235,7 +227,7 @@ namespace HealthClinic.CL.Service
         /// <returns> List of filtered patient prescriptions. </returns>
         private List<Prescription> searchForMedicines(List<Prescription> prescriptions, PrescriptionSearchDto prescriptionSearchDto)
         {
-            if (!prescriptionSearchDto.Medicines.Equals(""))
+            if (!UtilityMethods.CheckIfStringIsEmpty(prescriptionSearchDto.Medicines))
             {
 
                 prescriptions = prescriptions.Where(prescription => prescription.Medicines.Any(medicine => medicine.name.Contains(prescriptionSearchDto.Medicines))).ToList();
