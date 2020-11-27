@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using HealthClinic.CL.Utility;
+using System.Linq;
 
 namespace HealthClinic.CL.Service
 {
@@ -220,5 +221,24 @@ namespace HealthClinic.CL.Service
             return stringToCheck.Equals("Appointment");
         }
 
+        public List<DoctorAppointment> FindAllValidAppointments(List<DoctorAppointment> allValidAppointments, List<Survey> surveys)
+        {
+            return CheckIfAppointmentsHappened(allValidAppointments.Where(p => !FindAllUnvalidAppointments(surveys).Any(p2 => p2 == p.id)).ToList());
+        }
+
+        private static List<int> FindAllUnvalidAppointments(List<Survey> allSurveys)
+        {
+            List<int> allUnvalidAppointments = new List<int>();
+            foreach (Survey survey in allSurveys)
+            {
+                allUnvalidAppointments.Add(survey.appointmentId);
+            }
+            return allUnvalidAppointments;
+        }
+
+        private List<DoctorAppointment> CheckIfAppointmentsHappened(List<DoctorAppointment> allValidAppointments)
+        {
+            return allValidAppointments.Where(appointment => UtilityMethods.ParseDateInCorrectFormat(appointment.Date) < DateTime.Now).ToList();
+        }
     }
 }

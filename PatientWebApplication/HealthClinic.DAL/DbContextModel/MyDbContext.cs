@@ -53,6 +53,8 @@ namespace HealthClinic.CL.DbContextModel
         public DbSet<Medicine> Medicines { get; set; }
         public DbSet<RegistrationInPharmacy> Registrations { get; set; }
 
+        public DbSet<Survey> Surveys { get; set; }
+
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -82,13 +84,15 @@ namespace HealthClinic.CL.DbContextModel
 
             modelBuilder.Entity<DoctorUser>().HasData(
 
-           new DoctorUser(1, "Jovan", "Jovanovic", "1234", "2/2/2020", "123", "email", "pass", "Grad",
+           new DoctorUser(1, "Konstantin", "Davidovic", "1234", "2/2/2020", "123", "email", "pass", "Grad",
              200.0, false, "Specialty", new List<DoctorNotification>(), "Ordination 1"),
-            new DoctorUser(2, "Marko", "Markovic", "1234", "2/2/2020", "123", "email", "pass", "Grad",
+           new DoctorUser(2, "Novak", "Maric", "12345", "2/2/2020", "123", "email", "pass", "Grad",
+             200.0, false, "Specialty", new List<DoctorNotification>(), "Ordination 1"),
+            new DoctorUser(3, "Milica", "Tadic", "12346", "2/2/2020", "123", "email", "pass", "Grad",
              200.0, false, "Specialty", new List<DoctorNotification>(), "Ordination 1")
 
 
-           );
+           ) ;
 
             modelBuilder.Entity<PatientUser>().HasData(
 
@@ -204,8 +208,16 @@ namespace HealthClinic.CL.DbContextModel
 
             modelBuilder.Entity<DoctorAppointment>().HasData(
 
-            new DoctorAppointment(1, new TimeSpan(), "22/04/2020", 2, 1, new List < Referral >(), "1"),
-            new DoctorAppointment(2, new TimeSpan(), "07/01/2020", 2, 2, new List<Referral>(), "1")
+             new DoctorAppointment(1, new TimeSpan(), "22/04/2020", 2, 1, new List<Referral>(), "1"),
+            new DoctorAppointment(2, new TimeSpan(), "07/01/2020", 2, 2, new List<Referral>(), "1"),
+            new DoctorAppointment(3, new TimeSpan(), "05/07/2019", 1, 3, new List<Referral>(), "1"),
+            new DoctorAppointment(4, new TimeSpan(), "04/02/2019", 1, 1, new List<Referral>(), "1"),
+            new DoctorAppointment(5, new TimeSpan(), "11/01/2016", 1, 2, new List<Referral>(), "1"),
+            new DoctorAppointment(6, new TimeSpan(), "09/01/2014", 1, 3, new List<Referral>(), "1"),
+            new DoctorAppointment(7, new TimeSpan(), "07/02/2011", 1, 3, new List<Referral>(), "1"),
+            new DoctorAppointment(8, new TimeSpan(), "01/03/2020", 1, 2, new List<Referral>(), "1"),
+            new DoctorAppointment(9, new TimeSpan(), "14/03/2016", 1, 1, new List<Referral>(), "1"),
+            new DoctorAppointment(10, new TimeSpan(), "11/11/2030", 1, 2, new List<Referral>(), "1")
 
             );
 
@@ -247,6 +259,12 @@ namespace HealthClinic.CL.DbContextModel
             modelBuilder.Entity<RegistrationInPharmacy>().HasData(
 
             new RegistrationInPharmacy(1, 1, "Api key")
+
+            );
+
+            modelBuilder.Entity<Survey>().HasData(
+
+            new Survey(1,1, 1, 4, 5, 4, 5, 4, 5, 4, 5, 5, 5, 5, 4, 3, 3, 2, 2, 5)
 
             );
 
