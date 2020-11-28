@@ -220,6 +220,7 @@ namespace HealthClinic.CL.Service
         {
             return stringToCheck.Equals("Appointment");
         }
+
         /// <summary> This method is calling searchForFirstParameter, searchForOtherParameters to get list of filtered <c>DoctorAppointment</c> of logged patient. </summary>
         /// /// <param name="dto"><c>AppointmentAdvancedSearchDto</c> is Data Transfer Object of a <c>DoctorAppointment</c> that is be used to filter appointments.
         /// </param>
@@ -230,6 +231,7 @@ namespace HealthClinic.CL.Service
             return searchForOtherParameters(GetAppointmentsForPatient(2), dto, searchForFirstParameter(GetAppointmentsForPatient(2), dto));
 
         }
+
         /// <summary> This method is getting list of filtered <c>DoctorAppointment</c> that match list of parameters in <c>AppointmentAdvnacedSearchDto</c></summary>
         /// <param name="appointments"> List of all <c>DoctorAppointment</c> of logged user.
         /// </param>
@@ -250,21 +252,25 @@ namespace HealthClinic.CL.Service
             }
             return firstAppointments;
         }
+
         private List<DoctorAppointment> searchForLogicOperators(string logicOperator, List<DoctorAppointment> othersAppointments, List<DoctorAppointment> finalAppointments)
         {
             return logicOperator.Equals("or") ? othersAppointments.Union(finalAppointments).ToList() : othersAppointments.Intersect(finalAppointments).ToList();
         }
+
         private List<DoctorAppointment> searchForOtherRoles(string otherParameter, string otherValue, List<DoctorAppointment> appointments)
         {
             return otherParameter.Equals("doctor") ? searchForDoctorAdvanced(appointments, otherValue) :
                otherParameter.Equals("date") ? searchForDateAdvanced(appointments, otherValue) :
                searchForRoomAdvanced(appointments, otherValue);
         }
+
         private List<DoctorAppointment> searchForFirstParameter(List<DoctorAppointment> appointments, AppointmentAdvancedSearchDto dto)
         {
             return dto.FirstRole.Equals("doctor") || UtilityMethods.CheckIfStringIsEmpty(dto.FirstRole) ? searchForDoctorAdvanced(appointments, dto.First) :
                 dto.FirstRole.Equals("date") ? searchForDateAdvanced(appointments, dto.First) : searchForRoomAdvanced(appointments, dto.First);
         }
+
         /// <summary> This method is getting list of filtered <c>DoctorAppointment</c> of logged patient by parameter <c>Doctor</c>. </summary>
         /// /// <param name="appointments"><c>appointments</c> is List of appointments that matches search fields.
         /// </param>
@@ -277,6 +283,7 @@ namespace HealthClinic.CL.Service
             }
             return appointments;
         }
+
         /// <summary> This method is getting list of filtered <c>DoctorAppointment</c> of logged patient by parameter <c>Date</c>. </summary>
         /// /// <param name="appointments"><c>appointments</c> is List of appointments that matches search fields.
         /// </param>
@@ -289,6 +296,7 @@ namespace HealthClinic.CL.Service
             }
             return appointments;
         }
+        
         /// <summary> This method is getting list of filtered <c>DoctorAppointment</c> of logged patient by parameter <c>Room</c>. </summary>
         /// /// <param name="appointments"><c>appointments</c> is List of appointments that matches search fields.
         /// </param>
@@ -301,5 +309,25 @@ namespace HealthClinic.CL.Service
             }
             return appointments;
         }       
+
+        public List<DoctorAppointment> FindAllValidAppointments(List<DoctorAppointment> allValidAppointments, List<Survey> surveys)
+        {
+            return CheckIfAppointmentsHappened(allValidAppointments.Where(p => !FindAllUnvalidAppointments(surveys).Any(p2 => p2 == p.id)).ToList());
+        }
+
+        private static List<int> FindAllUnvalidAppointments(List<Survey> allSurveys)
+        {
+            List<int> allUnvalidAppointments = new List<int>();
+            foreach (Survey survey in allSurveys)
+            {
+                allUnvalidAppointments.Add(survey.appointmentId);
+            }
+            return allUnvalidAppointments;
+        }
+
+        private List<DoctorAppointment> CheckIfAppointmentsHappened(List<DoctorAppointment> allValidAppointments)
+        {
+            return allValidAppointments.Where(appointment => UtilityMethods.ParseDateInCorrectFormat(appointment.Date) < DateTime.Now).ToList();
+        }
     }
 }
