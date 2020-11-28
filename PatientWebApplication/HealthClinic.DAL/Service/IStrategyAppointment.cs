@@ -15,5 +15,6 @@ namespace HealthClinic.CL.Service
         void New(DoctorAppointment appointment, Operation operation);
         void Remove(int appointmentid);
         void Update(DoctorAppointment appointment, Operation operation);
+
     }
 }

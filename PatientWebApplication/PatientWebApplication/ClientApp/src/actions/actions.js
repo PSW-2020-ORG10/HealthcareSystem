@@ -20,7 +20,11 @@
     SURVEY_CREATED,
     LOADED_APPOINTMENTSURVEY,
     LOADED_ALL_PATIENT_REPORTS,
-    OBSERVE_PATIENT_REPORTS_ERROR
+    OBSERVE_PATIENT_REPORTS_ERROR,
+    ADVANCED_SEARCH_PATIENT_APPOINTMENTS,
+    ADVANCED_SEARCH_APPOINTMENTS_ERROR,
+    LOADED_ALL_PATIENT_APPOINTMENTS,
+    OBSERVE_PATIENT_APPOINTMENTS_ERROR
 } from "../types/types"
 import axios from "axios";
 
@@ -276,6 +280,40 @@ export const surveyCreated = (survey) => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: OBSERVE_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const advancedSearchPatientAppointments = (appointment) => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.post("http://localhost:60198/api/doctorappointment/advancedsearch", appointment);
+        debugger;
+        dispatch({
+            type: ADVANCED_SEARCH_PATIENT_APPOINTMENTS,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: ADVANCED_SEARCH_APPOINTMENTS_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const loadedAllPatientAppointments = () => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.get("http://localhost:60198/api/doctorappointment/patient");
+        debugger;
+        dispatch({
+            type: LOADED_ALL_PATIENT_APPOINTMENTS,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: OBSERVE_PATIENT_APPOINTMENTS_ERROR,
             payload: console.log(e),
         });
     }

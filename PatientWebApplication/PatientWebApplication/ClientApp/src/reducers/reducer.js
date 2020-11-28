@@ -9,9 +9,11 @@
     SIMPLE_SEARCH_PATIENT_PRESCRIPTIONS,
     ADVANCED_SEARCH_PATIENT_PRESCRIPTIONS,
     FIND_ONE_PATIENT,
+    LOADED_ALL_PATIENT_REPORTS,
+    ADVANCED_SEARCH_PATIENT_APPOINTMENTS,
+    LOADED_ALL_PATIENT_APPOINTMENTS,
     SURVEY_CREATED,
-    LOADED_APPOINTMENTSURVEY,
-    LOADED_ALL_PATIENT_REPORTS
+    LOADED_APPOINTMENTSURVEY
 } from "../types/types"
 
 function addFeedback(state=initialState, action) {
@@ -50,9 +52,10 @@ const initialState = {
     patientPrescriptionsList: [],
     patientList: [],
     patientInformationList: [],
+    patientAppointments: [],
+    patientAppointmentsList: [],
     appointmentSurveyList: [],
-    surveyList: [], 
-    patientAppointments: []
+    surveyList: []
 };
 
 
@@ -131,6 +134,17 @@ function reducer(state = initialState, action) {
             return {
                 ...state,
                 patientAppointments: action.payload
+            };
+        case LOADED_ALL_PATIENT_APPOINTMENTS:
+            return {
+                ...state,
+                patientAppointmentsList: action.payload
+            };
+        case ADVANCED_SEARCH_PATIENT_APPOINTMENTS:
+            return {
+                ...state,
+                patientAppointmentsList: action.payload
+
             };
         default:
             return state;

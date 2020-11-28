@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HealthClinic.CL.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20201127121700_NewMigration")]
-    partial class NewMigration
+    [Migration("20201128115505_LastMigration")]
+    partial class LastMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -822,6 +822,24 @@ namespace HealthClinic.CL.Migrations
                             DoctorUserId = 2,
                             PatientUserId = 1,
                             RoomId = "1",
+                            Start = new TimeSpan(0, 0, 0, 0, 0)
+                        },
+                        new
+                        {
+                            id = 11,
+                            Date = "14/03/2016",
+                            DoctorUserId = 1,
+                            PatientUserId = 2,
+                            RoomId = "A2",
+                            Start = new TimeSpan(0, 0, 0, 0, 0)
+                        },
+                        new
+                        {
+                            id = 12,
+                            Date = "11/11/2030",
+                            DoctorUserId = 2,
+                            PatientUserId = 2,
+                            RoomId = "B3",
                             Start = new TimeSpan(0, 0, 0, 0, 0)
                         });
                 });

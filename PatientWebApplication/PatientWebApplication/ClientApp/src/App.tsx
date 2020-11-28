@@ -13,6 +13,7 @@ import AppointmentReportSimpleSearch from './components/AppointmentReportSimpleS
 import RegistrationOfPatient from './components/PatientRegister';
 import PrescriptionsAdvanced from './components/PrescriptionsAdvanced';
 import MyInformation from './components/MyInformation';
+import AppointmentsAdvanced from './components/AppointmentsAdvanced';
 import CreateSurvey from './components/CreateSurvey';
 
 export default () => (
@@ -26,6 +27,7 @@ export default () => (
         <Route path='/register-patient' component={RegistrationOfPatient} />
         <Route path='/prescriptions-advanced' component={PrescriptionsAdvanced} />
         <Route path='/my-information' component={MyInformation} />
+        <Route path='/appointments-advanced' component={AppointmentsAdvanced} />
         <Route path='/create-survey' component={CreateSurvey} />
     </Layout>
 );
