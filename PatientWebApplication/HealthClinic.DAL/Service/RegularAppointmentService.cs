@@ -242,8 +242,6 @@ namespace HealthClinic.CL.Service
         /// <returns> List of filtered appointments. </returns>
         private List<DoctorAppointment> searchForOtherParameters(List<DoctorAppointment> appointments, AppointmentAdvancedSearchDto dto, List<DoctorAppointment> firstAppointments)
         {
-            List<DoctorAppointment> finalAppointments = firstAppointments;
-
             for (int i = 0; i < dto.RestRoles.Length; i++)
             {
                 List<DoctorAppointment> othersAppointments = searchForOtherRoles(dto.RestRoles[i], dto.Rest[i], appointments);
