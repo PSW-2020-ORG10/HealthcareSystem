@@ -46,7 +46,7 @@ namespace HealthClinic.CL.Service
         /// <returns> List of filtered patient prescriptions. </returns>
         public List<Prescription> SimpleSearchPrescriptions(PrescriptionSearchDto prescriptionSearchDto)
         {
-            return searchForDoctor(searchForMedicines(searchForUsed(searchForComments(GetPrescriptionsForPatient(1), prescriptionSearchDto), prescriptionSearchDto), prescriptionSearchDto), prescriptionSearchDto);
+            return SearchForDoctor(SearchForMedicines(SearchForUsed(SearchForComments(GetPrescriptionsForPatient(1), prescriptionSearchDto), prescriptionSearchDto), prescriptionSearchDto), prescriptionSearchDto);
 
         }
 
@@ -56,7 +56,7 @@ namespace HealthClinic.CL.Service
         /// <returns> List of filtered patient prescriptions. </returns>
         public List<Prescription> AdvancedSearchPrescriptions(PrescriptionAdvancedSearchDto dto)
         {
-            return searchForOtherParameters(GetPrescriptionsForPatient(1), dto, searchForFirstParameter(GetPrescriptionsForPatient(1), dto));
+            return SearchForOtherParameters(GetPrescriptionsForPatient(1), dto, SearchForFirstParameter(GetPrescriptionsForPatient(1), dto));
         }
 
         /// <summary> This method is getting list of filtered <c>Prescription</c> that match list of parameters in <c>PrescriptionAdvnacedSearchDto</c></summary>
@@ -67,39 +67,67 @@ namespace HealthClinic.CL.Service
         /// <param name="firstPrescriptions"> List of <c>Prescription</c> that contains prescriptions that matches first parameter.
         /// </param>
         /// <returns> List of filtered patient prescriptions. </returns>
-        private List<Prescription> searchForOtherParameters(List<Prescription> prescriptions, PrescriptionAdvancedSearchDto dto, List<Prescription> firstPrescriptions)
+        private List<Prescription> SearchForOtherParameters(List<Prescription> prescriptions, PrescriptionAdvancedSearchDto dto, List<Prescription> firstPrescriptions)
         {
            for (int i = 0; i < dto.RestRoles.Length; i++)
             {
-                List<Prescription> othersPrescriptions = searchForOtherParameters(dto.RestRoles[i], dto.Rest[i], prescriptions);
+                List<Prescription> othersPrescriptions = SearchForOtherParametersValues(dto.RestRoles[i], dto.Rest[i], prescriptions);
 
-                firstPrescriptions = searchForLogicOperators(dto.LogicOperators[i], othersPrescriptions, firstPrescriptions);           
+                firstPrescriptions = SearchForLogicOperators(dto.LogicOperators[i], othersPrescriptions, firstPrescriptions);           
             }
 
             return firstPrescriptions;
         }
 
-        private List<Prescription> searchForLogicOperators(string logicOperator, List<Prescription> othersPrescriptions, List<Prescription> finalPrescriptions)
+        /// <summary> This method is either merging 2 lists of filtered <c>Prescription</c> on logical operator AND or OR depending on sent parameter</summary>
+        /// /// <param name="logicOperator"><c>logicOperator</c> contains type of logical operator how we want to merge 2 lists of filtered <c>Prescription</c>.
+        /// </param>
+        /// /// /// <param name="othersPrescriptions"><c>othersPrescriptions</c> is first list of filtered <c>Prescription</c>.
+        /// </param>
+        /// /// <param name="finalPrescriptions"><c>finalPrescriptions</c> is second list of filtered <c>Prescription</c>.
+        /// </param>
+        /// <returns> List of filtered patient prescriptions. </returns>
+        private List<Prescription> SearchForLogicOperators(string logicOperator, List<Prescription> othersPrescriptions, List<Prescription> finalPrescriptions)
         {
             return logicOperator.Equals("or") ? othersPrescriptions.Union(finalPrescriptions).ToList() : othersPrescriptions.Intersect(finalPrescriptions).ToList();
         }
 
-        private List<Prescription> searchForOtherParameters(string otherParameter, string otherValue, List<Prescription> prescriptions)
+        /// <summary> This method is calling function for getting list of filtered <c>Prescription</c> of logged patient by sent parameters </summary>
+        /// /// <param name="otherParameter"><c>otherParameter</c> is string that contains type of parameter on which we want to filter prescriptions.
+        /// </param>
+        /// /// /// <param name="otherValue"><c>otherValue</c> is string that contains value of parameter which we use to filter prescriptions.
+        /// </param>
+        /// /// <param name="prescriptions"><c>prescriptions</c> is List of presciptions that matches search fields.
+        /// </param>
+        /// <returns> List of filtered patient prescriptions. </returns>
+        private List<Prescription> SearchForOtherParametersValues(string otherParameter, string otherValue, List<Prescription> prescriptions)
         {
-            return otherParameter.Equals("medicines") ? searchForMedicinesAdvanced(prescriptions, otherValue) : 
-                otherParameter.Equals("comment") ? searchForCommentsAdvanced(prescriptions, otherValue) : 
-                otherParameter.Equals("isUsed") ? searchForUsedAdvanced(prescriptions, otherValue) : 
-                searchForDoctorAdvanced(prescriptions, otherValue);
+            return otherParameter.Equals("medicines") ? SearchForMedicinesAdvanced(prescriptions, otherValue) : 
+                otherParameter.Equals("comment") ? SearchForCommentsAdvanced(prescriptions, otherValue) : 
+                otherParameter.Equals("isUsed") ? SearchForUsedAdvanced(prescriptions, otherValue) : 
+                SearchForDoctorAdvanced(prescriptions, otherValue);
         }
 
-        private List<Prescription> searchForFirstParameter(List<Prescription> prescriptions, PrescriptionAdvancedSearchDto dto)
+        /// <summary> This method is calling function for getting list of filtered <c>Prescription</c> of logged patient by sent parameter. </summary>
+        /// /// <param name="prescriptions"><c>prescriptions</c> is List of presciptions that matches search fields.
+        /// </param>
+        /// /// <param name="dto"><c>PrescriptionAdvancedSearchDto</c> is Data Transfer Object of <c>Prescription</c> and is being used to filter precriptions depending on sent value.
+        /// </param>
+        /// <returns> List of filtered patient prescriptions. </returns>
+        private List<Prescription> SearchForFirstParameter(List<Prescription> prescriptions, PrescriptionAdvancedSearchDto dto)
         {
-            return dto.FirstRole.Equals("medicines") || UtilityMethods.CheckIfStringIsEmpty(dto.FirstRole) ? searchForMedicinesAdvanced(prescriptions, dto.First) :
-                dto.FirstRole.Equals("comment") ? searchForCommentsAdvanced(prescriptions, dto.First) :
-                dto.FirstRole.Equals("isUsed") ? searchForUsedAdvanced(prescriptions, dto.First) : searchForDoctorAdvanced(prescriptions, dto.First);
+            return dto.FirstRole.Equals("medicines") || UtilityMethods.CheckIfStringIsEmpty(dto.FirstRole) ? SearchForMedicinesAdvanced(prescriptions, dto.First) :
+                dto.FirstRole.Equals("comment") ? SearchForCommentsAdvanced(prescriptions, dto.First) :
+                dto.FirstRole.Equals("isUsed") ? SearchForUsedAdvanced(prescriptions, dto.First) : SearchForDoctorAdvanced(prescriptions, dto.First);
         }
 
-        private List<Prescription> searchForDoctorAdvanced(List<Prescription> prescriptions, String searchField)
+        /// <summary> This method is getting list of filtered <c>Prescription</c> of logged patient by parameter <c>Doctor</c>. </summary>
+        /// /// <param name="prescriptions"><c>prescriptions</c> is List of presciptions that matches search fields.
+        /// </param>
+        /// /// <param name="searchField"><c>searchField</c> is field that contains doctors name or surname and is being used to filter precriptions.
+        /// </param>
+        /// <returns> List of filtered patient prescriptions. </returns>
+        private List<Prescription> SearchForDoctorAdvanced(List<Prescription> prescriptions, String searchField)
         {
             if (!UtilityMethods.CheckIfStringIsEmpty(searchField))
             {
@@ -109,7 +137,13 @@ namespace HealthClinic.CL.Service
             return prescriptions;
         }
 
-        private List<Prescription> searchForUsedAdvanced(List<Prescription> prescriptions, String searchField)
+        /// <summary> This method is getting list of filtered <c>Prescription</c> of logged patient by parameter <c>IsUsed</c>. </summary>
+        /// /// <param name="prescriptions"><c>prescriptions</c> is List of presciptions that matches search fields.
+        /// </param>
+        /// /// <param name="searchField"><c>searchField</c> is field that contains true or false for parameter is used and is being used to filter precriptions.
+        /// </param>
+        /// <returns> List of filtered patient prescriptions. </returns>
+        private List<Prescription> SearchForUsedAdvanced(List<Prescription> prescriptions, String searchField)
         {
             if (!UtilityMethods.CheckIfStringIsEmpty(searchField))
             {
@@ -119,7 +153,13 @@ namespace HealthClinic.CL.Service
             return prescriptions;
         }
 
-        private List<Prescription> searchForCommentsAdvanced(List<Prescription> prescriptions, String searchField)
+        /// <summary> This method is getting list of filtered <c>Prescription</c> of logged patient by parameter <c>Comment</c>. </summary>
+        /// /// <param name="prescriptions"><c>prescriptions</c> is List of presciptions that matches search fields.
+        /// </param>
+        /// /// <param name="searchField"><c>searchField</c> is field that contains comment and is being used to filter precriptions.
+        /// </param>
+        /// <returns> List of filtered patient prescriptions. </returns>
+        private List<Prescription> SearchForCommentsAdvanced(List<Prescription> prescriptions, String searchField)
         {
             if (!UtilityMethods.CheckIfStringIsEmpty(searchField))
             {
@@ -129,7 +169,13 @@ namespace HealthClinic.CL.Service
             return prescriptions;
         }
 
-        private List<Prescription> searchForMedicinesAdvanced(List<Prescription> prescriptions, String searchField)
+        /// <summary> This method is getting list of filtered <c>Prescription</c> of logged patient by parameter <c>Messages</c>. </summary>
+        /// /// <param name="prescriptions"><c>prescriptions</c> is List of presciptions that matches search fields.
+        /// </param>
+        /// /// <param name="searchField"><c>searchField</c> is field that contains medicine name and is being used to filter precriptions.
+        /// </param>
+        /// <returns> List of filtered patient prescriptions. </returns>
+        private List<Prescription> SearchForMedicinesAdvanced(List<Prescription> prescriptions, String searchField)
         {
             if (!UtilityMethods.CheckIfStringIsEmpty(searchField))
             {
@@ -142,10 +188,10 @@ namespace HealthClinic.CL.Service
         /// <summary> This method is getting list of filtered <c>Prescription</c> of logged patient by parameter <c>Doctor</c>. </summary>
         /// /// <param name="prescriptions"><c>prescriptions</c> is List of presciptions that matches search fields.
         /// </param>
-        /// /// <param name="prescriptionSearchDto"><c>prescriptionSearchDto</c> is Data Transfer Object of a <c>Prescription</c> that is beomg used to filter precriptions.
+        /// /// <param name="prescriptionSearchDto"><c>prescriptionSearchDto</c> is Data Transfer Object of a <c>Prescription</c> that is being used to filter precriptions.
         /// </param>
         /// <returns> List of filtered patient prescriptions. </returns>
-        private List<Prescription> searchForDoctor(List<Prescription> prescriptions, PrescriptionSearchDto prescriptionSearchDto)
+        private List<Prescription> SearchForDoctor(List<Prescription> prescriptions, PrescriptionSearchDto prescriptionSearchDto)
         {
             if (!UtilityMethods.CheckIfStringIsEmpty(prescriptionSearchDto.Doctor))
             {
@@ -158,10 +204,10 @@ namespace HealthClinic.CL.Service
         /// <summary> This method is getting list of filtered <c>Prescription</c> of logged patient by parameter <c>IsUsed</c>. </summary>
         /// /// <param name="prescriptions"><c>prescriptions</c> is List of presciptions that matches search fields.
         /// </param>
-        /// /// <param name="prescriptionSearchDto"><c>prescriptionSearchDto</c> is Data Transfer Object of a <c>Prescription</c> that is beomg used to filter precriptions.
+        /// /// <param name="prescriptionSearchDto"><c>prescriptionSearchDto</c> is Data Transfer Object of a <c>Prescription</c> that is being used to filter precriptions.
         /// </param>
         /// <returns> List of filtered patient prescriptions. </returns>
-        private List<Prescription> searchForUsed(List<Prescription> prescriptions, PrescriptionSearchDto prescriptionSearchDto)
+        private List<Prescription> SearchForUsed(List<Prescription> prescriptions, PrescriptionSearchDto prescriptionSearchDto)
         {
             if (!UtilityMethods.CheckIfStringIsEmpty(prescriptionSearchDto.IsUsed))
             {
@@ -174,10 +220,10 @@ namespace HealthClinic.CL.Service
         /// <summary> This method is getting list of filtered <c>Prescription</c> of logged patient by parameter <c>Comment</c>. </summary>
         /// /// <param name="prescriptions"><c>prescriptions</c> is List of presciptions that matches search fields.
         /// </param>
-        /// /// <param name="prescriptionSearchDto"><c>prescriptionSearchDto</c> is Data Transfer Object of a <c>Prescription</c> that is beomg used to filter precriptions.
+        /// /// <param name="prescriptionSearchDto"><c>prescriptionSearchDto</c> is Data Transfer Object of a <c>Prescription</c> that is being used to filter precriptions.
         /// </param>
         /// <returns> List of filtered patient prescriptions. </returns>
-        private List<Prescription> searchForComments(List<Prescription> prescriptions, PrescriptionSearchDto prescriptionSearchDto)
+        private List<Prescription> SearchForComments(List<Prescription> prescriptions, PrescriptionSearchDto prescriptionSearchDto)
         {
             if (!UtilityMethods.CheckIfStringIsEmpty(prescriptionSearchDto.Comment))
             {
@@ -190,10 +236,10 @@ namespace HealthClinic.CL.Service
         /// <summary> This method is getting list of filtered <c>Prescription</c> of logged patient by parameter <c>Messages</c>. </summary>
         /// /// <param name="prescriptions"><c>prescriptions</c> is List of presciptions that matches search fields.
         /// </param>
-        /// /// <param name="prescriptionSearchDto"><c>prescriptionSearchDto</c> is Data Transfer Object of a <c>Prescription</c> that is beomg used to filter precriptions.
+        /// /// <param name="prescriptionSearchDto"><c>prescriptionSearchDto</c> is Data Transfer Object of a <c>Prescription</c> that is being used to filter precriptions.
         /// </param>
         /// <returns> List of filtered patient prescriptions. </returns>
-        private List<Prescription> searchForMedicines(List<Prescription> prescriptions, PrescriptionSearchDto prescriptionSearchDto)
+        private List<Prescription> SearchForMedicines(List<Prescription> prescriptions, PrescriptionSearchDto prescriptionSearchDto)
         {
             if (!UtilityMethods.CheckIfStringIsEmpty(prescriptionSearchDto.Medicines))
             {

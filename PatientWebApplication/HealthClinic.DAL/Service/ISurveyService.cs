@@ -9,6 +9,10 @@ namespace HealthClinic.CL.Service
     public interface ISurveyService
     {
         Survey Create(SurveyDto surveyDto);
-        List<Survey> GetAllSurveysForPatientId(int id);            
+        List<Survey> GetAllSurveysForPatientId(int id);
+        List<Survey> GetAll();
+        SurveyAverageDto GetAllAverageRates();
+        List<SurveyDoctorAverageDto> GetAllDoctorAverageRates();
+
     }
 }

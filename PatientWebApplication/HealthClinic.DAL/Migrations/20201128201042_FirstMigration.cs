@@ -833,18 +833,25 @@ namespace HealthClinic.CL.Migrations
                     { 9, 9, "classify", "Patient had slight heart arrhythmia.", "Aspirin", 3, "25/02/2020" },
                     { 8, 8, "Appointment", "Patient had cold.", "Brufen", 1, "11/05/2020" },
                     { 7, 7, "classify", "Patient had slight heart arrhythmia.", "Aspirin", 3, "25/02/2020" },
+                    { 12, 12, "Appointment", "Patient had cold.", "Brufen", 1, "11/05/2020" },
                     { 6, 6, "Appointment", "Patient had cold.", "Brufen", 1, "11/05/2020" },
                     { 5, 5, "classify", "Patient had slight heart arrhythmia.", "Aspirin", 3, "25/02/2020" },
                     { 4, 4, "Appointment", "Patient had cold.", "Brufen", 1, "11/05/2020" },
                     { 3, 3, "classify", "Patient had slight heart arrhythmia.", "Aspirin", 3, "25/02/2020" },
-                    { 11, 11, "classify", "Patient had slight heart arrhythmia.", "Aspirin", 3, "25/02/2020" },
-                    { 12, 12, "Appointment", "Patient had cold.", "Brufen", 1, "11/05/2020" }
+                    { 11, 11, "classify", "Patient had slight heart arrhythmia.", "Aspirin", 3, "25/02/2020" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Surveys",
                 columns: new[] { "id", "appointmentId", "doctorsKnowledge", "doctorsPoliteness", "doctorsProfessionalism", "doctorsSkill", "doctorsTechnicality", "doctorsWorkingPace", "hospitalEnvironment", "hospitalEquipment", "hospitalHygiene", "hospitalPrices", "hospitalWaitingTime", "medicalStaffsKnowledge", "medicalStaffsPoliteness", "medicalStaffsProfessionalism", "medicalStaffsSkill", "medicalStaffsTechnicality", "medicalStaffsWorkingPace", "patientId" },
-                values: new object[] { 1, 1, 4, 5, 4, 5, 4, 5, 3, 3, 2, 2, 5, 5, 5, 4, 5, 5, 4, 1 });
+                values: new object[,]
+                {
+                    { 5, 7, 4, 5, 4, 2, 4, 5, 1, 1, 2, 5, 1, 5, 2, 1, 3, 4, 2, 1 },
+                    { 3, 5, 4, 5, 4, 3, 1, 5, 1, 2, 2, 1, 5, 5, 2, 3, 1, 5, 4, 1 },
+                    { 2, 4, 5, 5, 4, 1, 3, 5, 1, 3, 3, 3, 5, 5, 2, 2, 2, 4, 3, 1 },
+                    { 1, 3, 4, 5, 4, 5, 4, 5, 3, 3, 2, 2, 5, 5, 5, 4, 5, 5, 4, 1 },
+                    { 4, 6, 5, 5, 4, 5, 2, 1, 1, 3, 1, 3, 5, 2, 2, 3, 2, 4, 3, 1 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_DoctorAppointments_DoctorUserId",

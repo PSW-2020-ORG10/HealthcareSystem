@@ -13,6 +13,8 @@
     ADVANCED_SEARCH_PATIENT_APPOINTMENTS,
     LOADED_ALL_PATIENT_APPOINTMENTS,
     SURVEY_CREATED,
+    LOADED_ALL_RATES,
+    LOADED_ALL_DOCTOR_RATES,
     LOADED_APPOINTMENTSURVEY
 } from "../types/types"
 
@@ -55,7 +57,10 @@ const initialState = {
     patientAppointments: [],
     patientAppointmentsList: [],
     appointmentSurveyList: [],
-    surveyList: []
+    surveyList: [], 
+    patientAppointments: [],
+    doctorRatesList: [],
+    allRates: {}
 };
 
 
@@ -146,6 +151,17 @@ function reducer(state = initialState, action) {
                 patientAppointmentsList: action.payload
 
             };
+        case LOADED_ALL_RATES:
+            debugger;
+            return {
+                ...state,
+                allRates: action.payload
+            };
+        case LOADED_ALL_DOCTOR_RATES:
+            return {
+                ...state,
+                doctorRatesList: action.payload
+            };    
         default:
             return state;
     }

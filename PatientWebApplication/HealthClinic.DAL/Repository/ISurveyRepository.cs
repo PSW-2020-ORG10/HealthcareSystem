@@ -10,5 +10,6 @@ namespace HealthClinic.CL.Repository
     {
         Survey Add(Survey survey);
         List<Survey> GetAllSurveysForPatientId(int id);
+        List<Survey> GetAll();
     }
 }

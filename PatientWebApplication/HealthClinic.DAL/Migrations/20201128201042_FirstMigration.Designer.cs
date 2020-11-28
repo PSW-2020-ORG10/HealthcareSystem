@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HealthClinic.CL.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20201128190726_FirstMigration")]
+    [Migration("20201128201042_FirstMigration")]
     partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1342,7 +1342,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
-                            appointmentId = 1,
+                            appointmentId = 3,
                             doctorsKnowledge = 4,
                             doctorsPoliteness = 5,
                             doctorsProfessionalism = 4,
@@ -1360,6 +1360,98 @@ namespace HealthClinic.CL.Migrations
                             medicalStaffsSkill = 5,
                             medicalStaffsTechnicality = 5,
                             medicalStaffsWorkingPace = 4,
+                            patientId = 1
+                        },
+                        new
+                        {
+                            id = 2,
+                            appointmentId = 4,
+                            doctorsKnowledge = 5,
+                            doctorsPoliteness = 5,
+                            doctorsProfessionalism = 4,
+                            doctorsSkill = 1,
+                            doctorsTechnicality = 3,
+                            doctorsWorkingPace = 5,
+                            hospitalEnvironment = 1,
+                            hospitalEquipment = 3,
+                            hospitalHygiene = 3,
+                            hospitalPrices = 3,
+                            hospitalWaitingTime = 5,
+                            medicalStaffsKnowledge = 5,
+                            medicalStaffsPoliteness = 2,
+                            medicalStaffsProfessionalism = 2,
+                            medicalStaffsSkill = 2,
+                            medicalStaffsTechnicality = 4,
+                            medicalStaffsWorkingPace = 3,
+                            patientId = 1
+                        },
+                        new
+                        {
+                            id = 3,
+                            appointmentId = 5,
+                            doctorsKnowledge = 4,
+                            doctorsPoliteness = 5,
+                            doctorsProfessionalism = 4,
+                            doctorsSkill = 3,
+                            doctorsTechnicality = 1,
+                            doctorsWorkingPace = 5,
+                            hospitalEnvironment = 1,
+                            hospitalEquipment = 2,
+                            hospitalHygiene = 2,
+                            hospitalPrices = 1,
+                            hospitalWaitingTime = 5,
+                            medicalStaffsKnowledge = 5,
+                            medicalStaffsPoliteness = 2,
+                            medicalStaffsProfessionalism = 3,
+                            medicalStaffsSkill = 1,
+                            medicalStaffsTechnicality = 5,
+                            medicalStaffsWorkingPace = 4,
+                            patientId = 1
+                        },
+                        new
+                        {
+                            id = 4,
+                            appointmentId = 6,
+                            doctorsKnowledge = 5,
+                            doctorsPoliteness = 5,
+                            doctorsProfessionalism = 4,
+                            doctorsSkill = 5,
+                            doctorsTechnicality = 2,
+                            doctorsWorkingPace = 1,
+                            hospitalEnvironment = 1,
+                            hospitalEquipment = 3,
+                            hospitalHygiene = 1,
+                            hospitalPrices = 3,
+                            hospitalWaitingTime = 5,
+                            medicalStaffsKnowledge = 2,
+                            medicalStaffsPoliteness = 2,
+                            medicalStaffsProfessionalism = 3,
+                            medicalStaffsSkill = 2,
+                            medicalStaffsTechnicality = 4,
+                            medicalStaffsWorkingPace = 3,
+                            patientId = 1
+                        },
+                        new
+                        {
+                            id = 5,
+                            appointmentId = 7,
+                            doctorsKnowledge = 4,
+                            doctorsPoliteness = 5,
+                            doctorsProfessionalism = 4,
+                            doctorsSkill = 2,
+                            doctorsTechnicality = 4,
+                            doctorsWorkingPace = 5,
+                            hospitalEnvironment = 1,
+                            hospitalEquipment = 1,
+                            hospitalHygiene = 2,
+                            hospitalPrices = 5,
+                            hospitalWaitingTime = 1,
+                            medicalStaffsKnowledge = 5,
+                            medicalStaffsPoliteness = 2,
+                            medicalStaffsProfessionalism = 1,
+                            medicalStaffsSkill = 3,
+                            medicalStaffsTechnicality = 4,
+                            medicalStaffsWorkingPace = 2,
                             patientId = 1
                         });
                 });
