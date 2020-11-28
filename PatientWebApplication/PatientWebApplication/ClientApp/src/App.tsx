@@ -12,7 +12,7 @@ import PrescriptionsSimple from './components/PrescriptionsSimple';
 import AppointmentReportSimpleSearch from './components/AppointmentReportSimpleSearch';
 import RegistrationOfPatient from './components/PatientRegister';
 import MyInformation from './components/MyInformation';
-
+import AppointmentsAdvanced from './components/AppointmentsAdvanced';
 export default () => (
     <Layout>
         <Route exact path='/' component={Home} />
@@ -23,5 +23,6 @@ export default () => (
         <Route path='/reports-simple' component={AppointmentReportSimpleSearch} />
         <Route path='/register-patient' component={RegistrationOfPatient} />
         <Route path='/my-information' component={MyInformation} />
+        <Route path='/appointments-advanced' component={AppointmentsAdvanced} />
     </Layout>
 );

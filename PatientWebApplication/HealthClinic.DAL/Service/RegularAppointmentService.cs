@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using HealthClinic.CL.Utility;
+using System.Linq;
 
 namespace HealthClinic.CL.Service
 {
@@ -219,6 +220,86 @@ namespace HealthClinic.CL.Service
         {
             return stringToCheck.Equals("Appointment");
         }
+        /// <summary> This method is calling searchForFirstParameter, searchForOtherParameters to get list of filtered <c>DoctorAppointment</c> of logged patient. </summary>
+        /// /// <param name="dto"><c>AppointmentAdvancedSearchDto</c> is Data Transfer Object of a <c>DoctorAppointment</c> that is be used to filter appointments.
+        /// </param>
+        /// <returns> List of filtered appointments. </returns>
+        public List<DoctorAppointment> AdvancedSearchAppointments(AppointmentAdvancedSearchDto dto)
+        {
 
+            return searchForOtherParameters(GetAppointmentsForPatient(2), dto, searchForFirstParameter(GetAppointmentsForPatient(2), dto));
+
+        }
+        /// <summary> This method is getting list of filtered <c>DoctorAppointment</c> that match list of parameters in <c>AppointmentAdvnacedSearchDto</c></summary>
+        /// <param name="appointments"> List of all <c>DoctorAppointment</c> of logged user.
+        /// </param>
+        /// <param name="dto"><c>AppointmentAdvancedSearchDto</c> is Data Transfer Object of a <c>DoctorAppointment</c> that is be used to filter appointments.
+        /// </param>
+        /// <param name="firstAppointments"> List of <c>DoctorAppointment</c> that contains appointments that matches first parameter.
+        /// </param>
+        /// <returns> List of filtered appointments. </returns>
+        private List<DoctorAppointment> searchForOtherParameters(List<DoctorAppointment> appointments, AppointmentAdvancedSearchDto dto, List<DoctorAppointment> firstAppointments)
+        {
+            List<DoctorAppointment> finalAppointments = firstAppointments;
+
+            for (int i = 0; i < dto.RestRoles.Length; i++)
+            {
+                List<DoctorAppointment> othersAppointments = searchForOtherRoles(dto.RestRoles[i], dto.Rest[i], appointments);
+                
+                firstAppointments = searchForLogicOperators(dto.LogicOperators[i], othersAppointments, firstAppointments);
+            }
+            return firstAppointments;
+        }
+        private List<DoctorAppointment> searchForLogicOperators(string logicOperator, List<DoctorAppointment> othersAppointments, List<DoctorAppointment> finalAppointments)
+        {
+            return logicOperator.Equals("or") ? othersAppointments.Union(finalAppointments).ToList() : othersAppointments.Intersect(finalAppointments).ToList();
+        }
+        private List<DoctorAppointment> searchForOtherRoles(string otherParameter, string otherValue, List<DoctorAppointment> appointments)
+        {
+            return otherParameter.Equals("doctor") ? searchForDoctorAdvanced(appointments, otherValue) :
+               otherParameter.Equals("date") ? searchForDateAdvanced(appointments, otherValue) :
+               searchForRoomAdvanced(appointments, otherValue);
+        }
+        private List<DoctorAppointment> searchForFirstParameter(List<DoctorAppointment> appointments, AppointmentAdvancedSearchDto dto)
+        {
+            return dto.FirstRole.Equals("doctor") || UtilityMethods.CheckIfStringIsEmpty(dto.FirstRole) ? searchForDoctorAdvanced(appointments, dto.First) :
+                dto.FirstRole.Equals("date") ? searchForDateAdvanced(appointments, dto.First) : searchForRoomAdvanced(appointments, dto.First);
+        }
+        /// <summary> This method is getting list of filtered <c>DoctorAppointment</c> of logged patient by parameter <c>Doctor</c>. </summary>
+        /// /// <param name="appointments"><c>appointments</c> is List of appointments that matches search fields.
+        /// </param>
+        /// <returns> List of filtered appointments. </returns>
+        private List<DoctorAppointment> searchForDoctorAdvanced(List<DoctorAppointment> appointments, String searchField)
+        {
+            if (!UtilityMethods.CheckIfStringIsEmpty(searchField))
+            {
+                appointments = appointments.FindAll(appointment => appointment.Doctor.firstName.Contains(searchField) || appointment.Doctor.secondName.Contains(searchField) || appointment.Doctor.DoctorFullName().Contains(searchField));
+            }
+            return appointments;
+        }
+        /// <summary> This method is getting list of filtered <c>DoctorAppointment</c> of logged patient by parameter <c>Date</c>. </summary>
+        /// /// <param name="appointments"><c>appointments</c> is List of appointments that matches search fields.
+        /// </param>
+        /// <returns> List of filtered appointments. </returns>
+        private List<DoctorAppointment> searchForDateAdvanced(List<DoctorAppointment> appointments, String searchField)
+        {
+            if (!UtilityMethods.CheckIfStringIsEmpty(searchField))
+            {
+                appointments = appointments.FindAll(appointment=> appointment.Date.ToString().Equals(searchField));
+            }
+            return appointments;
+        }
+        /// <summary> This method is getting list of filtered <c>DoctorAppointment</c> of logged patient by parameter <c>Room</c>. </summary>
+        /// /// <param name="appointments"><c>appointments</c> is List of appointments that matches search fields.
+        /// </param>
+        /// <returns> List of filtered appointments. </returns>
+        private List<DoctorAppointment> searchForRoomAdvanced(List<DoctorAppointment> appointments, String searchField)
+        {
+            if (!UtilityMethods.CheckIfStringIsEmpty(searchField))
+            {
+                appointments = appointments.FindAll(appointment => appointment.RoomId.Contains(searchField));
+            }
+            return appointments;
+        }       
     }
 }

@@ -10,6 +10,7 @@ import PrescriptionsSimple from './PrescriptionsSimple';
 import AppointmentReportSimpleSearch from './AppointmentReportSimpleSearch';
 import RegistrationOfPatient from './PatientRegister';
 import MyInformation from './MyInformation';
+import AppointmentsAdvanced from './AppointmentsAdvanced';
 
 export default (props: { children: React.ReactNode }) => (
     <React.Fragment>
@@ -23,6 +24,7 @@ export default (props: { children: React.ReactNode }) => (
             <Route path='/reports-simple' component={AppointmentReportSimpleSearch} />
             <Route path='/register-patient' component={RegistrationOfPatient} />
             <Route path='/my-information' component={MyInformation} />
+            <Route path='/appointments-advanced' component={AppointmentsAdvanced} />
         </Container>
     </React.Fragment>
 );

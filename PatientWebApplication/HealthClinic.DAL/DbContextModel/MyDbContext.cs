@@ -205,7 +205,9 @@ namespace HealthClinic.CL.DbContextModel
             modelBuilder.Entity<DoctorAppointment>().HasData(
 
             new DoctorAppointment(1, new TimeSpan(), "22/04/2020", 2, 1, new List < Referral >(), "1"),
-            new DoctorAppointment(2, new TimeSpan(), "07/01/2020", 2, 2, new List<Referral>(), "1")
+            new DoctorAppointment(2, new TimeSpan(), "07/01/2020", 2, 2, new List<Referral>(), "1"),
+            new DoctorAppointment(3, new TimeSpan(), "14/06/2020", 2, 1, new List<Referral>(), "A2"),
+            new DoctorAppointment(4, new TimeSpan(), "31/03/2020", 2, 2, new List<Referral>(), "B3")
 
             );
 

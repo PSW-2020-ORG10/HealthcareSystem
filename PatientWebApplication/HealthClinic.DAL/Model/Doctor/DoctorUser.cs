@@ -11,6 +11,10 @@ namespace HealthClinic.CL.Model.Doctor
         public string ordination { get; set; }
 
         public string speciality { get; set; }
+        public string DoctorFullName()
+        {
+            return this.firstName + " " + this.secondName;
+        }
         public DoctorUser(int id, string name, string secondname, string ucin, string date, string phone, string email, string pasword, string city,
              double salary, bool isSpecialist, string speciality, List<DoctorNotification> specialNotifications, string ordination) :
              base(id, name, secondname, ucin, date, phone, email, pasword, city, salary)
