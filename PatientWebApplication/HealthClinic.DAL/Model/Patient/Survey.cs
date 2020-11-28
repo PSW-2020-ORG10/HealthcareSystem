@@ -96,5 +96,28 @@ namespace HealthClinic.CL.Model.Patient
             this.hospitalPrices = hospitalPrices;
             this.hospitalWaitingTime = hospitalWaitingTime;
         }
+        public Survey(int id, int patientId, int appointmentId, DoctorAppointment appointment, int doctorsProfessionalism, int doctorsPoliteness, int doctorsTechnicality, int doctorsSkill, int doctorsKnowledge, int doctorsWorkingPace, int medicalStaffsProfessionalism, int medicalStaffsPoliteness, int medicalStaffsTechnicality, int medicalStaffsSkill, int medicalStaffsKnowledge, int medicalStaffsWorkingPace, int hospitalEnvironment, int hospitalEquipment, int hospitalHygiene, int hospitalPrices, int hospitalWaitingTime) : base(id)
+        {
+            this.patientId = patientId;
+            this.appointmentId = appointmentId;
+            this.appointment = appointment;
+            this.doctorsProfessionalism = doctorsProfessionalism;
+            this.doctorsPoliteness = doctorsPoliteness;
+            this.doctorsTechnicality = doctorsTechnicality;
+            this.doctorsSkill = doctorsSkill;
+            this.doctorsKnowledge = doctorsKnowledge;
+            this.doctorsWorkingPace = doctorsWorkingPace;
+            this.medicalStaffsProfessionalism = medicalStaffsProfessionalism;
+            this.medicalStaffsPoliteness = medicalStaffsPoliteness;
+            this.medicalStaffsTechnicality = medicalStaffsTechnicality;
+            this.medicalStaffsSkill = medicalStaffsSkill;
+            this.medicalStaffsKnowledge = medicalStaffsKnowledge;
+            this.medicalStaffsWorkingPace = medicalStaffsWorkingPace;
+            this.hospitalEnvironment = hospitalEnvironment;
+            this.hospitalEquipment = hospitalEquipment;
+            this.hospitalHygiene = hospitalHygiene;
+            this.hospitalPrices = hospitalPrices;
+            this.hospitalWaitingTime = hospitalWaitingTime;
+        }
     }
 }

@@ -11,8 +11,8 @@ namespace HealthClinic.CL.Service
         Survey Create(SurveyDto surveyDto);
         List<Survey> GetAllSurveysForPatientId(int id);
         List<Survey> GetAll();
-        SurveyAverageDto GetAllAverageRates(List<Survey> surveys);
-        List<SurveyDoctorAverageDto> GetAllDoctorAverageRates(List<Survey> surveys);
+        SurveyAverageDto GetAllAverageRates();
+        List<SurveyDoctorAverageDto> GetAllDoctorAverageRates();
 
     }
 }

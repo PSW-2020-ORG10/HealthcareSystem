@@ -20,7 +20,7 @@ namespace HealthClinic.CL.Model.Patient
         {
             referral = referrals;
         }
-
+     
         public DoctorAppointment(int id, TimeSpan time, string date, int patientId, int doctorId, List<Referral> referrals, string roomid) : base(id, time, date, patientId, doctorId, roomid)
         {
             referral = referrals;

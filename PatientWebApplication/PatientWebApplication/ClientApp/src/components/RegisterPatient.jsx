@@ -392,8 +392,10 @@ class RegisterPatient extends Component {
     createRegistration() {
         if (this.state.patient.dateOfBirth !== "" && checkDateFormat(this.state.patient.dateOfBirth)) {
             showErrorToast()
+            return;
         } else if (this.state.patient.email !== "" && checkEmailFormat(this.state.patient.email)){
             showErrorToastEmail()
+            return;
         }
         else {
             toast.configure();
