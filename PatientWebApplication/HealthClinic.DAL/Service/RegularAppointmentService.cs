@@ -368,8 +368,12 @@ namespace HealthClinic.CL.Service
                 appointments = appointments.FindAll(appointment => appointment.RoomId.Contains(searchField));
             }
             return appointments;
-        }       
+        }
 
+        /// <summary> This method is getting lists of <c>DoctorAppointment</c> and <c>Survey</c> and checks for all valid appointment. </summary>
+        /// <param name="allValidAppointments"><c>appointments</c> is empty List of valid appointments. </param>
+        /// <param name="surveys"><c>surveys</c> is List of all surveys </param>
+        /// <returns> List of valid appointments. </returns>
         public List<DoctorAppointment> FindAllValidAppointments(List<DoctorAppointment> allValidAppointments, List<Survey> surveys)
         {
             return CheckIfAppointmentsHappened(allValidAppointments.Where(p => !FindAllUnvalidAppointments(surveys).Any(p2 => p2 == p.id)).ToList());

@@ -12,8 +12,7 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean }
         return (
             <header>
                 <Navbar className="navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow" light>
-                    <Container>
-                        <NavbarBrand tag={Link} to="/">PatientWebApplication</NavbarBrand>
+                    <Container>                     
                         <NavbarToggler onClick={this.toggle} className="mr-2"/>
                         <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={this.state.isOpen} navbar>
                             <ul className="navbar-nav flex-grow">
