@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HealthClinic.CL.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20201128115505_LastMigration")]
-    partial class LastMigration
+    [Migration("20201128190726_FirstMigration")]
+    partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -297,6 +297,106 @@ namespace HealthClinic.CL.Migrations
                         {
                             id = 2,
                             AppointmentId = 2,
+                            classify = "Appointment",
+                            comment = "Patient had cold.",
+                            medicine = "Brufen",
+                            quantityPerDay = 1,
+                            takeMedicineUntil = "11/05/2020"
+                        },
+                        new
+                        {
+                            id = 3,
+                            AppointmentId = 3,
+                            classify = "classify",
+                            comment = "Patient had slight heart arrhythmia.",
+                            medicine = "Aspirin",
+                            quantityPerDay = 3,
+                            takeMedicineUntil = "25/02/2020"
+                        },
+                        new
+                        {
+                            id = 4,
+                            AppointmentId = 4,
+                            classify = "Appointment",
+                            comment = "Patient had cold.",
+                            medicine = "Brufen",
+                            quantityPerDay = 1,
+                            takeMedicineUntil = "11/05/2020"
+                        },
+                        new
+                        {
+                            id = 5,
+                            AppointmentId = 5,
+                            classify = "classify",
+                            comment = "Patient had slight heart arrhythmia.",
+                            medicine = "Aspirin",
+                            quantityPerDay = 3,
+                            takeMedicineUntil = "25/02/2020"
+                        },
+                        new
+                        {
+                            id = 6,
+                            AppointmentId = 6,
+                            classify = "Appointment",
+                            comment = "Patient had cold.",
+                            medicine = "Brufen",
+                            quantityPerDay = 1,
+                            takeMedicineUntil = "11/05/2020"
+                        },
+                        new
+                        {
+                            id = 7,
+                            AppointmentId = 7,
+                            classify = "classify",
+                            comment = "Patient had slight heart arrhythmia.",
+                            medicine = "Aspirin",
+                            quantityPerDay = 3,
+                            takeMedicineUntil = "25/02/2020"
+                        },
+                        new
+                        {
+                            id = 8,
+                            AppointmentId = 8,
+                            classify = "Appointment",
+                            comment = "Patient had cold.",
+                            medicine = "Brufen",
+                            quantityPerDay = 1,
+                            takeMedicineUntil = "11/05/2020"
+                        },
+                        new
+                        {
+                            id = 9,
+                            AppointmentId = 9,
+                            classify = "classify",
+                            comment = "Patient had slight heart arrhythmia.",
+                            medicine = "Aspirin",
+                            quantityPerDay = 3,
+                            takeMedicineUntil = "25/02/2020"
+                        },
+                        new
+                        {
+                            id = 10,
+                            AppointmentId = 10,
+                            classify = "Appointment",
+                            comment = "Patient had cold.",
+                            medicine = "Brufen",
+                            quantityPerDay = 1,
+                            takeMedicineUntil = "11/05/2020"
+                        },
+                        new
+                        {
+                            id = 11,
+                            AppointmentId = 11,
+                            classify = "classify",
+                            comment = "Patient had slight heart arrhythmia.",
+                            medicine = "Aspirin",
+                            quantityPerDay = 3,
+                            takeMedicineUntil = "25/02/2020"
+                        },
+                        new
+                        {
+                            id = 12,
+                            AppointmentId = 12,
                             classify = "Appointment",
                             comment = "Patient had cold.",
                             medicine = "Brufen",
@@ -836,7 +936,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 12,
-                            Date = "11/11/2030",
+                            Date = "11/11/2010",
                             DoctorUserId = 2,
                             PatientUserId = 2,
                             RoomId = "B3",

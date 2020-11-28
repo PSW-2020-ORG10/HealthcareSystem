@@ -113,7 +113,17 @@ namespace HealthClinic.CL.DbContextModel
             modelBuilder.Entity<Referral>().HasData(
 
             new Referral(1, "Aspirin", "25/02/2020", 3, "classify", "Patient had slight heart arrhythmia.", 1),
-            new Referral(2, "Brufen", "11/05/2020", 1, "Appointment", "Patient had cold.", 2)
+            new Referral(2, "Brufen", "11/05/2020", 1, "Appointment", "Patient had cold.", 2),
+            new Referral(3, "Aspirin", "25/02/2020", 3, "classify", "Patient had slight heart arrhythmia.", 3),
+            new Referral(4, "Brufen", "11/05/2020", 1, "Appointment", "Patient had cold.", 4),
+            new Referral(5, "Aspirin", "25/02/2020", 3, "classify", "Patient had slight heart arrhythmia.", 5),
+            new Referral(6, "Brufen", "11/05/2020", 1, "Appointment", "Patient had cold.", 6),
+            new Referral(7, "Aspirin", "25/02/2020", 3, "classify", "Patient had slight heart arrhythmia.", 7),
+            new Referral(8, "Brufen", "11/05/2020", 1, "Appointment", "Patient had cold.", 8),
+            new Referral(9, "Aspirin", "25/02/2020", 3, "classify", "Patient had slight heart arrhythmia.", 9),
+            new Referral(10, "Brufen", "11/05/2020", 1, "Appointment", "Patient had cold.", 10),
+            new Referral(11, "Aspirin", "25/02/2020", 3, "classify", "Patient had slight heart arrhythmia.", 11),
+            new Referral(12, "Brufen", "11/05/2020", 1, "Appointment", "Patient had cold.", 12)
 
            );
 
