@@ -57,6 +57,10 @@ namespace PatientWebApplication.Controllers
 
         }
 
+        /// <summary> This method is calling <c>PatientService</c> to validate patients account. </summary>
+        /// <param name="id"><c>id</c> is id of patient who's account needs to be validated. 
+        /// </param>
+        /// <returns> If <paramref name="id"/> is not valid returns 400 Bad Request; if business logic is not valid, returns 404 Not Found, if patients account is successfully validated, it redirects to Homepage</returns>
         [HttpGet("{id}")]       // GET /api/patientuser/{id}
         public IActionResult Validate(int id)
         {
@@ -74,10 +78,11 @@ namespace PatientWebApplication.Controllers
             return Redirect("http://localhost:60198");
 
         }
+
         /// <summary> This method is calling <c>PatientService</c> to get one <c>PatientUser</c>. </summary>
         /// <param name="id"><c>id</c> is id of patient that needs to be found. 
+        /// </param>
         /// <returns> If <paramref name="id"/>and patient is not valid returns 400 Bad Request; if patient is successfully found, returns 200 OK with found patient.</returns>
-
         [HttpGet("getOne")]
         public IActionResult GetOne(int id)
         {

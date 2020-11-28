@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HealthClinic.CL.Migrations
 {
-    public partial class PreLastMigration : Migration
+    public partial class FirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -737,16 +737,18 @@ namespace HealthClinic.CL.Migrations
                 columns: new[] { "id", "Date", "DoctorUserId", "PatientUserId", "RoomId", "Start" },
                 values: new object[,]
                 {
-                    { 7, "07/02/2011", 3, 1, "1", new TimeSpan(0, 0, 0, 0, 0) },
+                    { 8, "01/03/2020", 2, 1, "1", new TimeSpan(0, 0, 0, 0, 0) },
+                    { 2, "07/01/2020", 2, 2, "1", new TimeSpan(0, 0, 0, 0, 0) },
+                    { 1, "22/04/2020", 1, 2, "1", new TimeSpan(0, 0, 0, 0, 0) },
                     { 10, "11/11/2030", 2, 1, "1", new TimeSpan(0, 0, 0, 0, 0) },
                     { 9, "14/03/2016", 1, 1, "1", new TimeSpan(0, 0, 0, 0, 0) },
-                    { 8, "01/03/2020", 2, 1, "1", new TimeSpan(0, 0, 0, 0, 0) },
-                    { 1, "22/04/2020", 1, 2, "1", new TimeSpan(0, 0, 0, 0, 0) },
+                    { 11, "14/03/2016", 1, 2, "A2", new TimeSpan(0, 0, 0, 0, 0) },
+                    { 7, "07/02/2011", 3, 1, "1", new TimeSpan(0, 0, 0, 0, 0) },
                     { 6, "09/01/2014", 3, 1, "1", new TimeSpan(0, 0, 0, 0, 0) },
                     { 5, "11/01/2016", 2, 1, "1", new TimeSpan(0, 0, 0, 0, 0) },
-                    { 4, "04/02/2019", 1, 1, "1", new TimeSpan(0, 0, 0, 0, 0) },
-                    { 2, "07/01/2020", 2, 2, "1", new TimeSpan(0, 0, 0, 0, 0) },
-                    { 3, "05/07/2019", 3, 1, "1", new TimeSpan(0, 0, 0, 0, 0) }
+                    { 12, "11/11/2010", 2, 2, "B3", new TimeSpan(0, 0, 0, 0, 0) },
+                    { 3, "05/07/2019", 3, 1, "1", new TimeSpan(0, 0, 0, 0, 0) },
+                    { 4, "04/02/2019", 1, 1, "1", new TimeSpan(0, 0, 0, 0, 0) }
                 });
 
             migrationBuilder.InsertData(
@@ -816,8 +818,8 @@ namespace HealthClinic.CL.Migrations
                 columns: new[] { "id", "OperationId", "classify", "comment", "medicine", "quantityPerDay", "takeMedicineUntil" },
                 values: new object[,]
                 {
-                    { 1, 1, "Operation", "Operation was successfull.", "Hemomycin", 1, "15/09/2020" },
-                    { 2, 2, "Operation", "Patient lost a lot of blood.", "Amoxicillin", 3, "18/10/2020" }
+                    { 2, 2, "Operation", "Patient lost a lot of blood.", "Amoxicillin", 3, "18/10/2020" },
+                    { 1, 1, "Operation", "Operation was successfull.", "Hemomycin", 1, "15/09/2020" }
                 });
 
             migrationBuilder.InsertData(
@@ -825,8 +827,18 @@ namespace HealthClinic.CL.Migrations
                 columns: new[] { "id", "AppointmentId", "classify", "comment", "medicine", "quantityPerDay", "takeMedicineUntil" },
                 values: new object[,]
                 {
+                    { 2, 2, "Appointment", "Patient had cold.", "Brufen", 1, "11/05/2020" },
                     { 1, 1, "classify", "Patient had slight heart arrhythmia.", "Aspirin", 3, "25/02/2020" },
-                    { 2, 2, "Appointment", "Patient had cold.", "Brufen", 1, "11/05/2020" }
+                    { 10, 10, "Appointment", "Patient had cold.", "Brufen", 1, "11/05/2020" },
+                    { 9, 9, "classify", "Patient had slight heart arrhythmia.", "Aspirin", 3, "25/02/2020" },
+                    { 8, 8, "Appointment", "Patient had cold.", "Brufen", 1, "11/05/2020" },
+                    { 7, 7, "classify", "Patient had slight heart arrhythmia.", "Aspirin", 3, "25/02/2020" },
+                    { 6, 6, "Appointment", "Patient had cold.", "Brufen", 1, "11/05/2020" },
+                    { 5, 5, "classify", "Patient had slight heart arrhythmia.", "Aspirin", 3, "25/02/2020" },
+                    { 4, 4, "Appointment", "Patient had cold.", "Brufen", 1, "11/05/2020" },
+                    { 3, 3, "classify", "Patient had slight heart arrhythmia.", "Aspirin", 3, "25/02/2020" },
+                    { 11, 11, "classify", "Patient had slight heart arrhythmia.", "Aspirin", 3, "25/02/2020" },
+                    { 12, 12, "Appointment", "Patient had cold.", "Brufen", 1, "11/05/2020" }
                 });
 
             migrationBuilder.InsertData(
