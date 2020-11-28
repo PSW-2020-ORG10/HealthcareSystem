@@ -40,3 +40,19 @@ export function checkEmailFormat(email) {
         return false;
     } else return true;
 };
+
+export function showErrorToastIsUsed() {
+    toast.configure();
+
+    toast.error("Make sure that Is Used parameter is True or False.", {
+        position: toast.POSITION.TOP_RIGHT
+    });
+}
+
+export function checkIsUsed(isUsed) {
+    if (isUsed == "True" || isUsed == "False") {
+        return true;
+    } else {
+        return false;
+    }
+};

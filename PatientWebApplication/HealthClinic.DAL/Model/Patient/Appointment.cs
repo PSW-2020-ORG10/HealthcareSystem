@@ -14,7 +14,6 @@ namespace HealthClinic.CL.Model.Patient
         public int PatientUserId { get; set; }
         public virtual PatientUser Patient { get; set; }
         public string RoomId { get; set; }
-
         public Appointment(int doctorUserId, DoctorUser doctor, TimeSpan start, string date, int patientUserId, PatientUser patient, string roomid)
         {
             DoctorUserId = doctorUserId;

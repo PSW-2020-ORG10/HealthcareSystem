@@ -7,12 +7,17 @@
     LOADED_ALL_PATIENT_PRESCRIPTIONS,
     PATIENT_REGISTERED,
     SIMPLE_SEARCH_PATIENT_PRESCRIPTIONS,
+    ADVANCED_SEARCH_PATIENT_PRESCRIPTIONS,
     FIND_ONE_PATIENT,
+    LOADED_ALL_PATIENT_REPORTS,
+    ADVANCED_SEARCH_PATIENT_APPOINTMENTS,
+    LOADED_ALL_PATIENT_APPOINTMENTS,
     SURVEY_CREATED,
     LOADED_APPOINTMENTSURVEY,
     LOADED_ALL_PATIENT_REPORTS,
     LOADED_ALL_RATES,
-    LOADED_ALL_DOCTOR_RATES
+    LOADED_ALL_DOCTOR_RATES,
+    LOADED_APPOINTMENTSURVEY
 } from "../types/types"
 
 function addFeedback(state=initialState, action) {
@@ -51,6 +56,8 @@ const initialState = {
     patientPrescriptionsList: [],
     patientList: [],
     patientInformationList: [],
+    patientAppointments: [],
+    patientAppointmentsList: [],
     appointmentSurveyList: [],
     surveyList: [], 
     patientAppointments: [],
@@ -108,6 +115,12 @@ function reducer(state = initialState, action) {
                 patientPrescriptionsList: action.payload
 
             };
+        case ADVANCED_SEARCH_PATIENT_PRESCRIPTIONS:
+            return {
+                ...state,
+                patientPrescriptionsList: action.payload
+
+            };
         case FIND_ONE_PATIENT:
             return {
                 ...state,
@@ -129,17 +142,28 @@ function reducer(state = initialState, action) {
                 ...state,
                 patientAppointments: action.payload
             };
+        case LOADED_ALL_PATIENT_APPOINTMENTS:
+            return {
+                ...state,
+                patientAppointmentsList: action.payload
+            };
+        case ADVANCED_SEARCH_PATIENT_APPOINTMENTS:
+            return {
+                ...state,
+                patientAppointmentsList: action.payload
+
+            };
         case LOADED_ALL_RATES:
             debugger;
             return {
                 ...state,
-               allRates: action.payload
+                allRates: action.payload
             };
         case LOADED_ALL_DOCTOR_RATES:
             return {
                 ...state,
                 doctorRatesList: action.payload
-            };
+            };    
         default:
             return state;
     }

@@ -6,7 +6,7 @@ import { wrap } from "module";
 class CheckPersonalInformationTable extends Component {
     componentDidMount() {
         debugger;
-        this.props.findOnePatient(8);
+        this.props.findOnePatient(3);
     }
     render() {
         debugger;
@@ -22,9 +22,9 @@ class CheckPersonalInformationTable extends Component {
                 <table className='table patientInformation' >
                     <tbody>
                         <tr>
-                            <th style={{ textAlign: "left", width: "700px", marginTop:'400px' }}></th>
-                            <td >
-                                <img  src={'images/' + patientInformationList.file} />
+                            <th style={{ textAlign: "center", width: "700px", marginTop: "100px" }}></th>
+                            <td>
+                                <img src={'images/' + patientInformationList.file} width={200} height={150}  />
 
                             </td>
                         </tr>
