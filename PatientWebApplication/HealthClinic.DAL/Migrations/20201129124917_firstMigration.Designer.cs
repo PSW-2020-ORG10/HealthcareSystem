@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HealthClinic.CL.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20201129084512_thirteenthMigration")]
-    partial class thirteenthMigration
+    [Migration("20201129124917_firstMigration")]
+    partial class firstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,7 +25,7 @@ namespace HealthClinic.CL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("PharmacyAPI")
+                    b.Property<string>("PharmacyName")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Text")
@@ -45,7 +45,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
-                            PharmacyAPI = "12345",
+                            PharmacyName = "Apoteka Jankovic",
                             Text = "Message",
                             Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             isRemoved = false
