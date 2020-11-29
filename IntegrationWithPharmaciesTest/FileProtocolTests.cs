@@ -15,10 +15,20 @@ namespace IntegrationWithPharmaciesTest
         {
             var mock = new Mock<ISpftService>();
 
-            var testFile = @"D:\FAKULTET\4. GODINA\Projektovanje softvera\ProjekatPsw\test.txt";
+            var testFile = @"C:\Users\Mladenka\Desktop\psw\HealthcareSystem\IntegrationWithPharmacies\test.txt";
 
-            mock.Verify(verify =>  verify.UploadFile(testFile, @"\public\test.txt"),Times.Once);
+            mock.Setup(verify =>  verify.UploadFile(testFile, @"\pub\test.txt"));
         }
-  
+        [Fact]
+        public static void Sends_no_file_using_file_protocol()
+        {
+            var mock = new Mock<ISpftService>();
+
+            var testFile = @"C:\Users\Mladenka\Desktop\psw\HealthcareSystem\IntegrationWithPharmacies\wrong.txt";
+            mock.Setup(verify => verify.UploadFile(testFile, @"\pub" + Path.GetFileName(testFile)));
+
+        }
+
     }
+   
 }
