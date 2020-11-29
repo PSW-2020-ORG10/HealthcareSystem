@@ -34,8 +34,8 @@ namespace HealthClinic.CL.Service
         public DoctorService()
         {
             doctorRepository = new DoctorRepository(path);          
-            operationRepository = new OperationRepository(path3);
-            appointmentRepository = new AppointmentRepository(path4);
+            operationRepository = new OperationRepository();
+            appointmentRepository = new AppointmentRepository();
             employeesScheduleRepository = new EmployeesScheduleRepository(path5);
 
         }
@@ -110,13 +110,13 @@ namespace HealthClinic.CL.Service
 
         private bool isDoctorResposableForOperation(DoctorUser doctor, Operation operation)
         {
-            if (operation.isResponiable.id.ToString().Equals(doctor.id.ToString())) return true;
+            if (operation.Doctor.id.ToString().Equals(doctor.id.ToString())) return true;
             return false;
         }
 
         private bool isDoctorResposableForAppointment(DoctorUser doctor, DoctorAppointment appointment)
         {
-            if (appointment.doctor.id.ToString().Equals(doctor.id.ToString())) return true;
+            if (appointment.Doctor.id.ToString().Equals(doctor.id.ToString())) return true;
             return false;
         }
 
@@ -177,9 +177,9 @@ namespace HealthClinic.CL.Service
         public bool checkIfDoctorIsBusyForAppointment(DoctorAppointment appointment, TimeSpan selectedTime)
         {
             TimeSpan durationOfAppointment = TimeSpan.FromMinutes(15);
-            TimeSpan scheduledEndTime = appointment.time.Add(durationOfAppointment);
+            TimeSpan scheduledEndTime = appointment.Start.Add(durationOfAppointment);
 
-            int areSelectedAndAppointmentTimeEqual = TimeSpan.Compare(selectedTime, appointment.time);
+            int areSelectedAndAppointmentTimeEqual = TimeSpan.Compare(selectedTime, appointment.Start);
             int areSelectedAndScheduledEndTimeEqual = TimeSpan.Compare(selectedTime, scheduledEndTime);
             if ((areSelectedAndAppointmentTimeEqual == 1 && areSelectedAndScheduledEndTimeEqual == -1) || areSelectedAndAppointmentTimeEqual == 0) return true;
             return false;
@@ -192,7 +192,7 @@ namespace HealthClinic.CL.Service
 
             foreach (DoctorAppointment appointment in listOfAppointments)
             {
-                if (isDoctorsEquals(appointment.doctor, doctor) && areDatesEqual(appointment.date, date) && checkIfDoctorIsBusyForAppointment(appointment, time)) return true;
+                if (isDoctorsEquals(appointment.Doctor, doctor) && areDatesEqual(appointment.Date, date) && checkIfDoctorIsBusyForAppointment(appointment, time)) return true;
             }
             return false;
         }
@@ -202,7 +202,7 @@ namespace HealthClinic.CL.Service
             List<DoctorAppointment> listOfAppoinments = appointmentRepository.GetAll();
             foreach (DoctorAppointment appointment in listOfAppoinments)
             {
-                if (isDoctorsEquals(appointment.doctor,doctor) && areDatesEqual(appointment.date, date) && 
+                if (isDoctorsEquals(appointment.Doctor,doctor) && areDatesEqual(appointment.Date, date) && 
                     (checkIfDoctorIsBusyForAppointment(appointment, start) || checkIfDoctorIsBusyForAppointment(appointment, end))) return true;
                 
             }
@@ -218,7 +218,7 @@ namespace HealthClinic.CL.Service
 
         public bool checkIfDoctorIsBusyForOperation(Operation operation, TimeSpan selectedTime)
         {
-            int areSelectedTimeAndOperationStartTimeEqual = TimeSpan.Compare(selectedTime, operation.start);
+            int areSelectedTimeAndOperationStartTimeEqual = TimeSpan.Compare(selectedTime, operation.Start);
             int areSelectedTimeAndOperationEndTimeEqual = TimeSpan.Compare(selectedTime, operation.end);
             if ((areSelectedTimeAndOperationStartTimeEqual == 1 && areSelectedTimeAndOperationEndTimeEqual == -1) || areSelectedTimeAndOperationStartTimeEqual == 0) return true;
             return false;
@@ -230,8 +230,8 @@ namespace HealthClinic.CL.Service
             if (listOfOperation == null) listOfOperation = new List<Operation>();
             foreach (Operation operation in listOfOperation)
             {
-                DoctorUser doctorOnOperation = operation.isResponiable;
-                if (isDoctorsEquals(doctorOnOperation, doctor) && areDatesEqual(operation.date,date) && checkIfDoctorIsBusyForOperation(operation, time))
+                DoctorUser doctorOnOperation = operation.Doctor;
+                if (isDoctorsEquals(doctorOnOperation, doctor) && areDatesEqual(operation.Date,date) && checkIfDoctorIsBusyForOperation(operation, time))
                 {
                     return true; 
                 }
@@ -244,8 +244,8 @@ namespace HealthClinic.CL.Service
             List<Operation> listOfOperation = operationRepository.GetAll();
             foreach (Operation operation in listOfOperation)
             {
-                DoctorUser doctorOnOperation = operation.isResponiable;
-                if (isDoctorsEquals(doctorOnOperation, doctor) && areDatesEqual(operation.date, date) && (checkIfDoctorIsBusyForOperation(operation, start) || checkIfDoctorIsBusyForOperation(operation, end)))
+                DoctorUser doctorOnOperation = operation.Doctor;
+                if (isDoctorsEquals(doctorOnOperation, doctor) && areDatesEqual(operation.Date, date) && (checkIfDoctorIsBusyForOperation(operation, start) || checkIfDoctorIsBusyForOperation(operation, end)))
                     return true;
                 }
             return false;

@@ -4,6 +4,7 @@ import axios from "axios";
 import { connect } from "react-redux"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { showErrorToast, checkDateFormat, checkEmailFormat, showErrorToastEmail } from "../utilities/Utilities"
 import "../css/app.css"
 
 class RegisterPatient extends Component {
@@ -11,7 +12,7 @@ class RegisterPatient extends Component {
         patient: {
             firstName: "",
             secondName: "",
-            gender: "Male",
+            gender: "",
             uniqueCitizensidentityNumber: "",
             dateOfBirth: "",
             phoneNumber: "",
@@ -170,7 +171,7 @@ class RegisterPatient extends Component {
         
         return (
             <div>
-                <form action="http://localhost:60198/register-patient">
+                
 
                     <div className="field-wrap">
                         <label className="label" htmlFor="">
@@ -207,7 +208,7 @@ class RegisterPatient extends Component {
                             onChange={(e) => this.updateGender(e)}
                             name="gender"
                         >
-                            
+                            <option value=""></option>
                             <option value="Male">Male </option>
                             <option value="Female">Female </option>
                         </select>
@@ -381,30 +382,41 @@ class RegisterPatient extends Component {
 
                     
                     <div className="btn-wrap align-right">
-                        <button disabled={!this.state.patient.firstName || !this.state.patient.secondName || !this.state.patient.allergie || !this.state.patient.bornIn || !this.state.patient.city || !this.state.patient.dateOfBirth || !this.state.patient.email || !this.state.patient.medicalIdNumber || !this.state.patient.parentName || !this.state.patient.password || !this.state.patient.phoneNumber || !this.state.patient.uniqueCitizensidentityNumber} className="btn btn-primary" onClick={this.createRegistration.bind(this)}>Register</button>
+                        <button disabled={!this.state.patient.firstName || !this.state.patient.secondName || this.state.patient.gender == "" || !this.state.patient.allergie || !this.state.patient.bornIn || !this.state.patient.city || !this.state.patient.dateOfBirth || !this.state.patient.email || !this.state.patient.medicalIdNumber || !this.state.patient.parentName || !this.state.patient.password || !this.state.patient.phoneNumber || !this.state.patient.uniqueCitizensidentityNumber} className="btn btn-primary" onClick={this.createRegistration.bind(this)}>Register</button>
                     </div>
-                </form>
+               
             </div>
         )
     }
 
-    createRegistration(){
-        toast.configure();
+    createRegistration() {
+        if (this.state.patient.dateOfBirth !== "" && checkDateFormat(this.state.patient.dateOfBirth)) {
+            showErrorToast()
+            return;
+        } else if (this.state.patient.email !== "" && checkEmailFormat(this.state.patient.email)){
+            showErrorToastEmail()
+            return;
+        }
+        else {
+            toast.configure();
 
-        toast.success("Registration successful!", {
-            position: toast.POSITION.TOP_RIGHT
-        });
 
-       
+            toast.success("Registration successful!", {
+                position: toast.POSITION.TOP_RIGHT
+            });
 
-        
 
-        console.log(this.state.patient);
 
-        this.props.patientRegistered(this.state.patient)
-        
-         
-       
+
+
+            console.log(this.state.patient);
+
+            this.props.patientRegistered(this.state.patient)
+            
+
+
+        }
+        window.location.href = "http://localhost:60198";
     }
 
 }
