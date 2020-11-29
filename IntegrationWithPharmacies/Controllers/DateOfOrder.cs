@@ -17,7 +17,5 @@ namespace IntegrationWithPharmacies.Controllers
             StartDate = Start;
             EndDate = End;
         }
-        public DateOfOrder() { }
-        
     }
 }
