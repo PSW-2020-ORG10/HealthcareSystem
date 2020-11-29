@@ -11,7 +11,7 @@ namespace HealthClinic.CL.Model.ActionsAndBenefits
 
         public DateTime Timestamp { get; set; }
 
-        public bool isRemoved  {get; set; }
+        public bool IsRemoved  {get; set; }
 
         public string PharmacyName { get; set; }
 
@@ -21,23 +21,23 @@ namespace HealthClinic.CL.Model.ActionsAndBenefits
 
         public Message(int id, string text, DateTime timestamp, bool isremoved, string pharmacyname) : base(id)
         {
-            this.Text = text;
-            this.Timestamp = timestamp;
-            this.isRemoved = isremoved;
-            this.PharmacyName = pharmacyname;
+            Text = text;
+            Timestamp = timestamp;
+            IsRemoved = isremoved;
+            PharmacyName = pharmacyname;
         }
 
         public Message( string text, DateTime timestamp, bool isremoved, string pharmacyname) 
         {
-            this.Text = text;
-            this.Timestamp = timestamp;
-            this.isRemoved = isremoved;
-            this.PharmacyName = pharmacyname;
+            Text = text;
+            Timestamp = timestamp;
+            IsRemoved = isremoved;
+            PharmacyName = pharmacyname;
         }
 
         public override string ToString()
         {
-            return this.Text + " sent at " + this.Timestamp.ToString();
+            return Text + " sent at " + Timestamp.ToString();
         }
     }
 }

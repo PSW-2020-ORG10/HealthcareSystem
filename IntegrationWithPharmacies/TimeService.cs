@@ -53,28 +53,19 @@ namespace IntegrationWithPharmacies
                 Directory.CreateDirectory(path);
             }
             string filepath = AppDomain.CurrentDomain.BaseDirectory + "\\Logs\\ServiceLog_" + DateTime.Now.Date.ToShortDateString().Replace('/', '_') + ".txt";
-            if (!File.Exists(filepath))
+            
+            try
             {
-                // Create a file to write to.   
-                using (StreamWriter sw = File.CreateText(filepath))
+                using (StreamWriter sw = File.AppendText(filepath))
                 {
                     sw.WriteLine(Message);
                 }
             }
-            else
+            catch (IOException e)
             {
-                try
-                {
-                    using (StreamWriter sw = File.AppendText(filepath))
-                    {
-                        sw.WriteLine(Message);
-                    }
-                }
-                catch (IOException e)
-                {
-                    Console.WriteLine(e.ToString());
-                }
+                Console.WriteLine(e.ToString());
             }
+            
         }
     }
     }

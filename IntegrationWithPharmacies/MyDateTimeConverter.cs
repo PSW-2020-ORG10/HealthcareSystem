@@ -15,8 +15,7 @@ namespace IntegrationWithPharmacies
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            var t = long.Parse(reader.Value.ToString());
-            return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds(t);
+            return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds(long.Parse(reader.Value.ToString()));
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

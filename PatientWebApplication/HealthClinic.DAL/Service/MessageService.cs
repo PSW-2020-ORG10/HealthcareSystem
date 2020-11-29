@@ -29,8 +29,7 @@ namespace HealthClinic.CL.Service
 
         public Message Create(MessageDTO dto)
         {
-            Message message = MessageAdapter.MessageDTOtoMessage(dto);
-            return MessageRepository.Create(message);
+            return MessageRepository.Create(MessageAdapter.MessageDTOtoMessage(dto));
         }
 
         public List<Message> GetAll()

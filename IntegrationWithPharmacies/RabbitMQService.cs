@@ -49,12 +49,10 @@ namespace IntegrationWithPharmacies
                     message = JsonConvert.DeserializeObject<Message>(jsonMessage, new MyDateTimeConverter());
                 }
 
-                message.PharmacyName = "Apoteka Jankovic";
                 Program.ListOfMessages.Add(message);
 
                 MessageService messageService = new MessageService();
-                MessageDTO dto = new MessageDTO(message.Text, message.Timestamp, message.PharmacyName);
-                messageService.Create(dto);
+                messageService.Create(new MessageDTO(message.Text, message.Timestamp, "Apoteka Jankovic"));
 
             };
             channel.BasicConsume(queue: "hello",
