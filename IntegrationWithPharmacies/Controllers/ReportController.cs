@@ -29,10 +29,6 @@ namespace IntegrationWithPharmacies.Controllers
             MedicineService = new MedicineForOrderingService(context);
             DoctorOrderService = new DoctorOrderServica(context);
         }
-        public DateTime convertStringToDate(String date)
-        {
-            String[] parts = date.Split("/");
-            return new DateTime(int.Parse(parts[2]),int.Parse(parts[1]), int.Parse(parts[0]));
 
 
         [HttpPost]
@@ -45,7 +41,7 @@ namespace IntegrationWithPharmacies.Controllers
             return Ok();
         }
 
-        public String getReportText(DateOfOrder date)
+        private String getReportText(DateOfOrder date)
         {
             StringBuilder stringBuilder = new StringBuilder();
             int totalQuatity = 0;
@@ -53,45 +49,46 @@ namespace IntegrationWithPharmacies.Controllers
             stringBuilder.Append("Report about consumption of medicine\n\n\n");
             foreach (DoctorsOrder order in DoctorOrderService.GetAll())
             {
-                stringBuilder.Append(getText(date, order, i));
+                stringBuilder.Append(getText(date, order,stringBuilder));
                 totalQuatity += getQuantity(date, totalQuatity, order);
                 i++;
             }
             return stringBuilder.Append("\n\n   Total ordered quatity: " + totalQuatity + "\n").ToString();
         }
 
-        private String getText(DateOfOrder date, DoctorsOrder order, int i)
+        private String getText(DateOfOrder date, DoctorsOrder order,StringBuilder stringBuilder)
         {
-            StringBuilder stringBuilder = new StringBuilder();
             foreach (MedicineForOrdering medicine in MedicineService.GetAll())
             {
-                if (medicine.OrderId.Equals(order.id) && order.IsFinished && DateTime.Compare(order.DateEnd, convertStringToDate(date.StartDate)) == 1 && DateTime.Compare(order.DateEnd, convertStringToDate(date.EndDate)) == -1)
+                if (isOrderInRequiredPeriod(medicine, date, order))
                 {
-                    stringBuilder.Append(i + ".\n     Medicine name: " + medicine.Name + "\n     Ordered quantity: " + medicine.Quantity + " (Date:  " + order.DateEnd.Date.ToString() + ")\n");
+                    stringBuilder.Append("\n     Medicine name: " + medicine.Name + "\n     Ordered quantity: " + medicine.Quantity + " (Date:  " + order.DateEnd.Date.ToString() + ")\n");
                 }
             }
             return stringBuilder.ToString();
         }
         private int getQuantity(DateOfOrder date, int totalQuatity, DoctorsOrder order)
         {
-            StringBuilder stringBuilder = new StringBuilder();
-            foreach (MedicineForOrdering medicine in MedicineService.GetAll())
-            {
-                if (medicine.OrderId.Equals(order.id) && order.IsFinished && DateTime.Compare(order.DateEnd, convertStringToDate(date.StartDate)) == 1 && DateTime.Compare(order.DateEnd, convertStringToDate(date.EndDate)) == -1)
-                {
-                    totalQuatity += medicine.Quantity;
-                }
-            }
-            return totalQuatity;
+            return MedicineService.GetAll().Where(medicine => isOrderInRequiredPeriod(medicine,date,order)).Sum(medicine => medicine.Quantity);
         }
-
-        public DateTime convertStringToDate(String date)
+        private bool isOrderInRequiredPeriod(MedicineForOrdering medicine,DateOfOrder date, DoctorsOrder order)
         {
-            String[] parts = date.Split("/");
-            return new DateTime(int.Parse(parts[2]), int.Parse(parts[1]), int.Parse(parts[0]));
-
+            if (isIdEqual(medicine.OrderId,order.id) && compareDates(order.DateEnd, convertStringToDate(date.StartDate))==1 && compareDates(order.DateEnd, convertStringToDate(date.EndDate))==-1 && order.IsFinished) return true;
+            return false;
         }
-        public SftpConfig getConfig()
+        private bool isIdEqual(int firstNumber,int secondNumber)
+        {
+            return(firstNumber == secondNumber);
+        }
+        private int compareDates(DateTime startDate, DateTime endDate)
+        {
+            return (DateTime.Compare(startDate, endDate));
+        }
+        private DateTime convertStringToDate(String date)
+        {
+            return new DateTime(int.Parse(date.Split("/")[2]), int.Parse(date.Split("/")[1]), int.Parse(date.Split("/")[0]));
+        }
+        private SftpConfig getConfig()
         {
             return new SftpConfig { Host = "192.168.0.28", Port = 22, UserName = "tester", Password = "password" };
         }
