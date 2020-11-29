@@ -9,8 +9,14 @@ import './custom.css'
 import PatientFeedback from './components/PatientFeedback';
 import CreateFeedback from './components/CreateFeedback';
 import PrescriptionsSimple from './components/PrescriptionsSimple';
+import AppointmentReportSimpleSearch from './components/AppointmentReportSimpleSearch';
 import RegistrationOfPatient from './components/PatientRegister';
+import PrescriptionsAdvanced from './components/PrescriptionsAdvanced';
 import MyInformation from './components/MyInformation';
+import AppointmentsAdvanced from './components/AppointmentsAdvanced';
+import CreateSurvey from './components/CreateSurvey';
+import DoctorRates from './components/DoctorRates';
+import AllRates from './components/AllRates';
 
 export default () => (
     <Layout>
@@ -19,7 +25,13 @@ export default () => (
         <Route path='/admin-feedback' component={AdminFeedback} />
         <Route path='/create-feedback' component={CreateFeedback} />
         <Route path='/prescriptions-simple' component={PrescriptionsSimple} />
+        <Route path='/reports-simple' component={AppointmentReportSimpleSearch} />
         <Route path='/register-patient' component={RegistrationOfPatient} />
+        <Route path='/prescriptions-advanced' component={PrescriptionsAdvanced} />
         <Route path='/my-information' component={MyInformation} />
+        <Route path='/appointments-advanced' component={AppointmentsAdvanced} />
+        <Route path='/create-survey' component={CreateSurvey} />
+        <Route path='/rates-doctor' component={DoctorRates} />
+        <Route path='/rates-general' component={AllRates} />
     </Layout>
 );

@@ -13,8 +13,20 @@
     PATIENT_REGISTERED,
     SIMPLE_SEARCH_PATIENT_PRESCRIPTIONS,
     SIMPLE_SEARCH_PRESCRIPTIONS_ERROR,
+    ADVANCED_SEARCH_PATIENT_PRESCRIPTIONS,
+    ADVANCED_SEARCH_PRESCRIPTIONS_ERROR,
     FIND_ONE_PATIENT,
-    FIND_ONE_PATIENT_ERROR
+    FIND_ONE_PATIENT_ERROR,
+    SURVEY_CREATED,
+    LOADED_APPOINTMENTSURVEY,
+    LOADED_ALL_PATIENT_REPORTS,
+    OBSERVE_PATIENT_REPORTS_ERROR,
+    LOADED_ALL_RATES,
+    LOADED_ALL_DOCTOR_RATES,
+    ADVANCED_SEARCH_PATIENT_APPOINTMENTS,
+    ADVANCED_SEARCH_APPOINTMENTS_ERROR,
+    LOADED_ALL_PATIENT_APPOINTMENTS,
+    OBSERVE_PATIENT_APPOINTMENTS_ERROR
 } from "../types/types"
 import axios from "axios";
 
@@ -171,6 +183,173 @@ export const findOnePatient = (id) => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: FIND_ONE_PATIENT_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const advancedSearchPatientPrescriptions = (prescription) => async (dispatch) => {
+    console.log(prescription.medicines)
+    try {
+        debugger;
+        const response = await axios.post("http://localhost:60198/api/prescription/advancedsearch", prescription);
+        debugger;
+        dispatch({
+            type: ADVANCED_SEARCH_PATIENT_PRESCRIPTIONS,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: ADVANCED_SEARCH_PRESCRIPTIONS_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+export const loadedAllPatientReports = (patientId) => async (dispatch) => {
+    try {
+        axios.all(  [axios.get('http://localhost:60198/api/doctorappointment/' + patientId),
+                     axios.get('http://localhost:60198/api/operation/' + patientId)])
+                        .then(axios.spread((firstResponse, secondResponse) => {
+                            debugger;
+                            var appointments = []
+                            firstResponse.data.forEach(element => appointments.push(element));
+                            secondResponse.data.forEach(element => appointments.push(element));
+                            console.log(appointments)
+                            dispatch({
+                                type: LOADED_ALL_PATIENT_REPORTS,
+                                payload: appointments,
+                            })
+                        }))
+                        .catch(error => console.log(error))
+    } catch (e) {
+        dispatch({
+            type: OBSERVE_PATIENT_REPORTS_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const simpleSearchAppointments  = (searchDto) => async (dispatch) => {
+    try {
+        axios.all([axios.post('http://localhost:60198/api/doctorappointment/search', searchDto),
+            axios.post('http://localhost:60198/api/operation/search',  searchDto)])
+            .then(axios.spread((firstResponse, secondResponse) => {
+                debugger;
+                var appointments = []
+                firstResponse.data.forEach(element => appointments.push(element));
+                secondResponse.data.forEach(element => appointments.push(element));
+                console.log(appointments)
+                dispatch({
+                    type: LOADED_ALL_PATIENT_REPORTS,
+                    payload: appointments,
+                })
+            }))
+            .catch(error => console.log(error))
+    } catch (e) {
+        dispatch({
+            type: OBSERVE_PATIENT_REPORTS_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const loadedAppointmentSurvey = () => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.get("http://localhost:60198/api/survey");
+        debugger;
+        dispatch({
+            type: LOADED_APPOINTMENTSURVEY,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: OBSERVE_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const surveyCreated = (survey) => async (dispatch) => {
+    try {
+        debugger;
+        await axios.post("http://localhost:60198/api/survey/", survey);
+        debugger;
+        dispatch({
+            type: SURVEY_CREATED,
+            payload: survey,
+        });
+    } catch (e) {
+        dispatch({
+            type: OBSERVE_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const advancedSearchPatientAppointments = (appointment) => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.post("http://localhost:60198/api/doctorappointment/advancedsearch", appointment);
+        debugger;
+        dispatch({
+            type: ADVANCED_SEARCH_PATIENT_APPOINTMENTS,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: ADVANCED_SEARCH_APPOINTMENTS_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const loadedAllPatientAppointments = () => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.get("http://localhost:60198/api/doctorappointment/patient");
+        debugger;
+        dispatch({
+            type: LOADED_ALL_PATIENT_APPOINTMENTS,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: OBSERVE_PATIENT_APPOINTMENTS_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const loadedAllRates = () => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.get("http://localhost:60198/api/survey/getRates");
+        debugger;
+        dispatch({
+            type: LOADED_ALL_RATES,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: OBSERVE_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const loadedAllDoctorRates = () => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.get("http://localhost:60198/api/survey/getDoctorRates");
+        debugger;
+        dispatch({
+            type: LOADED_ALL_DOCTOR_RATES,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: OBSERVE_ERROR,
             payload: console.log(e),
         });
     }

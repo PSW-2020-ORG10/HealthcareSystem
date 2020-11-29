@@ -20,7 +20,7 @@ namespace PatientWebApplicationTests
             
             PrescriptionService service = new PrescriptionService(CreateStubRepository());
 
-            List<Prescription> foundPrescriptions = service.SimpleSearchPrescriptions(new PrescriptionSearchDto("Medicine Name", "", "Comment"));
+            List<Prescription> foundPrescriptions = service.SimpleSearchPrescriptions(new PrescriptionSearchDto("Medicine Name", "", "Comment", ""));
 
             foundPrescriptions.ShouldHaveSingleItem();
         }
@@ -31,7 +31,7 @@ namespace PatientWebApplicationTests
 
             PrescriptionService service = new PrescriptionService(CreateStubRepository());
 
-            List<Prescription> foundPrescriptions = service.SimpleSearchPrescriptions(new PrescriptionSearchDto("", "False", ""));
+            List<Prescription> foundPrescriptions = service.SimpleSearchPrescriptions(new PrescriptionSearchDto("", "False", "", ""));
 
             foundPrescriptions.ShouldBeEmpty();
         }
@@ -41,7 +41,7 @@ namespace PatientWebApplicationTests
         {
             PrescriptionService service = new PrescriptionService(CreateStubRepository());
 
-            List<Prescription> foundPrescriptions = service.SimpleSearchPrescriptions(new PrescriptionSearchDto("", "", ""));
+            List<Prescription> foundPrescriptions = service.SimpleSearchPrescriptions(new PrescriptionSearchDto("", "", "", ""));
 
             foundPrescriptions.ShouldNotBeEmpty();
         }
@@ -57,8 +57,8 @@ namespace PatientWebApplicationTests
             Medicine medicine = new Medicine(1, "Medicine Name", 1, "Description", new List<ModelRoom>(), 1, true, 1);
             medicines.Add(medicine);
 
-            Prescription prescription1 = new Prescription(1, 1, medicines, true, "Comment");
-            Prescription prescription2 = new Prescription(2, 1, new List<Medicine>(), true, "Some text");
+            Prescription prescription1 = new Prescription(1, 1, medicines, true, "Comment", 1);
+            Prescription prescription2 = new Prescription(2, 1, new List<Medicine>(), true, "Some text", 1);
 
             prescriptions.Add(prescription1);
             prescriptions.Add(prescription2);

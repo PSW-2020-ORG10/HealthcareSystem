@@ -7,10 +7,12 @@ class PrescriptionsSearchSimpleTable extends Component {
     state = {
         medicines: "",
         isUsed: "",
-        comment: ""
+        comment: "",
+        doctor: ""
     };
 
     handleChange = (event) => {
+        debugger;
         const { name, value, type, checked } = event.target
         type === "checkbox" ? this.setState({
             [name]: checked
@@ -45,8 +47,7 @@ class PrescriptionsSearchSimpleTable extends Component {
                             className="field"
                             type="text"
                             value={this.state.medicines}
-                            name="medicines"
-                            
+                            name="medicines" 
                             onChange={this.handleChange}
                         />
                     </div>
@@ -75,13 +76,24 @@ class PrescriptionsSearchSimpleTable extends Component {
                             type="text"
                             value={this.state.comment}
                             name="comment"
-                            
+                            onChange={this.handleChange}
+                        />
+                    </div>
+                    <div className="field-wrap">
+                        <label className="label" htmlFor="">
+                            Doctor:
+                            </label>
+                        <input
+                            className="field"
+                            type="text"
+                            value={this.state.doctor}
+                            name="doctor"
                             onChange={this.handleChange}
                         />
                     </div>
 
                     <div className="btn-wrap align-right">
-                        <button className="btn btn-primary" onClick={this.searchPrescriptions.bind(this)}>Search</button>
+                    <button className="btn btn-primary btn-block btn-lg mb-4" onClick={this.searchPrescriptions.bind(this)}>Search</button>
                     </div>
                 
                 <table className='table allPrescriptions' >
@@ -90,6 +102,7 @@ class PrescriptionsSearchSimpleTable extends Component {
                             <th style={{ textAlign: "left" }}>Medicine</th>
                             <th style={{ textAlign: "center" }}>Is Used</th>
                             <th style={{ textAlign: "center" }}>Comment</th>
+                            <th style={{ textAlign: "center" }}>Doctor</th>
                         </tr>
                     </thead>
                     {patientPrescriptionsList.map((f) => (
@@ -104,6 +117,7 @@ class PrescriptionsSearchSimpleTable extends Component {
                                 </td>
                                 <td style={{ textAlign: "center" }} > {f.isUsed ? "Used" : "Not used"}</td >
                                 <td style={{ textAlign: "center" }}>{f.comment}</td >
+                                <td style={{ textAlign: "center" }}>{f.doctor.firstName + " " + f.doctor.secondName}</td >
                             </tr>
                         </tbody>
                     ))}

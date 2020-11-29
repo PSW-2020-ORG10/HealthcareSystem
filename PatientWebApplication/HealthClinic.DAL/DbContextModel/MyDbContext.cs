@@ -23,6 +23,7 @@ namespace HealthClinic.CL.DbContextModel
         public DbSet<DoctorNotification> DoctorNotifications { get; set; }
         public DbSet<Operation> Operations { get; set; }
         public DbSet<Referral> Referrals { get; set; }
+        public DbSet<OperationReferral> OperationReferrals { get; set; }
 
         public DbSet<Schedule> Schedules { get; set; }
 
@@ -53,6 +54,8 @@ namespace HealthClinic.CL.DbContextModel
         public DbSet<RegistrationInPharmacy> Registrations { get; set; }
         public DbSet<MedicineForOrdering> MedicinesForOrdering { get; set; }
 
+        public DbSet<Survey> Surveys { get; set; }
+
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -82,11 +85,15 @@ namespace HealthClinic.CL.DbContextModel
 
             modelBuilder.Entity<DoctorUser>().HasData(
 
-           new DoctorUser(1, "DoctorName", "DoctorSurname", "1234", "2/2/2020", "123", "email", "pass", "Grad",
+           new DoctorUser(1, "Konstantin", "Davidovic", "1234", "2/2/2020", "123", "email", "pass", "Grad",
+             200.0, false, "Specialty", new List<DoctorNotification>(), "Ordination 1"),
+           new DoctorUser(2, "Novak", "Maric", "12345", "2/2/2020", "123", "email", "pass", "Grad",
+             200.0, false, "Specialty", new List<DoctorNotification>(), "Ordination 1"),
+            new DoctorUser(3, "Milica", "Tadic", "12346", "2/2/2020", "123", "email", "pass", "Grad",
              200.0, false, "Specialty", new List<DoctorNotification>(), "Ordination 1")
 
 
-           );
+           ) ;
 
             modelBuilder.Entity<PatientUser>().HasData(
 
@@ -106,13 +113,32 @@ namespace HealthClinic.CL.DbContextModel
 
             modelBuilder.Entity<Referral>().HasData(
 
-            new Referral(1, "Medicine", "Take medicine until", 3, "classify", "comment")
+            new Referral(1, "Aspirin", "25/02/2020", 3, "classify", "Patient had slight heart arrhythmia.", 1),
+            new Referral(2, "Brufen", "11/05/2020", 1, "Appointment", "Patient had cold.", 2),
+            new Referral(3, "Aspirin", "25/02/2020", 3, "classify", "Patient had slight heart arrhythmia.", 3),
+            new Referral(4, "Brufen", "11/05/2020", 1, "Appointment", "Patient had cold.", 4),
+            new Referral(5, "Aspirin", "25/02/2020", 3, "classify", "Patient had slight heart arrhythmia.", 5),
+            new Referral(6, "Brufen", "11/05/2020", 1, "Appointment", "Patient had cold.", 6),
+            new Referral(7, "Aspirin", "25/02/2020", 3, "classify", "Patient had slight heart arrhythmia.", 7),
+            new Referral(8, "Brufen", "11/05/2020", 1, "Appointment", "Patient had cold.", 8),
+            new Referral(9, "Aspirin", "25/02/2020", 3, "classify", "Patient had slight heart arrhythmia.", 9),
+            new Referral(10, "Brufen", "11/05/2020", 1, "Appointment", "Patient had cold.", 10),
+            new Referral(11, "Aspirin", "25/02/2020", 3, "classify", "Patient had slight heart arrhythmia.", 11),
+            new Referral(12, "Brufen", "11/05/2020", 1, "Appointment", "Patient had cold.", 12)
 
            );
 
+            modelBuilder.Entity<OperationReferral>().HasData(
+
+            new OperationReferral(1, "Hemomycin", "15/09/2020", 1, "Operation", "Operation was successfull.", 1),
+            new OperationReferral(2, "Amoxicillin", "18/10/2020", 3, "Operation", "Patient lost a lot of blood.", 2)
+
+          );
+
             modelBuilder.Entity<Operation>().HasData(
 
-            new Operation(1, 1, "2/2/2020", new TimeSpan(), new TimeSpan(), 1, "room1", 1)
+            new Operation(1, 2, "20/02/2020", new TimeSpan(), new TimeSpan(), 1, "room1"),
+            new Operation(2, 2, "03/10/2020", new TimeSpan(), new TimeSpan(), 2, "room1")
 
             );
 
@@ -142,11 +168,6 @@ namespace HealthClinic.CL.DbContextModel
 
             );
 
-            modelBuilder.Entity<OfferedMedicines>().HasData(
-
-            new OfferedMedicines(13, "OfferedMedicine", 2, "description", new List <ModelRoom>(), 1, false, 10.0, 1)
-
-            );
 
             modelBuilder.Entity<Renovation>().HasData(
 
@@ -193,7 +214,18 @@ namespace HealthClinic.CL.DbContextModel
 
             modelBuilder.Entity<DoctorAppointment>().HasData(
 
-            new DoctorAppointment(1, new TimeSpan(), "22/04/2020", 2, 1, new List < Referral >(), "1")
+             new DoctorAppointment(1, new TimeSpan(), "22/04/2020", 2, 1, new List<Referral>(), "1"),
+            new DoctorAppointment(2, new TimeSpan(), "07/01/2020", 2, 2, new List<Referral>(), "1"),
+            new DoctorAppointment(3, new TimeSpan(), "05/07/2019", 1, 3, new List<Referral>(), "1"),
+            new DoctorAppointment(4, new TimeSpan(), "04/02/2019", 1, 1, new List<Referral>(), "1"),
+            new DoctorAppointment(5, new TimeSpan(), "11/01/2016", 1, 2, new List<Referral>(), "1"),
+            new DoctorAppointment(6, new TimeSpan(), "09/01/2014", 1, 3, new List<Referral>(), "1"),
+            new DoctorAppointment(7, new TimeSpan(), "07/02/2011", 1, 3, new List<Referral>(), "1"),
+            new DoctorAppointment(8, new TimeSpan(), "01/03/2020", 1, 2, new List<Referral>(), "1"),
+            new DoctorAppointment(9, new TimeSpan(), "14/03/2016", 1, 1, new List<Referral>(), "1"),
+            new DoctorAppointment(10, new TimeSpan(), "11/11/2030", 1, 2, new List<Referral>(), "1"),
+            new DoctorAppointment(11, new TimeSpan(), "14/03/2016", 2, 1, new List<Referral>(), "A2"),
+            new DoctorAppointment(12, new TimeSpan(), "11/11/2010", 2, 2, new List<Referral>(), "B3")
 
             );
 
@@ -205,8 +237,10 @@ namespace HealthClinic.CL.DbContextModel
 
            
             modelBuilder.Entity<Medicine>().HasData(
-
-             new Medicine(22, "Medicine Name", 2, "Medicine Description", new List<ModelRoom>(), 1, false, 1)
+            new Medicine(51, "Pancef", 44, "For temperature", new List<ModelRoom>(), 1, false, 5),
+            new Medicine(52, "Defrinol", 2, "For headache", new List<ModelRoom>(), 1, false, 7),
+            new Medicine(53, "Brufen", 2, "For illness", new List<ModelRoom>(), 1, false, 8),
+            new Medicine(54, "Paracetamol", 4, "For illness", new List<ModelRoom>(), 1, false, 6)
 
 
             );
@@ -214,8 +248,12 @@ namespace HealthClinic.CL.DbContextModel
 
             modelBuilder.Entity<Prescription>().HasData(
 
-            new Prescription(1, 1, new List<Medicine>(), true, "Comment"),
-            new Prescription(2, 2, null, true, "Some text")
+            new Prescription(5, 1, new List<Medicine>(), false, "Use every day", 1),
+            new Prescription(6, 2, new List<Medicine>(), true, "When needed", 1),
+            new Prescription(7, 1, new List<Medicine>(), true, "On every 12 hours", 2),
+            new Prescription(8, 1, new List<Medicine>(), true, "After lunch", 1)
+
+
 
             );
 
@@ -242,6 +280,16 @@ namespace HealthClinic.CL.DbContextModel
            new MedicineForOrdering(1,"Medicine name",1, "Medicine description", 1)
 
            );
+
+            modelBuilder.Entity<Survey>().HasData(
+
+            new Survey(1, 1, 3, 4, 5, 4, 5, 4, 5, 4, 5, 5, 5, 5, 4, 3, 3, 2, 2, 5),
+            new Survey(2, 1, 4, 4, 5, 3, 1, 5, 5, 2, 2, 4, 2, 5, 3, 1, 3, 3, 3, 5),
+            new Survey(3, 1, 5, 4, 5, 1, 3, 4, 5, 3, 2, 5, 1, 5, 4, 1, 2, 2, 1, 5),
+            new Survey(4, 1, 6, 4, 5, 2, 5, 5, 1, 3, 2, 4, 2, 2, 3, 1, 3, 1, 3, 5),
+            new Survey(5, 1, 7, 4, 5, 4, 2, 4, 5, 1, 2, 4, 3, 5, 2, 1, 1, 2, 5, 1)
+
+            );
 
 
         }

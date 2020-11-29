@@ -16,6 +16,7 @@ namespace HealthClinic.CL.Model.Doctor
         public int quantityPerDay { get; set; }
         public string classify { get; set; }
         public string comment { get; set; }
+        public int AppointmentId { get; set; }
 
         public Referral() : base() { }
         public Referral(int id, string medicine, string takeMedicineUntil, int quantityPerDay, string classify, string comment) : base(id)
@@ -27,6 +28,17 @@ namespace HealthClinic.CL.Model.Doctor
             this.classify = classify;
             this.comment = comment;
 
+        }
+
+        public Referral(int id, string medicine, string takeMedicineUntil, int quantityPerDay, string classify, string comment, int appointmentId) : base(id)
+
+        {
+            this.medicine = medicine;
+            this.takeMedicineUntil = takeMedicineUntil;
+            this.quantityPerDay = quantityPerDay;
+            this.classify = classify;
+            this.comment = comment;
+            AppointmentId = appointmentId;
         }
     }
 }

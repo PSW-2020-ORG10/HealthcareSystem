@@ -219,11 +219,41 @@ body {
     font-size: 20px;
 }
 
+.field-date {
+    width: 45% !important;
+    display: inline !important;
+}
+
+.field-end {
+    float: right;
+}
+
 .label {
     display: block;
     color: #999;
     padding-bottom: 5px;
     text-transform: uppercase;
+}
+
+.label-data {
+    display: block;
+    padding-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.label-date {
+    display: inline !important;
+    right: 0;
+}
+
+.label-end {
+    float: right;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.label-referral{
+    margin-left: 20px
 }
 
 @media only screen and (max-width: 600px) {
@@ -398,12 +428,10 @@ body {
         right: 25px;
     }
 }
-
-
 /*--------------------------------------------------------------
 ## Modal
 --------------------------------------------------------------*/
-.modal-wrap {
+/*.modal-wrap {
     display: flex;
     visibility: hidden;
     position: fixed;
@@ -449,4 +477,13 @@ body {
         .modal h2 {
             font-size: 20px;
         }
+}
+*/
+/*--------------------------------------------------------------
+## radio
+--------------------------------------------------------------*/
+input[type="radio"] {
+    margin-right: 195px;
+    margin-left: 5px;
+    padding: 10px
 }
