@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HealthClinic.CL.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20201128015019_tenthMigration")]
-    partial class tenthMigration
+    [Migration("20201129132849_SecondMigration")]
+    partial class SecondMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -611,7 +611,7 @@ namespace HealthClinic.CL.Migrations
                     b.HasData(
                         new
                         {
-                            id = 100,
+                            id = 1,
                             description = "Medicine description",
                             name = "Medicine name",
                             orderId = 1,
@@ -994,8 +994,14 @@ namespace HealthClinic.CL.Migrations
                     b.Property<string>("apiKey")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<string>("name")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<int>("pharmacyId")
                         .HasColumnType("int");
+
+                    b.Property<string>("town")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("id");
 
@@ -1005,8 +1011,10 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
-                            apiKey = "Api key",
-                            pharmacyId = 1
+                            apiKey = "api1",
+                            name = "Jankovic 1",
+                            pharmacyId = 1,
+                            town = "Novi Sad"
                         });
                 });
 

@@ -10,12 +10,12 @@ namespace HealthClinic.CL.Adapters
     {
         public static MedicineForOrdering MedicineOrderDtoToMedicineOrder(MedicineForOrderingDto dto)
         {
-            return new MedicineForOrdering(2, dto.name, dto.quantity, dto.description, dto.orderId);
+            return new MedicineForOrdering(dto.Name, dto.Quantity, dto.Description, dto.OrderId);
         }
 
         public MedicineForOrderingDto MedicineOrderToMedicineOrderDto(MedicineForOrdering medicine)
         {
-            return new MedicineForOrderingDto(medicine.name, medicine.quantity, medicine.description, medicine.orderId);
+            return new MedicineForOrderingDto(medicine.Name, medicine.Quantity, medicine.Description, medicine.OrderId);
         }
 
     }

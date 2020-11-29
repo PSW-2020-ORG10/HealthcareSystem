@@ -11,21 +11,21 @@ namespace HealthClinic.CL.Service
 {
     public class MedicineForOrderingService
     {
-        public MedicineForOrderingRepository medicineForOrderingRepository { get; }
+        public MedicineForOrderingRepository MedicineForOrderingRepository { get; }
         public MedicineForOrderingService() { }
 
         public MedicineForOrderingService(MyDbContext context)
         {
-            medicineForOrderingRepository = new MedicineForOrderingRepository(context);
+            MedicineForOrderingRepository = new MedicineForOrderingRepository(context);
         }
         public List<MedicineForOrdering> GetAll()
         {
-            return medicineForOrderingRepository.GetAll();
+            return MedicineForOrderingRepository.GetAll();
         }
         public MedicineForOrdering Create(MedicineForOrderingDto dto)
         {
             MedicineForOrdering medicine = MedicineForOrderingAdapter.MedicineOrderDtoToMedicineOrder(dto);
-            return medicineForOrderingRepository.Create(medicine);
+            return MedicineForOrderingRepository.Create(medicine);
         }
     }
 }

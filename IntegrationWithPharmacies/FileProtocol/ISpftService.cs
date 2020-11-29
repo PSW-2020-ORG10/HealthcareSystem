@@ -9,6 +9,6 @@ namespace IntegrationWithPharmacies.FileProtocol
     public interface ISpftService
     {
         IEnumerable<SftpFile> ListAllFiles(string remoteDirectory = ".");
-        bool UploadFile(string localFilePath, string remoteFilePath);
+        Boolean UploadFile(string localFilePath, string remoteFilePath);
     }
 }

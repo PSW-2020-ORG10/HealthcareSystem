@@ -7,15 +7,15 @@ namespace IntegrationWithPharmacies.Controllers
 {
     public class DateOfOrder
     {
-        public String startDate { get; set; }
-        public String endDate { get; set; }
+        public String StartDate { get; set; }
+        public String EndDate { get; set; }
 
-        public DateOfOrder(String start, String end)
-        {
-            startDate = start;
-            endDate = end;
-        }
         public DateOfOrder() { }
-        
+
+        public DateOfOrder(String Start, String End)
+        {
+            StartDate = Start;
+            EndDate = End;
+        }
     }
 }

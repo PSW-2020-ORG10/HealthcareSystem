@@ -7,7 +7,7 @@ namespace HealthClinic.CL.Repository
     public class ReportRepository : IReportRepository
     {
         public ReportRepository() { }
-        public bool saveFile(string filename)
+        public Boolean saveFile(string filename)
         {
             throw new NotImplementedException();
         }

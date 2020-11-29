@@ -9,21 +9,21 @@ namespace HealthClinic.CL.Repository
 {
     public class MedicineForOrderingRepository : IMedicineForOrderingRepository
     {
-        private MyDbContext dbContext;
+        private MyDbContext DbContext;
         public MedicineForOrderingRepository(MyDbContext dbContext)
         {
-            this.dbContext = dbContext;
+            DbContext = dbContext;
         }
         public MedicineForOrdering Create(MedicineForOrdering medicine)
         {
-            dbContext.MedicinesForOrdering.Add(medicine);
-            dbContext.SaveChanges();
+            DbContext.MedicinesForOrdering.Add(medicine);
+            DbContext.SaveChanges();
             return medicine;
         }
 
         public List<MedicineForOrdering> GetAll()
         {
-            return dbContext.MedicinesForOrdering.ToList();
+            return DbContext.MedicinesForOrdering.ToList();
         }
     }
 }

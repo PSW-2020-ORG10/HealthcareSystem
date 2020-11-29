@@ -26,6 +26,7 @@
                     <div class="col-75">
                         <input type="text" v-model="pharmacyApiKey" name="pharmacyApiKey" placeholder="Enter pharmacy api key..">
                     </div>
+
                 </div>
                 <div class="row">
                     <label v-if="unique" style="color:lightgreen;font-size:25px;">Successfully saved api key!</label>

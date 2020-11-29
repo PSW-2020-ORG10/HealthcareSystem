@@ -6,17 +6,17 @@ namespace HealthClinic.CL.Model.Orders
 {
     public class PharmacyOffer : Entity
     {
-        public string pharmacyName { get; set; }
+        public string PharmacyName { get; set; }
         public virtual List<Medicine> ListOfMedicies { get; set; }
-        public double summPriceOfMedications { get; set; }
+        public double SummPriceOfMedications { get; set; }
 
         public PharmacyOffer() : base() { }
 
-        public PharmacyOffer(int id, string pharmacyName, List<Medicine> ListOfMedicies, double summPriceOfMedications) : base(id)
+        public PharmacyOffer(int id, string pharmacyName, List<Medicine> listOfMedicies, double summPriceOfMedications) : base(id)
         {
-            this.pharmacyName = pharmacyName;
-            this.ListOfMedicies = ListOfMedicies;
-            this.summPriceOfMedications = summPriceOfMedications;
+            PharmacyName = pharmacyName;
+            ListOfMedicies = listOfMedicies;
+            SummPriceOfMedications = summPriceOfMedications;
         }
     }
 

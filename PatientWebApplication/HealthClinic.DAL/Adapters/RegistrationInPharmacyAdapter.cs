@@ -10,14 +10,12 @@ namespace HealthClinic.CL.Adapters
     {
         public static RegistrationInPharmacy RegistrationDtoToRegistration(RegistrationInPharmacyDto dto)
         {
-           // var randomNumber = new Random();
-          
-            return new RegistrationInPharmacy(dto.pharmacyId, dto.apiKey,dto.name,dto.town);
+            return new RegistrationInPharmacy(dto.PharmacyId, dto.ApiKey, dto.Name, dto.Town);
         }
 
         public static RegistrationInPharmacyDto RegistrationToRegistrationDto(RegistrationInPharmacy registration)
         {
-           return new RegistrationInPharmacyDto(registration.pharmacyId, registration.apiKey,registration.name,registration.town);
+           return new RegistrationInPharmacyDto(registration.PharmacyId, registration.ApiKey,registration.Name,registration.Town);
         }
     }
 }

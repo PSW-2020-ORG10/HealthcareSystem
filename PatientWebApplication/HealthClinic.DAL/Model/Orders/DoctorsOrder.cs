@@ -11,20 +11,28 @@ namespace HealthClinic.CL.Model.Orders
 {
     public class DoctorsOrder : Entity
     {
-        public bool isUrgent { get; set; }
-        public DateTime dateStart { get; set; }
-        public DateTime dateEnd { get; set; }
-        public bool isOrdered { get; set; }
-        public bool isFinished { get; set; }
+        public Boolean IsUrgent { get; set; }
+        public DateTime DateStart { get; set; }
+        public DateTime DateEnd { get; set; }
+        public Boolean IsOrdered { get; set; }
+        public Boolean IsFinished { get; set; }
 
         public DoctorsOrder() : base() { }
-        public DoctorsOrder(int id, bool isUrgent, DateTime dateBegin, DateTime dateEnd, bool isOrdered, bool isFinished) : base(id)
+        public DoctorsOrder(int id, Boolean isUrgent, DateTime dateBegin, DateTime dateEnd, Boolean isOrdered, Boolean isFinished) : base(id)
         {
-            this.isUrgent = isUrgent;
-            this.dateStart = dateBegin;
-            this.dateEnd = dateEnd;
-            this.isOrdered = isOrdered;
-            this.isFinished = isFinished;
+            IsUrgent = isUrgent;
+            DateStart = dateBegin;
+            DateEnd = dateEnd;
+            IsOrdered = isOrdered;
+            IsFinished = isFinished;
+        }
+        public DoctorsOrder(Boolean isUrgent, DateTime dateBegin, DateTime dateEnd, Boolean isOrdered, Boolean isFinished)
+        {
+            IsUrgent = isUrgent;
+            DateStart = dateBegin;
+            DateEnd = dateEnd;
+            IsOrdered = isOrdered;
+            IsFinished = isFinished;
         }
     }
 }

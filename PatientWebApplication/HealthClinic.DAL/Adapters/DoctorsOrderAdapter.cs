@@ -10,12 +10,12 @@ namespace HealthClinic.CL.Adapters
     {
         public static DoctorsOrder DoctorsOrderDtoToDoctorsOrder(DoctorsOrderDto dto)
         {
-            return new DoctorsOrder(1,dto.isUrgent, dto.dateStart,dto.dateEnd,dto.isOrdered,dto.isFinished);
+            return new DoctorsOrder(dto.IsUrgent, dto.DateStart, dto.DateEnd, dto.IsOrdered, dto.IsFinished);
         }
 
         public DoctorsOrderDto DoctorsOrderToDoctorsOrderDTO(DoctorsOrder order)
         {
-            return new DoctorsOrderDto(order.isUrgent, order.dateStart, order.dateEnd, order.isOrdered,order.isFinished);
+            return new DoctorsOrderDto(order.IsUrgent, order.DateStart, order.DateEnd, order.IsOrdered,order.IsFinished);
         }
 
     }

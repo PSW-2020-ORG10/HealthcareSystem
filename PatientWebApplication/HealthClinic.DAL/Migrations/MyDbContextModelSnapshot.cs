@@ -609,7 +609,7 @@ namespace HealthClinic.CL.Migrations
                     b.HasData(
                         new
                         {
-                            id = 100,
+                            id = 1,
                             description = "Medicine description",
                             name = "Medicine name",
                             orderId = 1,

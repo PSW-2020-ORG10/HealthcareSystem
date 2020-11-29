@@ -7,6 +7,6 @@ namespace HealthClinic.CL.Repository
 {
     interface IReportRepository
     {
-        bool saveFile(String filename);
+        Boolean saveFile(String filename);
     }
 }

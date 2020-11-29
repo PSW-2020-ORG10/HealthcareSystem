@@ -10,20 +10,27 @@ namespace HealthClinic.CL.Model.Orders
 {
     public class MedicineForOrdering :Entity 
     {
-        public String name { get; set; }
-        public int quantity { get; set; }
-        public String description { get; set; }
-        public int orderId { get; set; }
+        public String Name { get; set; }
+        public int Quantity { get; set; }
+        public String Description { get; set; }
+        public int OrderId { get; set; }
 
         public MedicineForOrdering() : base() { }
 
         public MedicineForOrdering(int id, string name, int quantity,String description, int order) :base(id)
         {
-            this.name = name;
-            this.quantity = quantity;
-            this.description = description;
-            this.orderId = order;
-        } 
+            Name = name;
+            Quantity = quantity;
+            Description = description;
+            OrderId = order;
+        }
+        public MedicineForOrdering(string name, int quantity, String description, int order)
+        {
+            Name = name;
+            Quantity = quantity;
+            Description = description;
+            OrderId = order;
+        }
 
     }
 }

@@ -169,7 +169,7 @@ namespace HealthClinic.CL.DbContextModel
 
             modelBuilder.Entity<DoctorsOrder>().HasData(
 
-            new DoctorsOrder(1, false,new DateTime(), new DateTime(), true,true)
+            new DoctorsOrder(1,false,new DateTime(), new DateTime(), true,true)
 
             );
 
@@ -239,7 +239,7 @@ namespace HealthClinic.CL.DbContextModel
             );
             modelBuilder.Entity<MedicineForOrdering>().HasData(
 
-           new MedicineForOrdering(100, "Medicine name",1, "Medicine description", 1)
+           new MedicineForOrdering(1,"Medicine name",1, "Medicine description", 1)
 
            );
 

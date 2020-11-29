@@ -6,18 +6,19 @@ namespace HealthClinic.CL.Dtos
 {
     public class RegistrationInPharmacyDto
     {
+        public int PharmacyId { get; set; }
+        public String ApiKey { get; set; }
+        public String Name { get; set; }
+        public String Town { get; set; }
 
-        public int pharmacyId { get; set; }
-        public String apiKey { get; set; }
-        public String name { get; set; }
-        public String town { get; set; }
         public RegistrationInPharmacyDto() { }
-        public RegistrationInPharmacyDto(int idPharmacy, String apiKeyPharmacy,String phName, String phTown)
+
+        public RegistrationInPharmacyDto(int idPharmacy, String apiKeyPharmacy, String pharmacyName, String pharmacyTown)
         {
-            pharmacyId = idPharmacy;
-            apiKey = apiKeyPharmacy;
-            name = phName;
-            town = phTown;
+            PharmacyId = idPharmacy;
+            ApiKey = apiKeyPharmacy;
+            Name = pharmacyName;
+            Town = pharmacyTown;
         }
     }
 }

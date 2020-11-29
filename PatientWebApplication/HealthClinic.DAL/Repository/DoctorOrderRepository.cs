@@ -10,26 +10,23 @@ namespace HealthClinic.CL.Repository
 {
     public class DoctorOrderRepository
     {
-        private readonly MyDbContext dbContext;
+        private readonly MyDbContext DbContext;
     
         public DoctorOrderRepository(MyDbContext dbContext)
         {
-            this.dbContext = dbContext;
+            DbContext = dbContext;
         }
 
         public DoctorsOrder Add(DoctorsOrder order)
         {
-            dbContext.DoctorsOrders.Add(order);
-            dbContext.SaveChanges();
+            DbContext.DoctorsOrders.Add(order);
+            DbContext.SaveChanges();
             return order;
         }
 
         public List<DoctorsOrder> GetAll()
         {
-            return dbContext.DoctorsOrders.ToList();
+            return DbContext.DoctorsOrders.ToList();
         }
-
-
-
     }
 }

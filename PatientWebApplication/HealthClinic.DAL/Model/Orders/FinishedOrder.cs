@@ -6,13 +6,13 @@ namespace HealthClinic.CL.Model.Orders
 {
     public class FinishedOrder : Entity
     {
-        public virtual List<Medicine> listOfMedicines { get; set; }
+        public virtual List<Medicine> ListOfMedicines { get; set; }
 
         public FinishedOrder() : base() { }
 
         public FinishedOrder(int id, List<Medicine> listOfMedicines) : base(id)
         {
-            this.listOfMedicines = listOfMedicines;
+            ListOfMedicines = listOfMedicines;
         }
 
     }

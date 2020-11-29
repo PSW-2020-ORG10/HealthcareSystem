@@ -5,21 +5,20 @@ using System.Text;
 
 namespace HealthClinic.CL.Dtos
 {
-    public class MedicineForOrderingDto 
+    public class MedicineForOrderingDto
     {
-        public String name { get; set; }
-        public int quantity { get; set; }
-        public String description { get; set; }
-        public int orderId { get; set; }
+        public String Name { get; set; }
+        public int Quantity { get; set; }
+        public String Description { get; set; }
+        public int OrderId { get; set; }
 
         public MedicineForOrderingDto() { }
-
         public MedicineForOrderingDto(string name, int quantity, String description, int order)
         {
-            this.name = name;
-            this.quantity = quantity;
-            this.description = description;
-            this.orderId = order;
+            Name = name;
+            Quantity = quantity;
+            Description = description;
+            OrderId = order;
         }
     }
 }
