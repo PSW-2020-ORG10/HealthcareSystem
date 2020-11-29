@@ -14,6 +14,9 @@ using HealthClinic.CL.Adapters;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using HealthClinic.CL.Model.ActionsAndBenefits;
+using IntegrationWithPharmacies.FileProtocol;
+using Microsoft.Extensions.Logging.Abstractions;
+using System.IO;
 
 namespace IntegrationWithPharmacies
 {
@@ -22,7 +25,7 @@ namespace IntegrationWithPharmacies
         public static object Messages { get; internal set; }
         public static List<Message> ListOfMessages = new List<Message>();
 
-        public static void Main(string[] args)
+    public static void Main(string[] args)
         {
             CreateHostBuilderMessages(args).Build();
             CreateHostBuilder(args).Build().Run();

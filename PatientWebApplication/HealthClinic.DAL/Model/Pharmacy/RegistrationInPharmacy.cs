@@ -7,15 +7,27 @@ namespace HealthClinic.CL.Model.Pharmacy
 {
     public class RegistrationInPharmacy : Entity
     {
-        public int pharmacyId { get; set; }
-        public String apiKey { get; set; }
+        public int PharmacyId { get; set; }
+        public String ApiKey { get; set; }
+        public String Name { get; set; }
+        public String Town { get; set; }
+
 
         public RegistrationInPharmacy() : base() { }
 
-        public RegistrationInPharmacy(int id, int idPharmacy, String apiKeyPharmacy) : base(id)
+        public RegistrationInPharmacy(int id, int idPharmacy, String apiKeyPharmacy,String pharmacyName, String pharmacyTown) : base(id)
         {
-            pharmacyId = idPharmacy;
-            apiKey = apiKeyPharmacy;
+            PharmacyId = idPharmacy;
+            ApiKey = apiKeyPharmacy;
+            Name = pharmacyName;
+            Town = pharmacyTown;
+        }
+          public RegistrationInPharmacy(int idPharmacy, String apiKeyPharmacy,String pharmacyName, String pharmacyTown) 
+        {
+            PharmacyId = idPharmacy;
+            ApiKey = apiKeyPharmacy;
+            Name = pharmacyName;
+            Town = pharmacyTown;
         }
     }
 }

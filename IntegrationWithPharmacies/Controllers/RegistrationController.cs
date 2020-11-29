@@ -11,6 +11,11 @@ using HealthClinic.CL.Model.Pharmacy;
 using HealthClinic.CL.Service;
 using HealthClinic.CL.DbContextModel;
 using HealthClinic.CL.Dtos;
+using IntegrationWithPharmacies.FileProtocol;
+using System.IO;
+using Microsoft.Extensions.Logging.Abstractions;
+using HealthClinic.CL.Repository;
+using HealthClinic.CL.Model.Orders;
 
 namespace IntegrationWithPharmacies.Controllers
 {
@@ -18,24 +23,22 @@ namespace IntegrationWithPharmacies.Controllers
     [ApiController]
     public class RegistrationController : ControllerBase
     {
-        private RegistrationInPharmacyService registrationInPharmacyService { get; set; }
-
+        private RegistrationInPharmacyService RegistrationInPharmacyService { get; set; }
         public RegistrationController(MyDbContext context)
         {
-            registrationInPharmacyService = new RegistrationInPharmacyService(context);
+            RegistrationInPharmacyService = new RegistrationInPharmacyService(context);
         }
 
-        [HttpGet]   // GET /api/registration
+        [HttpGet]  
         public IActionResult Get()
         {
-            return Ok(registrationInPharmacyService.GetAll());
+            return Ok(RegistrationInPharmacyService.GetAll());
         }
 
-        [HttpPost]      // POST /api/registration Request body: {"pharmacyId": "Some number", "apiKey": "Some api key"}
+        [HttpPost]      
         public IActionResult Post(RegistrationInPharmacyDto dto)
         {
-            if (registrationInPharmacyService.Create(dto) == null) return BadRequest();
-
+            if (RegistrationInPharmacyService.Create(dto) == null) return BadRequest();
             return Ok();
         }
 

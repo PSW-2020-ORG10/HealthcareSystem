@@ -52,9 +52,10 @@ namespace HealthClinic.CL.DbContextModel
         public DbSet<Question> Questions { get; set; }
         public DbSet<SecretaryUser> SecretaryUsers { get; set; }
         public DbSet<Medicine> Medicines { get; set; }
+        public DbSet<RegistrationInPharmacy> Registrations { get; set; }
+        public DbSet<MedicineForOrdering> MedicinesForOrdering { get; set; }
         public DbSet<Survey> Surveys { get; set; }
         public DbSet<Message> Messages { get; set; }
-        public DbSet<RegistrationInPharmacy> Registrations { get; set; }
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
@@ -189,7 +190,7 @@ namespace HealthClinic.CL.DbContextModel
 
             modelBuilder.Entity<DoctorsOrder>().HasData(
 
-            new DoctorsOrder(1, false, new List <Medicine>(), new DateTime(), true)
+            new DoctorsOrder(1,false,new DateTime(), new DateTime(), true,true)
 
             );
 
@@ -271,9 +272,14 @@ namespace HealthClinic.CL.DbContextModel
 
             modelBuilder.Entity<RegistrationInPharmacy>().HasData(
 
-            new RegistrationInPharmacy(1, 1, "Api key")
+            new RegistrationInPharmacy(1, 1, "api1","Jankovic 1","Novi Sad")
 
             );
+            modelBuilder.Entity<MedicineForOrdering>().HasData(
+
+           new MedicineForOrdering(1,"Medicine name",1, "Medicine description", 1)
+
+           );
 
             modelBuilder.Entity<Message>().HasData(
 

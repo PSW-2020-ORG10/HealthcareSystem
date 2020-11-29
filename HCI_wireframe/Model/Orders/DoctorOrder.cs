@@ -11,16 +11,19 @@ namespace HCI_wireframe.Model.Orders
     public class DoctorsOrder : Entity
     {
         public bool isUrgent { get; set; }
-        public virtual List<Medicine> listOfMedicines { get; set; }
-        public DateTime date { get; set; }
+        public virtual Dictionary<Medicine,int> listOfMedicines { get; set; }
+        public DateTime dateStart { get; set; }
+        public DateTime dateEnd { get; set; }
         public bool isOrdered { get; set; }
+        public bool isFinished { get; set; }
 
         public DoctorsOrder() : base() { }
-        public DoctorsOrder(int id, bool isUrgent, List<Medicine> listOfMedicines, DateTime date, bool isOrdered) : base(id)
+        public DoctorsOrder(int id, bool isUrgent, Dictionary<Medicine,int> listOfMedicines, DateTime dateBegin, DateTime dateEnd, bool isOrdered) : base(id)
         {
             this.isUrgent = isUrgent;
             this.listOfMedicines = listOfMedicines;
-            this.date = date;
+            this.dateStart = dateBegin;
+            this.dateEnd = dateEnd;
             this.isOrdered = isOrdered;
         }
     }
