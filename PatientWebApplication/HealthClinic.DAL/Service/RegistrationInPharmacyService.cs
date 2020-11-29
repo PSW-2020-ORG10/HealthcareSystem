@@ -54,6 +54,14 @@ namespace HealthClinic.CL.Service
             }
             return null;
         }
-
+        public RegistrationInPharmacy createIRegistration(RegistrationInPharmacyDto dto)
+        {
+            RegistrationInPharmacy registration = RegistrationInPharmacyAdapter.RegistrationDtoToRegistration(dto);
+            foreach (RegistrationInPharmacy registration2 in IRegistrationRepository.GetAll())
+            {
+                if (registration2.apiKey.Equals(registration.apiKey)) return null;
+            }
+            return registration;
+        }
     }
 }

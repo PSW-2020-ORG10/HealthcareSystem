@@ -39,6 +39,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="ClientApp\Pages\Error.cshtml" />
+    <Content Include="ClientApp\Pages\_ViewImports.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\HealthClinic.DAL\HealthClinic.CL.csproj" />
   </ItemGroup>
 

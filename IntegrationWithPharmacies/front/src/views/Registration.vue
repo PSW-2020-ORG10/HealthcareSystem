@@ -8,11 +8,7 @@
                         <label for="name">Name of pharmacy:</label>
                     </div>
                     <div class="col-75">
-                        <select id="name" name="name">
-                            <option value="Jankovic1">Jankovic 1</option>
-                            <option value="Jankovic2">Jankovic 2</option>
-                            <option value="Jankovic3">Jankovic 3</option>
-                        </select>
+                        <input type="text" id="name" name="name" v-model="name" placeholder="Name of pharmacy..">
                     </div>
                 </div>
                 <div class="row">
@@ -20,7 +16,7 @@
                         <label for="town">Town:</label>
                     </div>
                     <div class="col-75">
-                        <input type="text" id="town" name="town" placeholder="Town..">
+                        <input type="text" id="town" name="town" v-model="town" placeholder="Town..">
                     </div>
                 </div>
                 <div class="row">
@@ -56,6 +52,8 @@
                 unique: false,
                 notUnique: false,
                 emptyStringError: false,
+                town: "",
+                name : ""
                
             }
         },
@@ -63,7 +61,9 @@
                register: function () {
                 const pharmacy = {
                     apiKey: this.pharmacyApiKey,
-                    pharmacyId: 1253
+                    pharmacyId: 1253,
+                    name: this.name,
+                    town : this.town
                 };
                 this.axios.post('api/registration/', pharmacy)
                     .then(res => {

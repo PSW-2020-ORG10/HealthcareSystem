@@ -234,7 +234,7 @@ namespace HealthClinic.CL.DbContextModel
 
             modelBuilder.Entity<RegistrationInPharmacy>().HasData(
 
-            new RegistrationInPharmacy(1, 1, "Api key")
+            new RegistrationInPharmacy(1, 1, "api1","Jankovic 1","Novi Sad")
 
             );
             modelBuilder.Entity<MedicineForOrdering>().HasData(

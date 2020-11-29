@@ -1,7 +1,6 @@
 ﻿<template>
     <div id="home" style="background-image: url('images/wgMLUS.jpg');background-repeat: no-repeat;
   background-size: 175% 100%;  height: 1000px">
-        <main-navigation />
         <div id="header">
             <div id="header-text">
                 <div id="header-title">

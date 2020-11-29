@@ -1,4 +1,3 @@
-
 <template>
     <div id="app">
         <content transition="slide-x-transition">

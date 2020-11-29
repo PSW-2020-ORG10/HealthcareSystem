@@ -11,7 +11,7 @@
                     <label for="name">Start date:</label>
                 </div>
                 <div class="col-75">
-                    <input type="date" id="startDate" v-model ="startDate"  placeholder="Choose start date.."/>
+                    <input type="text" id="startDate" v-model ="startDate"  placeholder="01/01/2020"/>
                 </div>
             </div>
             <div class="row">
@@ -19,21 +19,10 @@
                     <label for="town">End date:</label>
                 </div>
                 <div class="col-75">
-                    <input type="date" id="endDate" v-model ="endDate" placeholder="Choose end date..">
+                    <input type="text" id="endDate" v-model ="endDate" placeholder="01/01/2020">
                 </div>
             </div>
-            <div class="row">
-                <div class="col-25">
-                    <label for="apiKey">Send to pharmacy(Name and town):</label>
-                </div>
-                <div class="col-75">
-                    <select id="name" name="name" v-model="pharmacy">
-                        <option value="Jankovic 1, Novi Sad">Jankovic 1, Novi Sad</option>
-                        <option value="Jankovic 2, Beograd">Jankovic 2, Beograd</option>
-                        <option value="Jankovic 3, Valjevo">Jankovic 3, Valjevo</option>
-                    </select>
-                </div>
-            </div>
+            
             <div class="row">
                 <label v-if="sent" style="color:aqua;font-size:25px;">Successfully sent report to pharmacy!</label>
                 <label v-if="notSent" style="color:red;font-size:25px;">Error occured while sending report!</label>
@@ -66,7 +55,11 @@
         },
         methods: {
             send: function () {
-                this.axios.post('api/report/', this.startDate, this.endDate)
+                const date = {
+                    startDate: this.startDate,
+                    endDate: this.endDate
+                };
+                this.axios.post('api/report/', date)
                     .then(res => {
                         this.sent = true;
                         this.notSent = false;

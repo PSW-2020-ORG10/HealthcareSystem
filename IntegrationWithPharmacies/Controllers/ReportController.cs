@@ -29,11 +29,17 @@ namespace IntegrationWithPharmacies.Controllers
             medicineService = new MedicineForOrderingService(context);
             orderRepository = new DoctorOrderRepository(context);
         }
+        public DateTime convertStringToDate(String date)
+        {
+            String[] parts = date.Split("/");
+            return new DateTime(int.Parse(parts[2]),int.Parse(parts[1]), int.Parse(parts[0]));
+
+        }
 
         [HttpPost]   // GET /api/registration
-        public IActionResult Post(DateTime startDate,DateTime endDate)
+        public IActionResult Post(DateOfOrder date)
         {
-
+      
             var config = new SftpConfig
             {
                 Host = "192.168.0.28",
@@ -42,11 +48,11 @@ namespace IntegrationWithPharmacies.Controllers
                 Password = "password"
             };
             var sftpService = new SftpService(new NullLogger<SftpService>(), config);
-            StringBuilder sb = new StringBuilder();
+
+            StringBuilder stringBuilder = new StringBuilder();
             int totalQuatity = 0;
-            sb.Append("Report about consumption of medicine\n\n\n");
+            stringBuilder.Append("Report about consumption of medicine\n\n\n");
             int i = 1;
-            
                 foreach (DoctorsOrder order in orderRepository.GetAll())
                 {
                      foreach (MedicineForOrdering medicine in medicineService.GetAll())
@@ -55,9 +61,10 @@ namespace IntegrationWithPharmacies.Controllers
                             {
                                 if (order.isFinished)
                                 {
-                                    sb.Append(i + ".\n");
-                                    sb.Append("     Medicine name: " + medicine.name + "\n");
-                                    sb.Append("     Ordered quantity: " + medicine.quantity + " (Date:  " + order.dateStart.Date + ")\n");
+                                    if(DateTime.Compare(order.dateStart, convertStringToDate(date.startDate)) >0 && DateTime.Compare(order.dateEnd, convertStringToDate(date.endDate)) <0)
+                                         stringBuilder.Append(i + ".\n");
+                                         stringBuilder.Append("     Medicine name: " + medicine.name + "\n");
+                                         stringBuilder.Append("     Ordered quantity: " + medicine.quantity + " (Date:  " + order.dateStart.Date + ")\n");
 
                                     totalQuatity += medicine.quantity;
                                     i++;
@@ -69,8 +76,8 @@ namespace IntegrationWithPharmacies.Controllers
                 
 
             }
-            sb.Append("\n\n   Total ordered quatity: " + totalQuatity + "\n");
-            String reportText = sb.ToString();
+            stringBuilder.Append("\n\n   Total ordered quatity: " + totalQuatity + "\n");
+            String reportText = stringBuilder.ToString();
             var testFile = @"C:\Users\Mladenka\Desktop\psw\HealthcareSystem\IntegrationWithPharmacies\TextFile.txt";
             System.IO.File.WriteAllText(testFile, reportText);
             Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory);
@@ -80,4 +87,5 @@ namespace IntegrationWithPharmacies.Controllers
 
 
     }
+  
 }
