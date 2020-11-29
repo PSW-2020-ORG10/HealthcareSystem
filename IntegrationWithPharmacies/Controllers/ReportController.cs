@@ -29,6 +29,10 @@ namespace IntegrationWithPharmacies.Controllers
             MedicineService = new MedicineForOrderingService(context);
             DoctorOrderService = new DoctorOrderServica(context);
         }
+        public DateTime convertStringToDate(String date)
+        {
+            String[] parts = date.Split("/");
+            return new DateTime(int.Parse(parts[2]),int.Parse(parts[1]), int.Parse(parts[0]));
 
 
         [HttpPost]
