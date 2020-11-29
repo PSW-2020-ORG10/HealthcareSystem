@@ -17,6 +17,39 @@ namespace HealthClinic.CL.Migrations
                 .HasAnnotation("ProductVersion", "3.1.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
+            modelBuilder.Entity("HealthClinic.CL.Model.ActionsAndBenefits.Message", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("PharmacyName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("isRemoved")
+                        .HasColumnType("tinyint(1)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Messages");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1,
+                            PharmacyName = "Apoteka Jankovic",
+                            Text = "Message",
+                            Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            isRemoved = false
+                        });
+                });
+
             modelBuilder.Entity("HealthClinic.CL.Model.Doctor.DoctorNotification", b =>
                 {
                     b.Property<int>("id")

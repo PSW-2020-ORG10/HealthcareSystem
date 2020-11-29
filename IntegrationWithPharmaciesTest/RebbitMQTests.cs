@@ -1,5 +1,10 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using HealthClinic.CL.Dtos;
+using HealthClinic.CL.Model.ActionsAndBenefits;
+using HealthClinic.CL.Repository;
+using HealthClinic.CL.Service;
+using Microsoft.Extensions.Hosting;
 using Moq;
+using Shouldly;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,13 +17,29 @@ namespace IntegrationWithPharmaciesTest
     {
 
         [Fact]
-        public static void  Deserializes_messages()
-        {
-
-            var test = new Mock<BackgroundService>();
-            test.Verify(verify => verify.StartAsync(new CancellationToken()));
+        public static void Create_message_successfuly()
+        { 
+            MessageService service = new MessageService(CreateStubRepository());
+            Message message = service.Create(new MessageDTO("Message", new DateTime(), "12345"));
+            message.ShouldNotBeNull();
 
         }
+
+
+       private static IMessageRepository CreateStubRepository()
+       {
+            var stubRepository = new Mock<IMessageRepository>();
+            Message message = new Message(3, "Message", new DateTime(), false, "Apoteka Jankovic");
+
+            var messages = new List<Message>();
+
+            stubRepository.Setup(m => m.Create(It.IsAny<Message>())).Returns(message);
+
+            return stubRepository.Object;
+
+       }
+
+        
 
 
     }

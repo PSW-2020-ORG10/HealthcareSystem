@@ -1,4 +1,5 @@
-﻿using HealthClinic.CL.Model.Doctor;
+﻿using HealthClinic.CL.Model.ActionsAndBenefits;
+using HealthClinic.CL.Model.Doctor;
 using HealthClinic.CL.Model.Employee;
 using HealthClinic.CL.Model.Hospital;
 using HealthClinic.CL.Model.Manager;
@@ -51,14 +52,20 @@ namespace HealthClinic.CL.DbContextModel
         public DbSet<SecretaryUser> SecretaryUsers { get; set; }
         public DbSet<Medicine> Medicines { get; set; }
         public DbSet<RegistrationInPharmacy> Registrations { get; set; }
-
+        public DbSet<Message> Messages { get; set; }
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
+
+        public MyDbContext()
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             PatientUser patient = new PatientUser(1, "Pera", "Peric","Male", "1234", "2/2/2020", "123","213", "Alergija", "Grad", false, "email", "pass", false,"Grad2", "Roditelj",null);
             List<ModelNotification> patientNotifications = new List<ModelNotification>();
             patientNotifications.Add(new ModelNotification(3, "3. string", 1));
+
+
             modelBuilder.Entity<ModelNotification>().HasData(
 
                 patientNotifications
@@ -234,6 +241,12 @@ namespace HealthClinic.CL.DbContextModel
             modelBuilder.Entity<RegistrationInPharmacy>().HasData(
 
             new RegistrationInPharmacy(1, 1, "Api key")
+
+            );
+
+            modelBuilder.Entity<Message>().HasData(
+
+             new Message(1, "Message", new DateTime(), false, "Apoteka Jankovic")
 
             );
 
