@@ -49,6 +49,7 @@ namespace IntegrationWithPharmacies
                     message = JsonConvert.DeserializeObject<Message>(jsonMessage, new MyDateTimeConverter());
                 }
 
+                message.PharmacyName = "Apoteka Jankovic";
                 Program.ListOfMessages.Add(message);
 
                 MessageService messageService = new MessageService();

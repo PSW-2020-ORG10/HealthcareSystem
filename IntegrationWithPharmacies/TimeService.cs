@@ -54,17 +54,17 @@ namespace IntegrationWithPharmacies
             }
             string filepath = AppDomain.CurrentDomain.BaseDirectory + "\\Logs\\ServiceLog_" + DateTime.Now.Date.ToShortDateString().Replace('/', '_') + ".txt";
             
-            try
-            {
-                using (StreamWriter sw = File.AppendText(filepath))
+                try
                 {
-                    sw.WriteLine(Message);
+                    using (StreamWriter sw = File.AppendText(filepath))
+                    {
+                        sw.WriteLine(Message);
+                    }
                 }
-            }
-            catch (IOException e)
-            {
-                Console.WriteLine(e.ToString());
-            }
+                catch (IOException e)
+                {
+                    Console.WriteLine(e.ToString());
+                }
             
         }
     }
