@@ -1,4 +1,5 @@
-﻿using HealthClinic.CL.Model.Doctor;
+﻿using HealthClinic.CL.Model.ActionsAndBenefits;
+using HealthClinic.CL.Model.Doctor;
 using HealthClinic.CL.Model.Employee;
 using HealthClinic.CL.Model.Hospital;
 using HealthClinic.CL.Model.Manager;
@@ -51,17 +52,23 @@ namespace HealthClinic.CL.DbContextModel
         public DbSet<Question> Questions { get; set; }
         public DbSet<SecretaryUser> SecretaryUsers { get; set; }
         public DbSet<Medicine> Medicines { get; set; }
+        public DbSet<Survey> Surveys { get; set; }
+        public DbSet<Message> Messages { get; set; }
         public DbSet<RegistrationInPharmacy> Registrations { get; set; }
 
-        public DbSet<Survey> Surveys { get; set; }
-
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
+
+        public MyDbContext()
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             PatientUser patient = new PatientUser(1, "Pera", "Peric","Male", "1234", "2/2/2020", "123","213", "Alergija", "Grad", false, "email", "pass", false,"Grad2", "Roditelj",null);
             List<ModelNotification> patientNotifications = new List<ModelNotification>();
             patientNotifications.Add(new ModelNotification(3, "3. string", 1));
+
+
             modelBuilder.Entity<ModelNotification>().HasData(
 
                 patientNotifications
@@ -275,17 +282,21 @@ namespace HealthClinic.CL.DbContextModel
 
             );
 
+            modelBuilder.Entity<Message>().HasData(
+
+           new Message(1, "Message", new DateTime(), false, "Apoteka Jankovic")
+
+          );
+
             modelBuilder.Entity<Survey>().HasData(
 
-            new Survey(1, 1, 3, 4, 5, 4, 5, 4, 5, 4, 5, 5, 5, 5, 4, 3, 3, 2, 2, 5),
-            new Survey(2, 1, 4, 4, 5, 3, 1, 5, 5, 2, 2, 4, 2, 5, 3, 1, 3, 3, 3, 5),
-            new Survey(3, 1, 5, 4, 5, 1, 3, 4, 5, 3, 2, 5, 1, 5, 4, 1, 2, 2, 1, 5),
-            new Survey(4, 1, 6, 4, 5, 2, 5, 5, 1, 3, 2, 4, 2, 2, 3, 1, 3, 1, 3, 5),
-            new Survey(5, 1, 7, 4, 5, 4, 2, 4, 5, 1, 2, 4, 3, 5, 2, 1, 1, 2, 5, 1)
+           new Survey(1, 1, 3, 4, 5, 4, 5, 4, 5, 4, 5, 5, 5, 5, 4, 3, 3, 2, 2, 5),
+           new Survey(2, 1, 4, 4, 5, 3, 1, 5, 5, 2, 2, 4, 2, 5, 3, 1, 3, 3, 3, 5),
+           new Survey(3, 1, 5, 4, 5, 1, 3, 4, 5, 3, 2, 5, 1, 5, 4, 1, 2, 2, 1, 5),
+           new Survey(4, 1, 6, 4, 5, 2, 5, 5, 1, 3, 2, 4, 2, 2, 3, 1, 3, 1, 3, 5),
+           new Survey(5, 1, 7, 4, 5, 4, 2, 4, 5, 1, 2, 4, 3, 5, 2, 1, 1, 2, 5, 1)
 
-            );
-
-
+           );
         }
 
     }

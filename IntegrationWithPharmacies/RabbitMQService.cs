@@ -1,19 +1,26 @@
-﻿using Microsoft.Extensions.Hosting;
-using Newtonsoft.Json;
-using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using HealthClinic.CL.DbContextModel;
+using HealthClinic.CL.Dtos;
+using HealthClinic.CL.Model.ActionsAndBenefits;
+using HealthClinic.CL.Service;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 
 namespace IntegrationWithPharmacies
 {
     public class RabbitMQService : BackgroundService
     {
-
         IConnection connection;
         IModel channel;
         public override Task StartAsync(CancellationToken cancellationToken)
@@ -34,18 +41,21 @@ namespace IntegrationWithPharmacies
                 var jsonMessage = Encoding.UTF8.GetString(body);
                 Message message;
                 try
-                {   // try deserialize with default datetime format
+                {   
                     message = JsonConvert.DeserializeObject<Message>(jsonMessage);
                 }
-                catch (Exception)     // datetime format not default, deserialize with Java format (milliseconds since 1970/01/01)
+                catch (Exception) 
                 {
                     message = JsonConvert.DeserializeObject<Message>(jsonMessage, new MyDateTimeConverter());
                 }
 
-
-
-                Console.WriteLine(" Primljena poruka {0}", message);
+                message.PharmacyName = "Apoteka Jankovic";
                 Program.ListOfMessages.Add(message);
+
+                MessageService messageService = new MessageService();
+                MessageDTO dto = new MessageDTO(message.Text, message.Timestamp, message.PharmacyName);
+                messageService.Create(dto);
+
             };
             channel.BasicConsume(queue: "hello",
                                     autoAck: true,

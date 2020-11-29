@@ -13,6 +13,7 @@ using HealthClinic.CL.Model.Patient;
 using HealthClinic.CL.Adapters;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using HealthClinic.CL.Model.ActionsAndBenefits;
 
 namespace IntegrationWithPharmacies
 {
@@ -23,8 +24,8 @@ namespace IntegrationWithPharmacies
 
         public static void Main(string[] args)
         {
+            CreateHostBuilderMessages(args).Build();
             CreateHostBuilder(args).Build().Run();
-            CreateHostBuilderMessages(args).Build().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -39,8 +40,8 @@ namespace IntegrationWithPharmacies
                  .UseWindowsService()
                 .ConfigureServices((hostContext, services) =>
                 {
-                services.AddHostedService<TimeService>();
-                services.AddHostedService<RabbitMQService>();
+                    services.AddHostedService<TimeService>();
+                    services.AddHostedService<RabbitMQService>();
                  });
     }
 }

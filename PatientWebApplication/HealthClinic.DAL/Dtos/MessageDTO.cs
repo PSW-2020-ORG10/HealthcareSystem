@@ -1,21 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace IntegrationWithPharmacies
+namespace HealthClinic.CL.Dtos
 {
-    public class Message
+    public class MessageDTO
     {
         public string Text { get; set; }
 
         public DateTime Timestamp { get; set; }
 
+        public string PharmacyName { get; set; }
 
-        public Message(string text, DateTime timestamp)
+        public MessageDTO( string text, DateTime timestamp, string pharmacyname)
         {
             this.Text = text;
             this.Timestamp = timestamp;
+            this.PharmacyName = pharmacyname;
+        }
+
+        public MessageDTO()
+        {
         }
 
         public override string ToString()

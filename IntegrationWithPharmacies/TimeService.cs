@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using HealthClinic.CL.Model.ActionsAndBenefits;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,8 +12,7 @@ namespace IntegrationWithPharmacies
 {
     public class TimeService : BackgroundService
     {
-        System.Timers.Timer collectTimer = new System.Timers.Timer();       // periodicly collects new messages from list and writes them to file
-        System.Timers.Timer generatorTimer = new System.Timers.Timer();     // periodicly generates new messages and adds them to list
+        System.Timers.Timer collectTimer = new System.Timers.Timer();        // periodicly generates new messages and adds them to list
 
         public override Task StartAsync(CancellationToken cancellationToken)
         {
@@ -26,9 +26,6 @@ namespace IntegrationWithPharmacies
             collectTimer.Interval = 5000; //number in miliseconds  
             collectTimer.Enabled = true;
 
-            generatorTimer.Elapsed += new ElapsedEventHandler(GenerateMessage);
-            generatorTimer.Interval = 2200; //number in miliseconds  
-            generatorTimer.Enabled = true;
             return Task.CompletedTask;
         }
 
@@ -36,12 +33,6 @@ namespace IntegrationWithPharmacies
         {
             WriteToFile("Service is stopped at " + DateTime.Now);
             return base.StopAsync(cancellationToken);
-        }
-
-        private void GenerateMessage(object source, ElapsedEventArgs e)
-        {
-            WriteToFile("Generate message at " + DateTime.Now);
-            Program.ListOfMessages.Add(new Message("generated text: " + System.Guid.NewGuid().ToString(), DateTime.Now));
         }
 
         private void CollectMessage(object source, ElapsedEventArgs e)
@@ -86,4 +77,4 @@ namespace IntegrationWithPharmacies
             }
         }
     }
-}
+    }
