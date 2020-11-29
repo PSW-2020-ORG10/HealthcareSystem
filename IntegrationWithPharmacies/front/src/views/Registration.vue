@@ -1,41 +1,44 @@
 ﻿<template>
     <div id="registration" style="background-image: url('images/wgMLUS.jpg');background-repeat: no-repeat;
   background-size: 175% 100%;  height: 1000px">
+        <div style="        background-color: #1D8288">
+            <h3 style="color:white;font-size: 35px;font-weight:bold">Register pharmacy in hospital system</h3>
+        </div>
         <div class="container">
-            
-                <div class="row">
-                    <div class="col-25">
-                        <label for="name">Name of pharmacy:</label>
-                    </div>
-                    <div class="col-75">
-                        <input type="text" id="name" name="name" v-model="name" placeholder="Name of pharmacy..">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-25">
-                        <label for="town">Town:</label>
-                    </div>
-                    <div class="col-75">
-                        <input type="text" id="town" name="town" v-model="town" placeholder="Town..">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-25">
-                        <label for="apiKey">Pharmacy api key:</label>
-                    </div>
-                    <div class="col-75">
-                        <input type="text" v-model="pharmacyApiKey" name="pharmacyApiKey" placeholder="Enter pharmacy api key..">
-                    </div>
 
+            <div class="row">
+                <div class="col-25">
+                    <label for="name">Name of pharmacy:</label>
                 </div>
-                <div class="row">
-                    <label v-if="unique" style="color:lightgreen;font-size:25px;">Successfully saved api key!</label>
-                    <label v-if="notUnique" style="color:red;font-size:25px;">This api key already exists!</label>
+                <div class="col-75">
+                    <input type="text" id="name" name="name" v-model="name" placeholder="Name of pharmacy..">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="town">Town:</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="town" name="town" v-model="town" placeholder="Town..">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                    <label for="apiKey">Pharmacy api key:</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" v-model="pharmacyApiKey" name="pharmacyApiKey" placeholder="Enter pharmacy api key..">
                 </div>
 
+            </div>
+            <div class="row">
+                <label v-if="unique" style="color:lightgreen;font-size:25px;">Successfully saved api key!</label>
+                <label v-if="notUnique" style="color:red;font-size:25px;">This api key already exists!</label>
+            </div>
 
 
-         
+
+
             <div class="row">
                 <button class="button" v-on:click="register">Register</button>
             </div>
@@ -155,7 +158,7 @@
     }
 
     .button {
-        background-color: #008CBA;
+        background-color: #1D8288;
         border: double;
         color: white;
         padding: 15px 32px;
