@@ -6,10 +6,6 @@ using HealthClinic.CL.Repository;
 using System;
 using System.Collections.Generic;
 using System.Text;
-namespace PatientWebApplication { 
-
-       
-    }
 
 namespace HealthClinic.CL.Service
 {
