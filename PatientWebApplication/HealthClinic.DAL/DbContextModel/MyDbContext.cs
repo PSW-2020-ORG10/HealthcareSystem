@@ -58,10 +58,6 @@ namespace HealthClinic.CL.DbContextModel
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
-        public MyDbContext()
-        {
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             PatientUser patient = new PatientUser(1, "Pera", "Peric","Male", "1234", "2/2/2020", "123","213", "Alergija", "Grad", false, "email", "pass", false,"Grad2", "Roditelj",null);
@@ -75,10 +71,6 @@ namespace HealthClinic.CL.DbContextModel
 
 
            );
-
-
-
-
 
             List<DoctorNotification> doctorNotifications = new List<DoctorNotification>();
             doctorNotifications.Add(new DoctorNotification(3, "3. string", 1));
