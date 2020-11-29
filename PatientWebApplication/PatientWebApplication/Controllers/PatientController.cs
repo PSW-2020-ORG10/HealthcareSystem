@@ -14,21 +14,27 @@ using System.Threading.Tasks;
 
 namespace PatientWebApplication.Controllers
 {
+    /// <summary>Class <c>PatientUserController</c> handles requests sent from client app.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class PatientUserController : ControllerBase
     {
+        /// <value>Property <c>PatientService</c> represents the service used for handling business logic.</value>
         private PatientService PatientService { get; set; }
         private IWebHostEnvironment _env;
 
 
-
+        /// <summary>This constructor injects the PatientUserController with matching PatientService.</summary>
         public PatientUserController(IWebHostEnvironment env)
         {
             PatientService = new PatientService(new PatientsRepository(), new EmailVerificationService());
             _env = env;
         }
 
+        /// <summary> This method determines if <c>PatientDto</c> provided <paramref name="dto"/> is valid for creating by calling <c>PatientValidator</c>
+        /// automatically and sends it to <c>PatientService</c>. </summary>  
+        /// <returns> if fields from <paramref name="dto"/> are not valid 400 Bad Request also if created feedback is not null 200 Ok else 404 Bad Request.</returns>
         [HttpPost]
         public IActionResult Create(PatientDto patientDto)
         {
@@ -42,6 +48,10 @@ namespace PatientWebApplication.Controllers
 
         }
 
+        /// <summary> This method calls <c>FeedbackService</c> to save image. </summary>
+        /// <param name="file"><c>id</c> is File model that needs to be saved. 
+        /// </param>
+        /// <returns> If <paramref name="file"/> is not valid returns 400 Bad Request; if business logic is not valid, returns 404 Not Found, if path is successfully returned, returns 200 OK with path</returns>
         [HttpPost("image")]
         public IActionResult SaveImg([FromForm] FileModel file)
         {
@@ -57,6 +67,10 @@ namespace PatientWebApplication.Controllers
 
         }
 
+        /// <summary> This method is calling <c>PatientService</c> to validate patients account. </summary>
+        /// <param name="id"><c>id</c> is id of patient who's account needs to be validated. 
+        /// </param>
+        /// <returns> If <paramref name="id"/> is not valid returns 400 Bad Request; if business logic is not valid, returns 404 Not Found, if patients account is successfully validated, it redirects to Homepage</returns>
         [HttpGet("{id}")]       // GET /api/patientuser/{id}
         public IActionResult Validate(int id)
         {
@@ -74,14 +88,15 @@ namespace PatientWebApplication.Controllers
             return Redirect("http://localhost:60198");
 
         }
+
         /// <summary> This method is calling <c>PatientService</c> to get one <c>PatientUser</c>. </summary>
         /// <param name="id"><c>id</c> is id of patient that needs to be found. 
+        /// </param>
         /// <returns> If <paramref name="id"/>and patient is not valid returns 400 Bad Request; if patient is successfully found, returns 200 OK with found patient.</returns>
-
         [HttpGet("getOne")]
         public IActionResult GetOne(int id)
         {
-            PatientUser patient = PatientService.GetOne(8);
+            PatientUser patient = PatientService.GetOne(3);
             if (id < 0 && patient == null)
             {
                 return BadRequest();
