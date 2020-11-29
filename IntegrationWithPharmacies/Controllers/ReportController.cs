@@ -29,14 +29,14 @@ namespace IntegrationWithPharmacies.Controllers
             MedicineService = new MedicineForOrderingService(context);
             DoctorOrderService = new DoctorOrderServica(context);
         }
- 
 
-        [HttpPost] 
+
+        [HttpPost]
         public IActionResult Post(DateOfOrder date)
         {
             var sftpService = new SftpService(new NullLogger<SftpService>(), getConfig());
             var testFile = @"..\TextFile.txt";
-            System.IO.File.WriteAllText(testFile,getReportText(date));
+            System.IO.File.WriteAllText(testFile, getReportText(date));
             sftpService.UploadFile(testFile, @"\pub\" + Path.GetFileName(testFile));
             return Ok();
         }
@@ -49,18 +49,38 @@ namespace IntegrationWithPharmacies.Controllers
             stringBuilder.Append("Report about consumption of medicine\n\n\n");
             foreach (DoctorsOrder order in DoctorOrderService.GetAll())
             {
-                foreach (MedicineForOrdering medicine in MedicineService.GetAll())
-                {
-                    if (medicine.OrderId.Equals(order.id) && order.IsFinished && DateTime.Compare(order.DateEnd, convertStringToDate(date.StartDate)) == 1 && DateTime.Compare(order.DateEnd, convertStringToDate(date.EndDate)) == -1)
-                    {
-                        stringBuilder.Append(i + ".\n     Medicine name: " + medicine.Name + "\n     Ordered quantity: " + medicine.Quantity + " (Date:  " + order.DateEnd.Date.ToString() + ")\n");
-                        totalQuatity += medicine.Quantity;
-                        i++;
-                    }
-                }
+                stringBuilder.Append(getText(date, order, i));
+                totalQuatity += getQuantity(date, totalQuatity, order);
+                i++;
             }
             return stringBuilder.Append("\n\n   Total ordered quatity: " + totalQuatity + "\n").ToString();
         }
+
+        private String getText(DateOfOrder date, DoctorsOrder order, int i)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (MedicineForOrdering medicine in MedicineService.GetAll())
+            {
+                if (medicine.OrderId.Equals(order.id) && order.IsFinished && DateTime.Compare(order.DateEnd, convertStringToDate(date.StartDate)) == 1 && DateTime.Compare(order.DateEnd, convertStringToDate(date.EndDate)) == -1)
+                {
+                    stringBuilder.Append(i + ".\n     Medicine name: " + medicine.Name + "\n     Ordered quantity: " + medicine.Quantity + " (Date:  " + order.DateEnd.Date.ToString() + ")\n");
+                }
+            }
+            return stringBuilder.ToString();
+        }
+        private int getQuantity(DateOfOrder date, int totalQuatity, DoctorsOrder order)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (MedicineForOrdering medicine in MedicineService.GetAll())
+            {
+                if (medicine.OrderId.Equals(order.id) && order.IsFinished && DateTime.Compare(order.DateEnd, convertStringToDate(date.StartDate)) == 1 && DateTime.Compare(order.DateEnd, convertStringToDate(date.EndDate)) == -1)
+                {
+                    totalQuatity += medicine.Quantity;
+                }
+            }
+            return totalQuatity;
+        }
+
         public DateTime convertStringToDate(String date)
         {
             String[] parts = date.Split("/");
@@ -73,5 +93,5 @@ namespace IntegrationWithPharmacies.Controllers
         }
     }
 
-   
+
 }
