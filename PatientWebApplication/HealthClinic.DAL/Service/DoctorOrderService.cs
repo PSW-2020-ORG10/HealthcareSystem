@@ -8,14 +8,14 @@ using HealthClinic.CL.Repository;
 using HealthClinic.CL.Adapters;
 namespace HealthClinic.CL.Service
 {
-    public class DoctorOrderServica
+    public class DoctorOrderService
     {
         public DoctorOrderRepository DoctorOrderRepository { get; }
         public object DoctorOrderAdapter { get; private set; }
 
-        public DoctorOrderServica() { }
+        public DoctorOrderService() { }
 
-        public DoctorOrderServica(MyDbContext context)
+        public DoctorOrderService(MyDbContext context)
         {
             DoctorOrderRepository = new DoctorOrderRepository(context);
         }
@@ -25,8 +25,7 @@ namespace HealthClinic.CL.Service
         }
         public DoctorsOrder Create(DoctorsOrderDto dto)
         {
-            DoctorsOrder order = DoctorsOrderAdapter.DoctorsOrderDtoToDoctorsOrder(dto);
-            return DoctorOrderRepository.Add(order);
+            return DoctorOrderRepository.Add(DoctorsOrderAdapter.DoctorsOrderDtoToDoctorsOrder(dto));
         }
     }
 }
