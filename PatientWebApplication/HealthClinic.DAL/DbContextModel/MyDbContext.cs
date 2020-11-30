@@ -204,7 +204,7 @@ namespace HealthClinic.CL.DbContextModel
 
             modelBuilder.Entity<Message>().HasData(
 
-            new Message(1, "Message", new DateTime(), false, "Apoteka Jankovic")
+            new Message(1, "Message", new DateTime(), false, "Apoteka Jankovic", "02/02/2020")
 
             );
 

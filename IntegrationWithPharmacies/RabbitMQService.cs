@@ -34,19 +34,18 @@ namespace IntegrationWithPharmacies
                 var jsonMessage = Encoding.UTF8.GetString(body);
                 Message message;
                 try
-                {
+                {   // try deserialize with default datetime format
                     message = JsonConvert.DeserializeObject<Message>(jsonMessage);
                 }
-                catch (Exception)
+                catch (Exception)     // datetime format not default, deserialize with Java format (milliseconds since 1970/01/01)
                 {
                     message = JsonConvert.DeserializeObject<Message>(jsonMessage, new MyDateTimeConverter());
                 }
-
                 message.PharmacyName = "Apoteka Jankovic";
                 Program.ListOfMessages.Add(message);
-
+                Console.WriteLine(message);
                 MessageService messageService = new MessageService();
-                messageService.Create(new MessageDto(message.Text, message.TimeStamp, "Apoteka Jankovic"));
+                messageService.Create(new MessageDto(message.Text, message.TimeStamp, "Apoteka Jankovic", message.DateAction));
 
             };
             channel.BasicConsume(queue: "hello",

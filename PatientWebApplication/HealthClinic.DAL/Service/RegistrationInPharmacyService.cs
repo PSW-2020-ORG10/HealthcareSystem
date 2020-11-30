@@ -61,5 +61,13 @@ namespace HealthClinic.CL.Service
             }
             return RegistrationInPharmacyAdapter.RegistrationDtoToRegistration(dto);
         }
+        public Boolean Remove(String apiKey)
+        {
+            try{   
+                RegistrationInPharmacyRepository.Remove(apiKey);
+                return true;
+            }
+            catch{ return false; }
+        }
     }
 }

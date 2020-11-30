@@ -23,6 +23,9 @@ namespace HealthClinic.CL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("DateAction")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<bool>("IsRemoved")
                         .HasColumnType("tinyint(1)");
 
@@ -32,7 +35,7 @@ namespace HealthClinic.CL.Migrations
                     b.Property<string>("Text")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<DateTime>("Timestamp")
+                    b.Property<DateTime>("TimeStamp")
                         .HasColumnType("datetime(6)");
 
                     b.HasKey("id");
@@ -43,10 +46,11 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
+                            DateAction = "02/02/2020",
                             IsRemoved = false,
                             PharmacyName = "Apoteka Jankovic",
                             Text = "Message",
-                            Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            TimeStamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 

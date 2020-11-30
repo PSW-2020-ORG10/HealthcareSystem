@@ -10,11 +10,14 @@ namespace HealthClinic.CL.Dtos
 
         public string PharmacyName { get; set; }
 
-        public MessageDto(string text, DateTime timestamp, string pharmacyname)
+        public string DateAction { get; set; }
+
+        public MessageDto(string text, DateTime timestamp, string pharmacyname, string dateaction)
         {
-            Text = text;
-            TimeStamp = timestamp;
-            PharmacyName = pharmacyname;
+            this.Text = text;
+            this.TimeStamp = timestamp;
+            this.PharmacyName = pharmacyname;
+            this.DateAction = dateaction;
         }
 
         public MessageDto()
@@ -23,7 +26,7 @@ namespace HealthClinic.CL.Dtos
 
         public override string ToString()
         {
-            return Text + " sent at " + TimeStamp.ToString();
+            return this.Text + " sent at " + this.TimeStamp.ToString();
         }
     }
 }

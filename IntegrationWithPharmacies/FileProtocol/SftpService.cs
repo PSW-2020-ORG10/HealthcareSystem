@@ -20,7 +20,7 @@ namespace IntegrationWithPharmacies.FileProtocol
 
         public Boolean UploadFile(string localFilePath, string remoteFilePath)
         {
-            using var client = new SftpClient("192.168.1.244", 22, "tester", "password");
+            using var client = new SftpClient("192.168.56.1", 22, "tester", "password");
             try
             {   client.Connect();
                 client.UploadFile(File.OpenRead(localFilePath), remoteFilePath);

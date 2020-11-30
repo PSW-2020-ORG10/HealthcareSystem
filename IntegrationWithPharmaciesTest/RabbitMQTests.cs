@@ -17,7 +17,7 @@ namespace IntegrationWithPharmaciesTest
         public static void Create_message_successfuly()
         {
             MessageService service = new MessageService(CreateStubRepository());
-            Message message = service.Create(new MessageDto("Message", new DateTime(), "12345"));
+            Message message = service.Create(new MessageDto("Message", new DateTime(), "12345", "02/02/2020"));
             message.ShouldNotBeNull();
 
         }
@@ -26,7 +26,7 @@ namespace IntegrationWithPharmaciesTest
         private static IMessageRepository CreateStubRepository()
         {
             var stubRepository = new Mock<IMessageRepository>();
-            Message message = new Message(3, "Message", new DateTime(), false, "Apoteka Jankovic");
+            Message message = new Message(3, "Message", new DateTime(), false, "Apoteka Jankovic", "02/02/2020");
 
             var messages = new List<Message>();
 
