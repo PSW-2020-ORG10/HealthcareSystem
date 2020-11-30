@@ -1,21 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using HealthClinic.CL.Services;
-using Class_diagram.Model.Patient;
-using HealthClinic.CL.Model.Pharmacy;
-using HealthClinic.CL.Service;
-using HealthClinic.CL.DbContextModel;
+﻿using HealthClinic.CL.DbContextModel;
 using HealthClinic.CL.Dtos;
-using IntegrationWithPharmacies.FileProtocol;
-using System.IO;
-using Microsoft.Extensions.Logging.Abstractions;
-using HealthClinic.CL.Repository;
-using HealthClinic.CL.Model.Orders;
+using HealthClinic.CL.Service;
+using Microsoft.AspNetCore.Mvc;
 
 namespace IntegrationWithPharmacies.Controllers
 {

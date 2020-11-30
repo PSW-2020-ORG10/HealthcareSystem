@@ -1,4 +1,5 @@
-﻿using HealthClinic.CL.Model.Doctor;
+﻿using HealthClinic.CL.Model.ActionsAndBenefits;
+using HealthClinic.CL.Model.Doctor;
 using HealthClinic.CL.Model.Employee;
 using HealthClinic.CL.Model.Hospital;
 using HealthClinic.CL.Model.Manager;
@@ -55,6 +56,7 @@ namespace HealthClinic.CL.DbContextModel
         public DbSet<MedicineForOrdering> MedicinesForOrdering { get; set; }
 
         public DbSet<Survey> Surveys { get; set; }
+        public DbSet<Message> Messages { get; set; }
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
@@ -197,6 +199,12 @@ namespace HealthClinic.CL.DbContextModel
             modelBuilder.Entity<FinishedOrder>().HasData(
 
             new FinishedOrder(1, new List <Medicine>())
+
+            );
+
+            modelBuilder.Entity<Message>().HasData(
+
+            new Message(1, "Message", new DateTime(), false, "Apoteka Jankovic")
 
             );
 

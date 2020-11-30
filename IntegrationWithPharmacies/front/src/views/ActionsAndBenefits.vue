@@ -4,30 +4,15 @@
         <table id="customers" style="width:2000px;">
             <tr>
                 <th>Pharmacy</th>
-                <th>Medication</th>
                 <th>Offer</th>
                 <th>Date</th>
                 <th></th>
             </tr>
-            <tr>
-                <td>Jankovic 2, Novi Sad</td>
-                <td>Andol</td>
-                <td>Do kraja nedelje na popustu od 30%!</td>
-                <td>30/11/2020</td>
-                <td><button v-on:click="ignore">Ignore</button></td>
-            </tr>
-            <tr>
-                <td>Jankovic 2, Novi Sad</td>
-                <td>Andol</td>
-                <td>Do kraja nedelje na popustu od 30%!</td>
-                <td>30/11/2020</td>
-                <td><button v-on:click="ignore">Ignore</button></td>
-            </tr>
 
-            <tr v-for="action in actionsAndBenefits" v-if="action.removed === false">
-                <td>{{action.pharmacy}}</td>
-                <td>{{action.description}}</td>
-                <td>{{action.date}}</td>
+            <tr v-for="action in this.actionsAndBenefits">
+                <td>{{action.PharmacyName}}</td>
+                <td>{{action.Text}}</td>
+                <td>{{action.TimeStamp}}</td>
                 <td><button v-on:click="ignore($event, action)" v-if="notIgnored">Ignore</button></td>
             </tr>
 
@@ -42,18 +27,24 @@
         data() {
             return {
                notIgnored  : true,
-                actionsAndBenefits: null
+               actionsAndBenefits: [],
             }
         },
         methods: {
             ignore: function () {
                 this.notIgnored = false;
-
             }
 
         },
         mounted() {
-           
+            this.axios.get('api/actionsAndBenefits')
+                .then(res => {
+                    this.actionsAndBenefits = res.data;
+                    console.log(this.actionsAndBenefits);
+                })
+                .catch(res => {
+                    console.log(res);
+                })
         }
     }
 </script>

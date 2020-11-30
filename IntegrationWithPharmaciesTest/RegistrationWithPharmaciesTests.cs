@@ -1,15 +1,11 @@
-using System;
-using HealthClinic.CL.DbContextModel;
+using System.Collections.Generic;
+using HealthClinic.CL.Dtos;
+using HealthClinic.CL.Model.Pharmacy;
 using HealthClinic.CL.Repository;
 using HealthClinic.CL.Service;
 using Moq;
 using Shouldly;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
-using HealthClinic.CL.Model.Pharmacy;
-using HealthClinic.CL.Dtos;
 
 namespace IntegrationWithPharmaciesTest
 {

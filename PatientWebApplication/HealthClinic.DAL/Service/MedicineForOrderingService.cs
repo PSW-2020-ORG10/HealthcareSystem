@@ -3,9 +3,7 @@ using HealthClinic.CL.DbContextModel;
 using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Orders;
 using HealthClinic.CL.Repository;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace HealthClinic.CL.Service
 {
