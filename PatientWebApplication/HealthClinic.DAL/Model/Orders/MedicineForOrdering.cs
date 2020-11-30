@@ -1,10 +1,6 @@
-﻿using HealthClinic.CL.Model.Hospital;
-using HealthClinic.CL.Model.Patient;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+﻿using HealthClinic.CL.Model.Patient;
 using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Text;
+
 
 namespace HealthClinic.CL.Model.Orders
 {

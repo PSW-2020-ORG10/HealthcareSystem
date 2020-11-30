@@ -1,9 +1,7 @@
 ﻿using HealthClinic.CL.DbContextModel;
 using HealthClinic.CL.Model.Orders;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace HealthClinic.CL.Repository
 {

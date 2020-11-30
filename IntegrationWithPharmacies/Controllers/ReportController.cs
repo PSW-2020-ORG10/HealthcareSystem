@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using HealthClinic.CL.DbContextModel;
 using HealthClinic.CL.Model.Orders;
-using HealthClinic.CL.Repository;
 using HealthClinic.CL.Service;
 using IntegrationWithPharmacies.FileProtocol;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging.Abstractions;
 

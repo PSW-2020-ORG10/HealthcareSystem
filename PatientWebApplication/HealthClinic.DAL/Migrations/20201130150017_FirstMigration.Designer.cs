@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HealthClinic.CL.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20201129132849_SecondMigration")]
-    partial class SecondMigration
+    [Migration("20201130150017_FirstMigration")]
+    partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -18,6 +18,39 @@ namespace HealthClinic.CL.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            modelBuilder.Entity("HealthClinic.CL.Model.ActionsAndBenefits.Message", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsRemoved")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("PharmacyName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Messages");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1,
+                            IsRemoved = false,
+                            PharmacyName = "Apoteka Jankovic",
+                            Text = "Message",
+                            Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
+                });
 
             modelBuilder.Entity("HealthClinic.CL.Model.Doctor.DoctorNotification", b =>
                 {
@@ -99,15 +132,47 @@ namespace HealthClinic.CL.Migrations
                             city = "Grad",
                             dateOfBirth = "2/2/2020",
                             email = "email",
-                            firstName = "DoctorName",
+                            firstName = "Konstantin",
                             isSpecialist = false,
                             ordination = "Ordination 1",
                             password = "pass",
                             phoneNumber = "123",
                             salary = 200.0,
-                            secondName = "DoctorSurname",
+                            secondName = "Davidovic",
                             speciality = "Specialty",
                             uniqueCitizensidentityNumber = "1234"
+                        },
+                        new
+                        {
+                            id = 2,
+                            city = "Grad",
+                            dateOfBirth = "2/2/2020",
+                            email = "email",
+                            firstName = "Novak",
+                            isSpecialist = false,
+                            ordination = "Ordination 1",
+                            password = "pass",
+                            phoneNumber = "123",
+                            salary = 200.0,
+                            secondName = "Maric",
+                            speciality = "Specialty",
+                            uniqueCitizensidentityNumber = "12345"
+                        },
+                        new
+                        {
+                            id = 3,
+                            city = "Grad",
+                            dateOfBirth = "2/2/2020",
+                            email = "email",
+                            firstName = "Milica",
+                            isSpecialist = false,
+                            ordination = "Ordination 1",
+                            password = "pass",
+                            phoneNumber = "123",
+                            salary = 200.0,
+                            secondName = "Tadic",
+                            speciality = "Specialty",
+                            uniqueCitizensidentityNumber = "12346"
                         });
                 });
 
@@ -117,32 +182,27 @@ namespace HealthClinic.CL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("DoctorUserId")
-                        .HasColumnType("int");
+                    b.Property<string>("Date")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("OperationReferralId")
+                    b.Property<int>("DoctorUserId")
                         .HasColumnType("int");
 
                     b.Property<int>("PatientUserId")
                         .HasColumnType("int");
 
-                    b.Property<string>("date")
+                    b.Property<string>("RoomId")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<TimeSpan>("end")
+                    b.Property<TimeSpan>("Start")
                         .HasColumnType("time(6)");
 
-                    b.Property<string>("idRoom")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<TimeSpan>("start")
+                    b.Property<TimeSpan>("end")
                         .HasColumnType("time(6)");
 
                     b.HasKey("id");
 
                     b.HasIndex("DoctorUserId");
-
-                    b.HasIndex("OperationReferralId");
 
                     b.HasIndex("PatientUserId");
 
@@ -152,23 +212,32 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
+                            Date = "20/02/2020",
                             DoctorUserId = 1,
-                            OperationReferralId = 1,
-                            PatientUserId = 1,
-                            date = "2/2/2020",
-                            end = new TimeSpan(0, 0, 0, 0, 0),
-                            idRoom = "room1",
-                            start = new TimeSpan(0, 0, 0, 0, 0)
+                            PatientUserId = 2,
+                            RoomId = "room1",
+                            Start = new TimeSpan(0, 0, 0, 0, 0),
+                            end = new TimeSpan(0, 0, 0, 0, 0)
+                        },
+                        new
+                        {
+                            id = 2,
+                            Date = "03/10/2020",
+                            DoctorUserId = 2,
+                            PatientUserId = 2,
+                            RoomId = "room1",
+                            Start = new TimeSpan(0, 0, 0, 0, 0),
+                            end = new TimeSpan(0, 0, 0, 0, 0)
                         });
                 });
 
-            modelBuilder.Entity("HealthClinic.CL.Model.Doctor.Referral", b =>
+            modelBuilder.Entity("HealthClinic.CL.Model.Doctor.OperationReferral", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("DoctorAppointmentid")
+                    b.Property<int>("OperationId")
                         .HasColumnType("int");
 
                     b.Property<string>("classify")
@@ -188,7 +257,61 @@ namespace HealthClinic.CL.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("DoctorAppointmentid");
+                    b.HasIndex("OperationId")
+                        .IsUnique();
+
+                    b.ToTable("OperationReferrals");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1,
+                            OperationId = 1,
+                            classify = "Operation",
+                            comment = "Operation was successfull.",
+                            medicine = "Hemomycin",
+                            quantityPerDay = 1,
+                            takeMedicineUntil = "15/09/2020"
+                        },
+                        new
+                        {
+                            id = 2,
+                            OperationId = 2,
+                            classify = "Operation",
+                            comment = "Patient lost a lot of blood.",
+                            medicine = "Amoxicillin",
+                            quantityPerDay = 3,
+                            takeMedicineUntil = "18/10/2020"
+                        });
+                });
+
+            modelBuilder.Entity("HealthClinic.CL.Model.Doctor.Referral", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("AppointmentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("classify")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("comment")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("medicine")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("quantityPerDay")
+                        .HasColumnType("int");
+
+                    b.Property<string>("takeMedicineUntil")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("AppointmentId");
 
                     b.ToTable("Referrals");
 
@@ -196,11 +319,122 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
+                            AppointmentId = 1,
                             classify = "classify",
-                            comment = "comment",
-                            medicine = "Medicine",
+                            comment = "Patient had slight heart arrhythmia.",
+                            medicine = "Aspirin",
                             quantityPerDay = 3,
-                            takeMedicineUntil = "Take medicine until"
+                            takeMedicineUntil = "25/02/2020"
+                        },
+                        new
+                        {
+                            id = 2,
+                            AppointmentId = 2,
+                            classify = "Appointment",
+                            comment = "Patient had cold.",
+                            medicine = "Brufen",
+                            quantityPerDay = 1,
+                            takeMedicineUntil = "11/05/2020"
+                        },
+                        new
+                        {
+                            id = 3,
+                            AppointmentId = 3,
+                            classify = "classify",
+                            comment = "Patient had slight heart arrhythmia.",
+                            medicine = "Aspirin",
+                            quantityPerDay = 3,
+                            takeMedicineUntil = "25/02/2020"
+                        },
+                        new
+                        {
+                            id = 4,
+                            AppointmentId = 4,
+                            classify = "Appointment",
+                            comment = "Patient had cold.",
+                            medicine = "Brufen",
+                            quantityPerDay = 1,
+                            takeMedicineUntil = "11/05/2020"
+                        },
+                        new
+                        {
+                            id = 5,
+                            AppointmentId = 5,
+                            classify = "classify",
+                            comment = "Patient had slight heart arrhythmia.",
+                            medicine = "Aspirin",
+                            quantityPerDay = 3,
+                            takeMedicineUntil = "25/02/2020"
+                        },
+                        new
+                        {
+                            id = 6,
+                            AppointmentId = 6,
+                            classify = "Appointment",
+                            comment = "Patient had cold.",
+                            medicine = "Brufen",
+                            quantityPerDay = 1,
+                            takeMedicineUntil = "11/05/2020"
+                        },
+                        new
+                        {
+                            id = 7,
+                            AppointmentId = 7,
+                            classify = "classify",
+                            comment = "Patient had slight heart arrhythmia.",
+                            medicine = "Aspirin",
+                            quantityPerDay = 3,
+                            takeMedicineUntil = "25/02/2020"
+                        },
+                        new
+                        {
+                            id = 8,
+                            AppointmentId = 8,
+                            classify = "Appointment",
+                            comment = "Patient had cold.",
+                            medicine = "Brufen",
+                            quantityPerDay = 1,
+                            takeMedicineUntil = "11/05/2020"
+                        },
+                        new
+                        {
+                            id = 9,
+                            AppointmentId = 9,
+                            classify = "classify",
+                            comment = "Patient had slight heart arrhythmia.",
+                            medicine = "Aspirin",
+                            quantityPerDay = 3,
+                            takeMedicineUntil = "25/02/2020"
+                        },
+                        new
+                        {
+                            id = 10,
+                            AppointmentId = 10,
+                            classify = "Appointment",
+                            comment = "Patient had cold.",
+                            medicine = "Brufen",
+                            quantityPerDay = 1,
+                            takeMedicineUntil = "11/05/2020"
+                        },
+                        new
+                        {
+                            id = 11,
+                            AppointmentId = 11,
+                            classify = "classify",
+                            comment = "Patient had slight heart arrhythmia.",
+                            medicine = "Aspirin",
+                            quantityPerDay = 3,
+                            takeMedicineUntil = "25/02/2020"
+                        },
+                        new
+                        {
+                            id = 12,
+                            AppointmentId = 12,
+                            classify = "Appointment",
+                            comment = "Patient had cold.",
+                            medicine = "Brufen",
+                            quantityPerDay = 1,
+                            takeMedicineUntil = "11/05/2020"
                         });
                 });
 
@@ -504,23 +738,23 @@ namespace HealthClinic.CL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("DateEnd")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("DateStart")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsFinished")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsOrdered")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsUrgent")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<int?>("ManagersOrderid")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("dateEnd")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime>("dateStart")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<bool>("isFinished")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool>("isOrdered")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool>("isUrgent")
-                        .HasColumnType("tinyint(1)");
 
                     b.HasKey("id");
 
@@ -532,11 +766,11 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
-                            dateEnd = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            dateStart = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            isFinished = true,
-                            isOrdered = true,
-                            isUrgent = false
+                            DateEnd = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateStart = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsFinished = true,
+                            IsOrdered = true,
+                            IsUrgent = false
                         });
                 });
 
@@ -563,13 +797,13 @@ namespace HealthClinic.CL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("date")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<bool>("isOrdered")
+                    b.Property<bool>("IsOrdered")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("isUrgent")
+                    b.Property<bool>("IsUrgent")
                         .HasColumnType("tinyint(1)");
 
                     b.HasKey("id");
@@ -580,9 +814,9 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
-                            date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            isOrdered = true,
-                            isUrgent = true
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsOrdered = true,
+                            IsUrgent = true
                         });
                 });
 
@@ -592,16 +826,16 @@ namespace HealthClinic.CL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("description")
+                    b.Property<string>("Description")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("name")
+                    b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("orderId")
+                    b.Property<int>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<int>("quantity")
+                    b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.HasKey("id");
@@ -612,10 +846,10 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
-                            description = "Medicine description",
-                            name = "Medicine name",
-                            orderId = 1,
-                            quantity = 1
+                            Description = "Medicine description",
+                            Name = "Medicine name",
+                            OrderId = 1,
+                            Quantity = 1
                         });
                 });
 
@@ -625,10 +859,10 @@ namespace HealthClinic.CL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("pharmacyName")
+                    b.Property<string>("PharmacyName")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<double>("summPriceOfMedications")
+                    b.Property<double>("SummPriceOfMedications")
                         .HasColumnType("double");
 
                     b.HasKey("id");
@@ -639,8 +873,8 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
-                            pharmacyName = "pharmacyName",
-                            summPriceOfMedications = 100.0
+                            PharmacyName = "pharmacyName",
+                            SummPriceOfMedications = 100.0
                         });
                 });
 
@@ -650,26 +884,26 @@ namespace HealthClinic.CL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("date")
+                    b.Property<string>("Date")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("doctorUserId")
+                    b.Property<int>("DoctorUserId")
                         .HasColumnType("int");
 
-                    b.Property<int>("patientUserId")
+                    b.Property<int>("PatientUserId")
                         .HasColumnType("int");
 
-                    b.Property<string>("roomid")
+                    b.Property<string>("RoomId")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<TimeSpan>("time")
+                    b.Property<TimeSpan>("Start")
                         .HasColumnType("time(6)");
 
                     b.HasKey("id");
 
-                    b.HasIndex("doctorUserId");
+                    b.HasIndex("DoctorUserId");
 
-                    b.HasIndex("patientUserId");
+                    b.HasIndex("PatientUserId");
 
                     b.ToTable("DoctorAppointments");
 
@@ -677,11 +911,110 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
-                            date = "22/04/2020",
-                            doctorUserId = 1,
-                            patientUserId = 2,
-                            roomid = "1",
-                            time = new TimeSpan(0, 0, 0, 0, 0)
+                            Date = "22/04/2020",
+                            DoctorUserId = 1,
+                            PatientUserId = 2,
+                            RoomId = "1",
+                            Start = new TimeSpan(0, 0, 0, 0, 0)
+                        },
+                        new
+                        {
+                            id = 2,
+                            Date = "07/01/2020",
+                            DoctorUserId = 2,
+                            PatientUserId = 2,
+                            RoomId = "1",
+                            Start = new TimeSpan(0, 0, 0, 0, 0)
+                        },
+                        new
+                        {
+                            id = 3,
+                            Date = "05/07/2019",
+                            DoctorUserId = 3,
+                            PatientUserId = 1,
+                            RoomId = "1",
+                            Start = new TimeSpan(0, 0, 0, 0, 0)
+                        },
+                        new
+                        {
+                            id = 4,
+                            Date = "04/02/2019",
+                            DoctorUserId = 1,
+                            PatientUserId = 1,
+                            RoomId = "1",
+                            Start = new TimeSpan(0, 0, 0, 0, 0)
+                        },
+                        new
+                        {
+                            id = 5,
+                            Date = "11/01/2016",
+                            DoctorUserId = 2,
+                            PatientUserId = 1,
+                            RoomId = "1",
+                            Start = new TimeSpan(0, 0, 0, 0, 0)
+                        },
+                        new
+                        {
+                            id = 6,
+                            Date = "09/01/2014",
+                            DoctorUserId = 3,
+                            PatientUserId = 1,
+                            RoomId = "1",
+                            Start = new TimeSpan(0, 0, 0, 0, 0)
+                        },
+                        new
+                        {
+                            id = 7,
+                            Date = "07/02/2011",
+                            DoctorUserId = 3,
+                            PatientUserId = 1,
+                            RoomId = "1",
+                            Start = new TimeSpan(0, 0, 0, 0, 0)
+                        },
+                        new
+                        {
+                            id = 8,
+                            Date = "01/03/2020",
+                            DoctorUserId = 2,
+                            PatientUserId = 1,
+                            RoomId = "1",
+                            Start = new TimeSpan(0, 0, 0, 0, 0)
+                        },
+                        new
+                        {
+                            id = 9,
+                            Date = "14/03/2016",
+                            DoctorUserId = 1,
+                            PatientUserId = 1,
+                            RoomId = "1",
+                            Start = new TimeSpan(0, 0, 0, 0, 0)
+                        },
+                        new
+                        {
+                            id = 10,
+                            Date = "11/11/2030",
+                            DoctorUserId = 2,
+                            PatientUserId = 1,
+                            RoomId = "1",
+                            Start = new TimeSpan(0, 0, 0, 0, 0)
+                        },
+                        new
+                        {
+                            id = 11,
+                            Date = "14/03/2016",
+                            DoctorUserId = 1,
+                            PatientUserId = 2,
+                            RoomId = "A2",
+                            Start = new TimeSpan(0, 0, 0, 0, 0)
+                        },
+                        new
+                        {
+                            id = 12,
+                            Date = "11/11/2010",
+                            DoctorUserId = 2,
+                            PatientUserId = 2,
+                            RoomId = "B3",
+                            Start = new TimeSpan(0, 0, 0, 0, 0)
                         });
                 });
 
@@ -930,6 +1263,9 @@ namespace HealthClinic.CL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
+
                     b.Property<string>("comment")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -941,22 +1277,42 @@ namespace HealthClinic.CL.Migrations
 
                     b.HasKey("id");
 
+                    b.HasIndex("DoctorId");
+
                     b.ToTable("Prescriptions");
 
                     b.HasData(
                         new
                         {
-                            id = 1,
-                            comment = "Comment",
+                            id = 5,
+                            DoctorId = 1,
+                            comment = "Use every day",
+                            isUsed = false,
+                            patientsid = 1
+                        },
+                        new
+                        {
+                            id = 6,
+                            DoctorId = 1,
+                            comment = "When needed",
+                            isUsed = true,
+                            patientsid = 2
+                        },
+                        new
+                        {
+                            id = 7,
+                            DoctorId = 2,
+                            comment = "On every 12 hours",
                             isUsed = true,
                             patientsid = 1
                         },
                         new
                         {
-                            id = 2,
-                            comment = "Some text",
+                            id = 8,
+                            DoctorId = 1,
+                            comment = "After lunch",
                             isUsed = true,
-                            patientsid = 2
+                            patientsid = 1
                         });
                 });
 
@@ -985,22 +1341,211 @@ namespace HealthClinic.CL.Migrations
                         });
                 });
 
+            modelBuilder.Entity("HealthClinic.CL.Model.Patient.Survey", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("appointmentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("doctorsKnowledge")
+                        .HasColumnType("int");
+
+                    b.Property<int>("doctorsPoliteness")
+                        .HasColumnType("int");
+
+                    b.Property<int>("doctorsProfessionalism")
+                        .HasColumnType("int");
+
+                    b.Property<int>("doctorsSkill")
+                        .HasColumnType("int");
+
+                    b.Property<int>("doctorsTechnicality")
+                        .HasColumnType("int");
+
+                    b.Property<int>("doctorsWorkingPace")
+                        .HasColumnType("int");
+
+                    b.Property<int>("hospitalEnvironment")
+                        .HasColumnType("int");
+
+                    b.Property<int>("hospitalEquipment")
+                        .HasColumnType("int");
+
+                    b.Property<int>("hospitalHygiene")
+                        .HasColumnType("int");
+
+                    b.Property<int>("hospitalPrices")
+                        .HasColumnType("int");
+
+                    b.Property<int>("hospitalWaitingTime")
+                        .HasColumnType("int");
+
+                    b.Property<int>("medicalStaffsKnowledge")
+                        .HasColumnType("int");
+
+                    b.Property<int>("medicalStaffsPoliteness")
+                        .HasColumnType("int");
+
+                    b.Property<int>("medicalStaffsProfessionalism")
+                        .HasColumnType("int");
+
+                    b.Property<int>("medicalStaffsSkill")
+                        .HasColumnType("int");
+
+                    b.Property<int>("medicalStaffsTechnicality")
+                        .HasColumnType("int");
+
+                    b.Property<int>("medicalStaffsWorkingPace")
+                        .HasColumnType("int");
+
+                    b.Property<int>("patientId")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("appointmentId");
+
+                    b.HasIndex("patientId");
+
+                    b.ToTable("Surveys");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1,
+                            appointmentId = 3,
+                            doctorsKnowledge = 4,
+                            doctorsPoliteness = 5,
+                            doctorsProfessionalism = 4,
+                            doctorsSkill = 5,
+                            doctorsTechnicality = 4,
+                            doctorsWorkingPace = 5,
+                            hospitalEnvironment = 3,
+                            hospitalEquipment = 3,
+                            hospitalHygiene = 2,
+                            hospitalPrices = 2,
+                            hospitalWaitingTime = 5,
+                            medicalStaffsKnowledge = 5,
+                            medicalStaffsPoliteness = 5,
+                            medicalStaffsProfessionalism = 4,
+                            medicalStaffsSkill = 5,
+                            medicalStaffsTechnicality = 5,
+                            medicalStaffsWorkingPace = 4,
+                            patientId = 1
+                        },
+                        new
+                        {
+                            id = 2,
+                            appointmentId = 4,
+                            doctorsKnowledge = 5,
+                            doctorsPoliteness = 5,
+                            doctorsProfessionalism = 4,
+                            doctorsSkill = 1,
+                            doctorsTechnicality = 3,
+                            doctorsWorkingPace = 5,
+                            hospitalEnvironment = 1,
+                            hospitalEquipment = 3,
+                            hospitalHygiene = 3,
+                            hospitalPrices = 3,
+                            hospitalWaitingTime = 5,
+                            medicalStaffsKnowledge = 5,
+                            medicalStaffsPoliteness = 2,
+                            medicalStaffsProfessionalism = 2,
+                            medicalStaffsSkill = 2,
+                            medicalStaffsTechnicality = 4,
+                            medicalStaffsWorkingPace = 3,
+                            patientId = 1
+                        },
+                        new
+                        {
+                            id = 3,
+                            appointmentId = 5,
+                            doctorsKnowledge = 4,
+                            doctorsPoliteness = 5,
+                            doctorsProfessionalism = 4,
+                            doctorsSkill = 3,
+                            doctorsTechnicality = 1,
+                            doctorsWorkingPace = 5,
+                            hospitalEnvironment = 1,
+                            hospitalEquipment = 2,
+                            hospitalHygiene = 2,
+                            hospitalPrices = 1,
+                            hospitalWaitingTime = 5,
+                            medicalStaffsKnowledge = 5,
+                            medicalStaffsPoliteness = 2,
+                            medicalStaffsProfessionalism = 3,
+                            medicalStaffsSkill = 1,
+                            medicalStaffsTechnicality = 5,
+                            medicalStaffsWorkingPace = 4,
+                            patientId = 1
+                        },
+                        new
+                        {
+                            id = 4,
+                            appointmentId = 6,
+                            doctorsKnowledge = 5,
+                            doctorsPoliteness = 5,
+                            doctorsProfessionalism = 4,
+                            doctorsSkill = 5,
+                            doctorsTechnicality = 2,
+                            doctorsWorkingPace = 1,
+                            hospitalEnvironment = 1,
+                            hospitalEquipment = 3,
+                            hospitalHygiene = 1,
+                            hospitalPrices = 3,
+                            hospitalWaitingTime = 5,
+                            medicalStaffsKnowledge = 2,
+                            medicalStaffsPoliteness = 2,
+                            medicalStaffsProfessionalism = 3,
+                            medicalStaffsSkill = 2,
+                            medicalStaffsTechnicality = 4,
+                            medicalStaffsWorkingPace = 3,
+                            patientId = 1
+                        },
+                        new
+                        {
+                            id = 5,
+                            appointmentId = 7,
+                            doctorsKnowledge = 4,
+                            doctorsPoliteness = 5,
+                            doctorsProfessionalism = 4,
+                            doctorsSkill = 2,
+                            doctorsTechnicality = 4,
+                            doctorsWorkingPace = 5,
+                            hospitalEnvironment = 1,
+                            hospitalEquipment = 1,
+                            hospitalHygiene = 2,
+                            hospitalPrices = 5,
+                            hospitalWaitingTime = 1,
+                            medicalStaffsKnowledge = 5,
+                            medicalStaffsPoliteness = 2,
+                            medicalStaffsProfessionalism = 1,
+                            medicalStaffsSkill = 3,
+                            medicalStaffsTechnicality = 4,
+                            medicalStaffsWorkingPace = 2,
+                            patientId = 1
+                        });
+                });
+
             modelBuilder.Entity("HealthClinic.CL.Model.Pharmacy.RegistrationInPharmacy", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("apiKey")
+                    b.Property<string>("ApiKey")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("name")
+                    b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("pharmacyId")
+                    b.Property<int>("PharmacyId")
                         .HasColumnType("int");
 
-                    b.Property<string>("town")
+                    b.Property<string>("Town")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("id");
@@ -1011,10 +1556,10 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
-                            apiKey = "api1",
-                            name = "Jankovic 1",
-                            pharmacyId = 1,
-                            town = "Novi Sad"
+                            ApiKey = "api1",
+                            Name = "Jankovic 1",
+                            PharmacyId = 1,
+                            Town = "Novi Sad"
                         });
                 });
 
@@ -1110,11 +1655,41 @@ namespace HealthClinic.CL.Migrations
                     b.HasData(
                         new
                         {
-                            id = 22,
-                            name = "Medicine Name",
+                            id = 51,
+                            name = "Pancef",
+                            quantity = 44,
+                            PrescriptionId = 5,
+                            description = "For temperature",
+                            doctorId = 1,
+                            isConfirmed = false
+                        },
+                        new
+                        {
+                            id = 52,
+                            name = "Defrinol",
                             quantity = 2,
-                            PrescriptionId = 1,
-                            description = "Medicine Description",
+                            PrescriptionId = 7,
+                            description = "For headache",
+                            doctorId = 1,
+                            isConfirmed = false
+                        },
+                        new
+                        {
+                            id = 53,
+                            name = "Brufen",
+                            quantity = 2,
+                            PrescriptionId = 8,
+                            description = "For illness",
+                            doctorId = 1,
+                            isConfirmed = false
+                        },
+                        new
+                        {
+                            id = 54,
+                            name = "Paracetamol",
+                            quantity = 4,
+                            PrescriptionId = 6,
+                            description = "For illness",
                             doctorId = 1,
                             isConfirmed = false
                         });
@@ -1128,19 +1703,6 @@ namespace HealthClinic.CL.Migrations
                         .HasColumnType("double");
 
                     b.HasDiscriminator().HasValue("OfferedMedicines");
-
-                    b.HasData(
-                        new
-                        {
-                            id = 13,
-                            name = "OfferedMedicine",
-                            quantity = 2,
-                            PrescriptionId = 1,
-                            description = "description",
-                            doctorId = 1,
-                            isConfirmed = false,
-                            price = 10.0
-                        });
                 });
 
             modelBuilder.Entity("HealthClinic.CL.Model.Doctor.DoctorNotification", b =>
@@ -1154,21 +1716,24 @@ namespace HealthClinic.CL.Migrations
 
             modelBuilder.Entity("HealthClinic.CL.Model.Doctor.Operation", b =>
                 {
-                    b.HasOne("HealthClinic.CL.Model.Doctor.DoctorUser", "isResponiable")
+                    b.HasOne("HealthClinic.CL.Model.Doctor.DoctorUser", "Doctor")
                         .WithMany()
                         .HasForeignKey("DoctorUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HealthClinic.CL.Model.Doctor.Referral", "operationReferral")
-                        .WithMany()
-                        .HasForeignKey("OperationReferralId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HealthClinic.CL.Model.Patient.PatientUser", "patient")
+                    b.HasOne("HealthClinic.CL.Model.Patient.PatientUser", "Patient")
                         .WithMany()
                         .HasForeignKey("PatientUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("HealthClinic.CL.Model.Doctor.OperationReferral", b =>
+                {
+                    b.HasOne("HealthClinic.CL.Model.Doctor.Operation", null)
+                        .WithOne("operationReferral")
+                        .HasForeignKey("HealthClinic.CL.Model.Doctor.OperationReferral", "OperationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1177,7 +1742,9 @@ namespace HealthClinic.CL.Migrations
                 {
                     b.HasOne("HealthClinic.CL.Model.Patient.DoctorAppointment", null)
                         .WithMany("referral")
-                        .HasForeignKey("DoctorAppointmentid");
+                        .HasForeignKey("AppointmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("HealthClinic.CL.Model.Employee.Schedule", b =>
@@ -1228,21 +1795,21 @@ namespace HealthClinic.CL.Migrations
             modelBuilder.Entity("HealthClinic.CL.Model.Orders.DoctorsOrder", b =>
                 {
                     b.HasOne("HealthClinic.CL.Model.Orders.ManagersOrder", null)
-                        .WithMany("listOfDoctorsOrders")
+                        .WithMany("ListOfDoctorsOrders")
                         .HasForeignKey("ManagersOrderid");
                 });
 
             modelBuilder.Entity("HealthClinic.CL.Model.Patient.DoctorAppointment", b =>
                 {
-                    b.HasOne("HealthClinic.CL.Model.Doctor.DoctorUser", "doctor")
+                    b.HasOne("HealthClinic.CL.Model.Doctor.DoctorUser", "Doctor")
                         .WithMany()
-                        .HasForeignKey("doctorUserId")
+                        .HasForeignKey("DoctorUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HealthClinic.CL.Model.Patient.PatientUser", "patient")
+                    b.HasOne("HealthClinic.CL.Model.Patient.PatientUser", "Patient")
                         .WithMany()
-                        .HasForeignKey("patientUserId")
+                        .HasForeignKey("PatientUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1265,10 +1832,34 @@ namespace HealthClinic.CL.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("HealthClinic.CL.Model.Patient.Prescription", b =>
+                {
+                    b.HasOne("HealthClinic.CL.Model.Doctor.DoctorUser", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("HealthClinic.CL.Model.Patient.Survey", b =>
+                {
+                    b.HasOne("HealthClinic.CL.Model.Patient.DoctorAppointment", "appointment")
+                        .WithMany()
+                        .HasForeignKey("appointmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HealthClinic.CL.Model.Patient.PatientUser", "patient")
+                        .WithMany()
+                        .HasForeignKey("patientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("HealthClinic.CL.Model.Hospital.Medicine", b =>
                 {
                     b.HasOne("HealthClinic.CL.Model.Orders.FinishedOrder", null)
-                        .WithMany("listOfMedicines")
+                        .WithMany("ListOfMedicines")
                         .HasForeignKey("FinishedOrderid");
 
                     b.HasOne("HealthClinic.CL.Model.Orders.PharmacyOffer", null)

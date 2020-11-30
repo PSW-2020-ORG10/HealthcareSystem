@@ -1,7 +1,5 @@
-﻿using HealthClinic.CL.Model.Hospital;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
+
 
 namespace HealthClinic.CL.Dtos
 {

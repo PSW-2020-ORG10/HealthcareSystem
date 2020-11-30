@@ -5,7 +5,6 @@ using HealthClinic.CL.Model.Pharmacy;
 using HealthClinic.CL.Repository;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace HealthClinic.CL.Service
 {

@@ -1,9 +1,6 @@
-﻿using IntegrationWithPharmacies.FileProtocol;
+﻿using System.IO;
+using IntegrationWithPharmacies.FileProtocol;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using Xunit;
 
 namespace IntegrationWithPharmaciesTest

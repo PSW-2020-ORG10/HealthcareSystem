@@ -1,5 +1,4 @@
-﻿
-using HealthClinic.CL.Model.Patient;
+﻿using HealthClinic.CL.Model.Patient;
 using System;
 using System.Collections.Generic;
 

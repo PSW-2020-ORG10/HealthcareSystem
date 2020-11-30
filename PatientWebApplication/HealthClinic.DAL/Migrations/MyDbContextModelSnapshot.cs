@@ -17,6 +17,39 @@ namespace HealthClinic.CL.Migrations
                 .HasAnnotation("ProductVersion", "3.1.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
+            modelBuilder.Entity("HealthClinic.CL.Model.ActionsAndBenefits.Message", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsRemoved")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("PharmacyName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Messages");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1,
+                            IsRemoved = false,
+                            PharmacyName = "Apoteka Jankovic",
+                            Text = "Message",
+                            Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
+                });
+
             modelBuilder.Entity("HealthClinic.CL.Model.Doctor.DoctorNotification", b =>
                 {
                     b.Property<int>("id")
@@ -703,17 +736,23 @@ namespace HealthClinic.CL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("ManagersOrderid")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("date")
+                    b.Property<DateTime>("DateEnd")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<bool>("isOrdered")
+                    b.Property<DateTime>("DateStart")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsFinished")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("isUrgent")
+                    b.Property<bool>("IsOrdered")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsUrgent")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int?>("ManagersOrderid")
+                        .HasColumnType("int");
 
                     b.HasKey("id");
 
@@ -725,9 +764,11 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
-                            date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            isOrdered = true,
-                            isUrgent = false
+                            DateEnd = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateStart = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsFinished = true,
+                            IsOrdered = true,
+                            IsUrgent = false
                         });
                 });
 
@@ -754,13 +795,13 @@ namespace HealthClinic.CL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("date")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<bool>("isOrdered")
+                    b.Property<bool>("IsOrdered")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("isUrgent")
+                    b.Property<bool>("IsUrgent")
                         .HasColumnType("tinyint(1)");
 
                     b.HasKey("id");
@@ -771,9 +812,42 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
-                            date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            isOrdered = true,
-                            isUrgent = true
+                            Date = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsOrdered = true,
+                            IsUrgent = true
+                        });
+                });
+
+            modelBuilder.Entity("HealthClinic.CL.Model.Orders.MedicineForOrdering", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.ToTable("MedicinesForOrdering");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1,
+                            Description = "Medicine description",
+                            Name = "Medicine name",
+                            OrderId = 1,
+                            Quantity = 1
                         });
                 });
 
@@ -783,10 +857,10 @@ namespace HealthClinic.CL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("pharmacyName")
+                    b.Property<string>("PharmacyName")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<double>("summPriceOfMedications")
+                    b.Property<double>("SummPriceOfMedications")
                         .HasColumnType("double");
 
                     b.HasKey("id");
@@ -797,8 +871,8 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
-                            pharmacyName = "pharmacyName",
-                            summPriceOfMedications = 100.0
+                            PharmacyName = "pharmacyName",
+                            SummPriceOfMedications = 100.0
                         });
                 });
 
@@ -1460,11 +1534,17 @@ namespace HealthClinic.CL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("apiKey")
+                    b.Property<string>("ApiKey")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("pharmacyId")
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("PharmacyId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Town")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("id");
 
@@ -1474,8 +1554,10 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
-                            apiKey = "Api key",
-                            pharmacyId = 1
+                            ApiKey = "api1",
+                            Name = "Jankovic 1",
+                            PharmacyId = 1,
+                            Town = "Novi Sad"
                         });
                 });
 
@@ -1540,9 +1622,6 @@ namespace HealthClinic.CL.Migrations
                 {
                     b.HasBaseType("HealthClinic.CL.Model.Hospital.Equipment");
 
-                    b.Property<int?>("DoctorsOrderid")
-                        .HasColumnType("int");
-
                     b.Property<int?>("FinishedOrderid")
                         .HasColumnType("int");
 
@@ -1560,8 +1639,6 @@ namespace HealthClinic.CL.Migrations
 
                     b.Property<bool>("isConfirmed")
                         .HasColumnType("tinyint(1)");
-
-                    b.HasIndex("DoctorsOrderid");
 
                     b.HasIndex("FinishedOrderid");
 
@@ -1716,7 +1793,7 @@ namespace HealthClinic.CL.Migrations
             modelBuilder.Entity("HealthClinic.CL.Model.Orders.DoctorsOrder", b =>
                 {
                     b.HasOne("HealthClinic.CL.Model.Orders.ManagersOrder", null)
-                        .WithMany("listOfDoctorsOrders")
+                        .WithMany("ListOfDoctorsOrders")
                         .HasForeignKey("ManagersOrderid");
                 });
 
@@ -1779,12 +1856,8 @@ namespace HealthClinic.CL.Migrations
 
             modelBuilder.Entity("HealthClinic.CL.Model.Hospital.Medicine", b =>
                 {
-                    b.HasOne("HealthClinic.CL.Model.Orders.DoctorsOrder", null)
-                        .WithMany("listOfMedicines")
-                        .HasForeignKey("DoctorsOrderid");
-
                     b.HasOne("HealthClinic.CL.Model.Orders.FinishedOrder", null)
-                        .WithMany("listOfMedicines")
+                        .WithMany("ListOfMedicines")
                         .HasForeignKey("FinishedOrderid");
 
                     b.HasOne("HealthClinic.CL.Model.Orders.PharmacyOffer", null)
