@@ -18,7 +18,7 @@ namespace HealthClinic.CL.Service
         
         public void createAndSaveFile()
         {
-            DoctorOrderServica orderService = new DoctorOrderServica();
+            DoctorOrderService orderService = new DoctorOrderService();
         }
 
         public object createAndSendFile()

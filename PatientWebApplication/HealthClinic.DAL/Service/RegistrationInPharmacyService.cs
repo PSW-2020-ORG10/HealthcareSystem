@@ -56,12 +56,11 @@ namespace HealthClinic.CL.Service
         }
         public RegistrationInPharmacy createIRegistration(RegistrationInPharmacyDto dto)
         {
-            RegistrationInPharmacy registration = RegistrationInPharmacyAdapter.RegistrationDtoToRegistration(dto);
-            foreach (RegistrationInPharmacy registration2 in IRegistrationRepository.GetAll())
+            foreach (RegistrationInPharmacy registrationIRepo in IRegistrationRepository.GetAll())
             {
-                if (registration2.ApiKey.Equals(registration.ApiKey)) return null;
+                if (registrationIRepo.ApiKey.Equals(RegistrationInPharmacyAdapter.RegistrationDtoToRegistration(dto).ApiKey)) return null;
             }
-            return registration;
+            return RegistrationInPharmacyAdapter.RegistrationDtoToRegistration(dto);
         }
     }
 }

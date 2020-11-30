@@ -20,14 +20,14 @@ namespace IntegrationWithPharmacies.Controllers
     public class ReportController : ControllerBase
     {
         private ReportService ReportService { get; set; }
-        private DoctorOrderServica DoctorOrderService { get; set; }
+        private DoctorOrderService DoctorOrderService { get; set; }
         private MedicineForOrderingService MedicineService { get; set; }
 
         public ReportController(MyDbContext context)
         {
             ReportService = new ReportService();
             MedicineService = new MedicineForOrderingService(context);
-            DoctorOrderService = new DoctorOrderServica(context);
+            DoctorOrderService = new DoctorOrderService(context);
         }
 
 

@@ -24,8 +24,7 @@ namespace HealthClinic.CL.Service
         }
         public MedicineForOrdering Create(MedicineForOrderingDto dto)
         {
-            MedicineForOrdering medicine = MedicineForOrderingAdapter.MedicineOrderDtoToMedicineOrder(dto);
-            return MedicineForOrderingRepository.Create(medicine);
+            return MedicineForOrderingRepository.Create(MedicineForOrderingAdapter.MedicineOrderDtoToMedicineOrder(dto));
         }
     }
 }
