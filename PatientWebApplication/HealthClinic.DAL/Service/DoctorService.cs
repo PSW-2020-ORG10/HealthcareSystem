@@ -254,28 +254,12 @@ namespace HealthClinic.CL.Service
 
         private List<DoctorUser> GetDoctorsBySpecialty(string specialty)
         {
-            List<DoctorUser> specialists = new List<DoctorUser>();
-            foreach (DoctorUser doctor in GetAll())
-            {
-                if (UtilityMethods.CheckForSpecialty(doctor, specialty))
-                {
-                    specialists.Add(doctor);
-                }
-            }
-            return specialists;
+            return GetAll().FindAll(doctor => UtilityMethods.CheckForSpecialty(doctor, specialty));
         }
 
         public List<DoctorUser> GetAvailableDoctors(string specialty, string date, int patientId)
         {
-            List<DoctorUser> availableDoctors = new List<DoctorUser>();
-            foreach(DoctorUser doctor in GetDoctorsBySpecialty(specialty))
-            {
-                if(this.regularAppointmentService.GetAllAvailableAppointmentsForDate(date, doctor.id, patientId).Count != 0)
-                {
-                    availableDoctors.Add(doctor);
-                }
-            }
-            return availableDoctors;
+            return GetDoctorsBySpecialty(specialty).FindAll(doctor => this.regularAppointmentService.GetAllAvailableAppointmentsForDate(date, doctor.id, patientId).Count != 0);
         }
     }
 }

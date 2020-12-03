@@ -199,28 +199,12 @@ namespace HealthClinic.CL.Service
 
         private List<Operation> GetAllOperationsByDateAndDoctor(DateTime date, int doctorId)
         {
-            List<Operation> operations = new List<Operation>();
-            foreach (Operation operation in _operationRepository.GetOperationsForDoctor(doctorId))
-            {
-                if (date == UtilityMethods.ParseDateInCorrectFormat(operation.Date))
-                {
-                    operations.Add(operation);
-                }
-            }
-            return operations;
+            return _operationRepository.GetOperationsForDoctor(doctorId).FindAll(operation => date == UtilityMethods.ParseDateInCorrectFormat(operation.Date));
         }
 
         private List<Operation> GetAllOperationsByDateAndPatient(DateTime date, int patientId)
         {
-            List<Operation> operations = new List<Operation>();
-            foreach (Operation operation in GetOperationsForPatient(patientId))
-            {
-                if (date == UtilityMethods.ParseDateInCorrectFormat(operation.Date))
-                {
-                    operations.Add(operation);
-                }
-            }
-            return operations;
+            return GetOperationsForPatient(patientId).FindAll(operation => date == UtilityMethods.ParseDateInCorrectFormat(operation.Date));
         }
 
         public HashSet<Operation> CreateOperationtSetForDate(DateTime date, int doctorId, int patientId)
