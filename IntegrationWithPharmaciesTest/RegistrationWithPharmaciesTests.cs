@@ -1,10 +1,8 @@
 using System.Collections.Generic;
-using HealthClinic.CL.DbContextModel;
 using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Pharmacy;
 using HealthClinic.CL.Repository;
 using HealthClinic.CL.Service;
-using Microsoft.EntityFrameworkCore;
 using Moq;
 using Shouldly;
 using Xunit;
@@ -61,28 +59,6 @@ namespace IntegrationWithPharmaciesTest
             RegistrationInPharmacy registrationInPharmacy = service.createIRegistration(new RegistrationInPharmacyDto(33, "apisa12345","Jankovic","NS"));
 
             registrationInPharmacy.ShouldBeNull();
-        }
-        [Fact]
-        public void creates_real_registration()
-        {
-            MyDbContext dbContext = new MyDbContext(new DbContextOptionsBuilder<MyDbContext>()
-                    .UseMySql("Server=localhost;port=3306;Database=MYSQLHealtcareDB;user=root;password=root").UseLazyLoadingProxies().Options);
-            RegistrationInPharmacyService service = new RegistrationInPharmacyService(dbContext);
-
-            RegistrationInPharmacy registrationInPharmacy = service.Create(new RegistrationInPharmacyDto(33, "api10", "Jankovic", "NS"));
-
-            registrationInPharmacy.ShouldNotBeNull();
-
-        }
-        [Fact]
-        public void deletes_real_registration()
-        {
-            MyDbContext dbContext = new MyDbContext(new DbContextOptionsBuilder<MyDbContext>()
-                    .UseMySql("Server=localhost;port=3306;Database=MYSQLHealtcareDB;user=root;password=root").UseLazyLoadingProxies().Options);
-            RegistrationInPharmacyService service = new RegistrationInPharmacyService(dbContext);
-
-            service.Remove("api10").ShouldBeTrue();
-
         }
     }
 }
