@@ -64,5 +64,17 @@ namespace PatientWebApplication.Controllers
             return Ok(this.regularAppointmentService.AdvancedSearchAppointments(dto));
         }
 
+        [HttpPost("recommend")]
+        public IActionResult RecommendAppointmentSchedule(RecommendedAppointmentDto dto)
+        {
+            return Ok(this.regularAppointmentService.GetRecommendedAppointment(dto));
+        }
+
+        [HttpPost("createRecommended")]
+        public IActionResult CreateRecommended(DoctorAppointment appointment)
+        {
+            return Ok(this.regularAppointmentService.CreateRecommended(appointment));
+        }
+
     }
 }

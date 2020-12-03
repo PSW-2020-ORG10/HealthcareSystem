@@ -32,7 +32,7 @@ namespace HealthClinic.CL.Migrations
                     b.Property<string>("Text")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<DateTime>("Timestamp")
+                    b.Property<DateTime>("TimeStamp")
                         .HasColumnType("datetime(6)");
 
                     b.HasKey("id");
@@ -46,7 +46,7 @@ namespace HealthClinic.CL.Migrations
                             IsRemoved = false,
                             PharmacyName = "Apoteka Jankovic",
                             Text = "Message",
-                            Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            TimeStamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -74,103 +74,6 @@ namespace HealthClinic.CL.Migrations
                             id = 3,
                             Data = "3. string",
                             DoctorUserId = 1
-                        });
-                });
-
-            modelBuilder.Entity("HealthClinic.CL.Model.Doctor.DoctorUser", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("city")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("dateOfBirth")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("email")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("firstName")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<bool>("isSpecialist")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("ordination")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("password")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("phoneNumber")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<double>("salary")
-                        .HasColumnType("double");
-
-                    b.Property<string>("secondName")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("speciality")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("uniqueCitizensidentityNumber")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.HasKey("id");
-
-                    b.ToTable("Doctors");
-
-                    b.HasData(
-                        new
-                        {
-                            id = 1,
-                            city = "Grad",
-                            dateOfBirth = "2/2/2020",
-                            email = "email",
-                            firstName = "Konstantin",
-                            isSpecialist = false,
-                            ordination = "Ordination 1",
-                            password = "pass",
-                            phoneNumber = "123",
-                            salary = 200.0,
-                            secondName = "Davidovic",
-                            speciality = "Specialty",
-                            uniqueCitizensidentityNumber = "1234"
-                        },
-                        new
-                        {
-                            id = 2,
-                            city = "Grad",
-                            dateOfBirth = "2/2/2020",
-                            email = "email",
-                            firstName = "Novak",
-                            isSpecialist = false,
-                            ordination = "Ordination 1",
-                            password = "pass",
-                            phoneNumber = "123",
-                            salary = 200.0,
-                            secondName = "Maric",
-                            speciality = "Specialty",
-                            uniqueCitizensidentityNumber = "12345"
-                        },
-                        new
-                        {
-                            id = 3,
-                            city = "Grad",
-                            dateOfBirth = "2/2/2020",
-                            email = "email",
-                            firstName = "Milica",
-                            isSpecialist = false,
-                            ordination = "Ordination 1",
-                            password = "pass",
-                            phoneNumber = "123",
-                            salary = 200.0,
-                            secondName = "Tadic",
-                            speciality = "Specialty",
-                            uniqueCitizensidentityNumber = "12346"
                         });
                 });
 
@@ -436,22 +339,60 @@ namespace HealthClinic.CL.Migrations
                         });
                 });
 
+            modelBuilder.Entity("HealthClinic.CL.Model.Employee.EmployeeUser", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("city")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("dateOfBirth")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("email")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("firstName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("password")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("phoneNumber")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<double>("salary")
+                        .HasColumnType("double");
+
+                    b.Property<string>("secondName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("uniqueCitizensidentityNumber")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("id");
+
+                    b.ToTable("EmployeeUser");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("EmployeeUser");
+                });
+
             modelBuilder.Entity("HealthClinic.CL.Model.Employee.Schedule", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
                     b.Property<string>("date")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("employeeFirst")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("employeeLast")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("employeeid")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<bool>("isOnDuty")
@@ -465,6 +406,8 @@ namespace HealthClinic.CL.Migrations
 
                     b.HasKey("id");
 
+                    b.HasIndex("EmployeeId");
+
                     b.HasIndex("shiftId");
 
                     b.ToTable("Schedules");
@@ -473,12 +416,82 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
-                            date = "2/2/2020",
-                            employeeFirst = "EmployeeName",
-                            employeeLast = "EmployeeSurname",
-                            employeeid = "1",
-                            isOnDuty = false,
-                            room = "1",
+                            EmployeeId = 1,
+                            date = "12/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 1
+                        },
+                        new
+                        {
+                            id = 2,
+                            EmployeeId = 1,
+                            date = "02/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 1
+                        },
+                        new
+                        {
+                            id = 3,
+                            EmployeeId = 1,
+                            date = "12/02/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 1
+                        },
+                        new
+                        {
+                            id = 4,
+                            EmployeeId = 1,
+                            date = "03/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 1
+                        },
+                        new
+                        {
+                            id = 5,
+                            EmployeeId = 1,
+                            date = "12/03/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 1
+                        },
+                        new
+                        {
+                            id = 6,
+                            EmployeeId = 1,
+                            date = "08/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 1
+                        },
+                        new
+                        {
+                            id = 7,
+                            EmployeeId = 1,
+                            date = "09/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 1
+                        },
+                        new
+                        {
+                            id = 8,
+                            EmployeeId = 1,
+                            date = "10/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 1
+                        },
+                        new
+                        {
+                            id = 9,
+                            EmployeeId = 1,
+                            date = "11/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
                             shiftId = 1
                         });
                 });
@@ -503,8 +516,8 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
-                            endTime = "End time",
-                            startTime = "Start time"
+                            endTime = "19:00",
+                            startTime = "08:00"
                         });
                 });
 
@@ -675,59 +688,6 @@ namespace HealthClinic.CL.Migrations
                     b.HasIndex("ManagerUserId");
 
                     b.ToTable("ManagerNotification");
-                });
-
-            modelBuilder.Entity("HealthClinic.CL.Model.Manager.ManagerUser", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("city")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("dateOfBirth")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("email")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("firstName")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("password")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("phoneNumber")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<double>("salary")
-                        .HasColumnType("double");
-
-                    b.Property<string>("secondName")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("uniqueCitizensidentityNumber")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.HasKey("id");
-
-                    b.ToTable("ManagerUsers");
-
-                    b.HasData(
-                        new
-                        {
-                            id = 17,
-                            city = "Grad",
-                            dateOfBirth = "22/04/1993",
-                            email = "email",
-                            firstName = "Manager Name",
-                            password = "pass",
-                            phoneNumber = "123",
-                            salary = 200.0,
-                            secondName = "Manager Surname",
-                            uniqueCitizensidentityNumber = "1234"
-                        });
                 });
 
             modelBuilder.Entity("HealthClinic.CL.Model.Orders.DoctorsOrder", b =>
@@ -1561,60 +1521,117 @@ namespace HealthClinic.CL.Migrations
                         });
                 });
 
-            modelBuilder.Entity("HealthClinic.CL.Model.Secretary.SecretaryUser", b =>
+            modelBuilder.Entity("HealthClinic.CL.Model.Doctor.DoctorUser", b =>
                 {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.HasBaseType("HealthClinic.CL.Model.Employee.EmployeeUser");
 
-                    b.Property<string>("city")
+                    b.Property<bool>("isSpecialist")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("ordination")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("dateOfBirth")
+                    b.Property<string>("speciality")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("email")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("firstName")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("password")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("phoneNumber")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("room")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<double>("salary")
-                        .HasColumnType("double");
-
-                    b.Property<string>("secondName")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("uniqueCitizensidentityNumber")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.HasKey("id");
-
-                    b.ToTable("SecretaryUsers");
+                    b.HasDiscriminator().HasValue("DoctorUser");
 
                     b.HasData(
                         new
                         {
                             id = 1,
                             city = "Grad",
+                            dateOfBirth = "2/2/2020",
+                            email = "email",
+                            firstName = "Konstantin",
+                            password = "pass",
+                            phoneNumber = "123",
+                            salary = 200.0,
+                            secondName = "Davidovic",
+                            uniqueCitizensidentityNumber = "1234",
+                            isSpecialist = false,
+                            ordination = "Ordination 1",
+                            speciality = "Specialty"
+                        },
+                        new
+                        {
+                            id = 2,
+                            city = "Grad",
+                            dateOfBirth = "2/2/2020",
+                            email = "email",
+                            firstName = "Novak",
+                            password = "pass",
+                            phoneNumber = "123",
+                            salary = 200.0,
+                            secondName = "Maric",
+                            uniqueCitizensidentityNumber = "12345",
+                            isSpecialist = false,
+                            ordination = "Ordination 1",
+                            speciality = "Specialty"
+                        },
+                        new
+                        {
+                            id = 3,
+                            city = "Grad",
+                            dateOfBirth = "2/2/2020",
+                            email = "email",
+                            firstName = "Milica",
+                            password = "pass",
+                            phoneNumber = "123",
+                            salary = 200.0,
+                            secondName = "Tadic",
+                            uniqueCitizensidentityNumber = "12346",
+                            isSpecialist = false,
+                            ordination = "Ordination 1",
+                            speciality = "Specialty"
+                        });
+                });
+
+            modelBuilder.Entity("HealthClinic.CL.Model.Manager.ManagerUser", b =>
+                {
+                    b.HasBaseType("HealthClinic.CL.Model.Employee.EmployeeUser");
+
+                    b.HasDiscriminator().HasValue("ManagerUser");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 17,
+                            city = "Grad",
+                            dateOfBirth = "22/04/1993",
+                            email = "email",
+                            firstName = "Manager Name",
+                            password = "pass",
+                            phoneNumber = "123",
+                            salary = 200.0,
+                            secondName = "Manager Surname",
+                            uniqueCitizensidentityNumber = "1234"
+                        });
+                });
+
+            modelBuilder.Entity("HealthClinic.CL.Model.Secretary.SecretaryUser", b =>
+                {
+                    b.HasBaseType("HealthClinic.CL.Model.Employee.EmployeeUser");
+
+                    b.Property<string>("room")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasDiscriminator().HasValue("SecretaryUser");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 162,
+                            city = "Grad",
                             dateOfBirth = "12/12/2012",
                             email = "email",
                             firstName = "Secretary Name",
                             password = "pass",
                             phoneNumber = "123",
-                            room = "Room",
                             salary = 133.0,
                             secondName = "Secretary Surname",
-                            uniqueCitizensidentityNumber = "1234"
+                            uniqueCitizensidentityNumber = "1234",
+                            room = "Room"
                         });
                 });
 
@@ -1747,6 +1764,12 @@ namespace HealthClinic.CL.Migrations
 
             modelBuilder.Entity("HealthClinic.CL.Model.Employee.Schedule", b =>
                 {
+                    b.HasOne("HealthClinic.CL.Model.Employee.EmployeeUser", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("HealthClinic.CL.Model.Employee.Shift", "shift")
                         .WithMany()
                         .HasForeignKey("shiftId")

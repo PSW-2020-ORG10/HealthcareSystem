@@ -33,10 +33,10 @@ namespace HealthClinic.CL.Service
 
         public DoctorService()
         {
-            doctorRepository = new DoctorRepository(path);          
+            doctorRepository = new DoctorRepository();          
             operationRepository = new OperationRepository();
             appointmentRepository = new AppointmentRepository();
-            employeesScheduleRepository = new EmployeesScheduleRepository(path5);
+            employeesScheduleRepository = new EmployeesScheduleRepository();
 
         }
         public override List<DoctorUser> GetAll()
@@ -146,7 +146,7 @@ namespace HealthClinic.CL.Service
 
             foreach (Schedule schedule in listOfSchedule)
             {
-                if (schedule.employeeid.Equals(doctorUser.id.ToString()))  removeDoctorFromRepositories(schedule.id, doctor);
+                if (schedule.EmployeeId.Equals(doctorUser.id.ToString()))  removeDoctorFromRepositories(schedule.id, doctor);
             }
         }
 

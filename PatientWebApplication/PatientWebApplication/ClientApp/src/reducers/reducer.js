@@ -15,7 +15,10 @@
     SURVEY_CREATED,
     LOADED_ALL_RATES,
     LOADED_ALL_DOCTOR_RATES,
-    LOADED_APPOINTMENTSURVEY
+    LOADED_APPOINTMENTSURVEY,
+    LOADED_ALL_DOCTORS,
+    RECOMMEND_APPOINTMENT,
+    CREATE_RECOMMEND_APPOINTMENT
 } from "../types/types"
 
 function addFeedback(state=initialState, action) {
@@ -60,7 +63,9 @@ const initialState = {
     surveyList: [], 
     patientAppointments: [],
     doctorRatesList: [],
-    allRates: {}
+    allRates: {},
+    doctorList: [],
+    recommendedAppointment: {}
 };
 
 
@@ -161,7 +166,25 @@ function reducer(state = initialState, action) {
             return {
                 ...state,
                 doctorRatesList: action.payload
-            };    
+            };
+        case LOADED_ALL_DOCTORS:
+            return {
+                ...state,
+                doctorList: action.payload
+
+            };
+        case RECOMMEND_APPOINTMENT:
+            return {
+                ...state,
+                recommendedAppointment: action.payload
+
+            };
+        case CREATE_RECOMMEND_APPOINTMENT:
+            return {
+                ...state,
+                recommendedAppointment: action.payload
+
+            };
         default:
             return state;
     }

@@ -17,5 +17,6 @@ namespace HealthClinic.CL.Repository
         DoctorAppointment GetByid(int id);
         void New(DoctorAppointment appointment);
         void Update(DoctorAppointment appointment);
+        DoctorAppointment Create(DoctorAppointment appointment);
     }
 }

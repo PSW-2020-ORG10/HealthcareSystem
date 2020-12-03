@@ -22,7 +22,7 @@ namespace HealthClinic.CL.Service
         public SecretaryService()
         {
             secretaryRepository = new SecretaryRepository(path);
-            employeesScheduleRepository = new EmployeesScheduleRepository(path2);
+            employeesScheduleRepository = new EmployeesScheduleRepository();
         }
         public override List<SecretaryUser> GetAll()
         {
@@ -63,7 +63,7 @@ namespace HealthClinic.CL.Service
 
         private Boolean isScheduleForSecretary(Schedule schedule, SecretaryUser secretaryUser)
         {
-            if(schedule.employeeFirst.Equals(secretaryUser.firstName)) return true;
+            if(schedule.Employee.firstName.Equals(secretaryUser.firstName)) return true;
             
             return false;
         }

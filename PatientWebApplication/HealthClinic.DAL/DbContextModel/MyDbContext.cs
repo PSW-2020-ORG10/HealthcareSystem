@@ -148,13 +148,22 @@ namespace HealthClinic.CL.DbContextModel
 
             modelBuilder.Entity<Shift>().HasData(
 
-            new Shift(1, "Start time", "End time")
+            new Shift(1, "08:00", "19:00")
 
             );
 
             modelBuilder.Entity<Schedule>().HasData(
 
-            new Schedule(1, "1", "2/2/2020", false, "EmployeeName", "EmployeeSurname", 1, "1")
+            new Schedule(1, 1, "12/12/2020", true, 1, "Ordination 1"),
+            new Schedule(2, 1, "02/12/2020", true, 1, "Ordination 1"),
+            new Schedule(3, 1, "12/02/2020", true, 1, "Ordination 1"),
+            new Schedule(4, 1, "03/12/2020", true, 1, "Ordination 1"),
+            new Schedule(5, 1, "12/03/2020", true, 1, "Ordination 1"),
+            new Schedule(6, 1, "08/12/2020", true, 1, "Ordination 1"),
+            new Schedule(7, 1, "09/12/2020", true, 1, "Ordination 1"),
+            new Schedule(8, 1, "10/12/2020", true, 1, "Ordination 1"),
+            new Schedule(9, 1, "11/12/2020", true, 1, "Ordination 1")
+
 
            );
 
@@ -273,7 +282,7 @@ namespace HealthClinic.CL.DbContextModel
 
             modelBuilder.Entity<SecretaryUser>().HasData(
 
-            new SecretaryUser(1, "Secretary Name", "Secretary Surname", "1234", "12/12/2012", "123", "email", "pass", "Grad",
+            new SecretaryUser(162, "Secretary Name", "Secretary Surname", "1234", "12/12/2012", "123", "email", "pass", "Grad",
             133, "Room")
 
             );

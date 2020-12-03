@@ -26,7 +26,13 @@
     ADVANCED_SEARCH_PATIENT_APPOINTMENTS,
     ADVANCED_SEARCH_APPOINTMENTS_ERROR,
     LOADED_ALL_PATIENT_APPOINTMENTS,
-    OBSERVE_PATIENT_APPOINTMENTS_ERROR
+    OBSERVE_PATIENT_APPOINTMENTS_ERROR,
+    LOADED_ALL_DOCTORS,
+    OBSERVE_DOCTORS_ERROR,
+    RECOMMEND_APPOINTMENT,
+    RECOMMEND_APPOINTMENT_ERROR,
+    CREATE_RECOMMEND_APPOINTMENT,
+    CREATE_RECOMMEND_APPOINTMENT_ERROR
 } from "../types/types"
 import axios from "axios";
 
@@ -350,6 +356,59 @@ export const loadedAllDoctorRates = () => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: OBSERVE_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const loadedAllDoctors = () => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.get("http://localhost:60198/api/doctor/");
+        debugger;
+        dispatch({
+            type: LOADED_ALL_DOCTORS,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: OBSERVE_DOCTORS_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const recommendAppointment = (appointment) => async (dispatch) => {
+    console.log(appointment.start)
+    try {
+        debugger;
+        const response = await axios.post("http://localhost:60198/api/doctorappointment/recommend", appointment);
+        debugger;
+        dispatch({
+            type: RECOMMEND_APPOINTMENT,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: RECOMMEND_APPOINTMENT_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const createRecommendAppointment = (appointment) => async (dispatch) => {
+    console.log(appointment.start)
+    try {
+        debugger;
+        const response = await axios.post("http://localhost:60198/api/doctorappointment/createRecommended", appointment);
+        debugger;
+        dispatch({
+            type: CREATE_RECOMMEND_APPOINTMENT,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: CREATE_RECOMMEND_APPOINTMENT_ERROR,
             payload: console.log(e),
         });
     }

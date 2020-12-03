@@ -15,6 +15,7 @@ import AppointmentsAdvanced from './AppointmentsAdvanced';
 import CreateSurvey from './CreateSurvey';
 import DoctorRates from './DoctorRates';
 import AllRates from './AllRates';
+import RecommendedAppointment from './RecommendedAppointment';
 
 export default (props: { children: React.ReactNode }) => (
     <React.Fragment>
@@ -33,6 +34,7 @@ export default (props: { children: React.ReactNode }) => (
             <Route path='/create-survey' component={CreateSurvey} />
             <Route path='/rates-doctor' component={DoctorRates} />
             <Route path='/rates-general' component={AllRates} />
+            <Route path='/recommended-appointment' component={RecommendedAppointment} />
         </Container>
     </React.Fragment>
 );
