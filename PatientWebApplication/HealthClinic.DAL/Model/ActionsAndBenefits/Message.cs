@@ -22,25 +22,25 @@ namespace HealthClinic.CL.Model.ActionsAndBenefits
 
         public Message(int id, string text, DateTime timestamp, bool isremoved, string pharmacyname, string dateaction) : base(id)
         {
-            this.Text = text;
-            this.TimeStamp = timestamp;
-            this.IsRemoved = isremoved;
-            this.PharmacyName = pharmacyname;
-            this.DateAction = dateaction;
+            Text = text;
+            TimeStamp = timestamp;
+            IsRemoved = isremoved;
+            PharmacyName = pharmacyname;
+            DateAction = dateaction;
         }
 
         public Message(string text, DateTime timestamp, bool isremoved, string pharmacyname, string dateaction)
         {
-            this.Text = text;
-            this.TimeStamp = timestamp;
-            this.IsRemoved = isremoved;
-            this.PharmacyName = pharmacyname;
-            this.DateAction = dateaction;
+            Text = text;
+            TimeStamp = timestamp;
+            IsRemoved = isremoved;
+            PharmacyName = pharmacyname;
+            DateAction = dateaction;
         }
 
         public override string ToString()
         {
-            return this.Text + " sent at " + this.TimeStamp.ToString();
+            return Text + " sent at " + TimeStamp.ToString();
         }
     }
 }

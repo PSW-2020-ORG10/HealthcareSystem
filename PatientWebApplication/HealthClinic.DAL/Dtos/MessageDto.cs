@@ -14,19 +14,17 @@ namespace HealthClinic.CL.Dtos
 
         public MessageDto(string text, DateTime timestamp, string pharmacyname, string dateaction)
         {
-            this.Text = text;
-            this.TimeStamp = timestamp;
-            this.PharmacyName = pharmacyname;
-            this.DateAction = dateaction;
+            Text = text;
+            TimeStamp = timestamp;
+            PharmacyName = pharmacyname;
+            DateAction = dateaction;
         }
 
-        public MessageDto()
-        {
-        }
+        public MessageDto() {}
 
         public override string ToString()
         {
-            return this.Text + " sent at " + this.TimeStamp.ToString();
+            return Text + " sent at " + TimeStamp.ToString();
         }
     }
 }

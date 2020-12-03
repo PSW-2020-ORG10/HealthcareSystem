@@ -30,6 +30,7 @@ namespace IntegrationWithPharmacies.FileProtocol
             finally  { client.Disconnect(); }
         }
 
+
         IEnumerable<SftpFile> ISpftService.ListAllFiles(string remoteDirectory)
         {
             using var client = new SftpClient("192.168.56.1", 22, "tester", "password");

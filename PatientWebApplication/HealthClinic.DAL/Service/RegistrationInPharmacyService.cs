@@ -53,6 +53,14 @@ namespace HealthClinic.CL.Service
             }
             return null;
         }
+        public RegistrationInPharmacy getPharmacyName(String name)
+        {
+            foreach (RegistrationInPharmacy registration in RegistrationInPharmacyRepository.GetAll())
+            {
+                if (registration.Name.Equals(name)) return registration;
+            }
+            return null;
+        }
         public RegistrationInPharmacy createIRegistration(RegistrationInPharmacyDto dto)
         {
             foreach (RegistrationInPharmacy registrationIRepo in IRegistrationRepository.GetAll())
