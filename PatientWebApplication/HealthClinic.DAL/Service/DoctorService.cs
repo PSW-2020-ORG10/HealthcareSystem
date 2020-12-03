@@ -19,12 +19,12 @@ namespace HealthClinic.CL.Service
 {
     public class DoctorService : AbstractUserService<DoctorUser>
     {
-        public IOperationRepository _operationRepository;
-        public PatientsRepository patientsRepository;
-        public IDoctorRepository _doctorRepository;
-        public IAppointmentRepository _appointmentRepository;
-        public IEmployeesScheduleRepository _employeesScheduleRepository;
-        public RegularAppointmentService regularAppointmentService;
+        private IOperationRepository _operationRepository;
+        private PatientsRepository patientsRepository;
+        private IDoctorRepository _doctorRepository;
+        private IAppointmentRepository _appointmentRepository;
+        private IEmployeesScheduleRepository _employeesScheduleRepository;
+        private RegularAppointmentService regularAppointmentService;
 
         String path = bingPathToAppDir(@"JsonFiles\doctors.json");
         String path2 = bingPathToAppDir(@"JsonFiles\patients.json");
@@ -263,18 +263,6 @@ namespace HealthClinic.CL.Service
                 }
             }
             return specialists;
-        }
-
-        private Boolean CheckIfDoctorIsWorking(DoctorUser doctor, DateTime date)
-        {
-            foreach (Schedule schedule in _employeesScheduleRepository.GetScheduleForDoctor(doctor.id.ToString()))
-            {
-                if(UtilityMethods.ParseDateInCorrectFormat(schedule.date) == date)
-                {
-                    return true;
-                }
-            }
-            return false;
         }
 
         public List<DoctorUser> GetAvailableDoctors(string specialty, string date, int patientId)

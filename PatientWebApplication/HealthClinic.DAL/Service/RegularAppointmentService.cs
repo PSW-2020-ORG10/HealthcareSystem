@@ -22,10 +22,10 @@ namespace HealthClinic.CL.Service
     public class RegularAppointmentService : BingPath, IStrategyAppointment
     {
         private IAppointmentRepository _appointmentRepository;
-        public DoctorService doctorService;
-        public EmployeesScheduleService employeesScheduleService;
-        public IPatientsRepository _patientRepository;
-        public OperationService operationService;
+        private DoctorService doctorService;
+        private EmployeesScheduleService employeesScheduleService;
+        private IPatientsRepository _patientRepository;
+        private OperationService operationService;
         String path = bingPathToAppDir(@"JsonFiles\appointments.json");
 
         public RegularAppointmentService(IAppointmentRepository appointmentRepository, IEmployeesScheduleRepository employeesScheduleRepository, DoctorService doctorService, IPatientsRepository patientRepository, OperationService operationService)

@@ -5,6 +5,7 @@
  ***********************************************************************/
 
 using HealthClinic.CL.Model.Doctor;
+using HealthClinic.CL.Utility;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -35,10 +36,7 @@ namespace HealthClinic.CL.Model.Patient
             {
                 return false;
             }
-            else
-            {
-                return this.Date.Equals(item.Date) && this.DoctorUserId == item.DoctorUserId && this.PatientUserId == item.PatientUserId && this.RoomId.Equals(item.RoomId);
-            }
+            return UtilityMethods.CheckIfStringsMatch(this.Date, item.Date) && this.DoctorUserId == item.DoctorUserId && this.PatientUserId == item.PatientUserId && UtilityMethods.CheckIfStringsMatch(this.RoomId, item.RoomId);
         }
 
     }
