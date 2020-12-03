@@ -53,5 +53,9 @@ namespace HealthClinic.CL.Repository
             return dbContext.Operations.ToList().FindAll(operation => operation.PatientUserId == idPatient);
         }
 
+        public List<Operation> GetOperationsForDoctor(int idDoctor)
+        {
+            return dbContext.Operations.ToList().FindAll(operation => operation.DoctorUserId == idDoctor);
+        }
     }
 }

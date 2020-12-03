@@ -29,5 +29,11 @@ namespace HealthClinic.CL.Utility
         {
             return doctor.speciality.Equals(specialty);
         }
+
+        public static Boolean TryParseTimeSpanInCorrectFormat(String timeSpan)
+        {
+            var time = new TimeSpan();
+            return TimeSpan.TryParseExact(timeSpan, "hh:\\mm\\:ss", CultureInfo.InvariantCulture, out time);
+        }
     }
 }

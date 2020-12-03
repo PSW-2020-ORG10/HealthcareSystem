@@ -139,8 +139,8 @@ namespace HealthClinic.CL.DbContextModel
 
             modelBuilder.Entity<Operation>().HasData(
 
-            new Operation(1, 2, "20/02/2020", new TimeSpan(), new TimeSpan(), 1, "room1"),
-            new Operation(2, 2, "03/10/2020", new TimeSpan(), new TimeSpan(), 2, "room1")
+            new Operation(1, 2, "03/03/2020", new TimeSpan(0, 14, 0, 0), new TimeSpan(0, 15, 0, 0, 0), 1, "room1"),
+            new Operation(2, 1, "03/10/2020", new TimeSpan(0, 15, 0, 0), new TimeSpan(0, 15, 15, 0, 0), 2, "room1")
 
             );
 

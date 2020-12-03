@@ -17,5 +17,6 @@ namespace HealthClinic.CL.Repository
         List<Operation> GetOperationsForPatient(int idPatient);
         void New(Operation operation);
         void Update(Operation operation);
+        List<Operation> GetOperationsForDoctor(int idDoctor);
     }
 }

@@ -28,5 +28,18 @@ namespace HealthClinic.CL.Model.Patient
 
         public DoctorAppointment() : base() { }
 
+        public override bool Equals(Object obj)
+        {
+            var item = obj as DoctorAppointment;
+            if (item == null)
+            {
+                return false;
+            }
+            else
+            {
+                return this.Date.Equals(item.Date) && this.DoctorUserId == item.DoctorUserId && this.PatientUserId == item.PatientUserId && this.RoomId.Equals(item.RoomId);
+            }
+        }
+
     }
 }

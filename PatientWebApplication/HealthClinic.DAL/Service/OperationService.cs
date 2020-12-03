@@ -197,5 +197,46 @@ namespace HealthClinic.CL.Service
             return stringToCheck.Equals("Operation");
         }
 
+        private List<Operation> GetAllOperationsByDateAndDoctor(DateTime date, int doctorId)
+        {
+            List<Operation> operations = new List<Operation>();
+            foreach (Operation operation in _operationRepository.GetOperationsForDoctor(doctorId))
+            {
+                if (date == UtilityMethods.ParseDateInCorrectFormat(operation.Date))
+                {
+                    operations.Add(operation);
+                }
+            }
+            return operations;
+        }
+
+        private List<Operation> GetAllOperationsByDateAndPatient(DateTime date, int patientId)
+        {
+            List<Operation> operations = new List<Operation>();
+            foreach (Operation operation in GetOperationsForPatient(patientId))
+            {
+                if (date == UtilityMethods.ParseDateInCorrectFormat(operation.Date))
+                {
+                    operations.Add(operation);
+                }
+            }
+            return operations;
+        }
+
+        public HashSet<Operation> CreateOperationtSetForDate(DateTime date, int doctorId, int patientId)
+        {
+            HashSet<Operation> appointmentsSet = new HashSet<Operation>(GetAllOperationsByDateAndDoctor(date, doctorId));
+            appointmentsSet.UnionWith(GetAllOperationsByDateAndPatient(date, patientId));
+            return appointmentsSet;
+        }
+        
+        public Boolean IsOperationInTimePeriod(TimeSpan time, List<Operation> operations)
+        {
+            foreach(Operation operation in operations)
+            {
+                if (time >= operation.Start && time < operation.end) return true;
+            }
+            return false;
+        }
     }
 }
