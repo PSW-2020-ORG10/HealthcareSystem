@@ -20,11 +20,13 @@ namespace PatientWebApplication.Controllers
     {
         /// <value>Property <c>RegularAppointmentService</c> represents the service used for handling business logic.</value>
         private RegularAppointmentService regularAppointmentService;
+        private DoctorService doctorService;
 
         /// <summary>This constructor initiates the DoctorAppointmentController's appointment service.</summary>
         public DoctorAppointmentController()
         {
-            this.regularAppointmentService = new RegularAppointmentService(new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorService(new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorRepository()));
+            this.regularAppointmentService = new RegularAppointmentService(new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorService(new OperationRepository(), new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorRepository()), new PatientsRepository(), new OperationService(new OperationRepository()));
+            this.doctorService = new DoctorService(new OperationRepository(), new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorRepository());
         }
 
         /// <summary> This method is calling <c>RegularAppointmentService</c> to get list of all appointments of one patient. </summary>
@@ -68,6 +70,13 @@ namespace PatientWebApplication.Controllers
         public IActionResult GetAvailableAppointments(AvailableAppointmentsSearchDto dto)
         {
             return Ok(this.regularAppointmentService.GetAllAvailableAppointmentsForDate(dto.Date, dto.DoctorId, dto.PatientId));
+        }
+
+        [HttpPost]
+        public IActionResult Post(DoctorAppointment appointment)
+        {
+            this.regularAppointmentService.New(appointment, null);
+            return Ok();
         }
     }
 }

@@ -210,22 +210,22 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
-                            Date = "20/02/2020",
+                            Date = "03/03/2020",
                             DoctorUserId = 1,
                             PatientUserId = 2,
                             RoomId = "room1",
-                            Start = new TimeSpan(0, 0, 0, 0, 0),
-                            end = new TimeSpan(0, 0, 0, 0, 0)
+                            Start = new TimeSpan(0, 14, 0, 0, 0),
+                            end = new TimeSpan(0, 15, 0, 0, 0)
                         },
                         new
                         {
                             id = 2,
                             Date = "03/10/2020",
                             DoctorUserId = 2,
-                            PatientUserId = 2,
+                            PatientUserId = 1,
                             RoomId = "room1",
-                            Start = new TimeSpan(0, 0, 0, 0, 0),
-                            end = new TimeSpan(0, 0, 0, 0, 0)
+                            Start = new TimeSpan(0, 15, 0, 0, 0),
+                            end = new TimeSpan(0, 15, 15, 0, 0)
                         });
                 });
 

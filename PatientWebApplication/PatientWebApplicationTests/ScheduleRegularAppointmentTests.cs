@@ -17,7 +17,7 @@ namespace PatientWebApplicationTests
         [Fact]
         public void Find_Available_Appointments()
         {
-            RegularAppointmentService service = new RegularAppointmentService(CreateAppointmentStubRepository(), CreateScheduleStubRepository(), new DoctorService(CreateAppointmentStubRepository(), CreateScheduleStubRepository(), CreateDoctorStubRepository()));
+            RegularAppointmentService service = new RegularAppointmentService(CreateAppointmentStubRepository(), CreateScheduleStubRepository(), new DoctorService(CreateOperationStubRepository(), CreateAppointmentStubRepository(), CreateScheduleStubRepository(), CreateDoctorStubRepository()), CreatePatientStubRepository(), new OperationService(CreateOperationStubRepository()));
 
             List<DoctorAppointment> appointments = service.GetAllAvailableAppointmentsForDate("03/03/2020", 2, 2);
 
@@ -27,7 +27,7 @@ namespace PatientWebApplicationTests
         [Fact]
         public void Find_No_Available_Appointments()
         {
-            RegularAppointmentService service = new RegularAppointmentService(CreateAppointmentStubRepository(), CreateScheduleStubRepository(), new DoctorService(CreateAppointmentStubRepository(), CreateScheduleStubRepository(), CreateDoctorStubRepository()));
+            RegularAppointmentService service = new RegularAppointmentService(CreateAppointmentStubRepository(), CreateScheduleStubRepository(), new DoctorService(CreateOperationStubRepository(), CreateAppointmentStubRepository(), CreateScheduleStubRepository(), CreateDoctorStubRepository()), CreatePatientStubRepository(), new OperationService(CreateOperationStubRepository()));
 
             List<DoctorAppointment> appointments = service.GetAllAvailableAppointmentsForDate("02/02/2020", 1, 2);
 
@@ -37,7 +37,7 @@ namespace PatientWebApplicationTests
         [Fact]
         public void Find_Available_Doctors()
         {
-            DoctorService service = new DoctorService(CreateAppointmentStubRepository(), CreateScheduleStubRepository(), CreateDoctorStubRepository());
+            DoctorService service = new DoctorService(CreateOperationStubRepository(), CreateAppointmentStubRepository(), CreateScheduleStubRepository(), CreateDoctorStubRepository());
 
             List<DoctorUser> appointments = service.GetAvailableDoctors("Cardiology", "02/02/2020", 2);
 
@@ -47,7 +47,7 @@ namespace PatientWebApplicationTests
         [Fact]
         public void Find_No_Available_Doctors()
         {
-            DoctorService service = new DoctorService(CreateAppointmentStubRepository(), CreateScheduleStubRepository(), CreateDoctorStubRepository());
+            DoctorService service = new DoctorService(CreateOperationStubRepository(), CreateAppointmentStubRepository(), CreateScheduleStubRepository(), CreateDoctorStubRepository());
 
             List<DoctorUser> appointments = service.GetAvailableDoctors("Pulmonology", "02/02/2020", 2);
 
@@ -100,6 +100,33 @@ namespace PatientWebApplicationTests
             return stubRepository.Object;
         }
 
+        private static IOperationRepository CreateOperationStubRepository()
+        {
+            var stubRepository = new Mock<IOperationRepository>();
+
+            var patientOperations = new List<Operation>();
+            var doctorOperations = new List<Operation>();
+
+            OperationReferral referral1 = new OperationReferral(1, "Medicine", "Take medicine until", 3, "classify", "comment", 1);
+            OperationReferral referral2 = new OperationReferral(2, "Medicine2", "Take medicine until", 3, "Appointment", "comment", 1);
+            var referrals = new List<OperationReferral>();
+            referrals.Add(referral1);
+            referrals.Add(referral1);
+
+            Operation operation1 = new Operation(1, 2, "03/03/2020", new TimeSpan(0, 14, 0, 0), new TimeSpan(0, 15, 0, 0, 0), 1, "room1");
+            Operation operation2 = new Operation(2, 1, "03/10/2020", new TimeSpan(0, 15, 0, 0), new TimeSpan(0, 15, 15, 0, 0), 2, "room1");
+
+            patientOperations.Add(operation1);
+            doctorOperations.Add(operation2);
+
+            stubRepository.Setup(m => m.GetOperationsForPatient(2)).Returns(patientOperations);
+            stubRepository.Setup(m => m.GetOperationsForDoctor(2)).Returns(doctorOperations);
+            stubRepository.Setup(m => m.GetOperationsForDoctor(1)).Returns(new List<Operation>());
+            stubRepository.Setup(m => m.GetOperationsForDoctor(3)).Returns(new List<Operation>());
+
+            return stubRepository.Object;
+        }
+
         private static IEmployeesScheduleRepository CreateScheduleStubRepository()
         {
             var stubRepository = new Mock<IEmployeesScheduleRepository>();
@@ -133,6 +160,17 @@ namespace PatientWebApplicationTests
             stubRepository.Setup(m => m.GetByid(1)).Returns(doctor1);
             stubRepository.Setup(m => m.GetByid(2)).Returns(doctor2);
             stubRepository.Setup(m => m.GetByid(3)).Returns(doctor3);
+
+            return stubRepository.Object;
+        }
+
+        private static IPatientsRepository CreatePatientStubRepository()
+        {
+            var stubRepository = new Mock<IPatientsRepository>();
+            List<PatientUser> patients = new List<PatientUser>();
+            PatientUser patient = new PatientUser(2, "PatientName2", "PatientSurname2", "Female", "1234", "2/2/2020", "123", "2112313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null);
+
+            stubRepository.Setup(m => m.Find(patient.id)).Returns(patient);
 
             return stubRepository.Object;
         }

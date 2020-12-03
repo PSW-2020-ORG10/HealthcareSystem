@@ -20,7 +20,7 @@ namespace PatientWebApplication.Controllers
         /// <summary>This constructor initiates the DoctorAppointmentController's appointment service.</summary>
         public DoctorController()
         {
-            this.doctorService = new DoctorService(new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorRepository());
+            this.doctorService = new DoctorService(new OperationRepository(), new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorRepository());
         }
 
         [HttpGet("available")]
