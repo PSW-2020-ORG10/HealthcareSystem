@@ -24,7 +24,7 @@ namespace PatientWebApplication.Controllers
         /// <summary>This constructor initiates the DoctorAppointmentController's appointment service.</summary>
         public DoctorAppointmentController()
         {
-            this.regularAppointmentService = new RegularAppointmentService(new AppointmentRepository());
+            this.regularAppointmentService = new RegularAppointmentService(new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorService(new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorRepository()));
         }
 
         /// <summary> This method is calling <c>RegularAppointmentService</c> to get list of all appointments of one patient. </summary>
@@ -64,5 +64,10 @@ namespace PatientWebApplication.Controllers
             return Ok(this.regularAppointmentService.AdvancedSearchAppointments(dto));
         }
 
+        [HttpPost("availableappointments")]
+        public IActionResult GetAvailableAppointments(AvailableAppointmentsSearchDto dto)
+        {
+            return Ok(this.regularAppointmentService.GetAllAvailableAppointmentsForDate(dto.Date, dto.DoctorId, dto.PatientId));
+        }
     }
 }

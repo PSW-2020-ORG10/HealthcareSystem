@@ -53,5 +53,9 @@ namespace HealthClinic.CL.Repository
             return dbContext.DoctorAppointments.ToList().FindAll(appointment => appointment.PatientUserId == idPatient);
         }
 
+        public List<DoctorAppointment> GetAppointmentsForDoctor(int idDoctor)
+        {
+            return dbContext.DoctorAppointments.ToList().FindAll(appointment => appointment.DoctorUserId == idDoctor);
+        }
     }
 }

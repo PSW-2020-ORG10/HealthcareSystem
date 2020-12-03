@@ -15,34 +15,34 @@ namespace HealthClinic.CL.Service
 {
     public class EmployeesScheduleService : BingPath, IService<Schedule>
     {
-        public EmployeesScheduleRepository employeesScheduleRepository;
+        public IEmployeesScheduleRepository _employeesScheduleRepository;
         String path = bingPathToAppDir(@"JsonFiles\schedule.json");
 
 
-        public EmployeesScheduleService()
+        public EmployeesScheduleService(IEmployeesScheduleRepository employeesScheduleRepository)
         {
-            employeesScheduleRepository = new EmployeesScheduleRepository(path);
+            this._employeesScheduleRepository = employeesScheduleRepository;
         }
 
         public void New(Schedule schedule)
         {
-            employeesScheduleRepository.New(schedule);
+            _employeesScheduleRepository.New(schedule);
 
         }
 
         public void Update(Schedule schedule)
         {
-            employeesScheduleRepository.Update(schedule);
+            _employeesScheduleRepository.Update(schedule);
         }
 
         public void Remove(Schedule schedule)
         {
-            employeesScheduleRepository.Delete(schedule.id);
+            _employeesScheduleRepository.Delete(schedule.id);
         }
 
         public List<Schedule> GetAll()
         {
-            return employeesScheduleRepository.GetAll();
+            return _employeesScheduleRepository.GetAll();
 
         }
 
@@ -61,7 +61,7 @@ namespace HealthClinic.CL.Service
 
         public Shift getShiftForDoctorForSpecificDay(string date, DoctorUser doctor)
         {
-            List<Schedule> listOfSchedule = employeesScheduleRepository.GetAll();
+            List<Schedule> listOfSchedule = _employeesScheduleRepository.GetAll();
 
             foreach (Schedule schedule in listOfSchedule)
             {
@@ -110,7 +110,7 @@ namespace HealthClinic.CL.Service
 
         public Schedule GetByid(int id)
         {
-            return employeesScheduleRepository.GetByid(id);
+            return _employeesScheduleRepository.GetByid(id);
         }
     }
 }

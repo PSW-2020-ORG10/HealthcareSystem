@@ -26,7 +26,7 @@ namespace PatientWebApplication.Controllers
         public SurveyController()
         {
             SurveyService = new SurveyService(new SurveyRepository());
-            regularAppointmentService = new RegularAppointmentService(new AppointmentRepository());
+            regularAppointmentService = new RegularAppointmentService(new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorService(new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorRepository()));
         }
 
         /// <summary> This method determines if <c>SurveyDto</c> provided <paramref name="surveyDto"/> is valid for creating by calling <c>SurveyValidator</c>
