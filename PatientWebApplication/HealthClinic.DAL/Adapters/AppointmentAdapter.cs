@@ -22,10 +22,9 @@ namespace HealthClinic.CL.Adapters
         public List<AppointmentDto> ConvertAppointmentListToAppointmentDtoList(List<DoctorAppointment> appointments)
         {
             List<AppointmentDto> appointmentsDto = new List<AppointmentDto>();
-            AppointmentAdapter adapter = new AppointmentAdapter();
             foreach (DoctorAppointment appointment in appointments)
             {
-                appointmentsDto.Add(adapter.AppointmentToAppointmenDto(appointment));
+                appointmentsDto.Add(AppointmentToAppointmenDto(appointment));
             }
             return appointmentsDto;
         }

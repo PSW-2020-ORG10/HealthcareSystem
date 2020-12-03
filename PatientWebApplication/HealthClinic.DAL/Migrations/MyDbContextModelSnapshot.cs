@@ -32,7 +32,7 @@ namespace HealthClinic.CL.Migrations
                     b.Property<string>("Text")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<DateTime>("Timestamp")
+                    b.Property<DateTime>("TimeStamp")
                         .HasColumnType("datetime(6)");
 
                     b.HasKey("id");
@@ -46,7 +46,7 @@ namespace HealthClinic.CL.Migrations
                             IsRemoved = false,
                             PharmacyName = "Apoteka Jankovic",
                             Text = "Message",
-                            Timestamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                            TimeStamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -137,7 +137,7 @@ namespace HealthClinic.CL.Migrations
                             phoneNumber = "123",
                             salary = 200.0,
                             secondName = "Davidovic",
-                            speciality = "Specialty",
+                            speciality = "Cardiology",
                             uniqueCitizensidentityNumber = "1234"
                         },
                         new
@@ -153,7 +153,7 @@ namespace HealthClinic.CL.Migrations
                             phoneNumber = "123",
                             salary = 200.0,
                             secondName = "Maric",
-                            speciality = "Specialty",
+                            speciality = "Pulmonology",
                             uniqueCitizensidentityNumber = "12345"
                         },
                         new
@@ -169,7 +169,7 @@ namespace HealthClinic.CL.Migrations
                             phoneNumber = "123",
                             salary = 200.0,
                             secondName = "Tadic",
-                            speciality = "Specialty",
+                            speciality = "Cardiology",
                             uniqueCitizensidentityNumber = "12346"
                         });
                 });
@@ -473,11 +473,33 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
-                            date = "2/2/2020",
+                            date = "03/03/2020",
+                            employeeFirst = "EmployeeName",
+                            employeeLast = "EmployeeSurname",
+                            employeeid = "2",
+                            isOnDuty = true,
+                            room = "1",
+                            shiftId = 1
+                        },
+                        new
+                        {
+                            id = 2,
+                            date = "02/02/2020",
                             employeeFirst = "EmployeeName",
                             employeeLast = "EmployeeSurname",
                             employeeid = "1",
-                            isOnDuty = false,
+                            isOnDuty = true,
+                            room = "1",
+                            shiftId = 2
+                        },
+                        new
+                        {
+                            id = 3,
+                            date = "02/02/2020",
+                            employeeFirst = "EmployeeName",
+                            employeeLast = "EmployeeSurname",
+                            employeeid = "3",
+                            isOnDuty = true,
                             room = "1",
                             shiftId = 1
                         });
@@ -503,8 +525,14 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
-                            endTime = "End time",
-                            startTime = "Start time"
+                            endTime = "16:00",
+                            startTime = "14:00"
+                        },
+                        new
+                        {
+                            id = 2,
+                            endTime = "12:30",
+                            startTime = "12:00"
                         });
                 });
 
@@ -909,56 +937,56 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
-                            Date = "22/04/2020",
+                            Date = "03/03/2020",
                             DoctorUserId = 1,
                             PatientUserId = 2,
                             RoomId = "1",
-                            Start = new TimeSpan(0, 0, 0, 0, 0)
+                            Start = new TimeSpan(0, 14, 15, 0, 0)
                         },
                         new
                         {
                             id = 2,
-                            Date = "07/01/2020",
+                            Date = "03/03/2020",
                             DoctorUserId = 2,
                             PatientUserId = 2,
                             RoomId = "1",
-                            Start = new TimeSpan(0, 0, 0, 0, 0)
+                            Start = new TimeSpan(0, 14, 30, 0, 0)
                         },
                         new
                         {
                             id = 3,
-                            Date = "05/07/2019",
-                            DoctorUserId = 3,
+                            Date = "03/03/2020",
+                            DoctorUserId = 2,
                             PatientUserId = 1,
                             RoomId = "1",
-                            Start = new TimeSpan(0, 0, 0, 0, 0)
+                            Start = new TimeSpan(0, 15, 0, 0, 0)
                         },
                         new
                         {
                             id = 4,
-                            Date = "04/02/2019",
-                            DoctorUserId = 1,
+                            Date = "03/03/2020",
+                            DoctorUserId = 2,
                             PatientUserId = 1,
                             RoomId = "1",
-                            Start = new TimeSpan(0, 0, 0, 0, 0)
+                            Start = new TimeSpan(0, 15, 45, 0, 0)
                         },
                         new
                         {
                             id = 5,
-                            Date = "11/01/2016",
-                            DoctorUserId = 2,
+                            Date = "02/02/2020",
+                            DoctorUserId = 1,
                             PatientUserId = 1,
                             RoomId = "1",
-                            Start = new TimeSpan(0, 0, 0, 0, 0)
+                            Start = new TimeSpan(0, 12, 0, 0, 0)
                         },
                         new
                         {
                             id = 6,
-                            Date = "09/01/2014",
+                            Date = "02/02/2020",
                             DoctorUserId = 3,
-                            PatientUserId = 1,
+                            PatientUserId = 2,
                             RoomId = "1",
-                            Start = new TimeSpan(0, 0, 0, 0, 0)
+                            Start = new TimeSpan(0, 12, 15, 0, 0)
                         },
                         new
                         {

@@ -14,6 +14,7 @@ namespace HealthClinic.CL.Repository
         void Delete(int id);
         List<DoctorAppointment> GetAll();
         List<DoctorAppointment> GetAppointmentsForPatient(int idPatient);
+        List<DoctorAppointment> GetAppointmentsForDoctor(int idDoctor);
         DoctorAppointment GetByid(int id);
         void New(DoctorAppointment appointment);
         void Update(DoctorAppointment appointment);

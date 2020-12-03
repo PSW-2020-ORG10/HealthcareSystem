@@ -22,7 +22,7 @@ namespace HealthClinic.CL.Service
         public SecretaryService()
         {
             secretaryRepository = new SecretaryRepository(path);
-            employeesScheduleRepository = new EmployeesScheduleRepository(path2);
+            employeesScheduleRepository = new EmployeesScheduleRepository();
         }
         public override List<SecretaryUser> GetAll()
         {

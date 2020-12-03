@@ -93,7 +93,7 @@ namespace HealthClinic.CL.Service
         public bool isFoundInDoctors(string email, string ucin, T user)
         {
             String path = bingPathToAppDir(@"JsonFiles\doctors.json");
-            DoctorRepository doctorRepository = new DoctorRepository(path);
+            DoctorRepository doctorRepository = new DoctorRepository();
             List<DoctorUser> listOfDoctors = doctorRepository.GetAll();
 
             foreach (DoctorUser doctor in listOfDoctors)

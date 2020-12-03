@@ -10,6 +10,7 @@ using HealthClinic.CL.Model.Employee;
 using HealthClinic.CL.Model.Hospital;
 using HealthClinic.CL.Model.Patient;
 using HealthClinic.CL.Repository;
+using HealthClinic.CL.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +21,10 @@ namespace HealthClinic.CL.Service
     {
         public OperationRepository operationRepository;
         public PatientsRepository patientsRepository;
-        public DoctorRepository doctorRepository;
-        public AppointmentRepository appointmentRepository;
-        public EmployeesScheduleRepository employeesScheduleRepository;
+        public IDoctorRepository _doctorRepository;
+        public IAppointmentRepository _appointmentRepository;
+        public IEmployeesScheduleRepository _employeesScheduleRepository;
+        public RegularAppointmentService regularAppointmentService;
 
         String path = bingPathToAppDir(@"JsonFiles\doctors.json");
         String path2 = bingPathToAppDir(@"JsonFiles\patients.json");
@@ -31,24 +33,24 @@ namespace HealthClinic.CL.Service
         String path5 = bingPathToAppDir(@"JsonFiles\schedule.json");
 
 
-        public DoctorService()
+        public DoctorService(IAppointmentRepository appointmentRepository, IEmployeesScheduleRepository employeesScheduleRepository, IDoctorRepository doctorRepository)
         {
-            doctorRepository = new DoctorRepository(path);          
-            operationRepository = new OperationRepository();
-            appointmentRepository = new AppointmentRepository();
-            employeesScheduleRepository = new EmployeesScheduleRepository(path5);
-
+            this._doctorRepository = doctorRepository;
+            this.operationRepository = new OperationRepository();
+            this._appointmentRepository = appointmentRepository;
+            this._employeesScheduleRepository = employeesScheduleRepository;
+            this.regularAppointmentService = new RegularAppointmentService(appointmentRepository, employeesScheduleRepository, this);
         }
         public override List<DoctorUser> GetAll()
         {
-            return doctorRepository.GetAll();
+            return _doctorRepository.GetAll();
         }
 
         public override Boolean New(DoctorUser doctor)
         {
             if (isDataValid(doctor.email, doctor.uniqueCitizensidentityNumber, doctor) && isCityValid(doctor.city))
             {
-                doctorRepository.New(doctor);
+                _doctorRepository.New(doctor);
                 return true;
             }
             return false;
@@ -58,7 +60,7 @@ namespace HealthClinic.CL.Service
         {
             if (isDataValid(doctor.email, doctor.uniqueCitizensidentityNumber, doctor) && isCityValid(doctor.city))
             {
-                doctorRepository.Update(doctor);
+                _doctorRepository.Update(doctor);
                 return true;
             }
             return false;
@@ -66,12 +68,12 @@ namespace HealthClinic.CL.Service
 
         public override DoctorUser GetByid(int id)
         {
-            return doctorRepository.GetByid(id);
+            return _doctorRepository.GetByid(id);
         }
 
         public override void Remove(DoctorUser doctor)
         {
-            doctorRepository.Delete(doctor.id);
+            _doctorRepository.Delete(doctor.id);
             removeDoctorFromSchedule(doctor);
         }
 
@@ -126,34 +128,34 @@ namespace HealthClinic.CL.Service
 
             foreach (Operation operation in listOfOperations)
             {
-                if (isDoctorResposableForOperation(doctor, operation))  listOfOperations.Remove(operation);
+                if (isDoctorResposableForOperation(doctor, operation)) listOfOperations.Remove(operation);
             }
         }
         public void removeScheduledAppointmentForDoctor(DoctorUser doctor)
         {
-            List<DoctorAppointment> listOfAppoinments = appointmentRepository.GetAll();
+            List<DoctorAppointment> listOfAppoinments = _appointmentRepository.GetAll();
 
             foreach (DoctorAppointment appointment in listOfAppoinments)
             {
-                if (isDoctorResposableForAppointment(doctor, appointment))  listOfAppoinments.Remove(appointment);
+                if (isDoctorResposableForAppointment(doctor, appointment)) listOfAppoinments.Remove(appointment);
             }
         }
 
         private void findAndRemoveDoctorFromSchedule(DoctorUser doctor, DoctorUser doctorUser)
         {
             List<Schedule> listOfSchedule = new List<Schedule>();
-            listOfSchedule = employeesScheduleRepository.GetAll();
+            listOfSchedule = _employeesScheduleRepository.GetAll();
 
             foreach (Schedule schedule in listOfSchedule)
             {
-                if (schedule.employeeid.Equals(doctorUser.id.ToString()))  removeDoctorFromRepositories(schedule.id, doctor);
+                if (schedule.employeeid.Equals(doctorUser.id.ToString())) removeDoctorFromRepositories(schedule.id, doctor);
             }
         }
 
 
         private void removeDoctorFromRepositories(int id, DoctorUser doctor)
         {
-            employeesScheduleRepository.Delete(id);
+            _employeesScheduleRepository.Delete(id);
             removeScheduledOperationsForDoctor(doctor);
             removeScheduledAppointmentForDoctor(doctor);
         }
@@ -166,7 +168,7 @@ namespace HealthClinic.CL.Service
 
         public void removeDoctorFromSchedule(DoctorUser doctor)
         {
-            List<DoctorUser> listOfDoctors = doctorRepository.GetAll();
+            List<DoctorUser> listOfDoctors = _doctorRepository.GetAll();
 
             foreach (DoctorUser doctorUser in listOfDoctors)
             {
@@ -187,7 +189,7 @@ namespace HealthClinic.CL.Service
 
         public Boolean doesDoctorHaveAnAppointmentAtSpecificTime(DoctorUser doctor, TimeSpan time, string date)
         {
-            List<DoctorAppointment> listOfAppointments = appointmentRepository.GetAll();
+            List<DoctorAppointment> listOfAppointments = _appointmentRepository.GetAll();
             if (listOfAppointments == null) listOfAppointments = new List<DoctorAppointment>();
 
             foreach (DoctorAppointment appointment in listOfAppointments)
@@ -199,18 +201,18 @@ namespace HealthClinic.CL.Service
 
         public bool doesDoctorHaveAnAppointmentAtSpecificPeriod(DoctorUser doctor, TimeSpan start, TimeSpan end, string date)
         {
-            List<DoctorAppointment> listOfAppoinments = appointmentRepository.GetAll();
+            List<DoctorAppointment> listOfAppoinments = _appointmentRepository.GetAll();
             foreach (DoctorAppointment appointment in listOfAppoinments)
             {
-                if (isDoctorsEquals(appointment.Doctor,doctor) && areDatesEqual(appointment.Date, date) && 
+                if (isDoctorsEquals(appointment.Doctor, doctor) && areDatesEqual(appointment.Date, date) &&
                     (checkIfDoctorIsBusyForAppointment(appointment, start) || checkIfDoctorIsBusyForAppointment(appointment, end))) return true;
-                
+
             }
             return false;
 
         }
 
-        public bool areDatesEqual(String firstDate,String secondDate)
+        public bool areDatesEqual(String firstDate, String secondDate)
         {
             if (firstDate.Equals(secondDate)) return true;
             return false;
@@ -231,9 +233,9 @@ namespace HealthClinic.CL.Service
             foreach (Operation operation in listOfOperation)
             {
                 DoctorUser doctorOnOperation = operation.Doctor;
-                if (isDoctorsEquals(doctorOnOperation, doctor) && areDatesEqual(operation.Date,date) && checkIfDoctorIsBusyForOperation(operation, time))
+                if (isDoctorsEquals(doctorOnOperation, doctor) && areDatesEqual(operation.Date, date) && checkIfDoctorIsBusyForOperation(operation, time))
                 {
-                    return true; 
+                    return true;
                 }
             }
             return false;
@@ -247,10 +249,46 @@ namespace HealthClinic.CL.Service
                 DoctorUser doctorOnOperation = operation.Doctor;
                 if (isDoctorsEquals(doctorOnOperation, doctor) && areDatesEqual(operation.Date, date) && (checkIfDoctorIsBusyForOperation(operation, start) || checkIfDoctorIsBusyForOperation(operation, end)))
                     return true;
-                }
+            }
             return false;
         }
 
+        private List<DoctorUser> GetDoctorsBySpecialty(string specialty)
+        {
+            List<DoctorUser> specialists = new List<DoctorUser>();
+            foreach (DoctorUser doctor in GetAll())
+            {
+                if (UtilityMethods.CheckForSpecialty(doctor, specialty))
+                {
+                    specialists.Add(doctor);
+                }
+            }
+            return specialists;
+        }
 
+        private Boolean CheckIfDoctorIsWorking(DoctorUser doctor, DateTime date)
+        {
+            foreach (Schedule schedule in _employeesScheduleRepository.GetScheduleForDoctor(doctor.id.ToString()))
+            {
+                if(UtilityMethods.ParseDateInCorrectFormat(schedule.date) == date)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public List<DoctorUser> GetAvailableDoctors(string specialty, string date, int patientId)
+        {
+            List<DoctorUser> availableDoctors = new List<DoctorUser>();
+            foreach(DoctorUser doctor in GetDoctorsBySpecialty(specialty))
+            {
+                if(this.regularAppointmentService.GetAllAvailableAppointmentsForDate(date, doctor.id, patientId).Count != 0)
+                {
+                    availableDoctors.Add(doctor);
+                }
+            }
+            return availableDoctors;
+        }
     }
 }
