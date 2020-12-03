@@ -916,6 +916,9 @@ namespace HealthClinic.CL.Migrations
                     b.Property<int>("DoctorUserId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsCanceled")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<int>("PatientUserId")
                         .HasColumnType("int");
 
@@ -939,6 +942,7 @@ namespace HealthClinic.CL.Migrations
                             id = 1,
                             Date = "03/03/2020",
                             DoctorUserId = 1,
+                            IsCanceled = false,
                             PatientUserId = 2,
                             RoomId = "1",
                             Start = new TimeSpan(0, 14, 15, 0, 0)
@@ -948,6 +952,7 @@ namespace HealthClinic.CL.Migrations
                             id = 2,
                             Date = "03/03/2020",
                             DoctorUserId = 2,
+                            IsCanceled = false,
                             PatientUserId = 2,
                             RoomId = "1",
                             Start = new TimeSpan(0, 14, 30, 0, 0)
@@ -957,6 +962,7 @@ namespace HealthClinic.CL.Migrations
                             id = 3,
                             Date = "03/03/2020",
                             DoctorUserId = 2,
+                            IsCanceled = false,
                             PatientUserId = 1,
                             RoomId = "1",
                             Start = new TimeSpan(0, 15, 0, 0, 0)
@@ -966,6 +972,7 @@ namespace HealthClinic.CL.Migrations
                             id = 4,
                             Date = "03/03/2020",
                             DoctorUserId = 2,
+                            IsCanceled = false,
                             PatientUserId = 1,
                             RoomId = "1",
                             Start = new TimeSpan(0, 15, 45, 0, 0)
@@ -975,6 +982,7 @@ namespace HealthClinic.CL.Migrations
                             id = 5,
                             Date = "02/02/2020",
                             DoctorUserId = 1,
+                            IsCanceled = false,
                             PatientUserId = 1,
                             RoomId = "1",
                             Start = new TimeSpan(0, 12, 0, 0, 0)
@@ -984,6 +992,7 @@ namespace HealthClinic.CL.Migrations
                             id = 6,
                             Date = "02/02/2020",
                             DoctorUserId = 3,
+                            IsCanceled = false,
                             PatientUserId = 2,
                             RoomId = "1",
                             Start = new TimeSpan(0, 12, 15, 0, 0)
@@ -993,6 +1002,7 @@ namespace HealthClinic.CL.Migrations
                             id = 7,
                             Date = "07/02/2011",
                             DoctorUserId = 3,
+                            IsCanceled = false,
                             PatientUserId = 1,
                             RoomId = "1",
                             Start = new TimeSpan(0, 0, 0, 0, 0)
@@ -1002,6 +1012,7 @@ namespace HealthClinic.CL.Migrations
                             id = 8,
                             Date = "01/03/2020",
                             DoctorUserId = 2,
+                            IsCanceled = false,
                             PatientUserId = 1,
                             RoomId = "1",
                             Start = new TimeSpan(0, 0, 0, 0, 0)
@@ -1011,6 +1022,7 @@ namespace HealthClinic.CL.Migrations
                             id = 9,
                             Date = "14/03/2016",
                             DoctorUserId = 1,
+                            IsCanceled = false,
                             PatientUserId = 1,
                             RoomId = "1",
                             Start = new TimeSpan(0, 0, 0, 0, 0)
@@ -1020,6 +1032,7 @@ namespace HealthClinic.CL.Migrations
                             id = 10,
                             Date = "11/11/2030",
                             DoctorUserId = 2,
+                            IsCanceled = false,
                             PatientUserId = 1,
                             RoomId = "1",
                             Start = new TimeSpan(0, 0, 0, 0, 0)
@@ -1029,6 +1042,7 @@ namespace HealthClinic.CL.Migrations
                             id = 11,
                             Date = "14/03/2016",
                             DoctorUserId = 1,
+                            IsCanceled = false,
                             PatientUserId = 2,
                             RoomId = "A2",
                             Start = new TimeSpan(0, 0, 0, 0, 0)
@@ -1038,6 +1052,7 @@ namespace HealthClinic.CL.Migrations
                             id = 12,
                             Date = "11/11/2010",
                             DoctorUserId = 2,
+                            IsCanceled = false,
                             PatientUserId = 2,
                             RoomId = "B3",
                             Start = new TimeSpan(0, 0, 0, 0, 0)

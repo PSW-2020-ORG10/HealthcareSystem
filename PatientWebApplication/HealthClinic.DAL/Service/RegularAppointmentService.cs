@@ -77,12 +77,28 @@ namespace HealthClinic.CL.Service
             return _appointmentRepository.GetByid(id);
         }
 
-        /// <summary> This method is calling <c>AppointmentRepository</c> to get all appointments of one patient. </summary>
+        /// <summary> This method is calling <c>AppointmentRepository</c> to get all appointments of one patient that already happend . </summary>
         /// <param name="id"><c>id</c> is id of patient who's appointments we need.</param>
         /// <returns> List of patient's appointments. </returns>
         public List<DoctorAppointment> GetAppointmentsForPatient(int id)
         {
-            return _appointmentRepository.GetAppointmentsForPatient(id);
+            return CheckIfAppointmentsHappened(_appointmentRepository.GetAppointmentsForPatient(id));
+        }
+
+        /// <summary> This method is calling <c>AppointmentRepository</c> to get all appointments of one patient that is happening in next 2 days . </summary>
+        /// <param name="id"><c>id</c> is id of patient who's appointments we need.</param>
+        /// <returns> List of patient's appointments. </returns>
+        public List<DoctorAppointment> GetAppointmentsForPatientInTwoDays(int id)
+        {
+            return CheckIfAppointmentsAreInTwoDays(_appointmentRepository.GetAppointmentsForPatient(id));
+        }
+
+        /// <summary> This method is calling <c>AppointmentRepository</c> to get all appointments of one patient that is happening in future . </summary>
+        /// <param name="id"><c>id</c> is id of patient who's appointments we need.</param>
+        /// <returns> List of patient's appointments. </returns>
+        public List<DoctorAppointment> GetAppointmentsForPatientInFuture(int id)
+        {
+            return CheckIfAppointmentsAreInFuture(_appointmentRepository.GetAppointmentsForPatient(id));
         }
 
         public List<DoctorAppointment> GetAppointmentsForDoctor(int id)
@@ -465,6 +481,14 @@ namespace HealthClinic.CL.Service
         private List<DoctorAppointment> CheckIfAppointmentsHappened(List<DoctorAppointment> allValidAppointments)
         {
             return allValidAppointments.Where(appointment => UtilityMethods.ParseDateInCorrectFormat(appointment.Date) < DateTime.Now).ToList();
+        }
+        private List<DoctorAppointment> CheckIfAppointmentsAreInTwoDays(List<DoctorAppointment> allValidAppointments)
+        {
+            return allValidAppointments.Where(appointment => ((UtilityMethods.ParseDateInCorrectFormat(appointment.Date) < (DateTime.Now.AddDays(2))) && (UtilityMethods.ParseDateInCorrectFormat(appointment.Date) >= DateTime.Now))).ToList();
+        }
+        private List<DoctorAppointment> CheckIfAppointmentsAreInFuture(List<DoctorAppointment> allValidAppointments)
+        {
+            return allValidAppointments.Where(appointment => UtilityMethods.ParseDateInCorrectFormat(appointment.Date) > DateTime.Now.AddDays(2)).ToList();
         }
     }
 }
