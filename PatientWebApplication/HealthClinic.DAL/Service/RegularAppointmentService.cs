@@ -113,7 +113,7 @@ namespace HealthClinic.CL.Service
                 }
                 else
                 {
-                    recommendedAppointment = RecommenedAnAppointmentDatePriority(startDate, endDate, patient);
+                    recommendedAppointment = RecommenedAnAppointmentDatePriority(startDate, endDate, patient, doctor.speciality);
                 }
             }
 
@@ -191,13 +191,11 @@ namespace HealthClinic.CL.Service
             return int.Parse(partsEnd[1]);
         }
 
-        public DoctorAppointment RecommenedAnAppointmentDatePriority(DateTime date1, DateTime date2, PatientUser patient)
+        public DoctorAppointment RecommenedAnAppointmentDatePriority(DateTime date1, DateTime date2, PatientUser patient, string speciality)
         {
-            List<DoctorUser> doctorsList = doctorRepository.GetAll();
-
-            foreach (DoctorUser doctor in doctorsList)
+            foreach (DoctorUser doctor in doctorRepository.GetAll())
             {
-                if (doctor.isSpecialist == false && RecommendAnAppointment(doctor, date1, date2, patient) != null)
+                if (doctor.speciality.Equals(speciality) && RecommendAnAppointment(doctor, date1, date2, patient) != null)
                     return RecommendAnAppointment(doctor, date1, date2, patient);
             }
             return null;

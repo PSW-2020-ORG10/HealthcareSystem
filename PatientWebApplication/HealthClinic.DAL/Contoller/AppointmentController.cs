@@ -55,7 +55,7 @@ namespace HealthClinic.CL.Contoller
         }
         public DoctorAppointment recommenedAnAppointmentDatePriority(DateTime date1, DateTime date2, PatientUser patient)
         {
-            return regularAppointmentService.RecommenedAnAppointmentDatePriority(date1, date2, patient);
+            return regularAppointmentService.RecommenedAnAppointmentDatePriority(date1, date2, patient, "Speciality");
         }
 
 
