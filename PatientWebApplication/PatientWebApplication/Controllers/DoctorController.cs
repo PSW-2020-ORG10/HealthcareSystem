@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HealthClinic.CL.Adapters;
+using HealthClinic.CL.Repository;
 using HealthClinic.CL.Service;
+using HealthClinic.CL.Utility;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,17 +15,24 @@ namespace PatientWebApplication.Controllers
     [ApiController]
     public class DoctorController : ControllerBase
     {
-        private DoctorService DoctorService { get; set; }
+        private DoctorService doctorService;
 
+        /// <summary>This constructor initiates the DoctorAppointmentController's appointment service.</summary>
         public DoctorController()
         {
-            DoctorService = new DoctorService();
+            this.doctorService = new DoctorService(new OperationRepository(), new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorRepository());
+        }
+
+        [HttpGet("available")]
+        public IActionResult GetAvailableDoctors(string specialty, string date, int patientId)
+        {
+            return Ok(new DoctorAdapter().ConvertDoctorListToDoctorDtoList(doctorService.GetAvailableDoctors(specialty, date, patientId)));
         }
 
         [HttpGet]       // GET /api/doctor
         public IActionResult Get()
         {
-            return Ok(DoctorService.GetAll());
+            return Ok(doctorService.GetAll());
         }
     }
 }

@@ -17,7 +17,7 @@ namespace PatientWebApplicationTests
         [Fact]
         public void Get_Appointments_Successfuly()
         {
-            RegularAppointmentService service = new RegularAppointmentService(CreateStubRepository());
+            RegularAppointmentService service = new RegularAppointmentService(CreateStubRepository(), new Mock<IEmployeesScheduleRepository>().Object, new DoctorService(new Mock<IOperationRepository>().Object, CreateStubRepository(), new Mock<IEmployeesScheduleRepository>().Object, new Mock<IDoctorRepository>().Object), new Mock<IPatientsRepository>().Object, new OperationService(new Mock<IOperationRepository>().Object));
             List<DoctorAppointment> foundAppointments = service.GetAppointmentsForPatient(1);
             foundAppointments.ShouldNotBeNull();
         }

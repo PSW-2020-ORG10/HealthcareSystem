@@ -12,12 +12,30 @@ using System.Linq;
 
 namespace HealthClinic.CL.Repository
 {
-    public class DoctorRepository
-   {
+    public class DoctorRepository : IDoctorRepository
+    {
         private readonly MyDbContext dbContext;
         public DoctorRepository()
         {
             this.dbContext = new MyDbContext(new DbContextOptionsBuilder<MyDbContext>().UseMySql("Server=localhost;port=3306;Database=MYSQLHealtcareDB;user=root;password=root").UseLazyLoadingProxies().Options);
+        }
+
+        public void New(DoctorUser doctor)
+        {
+            dbContext.Doctors.Add(doctor);
+            dbContext.SaveChanges();
+        }
+
+        public void Update(DoctorUser doctor)
+        {
+            dbContext.Doctors.Update(doctor);
+            dbContext.SaveChanges();
+        }
+
+        public void Delete(int id)
+        {
+            dbContext.Doctors.Remove(GetByid(id));
+            dbContext.SaveChanges();
         }
 
         public List<DoctorUser> GetAll()
@@ -25,29 +43,10 @@ namespace HealthClinic.CL.Repository
             return dbContext.Doctors.ToList();
         }
 
-        public DoctorUser New(DoctorUser doctor)
-        {
-            dbContext.Doctors.Add(doctor);
-            dbContext.SaveChanges();
-            return doctor;
-        }
-
-        public DoctorUser Update(DoctorUser doctor)
-        {
-            dbContext.Doctors.Update(doctor);
-            dbContext.SaveChanges();
-            return doctor;
-        }
-
         public DoctorUser GetByid(int id)
         {
-            return dbContext.Doctors.SingleOrDefault(d => d.id == id);
+            return dbContext.Doctors.SingleOrDefault(doctor => doctor.id == id);
         }
 
-        public void Delete(int id)
-        {
-            dbContext.Doctors.Remove(dbContext.Doctors.SingleOrDefault(d => d.id == id));
-            dbContext.SaveChanges();
-        }
     }
 }

@@ -17,7 +17,7 @@ namespace PatientWebApplicationTests
         public void Find_Appointment()
         {
 
-            RegularAppointmentService service = new RegularAppointmentService(CreateAppointmentStubRepository());
+            RegularAppointmentService service = new RegularAppointmentService(CreateAppointmentStubRepository(), new Mock<IEmployeesScheduleRepository>().Object, new DoctorService(new Mock<IOperationRepository>().Object, CreateAppointmentStubRepository(), new Mock<IEmployeesScheduleRepository>().Object, new Mock<IDoctorRepository>().Object), new Mock<IPatientsRepository>().Object, new OperationService(new Mock<IOperationRepository>().Object));
 
             List<DoctorAppointment> foundAppointments = service.SimpleSearchAppointments(new AppointmentReportSearchDto("Per", "20/07/2020", "25/08/2020", "Appointment", 2));
 
@@ -28,7 +28,7 @@ namespace PatientWebApplicationTests
         public void Find_No_Matching_Appointments()
         {
 
-            RegularAppointmentService service = new RegularAppointmentService(CreateAppointmentStubRepository());
+            RegularAppointmentService service = new RegularAppointmentService(CreateAppointmentStubRepository(), new Mock<IEmployeesScheduleRepository>().Object, new DoctorService(new Mock<IOperationRepository>().Object, CreateAppointmentStubRepository(), new Mock<IEmployeesScheduleRepository>().Object, new Mock<IDoctorRepository>().Object), new Mock<IPatientsRepository>().Object, new OperationService(new Mock<IOperationRepository>().Object));
 
             List<DoctorAppointment> foundAppointments = service.SimpleSearchAppointments(new AppointmentReportSearchDto("", "", "", "Operation", 2));
 
@@ -38,7 +38,7 @@ namespace PatientWebApplicationTests
         [Fact]
         public void Find_Appointment_With_Empty_Start()
         {
-            RegularAppointmentService service = new RegularAppointmentService(CreateAppointmentStubRepository());
+            RegularAppointmentService service = new RegularAppointmentService(CreateAppointmentStubRepository(), new Mock<IEmployeesScheduleRepository>().Object, new DoctorService(new Mock<IOperationRepository>().Object, CreateAppointmentStubRepository(), new Mock<IEmployeesScheduleRepository>().Object, new Mock<IDoctorRepository>().Object), new Mock<IPatientsRepository>().Object, new OperationService(new Mock<IOperationRepository>().Object));
 
             List<DoctorAppointment> foundAppointments = service.SimpleSearchAppointments(new AppointmentReportSearchDto("", "", "22/11/2020", "Appointment", 2));
 
@@ -49,7 +49,7 @@ namespace PatientWebApplicationTests
         [Fact]
         public void Find_Appointment_With_Empty_End()
         {
-            RegularAppointmentService service = new RegularAppointmentService(CreateAppointmentStubRepository());
+            RegularAppointmentService service = new RegularAppointmentService(CreateAppointmentStubRepository(), new Mock<IEmployeesScheduleRepository>().Object, new DoctorService(new Mock<IOperationRepository>().Object, CreateAppointmentStubRepository(), new Mock<IEmployeesScheduleRepository>().Object, new Mock<IDoctorRepository>().Object), new Mock<IPatientsRepository>().Object, new OperationService(new Mock<IOperationRepository>().Object));
 
             List<DoctorAppointment> foundAppointments = service.SimpleSearchAppointments(new AppointmentReportSearchDto("", "22/01/2020", "", "Appointment", 2));
 

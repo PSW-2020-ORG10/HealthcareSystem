@@ -6,6 +6,7 @@
 
 using HealthClinic.CL.Model.Doctor;
 using HealthClinic.CL.Model.Hospital;
+using HealthClinic.CL.Repository;
 using HealthClinic.CL.Service;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace HealthClinic.CL.Contoller
 
         public DoctorController()
         {
-            doctorService = new DoctorService();
+            doctorService = new DoctorService(new OperationRepository(), new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorRepository());
         }
 
 
@@ -53,11 +54,11 @@ namespace HealthClinic.CL.Contoller
         }
         public Boolean doesDoctorHaveAnAppointmentAtSpecificTime(DoctorUser doctor, TimeSpan time, string date)
         {
-            return doctorService.doesDoctorHaveAnAppointmentAtSpecificTime(doctor, time, date);
+            return doctorService.DoesDoctorHaveAnAppointmentAtSpecificTime(doctor, time, date);
         }
         public Boolean doesDoctorHaveAnOperationAtSpecificTime(DoctorUser doctor, TimeSpan time, string date)
         {
-            return doctorService.doesDoctorHaveAnOperationAtSpecificTime(doctor, time, date);
+            return doctorService.DoesDoctorHaveAnOperationAtSpecificTime(doctor, time, date);
         }
 
         public bool doesDoctorHaveAnOperationAtSpecificPerod(DoctorUser doctor, TimeSpan start, TimeSpan end, string dateToString)

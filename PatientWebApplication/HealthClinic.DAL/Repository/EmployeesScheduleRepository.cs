@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace HealthClinic.CL.Repository
 {
-    public class EmployeesScheduleRepository
+    public class EmployeesScheduleRepository : IEmployeesScheduleRepository
     {
         private readonly MyDbContext dbContext;
         public EmployeesScheduleRepository()
@@ -50,8 +50,7 @@ namespace HealthClinic.CL.Repository
 
         public List<Schedule> GetScheduleForDoctor(string id)
         {
-            return dbContext.Schedules.ToList().FindAll(schedule => schedule.EmployeeId.Equals(id));
+            return dbContext.Schedules.ToList().FindAll(schedule => schedule.EmployeeId.ToString().Equals(id));
         }
-
     }
 }

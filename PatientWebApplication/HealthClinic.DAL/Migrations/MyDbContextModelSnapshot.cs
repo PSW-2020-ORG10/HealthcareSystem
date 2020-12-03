@@ -113,22 +113,22 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
-                            Date = "20/02/2020",
+                            Date = "03/03/2020",
                             DoctorUserId = 1,
                             PatientUserId = 2,
                             RoomId = "room1",
-                            Start = new TimeSpan(0, 0, 0, 0, 0),
-                            end = new TimeSpan(0, 0, 0, 0, 0)
+                            Start = new TimeSpan(0, 14, 0, 0, 0),
+                            end = new TimeSpan(0, 15, 0, 0, 0)
                         },
                         new
                         {
                             id = 2,
                             Date = "03/10/2020",
                             DoctorUserId = 2,
-                            PatientUserId = 2,
+                            PatientUserId = 1,
                             RoomId = "room1",
-                            Start = new TimeSpan(0, 0, 0, 0, 0),
-                            end = new TimeSpan(0, 0, 0, 0, 0)
+                            Start = new TimeSpan(0, 15, 0, 0, 0),
+                            end = new TimeSpan(0, 15, 15, 0, 0)
                         });
                 });
 
@@ -417,82 +417,55 @@ namespace HealthClinic.CL.Migrations
                         {
                             id = 1,
                             EmployeeId = 1,
-                            date = "12/12/2020",
+                            date = "08/12/2020",
                             isOnDuty = true,
                             room = "Ordination 1",
-                            shiftId = 1
+                            shiftId = 3
                         },
                         new
                         {
                             id = 2,
                             EmployeeId = 1,
-                            date = "02/12/2020",
+                            date = "09/12/2020",
                             isOnDuty = true,
                             room = "Ordination 1",
-                            shiftId = 1
+                            shiftId = 3
                         },
                         new
                         {
                             id = 3,
                             EmployeeId = 1,
-                            date = "12/02/2020",
+                            date = "10/12/2020",
                             isOnDuty = true,
                             room = "Ordination 1",
-                            shiftId = 1
+                            shiftId = 3
                         },
                         new
                         {
                             id = 4,
                             EmployeeId = 1,
-                            date = "03/12/2020",
+                            date = "11/12/2020",
                             isOnDuty = true,
                             room = "Ordination 1",
-                            shiftId = 1
+                            shiftId = 3
                         },
                         new
                         {
                             id = 5,
                             EmployeeId = 1,
-                            date = "12/03/2020",
+                            date = "12/12/2020",
                             isOnDuty = true,
                             room = "Ordination 1",
-                            shiftId = 1
+                            shiftId = 3
                         },
                         new
                         {
                             id = 6,
                             EmployeeId = 1,
-                            date = "08/12/2020",
+                            date = "13/12/2020",
                             isOnDuty = true,
                             room = "Ordination 1",
-                            shiftId = 1
-                        },
-                        new
-                        {
-                            id = 7,
-                            EmployeeId = 1,
-                            date = "09/12/2020",
-                            isOnDuty = true,
-                            room = "Ordination 1",
-                            shiftId = 1
-                        },
-                        new
-                        {
-                            id = 8,
-                            EmployeeId = 1,
-                            date = "10/12/2020",
-                            isOnDuty = true,
-                            room = "Ordination 1",
-                            shiftId = 1
-                        },
-                        new
-                        {
-                            id = 9,
-                            EmployeeId = 1,
-                            date = "11/12/2020",
-                            isOnDuty = true,
-                            room = "Ordination 1",
-                            shiftId = 1
+                            shiftId = 3
                         });
                 });
 
@@ -516,6 +489,18 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
+                            endTime = "16:00",
+                            startTime = "14:00"
+                        },
+                        new
+                        {
+                            id = 2,
+                            endTime = "12:30",
+                            startTime = "12:00"
+                        },
+                        new
+                        {
+                            id = 3,
                             endTime = "19:00",
                             startTime = "08:00"
                         });
@@ -869,56 +854,56 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
-                            Date = "22/04/2020",
+                            Date = "03/03/2020",
                             DoctorUserId = 1,
                             PatientUserId = 2,
                             RoomId = "1",
-                            Start = new TimeSpan(0, 0, 0, 0, 0)
+                            Start = new TimeSpan(0, 14, 15, 0, 0)
                         },
                         new
                         {
                             id = 2,
-                            Date = "07/01/2020",
+                            Date = "03/03/2020",
                             DoctorUserId = 2,
                             PatientUserId = 2,
                             RoomId = "1",
-                            Start = new TimeSpan(0, 0, 0, 0, 0)
+                            Start = new TimeSpan(0, 14, 30, 0, 0)
                         },
                         new
                         {
                             id = 3,
-                            Date = "05/07/2019",
-                            DoctorUserId = 3,
+                            Date = "03/03/2020",
+                            DoctorUserId = 2,
                             PatientUserId = 1,
                             RoomId = "1",
-                            Start = new TimeSpan(0, 0, 0, 0, 0)
+                            Start = new TimeSpan(0, 15, 0, 0, 0)
                         },
                         new
                         {
                             id = 4,
-                            Date = "04/02/2019",
-                            DoctorUserId = 1,
+                            Date = "03/03/2020",
+                            DoctorUserId = 2,
                             PatientUserId = 1,
                             RoomId = "1",
-                            Start = new TimeSpan(0, 0, 0, 0, 0)
+                            Start = new TimeSpan(0, 15, 45, 0, 0)
                         },
                         new
                         {
                             id = 5,
-                            Date = "11/01/2016",
-                            DoctorUserId = 2,
+                            Date = "02/02/2020",
+                            DoctorUserId = 1,
                             PatientUserId = 1,
                             RoomId = "1",
-                            Start = new TimeSpan(0, 0, 0, 0, 0)
+                            Start = new TimeSpan(0, 12, 0, 0, 0)
                         },
                         new
                         {
                             id = 6,
-                            Date = "09/01/2014",
+                            Date = "02/02/2020",
                             DoctorUserId = 3,
-                            PatientUserId = 1,
+                            PatientUserId = 2,
                             RoomId = "1",
-                            Start = new TimeSpan(0, 0, 0, 0, 0)
+                            Start = new TimeSpan(0, 12, 15, 0, 0)
                         },
                         new
                         {
@@ -1551,7 +1536,7 @@ namespace HealthClinic.CL.Migrations
                             uniqueCitizensidentityNumber = "1234",
                             isSpecialist = false,
                             ordination = "Ordination 1",
-                            speciality = "Specialty"
+                            speciality = "Cardiology"
                         },
                         new
                         {
@@ -1567,7 +1552,7 @@ namespace HealthClinic.CL.Migrations
                             uniqueCitizensidentityNumber = "12345",
                             isSpecialist = false,
                             ordination = "Ordination 1",
-                            speciality = "Specialty"
+                            speciality = "Pulmonology"
                         },
                         new
                         {
@@ -1583,7 +1568,7 @@ namespace HealthClinic.CL.Migrations
                             uniqueCitizensidentityNumber = "12346",
                             isSpecialist = false,
                             ordination = "Ordination 1",
-                            speciality = "Specialty"
+                            speciality = "Cardiology"
                         });
                 });
 

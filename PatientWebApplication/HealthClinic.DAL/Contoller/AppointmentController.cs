@@ -18,7 +18,7 @@ namespace HealthClinic.CL.Contoller
 
         public AppointmentController()
         {
-            regularAppointmentService = new RegularAppointmentService(new AppointmentRepository());
+            regularAppointmentService = new RegularAppointmentService(new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorService(new OperationRepository(), new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorRepository()), new PatientsRepository(), new OperationService(new OperationRepository()));
             contextAppointmentService = new ContextAppointmentService(regularAppointmentService);
         }
         public void New(DoctorAppointment appointment, Operation operation)

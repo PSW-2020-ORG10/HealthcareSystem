@@ -88,11 +88,11 @@ namespace HealthClinic.CL.DbContextModel
             modelBuilder.Entity<DoctorUser>().HasData(
 
            new DoctorUser(1, "Konstantin", "Davidovic", "1234", "2/2/2020", "123", "email", "pass", "Grad",
-             200.0, false, "Specialty", new List<DoctorNotification>(), "Ordination 1"),
+             200.0, false, "Cardiology", new List<DoctorNotification>(), "Ordination 1"),
            new DoctorUser(2, "Novak", "Maric", "12345", "2/2/2020", "123", "email", "pass", "Grad",
-             200.0, false, "Specialty", new List<DoctorNotification>(), "Ordination 1"),
+             200.0, false, "Pulmonology", new List<DoctorNotification>(), "Ordination 1"),
             new DoctorUser(3, "Milica", "Tadic", "12346", "2/2/2020", "123", "email", "pass", "Grad",
-             200.0, false, "Specialty", new List<DoctorNotification>(), "Ordination 1")
+             200.0, false, "Cardiology", new List<DoctorNotification>(), "Ordination 1")
 
 
            ) ;
@@ -139,8 +139,8 @@ namespace HealthClinic.CL.DbContextModel
 
             modelBuilder.Entity<Operation>().HasData(
 
-            new Operation(1, 2, "20/02/2020", new TimeSpan(), new TimeSpan(), 1, "room1"),
-            new Operation(2, 2, "03/10/2020", new TimeSpan(), new TimeSpan(), 2, "room1")
+            new Operation(1, 2, "03/03/2020", new TimeSpan(0, 14, 0, 0), new TimeSpan(0, 15, 0, 0, 0), 1, "room1"),
+            new Operation(2, 1, "03/10/2020", new TimeSpan(0, 15, 0, 0), new TimeSpan(0, 15, 15, 0, 0), 2, "room1")
 
             );
 
@@ -148,21 +148,20 @@ namespace HealthClinic.CL.DbContextModel
 
             modelBuilder.Entity<Shift>().HasData(
 
-            new Shift(1, "08:00", "19:00")
+            new Shift(1, "14:00", "16:00"),
+            new Shift(2, "12:00", "12:30"),
+            new Shift(3, "08:00", "19:00")
 
             );
 
             modelBuilder.Entity<Schedule>().HasData(
 
-            new Schedule(1, 1, "12/12/2020", true, 1, "Ordination 1"),
-            new Schedule(2, 1, "02/12/2020", true, 1, "Ordination 1"),
-            new Schedule(3, 1, "12/02/2020", true, 1, "Ordination 1"),
-            new Schedule(4, 1, "03/12/2020", true, 1, "Ordination 1"),
-            new Schedule(5, 1, "12/03/2020", true, 1, "Ordination 1"),
-            new Schedule(6, 1, "08/12/2020", true, 1, "Ordination 1"),
-            new Schedule(7, 1, "09/12/2020", true, 1, "Ordination 1"),
-            new Schedule(8, 1, "10/12/2020", true, 1, "Ordination 1"),
-            new Schedule(9, 1, "11/12/2020", true, 1, "Ordination 1")
+            new Schedule(1, 1, "08/12/2020", true, 3, "Ordination 1"),
+            new Schedule(2, 1, "09/12/2020", true, 3, "Ordination 1"),
+            new Schedule(3, 1, "10/12/2020", true, 3, "Ordination 1"),
+            new Schedule(4, 1, "11/12/2020", true, 3, "Ordination 1"),
+            new Schedule(5, 1, "12/12/2020", true, 3, "Ordination 1"),
+            new Schedule(6, 1, "13/12/2020", true, 3, "Ordination 1")
 
 
            );
@@ -231,12 +230,12 @@ namespace HealthClinic.CL.DbContextModel
 
             modelBuilder.Entity<DoctorAppointment>().HasData(
 
-             new DoctorAppointment(1, new TimeSpan(), "22/04/2020", 2, 1, new List<Referral>(), "1"),
-            new DoctorAppointment(2, new TimeSpan(), "07/01/2020", 2, 2, new List<Referral>(), "1"),
-            new DoctorAppointment(3, new TimeSpan(), "05/07/2019", 1, 3, new List<Referral>(), "1"),
-            new DoctorAppointment(4, new TimeSpan(), "04/02/2019", 1, 1, new List<Referral>(), "1"),
-            new DoctorAppointment(5, new TimeSpan(), "11/01/2016", 1, 2, new List<Referral>(), "1"),
-            new DoctorAppointment(6, new TimeSpan(), "09/01/2014", 1, 3, new List<Referral>(), "1"),
+            new DoctorAppointment(1, new TimeSpan(0, 14, 15, 0, 0), "03/03/2020", 2, 1, new List<Referral>(), "1"),
+            new DoctorAppointment(2, new TimeSpan(0, 14, 30, 0, 0), "03/03/2020", 2, 2, new List<Referral>(), "1"),
+            new DoctorAppointment(3, new TimeSpan(0, 15, 0, 0, 0), "03/03/2020", 1, 2, new List<Referral>(), "1"),
+            new DoctorAppointment(4, new TimeSpan(0, 15, 45, 0, 0), "03/03/2020", 1, 2, new List<Referral>(), "1"),
+            new DoctorAppointment(5, new TimeSpan(0, 12, 0, 0, 0), "02/02/2020", 1, 1, new List<Referral>(), "1"),
+            new DoctorAppointment(6, new TimeSpan(0, 12, 15, 0, 0), "02/02/2020", 2, 3, new List<Referral>(), "1"),
             new DoctorAppointment(7, new TimeSpan(), "07/02/2011", 1, 3, new List<Referral>(), "1"),
             new DoctorAppointment(8, new TimeSpan(), "01/03/2020", 1, 2, new List<Referral>(), "1"),
             new DoctorAppointment(9, new TimeSpan(), "14/03/2016", 1, 1, new List<Referral>(), "1"),

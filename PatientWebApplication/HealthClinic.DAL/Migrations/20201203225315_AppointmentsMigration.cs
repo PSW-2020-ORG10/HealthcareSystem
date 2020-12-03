@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HealthClinic.CL.Migrations
 {
-    public partial class FirstMigration : Migration
+    public partial class AppointmentsMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -653,7 +653,7 @@ namespace HealthClinic.CL.Migrations
             migrationBuilder.InsertData(
                 table: "EmployeeUser",
                 columns: new[] { "id", "Discriminator", "city", "dateOfBirth", "email", "firstName", "password", "phoneNumber", "salary", "secondName", "uniqueCitizensidentityNumber", "isSpecialist", "ordination", "speciality" },
-                values: new object[] { 3, "DoctorUser", "Grad", "2/2/2020", "email", "Milica", "pass", "123", 200.0, "Tadic", "12346", false, "Ordination 1", "Specialty" });
+                values: new object[] { 3, "DoctorUser", "Grad", "2/2/2020", "email", "Milica", "pass", "123", 200.0, "Tadic", "12346", false, "Ordination 1", "Cardiology" });
 
             migrationBuilder.InsertData(
                 table: "EmployeeUser",
@@ -665,8 +665,8 @@ namespace HealthClinic.CL.Migrations
                 columns: new[] { "id", "Discriminator", "city", "dateOfBirth", "email", "firstName", "password", "phoneNumber", "salary", "secondName", "uniqueCitizensidentityNumber", "isSpecialist", "ordination", "speciality" },
                 values: new object[,]
                 {
-                    { 1, "DoctorUser", "Grad", "2/2/2020", "email", "Konstantin", "pass", "123", 200.0, "Davidovic", "1234", false, "Ordination 1", "Specialty" },
-                    { 2, "DoctorUser", "Grad", "2/2/2020", "email", "Novak", "pass", "123", 200.0, "Maric", "12345", false, "Ordination 1", "Specialty" }
+                    { 2, "DoctorUser", "Grad", "2/2/2020", "email", "Novak", "pass", "123", 200.0, "Maric", "12345", false, "Ordination 1", "Pulmonology" },
+                    { 1, "DoctorUser", "Grad", "2/2/2020", "email", "Konstantin", "pass", "123", 200.0, "Davidovic", "1234", false, "Ordination 1", "Cardiology" }
                 });
 
             migrationBuilder.InsertData(
@@ -736,24 +736,29 @@ namespace HealthClinic.CL.Migrations
             migrationBuilder.InsertData(
                 table: "Shifts",
                 columns: new[] { "id", "endTime", "startTime" },
-                values: new object[] { 1, "19:00", "08:00" });
+                values: new object[,]
+                {
+                    { 3, "19:00", "08:00" },
+                    { 2, "12:30", "12:00" },
+                    { 1, "16:00", "14:00" }
+                });
 
             migrationBuilder.InsertData(
                 table: "DoctorAppointments",
                 columns: new[] { "id", "Date", "DoctorUserId", "PatientUserId", "RoomId", "Start" },
                 values: new object[,]
                 {
-                    { 6, "09/01/2014", 3, 1, "1", new TimeSpan(0, 0, 0, 0, 0) },
-                    { 2, "07/01/2020", 2, 2, "1", new TimeSpan(0, 0, 0, 0, 0) },
-                    { 1, "22/04/2020", 1, 2, "1", new TimeSpan(0, 0, 0, 0, 0) },
+                    { 5, "02/02/2020", 1, 1, "1", new TimeSpan(0, 12, 0, 0, 0) },
+                    { 6, "02/02/2020", 3, 2, "1", new TimeSpan(0, 12, 15, 0, 0) },
+                    { 2, "03/03/2020", 2, 2, "1", new TimeSpan(0, 14, 30, 0, 0) },
+                    { 1, "03/03/2020", 1, 2, "1", new TimeSpan(0, 14, 15, 0, 0) },
                     { 10, "11/11/2030", 2, 1, "1", new TimeSpan(0, 0, 0, 0, 0) },
                     { 9, "14/03/2016", 1, 1, "1", new TimeSpan(0, 0, 0, 0, 0) },
                     { 8, "01/03/2020", 2, 1, "1", new TimeSpan(0, 0, 0, 0, 0) },
                     { 7, "07/02/2011", 3, 1, "1", new TimeSpan(0, 0, 0, 0, 0) },
                     { 11, "14/03/2016", 1, 2, "A2", new TimeSpan(0, 0, 0, 0, 0) },
-                    { 5, "11/01/2016", 2, 1, "1", new TimeSpan(0, 0, 0, 0, 0) },
-                    { 4, "04/02/2019", 1, 1, "1", new TimeSpan(0, 0, 0, 0, 0) },
-                    { 3, "05/07/2019", 3, 1, "1", new TimeSpan(0, 0, 0, 0, 0) },
+                    { 4, "03/03/2020", 2, 1, "1", new TimeSpan(0, 15, 45, 0, 0) },
+                    { 3, "03/03/2020", 2, 1, "1", new TimeSpan(0, 15, 0, 0, 0) },
                     { 12, "11/11/2010", 2, 2, "B3", new TimeSpan(0, 0, 0, 0, 0) }
                 });
 
@@ -778,8 +783,8 @@ namespace HealthClinic.CL.Migrations
                 columns: new[] { "id", "Date", "DoctorUserId", "PatientUserId", "RoomId", "Start", "end" },
                 values: new object[,]
                 {
-                    { 1, "20/02/2020", 1, 2, "room1", new TimeSpan(0, 0, 0, 0, 0), new TimeSpan(0, 0, 0, 0, 0) },
-                    { 2, "03/10/2020", 2, 2, "room1", new TimeSpan(0, 0, 0, 0, 0), new TimeSpan(0, 0, 0, 0, 0) }
+                    { 1, "03/03/2020", 1, 2, "room1", new TimeSpan(0, 14, 0, 0, 0), new TimeSpan(0, 15, 0, 0, 0) },
+                    { 2, "03/10/2020", 2, 1, "room1", new TimeSpan(0, 15, 0, 0, 0), new TimeSpan(0, 15, 15, 0, 0) }
                 });
 
             migrationBuilder.InsertData(
@@ -803,11 +808,12 @@ namespace HealthClinic.CL.Migrations
                 columns: new[] { "id", "EmployeeId", "date", "isOnDuty", "room", "shiftId" },
                 values: new object[,]
                 {
-                    { 2, 1, "02/12/2020", true, "Ordination 1", 1 },
-                    { 3, 1, "12/02/2020", true, "Ordination 1", 1 },
-                    { 4, 1, "03/12/2020", true, "Ordination 1", 1 },
-                    { 1, 1, "12/12/2020", true, "Ordination 1", 1 },
-                    { 5, 1, "12/03/2020", true, "Ordination 1", 1 }
+                    { 2, 1, "09/12/2020", true, "Ordination 1", 3 },
+                    { 1, 1, "08/12/2020", true, "Ordination 1", 3 },
+                    { 4, 1, "11/12/2020", true, "Ordination 1", 3 },
+                    { 5, 1, "12/12/2020", true, "Ordination 1", 3 },
+                    { 6, 1, "13/12/2020", true, "Ordination 1", 3 },
+                    { 3, 1, "10/12/2020", true, "Ordination 1", 3 }
                 });
 
             migrationBuilder.InsertData(
@@ -840,18 +846,18 @@ namespace HealthClinic.CL.Migrations
                 columns: new[] { "id", "AppointmentId", "classify", "comment", "medicine", "quantityPerDay", "takeMedicineUntil" },
                 values: new object[,]
                 {
+                    { 6, 6, "Appointment", "Patient had cold.", "Brufen", 1, "11/05/2020" },
                     { 2, 2, "Appointment", "Patient had cold.", "Brufen", 1, "11/05/2020" },
                     { 1, 1, "classify", "Patient had slight heart arrhythmia.", "Aspirin", 3, "25/02/2020" },
                     { 10, 10, "Appointment", "Patient had cold.", "Brufen", 1, "11/05/2020" },
                     { 9, 9, "classify", "Patient had slight heart arrhythmia.", "Aspirin", 3, "25/02/2020" },
                     { 8, 8, "Appointment", "Patient had cold.", "Brufen", 1, "11/05/2020" },
                     { 7, 7, "classify", "Patient had slight heart arrhythmia.", "Aspirin", 3, "25/02/2020" },
-                    { 12, 12, "Appointment", "Patient had cold.", "Brufen", 1, "11/05/2020" },
-                    { 6, 6, "Appointment", "Patient had cold.", "Brufen", 1, "11/05/2020" },
+                    { 11, 11, "classify", "Patient had slight heart arrhythmia.", "Aspirin", 3, "25/02/2020" },
                     { 5, 5, "classify", "Patient had slight heart arrhythmia.", "Aspirin", 3, "25/02/2020" },
                     { 4, 4, "Appointment", "Patient had cold.", "Brufen", 1, "11/05/2020" },
                     { 3, 3, "classify", "Patient had slight heart arrhythmia.", "Aspirin", 3, "25/02/2020" },
-                    { 11, 11, "classify", "Patient had slight heart arrhythmia.", "Aspirin", 3, "25/02/2020" }
+                    { 12, 12, "Appointment", "Patient had cold.", "Brufen", 1, "11/05/2020" }
                 });
 
             migrationBuilder.InsertData(
@@ -859,11 +865,11 @@ namespace HealthClinic.CL.Migrations
                 columns: new[] { "id", "appointmentId", "doctorsKnowledge", "doctorsPoliteness", "doctorsProfessionalism", "doctorsSkill", "doctorsTechnicality", "doctorsWorkingPace", "hospitalEnvironment", "hospitalEquipment", "hospitalHygiene", "hospitalPrices", "hospitalWaitingTime", "medicalStaffsKnowledge", "medicalStaffsPoliteness", "medicalStaffsProfessionalism", "medicalStaffsSkill", "medicalStaffsTechnicality", "medicalStaffsWorkingPace", "patientId" },
                 values: new object[,]
                 {
-                    { 5, 7, 4, 5, 4, 2, 4, 5, 1, 1, 2, 5, 1, 5, 2, 1, 3, 4, 2, 1 },
                     { 3, 5, 4, 5, 4, 3, 1, 5, 1, 2, 2, 1, 5, 5, 2, 3, 1, 5, 4, 1 },
                     { 2, 4, 5, 5, 4, 1, 3, 5, 1, 3, 3, 3, 5, 5, 2, 2, 2, 4, 3, 1 },
                     { 1, 3, 4, 5, 4, 5, 4, 5, 3, 3, 2, 2, 5, 5, 5, 4, 5, 5, 4, 1 },
-                    { 4, 6, 5, 5, 4, 5, 2, 1, 1, 3, 1, 3, 5, 2, 2, 3, 2, 4, 3, 1 }
+                    { 4, 6, 5, 5, 4, 5, 2, 1, 1, 3, 1, 3, 5, 2, 2, 3, 2, 4, 3, 1 },
+                    { 5, 7, 4, 5, 4, 2, 4, 5, 1, 1, 2, 5, 1, 5, 2, 1, 3, 4, 2, 1 }
                 });
 
             migrationBuilder.CreateIndex(

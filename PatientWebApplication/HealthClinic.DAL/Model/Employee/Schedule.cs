@@ -30,5 +30,14 @@ namespace HealthClinic.CL.Model.Employee
             this.shiftId = shiftId;
             this.room = room;
         }
+
+        public Schedule(int id, int employeeId, string date, bool isOnDuty, Shift shift, string room) : base(id)
+        {
+            this.EmployeeId = employeeId;
+            this.date = date;
+            this.isOnDuty = isOnDuty;
+            this.shift = shift;
+            this.room = room;
+        }
     }
 }

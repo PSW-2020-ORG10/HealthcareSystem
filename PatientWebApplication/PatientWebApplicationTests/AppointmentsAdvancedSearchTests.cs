@@ -18,7 +18,7 @@ namespace PatientWebApplicationTests
         public void Find_Appointments()
         {
 
-            RegularAppointmentService service = new RegularAppointmentService(CreateStubRepository());
+            RegularAppointmentService service = new RegularAppointmentService(CreateStubRepository(), new Mock<IEmployeesScheduleRepository>().Object, new DoctorService(new Mock<IOperationRepository>().Object, CreateStubRepository(), new Mock<IEmployeesScheduleRepository>().Object, new Mock<IDoctorRepository>().Object), new Mock<IPatientsRepository>().Object, new OperationService(new Mock<IOperationRepository>().Object));
 
             List<DoctorAppointment> foundAppointments = service.AdvancedSearchAppointments(new AppointmentAdvancedSearchDto("date", "22/04/2020", new string[] { }, new string[] { }, new string[] { }));
 
@@ -29,7 +29,7 @@ namespace PatientWebApplicationTests
         public void Find_Appointments_OR()
         {
 
-            RegularAppointmentService service = new RegularAppointmentService(CreateStubRepository());
+            RegularAppointmentService service = new RegularAppointmentService(CreateStubRepository(), new Mock<IEmployeesScheduleRepository>().Object, new DoctorService(new Mock<IOperationRepository>().Object, CreateStubRepository(), new Mock<IEmployeesScheduleRepository>().Object, new Mock<IDoctorRepository>().Object), new Mock<IPatientsRepository>().Object, new OperationService(new Mock<IOperationRepository>().Object));
 
             List<DoctorAppointment> foundAppointments = service.AdvancedSearchAppointments(new AppointmentAdvancedSearchDto("date", "22/04/2020", new string[1] { "date" }, new string[1] { "Date" }, new string[1] { "or" }));
 
@@ -40,7 +40,7 @@ namespace PatientWebApplicationTests
         public void Find_No_Appointments_AND()
         {
 
-            RegularAppointmentService service = new RegularAppointmentService(CreateStubRepository());
+            RegularAppointmentService service = new RegularAppointmentService(CreateStubRepository(), new Mock<IEmployeesScheduleRepository>().Object, new DoctorService(new Mock<IOperationRepository>().Object, CreateStubRepository(), new Mock<IEmployeesScheduleRepository>().Object, new Mock<IDoctorRepository>().Object), new Mock<IPatientsRepository>().Object, new OperationService(new Mock<IOperationRepository>().Object));
 
             List<DoctorAppointment> foundAppointments = service.AdvancedSearchAppointments(new AppointmentAdvancedSearchDto("date", "22/04/2020", new string[1] { "date" }, new string[1] { "Date12" }, new string[1] { "and" }));
 
@@ -51,7 +51,7 @@ namespace PatientWebApplicationTests
         public void Find_No_Matching_Appointments()
         {
 
-            RegularAppointmentService service = new RegularAppointmentService(CreateStubRepository());
+            RegularAppointmentService service = new RegularAppointmentService(CreateStubRepository(), new Mock<IEmployeesScheduleRepository>().Object, new DoctorService(new Mock<IOperationRepository>().Object, CreateStubRepository(), new Mock<IEmployeesScheduleRepository>().Object, new Mock<IDoctorRepository>().Object), new Mock<IPatientsRepository>().Object, new OperationService(new Mock<IOperationRepository>().Object));
 
             List<DoctorAppointment> foundAppointments = service.AdvancedSearchAppointments(new AppointmentAdvancedSearchDto("date", "23/04/2020", new string[] { }, new string[] { }, new string[] { }));
 
@@ -61,7 +61,7 @@ namespace PatientWebApplicationTests
         public void Find_Appointments_With_Empty_Search()
         {
 
-            RegularAppointmentService service = new RegularAppointmentService(CreateStubRepository());
+            RegularAppointmentService service = new RegularAppointmentService(CreateStubRepository(), new Mock<IEmployeesScheduleRepository>().Object, new DoctorService(new Mock<IOperationRepository>().Object, CreateStubRepository(), new Mock<IEmployeesScheduleRepository>().Object, new Mock<IDoctorRepository>().Object), new Mock<IPatientsRepository>().Object, new OperationService(new Mock<IOperationRepository>().Object));
 
             List<DoctorAppointment> foundAppointments = service.AdvancedSearchAppointments(new AppointmentAdvancedSearchDto("", "", new string[] { }, new string[] { }, new string[] { }));
 
