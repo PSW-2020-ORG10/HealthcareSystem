@@ -33,6 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\components\AllPatientsAppointments.tsx" />
     <None Remove="ClientApp\src\components\AllRates.tsx" />
     <None Remove="ClientApp\src\components\CreateSurvey.tsx" />
     <None Remove="ClientApp\src\components\AppointmentReportSimpleSearch.tsx" />
@@ -54,6 +55,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\components\AllPatientsAppointments.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\AllRates.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\CreateSurvey.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\AppointmentReportSimpleSearch.tsx" />

@@ -53,7 +53,7 @@ namespace PatientWebApplication.Controllers
         [HttpGet("patient")]       
         public IActionResult GetAppointmentsForPatient()
         {
-            return Ok(this.regularAppointmentService.GetAppointmentsForPatient(2)); 
+            return Ok(this.regularAppointmentService.GetAppointmentsForPatient(1)); 
         }
 
         /// <summary> This method is calling <c>regularAppointmentService</c> to get list of all <c>DoctorAppointment</c> that matches <c>Appointment dto</c>. </summary>
