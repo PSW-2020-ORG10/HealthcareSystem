@@ -8,9 +8,9 @@ import { showErrorToast, checkDateFormat } from "../utilities/Utilities"
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
 
-class SelectDateForm extends Component {
+class SelectSpecialtyForm extends Component {
     state = {
-        date: new Date()  
+        specialty: ""
     };
 
     componentDidMount() {
@@ -21,26 +21,23 @@ class SelectDateForm extends Component {
         debugger;
         console.log(event)
         this.setState({
-            date: event
+            specialty: event.target.value
         })
-        this.props.handleDateChange(event)
+        this.props.handleSpecialtyChange(event)
     }
 
     render() {
-        if (this.props.step !== 0) {
+        if (this.props.step !== 1) {
             return null
         }
         return (
             <div style={{ marginTop: "40px" }}>
-                <label className="label">Date: </label>
-                <DatePicker
-                    id="datepickerInput"
-                    name="date"
-                    dateFormat="dd/MM/yyyy"
-                    selected={this.state.date}
-                    minDate={new Date()}
-                    onChange={this.handleChange.bind(this)}
-                />
+                <label className="label label-date">Specialty: </label>
+                <select className="field" defaultValue={this.state.specialty} onChange={this.handleChange.bind(this)}>
+                    <option value=""></option>
+                    <option value="Cardiology">Cardiology</option>
+                    <option value="Pulmonology">Pulmonology</option>
+                </select>
             </div>
             )
     }
@@ -51,4 +48,4 @@ const mapStateToProps = (state) =>
 
     ({  })
 
-export default connect(mapStateToProps)(SelectDateForm);
+export default connect(mapStateToProps)(SelectSpecialtyForm);

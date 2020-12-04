@@ -28,4 +28,9 @@ export const ADVANCED_SEARCH_PATIENT_APPOINTMENTS = "advancedSearchPatientAppoin
 export const ADVANCED_SEARCH_APPOINTMENTS_ERROR = "advancedSearchAppointmentsError";
 export const LOADED_ALL_PATIENT_APPOINTMENTS = "loadedAllPatientAppointments";
 export const OBSERVE_PATIENT_APPOINTMENTS_ERROR = "observePatientAppointmentsError";
-
+export const LOADED_ALL_AVAILABLE_DOCTORS = "loadedAllAvailableDoctors";
+export const LOADED_ALL_AVAILABLE_DOCTORS_ERROR = "loadedAllAvailableDoctorsError";
+export const LOADED_ALL_AVAILABLE_APPOINTMENTS = "loadedAllAvailableAppointments";
+export const LOADED_ALL_AVAILABLE_APPOINTMENTS_ERROR = "loadedAllAvailableAppointmentsError";
+export const APPOINTMENT_SCHEDULED = "appointmentScheduled";
+export const APPOINTMENT_SCHEDULED_ERROR = "appointmentScheduledError";
