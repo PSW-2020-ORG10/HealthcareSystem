@@ -29,7 +29,15 @@ namespace HealthClinic.CL.Repository
         {
             return DbContext.Registrations.ToList().SingleOrDefault(registration => registration.ApiKey == apiKey);
         }
+        public Boolean Remove(String apiKey)
+        {
+            try {
+                DbContext.Registrations.Remove(DbContext.Registrations.ToList().SingleOrDefault(registration => registration.ApiKey == apiKey));
+                return true;
+            }
+            catch {return false; }
+        }
 
-        
+
     }
 }

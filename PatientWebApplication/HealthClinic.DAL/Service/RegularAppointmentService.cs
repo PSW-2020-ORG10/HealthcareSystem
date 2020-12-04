@@ -87,8 +87,7 @@ namespace HealthClinic.CL.Service
 
         public List<DoctorAppointment> GetAppointmentsForDoctor(int id)
         {
-            List<DoctorAppointment> appointments = _appointmentRepository.GetAppointmentsForDoctor(id);
-            return appointments;
+            return _appointmentRepository.GetAppointmentsForDoctor(id);
         }
 
         public DoctorAppointment RecommendAnAppointment(DoctorUser doctor, DateTime date1, DateTime date2, PatientUser patient)
@@ -100,31 +99,14 @@ namespace HealthClinic.CL.Service
             }
             return null;
         }
-
         private List<DoctorAppointment> GetAllAppointmentsByDateAndDoctor(DateTime date, int doctorId)
         {
-            List<DoctorAppointment> appointments = new List<DoctorAppointment>();
-            foreach (DoctorAppointment appointment in GetAppointmentsForDoctor(doctorId))
-            {
-                if(date == UtilityMethods.ParseDateInCorrectFormat(appointment.Date))
-                {
-                    appointments.Add(appointment);
-                }
-            }
-            return appointments;
+            return GetAppointmentsForDoctor(doctorId).Where(appointment => (date == UtilityMethods.ParseDateInCorrectFormat(appointment.Date))).ToList();
         }
 
         private List<DoctorAppointment> GetAllAppointmentsByDateAndPatient(DateTime date, int patientId)
         {
-            List<DoctorAppointment> appointments = new List<DoctorAppointment>();
-            foreach (DoctorAppointment appointment in GetAppointmentsForPatient(patientId))
-            {
-                if (date == UtilityMethods.ParseDateInCorrectFormat(appointment.Date))
-                {
-                    appointments.Add(appointment);
-                }
-            }
-            return appointments;
+            return GetAppointmentsForPatient(patientId).Where(appointment => (date == UtilityMethods.ParseDateInCorrectFormat(appointment.Date))).ToList();
         }
 
         private DoctorAppointment getAvailableTerm(DoctorUser doctor, DateTime date, TimeSpan time1, PatientUser patient)

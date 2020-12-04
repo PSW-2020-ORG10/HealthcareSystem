@@ -296,6 +296,7 @@ namespace HCI_wireframe
               
              
                DoctorAppointment pronadjesApp = appointmentController.RecommendAnAppointment(doktorPregled, dt1, dt2, patient);
+
                 if (pronadjesApp==null)
                 {
                     
