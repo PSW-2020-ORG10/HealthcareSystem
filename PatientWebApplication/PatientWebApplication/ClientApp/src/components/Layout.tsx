@@ -16,25 +16,27 @@ import CreateSurvey from './CreateSurvey';
 import DoctorRates from './DoctorRates';
 import AllRates from './AllRates';
 import AllPatientsAppointments from './AllPatientsAppointments';
+import ScheduleAppointment from './ScheduleAppointment';
 
 export default (props: { children: React.ReactNode }) => (
     <React.Fragment>
         <NavMenu/>
         <Container>
             <Route exact path='/' component={Home} />
-            <Route path='/patient-feedback' component={PatientFeedback} />
-            <Route path='/admin-feedback' component={AdminFeedback} />
-            <Route path='/create-feedback' component={CreateFeedback} />
-            <Route path='/prescriptions-simple' component={PrescriptionsSimple} />
-            <Route path='/reports-simple' component={AppointmentReportSimpleSearch} />
-            <Route path='/register-patient' component={RegistrationOfPatient} />
-            <Route path='/prescriptions-advanced' component={PrescriptionsAdvanced} />
-            <Route path='/my-information' component={MyInformation} />
-            <Route path='/appointments-advanced' component={AppointmentsAdvanced} />
-            <Route path='/create-survey' component={CreateSurvey} />
-            <Route path='/rates-doctor' component={DoctorRates} />
-            <Route path='/rates-general' component={AllRates} />
+            {/*<Route path='/patient-feedback' component={PatientFeedback} />
+                <Route path='/admin-feedback' component={AdminFeedback} />
+                <Route path='/create-feedback' component={CreateFeedback} />
+                <Route path='/prescriptions-simple' component={PrescriptionsSimple} />
+                <Route path='/reports-simple' component={AppointmentReportSimpleSearch} />
+                <Route path='/register-patient' component={RegistrationOfPatient} />
+                <Route path='/prescriptions-advanced' component={PrescriptionsAdvanced} />
+                <Route path='/my-information' component={MyInformation} />
+                <Route path='/appointments-advanced' component={AppointmentsAdvanced} />
+                <Route path='/create-survey' component={CreateSurvey} />
+                <Route path='/rates-doctor' component={DoctorRates} />
+                <Route path='/rates-general' component={AllRates} />*/}
             <Route path='/my-appointments' component={AllPatientsAppointments} />
+            <Route path='/schedule-appointment' component={ScheduleAppointment} />
         </Container>
     </React.Fragment>
 );
