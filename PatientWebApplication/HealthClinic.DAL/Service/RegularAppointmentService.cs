@@ -99,6 +99,15 @@ namespace HealthClinic.CL.Service
             }
             return null;
         }
+        private List<DoctorAppointment> GetAllAppointmentsByDateAndDoctor(DateTime date, int doctorId)
+        {
+            return GetAppointmentsForDoctor(doctorId).Where(appointment => (date == UtilityMethods.ParseDateInCorrectFormat(appointment.Date))).ToList();
+        }
+
+        private List<DoctorAppointment> GetAllAppointmentsByDateAndPatient(DateTime date, int patientId)
+        {
+            return GetAppointmentsForPatient(patientId).Where(appointment => (date == UtilityMethods.ParseDateInCorrectFormat(appointment.Date))).ToList();
+        }
 
         private DoctorAppointment getAvailableTerm(DoctorUser doctor, DateTime date, TimeSpan time1, PatientUser patient)
         {
@@ -134,8 +143,8 @@ namespace HealthClinic.CL.Service
 
         private HashSet<DoctorAppointment> CreateAppointmentSetForDate(DateTime date, int doctorId, int patientId)
         {
-            HashSet<DoctorAppointment> appointmentsSet = new HashSet<DoctorAppointment>(GetAppointmentsForDoctor(doctorId).Where(appointment => (date == UtilityMethods.ParseDateInCorrectFormat(appointment.Date))));
-            appointmentsSet.UnionWith(GetAppointmentsForPatient(patientId).Where(appointment => (date == UtilityMethods.ParseDateInCorrectFormat(appointment.Date))));
+            HashSet<DoctorAppointment> appointmentsSet = new HashSet<DoctorAppointment>(GetAllAppointmentsByDateAndDoctor(date, doctorId));
+            appointmentsSet.UnionWith(GetAllAppointmentsByDateAndPatient(date, patientId));
             return appointmentsSet;
         }
 
