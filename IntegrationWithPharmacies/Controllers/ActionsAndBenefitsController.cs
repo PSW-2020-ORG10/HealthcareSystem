@@ -4,6 +4,7 @@ using HealthClinic.CL.Model.Pharmacy;
 using HealthClinic.CL.Service;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace IntegrationWithPharmacies.Controllers
 {
@@ -24,24 +25,12 @@ namespace IntegrationWithPharmacies.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-           return Ok(getAllForVue());
+           return Ok(MessageService.GetAll().Where(message => (RegistrationInPharmacyService.GetRegistrationByPharmacyName(GetName(message)) != null)));
         }
-
-        private List<Message> getAllForVue()
-        {
-            List<Message> messageForVue = new List<Message>();
-            foreach(Message message in MessageService.GetAll())
-            {
-                RegistrationInPharmacy registration = RegistrationInPharmacyService.getPharmacyName(GetName(message));
-                if (registration != null) { messageForVue.Add(message); }
-            }
-            return messageForVue;
-        }
-
+     
         private static string GetName(Message message)
         {
-            string[] parts = message.Text.Split(':');
-            return parts[0].Trim();
+            return message.Text.Split(':')[0].Trim();
         }
     }
 }

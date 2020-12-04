@@ -87,8 +87,7 @@ namespace HealthClinic.CL.Service
 
         public List<DoctorAppointment> GetAppointmentsForDoctor(int id)
         {
-            List<DoctorAppointment> appointments = _appointmentRepository.GetAppointmentsForDoctor(id);
-            return appointments;
+            return _appointmentRepository.GetAppointmentsForDoctor(id);
         }
 
         public DoctorAppointment RecommendAnAppointment(DoctorUser doctor, DateTime date1, DateTime date2, PatientUser patient)
@@ -99,32 +98,6 @@ namespace HealthClinic.CL.Service
                 if (getAvailableTerm(doctor, date, time1, patient) != null) return getAvailableTerm(doctor, date, time1, patient);
             }
             return null;
-        }
-
-        private List<DoctorAppointment> GetAllAppointmentsByDateAndDoctor(DateTime date, int doctorId)
-        {
-            List<DoctorAppointment> appointments = new List<DoctorAppointment>();
-            foreach (DoctorAppointment appointment in GetAppointmentsForDoctor(doctorId))
-            {
-                if(date == UtilityMethods.ParseDateInCorrectFormat(appointment.Date))
-                {
-                    appointments.Add(appointment);
-                }
-            }
-            return appointments;
-        }
-
-        private List<DoctorAppointment> GetAllAppointmentsByDateAndPatient(DateTime date, int patientId)
-        {
-            List<DoctorAppointment> appointments = new List<DoctorAppointment>();
-            foreach (DoctorAppointment appointment in GetAppointmentsForPatient(patientId))
-            {
-                if (date == UtilityMethods.ParseDateInCorrectFormat(appointment.Date))
-                {
-                    appointments.Add(appointment);
-                }
-            }
-            return appointments;
         }
 
         private DoctorAppointment getAvailableTerm(DoctorUser doctor, DateTime date, TimeSpan time1, PatientUser patient)
@@ -161,8 +134,8 @@ namespace HealthClinic.CL.Service
 
         private HashSet<DoctorAppointment> CreateAppointmentSetForDate(DateTime date, int doctorId, int patientId)
         {
-            HashSet<DoctorAppointment> appointmentsSet = new HashSet<DoctorAppointment>(GetAllAppointmentsByDateAndDoctor(date, doctorId));
-            appointmentsSet.UnionWith(GetAllAppointmentsByDateAndPatient(date, patientId));
+            HashSet<DoctorAppointment> appointmentsSet = new HashSet<DoctorAppointment>(GetAppointmentsForDoctor(doctorId).Where(appointment => (date == UtilityMethods.ParseDateInCorrectFormat(appointment.Date))));
+            appointmentsSet.UnionWith(GetAppointmentsForPatient(patientId).Where(appointment => (date == UtilityMethods.ParseDateInCorrectFormat(appointment.Date))));
             return appointmentsSet;
         }
 

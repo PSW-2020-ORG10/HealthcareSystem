@@ -31,9 +31,8 @@ namespace HealthClinic.CL.Repository
         }
         public Boolean Remove(String apiKey)
         {
-            RegistrationInPharmacy registration2 = DbContext.Registrations.ToList().SingleOrDefault(registration => registration.ApiKey == apiKey);
             try {
-                DbContext.Registrations.Remove(registration2);
+                DbContext.Registrations.Remove(DbContext.Registrations.ToList().SingleOrDefault(registration => registration.ApiKey == apiKey));
                 return true;
             }
             catch {return false; }

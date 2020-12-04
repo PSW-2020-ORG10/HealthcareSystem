@@ -53,7 +53,7 @@ namespace HealthClinic.CL.Service
             }
             return null;
         }
-        public RegistrationInPharmacy getPharmacyName(String name)
+        public RegistrationInPharmacy GetRegistrationByPharmacyName(String name)
         {
             foreach (RegistrationInPharmacy registration in RegistrationInPharmacyRepository.GetAll())
             {

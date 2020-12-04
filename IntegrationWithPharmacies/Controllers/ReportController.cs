@@ -36,20 +36,13 @@ namespace IntegrationWithPharmacies.Controllers
         {
             var sftpService = new SftpService(new NullLogger<SftpService>(), getConfig());
             var testFile = @"..\TextFile.txt";
-            StringBuilder stringBuilder2 = new StringBuilder();
+            StringBuilder stringBuilder = new StringBuilder();
 
-            List<RegistrationInPharmacy> registrations = RegistrationInPharmacyService.GetAll();
-            foreach (RegistrationInPharmacy registration in registrations)
+            foreach (RegistrationInPharmacy registration in RegistrationInPharmacyService.GetAll())
             {
-                stringBuilder2.Append(registration.ApiKey + ";");
-
+                stringBuilder.Append(registration.ApiKey + ";");
             }
-            String str = stringBuilder2.ToString();
-            str = str + "!";
-            str = str + "             Report about consumption of medicine\n\n\n";
-
-            str = str +getReportText(date);
-            System.IO.File.WriteAllText(testFile, str);
+            System.IO.File.WriteAllText(testFile, stringBuilder.ToString() + "!    Report about consumption of medicine\n\n\n" +getReportText(date));
             sftpService.UploadFile(testFile, @"\pub\" + Path.GetFileName(testFile));
             return Ok();
         }
