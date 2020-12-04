@@ -8,12 +8,12 @@ namespace HealthClinic.CL.Adapters
     {
         public static Message MessageDTOtoMessage(MessageDto dto)
         {
-            return new Message(dto.Text, dto.TimeStamp, false, dto.PharmacyName);
+            return new Message(dto.Text, dto.TimeStamp, false, dto.PharmacyName, dto.DateAction);
         }
 
         public MessageDto MessageToMessageDTO(Message message)
         {
-            return new MessageDto(message.Text, message.TimeStamp, message.PharmacyName);
+            return new MessageDto(message.Text, message.TimeStamp, message.PharmacyName, message.DateAction);
         }
     }
 }

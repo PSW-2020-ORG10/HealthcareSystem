@@ -14,29 +14,33 @@ namespace HealthClinic.CL.Model.ActionsAndBenefits
 
         public string PharmacyName { get; set; }
 
+        public string DateAction { get; set; }
+
         public Message() : base()
         {
         }
 
-        public Message(int id, string text, DateTime timestamp, bool isremoved, string pharmacyname) : base(id)
+        public Message(int id, string text, DateTime timestamp, bool isremoved, string pharmacyname, string dateaction) : base(id)
         {
-            Text = text;
-            TimeStamp = timestamp;
-            IsRemoved = isremoved;
-            PharmacyName = pharmacyname;
+            this.Text = text;
+            this.TimeStamp = timestamp;
+            this.IsRemoved = isremoved;
+            this.PharmacyName = pharmacyname;
+            this.DateAction = dateaction;
         }
 
-        public Message(string text, DateTime timestamp, bool isremoved, string pharmacyname)
+        public Message(string text, DateTime timestamp, bool isremoved, string pharmacyname, string dateaction)
         {
-            Text = text;
-            TimeStamp = timestamp;
-            IsRemoved = isremoved;
-            PharmacyName = pharmacyname;
+            this.Text = text;
+            this.TimeStamp = timestamp;
+            this.IsRemoved = isremoved;
+            this.PharmacyName = pharmacyname;
+            this.DateAction = dateaction;
         }
 
         public override string ToString()
         {
-            return Text + " sent at " + TimeStamp.ToString();
+            return this.Text + " sent at " + this.TimeStamp.ToString();
         }
     }
 }
