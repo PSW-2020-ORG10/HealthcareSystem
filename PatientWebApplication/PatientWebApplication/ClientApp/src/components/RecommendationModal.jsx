@@ -58,6 +58,11 @@ class RecommendationModal extends Component {
             position: toast.POSITION.TOP_RIGHT
         });
 
+        this.props.appointment.patientUserId = this.props.appointment.patient.id;
+        this.props.appointment.doctorUserId = this.props.appointment.doctor.id;
+        this.props.appointment.patient = null;
+        this.props.appointment.doctor = null;
+
         this.props.createRecommendAppointment(this.props.appointment)
 
         this.setState({ modalShow: false });

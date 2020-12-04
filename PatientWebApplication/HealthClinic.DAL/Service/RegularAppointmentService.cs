@@ -58,7 +58,7 @@ namespace HealthClinic.CL.Service
         /// <returns> Created appointment. </returns>
         public DoctorAppointment CreateRecommended(DoctorAppointment appointment)
         {
-           return _appointmentRepository.Create(new DoctorAppointment(appointment.id, appointment.Start, appointment.Date, appointment.Patient.id, appointment.Doctor.id, appointment.referral, appointment.RoomId));
+            return _appointmentRepository.Create(appointment);
         }
 
         /// <summary> This method is calling <c>AppointmentRepository</c> to update appointment. </summary>
@@ -111,7 +111,6 @@ namespace HealthClinic.CL.Service
             {
                 if (dto.Priority.Equals("doctor"))
                 {
-                    startDate = startDate.AddDays(-1);
                     endDate = endDate.AddDays(3);
 
                     recommendedAppointment = RecommendAnAppointment(doctor, startDate, endDate, patient);
@@ -213,7 +212,7 @@ namespace HealthClinic.CL.Service
 
         private DoctorAppointment GetNewDoctorAppointment(DoctorUser doctor, DateTime date, TimeSpan time1, PatientUser patient, Shift doctorShift)
         {
-            for (var time = GetStartTimeSpan(doctorShift); time <= GetEndTimeSpan(doctorShift); time = time.Add(time1))
+            for (var time = GetStartTimeSpan(doctorShift); time < GetEndTimeSpan(doctorShift); time = time.Add(time1))
             {
                 if (IsTermNotAvailable(doctor, time, MakeStringFromDate(date), patient) == false)
                 {
