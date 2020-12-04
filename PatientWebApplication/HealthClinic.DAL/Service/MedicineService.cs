@@ -5,6 +5,7 @@
  ***********************************************************************/
 
 using HealthClinic.CL.Contoller;
+using HealthClinic.CL.DbContextModel;
 using HealthClinic.CL.Model.Hospital;
 using HealthClinic.CL.Repository;
 using System;
@@ -21,7 +22,10 @@ namespace HealthClinic.CL.Service
         {
             medicineRepository = new MedicineRepository(path);
         }
-
+        public MedicineService(MyDbContext context)
+        {
+            medicineRepository = new MedicineRepository(context);
+        }
         public void New(Medicine medicine)
         {
             medicineRepository.New(medicine);
