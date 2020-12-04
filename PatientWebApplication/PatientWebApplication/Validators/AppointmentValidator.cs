@@ -12,13 +12,13 @@ namespace PatientWebApplication.Validators
     {
         public AppointmentValidator()
         {
-            RuleFor(a => a.id).Equal(0);
+            /*RuleFor(a => a.id).Equal(0);
             RuleFor(a => a.DoctorUserId).GreaterThan(0);
             RuleFor(a => a.PatientUserId).GreaterThan(0);
             RuleFor(a => UtilityMethods.TryParseDateInCorrectFormat(a.Date)).Equal(true);
             RuleFor(a => a.Doctor).Null();
             RuleFor(a => a.Patient).Null();
-            RuleFor(a => a.referral).Empty();
+            RuleFor(a => a.referral).Empty();*/
         }
     }
 }

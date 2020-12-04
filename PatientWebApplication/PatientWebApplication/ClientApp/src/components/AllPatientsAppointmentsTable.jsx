@@ -1,8 +1,9 @@
 ﻿import React, { Component } from "react"
-import { loadedAllPatientAppointments } from "../actions/actions"
+import { loadedAllPatientAppointments, loadedAllPatientAppointmentsInTwoDays, loadedAllPatientAppointmentsInFuture, cancelAppointment } from "../actions/actions"
 import { connect } from "react-redux"
 import { wrap } from "module";
 import axios from "axios";
+import CancelAppointmentButton from "./CancelAppointmentButton";
 import ReferralModal from "./ReferralModal"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -15,6 +16,8 @@ class AllPatientsAppointmentsTable extends Component {
     componentDidMount() {
         debugger;
         this.props.loadedAllPatientAppointments();
+        this.props.loadedAllPatientAppointmentsInTwoDays();
+        this.props.loadedAllPatientAppointmentsInFuture();
     }
 
     render() {
@@ -22,7 +25,17 @@ class AllPatientsAppointmentsTable extends Component {
 
             return null;
         }
+        if (this.props.patientAppointmentsInTwoDaysList === undefined) {
+
+            return null;
+        }
+        if (this.props.patientAppointmentsInFutureList === undefined) {
+
+            return null;
+        }
         const patientAppointmentsList = this.props.patientAppointmentsList;
+        const patientAppointmentsInTwoDaysList = this.props.patientAppointmentsInTwoDaysList;
+        const patientAppointmentsInFutureList = this.props.patientAppointmentsInFutureList;
         debugger;
         return (
             <div>
@@ -43,6 +56,26 @@ class AllPatientsAppointmentsTable extends Component {
                                 <td style={{ textAlign: "center" }} > {this.checkType(f)}</td >
                                 <td style={{ textAlign: "center" }}>{f.date}</td >
                                 <td style={{ textAlign: "right" }}><button onClick={() => { this.displayModal(f) }} className="btn btn-primary">Details</button></td >
+                            </tr>
+                        </tbody>
+                    ))}
+                    {patientAppointmentsInTwoDaysList.map((f) => (
+                        <tbody key={f}>
+                            <tr key={f}>
+                                <td style={{ textAlign: "left" }} >{f.doctor.firstName + ' ' + f.doctor.secondName}</td>
+                                <td style={{ textAlign: "center" }} > {this.checkType(f)}</td >
+                                <td style={{ textAlign: "center" }}>{f.date}</td >
+                                <td style={{ textAlign: "right" }}><button disabled={true} className="btn btn-primary">Cancel</button></td >
+                            </tr>
+                        </tbody>
+                    ))}
+                    {patientAppointmentsInFutureList.map((f) => (
+                        <tbody key={f}>
+                            <tr key={f}>
+                                <td style={{ textAlign: "left" }} >{f.doctor.firstName + ' ' + f.doctor.secondName}</td>
+                                <td style={{ textAlign: "center" }} > {this.checkType(f)}</td >
+                                <td style={{ textAlign: "center" }}>{f.date}</td >
+                                <td style={{ textAlign: "right" }}><CancelAppointmentButton appointment={f}> </CancelAppointmentButton></td >
                             </tr>
                         </tbody>
                     ))}
@@ -78,12 +111,23 @@ class AllPatientsAppointmentsTable extends Component {
             return "Appointment"
         }
     }
+
+    cancelApp=(appointment) => {
+        toast.configure();
+
+        toast.success("Appointment successfully cancelled!", {
+            position: toast.POSITION.TOP_RIGHT
+        });
+
+        this.props.cancelAppointment(appointment)
+    }
 }
+
 
 
 const mapStateToProps = (state) =>
 
-    ({ patientAppointmentsList: state.reducer.patientAppointmentsList })
+    ({ patientAppointmentsList: state.reducer.patientAppointmentsList, patientAppointmentsInTwoDaysList: state.reducer.patientAppointmentsInTwoDaysList, patientAppointmentsInFutureList: state.reducer.patientAppointmentsInFutureList })
 
-export default connect(mapStateToProps, { loadedAllPatientAppointments })(AllPatientsAppointmentsTable);
+export default connect(mapStateToProps, { loadedAllPatientAppointments, loadedAllPatientAppointmentsInTwoDays, loadedAllPatientAppointmentsInFuture, cancelAppointment })(AllPatientsAppointmentsTable);
 

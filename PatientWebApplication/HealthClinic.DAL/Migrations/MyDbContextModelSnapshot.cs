@@ -1000,7 +1000,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 7,
-                            Date = "07/02/2011",
+                            Date = "07/02/2031",
                             DoctorUserId = 3,
                             IsCanceled = false,
                             PatientUserId = 1,
@@ -1010,7 +1010,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 8,
-                            Date = "01/03/2020",
+                            Date = "06/12/2020",
                             DoctorUserId = 2,
                             IsCanceled = false,
                             PatientUserId = 1,
@@ -1020,7 +1020,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 9,
-                            Date = "14/03/2016",
+                            Date = "05/12/2030",
                             DoctorUserId = 1,
                             IsCanceled = false,
                             PatientUserId = 1,

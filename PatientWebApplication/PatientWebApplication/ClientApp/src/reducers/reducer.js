@@ -15,6 +15,9 @@
     SURVEY_CREATED,
     LOADED_ALL_RATES,
     LOADED_ALL_DOCTOR_RATES,
+    LOADED_ALL_PATIENT_APPOINTMENTS_INTWODAYS,
+    LOADED_ALL_PATIENT_APPOINTMENTS_INFUTURE,
+    CANCEL_APPOINTMENT,
     LOADED_APPOINTMENTSURVEY
 } from "../types/types"
 
@@ -60,6 +63,9 @@ const initialState = {
     surveyList: [], 
     patientAppointments: [],
     doctorRatesList: [],
+    patientAppointmentsInTwoDaysList: [],
+    patientAppointmentsInFutureList: [],
+    canceledAppointment: {},
     allRates: {}
 };
 
@@ -161,7 +167,22 @@ function reducer(state = initialState, action) {
             return {
                 ...state,
                 doctorRatesList: action.payload
-            };    
+            };   
+        case LOADED_ALL_PATIENT_APPOINTMENTS_INTWODAYS:
+            return {
+                ...state,
+                patientAppointmentsInTwoDaysList: action.payload
+            };
+        case LOADED_ALL_PATIENT_APPOINTMENTS_INFUTURE:
+            return {
+                ...state,
+                patientAppointmentsInFutureList: action.payload
+            };
+        case CANCEL_APPOINTMENT:
+            return {
+                ...state,
+                patientAppointmentsList: updateObjectInArray(state.patientAppointmentsList, action)
+            };        
         default:
             return state;
     }

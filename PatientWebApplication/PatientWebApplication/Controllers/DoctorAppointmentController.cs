@@ -72,6 +72,16 @@ namespace PatientWebApplication.Controllers
             return Ok(this.regularAppointmentService.GetAppointmentsForPatientInFuture(1));
         }
 
+        /// <summary> This method provides <c>DoctorAppointment</c> <paramref name="appointment"/> and sends it to <c>RegularAppointmentService</c> there appointment.IsCanceled will be set to true. </summary>
+        /// <param name="appointment"><c>DoctorAppointment</c> is <c>DoctorAppointment</c> that needs to be canceled.
+        /// </param>
+        /// <returns>200 Ok with canceled appointment.</returns>
+        [HttpPut("{appointmentId}")]
+        public IActionResult CancelAppointment(int appointmentId)
+        {
+            return Ok(this.regularAppointmentService.CancelAppointment(appointmentId));
+        }
+
         /// <summary> This method is calling <c>regularAppointmentService</c> to get list of all <c>DoctorAppointment</c> that matches <c>Appointment dto</c>. </summary>
         /// <param name="dto"><c>dto</c> is Data Transfer Object of a <c>DoctorAppointment</c> that contains <c>Doctor</c>, <c>Date</c>, <c>Room</c> and will be used for filtering appointments. 
         /// </param>

@@ -231,9 +231,9 @@ namespace HealthClinic.CL.DbContextModel
             new DoctorAppointment(4, new TimeSpan(0, 15, 45, 0, 0), "03/03/2020", 1, 2, new List<Referral>(), "1"),
             new DoctorAppointment(5, new TimeSpan(0, 12, 0, 0, 0), "02/02/2020", 1, 1, new List<Referral>(), "1"),
             new DoctorAppointment(6, new TimeSpan(0, 12, 15, 0, 0), "02/02/2020", 2, 3, new List<Referral>(), "1"),
-            new DoctorAppointment(7, new TimeSpan(), "07/02/2011", 1, 3, new List<Referral>(), "1"),
-            new DoctorAppointment(8, new TimeSpan(), "01/03/2020", 1, 2, new List<Referral>(), "1"),
-            new DoctorAppointment(9, new TimeSpan(), "14/03/2016", 1, 1, new List<Referral>(), "1"),
+            new DoctorAppointment(7, new TimeSpan(), "07/02/2031", 1, 3, new List<Referral>(), "1"),
+            new DoctorAppointment(8, new TimeSpan(), "06/12/2020", 1, 2, new List<Referral>(), "1"),
+            new DoctorAppointment(9, new TimeSpan(), "05/12/2030", 1, 1, new List<Referral>(), "1"),
             new DoctorAppointment(10, new TimeSpan(), "11/11/2030", 1, 2, new List<Referral>(), "1"),
             new DoctorAppointment(11, new TimeSpan(), "14/03/2016", 2, 1, new List<Referral>(), "A2"),
             new DoctorAppointment(12, new TimeSpan(), "11/11/2010", 2, 2, new List<Referral>(), "B3")

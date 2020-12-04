@@ -28,4 +28,6 @@ export const ADVANCED_SEARCH_PATIENT_APPOINTMENTS = "advancedSearchPatientAppoin
 export const ADVANCED_SEARCH_APPOINTMENTS_ERROR = "advancedSearchAppointmentsError";
 export const LOADED_ALL_PATIENT_APPOINTMENTS = "loadedAllPatientAppointments";
 export const OBSERVE_PATIENT_APPOINTMENTS_ERROR = "observePatientAppointmentsError";
-
+export const LOADED_ALL_PATIENT_APPOINTMENTS_INTWODAYS = "loadedAllPatientAppointmentsInTwoDays";
+export const LOADED_ALL_PATIENT_APPOINTMENTS_INFUTURE = "loadedAllPatientAppointmentsInFuture";
+export const CANCEL_APPOINTMENT = "cancelAppointment";

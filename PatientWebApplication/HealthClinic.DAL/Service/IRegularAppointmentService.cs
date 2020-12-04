@@ -27,5 +27,6 @@ namespace HealthClinic.CL.Service
         void Remove(int appointmentid);
         List<DoctorAppointment> SimpleSearchAppointments(AppointmentReportSearchDto appointmentReportSearchDto);
         void Update(DoctorAppointment appointment, Operation operation);
+        DoctorAppointment CancelAppointment(DoctorAppointment appointment);
     }
 }
