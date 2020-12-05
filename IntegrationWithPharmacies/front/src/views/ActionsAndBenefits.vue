@@ -5,14 +5,16 @@
             <tr>
                 <th>Pharmacy</th>
                 <th>Offer</th>
-                <th>Date</th>
+                <th>Published</th>
+                <th>Valid until</th>
                 <th></th>
             </tr>
 
-            <tr v-for="action in this.actionsAndBenefits">
-                <td>{{action.PharmacyName}}</td>
-                <td>{{action.Text}}</td>
-                <td>{{action.TimeStamp}}</td>
+            <tr v-for="action in this.actionsAndBenefits" v-bind:key="action.id">
+                <td>{{action.pharmacyName}}</td>
+                <td>{{action.text}}</td>
+                <td>{{action.timeStamp}}</td>
+                <td>{{action.dateAction}}</td>
                 <td><button v-on:click="ignore($event, action)" v-if="notIgnored">Ignore</button></td>
             </tr>
 
@@ -35,12 +37,14 @@
                 this.notIgnored = false;
             }
 
+
         },
         mounted() {
             this.axios.get('api/actionsAndBenefits')
                 .then(res => {
                     this.actionsAndBenefits = res.data;
                     console.log(this.actionsAndBenefits);
+
                 })
                 .catch(res => {
                     console.log(res);
