@@ -474,7 +474,9 @@ namespace HealthClinic.CL.Service
         /// <returns>null if DoctorAppointment is not valid; otherwise, succesfully canceled DoctorAppointment. </returns>
         public DoctorAppointment CancelAppointment(int appointmentId)
         {
-            return _appointmentRepository.CancelAppointment(CheckIfAppointmentsAreInFutureFromToday(_appointmentRepository.GetByid(appointmentId)));
+            DoctorAppointment appointment = CheckIfAppointmentsAreInFutureFromToday(_appointmentRepository.GetByid(appointmentId));
+            if (appointment == null) return null;
+            return _appointmentRepository.CancelAppointment(appointment);
         }
 
         private static List<int> FindAllUnvalidAppointments(List<Survey> allSurveys)
@@ -501,7 +503,7 @@ namespace HealthClinic.CL.Service
         }
         private DoctorAppointment CheckIfAppointmentsAreInFutureFromToday(DoctorAppointment appointment)
         {
-            return (UtilityMethods.ParseDateInCorrectFormat(appointment.Date) < DateTime.Now) ? null : appointment;
+            return (UtilityMethods.ParseDateInCorrectFormat(appointment.Date) < DateTime.Now.AddDays(2)) ? null : appointment;
         }
     }
 }
