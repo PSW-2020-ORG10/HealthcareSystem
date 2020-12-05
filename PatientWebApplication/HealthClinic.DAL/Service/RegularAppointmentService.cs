@@ -457,8 +457,7 @@ namespace HealthClinic.CL.Service
         public DoctorAppointment CancelAppointment(int appointmentId)
         {
             DoctorAppointment appointment = CheckIfAppointmentsAreInFutureFromToday(_appointmentRepository.GetByid(appointmentId));
-            if (appointment == null) return null;
-            return _appointmentRepository.CancelAppointment(appointment);
+            return (appointment == null) ? null : _appointmentRepository.CancelAppointment(appointment);
         }
 
         private static List<int> FindAllUnvalidAppointments(List<Survey> allSurveys)
