@@ -3,16 +3,14 @@ using System;
 using HealthClinic.CL.DbContextModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HealthClinic.CL.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20201203221641_ThirdMigration")]
-    partial class ThirdMigration
+    partial class MyDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,6 +22,9 @@ namespace HealthClinic.CL.Migrations
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<string>("DateAction")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<bool>("IsRemoved")
                         .HasColumnType("tinyint(1)");
@@ -45,6 +46,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
+                            DateAction = "02/02/2020",
                             IsRemoved = false,
                             PharmacyName = "Apoteka Jankovic",
                             Text = "Message",
@@ -918,6 +920,9 @@ namespace HealthClinic.CL.Migrations
                     b.Property<int>("DoctorUserId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsCanceled")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<int>("PatientUserId")
                         .HasColumnType("int");
 
@@ -926,9 +931,6 @@ namespace HealthClinic.CL.Migrations
 
                     b.Property<TimeSpan>("Start")
                         .HasColumnType("time(6)");
-
-                    b.Property<bool>("isCanceled")
-                        .HasColumnType("tinyint(1)");
 
                     b.HasKey("id");
 
@@ -944,120 +946,120 @@ namespace HealthClinic.CL.Migrations
                             id = 1,
                             Date = "03/03/2020",
                             DoctorUserId = 1,
+                            IsCanceled = false,
                             PatientUserId = 2,
                             RoomId = "1",
-                            Start = new TimeSpan(0, 14, 15, 0, 0),
-                            isCanceled = false
+                            Start = new TimeSpan(0, 14, 15, 0, 0)
                         },
                         new
                         {
                             id = 2,
                             Date = "03/03/2020",
                             DoctorUserId = 2,
+                            IsCanceled = false,
                             PatientUserId = 2,
                             RoomId = "1",
-                            Start = new TimeSpan(0, 14, 30, 0, 0),
-                            isCanceled = false
+                            Start = new TimeSpan(0, 14, 30, 0, 0)
                         },
                         new
                         {
                             id = 3,
                             Date = "03/03/2020",
                             DoctorUserId = 2,
+                            IsCanceled = false,
                             PatientUserId = 1,
                             RoomId = "1",
-                            Start = new TimeSpan(0, 15, 0, 0, 0),
-                            isCanceled = false
+                            Start = new TimeSpan(0, 15, 0, 0, 0)
                         },
                         new
                         {
                             id = 4,
                             Date = "03/03/2020",
                             DoctorUserId = 2,
+                            IsCanceled = false,
                             PatientUserId = 1,
                             RoomId = "1",
-                            Start = new TimeSpan(0, 15, 45, 0, 0),
-                            isCanceled = false
+                            Start = new TimeSpan(0, 15, 45, 0, 0)
                         },
                         new
                         {
                             id = 5,
                             Date = "02/02/2020",
                             DoctorUserId = 1,
+                            IsCanceled = false,
                             PatientUserId = 1,
                             RoomId = "1",
-                            Start = new TimeSpan(0, 12, 0, 0, 0),
-                            isCanceled = false
+                            Start = new TimeSpan(0, 12, 0, 0, 0)
                         },
                         new
                         {
                             id = 6,
                             Date = "02/02/2020",
                             DoctorUserId = 3,
+                            IsCanceled = false,
                             PatientUserId = 2,
                             RoomId = "1",
-                            Start = new TimeSpan(0, 12, 15, 0, 0),
-                            isCanceled = false
+                            Start = new TimeSpan(0, 12, 15, 0, 0)
                         },
                         new
                         {
                             id = 7,
-                            Date = "07/02/2011",
+                            Date = "07/02/2031",
                             DoctorUserId = 3,
+                            IsCanceled = false,
                             PatientUserId = 1,
                             RoomId = "1",
-                            Start = new TimeSpan(0, 0, 0, 0, 0),
-                            isCanceled = false
+                            Start = new TimeSpan(0, 0, 0, 0, 0)
                         },
                         new
                         {
                             id = 8,
-                            Date = "01/03/2020",
+                            Date = "06/12/2020",
                             DoctorUserId = 2,
+                            IsCanceled = false,
                             PatientUserId = 1,
                             RoomId = "1",
-                            Start = new TimeSpan(0, 0, 0, 0, 0),
-                            isCanceled = false
+                            Start = new TimeSpan(0, 0, 0, 0, 0)
                         },
                         new
                         {
                             id = 9,
-                            Date = "14/03/2016",
+                            Date = "05/12/2030",
                             DoctorUserId = 1,
+                            IsCanceled = false,
                             PatientUserId = 1,
                             RoomId = "1",
-                            Start = new TimeSpan(0, 0, 0, 0, 0),
-                            isCanceled = false
+                            Start = new TimeSpan(0, 0, 0, 0, 0)
                         },
                         new
                         {
                             id = 10,
                             Date = "11/11/2030",
                             DoctorUserId = 2,
+                            IsCanceled = false,
                             PatientUserId = 1,
                             RoomId = "1",
-                            Start = new TimeSpan(0, 0, 0, 0, 0),
-                            isCanceled = false
+                            Start = new TimeSpan(0, 0, 0, 0, 0)
                         },
                         new
                         {
                             id = 11,
                             Date = "14/03/2016",
                             DoctorUserId = 1,
+                            IsCanceled = false,
                             PatientUserId = 2,
                             RoomId = "A2",
-                            Start = new TimeSpan(0, 0, 0, 0, 0),
-                            isCanceled = false
+                            Start = new TimeSpan(0, 0, 0, 0, 0)
                         },
                         new
                         {
                             id = 12,
                             Date = "11/11/2010",
                             DoctorUserId = 2,
+                            IsCanceled = false,
                             PatientUserId = 2,
                             RoomId = "B3",
-                            Start = new TimeSpan(0, 0, 0, 0, 0),
-                            isCanceled = false
+                            Start = new TimeSpan(0, 0, 0, 0, 0)
                         });
                 });
 

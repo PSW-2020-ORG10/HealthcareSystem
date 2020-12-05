@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HealthClinic.CL.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20201203222356_FourthMigration")]
-    partial class FourthMigration
+    [Migration("20201205212826_FirstMigration")]
+    partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,6 +24,9 @@ namespace HealthClinic.CL.Migrations
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<string>("DateAction")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<bool>("IsRemoved")
                         .HasColumnType("tinyint(1)");
@@ -45,6 +48,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
+                            DateAction = "02/02/2020",
                             IsRemoved = false,
                             PharmacyName = "Apoteka Jankovic",
                             Text = "Message",
@@ -1002,7 +1006,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 7,
-                            Date = "07/02/2011",
+                            Date = "07/02/2031",
                             DoctorUserId = 3,
                             IsCanceled = false,
                             PatientUserId = 1,
@@ -1012,7 +1016,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 8,
-                            Date = "01/03/2020",
+                            Date = "06/12/2020",
                             DoctorUserId = 2,
                             IsCanceled = false,
                             PatientUserId = 1,
@@ -1022,7 +1026,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 9,
-                            Date = "14/03/2016",
+                            Date = "05/12/2030",
                             DoctorUserId = 1,
                             IsCanceled = false,
                             PatientUserId = 1,
