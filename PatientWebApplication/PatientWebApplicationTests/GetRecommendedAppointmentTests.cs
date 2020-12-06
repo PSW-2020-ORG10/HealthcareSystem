@@ -20,9 +20,9 @@ namespace PatientWebApplicationTests
         {
             RegularAppointmentService service = new RegularAppointmentService(CreateAppointmentStubRepository(), CreateScheduleStubRepository(), new DoctorService(CreateOperationStubRepository(), CreateAppointmentStubRepository(), CreateScheduleStubRepository(), CreateDoctorStubRepository()), CreatePatientStubRepository(), new OperationService(CreateOperationStubRepository()));
 
-            DoctorAppointment appointment = service.GetRecommendedAppointment(new RecommendedAppointmentDto(2, "02/03/2020", "04/03/2020", "doctor"));
+            List<DoctorAppointment> appointments = service.GetRecommendedAppointment(new RecommendedAppointmentDto(2, "02/03/2020", "04/03/2020", "doctor"));
 
-            appointment.ShouldNotBeNull();
+            appointments.ShouldNotBeEmpty();
         }
 
         [Fact]
@@ -30,9 +30,9 @@ namespace PatientWebApplicationTests
         {
             RegularAppointmentService service = new RegularAppointmentService(CreateAppointmentStubRepository(), CreateScheduleStubRepository(), new DoctorService(CreateOperationStubRepository(), CreateAppointmentStubRepository(), CreateScheduleStubRepository(), CreateDoctorStubRepository()), CreatePatientStubRepository(), new OperationService(CreateOperationStubRepository()));
 
-            DoctorAppointment appointment = service.GetRecommendedAppointment(new RecommendedAppointmentDto(1, "07/02/2020", "08/02/2020", "doctor"));
+            List<DoctorAppointment> appointments = service.GetRecommendedAppointment(new RecommendedAppointmentDto(1, "07/02/2020", "08/02/2020", "doctor"));
 
-            appointment.ShouldBeNull();
+            appointments.ShouldBeEmpty();
         }
 
         [Fact]
@@ -40,9 +40,9 @@ namespace PatientWebApplicationTests
         {
             RegularAppointmentService service = new RegularAppointmentService(CreateAppointmentStubRepository(), CreateScheduleStubRepository(), new DoctorService(CreateOperationStubRepository(), CreateAppointmentStubRepository(), CreateScheduleStubRepository(), CreateDoctorStubRepository()), CreatePatientStubRepository(), new OperationService(CreateOperationStubRepository()));
 
-            DoctorAppointment appointment = service.GetRecommendedAppointment(new RecommendedAppointmentDto(1, "05/02/2020", "08/02/2020", "date"));
+            List<DoctorAppointment> appointments = service.GetRecommendedAppointment(new RecommendedAppointmentDto(1, "05/02/2020", "08/02/2020", "date"));
 
-            appointment.ShouldNotBeNull();
+            appointments.ShouldNotBeEmpty();
         }
 
         [Fact]
@@ -50,9 +50,9 @@ namespace PatientWebApplicationTests
         {
             RegularAppointmentService service = new RegularAppointmentService(CreateAppointmentStubRepository(), CreateScheduleStubRepository(), new DoctorService(CreateOperationStubRepository(), CreateAppointmentStubRepository(), CreateScheduleStubRepository(), CreateDoctorStubRepository()), CreatePatientStubRepository(), new OperationService(CreateOperationStubRepository()));
 
-            DoctorAppointment appointment = service.GetRecommendedAppointment(new RecommendedAppointmentDto(2, "01/03/2020", "02/03/2020", "doctor"));
+            List<DoctorAppointment> appointments = service.GetRecommendedAppointment(new RecommendedAppointmentDto(2, "01/03/2020", "02/03/2020", "doctor"));
 
-            appointment.ShouldNotBeNull();
+            appointments.ShouldNotBeEmpty();
         }
 
         [Fact]
@@ -60,9 +60,9 @@ namespace PatientWebApplicationTests
         {
             RegularAppointmentService service = new RegularAppointmentService(CreateAppointmentStubRepository(), CreateScheduleStubRepository(), new DoctorService(CreateOperationStubRepository(), CreateAppointmentStubRepository(), CreateScheduleStubRepository(), CreateDoctorStubRepository()), CreatePatientStubRepository(), new OperationService(CreateOperationStubRepository()));
 
-            DoctorAppointment appointment = service.GetRecommendedAppointment(new RecommendedAppointmentDto(1, "06/03/2020", "08/03/2020", "doctor"));
+            List<DoctorAppointment> appointments = service.GetRecommendedAppointment(new RecommendedAppointmentDto(1, "06/03/2020", "08/03/2020", "doctor"));
 
-            appointment.ShouldBeNull();
+            appointments.ShouldBeEmpty();
         }
 
         [Fact]
@@ -70,9 +70,9 @@ namespace PatientWebApplicationTests
         {
             RegularAppointmentService service = new RegularAppointmentService(CreateAppointmentStubRepository(), CreateScheduleStubRepository(), new DoctorService(CreateOperationStubRepository(), CreateAppointmentStubRepository(), CreateScheduleStubRepository(), CreateDoctorStubRepository()), CreatePatientStubRepository(), new OperationService(CreateOperationStubRepository()));
 
-            DoctorAppointment appointment = service.GetRecommendedAppointment(new RecommendedAppointmentDto(1, "06/03/2020", "08/03/2020", "date"));
+            List<DoctorAppointment> appointments = service.GetRecommendedAppointment(new RecommendedAppointmentDto(1, "06/03/2020", "08/03/2020", "date"));
 
-            appointment.ShouldNotBeNull();
+            appointments.ShouldNotBeEmpty();
         }
 
         private static IAppointmentRepository CreateAppointmentStubRepository()
@@ -138,7 +138,7 @@ namespace PatientWebApplicationTests
             referrals.Add(referral1);
             referrals.Add(referral1);
 
-            Operation operation1 = new Operation(1, 2, "03/03/2020", new TimeSpan(0, 14, 0, 0), new TimeSpan(0, 15, 0, 0, 0), 1, "room1");
+            Operation operation1 = new Operation(1, 1, "03/03/2020", new TimeSpan(0, 14, 0, 0), new TimeSpan(0, 15, 0, 0, 0), 1, "room1");
             Operation operation2 = new Operation(2, 1, "03/10/2020", new TimeSpan(0, 15, 0, 0), new TimeSpan(0, 15, 15, 0, 0), 2, "room1");
 
             patientOperations.Add(operation1);

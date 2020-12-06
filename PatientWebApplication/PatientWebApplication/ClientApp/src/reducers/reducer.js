@@ -65,7 +65,8 @@ const initialState = {
     doctorRatesList: [],
     allRates: {},
     doctorList: [],
-    recommendedAppointment: {}
+    recommendedAppointments: [],
+    createdRecommendedAppointment: {}
 };
 
 
@@ -176,13 +177,13 @@ function reducer(state = initialState, action) {
         case RECOMMEND_APPOINTMENT:
             return {
                 ...state,
-                recommendedAppointment: action.payload
+                recommendedAppointments: action.payload
 
             };
         case CREATE_RECOMMEND_APPOINTMENT:
             return {
                 ...state,
-                recommendedAppointment: action.payload
+                createdRecommendedAppointment: action.payload
 
             };
         default:

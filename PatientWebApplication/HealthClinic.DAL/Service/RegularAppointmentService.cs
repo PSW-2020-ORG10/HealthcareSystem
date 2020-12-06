@@ -99,29 +99,29 @@ namespace HealthClinic.CL.Service
             return appointments;
         }
 
-        public DoctorAppointment GetRecommendedAppointment(RecommendedAppointmentDto dto)
+        public List<DoctorAppointment> GetRecommendedAppointment(RecommendedAppointmentDto dto)
         {
             DoctorUser doctor = doctorService.GetByid(dto.DoctorId);
             DateTime startDate = UtilityMethods.ParseDateInCorrectFormat(dto.Start);
             DateTime endDate = UtilityMethods.ParseDateInCorrectFormat(dto.End);
             PatientUser patient = _patientRepository.Find(2); //still no login, change after login, id set to 1
-            DoctorAppointment recommendedAppointment = RecommendAnAppointment(doctor, startDate, endDate, patient);
+            List<DoctorAppointment> recomendedAppointments = GetAllAvailableAppointmentsForRecommendedDates(dto.DoctorId, startDate, endDate, patient.id);
 
-            if (recommendedAppointment == null)
+            if (!recomendedAppointments.Any())
             {
                 if (dto.Priority.Equals("doctor"))
                 {
                     endDate = endDate.AddDays(3);
 
-                    recommendedAppointment = RecommendAnAppointment(doctor, startDate, endDate, patient);
+                    recomendedAppointments = GetAllAvailableAppointmentsForRecommendedDates(dto.DoctorId, startDate, endDate, patient.id);
                 }
                 else
                 {
-                    recommendedAppointment = RecommenedAnAppointmentDatePriority(startDate, endDate, patient, doctor.speciality);
+                    recomendedAppointments = RecommenedAnAppointmentDatePriority(startDate, endDate, patient, doctor.speciality);
                 }
             }
 
-            return recommendedAppointment;
+            return recomendedAppointments;
         }
 
         public DoctorAppointment RecommendAnAppointment(DoctorUser doctor, DateTime startDate, DateTime endDate, PatientUser patient)
@@ -133,6 +133,36 @@ namespace HealthClinic.CL.Service
                 if (GetAvailableTerm(doctor, date, time1, patient) != null) return GetAvailableTerm(doctor, date, time1, patient);
             }
             return null;
+        }
+
+        public List<DoctorAppointment> GetAllAvailableAppointmentsForRecommendedDates(int doctorId, DateTime startDate, DateTime endDate, int patientId)
+        {
+            List<DoctorAppointment> availableAppointments = new List<DoctorAppointment>();
+            for (var date = startDate; date <= endDate; date = date.AddDays(1))
+            {
+                List<TimeSpan> startTimesAppointments = GetAllStartTimes(CreateAppointmentSetForDate(date, doctorId, patientId).ToList());
+                
+                Shift doctorShift = employeesScheduleService.getShiftForDoctorForSpecificDay(MakeStringFromDate(date), doctorService.GetByid(doctorId));
+                if (doctorShift == null)
+                {
+                    continue;
+                }
+                TimeSpan time = TimeSpan.Parse(doctorShift.startTime);
+                while (time != TimeSpan.Parse(doctorShift.endTime))
+                {
+                    if (!startTimesAppointments.Contains(time) && !IsTermNotAvailable(doctorService.GetByid(doctorId), time, MakeStringFromDate(date), _patientRepository.Find(patientId)))
+                    {
+                        availableAppointments.Add((new DoctorAppointment(0, time, MakeStringFromDate(date), _patientRepository.Find(patientId), doctorService.GetByid(doctorId), new List<Referral>(), doctorService.GetByid(doctorId).ordination)));
+                        if (availableAppointments.Count >= 5)
+                        {
+                            return availableAppointments;
+                        }
+                    }
+                    time = time.Add(TimeSpan.FromMinutes(15));
+                }
+            }
+
+            return availableAppointments;
         }
 
         private List<DoctorAppointment> GetAllAppointmentsByDateAndDoctor(DateTime date, int doctorId)
@@ -259,16 +289,17 @@ namespace HealthClinic.CL.Service
             return int.Parse(partsEnd[1]);
         }
 
-        public DoctorAppointment RecommenedAnAppointmentDatePriority(DateTime date1, DateTime date2, PatientUser patient, string speciality)
+        public List<DoctorAppointment> RecommenedAnAppointmentDatePriority(DateTime date1, DateTime date2, PatientUser patient, string speciality)
         {
             List<DoctorUser> doctorsList = doctorService.GetAll();
+            List<DoctorAppointment> appointments = new List<DoctorAppointment>();
 
             foreach (DoctorUser doctor in doctorsList)
             {
-                if (doctor.speciality.Equals(speciality) && RecommendAnAppointment(doctor, date1, date2, patient) != null)
-                    return RecommendAnAppointment(doctor, date1, date2, patient);
+                if (doctor.speciality.Equals(speciality) && GetAllAvailableAppointmentsForRecommendedDates(doctor.id, date1, date2, patient.id).Any())
+                    return GetAllAvailableAppointmentsForRecommendedDates(doctor.id, date1, date2, patient.id);
             }
-            return null;
+            return appointments;
         }
 
         public Boolean IsTermNotAvailable(DoctorUser doctor, TimeSpan time, String dateToString, PatientUser patient)

@@ -28,6 +28,7 @@ class RecommendedAppointmentScheduling extends Component {
     componentDidMount() {
         debugger;
         this.props.loadedAllDoctors();
+        this.props.recommendAppointment({ doctorId: this.state.doctorId, start: this.state.start, end: this.state.end, priority: this.state.priority })
     }
 
     render() {
@@ -39,7 +40,7 @@ class RecommendedAppointmentScheduling extends Component {
 
         const doctorList = this.props.doctorList;
 
-        const recommendedAppointment = this.props.recommendedAppointment;
+        const recommendedAppointments = this.props.recommendedAppointments;
 
         return (
             <div>
@@ -99,7 +100,7 @@ class RecommendedAppointmentScheduling extends Component {
                 </div>
 
                 <div>
-                    {this.state.modalShow ? <RecommendationModal show={this.state.modalShow} appointment={recommendedAppointment} onShowChange={this.getRecommendedAppointment.bind(this)} /> : null}
+                    {this.state.modalShow ? <RecommendationModal show={this.state.modalShow} appointments={recommendedAppointments} onShowChange={this.getRecommendedAppointment.bind(this)} /> : null}
                 </div>
 
             </div>
@@ -179,6 +180,6 @@ class RecommendedAppointmentScheduling extends Component {
 
 const mapStateToProps = (state) =>
 
-    ({ doctorList: state.reducer.doctorList, recommendedAppointment: state.reducer.recommendedAppointment })
+    ({ doctorList: state.reducer.doctorList, recommendedAppointments: state.reducer.recommendedAppointments })
 
 export default connect(mapStateToProps, { loadedAllDoctors, recommendAppointment })(RecommendedAppointmentScheduling);

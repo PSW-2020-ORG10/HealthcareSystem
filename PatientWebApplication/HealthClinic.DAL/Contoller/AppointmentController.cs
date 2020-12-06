@@ -53,7 +53,7 @@ namespace HealthClinic.CL.Contoller
         {
             return regularAppointmentService.RecommendAnAppointment(doctor, date1, date2, patient);
         }
-        public DoctorAppointment recommenedAnAppointmentDatePriority(DateTime date1, DateTime date2, PatientUser patient)
+        public List<DoctorAppointment> recommenedAnAppointmentDatePriority(DateTime date1, DateTime date2, PatientUser patient)
         {
             return regularAppointmentService.RecommenedAnAppointmentDatePriority(date1, date2, patient, "Speciality");
         }
