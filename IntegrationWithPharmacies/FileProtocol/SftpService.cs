@@ -30,6 +30,10 @@ namespace IntegrationWithPharmacies.FileProtocol
             finally  { client.Disconnect(); }
         }
 
+        public bool UploadFileHttp(string testFile, string v)
+        {
+            throw new NotImplementedException();
+        }
 
         IEnumerable<SftpFile> ISpftService.ListAllFiles(string remoteDirectory)
         {

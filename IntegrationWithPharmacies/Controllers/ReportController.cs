@@ -1,15 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using HealthClinic.CL.DbContextModel;
+﻿using HealthClinic.CL.DbContextModel;
+using HealthClinic.CL.Model.ActionsAndBenefits;
 using HealthClinic.CL.Model.Orders;
 using HealthClinic.CL.Model.Pharmacy;
+using HealthClinic.CL.Repository;
 using HealthClinic.CL.Service;
 using IntegrationWithPharmacies.FileProtocol;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging.Abstractions;
+using Newtonsoft.Json;
+using RestSharp;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+
+
 
 namespace IntegrationWithPharmacies.Controllers
 {
@@ -35,7 +44,7 @@ namespace IntegrationWithPharmacies.Controllers
         public IActionResult Post(DateOfOrder date)
         {
             var sftpService = new SftpService(new NullLogger<SftpService>(), getConfig());
-            var testFile = @"..\TextFile.txt";
+            var testFile = @"..\test.txt";
             StringBuilder stringBuilder = new StringBuilder();
 
             foreach (RegistrationInPharmacy registration in RegistrationInPharmacyService.GetAll())
@@ -44,6 +53,44 @@ namespace IntegrationWithPharmacies.Controllers
             }
             System.IO.File.WriteAllText(testFile, stringBuilder.ToString() + "!    Report about consumption of medicine\n\n\n" +getReportText(date));
             sftpService.UploadFile(testFile, @"\pub\" + Path.GetFileName(testFile));
+            return Ok();
+        }
+      
+        [HttpPost("http")]
+        public IActionResult PostHttp(DateOfOrder date)
+        {
+            
+            var testFile = @"..\test.txt";
+            StringBuilder stringBuilder = new StringBuilder();
+
+            foreach (RegistrationInPharmacy registration in RegistrationInPharmacyService.GetAll())
+            {
+                stringBuilder.Append(registration.ApiKey + ";");
+            }
+            System.IO.File.WriteAllText(testFile, stringBuilder.ToString() + "!    Report about consumption of medicine\n\n\n" + getReportText(date));
+            Console.WriteLine("*******************       1           *****************************");
+            try
+            {
+                Console.WriteLine("*******************       2           *****************************");
+
+                WebClient client = new WebClient();
+                Console.WriteLine("*******************      3          *****************************");
+                Uri uri = new Uri(@"http://localhost:8082/download/file/http");
+                Console.WriteLine("*******************      4          *****************************");
+                client.Credentials = CredentialCache.DefaultCredentials;
+                Console.WriteLine("*******************      5          *****************************");
+                client.UploadFile(uri, "POST", @"..\TextFile.txt");
+                Console.WriteLine("*******************      6          *****************************");
+                client.Dispose();
+                Console.WriteLine("*******************      7          *****************************");
+
+            
+                return Ok(JsonConvert.SerializeObject(testFile));
+            }
+            catch(Exception e) {
+                Console.WriteLine("**********************************************************");
+
+            }
             return Ok();
         }
 
