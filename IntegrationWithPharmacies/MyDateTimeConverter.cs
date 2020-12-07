@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace IntegrationWithPharmacies
 {
-    public class MyDateTimeConverter : Newtonsoft.Json.JsonConverter
+    public class MyDateTimeConverter : JsonConverter
     {
         public override bool CanConvert(Type objectType)
         {

@@ -16,15 +16,18 @@ namespace HealthClinic.CL.Model.Patient
     {
         [ForeignKey("AppointmentId")]
         public virtual List<Referral> referral { get; set; }
+        public bool IsCanceled { get; set; }
 
         public DoctorAppointment(int id, TimeSpan time, string date, PatientUser patient, DoctorUser doctor, List<Referral> referrals, string roomid) : base(id, time, date, patient, doctor, roomid)
         {
             referral = referrals;
+            IsCanceled = false;
         }
      
         public DoctorAppointment(int id, TimeSpan time, string date, int patientId, int doctorId, List<Referral> referrals, string roomid) : base(id, time, date, patientId, doctorId, roomid)
         {
             referral = referrals;
+            IsCanceled = false;
         }
 
         public DoctorAppointment() : base() { }

@@ -10,7 +10,7 @@ namespace IntegrationWithPharmacies
 {
     public class TimeService : BackgroundService
     {
-        System.Timers.Timer collectTimer = new System.Timers.Timer();        // periodicly generates new messages and adds them to list
+        System.Timers.Timer collectTimer = new System.Timers.Timer();    
 
         public override Task StartAsync(CancellationToken cancellationToken)
         {
@@ -21,9 +21,8 @@ namespace IntegrationWithPharmacies
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
             collectTimer.Elapsed += new ElapsedEventHandler(CollectMessage);
-            collectTimer.Interval = 5000; //number in miliseconds  
+            collectTimer.Interval = 5000; 
             collectTimer.Enabled = true;
-
             return Task.CompletedTask;
         }
 
@@ -38,7 +37,7 @@ namespace IntegrationWithPharmacies
             WriteToFile("Collect messages at " + DateTime.Now);
             foreach (Message message in Program.ListOfMessages)
             {
-                WriteToFile("Message " + message.Text + " sent at " + message.TimeStamp + " was read at " + DateTime.Now);
+                WriteToFile("Message " + message.Text + " sent at " + message.TimeStamp + " was read at the specific time " + DateTime.Now);
             }
             Program.ListOfMessages.Clear();
         }
@@ -46,24 +45,23 @@ namespace IntegrationWithPharmacies
         public void WriteToFile(string Message)
         {
             string path = AppDomain.CurrentDomain.BaseDirectory + "\\Logs";
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
+            if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+            
             string filepath = AppDomain.CurrentDomain.BaseDirectory + "\\Logs\\ServiceLog_" + DateTime.Now.Date.ToShortDateString().Replace('/', '_') + ".txt";
+            if (!File.Exists(filepath))  CreateFile(Message, filepath);
+            
+            else AppendInFile(Message, filepath);
+        }
 
-            try
-            {
-                using (StreamWriter sw = File.AppendText(filepath))
-                {
-                    sw.WriteLine(Message);
-                }
-            }
-            catch (IOException e)
-            {
-                Console.WriteLine(e.ToString());
-            }
+        private static void CreateFile(string Message, string filepath)
+        {
+            using (StreamWriter sw = File.CreateText(filepath)) sw.WriteLine(Message);
+        }
 
+        private static void AppendInFile(string Message, string filepath)
+        {
+            try { using (StreamWriter sw = File.AppendText(filepath)) sw.WriteLine(Message); }
+            catch (IOException e)  { Console.WriteLine(e.ToString()); }
         }
     }
 }

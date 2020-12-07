@@ -11,6 +11,7 @@ namespace HealthClinic.CL.Service
     {
 
         private IMessageRepository MessageRepository { get; set; }
+
         public MessageService()
         {
             MessageRepository = new MessageRepository();
