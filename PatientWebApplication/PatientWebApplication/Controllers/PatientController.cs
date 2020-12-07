@@ -24,14 +24,12 @@ namespace PatientWebApplication.Controllers
         private PatientService PatientService { get; set; }
         private IWebHostEnvironment _env;
 
-
         /// <summary>This constructor injects the PatientUserController with matching PatientService.</summary>
         public PatientUserController(IWebHostEnvironment env)
         {
             PatientService = new PatientService(new PatientsRepository(), new EmailVerificationService());
             _env = env;
         }
-
         /// <summary> This method determines if <c>PatientDto</c> provided <paramref name="dto"/> is valid for creating by calling <c>PatientValidator</c>
         /// automatically and sends it to <c>PatientService</c>. </summary>  
         /// <returns> if fields from <paramref name="dto"/> are not valid 400 Bad Request also if created feedback is not null 200 Ok else 404 Bad Request.</returns>
@@ -42,9 +40,9 @@ namespace PatientWebApplication.Controllers
             {
                 return BadRequest();
             }
-           
+
             return Ok();
-            
+
 
         }
 
@@ -63,7 +61,7 @@ namespace PatientWebApplication.Controllers
             }
 
             return Ok(fileName);
-        
+
 
         }
 
@@ -105,5 +103,11 @@ namespace PatientWebApplication.Controllers
 
         }
 
+        [HttpGet]       
+        public IActionResult Get()
+        {
+            List<PatientUser> result = PatientService.GetAll();
+            return Ok(result);
+        }
     }
 }

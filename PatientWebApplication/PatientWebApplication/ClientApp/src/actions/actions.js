@@ -26,7 +26,9 @@
     ADVANCED_SEARCH_PATIENT_APPOINTMENTS,
     ADVANCED_SEARCH_APPOINTMENTS_ERROR,
     LOADED_ALL_PATIENT_APPOINTMENTS,
-    OBSERVE_PATIENT_APPOINTMENTS_ERROR
+    OBSERVE_PATIENT_APPOINTMENTS_ERROR,
+    LOADED_ALL_PATIENTS,
+    OBSERVE_PATIENTS_ERROR
 } from "../types/types"
 import axios from "axios";
 
@@ -350,6 +352,23 @@ export const loadedAllDoctorRates = () => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: OBSERVE_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const loadedAllPatients = () => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.get("http://localhost:60198/api/patientuser");
+        debugger;
+        dispatch({
+            type: LOADED_ALL_PATIENTS,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: OBSERVE_PATIENTS_ERROR,
             payload: console.log(e),
         });
     }
