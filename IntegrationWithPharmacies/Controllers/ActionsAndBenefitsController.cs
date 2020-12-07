@@ -85,6 +85,9 @@ namespace IntegrationWithPharmacies.Controllers
             MedicineDescription result = response.Data;
             Console.WriteLine(result.ToString());
         }
+
+
+
         private async Task<System.IO.Stream> Upload(string paramString, Stream paramFileStream, byte[] paramFileBytes)
         {
             HttpContent stringContent = new StringContent(paramString);
