@@ -31,3 +31,5 @@ export const OBSERVE_PATIENT_APPOINTMENTS_ERROR = "observePatientAppointmentsErr
 export const LOADED_ALL_PATIENT_APPOINTMENTS_INTWODAYS = "loadedAllPatientAppointmentsInTwoDays";
 export const LOADED_ALL_PATIENT_APPOINTMENTS_INFUTURE = "loadedAllPatientAppointmentsInFuture";
 export const CANCEL_APPOINTMENT = "cancelAppointment";
+export const LOADED_ALL_PATIENT_APPOINTMENTS_WITH_SURVEYS = "loadedAllPatientAppointmentsWithSurvey";
+export const LOADED_ALL_PATIENT_APPOINTMENTS_WITHOUT_SURVEYS = "loadedAllPatientAppointmentsWithoutSurvey";

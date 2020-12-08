@@ -29,6 +29,8 @@
     LOADED_ALL_PATIENT_APPOINTMENTS_INTWODAYS,
     LOADED_ALL_PATIENT_APPOINTMENTS_INFUTURE,
     CANCEL_APPOINTMENT,
+    LOADED_ALL_PATIENT_APPOINTMENTS_WITH_SURVEYS,
+    LOADED_ALL_PATIENT_APPOINTMENTS_WITHOUT_SURVEYS,
     OBSERVE_PATIENT_APPOINTMENTS_ERROR
 } from "../types/types"
 import axios from "axios";
@@ -399,6 +401,40 @@ export const cancelAppointment = (appointmentId) => async (dispatch) => {
         debugger;
         dispatch({
             type: CANCEL_APPOINTMENT,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: OBSERVE_PATIENT_APPOINTMENTS_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const loadedAllPatientAppointmentsWithSurvey = () => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.get("http://localhost:60198/api/survey/");
+        debugger;
+        dispatch({
+            type: LOADED_ALL_PATIENT_APPOINTMENTS_WITH_SURVEYS,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: OBSERVE_PATIENT_APPOINTMENTS_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const loadedAllPatientAppointmentsWithoutSurvey = () => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.get("http://localhost:60198/api/survey/getWithSurveys");
+        debugger;
+        dispatch({
+            type: LOADED_ALL_PATIENT_APPOINTMENTS_WITHOUT_SURVEYS,
             payload: response.data,
         });
     } catch (e) {

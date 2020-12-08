@@ -47,6 +47,9 @@ namespace HealthClinic.CL.DbContextModel
         public DbSet<ManagersOrder> ManagersOrders { get; set; }
         public DbSet<PharmacyOffer> PharmacyOffers { get; set; }
         public DbSet<DoctorAppointment> DoctorAppointments { get; set; }
+
+        //public DbSet<DoctorAppointment> SurveyAppointments { get; set; }
+
         public DbSet<PhoneNumber> PhoneNumbers { get; set; }
         public DbSet<Prescription> Prescriptions { get; set; }
         public DbSet<Question> Questions { get; set; }
@@ -232,7 +235,7 @@ namespace HealthClinic.CL.DbContextModel
             new DoctorAppointment(5, new TimeSpan(0, 12, 0, 0, 0), "02/02/2020", 1, 1, new List<Referral>(), "1"),
             new DoctorAppointment(6, new TimeSpan(0, 12, 15, 0, 0), "02/02/2020", 2, 3, new List<Referral>(), "1"),
             new DoctorAppointment(7, new TimeSpan(), "07/02/2031", 1, 3, new List<Referral>(), "1"),
-            new DoctorAppointment(8, new TimeSpan(), "06/12/2020", 1, 2, new List<Referral>(), "1"),
+            new DoctorAppointment(8, new TimeSpan(), "07/12/2020", 1, 2, new List<Referral>(), "1"),
             new DoctorAppointment(9, new TimeSpan(), "05/12/2030", 1, 1, new List<Referral>(), "1"),
             new DoctorAppointment(10, new TimeSpan(), "11/11/2030", 1, 2, new List<Referral>(), "1"),
             new DoctorAppointment(11, new TimeSpan(), "14/03/2016", 2, 1, new List<Referral>(), "A2"),
@@ -295,14 +298,9 @@ namespace HealthClinic.CL.DbContextModel
             modelBuilder.Entity<Survey>().HasData(
 
             new Survey(1, 1, 3, 4, 5, 4, 5, 4, 5, 4, 5, 5, 5, 5, 4, 3, 3, 2, 2, 5),
-            new Survey(2, 1, 4, 4, 5, 3, 1, 5, 5, 2, 2, 4, 2, 5, 3, 1, 3, 3, 3, 5),
-            new Survey(3, 1, 5, 4, 5, 1, 3, 4, 5, 3, 2, 5, 1, 5, 4, 1, 2, 2, 1, 5),
-            new Survey(4, 1, 6, 4, 5, 2, 5, 5, 1, 3, 2, 4, 2, 2, 3, 1, 3, 1, 3, 5),
-            new Survey(5, 1, 7, 4, 5, 4, 2, 4, 5, 1, 2, 4, 3, 5, 2, 1, 1, 2, 5, 1)
-
+            new Survey(2, 1, 4, 4, 5, 3, 1, 5, 5, 2, 2, 4, 2, 5, 3, 1, 3, 3, 3, 5)        
             );
-
-
+         
         }
 
     }

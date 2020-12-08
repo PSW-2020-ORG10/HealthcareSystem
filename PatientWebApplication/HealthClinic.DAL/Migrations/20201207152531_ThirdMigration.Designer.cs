@@ -3,14 +3,16 @@ using System;
 using HealthClinic.CL.DbContextModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HealthClinic.CL.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201207152531_ThirdMigration")]
+    partial class ThirdMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -938,7 +940,7 @@ namespace HealthClinic.CL.Migrations
 
                     b.HasIndex("PatientUserId");
 
-                    b.ToTable("DoctorAppointments");
+                    b.ToTable("DoctorAppointment");
 
                     b.HasData(
                         new
