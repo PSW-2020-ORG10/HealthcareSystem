@@ -7,6 +7,7 @@
 using HealthClinic.CL.DbContextModel;
 using HealthClinic.CL.Model.Patient;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -58,12 +59,20 @@ namespace HealthClinic.CL.Repository
 
         public List<DoctorAppointment> GetAppointmentsForPatient(int idPatient)
         {
-            return dbContext.DoctorAppointments.ToList().FindAll(appointment => appointment.PatientUserId == idPatient);
+            return dbContext.DoctorAppointments.ToList().FindAll(appointment => (appointment.PatientUserId == idPatient) && (!appointment.IsCanceled));
         }
 
         public List<DoctorAppointment> GetAppointmentsForDoctor(int idDoctor)
         {
             return dbContext.DoctorAppointments.ToList().FindAll(appointment => appointment.DoctorUserId == idDoctor);
+        }
+
+        public DoctorAppointment CancelAppointment(DoctorAppointment appointment)
+        {
+            appointment.IsCanceled = true;
+            appointment.CancelDateString = DateTime.Now.ToString("dd/MM/yyyy");
+            dbContext.SaveChanges();
+            return appointment;
         }
     }
 }

@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HealthClinic.CL.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20201203225315_AppointmentsMigration")]
-    partial class AppointmentsMigration
+    [Migration("20201209211124_MergedMigration")]
+    partial class MergedMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,6 +24,9 @@ namespace HealthClinic.CL.Migrations
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<string>("DateAction")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<bool>("IsRemoved")
                         .HasColumnType("tinyint(1)");
@@ -45,6 +48,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
+                            DateAction = "02/02/2020",
                             IsRemoved = false,
                             PharmacyName = "Apoteka Jankovic",
                             Text = "Message",
@@ -829,11 +833,17 @@ namespace HealthClinic.CL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("CancelDateString")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<string>("Date")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<int>("DoctorUserId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsCanceled")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<int>("PatientUserId")
                         .HasColumnType("int");
@@ -858,6 +868,7 @@ namespace HealthClinic.CL.Migrations
                             id = 1,
                             Date = "03/03/2020",
                             DoctorUserId = 1,
+                            IsCanceled = false,
                             PatientUserId = 2,
                             RoomId = "1",
                             Start = new TimeSpan(0, 14, 15, 0, 0)
@@ -867,6 +878,7 @@ namespace HealthClinic.CL.Migrations
                             id = 2,
                             Date = "03/03/2020",
                             DoctorUserId = 2,
+                            IsCanceled = false,
                             PatientUserId = 2,
                             RoomId = "1",
                             Start = new TimeSpan(0, 14, 30, 0, 0)
@@ -876,6 +888,7 @@ namespace HealthClinic.CL.Migrations
                             id = 3,
                             Date = "03/03/2020",
                             DoctorUserId = 2,
+                            IsCanceled = false,
                             PatientUserId = 1,
                             RoomId = "1",
                             Start = new TimeSpan(0, 15, 0, 0, 0)
@@ -885,6 +898,7 @@ namespace HealthClinic.CL.Migrations
                             id = 4,
                             Date = "03/03/2020",
                             DoctorUserId = 2,
+                            IsCanceled = false,
                             PatientUserId = 1,
                             RoomId = "1",
                             Start = new TimeSpan(0, 15, 45, 0, 0)
@@ -894,6 +908,7 @@ namespace HealthClinic.CL.Migrations
                             id = 5,
                             Date = "02/02/2020",
                             DoctorUserId = 1,
+                            IsCanceled = false,
                             PatientUserId = 1,
                             RoomId = "1",
                             Start = new TimeSpan(0, 12, 0, 0, 0)
@@ -903,6 +918,7 @@ namespace HealthClinic.CL.Migrations
                             id = 6,
                             Date = "02/02/2020",
                             DoctorUserId = 3,
+                            IsCanceled = false,
                             PatientUserId = 2,
                             RoomId = "1",
                             Start = new TimeSpan(0, 12, 15, 0, 0)
@@ -910,8 +926,9 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 7,
-                            Date = "07/02/2011",
+                            Date = "07/02/2031",
                             DoctorUserId = 3,
+                            IsCanceled = false,
                             PatientUserId = 1,
                             RoomId = "1",
                             Start = new TimeSpan(0, 0, 0, 0, 0)
@@ -919,8 +936,9 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 8,
-                            Date = "01/03/2020",
+                            Date = "07/12/2020",
                             DoctorUserId = 2,
+                            IsCanceled = false,
                             PatientUserId = 1,
                             RoomId = "1",
                             Start = new TimeSpan(0, 0, 0, 0, 0)
@@ -928,8 +946,9 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 9,
-                            Date = "14/03/2016",
+                            Date = "05/12/2030",
                             DoctorUserId = 1,
+                            IsCanceled = false,
                             PatientUserId = 1,
                             RoomId = "1",
                             Start = new TimeSpan(0, 0, 0, 0, 0)
@@ -939,6 +958,7 @@ namespace HealthClinic.CL.Migrations
                             id = 10,
                             Date = "11/11/2030",
                             DoctorUserId = 2,
+                            IsCanceled = false,
                             PatientUserId = 1,
                             RoomId = "1",
                             Start = new TimeSpan(0, 0, 0, 0, 0)
@@ -948,6 +968,7 @@ namespace HealthClinic.CL.Migrations
                             id = 11,
                             Date = "14/03/2016",
                             DoctorUserId = 1,
+                            IsCanceled = false,
                             PatientUserId = 2,
                             RoomId = "A2",
                             Start = new TimeSpan(0, 0, 0, 0, 0)
@@ -957,6 +978,7 @@ namespace HealthClinic.CL.Migrations
                             id = 12,
                             Date = "11/11/2010",
                             DoctorUserId = 2,
+                            IsCanceled = false,
                             PatientUserId = 2,
                             RoomId = "B3",
                             Start = new TimeSpan(0, 0, 0, 0, 0)
@@ -1402,75 +1424,6 @@ namespace HealthClinic.CL.Migrations
                             medicalStaffsSkill = 2,
                             medicalStaffsTechnicality = 4,
                             medicalStaffsWorkingPace = 3,
-                            patientId = 1
-                        },
-                        new
-                        {
-                            id = 3,
-                            appointmentId = 5,
-                            doctorsKnowledge = 4,
-                            doctorsPoliteness = 5,
-                            doctorsProfessionalism = 4,
-                            doctorsSkill = 3,
-                            doctorsTechnicality = 1,
-                            doctorsWorkingPace = 5,
-                            hospitalEnvironment = 1,
-                            hospitalEquipment = 2,
-                            hospitalHygiene = 2,
-                            hospitalPrices = 1,
-                            hospitalWaitingTime = 5,
-                            medicalStaffsKnowledge = 5,
-                            medicalStaffsPoliteness = 2,
-                            medicalStaffsProfessionalism = 3,
-                            medicalStaffsSkill = 1,
-                            medicalStaffsTechnicality = 5,
-                            medicalStaffsWorkingPace = 4,
-                            patientId = 1
-                        },
-                        new
-                        {
-                            id = 4,
-                            appointmentId = 6,
-                            doctorsKnowledge = 5,
-                            doctorsPoliteness = 5,
-                            doctorsProfessionalism = 4,
-                            doctorsSkill = 5,
-                            doctorsTechnicality = 2,
-                            doctorsWorkingPace = 1,
-                            hospitalEnvironment = 1,
-                            hospitalEquipment = 3,
-                            hospitalHygiene = 1,
-                            hospitalPrices = 3,
-                            hospitalWaitingTime = 5,
-                            medicalStaffsKnowledge = 2,
-                            medicalStaffsPoliteness = 2,
-                            medicalStaffsProfessionalism = 3,
-                            medicalStaffsSkill = 2,
-                            medicalStaffsTechnicality = 4,
-                            medicalStaffsWorkingPace = 3,
-                            patientId = 1
-                        },
-                        new
-                        {
-                            id = 5,
-                            appointmentId = 7,
-                            doctorsKnowledge = 4,
-                            doctorsPoliteness = 5,
-                            doctorsProfessionalism = 4,
-                            doctorsSkill = 2,
-                            doctorsTechnicality = 4,
-                            doctorsWorkingPace = 5,
-                            hospitalEnvironment = 1,
-                            hospitalEquipment = 1,
-                            hospitalHygiene = 2,
-                            hospitalPrices = 5,
-                            hospitalWaitingTime = 1,
-                            medicalStaffsKnowledge = 5,
-                            medicalStaffsPoliteness = 2,
-                            medicalStaffsProfessionalism = 1,
-                            medicalStaffsSkill = 3,
-                            medicalStaffsTechnicality = 4,
-                            medicalStaffsWorkingPace = 2,
                             patientId = 1
                         });
                 });

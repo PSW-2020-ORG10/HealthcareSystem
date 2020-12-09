@@ -28,5 +28,6 @@ namespace HealthClinic.CL.Service
         List<DoctorAppointment> SimpleSearchAppointments(AppointmentReportSearchDto appointmentReportSearchDto);
         void Update(DoctorAppointment appointment, Operation operation);
         DoctorAppointment GetRecommendedAppointment(RecommendedAppointmentDto dto);
+        DoctorAppointment CancelAppointment(DoctorAppointment appointment);
     }
 }

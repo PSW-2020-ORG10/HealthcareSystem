@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HealthClinic.CL.Migrations
 {
-    public partial class AppointmentsMigration : Migration
+    public partial class MergedMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -86,7 +86,8 @@ namespace HealthClinic.CL.Migrations
                     Text = table.Column<string>(nullable: true),
                     TimeStamp = table.Column<DateTime>(nullable: false),
                     IsRemoved = table.Column<bool>(nullable: false),
-                    PharmacyName = table.Column<string>(nullable: true)
+                    PharmacyName = table.Column<string>(nullable: true),
+                    DateAction = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -321,7 +322,9 @@ namespace HealthClinic.CL.Migrations
                     Start = table.Column<TimeSpan>(nullable: false),
                     Date = table.Column<string>(nullable: true),
                     PatientUserId = table.Column<int>(nullable: false),
-                    RoomId = table.Column<string>(nullable: true)
+                    RoomId = table.Column<string>(nullable: true),
+                    IsCanceled = table.Column<bool>(nullable: false),
+                    CancelDateString = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -691,8 +694,8 @@ namespace HealthClinic.CL.Migrations
 
             migrationBuilder.InsertData(
                 table: "Messages",
-                columns: new[] { "id", "IsRemoved", "PharmacyName", "Text", "TimeStamp" },
-                values: new object[] { 1, false, "Apoteka Jankovic", "Message", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                columns: new[] { "id", "DateAction", "IsRemoved", "PharmacyName", "Text", "TimeStamp" },
+                values: new object[] { 1, "02/02/2020", false, "Apoteka Jankovic", "Message", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
                 table: "Patients",
@@ -745,21 +748,21 @@ namespace HealthClinic.CL.Migrations
 
             migrationBuilder.InsertData(
                 table: "DoctorAppointments",
-                columns: new[] { "id", "Date", "DoctorUserId", "PatientUserId", "RoomId", "Start" },
+                columns: new[] { "id", "CancelDateString", "Date", "DoctorUserId", "IsCanceled", "PatientUserId", "RoomId", "Start" },
                 values: new object[,]
                 {
-                    { 5, "02/02/2020", 1, 1, "1", new TimeSpan(0, 12, 0, 0, 0) },
-                    { 6, "02/02/2020", 3, 2, "1", new TimeSpan(0, 12, 15, 0, 0) },
-                    { 2, "03/03/2020", 2, 2, "1", new TimeSpan(0, 14, 30, 0, 0) },
-                    { 1, "03/03/2020", 1, 2, "1", new TimeSpan(0, 14, 15, 0, 0) },
-                    { 10, "11/11/2030", 2, 1, "1", new TimeSpan(0, 0, 0, 0, 0) },
-                    { 9, "14/03/2016", 1, 1, "1", new TimeSpan(0, 0, 0, 0, 0) },
-                    { 8, "01/03/2020", 2, 1, "1", new TimeSpan(0, 0, 0, 0, 0) },
-                    { 7, "07/02/2011", 3, 1, "1", new TimeSpan(0, 0, 0, 0, 0) },
-                    { 11, "14/03/2016", 1, 2, "A2", new TimeSpan(0, 0, 0, 0, 0) },
-                    { 4, "03/03/2020", 2, 1, "1", new TimeSpan(0, 15, 45, 0, 0) },
-                    { 3, "03/03/2020", 2, 1, "1", new TimeSpan(0, 15, 0, 0, 0) },
-                    { 12, "11/11/2010", 2, 2, "B3", new TimeSpan(0, 0, 0, 0, 0) }
+                    { 5, null, "02/02/2020", 1, false, 1, "1", new TimeSpan(0, 12, 0, 0, 0) },
+                    { 6, null, "02/02/2020", 3, false, 2, "1", new TimeSpan(0, 12, 15, 0, 0) },
+                    { 2, null, "03/03/2020", 2, false, 2, "1", new TimeSpan(0, 14, 30, 0, 0) },
+                    { 1, null, "03/03/2020", 1, false, 2, "1", new TimeSpan(0, 14, 15, 0, 0) },
+                    { 10, null, "11/11/2030", 2, false, 1, "1", new TimeSpan(0, 0, 0, 0, 0) },
+                    { 9, null, "05/12/2030", 1, false, 1, "1", new TimeSpan(0, 0, 0, 0, 0) },
+                    { 8, null, "07/12/2020", 2, false, 1, "1", new TimeSpan(0, 0, 0, 0, 0) },
+                    { 7, null, "07/02/2031", 3, false, 1, "1", new TimeSpan(0, 0, 0, 0, 0) },
+                    { 11, null, "14/03/2016", 1, false, 2, "A2", new TimeSpan(0, 0, 0, 0, 0) },
+                    { 4, null, "03/03/2020", 2, false, 1, "1", new TimeSpan(0, 15, 45, 0, 0) },
+                    { 3, null, "03/03/2020", 2, false, 1, "1", new TimeSpan(0, 15, 0, 0, 0) },
+                    { 12, null, "11/11/2010", 2, false, 2, "B3", new TimeSpan(0, 0, 0, 0, 0) }
                 });
 
             migrationBuilder.InsertData(
@@ -851,12 +854,12 @@ namespace HealthClinic.CL.Migrations
                     { 1, 1, "classify", "Patient had slight heart arrhythmia.", "Aspirin", 3, "25/02/2020" },
                     { 10, 10, "Appointment", "Patient had cold.", "Brufen", 1, "11/05/2020" },
                     { 9, 9, "classify", "Patient had slight heart arrhythmia.", "Aspirin", 3, "25/02/2020" },
-                    { 8, 8, "Appointment", "Patient had cold.", "Brufen", 1, "11/05/2020" },
+                    { 5, 5, "classify", "Patient had slight heart arrhythmia.", "Aspirin", 3, "25/02/2020" },
                     { 7, 7, "classify", "Patient had slight heart arrhythmia.", "Aspirin", 3, "25/02/2020" },
                     { 11, 11, "classify", "Patient had slight heart arrhythmia.", "Aspirin", 3, "25/02/2020" },
-                    { 5, 5, "classify", "Patient had slight heart arrhythmia.", "Aspirin", 3, "25/02/2020" },
                     { 4, 4, "Appointment", "Patient had cold.", "Brufen", 1, "11/05/2020" },
                     { 3, 3, "classify", "Patient had slight heart arrhythmia.", "Aspirin", 3, "25/02/2020" },
+                    { 8, 8, "Appointment", "Patient had cold.", "Brufen", 1, "11/05/2020" },
                     { 12, 12, "Appointment", "Patient had cold.", "Brufen", 1, "11/05/2020" }
                 });
 
@@ -865,11 +868,8 @@ namespace HealthClinic.CL.Migrations
                 columns: new[] { "id", "appointmentId", "doctorsKnowledge", "doctorsPoliteness", "doctorsProfessionalism", "doctorsSkill", "doctorsTechnicality", "doctorsWorkingPace", "hospitalEnvironment", "hospitalEquipment", "hospitalHygiene", "hospitalPrices", "hospitalWaitingTime", "medicalStaffsKnowledge", "medicalStaffsPoliteness", "medicalStaffsProfessionalism", "medicalStaffsSkill", "medicalStaffsTechnicality", "medicalStaffsWorkingPace", "patientId" },
                 values: new object[,]
                 {
-                    { 3, 5, 4, 5, 4, 3, 1, 5, 1, 2, 2, 1, 5, 5, 2, 3, 1, 5, 4, 1 },
                     { 2, 4, 5, 5, 4, 1, 3, 5, 1, 3, 3, 3, 5, 5, 2, 2, 2, 4, 3, 1 },
-                    { 1, 3, 4, 5, 4, 5, 4, 5, 3, 3, 2, 2, 5, 5, 5, 4, 5, 5, 4, 1 },
-                    { 4, 6, 5, 5, 4, 5, 2, 1, 1, 3, 1, 3, 5, 2, 2, 3, 2, 4, 3, 1 },
-                    { 5, 7, 4, 5, 4, 2, 4, 5, 1, 1, 2, 5, 1, 5, 2, 1, 3, 4, 2, 1 }
+                    { 1, 3, 4, 5, 4, 5, 4, 5, 3, 3, 2, 2, 5, 5, 5, 4, 5, 5, 4, 1 }
                 });
 
             migrationBuilder.CreateIndex(

@@ -19,5 +19,6 @@ namespace HealthClinic.CL.Repository
         DoctorAppointment New(DoctorAppointment appointment);
         void Update(DoctorAppointment appointment);
         DoctorAppointment Create(DoctorAppointment appointment);
+        DoctorAppointment CancelAppointment(DoctorAppointment appointment);
     }
 }

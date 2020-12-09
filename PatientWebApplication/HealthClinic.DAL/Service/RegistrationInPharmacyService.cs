@@ -53,6 +53,14 @@ namespace HealthClinic.CL.Service
             }
             return null;
         }
+        public RegistrationInPharmacy GetRegistrationByPharmacyName(String name)
+        {
+            foreach (RegistrationInPharmacy registration in RegistrationInPharmacyRepository.GetAll())
+            {
+                if (registration.Name.Equals(name)) return registration;
+            }
+            return null;
+        }
         public RegistrationInPharmacy createIRegistration(RegistrationInPharmacyDto dto)
         {
             foreach (RegistrationInPharmacy registrationIRepo in IRegistrationRepository.GetAll())
@@ -60,6 +68,14 @@ namespace HealthClinic.CL.Service
                 if (registrationIRepo.ApiKey.Equals(RegistrationInPharmacyAdapter.RegistrationDtoToRegistration(dto).ApiKey)) return null;
             }
             return RegistrationInPharmacyAdapter.RegistrationDtoToRegistration(dto);
+        }
+        public Boolean Remove(String apiKey)
+        {
+            try{   
+                RegistrationInPharmacyRepository.Remove(apiKey);
+                return true;
+            }
+            catch{ return false; }
         }
     }
 }

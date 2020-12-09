@@ -18,7 +18,12 @@
     LOADED_APPOINTMENTSURVEY,
     LOADED_ALL_DOCTORS,
     RECOMMEND_APPOINTMENT,
-    CREATE_RECOMMEND_APPOINTMENT
+    CREATE_RECOMMEND_APPOINTMENT,
+    LOADED_ALL_PATIENT_APPOINTMENTS_INTWODAYS,
+    LOADED_ALL_PATIENT_APPOINTMENTS_INFUTURE,
+    CANCEL_APPOINTMENT,
+    LOADED_ALL_PATIENT_APPOINTMENTS_WITH_SURVEYS,
+    LOADED_ALL_PATIENT_APPOINTMENTS_WITHOUT_SURVEYS
 } from "../types/types"
 
 function addFeedback(state=initialState, action) {
@@ -66,7 +71,13 @@ const initialState = {
     allRates: {},
     doctorList: [],
     recommendedAppointments: [],
-    createdRecommendedAppointment: {}
+    createdRecommendedAppointment: {},
+    patientAppointmentsInTwoDaysList: [],
+    patientAppointmentsInFutureList: [],
+    patientAppointmentsWithSurveys: [],
+    patientAppointmentsWithoutSurveys: [],
+    canceledAppointment: {},
+    allRates: {}
 };
 
 
@@ -167,7 +178,32 @@ function reducer(state = initialState, action) {
             return {
                 ...state,
                 doctorRatesList: action.payload
+            };   
+        case LOADED_ALL_PATIENT_APPOINTMENTS_INTWODAYS:
+            return {
+                ...state,
+                patientAppointmentsInTwoDaysList: action.payload
             };
+        case LOADED_ALL_PATIENT_APPOINTMENTS_INFUTURE:
+            return {
+                ...state,
+                patientAppointmentsInFutureList: action.payload
+            };
+        case CANCEL_APPOINTMENT:
+            return {
+                ...state,
+                patientAppointmentsList: updateObjectInArray(state.patientAppointmentsList, action)
+            };     
+        case LOADED_ALL_PATIENT_APPOINTMENTS_WITH_SURVEYS:
+            return {
+                ...state,
+                patientAppointmentsWithSurveys: action.payload
+            };     
+        case LOADED_ALL_PATIENT_APPOINTMENTS_WITHOUT_SURVEYS:
+            return {
+                ...state,
+                patientAppointmentsWithoutSurveys: action.payload
+            }; 
         case LOADED_ALL_DOCTORS:
             return {
                 ...state,
@@ -185,7 +221,7 @@ function reducer(state = initialState, action) {
                 ...state,
                 createdRecommendedAppointment: action.payload
 
-            };
+            };    
         default:
             return state;
     }
