@@ -447,12 +447,12 @@ namespace HealthClinic.CL.Service
         /// <returns> List of valid appointments. </returns>
         public List<DoctorAppointment> FindAllValidAppointmentsWithoutSurvey(List<DoctorAppointment> allValidAppointments, List<Survey> surveys)
         {
-            return CheckIfAppointmentsHappened(allValidAppointments.Where(p => !FindAllUnvalidAppointments(surveys).Any(p2 => p2 == p.id)).ToList());
+            return CheckIfAppointmentsHappened(allValidAppointments.Where(validAppointment => !FindAllUnvalidAppointments(surveys).Any(unvalidAppointment => unvalidAppointment == validAppointment.id)).ToList());
         }
 
         public List<DoctorAppointment> FindAllValidAppointmentsWithSurvey(List<DoctorAppointment> allValidAppointments, List<Survey> surveys)
         {
-            return CheckIfAppointmentsHappened(allValidAppointments.Where(p => FindAllUnvalidAppointments(surveys).Any(p2 => p2 == p.id)).ToList());
+            return CheckIfAppointmentsHappened(allValidAppointments.Where(validAppointment => FindAllUnvalidAppointments(surveys).Any(unvalidAppointment => unvalidAppointment == validAppointment.id)).ToList());
         }
 
         /// <summary> This method provides <c>DoctorAppointment</c> <paramref name="appointment"/> and sends it to <c>AppointmentRepository</c> there appointment.IsCanceled will be set to true. </summary>
