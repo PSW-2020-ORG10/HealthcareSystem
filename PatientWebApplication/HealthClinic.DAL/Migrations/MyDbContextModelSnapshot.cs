@@ -914,6 +914,9 @@ namespace HealthClinic.CL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("CancelDateString")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<string>("Date")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
