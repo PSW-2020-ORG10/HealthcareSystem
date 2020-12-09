@@ -7,6 +7,7 @@
 using HealthClinic.CL.DbContextModel;
 using HealthClinic.CL.Model.Patient;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -62,6 +63,7 @@ namespace HealthClinic.CL.Repository
         public DoctorAppointment CancelAppointment(DoctorAppointment appointment)
         {
             appointment.IsCanceled = true;
+            appointment.CancelDateString = DateTime.Now.ToString("dd/MM/yyyy");
             dbContext.SaveChanges();
             return appointment;
         }
