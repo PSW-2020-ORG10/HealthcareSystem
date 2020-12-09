@@ -111,7 +111,7 @@ namespace HealthClinic.CL.Service
             {
                 if (dto.Priority.Equals("doctor"))
                 {
-                    endDate = endDate.AddDays(3);
+                    endDate = (endDate - startDate).TotalDays > 20 ? endDate.AddDays(10) : (endDate - startDate).TotalDays > 10 ? endDate.AddDays(5) : endDate.AddDays(3);
 
                     recomendedAppointments = GetAllAvailableAppointmentsForRecommendedDates(dto.DoctorId, startDate, endDate, patient.id);
                 }
