@@ -1,5 +1,5 @@
 ﻿import React, { Component } from "react"
-import { loadedAllPatients, blockPatient } from "../actions/actions"
+import { loadedMaliciousPatients, blockPatient } from "../actions/actions"
 import { connect } from "react-redux"
 import { wrap } from "module";
 import axios from "axios";
@@ -13,15 +13,15 @@ class MaliciousPatientTable extends Component {
 
     componentDidMount() {
         debugger;
-        this.props.loadedAllPatients();
+        this.props.loadedMaliciousPatients();
     }
 
     render() {
-        if (this.props.allPatientsList === undefined) {
+        if (this.props.maliciousPatientsList === undefined) {
 
             return null;
         }
-        const allPatientsList = this.props.allPatientsList;
+        const maliciousPatientsList = this.props.maliciousPatientsList;
         debugger;
         return (
             <div>
@@ -33,7 +33,7 @@ class MaliciousPatientTable extends Component {
                             <th style={{ textAlign: "center" }}></th>
                         </tr>
                     </thead>
-                    {allPatientsList.map((f) => (
+                    {maliciousPatientsList.map((f) => (
                         <tbody key={f}>
                             <tr key={f}>
                                 <td style={{ textAlign: "center" }} >{f.firstName + ' ' + f.secondName}</td>
@@ -61,7 +61,7 @@ class MaliciousPatientTable extends Component {
 
 const mapStateToProps = (state) =>
 
-    ({ allPatientsList: state.reducer.allPatientsList })
+    ({ maliciousPatientsList: state.reducer.maliciousPatientsList })
 
-export default connect(mapStateToProps, { loadedAllPatients, blockPatient })(MaliciousPatientTable);
+export default connect(mapStateToProps, { loadedMaliciousPatients, blockPatient })(MaliciousPatientTable);
 

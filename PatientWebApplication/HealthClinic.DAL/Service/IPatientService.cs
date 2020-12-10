@@ -17,5 +17,6 @@ namespace HealthClinic.CL.Service
         string ImageToSave(string path, FileModel file);
         PatientUser GetOne(int id);
         PatientUser BlockPatient(int patientId);
+        List<PatientUser> GetMaliciousPatients();
     }
 }

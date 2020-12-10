@@ -11,6 +11,7 @@ using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Doctor;
 using HealthClinic.CL.Model.Patient;
 using HealthClinic.CL.Repository;
+using HealthClinic.CL.Utility;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,15 +24,17 @@ namespace HealthClinic.CL.Service
     /// </summary>
     public class PatientService : IPatientService
     {
+        private RegularAppointmentService _regularAppointmentService { get; set; }
         /// <value>Property <c>IPatientsRepository</c> represents the interface of repository used for data access.</value>
         private IPatientsRepository PatientsRepository { get; set; }
         private IEmailVerificationService EmailVerificationService { get; set; }
 
         /// <summary>This constructor injects the PatientService with matching IPatientsRepository.</summary>
-        public PatientService(IPatientsRepository patientsRepository, IEmailVerificationService emailVerificationService)
+        public PatientService(IPatientsRepository patientsRepository, IEmailVerificationService emailVerificationService, RegularAppointmentService regularAppointmentService)
         {
             PatientsRepository = patientsRepository;
             EmailVerificationService = emailVerificationService;
+            _regularAppointmentService = regularAppointmentService;
         }
 
         /// <summary> This method converts <paramref name="patientDto"/> to <c>PatientUser</c> using <c>PatientAdapter</c> and sends it to <c>PatientsRepository</c>. </summary>
@@ -50,7 +53,7 @@ namespace HealthClinic.CL.Service
         public PatientUser Validate(int id)
         {
             PatientUser patient = PatientsRepository.Find(id);
-            if(patient != null)
+            if (patient != null)
             {
                 return PatientsRepository.Validate(patient);
             }
@@ -84,6 +87,7 @@ namespace HealthClinic.CL.Service
 
             }
         }
+
         /// <summary> This method is calling <c>PatientRepository</c> to find one patient using <paramref name="id"/>. </summary>
         /// <param name="id"><c>id</c> is <c>id</c> of a <c>PatientUser</c> that needs to be found.
         /// <returns>One patient</returns>
@@ -95,7 +99,42 @@ namespace HealthClinic.CL.Service
         public PatientUser BlockPatient(int patientId)
         {
             PatientUser patient = PatientsRepository.FindOne(patientId);
-            return (patient == null) ? null :PatientsRepository.BlockPatient(patient);
+            return (patient == null) ? null : PatientsRepository.BlockPatient(patient);
+        }
+        public List<PatientUser> GetMaliciousPatients()
+        {
+            Dictionary<int,int> hashMap = new Dictionary<int, int>();
+            List<PatientUser> maliciousPatients = new List<PatientUser>();
+            List<DoctorAppointment> appointments = _regularAppointmentService.GetAll();
+           // List<PatientUser> patient = GetAll();
+           // List<int> allValidPatients = new List<int>();
+            foreach (DoctorAppointment appointment in appointments) {
+                if (appointment.IsCanceled == true && CheckIfAppointmentsAreInPastOneMonthFromToday(appointment) != null) {
+                    if (hashMap.ContainsKey(appointment.PatientUserId)) {
+                        hashMap[appointment.PatientUserId]++;
+                        // maliciousPatients.Add(id, GetOne(id));
+                        //allValidPatients.Add(appointment.id);
+                    }
+                    else{
+                        hashMap[appointment.PatientUserId] = 1;
+                    }
+            foreach(int key in hashMap.Keys) {
+                if(hashMap[key] >= 1)
+                    maliciousPatients.Add(GetOne(key));
+                    }
+
+                }
+            }
+            /*foreach (int validPatient in allValidPatients) {
+                if (brojac == 3) {
+                    maliciousPatients.Add(GetOne(validPatient));
+                }
+            }*/
+            return maliciousPatients;
+        }
+        private DoctorAppointment CheckIfAppointmentsAreInPastOneMonthFromToday(DoctorAppointment appointment)
+        {
+            return (UtilityMethods.ParseDateInCorrectFormat(appointment.Date) > DateTime.Now.AddDays(-32)) ? null : appointment;
         }
     }
 }

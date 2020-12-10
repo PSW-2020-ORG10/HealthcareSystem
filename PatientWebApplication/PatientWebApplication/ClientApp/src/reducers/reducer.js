@@ -22,7 +22,8 @@
     CANCEL_APPOINTMENT,
     BLOCK_PATIENT,
     LOADED_ALL_PATIENT_APPOINTMENTS_WITH_SURVEYS,
-    LOADED_ALL_PATIENT_APPOINTMENTS_WITHOUT_SURVEYS
+    LOADED_ALL_PATIENT_APPOINTMENTS_WITHOUT_SURVEYS,
+    LOADED_MALICIOUS_PATIENTS
 } from "../types/types"
 
 function addFeedback(state=initialState, action) {
@@ -75,6 +76,7 @@ const initialState = {
     patientAppointmentsWithoutSurveys: [],
     canceledAppointment: {},
     allPatientsBlockList: [],
+    maliciousPatientsList: []
 };
 
 
@@ -210,7 +212,12 @@ function reducer(state = initialState, action) {
             return {
                 ...state,
                 allPatientsBlockList: updateObjectInArray(state.allPatientsBlockList, action)
-        };         
+            }; 
+        case LOADED_MALICIOUS_PATIENTS:
+            return {
+                ...state,
+                maliciousPatientsList: action.payload
+            }; 
         default:
             return state;
     }

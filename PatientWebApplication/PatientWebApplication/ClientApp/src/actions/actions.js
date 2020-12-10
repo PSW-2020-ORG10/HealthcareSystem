@@ -36,7 +36,8 @@
     OBSERVE_BLOCK_PATIENT_ERROR,
     LOADED_ALL_PATIENT_APPOINTMENTS_WITH_SURVEYS,
     LOADED_ALL_PATIENT_APPOINTMENTS_WITHOUT_SURVEYS,
-    OBSERVE_PATIENT_APPOINTMENTS_ERROR
+    LOADED_MALICIOUS_PATIENTS,
+    OBSERVE_MALICIOUS_ERROR
 } from "../types/types"
 import axios from "axios";
 
@@ -479,6 +480,23 @@ export const blockPatient = (patientId) => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: OBSERVE_BLOCK_PATIENT_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const loadedMaliciousPatients = () => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.get("http://localhost:60198/api/patientuser/malicious");
+        debugger;
+        dispatch({
+            type: LOADED_MALICIOUS_PATIENTS,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: OBSERVE_MALICIOUS_ERROR,
             payload: console.log(e),
         });
     }

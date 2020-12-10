@@ -23,11 +23,11 @@ namespace PatientWebApplication.Controllers
         /// <value>Property <c>PatientService</c> represents the service used for handling business logic.</value>
         private PatientService PatientService { get; set; }
         private IWebHostEnvironment _env;
-
+        private RegularAppointmentService regularAppointmentService { get; set; }
         /// <summary>This constructor injects the PatientUserController with matching PatientService.</summary>
         public PatientUserController(IWebHostEnvironment env)
         {
-            PatientService = new PatientService(new PatientsRepository(), new EmailVerificationService());
+            PatientService = new PatientService(new PatientsRepository(), new EmailVerificationService(), new RegularAppointmentService(new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorService(new OperationRepository(), new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorRepository()), new PatientsRepository(), new OperationService(new OperationRepository())));
             _env = env;
         }
         /// <summary> This method determines if <c>PatientDto</c> provided <paramref name="dto"/> is valid for creating by calling <c>PatientValidator</c>
@@ -108,6 +108,12 @@ namespace PatientWebApplication.Controllers
         {
             List<PatientUser> result = PatientService.GetAll();
             return Ok(result);
+        }
+        [HttpGet("malicious")]    
+        public IActionResult GetMalicious()
+        {
+            List<PatientUser> result = PatientService.GetMaliciousPatients();
+            return Ok(result); 
         }
         [HttpPut("{patientId}")]
         public IActionResult BlockPatient(int patientId)
