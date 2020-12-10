@@ -100,7 +100,9 @@ namespace HealthClinic.CL.DbContextModel
             modelBuilder.Entity<PatientUser>().HasData(
 
             new PatientUser(1, "Pera2", "Peric","Male", "1234", "2/2/2020", "123", "212313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null),
-            new PatientUser(2, "Pera3", "Peric", "Female", "1234", "2/2/2020", "123", "2112313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null)
+            new PatientUser(2, "Pera3", "Peric", "Female", "1234", "2/2/2020", "123", "2112313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null),
+            new PatientUser(3, "Stefan", "Lelic", "Male", "1234", "2/2/2020", "123", "212313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null),
+            new PatientUser(4, "Marko", "Lazarevic", "Female", "1234", "2/2/2020", "123", "2112313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null)
 
             );
 

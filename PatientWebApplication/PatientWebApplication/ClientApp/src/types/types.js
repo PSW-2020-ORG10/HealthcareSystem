@@ -33,3 +33,5 @@ export const OBSERVE_PATIENTS_ERROR = "observePatientsError";
 export const LOADED_ALL_PATIENT_APPOINTMENTS_INTWODAYS = "loadedAllPatientAppointmentsInTwoDays";
 export const LOADED_ALL_PATIENT_APPOINTMENTS_INFUTURE = "loadedAllPatientAppointmentsInFuture";
 export const CANCEL_APPOINTMENT = "cancelAppointment";
+export const BLOCK_PATIENT = "blockPatient";
+export const OBSERVE_BLOCK_PATIENT_ERROR = "observeBlockPatientError";

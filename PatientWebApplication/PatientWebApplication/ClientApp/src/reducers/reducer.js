@@ -19,7 +19,8 @@
     LOADED_ALL_PATIENTS,
     LOADED_ALL_PATIENT_APPOINTMENTS_INTWODAYS,
     LOADED_ALL_PATIENT_APPOINTMENTS_INFUTURE,
-    CANCEL_APPOINTMENT
+    CANCEL_APPOINTMENT,
+    BLOCK_PATIENT
 } from "../types/types"
 
 function addFeedback(state=initialState, action) {
@@ -68,7 +69,8 @@ const initialState = {
     allPatientsList: [],
     patientAppointmentsInTwoDaysList: [],
     patientAppointmentsInFutureList: [],
-    canceledAppointment: {}
+    canceledAppointment: {},
+    allPatientsBlockList: [],
 };
 
 
@@ -189,7 +191,12 @@ function reducer(state = initialState, action) {
             return {
                 ...state,
                 patientAppointmentsList: updateObjectInArray(state.patientAppointmentsList, action)
-            };        
+            };
+        case BLOCK_PATIENT:
+            return {
+                ...state,
+                allPatientsBlockList: updateObjectInArray(state.allPatientsBlockList, action)
+            };       
         default:
             return state;
     }

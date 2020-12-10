@@ -91,6 +91,12 @@ namespace HealthClinic.CL.Service
         {
             return PatientsRepository.FindOne(id);
         }
+
+        public PatientUser BlockPatient(int patientId)
+        {
+            PatientUser patient = PatientsRepository.FindOne(patientId);
+            return (patient == null) ? null :PatientsRepository.BlockPatient(patient);
+        }
     }
 }
 

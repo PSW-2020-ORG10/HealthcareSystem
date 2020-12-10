@@ -109,5 +109,12 @@ namespace PatientWebApplication.Controllers
             List<PatientUser> result = PatientService.GetAll();
             return Ok(result);
         }
+        [HttpPut("{patientId}")]
+        public IActionResult BlockPatient(int patientId)
+        {
+            PatientUser patient = this.PatientService.BlockPatient(patientId);
+            if (patient == null) return BadRequest();
+            return Ok(patient);
+        }
     }
 }

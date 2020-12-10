@@ -3,14 +3,16 @@ using System;
 using HealthClinic.CL.DbContextModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HealthClinic.CL.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201207170639_SecondMigration")]
+    partial class SecondMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1278,52 +1280,6 @@ namespace HealthClinic.CL.Migrations
                             password = "pass",
                             phoneNumber = "123",
                             secondName = "Peric",
-                            uniqueCitizensidentityNumber = "1234"
-                        },
-                        new
-                        {
-                            id = 3,
-                            allergie = "Alergija",
-                            bornIn = "Grad2",
-                            city = "Grad",
-                            dateOfBirth = "2/2/2020",
-                            email = "email",
-                            exLastname = "",
-                            firstName = "Stefan",
-                            gender = "Male",
-                            guest = false,
-                            isBlocked = false,
-                            isMarried = false,
-                            isRegisteredBySecretary = false,
-                            isVerified = false,
-                            medicalIdNumber = "212313",
-                            parentName = "Roditelj",
-                            password = "pass",
-                            phoneNumber = "123",
-                            secondName = "Lelic",
-                            uniqueCitizensidentityNumber = "1234"
-                        },
-                        new
-                        {
-                            id = 4,
-                            allergie = "Alergija",
-                            bornIn = "Grad2",
-                            city = "Grad",
-                            dateOfBirth = "2/2/2020",
-                            email = "email",
-                            exLastname = "",
-                            firstName = "Marko",
-                            gender = "Female",
-                            guest = false,
-                            isBlocked = false,
-                            isMarried = false,
-                            isRegisteredBySecretary = false,
-                            isVerified = false,
-                            medicalIdNumber = "2112313",
-                            parentName = "Roditelj",
-                            password = "pass",
-                            phoneNumber = "123",
-                            secondName = "Lazarevic",
                             uniqueCitizensidentityNumber = "1234"
                         });
                 });

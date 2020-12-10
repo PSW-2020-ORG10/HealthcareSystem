@@ -31,7 +31,9 @@
     OBSERVE_PATIENTS_ERROR,
     LOADED_ALL_PATIENT_APPOINTMENTS_INTWODAYS,
     LOADED_ALL_PATIENT_APPOINTMENTS_INFUTURE,
-    CANCEL_APPOINTMENT
+    CANCEL_APPOINTMENT,
+    BLOCK_PATIENT,
+    OBSERVE_BLOCK_PATIENT_ERROR
 } from "../types/types"
 import axios from "axios";
 
@@ -423,6 +425,23 @@ export const loadedAllPatients = () => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: OBSERVE_PATIENTS_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const blockPatient = (patientId) => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.put("http://localhost:60198/api/patientuser/" + patientId);
+        debugger;
+        dispatch({
+            type: BLOCK_PATIENT,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: OBSERVE_BLOCK_PATIENT_ERROR,
             payload: console.log(e),
         });
     }
