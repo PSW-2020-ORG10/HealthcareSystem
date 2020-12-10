@@ -16,7 +16,7 @@ namespace PatientWebApplicationTests
         [Fact]
         public void Block_Patient_Successfuly()
         {
-            PatientService service = new PatientService(CreateStubRepository(), new Mock<IEmailVerificationService>().Object);
+            PatientService service = new PatientService(CreateStubRepository(), new Mock<IEmailVerificationService>().Object, new RegularAppointmentService(new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorService(new OperationRepository(), new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorRepository()), new PatientsRepository(), new OperationService(new OperationRepository())));
             PatientUser patient = service.BlockPatient(1);
             patient.isBlocked.ShouldBe(true);
         }

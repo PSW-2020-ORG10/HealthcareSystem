@@ -106,25 +106,30 @@ namespace HealthClinic.CL.Service
             Dictionary<int,int> hashMap = new Dictionary<int, int>();
             List<PatientUser> maliciousPatients = new List<PatientUser>();
             List<DoctorAppointment> appointments = _regularAppointmentService.GetAll();
-           // List<PatientUser> patient = GetAll();
-           // List<int> allValidPatients = new List<int>();
+            // List<PatientUser> patient = GetAll();
+            // List<int> allValidPatients = new List<int>();
             foreach (DoctorAppointment appointment in appointments) {
-                if (appointment.IsCanceled == true && CheckIfAppointmentsAreInPastOneMonthFromToday(appointment) != null) {
-                    if (hashMap.ContainsKey(appointment.PatientUserId)) {
+                if (appointment.IsCanceled == true && CheckIfAppointmentsAreInPastOneMonthFromToday(appointment) != null)
+                {
+                    if (hashMap.ContainsKey(appointment.PatientUserId))
+                    {
                         hashMap[appointment.PatientUserId]++;
                         // maliciousPatients.Add(id, GetOne(id));
                         //allValidPatients.Add(appointment.id);
                     }
-                    else{
+                    else
+                    {
                         hashMap[appointment.PatientUserId] = 1;
                     }
-            foreach(int key in hashMap.Keys) {
-                if(hashMap[key] >= 1)
-                    maliciousPatients.Add(GetOne(key));
-                    }
-
                 }
             }
+            foreach(int key in hashMap.Keys) {
+                if(hashMap[key] >= 3)
+                    maliciousPatients.Add(GetOne(key));
+            }
+
+                
+            
             /*foreach (int validPatient in allValidPatients) {
                 if (brojac == 3) {
                     maliciousPatients.Add(GetOne(validPatient));
@@ -134,7 +139,7 @@ namespace HealthClinic.CL.Service
         }
         private DoctorAppointment CheckIfAppointmentsAreInPastOneMonthFromToday(DoctorAppointment appointment)
         {
-            return (UtilityMethods.ParseDateInCorrectFormat(appointment.Date) > DateTime.Now.AddDays(-32)) ? null : appointment;
+            return (UtilityMethods.ParseDateInCorrectFormat(appointment.CancelDateString) > DateTime.Now.AddDays(-32)) ? appointment : null;
         }
     }
 }
