@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HealthClinic.CL.Adapters;
+using HealthClinic.CL.DbContextModel;
 using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Patient;
 using HealthClinic.CL.Repository;
@@ -23,10 +24,10 @@ namespace PatientWebApplication.Controllers
         private DoctorService doctorService;
 
         /// <summary>This constructor initiates the DoctorAppointmentController's appointment service.</summary>
-        public DoctorAppointmentController()
+        public DoctorAppointmentController(MyDbContext context)
         {
-            this.regularAppointmentService = new RegularAppointmentService(new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorService(new OperationRepository(), new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorRepository()), new PatientsRepository(), new OperationService(new OperationRepository()));
-            this.doctorService = new DoctorService(new OperationRepository(), new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorRepository());
+            this.regularAppointmentService = new RegularAppointmentService(context);
+            this.doctorService = new DoctorService(context);
         }
 
         /// <summary> This method is calling <c>RegularAppointmentService</c> to get list of all appointments of one patient. </summary>
@@ -75,8 +76,12 @@ namespace PatientWebApplication.Controllers
         [HttpPost]
         public IActionResult Post(DoctorAppointment appointment)
         {
-            this.regularAppointmentService.New(appointment, null);
-            return Ok();
+            DoctorAppointment doctorAppointment = this.regularAppointmentService.CreateRegular(appointment);
+            if(doctorAppointment == null)
+            {
+                return BadRequest();
+            }
+            return Ok(doctorAppointment);
         }
     }
 }

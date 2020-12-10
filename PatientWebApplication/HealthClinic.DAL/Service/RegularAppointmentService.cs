@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using HealthClinic.CL.Utility;
 using System.Linq;
+using HealthClinic.CL.DbContextModel;
 
 namespace HealthClinic.CL.Service
 {
@@ -37,6 +38,15 @@ namespace HealthClinic.CL.Service
             this.operationService = operationService;
         }
 
+        public RegularAppointmentService(MyDbContext context)
+        {
+            this._appointmentRepository = new AppointmentRepository(context);
+            this._patientRepository = new PatientsRepository(context);
+            this.operationService = new OperationService(new OperationRepository(context));
+            this.employeesScheduleService = new EmployeesScheduleService(new EmployeesScheduleRepository(context));
+            this.doctorService = new DoctorService(new OperationRepository(context), _appointmentRepository, new EmployeesScheduleRepository(context), new DoctorRepository(context));
+        }
+
         /// <summary> This method is calling <c>AppointmentRepository</c> to get list of all appointments. </summary>
         /// <returns> List of all appointments. </returns>
         public List<DoctorAppointment> GetAll()
@@ -51,6 +61,13 @@ namespace HealthClinic.CL.Service
         {
             if (!GetAllAvailableAppointmentsForDate(appointment.Date, appointment.DoctorUserId, appointment.PatientUserId).Contains(appointment)) return;
             _appointmentRepository.New(appointment);
+        }
+
+        public DoctorAppointment CreateRegular(DoctorAppointment appointment)
+        {
+            var appointments = GetAllAvailableAppointmentsForDate(appointment.Date, appointment.DoctorUserId, appointment.PatientUserId);
+            if (!appointments.Contains(appointment)) return null;
+            return _appointmentRepository.New(appointment);
         }
 
         /// <summary> This method is calling <c>AppointmentRepository</c> to update appointment. </summary>

@@ -15,6 +15,11 @@ namespace HealthClinic.CL.Repository
     public class EmployeesScheduleRepository : IEmployeesScheduleRepository
     {
         private readonly MyDbContext dbContext;
+        public EmployeesScheduleRepository(MyDbContext context)
+        {
+            this.dbContext = context;
+        }
+
         public EmployeesScheduleRepository()
         {
             this.dbContext = new MyDbContext(new DbContextOptionsBuilder<MyDbContext>().UseMySql("Server=localhost;port=3306;Database=MYSQLHealtcareDB;user=root;password=root").UseLazyLoadingProxies().Options);
