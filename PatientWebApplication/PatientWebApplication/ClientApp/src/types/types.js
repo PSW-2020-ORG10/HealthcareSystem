@@ -35,3 +35,5 @@ export const LOADED_ALL_PATIENT_APPOINTMENTS_INFUTURE = "loadedAllPatientAppoint
 export const CANCEL_APPOINTMENT = "cancelAppointment";
 export const BLOCK_PATIENT = "blockPatient";
 export const OBSERVE_BLOCK_PATIENT_ERROR = "observeBlockPatientError";
+export const LOADED_ALL_PATIENT_APPOINTMENTS_WITH_SURVEYS = "loadedAllPatientAppointmentsWithSurvey";
+export const LOADED_ALL_PATIENT_APPOINTMENTS_WITHOUT_SURVEYS = "loadedAllPatientAppointmentsWithoutSurvey";

@@ -6,6 +6,7 @@ using Moq;
 using Shouldly;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using Xunit;
 
@@ -109,11 +110,13 @@ namespace PatientWebApplicationTests
             DoctorUser doctor2 = new DoctorUser(2, "Novak", "Maric", "12345", "2/2/2020", "123", "email", "pass", "Grad",
               200.0, false, "Specialty", new List<DoctorNotification>(), "Ordination 1");
 
+            DateTime dt = DateTime.Now.AddDays(10);
+            String date = dt.ToString("dd/MM/yyyy");
             PatientUser patient1 = new PatientUser(1, "Pera2", "Peric", "Male", "1234", "2/2/2020", "123", "212313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null);
             PatientUser patient2 = new PatientUser(2, "Pera3", "Peric", "Female", "1234", "2/2/2020", "123", "2112313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null);
 
-            DoctorAppointment appointment1 = new DoctorAppointment(4, new TimeSpan(), "17/12/2020", patient1, doctor1, new List<Referral>(), "1");
-            DoctorAppointment appointment2 = new DoctorAppointment(5, new TimeSpan(), "17/12/2020", patient1, doctor2, new List<Referral>(), "1");
+            DoctorAppointment appointment1 = new DoctorAppointment(4, new TimeSpan(), date, patient1, doctor1, new List<Referral>(), "1");
+            DoctorAppointment appointment2 = new DoctorAppointment(5, new TimeSpan(), date, patient1, doctor2, new List<Referral>(), "1");
 
 
 
@@ -136,11 +139,15 @@ namespace PatientWebApplicationTests
             DoctorUser doctor2 = new DoctorUser(2, "Novak", "Maric", "12345", "2/2/2020", "123", "email", "pass", "Grad",
               200.0, false, "Specialty", new List<DoctorNotification>(), "Ordination 1");
 
+
+
+            DateTime dt = DateTime.Now.AddDays(1);
+            String date = dt.ToString("dd/MM/yyyy");
             PatientUser patient1 = new PatientUser(1, "Pera2", "Peric", "Male", "1234", "2/2/2020", "123", "212313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null);
             PatientUser patient2 = new PatientUser(2, "Pera3", "Peric", "Female", "1234", "2/2/2020", "123", "2112313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null);
 
-            DoctorAppointment appointment1 = new DoctorAppointment(4, new TimeSpan(), "06/12/2020", patient1, doctor1, new List<Referral>(), "1");
-            DoctorAppointment appointment2 = new DoctorAppointment(5, new TimeSpan(), "06/12/2020", patient1, doctor2, new List<Referral>(), "1");
+            DoctorAppointment appointment1 = new DoctorAppointment(4, new TimeSpan(), date, patient1, doctor1, new List<Referral>(), "1");
+            DoctorAppointment appointment2 = new DoctorAppointment(5, new TimeSpan(), date, patient1, doctor2, new List<Referral>(), "1");
 
 
 

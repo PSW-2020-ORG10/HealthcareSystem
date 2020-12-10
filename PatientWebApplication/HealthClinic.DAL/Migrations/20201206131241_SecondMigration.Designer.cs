@@ -3,14 +3,16 @@ using System;
 using HealthClinic.CL.DbContextModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HealthClinic.CL.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201206131241_SecondMigration")]
+    partial class SecondMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -914,9 +916,6 @@ namespace HealthClinic.CL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("CancelDateString")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
                     b.Property<string>("Date")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -1202,9 +1201,6 @@ namespace HealthClinic.CL.Migrations
                     b.Property<bool>("guest")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("isBlocked")
-                        .HasColumnType("tinyint(1)");
-
                     b.Property<bool>("isMarried")
                         .HasColumnType("tinyint(1)");
 
@@ -1249,7 +1245,6 @@ namespace HealthClinic.CL.Migrations
                             firstName = "Pera2",
                             gender = "Male",
                             guest = false,
-                            isBlocked = false,
                             isMarried = false,
                             isRegisteredBySecretary = false,
                             isVerified = false,
@@ -1272,7 +1267,6 @@ namespace HealthClinic.CL.Migrations
                             firstName = "Pera3",
                             gender = "Female",
                             guest = false,
-                            isBlocked = false,
                             isMarried = false,
                             isRegisteredBySecretary = false,
                             isVerified = false,
@@ -1281,52 +1275,6 @@ namespace HealthClinic.CL.Migrations
                             password = "pass",
                             phoneNumber = "123",
                             secondName = "Peric",
-                            uniqueCitizensidentityNumber = "1234"
-                        },
-                        new
-                        {
-                            id = 3,
-                            allergie = "Alergija",
-                            bornIn = "Grad2",
-                            city = "Grad",
-                            dateOfBirth = "2/2/2020",
-                            email = "email",
-                            exLastname = "",
-                            firstName = "Stefan",
-                            gender = "Male",
-                            guest = false,
-                            isBlocked = false,
-                            isMarried = false,
-                            isRegisteredBySecretary = false,
-                            isVerified = false,
-                            medicalIdNumber = "212313",
-                            parentName = "Roditelj",
-                            password = "pass",
-                            phoneNumber = "123",
-                            secondName = "Lelic",
-                            uniqueCitizensidentityNumber = "1234"
-                        },
-                        new
-                        {
-                            id = 4,
-                            allergie = "Alergija",
-                            bornIn = "Grad2",
-                            city = "Grad",
-                            dateOfBirth = "2/2/2020",
-                            email = "email",
-                            exLastname = "",
-                            firstName = "Marko",
-                            gender = "Female",
-                            guest = false,
-                            isBlocked = false,
-                            isMarried = false,
-                            isRegisteredBySecretary = false,
-                            isVerified = false,
-                            medicalIdNumber = "2112313",
-                            parentName = "Roditelj",
-                            password = "pass",
-                            phoneNumber = "123",
-                            secondName = "Lazarevic",
                             uniqueCitizensidentityNumber = "1234"
                         });
                 });
