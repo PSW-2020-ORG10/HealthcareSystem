@@ -19,7 +19,12 @@
     LOADED_ALL_AVAILABLE_DOCTORS,
     LOADED_ALL_AVAILABLE_DOCTORS_ERROR,
     LOADED_ALL_AVAILABLE_APPOINTMENTS,
-    LOADED_ALL_AVAILABLE_APPOINTMENTS_ERROR
+    LOADED_ALL_AVAILABLE_APPOINTMENTS_ERROR,
+    LOADED_ALL_PATIENT_APPOINTMENTS_INTWODAYS,
+    LOADED_ALL_PATIENT_APPOINTMENTS_INFUTURE,
+    CANCEL_APPOINTMENT,
+    LOADED_ALL_PATIENT_APPOINTMENTS_WITH_SURVEYS,
+    LOADED_ALL_PATIENT_APPOINTMENTS_WITHOUT_SURVEYS,
 } from "../types/types"
 
 function addFeedback(state=initialState, action) {
@@ -64,6 +69,11 @@ const initialState = {
     surveyList: [], 
     patientAppointments: [],
     doctorRatesList: [],
+    patientAppointmentsInTwoDaysList: [],
+    patientAppointmentsInFutureList: [],
+    patientAppointmentsWithSurveys: [],
+    patientAppointmentsWithoutSurveys: [],
+    canceledAppointment: {},
     allRates: {},
     availableDoctors: [],
     availableAppointments: []
@@ -177,7 +187,32 @@ function reducer(state = initialState, action) {
             return {
                 ...state,
                 availableAppointments: action.payload
-            }
+            };   
+        case LOADED_ALL_PATIENT_APPOINTMENTS_INTWODAYS:
+            return {
+                ...state,
+                patientAppointmentsInTwoDaysList: action.payload
+            };
+        case LOADED_ALL_PATIENT_APPOINTMENTS_INFUTURE:
+            return {
+                ...state,
+                patientAppointmentsInFutureList: action.payload
+            };
+        case CANCEL_APPOINTMENT:
+            return {
+                ...state,
+                patientAppointmentsList: updateObjectInArray(state.patientAppointmentsList, action)
+            };     
+        case LOADED_ALL_PATIENT_APPOINTMENTS_WITH_SURVEYS:
+            return {
+                ...state,
+                patientAppointmentsWithSurveys: action.payload
+            };     
+        case LOADED_ALL_PATIENT_APPOINTMENTS_WITHOUT_SURVEYS:
+            return {
+                ...state,
+                patientAppointmentsWithoutSurveys: action.payload
+            };     
         default:
             return state;
     }

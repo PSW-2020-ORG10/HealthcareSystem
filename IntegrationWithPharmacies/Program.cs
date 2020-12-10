@@ -13,7 +13,7 @@ namespace IntegrationWithPharmacies
 
         public static void Main(string[] args)
         {
-            CreateHostBuilderMessages(args).Build();
+            CreateHostBuilderMessages(args).Build().Run();
             CreateHostBuilder(args).Build().Run();
         }
 
@@ -25,12 +25,12 @@ namespace IntegrationWithPharmacies
                 });
 
         public static IHostBuilder CreateHostBuilderMessages(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                 .UseWindowsService()
-                .ConfigureServices((hostContext, services) =>
-                {
-                    services.AddHostedService<TimeService>();
-                    services.AddHostedService<RabbitMQService>();
-                });
+          Host.CreateDefaultBuilder(args)
+              .UseWindowsService()
+              .ConfigureServices((hostContext, services) =>
+              {
+                  services.AddHostedService<TimeService>();
+                  services.AddHostedService<RabbitMQService>();
+              });
     }
 }
