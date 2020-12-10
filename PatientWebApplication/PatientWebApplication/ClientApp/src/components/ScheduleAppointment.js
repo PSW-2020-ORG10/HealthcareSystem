@@ -29,7 +29,7 @@ var ScheduleAppointment = /** @class */ (function (_super) {
     }
     ScheduleAppointment.prototype.render = function () {
         return (React.createElement(React.Fragment, null,
-            React.createElement(Header_1.default, { title: "Schedule appointments", description: "See what other users think about our doctors." }),
+            React.createElement(Header_1.default, { title: "Schedule appointments", description: "Schedule doctor appointment." }),
             React.createElement(ScheduleAppointmentBody_1.default, null)));
     };
     return ScheduleAppointment;

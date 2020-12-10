@@ -13,13 +13,13 @@ class SelectDoctorForm extends Component {
     state = {
         doctor: null,
         bgColor: 'white',
-        timesDisabled: 0
+        timesDisabled: 0,
+        availableDoctors: this.props.loadedAllAvailableDoctors(this.props.specialty, this.props.date, 2)
     };
 
     componentDidMount() {
         debugger;
-//        this.props.loadedAllAvailableDoctors(this.props.specialty, this.props.date, 2);
-        this.props.loadedAllAvailableDoctors("Cardiology", "02/02/2020", 2);
+        this.props.loadedAllAvailableDoctors(this.props.specialty, this.props.date, 2);
     }
 
     handleChange = (f) => {
@@ -34,6 +34,7 @@ class SelectDoctorForm extends Component {
     }
 
     render() {
+        debugger
         if (this.props.step !== 2) {
             return null
         }
@@ -49,8 +50,8 @@ class SelectDoctorForm extends Component {
                         </tr>
                     </thead>
                     {this.props.availableDoctors.map((f) => (
-                        <tbody key={f}>
-                            <tr style={{ backgroundColor: this.state.bgColor }} key={f} onClick={() => this.handleChange(f)}>
+                        <tbody key={f.id}>
+                            <tr style={this.state.doctor == f ? { backgroundColor: this.state.bgColor } : null} key={f.id} onClick={() => this.handleChange(f)}>
                                 <td style={{ textAlign: "left" }} >{f.nameAndSurname}</td>
                                 <td style={{ textAlign: "center" }} > {f.specialty}</td >
                             </tr>

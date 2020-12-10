@@ -5,6 +5,12 @@
     color: grey;
 }
 
+#appointmentTable {
+    height: 350px !important;
+    overflow: scroll;
+    overflow-x: hidden
+}
+
 .modalFooter {
     display: block !important;
 }

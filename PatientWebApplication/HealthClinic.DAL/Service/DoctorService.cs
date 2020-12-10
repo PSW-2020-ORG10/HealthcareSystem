@@ -252,7 +252,7 @@ namespace HealthClinic.CL.Service
             return false;
         }
 
-        private List<DoctorUser> GetDoctorsBySpecialty(string specialty)
+        public List<DoctorUser> GetDoctorsBySpecialty(string specialty)
         {
             return GetAll().FindAll(doctor => UtilityMethods.CheckForSpecialty(doctor, specialty));
         }

@@ -35,6 +35,36 @@ namespace PatientWebApplicationTests
         }
 
         [Fact]
+        public void Find_No_Available_Appointments_Because_Doctor_Doesnt_Have_Shift()
+        {
+            RegularAppointmentService service = new RegularAppointmentService(CreateAppointmentStubRepository(), CreateScheduleStubRepository(), new DoctorService(CreateOperationStubRepository(), CreateAppointmentStubRepository(), CreateScheduleStubRepository(), CreateDoctorStubRepository()), CreatePatientStubRepository(), new OperationService(CreateOperationStubRepository()));
+
+            List<DoctorAppointment> appointments = service.GetAllAvailableAppointmentsForDate("02/02/2020", 2, 2);
+
+            appointments.ShouldBeEmpty();
+        }
+
+        [Fact]
+        public void Find_Doctors_By_Specialty()
+        {
+            DoctorService service = new DoctorService(CreateOperationStubRepository(), CreateAppointmentStubRepository(), CreateScheduleStubRepository(), CreateDoctorStubRepository());
+
+            List<DoctorUser> appointments = service.GetDoctorsBySpecialty("Cardiology");
+
+            appointments.ShouldNotBeEmpty();
+        }
+
+        [Fact]
+        public void Find_No_Doctors_By_Specialty()
+        {
+            DoctorService service = new DoctorService(CreateOperationStubRepository(), CreateAppointmentStubRepository(), CreateScheduleStubRepository(), CreateDoctorStubRepository());
+
+            List<DoctorUser> appointments = service.GetDoctorsBySpecialty("asdmksakdmksa");
+
+            appointments.ShouldBeEmpty();
+        }
+
+        [Fact]
         public void Find_Available_Doctors()
         {
             DoctorService service = new DoctorService(CreateOperationStubRepository(), CreateAppointmentStubRepository(), CreateScheduleStubRepository(), CreateDoctorStubRepository());
@@ -49,9 +79,9 @@ namespace PatientWebApplicationTests
         {
             DoctorService service = new DoctorService(CreateOperationStubRepository(), CreateAppointmentStubRepository(), CreateScheduleStubRepository(), CreateDoctorStubRepository());
 
-            List<DoctorUser> appointments = service.GetAvailableDoctors("Pulmonology", "02/02/2020", 2);
+            List<DoctorUser> doctors = service.GetAvailableDoctors("Pulmonology", "02/02/2020", 2);
 
-            appointments.ShouldBeEmpty();
+            doctors.ShouldBeEmpty();
         }
 
         private static IAppointmentRepository CreateAppointmentStubRepository()

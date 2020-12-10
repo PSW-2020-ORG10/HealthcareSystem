@@ -19,8 +19,8 @@ class SelectAppointmentForm extends Component {
     componentDidMount() {
         debugger;
         this.props.loadedAllAvailableAppointments({
-            "Date": "03/03/2020",
-            "DoctorId": "2",
+            "Date": this.props.date,
+            "DoctorId": this.props.doctorId,
             "PatientId": "2"
         });
     }
@@ -43,26 +43,27 @@ class SelectAppointmentForm extends Component {
         if (this.state.timesDisabled == 0) this.props.disableSchedule();
         debugger;
         return (
-            <div style={{ marginTop: "40px" }}>
-                <table className='table allAppointments' >
-                    <thead>
-                        <tr>
-                            <th style={{ textAlign: "left" }}>Start Time</th>
-                            <th style={{ textAlign: "center" }}>Date</th>
-                            <th style={{ textAlign: "right" }}>Room</th>
-                        </tr>
-                    </thead>
-                    {this.props.availableAppointments.map((f) => (
-                        <tbody key={f.start}>
-                            <tr style={this.state.appointment == f ? {backgroundColor : this.state.bgColor} : null } key={f.start} onClick={() => this.handleChange(f)}>
-                                <td style={{ textAlign: "left" }} >{f.start}</td>
-                                <td style={{ textAlign: "center" }} >{f.date}</td>
-                                <td style={{ textAlign: "right" }} > {f.roomId}</td >
-                            </tr>
-                        </tbody>
-                    ))}
-                </table>
-            </div>
+            this.props.availableAppointments.length == 0 ? <h3 style={{ marginTop: "40px" }}>Sorry, there are no available appointments!</h3> :
+                    <div style={{ marginTop: "40px" }} id="appointmentTable">
+                        <table className='table allAppointments'>
+                            <thead>
+                                <tr>
+                                    <th style={{ textAlign: "left" }}>Start Time</th>
+                                    <th style={{ textAlign: "center" }}>Date</th>
+                                    <th style={{ textAlign: "right" }}>Room</th>
+                                </tr>
+                            </thead>
+                            {this.props.availableAppointments.map((f) => (
+                                <tbody key={f.start}>
+                                    <tr style={this.state.appointment == f ? { backgroundColor: this.state.bgColor } : null} key={f.start} onClick={() => this.handleChange(f)}>
+                                        <td style={{ textAlign: "left" }} >{f.start}</td>
+                                        <td style={{ textAlign: "center" }} >{f.date}</td>
+                                        <td style={{ textAlign: "right" }} > {f.roomId}</td >
+                                    </tr>
+                                </tbody>
+                            ))}
+                        </table>
+                    </div>
             )
     }
 }

@@ -26,7 +26,7 @@ namespace PatientWebApplication.Controllers
         [HttpGet("available")]
         public IActionResult GetAvailableDoctors(string specialty, string date, int patientId)
         {
-            return Ok(new DoctorAdapter().ConvertDoctorListToDoctorDtoList(doctorService.GetAvailableDoctors(specialty, date, patientId)));
+            return Ok(new DoctorAdapter().ConvertDoctorListToDoctorDtoList(doctorService.GetDoctorsBySpecialty(specialty)));
         }
     }
 }

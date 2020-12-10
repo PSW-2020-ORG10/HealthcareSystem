@@ -48,10 +48,10 @@ class ScheduleRegularAppointmentModal extends Component {
                     <div>
                         <Stepper steps={[{ title: 'Pick date' }, { title: 'Select specialty' }, { title: 'Select doctor' }, { title: 'Pick time' }]} activeStep={this.state.step} />
                     </div>
-                    <SelectDateForm step={this.state.step} handleDateChange={this.handleDateChange} />
-                    <SelectSpecialtyForm step={this.state.step} handleSpecialtyChange={this.handleSpecialtyChange} />
-                    <SelectDoctorForm step={this.state.step} specialty={this.state.specialty} date={formatDate(this.state.date)} disableNext={this.disableNext} handleDoctorChange={this.handleDoctorChange} />
-                    <SelectAppointmentForm step={this.state.step} handleAppointmentChange={this.handleAppointmentChange} disableSchedule={this.disableSchedule} />
+                    {this.state.step == 0 ? < SelectDateForm step={this.state.step} handleDateChange={this.handleDateChange} /> : null}
+                    {this.state.step == 1 ? < SelectSpecialtyForm step={this.state.step} handleSpecialtyChange={this.handleSpecialtyChange} /> : null}
+                    {this.state.step == 2 ? < SelectDoctorForm step={this.state.step} specialty={this.state.specialty} date={formatDate(this.state.date)} disableNext={this.disableNext} handleDoctorChange={this.handleDoctorChange} /> : null}
+                    {this.state.step == 3 ? < SelectAppointmentForm step={this.state.step} date={formatDate(this.state.date)} doctorId={this.state.doctorId} handleAppointmentChange={this.handleAppointmentChange} disableSchedule={this.disableSchedule} /> : null}
                 </ModalBody>
                 <ModalFooter className="modalFooter">
                     {this.state.prevShow ? <Button color="warning" onClick={this.prev.bind(this)}> Previous</Button > : null}
@@ -70,6 +70,7 @@ class ScheduleRegularAppointmentModal extends Component {
 
     prev() {
         debugger;
+        this.setState({ nextDisabled: false })
         this.setState({ step: --this.state.step })
         this.showNextButton()
         this.showPrevButton()

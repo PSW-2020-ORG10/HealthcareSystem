@@ -61,14 +61,16 @@ namespace HealthClinic.CL.Service
 
         public Shift getShiftForDoctorForSpecificDay(string date, DoctorUser doctor)
         {
+            if(doctor == null)
+            {
+                return null;
+            }
             List<Schedule> listOfSchedule = _employeesScheduleRepository.GetAll();
-
             foreach (Schedule schedule in listOfSchedule)
             {
                 Shift scheduleShiftForDoctor = getScheduleShiftForDoctor(doctor, date, schedule);
                 if (scheduleShiftForDoctor != null) return scheduleShiftForDoctor;
             }
-
             return null;
         }
 

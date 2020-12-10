@@ -18,6 +18,11 @@ class AppointmentConfirmationModal extends Component {
         this.props.onShowChange();
     }
 
+    toggle1() {
+        this.setState({ confirmationModalShow: false });
+        this.props.onShowChange();
+    }
+
     render() {
         debugger;
         return (
@@ -27,7 +32,7 @@ class AppointmentConfirmationModal extends Component {
                     <h4>Are you sure you want to schedule an appointment?</h4>
                 </ModalBody>
                 <ModalFooter className="modalFooter">
-                    <Button color="danger" onClick={() => this.toggle()}> No</Button >
+                    <Button color="danger" onClick={() => this.toggle1()}> No</Button >
                     <Button color="success" className="float-right" onClick={() => this.scheduleAppointment()}> Yes</Button >
                 </ModalFooter>
             </Modal>

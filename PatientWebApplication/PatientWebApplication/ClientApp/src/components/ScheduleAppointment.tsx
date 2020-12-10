@@ -19,7 +19,7 @@ class ScheduleAppointment extends React.PureComponent<CounterProps> {
     render() {
         return (
             <React.Fragment>
-                <Header title="Schedule appointments" description="See what other users think about our doctors." />
+                <Header title="Schedule appointments" description="Schedule doctor appointment." />
                 <ScheduleAppointmentBody/>
             </React.Fragment>
         );
