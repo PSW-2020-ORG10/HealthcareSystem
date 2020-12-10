@@ -164,7 +164,17 @@ namespace HealthClinic.CL.DbContextModel
             new Schedule(3, 1, "10/12/2020", true, 3, "Ordination 1"),
             new Schedule(4, 1, "11/12/2020", true, 3, "Ordination 1"),
             new Schedule(5, 1, "12/12/2020", true, 3, "Ordination 1"),
-            new Schedule(6, 1, "13/12/2020", true, 3, "Ordination 1")
+            new Schedule(6, 1, "13/12/2020", true, 3, "Ordination 1"),
+            new Schedule(7, 1, "14/12/2020", true, 3, "Ordination 1"),
+            new Schedule(8, 1, "15/12/2020", true, 3, "Ordination 1"),
+            new Schedule(9, 1, "16/12/2020", true, 3, "Ordination 1"),
+            new Schedule(10, 1, "17/12/2020", true, 3, "Ordination 1"),
+            new Schedule(11, 1, "18/12/2020", true, 3, "Ordination 1"),
+            new Schedule(12, 1, "19/12/2020", true, 3, "Ordination 1"),
+            new Schedule(13, 1, "20/12/2020", true, 3, "Ordination 1"),
+            new Schedule(14, 1, "21/12/2020", true, 3, "Ordination 1"),
+            new Schedule(15, 1, "22/12/2020", true, 3, "Ordination 1"),
+            new Schedule(16, 1, "12/15/2020", true, 3, "Ordination 1")
 
 
            );

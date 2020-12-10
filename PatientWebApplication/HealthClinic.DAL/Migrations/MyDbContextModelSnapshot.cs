@@ -470,6 +470,96 @@ namespace HealthClinic.CL.Migrations
                             isOnDuty = true,
                             room = "Ordination 1",
                             shiftId = 3
+                        },
+                        new
+                        {
+                            id = 7,
+                            EmployeeId = 1,
+                            date = "14/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 3
+                        },
+                        new
+                        {
+                            id = 8,
+                            EmployeeId = 1,
+                            date = "15/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 3
+                        },
+                        new
+                        {
+                            id = 9,
+                            EmployeeId = 1,
+                            date = "16/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 3
+                        },
+                        new
+                        {
+                            id = 10,
+                            EmployeeId = 1,
+                            date = "17/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 3
+                        },
+                        new
+                        {
+                            id = 11,
+                            EmployeeId = 1,
+                            date = "18/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 3
+                        },
+                        new
+                        {
+                            id = 12,
+                            EmployeeId = 1,
+                            date = "19/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 3
+                        },
+                        new
+                        {
+                            id = 13,
+                            EmployeeId = 1,
+                            date = "20/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 3
+                        },
+                        new
+                        {
+                            id = 14,
+                            EmployeeId = 1,
+                            date = "21/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 3
+                        },
+                        new
+                        {
+                            id = 15,
+                            EmployeeId = 1,
+                            date = "22/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 3
+                        },
+                        new
+                        {
+                            id = 16,
+                            EmployeeId = 1,
+                            date = "12/15/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 3
                         });
                 });
 

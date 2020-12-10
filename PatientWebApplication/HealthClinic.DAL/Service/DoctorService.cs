@@ -194,7 +194,10 @@ namespace HealthClinic.CL.Service
 
             foreach (DoctorAppointment appointment in listOfAppointments)
             {
-                if (areDatesEqual(appointment.Date, date) && checkIfDoctorIsBusyForAppointment(appointment, time)) return true;
+                if (!appointment.IsCanceled)
+                {
+                    if (areDatesEqual(appointment.Date, date) && checkIfDoctorIsBusyForAppointment(appointment, time)) return true;
+                }
             }
             return false;
         }

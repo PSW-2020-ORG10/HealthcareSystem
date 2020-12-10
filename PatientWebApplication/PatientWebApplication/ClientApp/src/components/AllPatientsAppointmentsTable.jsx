@@ -66,7 +66,7 @@ class AllPatientsAppointmentsTable extends Component {
                                 <td style={{ textAlign: "left" }} >{f.doctor.firstName + ' ' + f.doctor.secondName}</td>
                                 <td style={{ textAlign: "center" }} > {this.checkType(f)}</td >
                                 <td style={{ textAlign: "center" }}>{f.date}</td >
-                                <td style={{ textAlign: "right" }}><button onClick={() => { this.displayModal(f) }} className="btn btn-primary">Details</button></td >
+                                <td style={{ textAlign: "right" }}><button disabled={f.referral.length == 0} onClick={() => { this.displayModal(f) }} className="btn btn-primary">Details</button></td >
                                 <td style={{ textAlign: "right" }}><button onClick={() => this.fillSurvey(f)} className="btn btn-primary">Fill Survey</button></td >
                             </tr>
                         </tbody>
@@ -77,7 +77,7 @@ class AllPatientsAppointmentsTable extends Component {
                                 <td style={{ textAlign: "left" }} >{f.doctor.firstName + ' ' + f.doctor.secondName}</td>
                                 <td style={{ textAlign: "center" }} > {this.checkType(f)}</td >
                                 <td style={{ textAlign: "center" }}>{f.date}</td >
-                                <td style={{ textAlign: "right" }}><button onClick={() => { this.displayModal(f) }} className="btn btn-primary">Details</button></td >
+                                <td style={{ textAlign: "right" }}><button disabled={f.referral.length == 0} onClick={() => { this.displayModal(f) }} className="btn btn-primary">Details</button></td >
                                 <td style={{ textAlign: "right" }}><button disabled={true} className="btn btn-primary">Fill Survey</button></td >
                             </tr>
                         </tbody>

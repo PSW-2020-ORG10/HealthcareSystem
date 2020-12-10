@@ -234,7 +234,10 @@ namespace HealthClinic.CL.Service
             List <TimeSpan> startTimes = new List<TimeSpan>();
             foreach (DoctorAppointment appointment in appointments)
             {
-                startTimes.Add(appointment.Start);
+                if (!appointment.IsCanceled)
+                {
+                    startTimes.Add(appointment.Start);
+                }
             }
             return startTimes;
         }
