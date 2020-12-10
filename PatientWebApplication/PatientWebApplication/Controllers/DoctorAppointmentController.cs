@@ -54,7 +54,7 @@ namespace PatientWebApplication.Controllers
         [HttpGet("patient")]       
         public IActionResult GetAppointmentsForPatient()
         {
-            return Ok(this.regularAppointmentService.GetAppointmentsForPatient(1)); 
+            return Ok(this.regularAppointmentService.GetAppointmentsForPatient(2)); 
         }
 
         /// <summary> This method is calling <c>regularAppointmentService</c> to get list of all <c>DoctorAppointment</c> that is happening in two days. </summary>
@@ -62,7 +62,7 @@ namespace PatientWebApplication.Controllers
         [HttpGet("patientInTwoDays")]
         public IActionResult GetAppointmentsForPatientInTwoDays()
         {
-            return Ok(this.regularAppointmentService.GetAppointmentsForPatientInTwoDays(1));
+            return Ok(this.regularAppointmentService.GetAppointmentsForPatientInTwoDays(2));
         }
 
         /// <summary> This method is calling <c>regularAppointmentService</c> to get list of all <c>DoctorAppointment</c> that already happend. </summary>
@@ -70,7 +70,7 @@ namespace PatientWebApplication.Controllers
         [HttpGet("patientInFuture")]
         public IActionResult GetAppointmentsForPatientInFuture()
         {
-            return Ok(this.regularAppointmentService.GetAppointmentsForPatientInFuture(1));
+            return Ok(this.regularAppointmentService.GetAppointmentsForPatientInFuture(2));
         }
 
         /// <summary> This method provides <paramref name="appointmentId"/> and sends it to <c>RegularAppointmentService</c> there appointment.IsCanceled will be set to true. </summary>

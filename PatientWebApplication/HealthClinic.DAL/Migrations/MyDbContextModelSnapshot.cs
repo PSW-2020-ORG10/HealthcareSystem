@@ -3,16 +3,14 @@ using System;
 using HealthClinic.CL.DbContextModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HealthClinic.CL.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20201209190255_FifthMigration")]
-    partial class FifthMigration
+    partial class MyDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -134,7 +132,7 @@ namespace HealthClinic.CL.Migrations
                         {
                             id = 1,
                             city = "Grad",
-                            dateOfBirth = "2/2/2020",
+                            dateOfBirth = "02/02/1975",
                             email = "email",
                             firstName = "Konstantin",
                             isSpecialist = false,
@@ -150,11 +148,11 @@ namespace HealthClinic.CL.Migrations
                         {
                             id = 2,
                             city = "Grad",
-                            dateOfBirth = "2/2/2020",
+                            dateOfBirth = "02/02/1982",
                             email = "email",
                             firstName = "Novak",
                             isSpecialist = false,
-                            ordination = "Ordination 1",
+                            ordination = "Ordination 2",
                             password = "pass",
                             phoneNumber = "123",
                             salary = 200.0,
@@ -166,16 +164,32 @@ namespace HealthClinic.CL.Migrations
                         {
                             id = 3,
                             city = "Grad",
-                            dateOfBirth = "2/2/2020",
+                            dateOfBirth = "02/02/1988",
                             email = "email",
                             firstName = "Milica",
                             isSpecialist = false,
-                            ordination = "Ordination 1",
+                            ordination = "Ordination 3",
                             password = "pass",
                             phoneNumber = "123",
                             salary = 200.0,
                             secondName = "Tadic",
                             speciality = "Cardiology",
+                            uniqueCitizensidentityNumber = "12346"
+                        },
+                        new
+                        {
+                            id = 4,
+                            city = "Grad",
+                            dateOfBirth = "02/02/1988",
+                            email = "email",
+                            firstName = "Jovan",
+                            isSpecialist = false,
+                            ordination = "Ordination 4",
+                            password = "pass",
+                            phoneNumber = "123",
+                            salary = 200.0,
+                            secondName = "Jovanovic",
+                            speciality = "Pulmonology",
                             uniqueCitizensidentityNumber = "12346"
                         });
                 });
@@ -216,7 +230,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
-                            Date = "03/03/2020",
+                            Date = "23/12/2020",
                             DoctorUserId = 1,
                             PatientUserId = 2,
                             RoomId = "room1",
@@ -479,7 +493,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
-                            date = "03/03/2020",
+                            date = "23/12/2020",
                             employeeFirst = "EmployeeName",
                             employeeLast = "EmployeeSurname",
                             employeeid = "2",
@@ -490,7 +504,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 2,
-                            date = "02/02/2020",
+                            date = "22/12/2020",
                             employeeFirst = "EmployeeName",
                             employeeLast = "EmployeeSurname",
                             employeeid = "1",
@@ -501,10 +515,21 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 3,
-                            date = "02/02/2020",
+                            date = "22/12/2020",
                             employeeFirst = "EmployeeName",
                             employeeLast = "EmployeeSurname",
                             employeeid = "3",
+                            isOnDuty = true,
+                            room = "1",
+                            shiftId = 1
+                        },
+                        new
+                        {
+                            id = 4,
+                            date = "23/12/2020",
+                            employeeFirst = "EmployeeName",
+                            employeeLast = "EmployeeSurname",
+                            employeeid = "4",
                             isOnDuty = true,
                             room = "1",
                             shiftId = 1
@@ -949,7 +974,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
-                            Date = "03/03/2020",
+                            Date = "23/12/2020",
                             DoctorUserId = 1,
                             IsCanceled = false,
                             PatientUserId = 2,
@@ -959,7 +984,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 2,
-                            Date = "03/03/2020",
+                            Date = "23/12/2020",
                             DoctorUserId = 2,
                             IsCanceled = false,
                             PatientUserId = 2,
@@ -969,7 +994,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 3,
-                            Date = "03/03/2020",
+                            Date = "23/12/2020",
                             DoctorUserId = 2,
                             IsCanceled = false,
                             PatientUserId = 1,
@@ -979,7 +1004,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 4,
-                            Date = "03/03/2020",
+                            Date = "23/12/2020",
                             DoctorUserId = 2,
                             IsCanceled = false,
                             PatientUserId = 1,
@@ -989,7 +1014,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 5,
-                            Date = "02/02/2020",
+                            Date = "22/12/2020",
                             DoctorUserId = 1,
                             IsCanceled = false,
                             PatientUserId = 1,
@@ -999,7 +1024,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 6,
-                            Date = "02/02/2020",
+                            Date = "22/12/2020",
                             DoctorUserId = 3,
                             IsCanceled = false,
                             PatientUserId = 2,
