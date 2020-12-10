@@ -68,12 +68,10 @@ namespace IntegrationWithPharmacies.Controllers
             System.IO.FileStream fs = System.IO.File.Create(complete);
             fs.Close();
             System.IO.File.WriteAllText(complete, stringBuilder.ToString() + "!    Report about consumption of medicine\n\n\n" + getReportText(date));
-            Console.WriteLine("*******************       1           *****************************");
+            
 
             string[] lines = System.IO.File.ReadAllLines(@"..\TextFile.txt");
 
-            // Display the file contents by using a foreach loop.
-            System.Console.WriteLine("Contents of WriteLines2.txt = ");
             foreach (string line in lines)
             {
                 // Use a tab to indent each line of the file.
@@ -190,7 +188,7 @@ namespace IntegrationWithPharmacies.Controllers
         }
         private SftpConfig getConfig()
         {
-            return new SftpConfig { Host = "192.168.56.1", Port = 22, UserName = "tester", Password = "password" };
+            return new SftpConfig { Host = "192.168.1.244", Port = 22, UserName = "tester", Password = "password" };
         }
     }
 

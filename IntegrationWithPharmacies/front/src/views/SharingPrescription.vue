@@ -10,26 +10,20 @@
                 <div class="col-25">
                     <label for="name">Patient's name:</label>
                 </div>
-                <div class="col-75">
-                    <input type="text" id="name" name="name" v-model="name" placeholder="Patients name..">
+                <div class="col-45">
+                    <select v-model="selectedPatient">
+                        <option v-for="pat in patients" :value="pat" :key="pat.id" v-on:select="showMedId">
+                            {{pat.firstName}}&nbsp;{{pat.secondName}}&nbsp;&nbsp;|MedID: {{pat.medicalIdNumber}}
+                        </option>
+
+                    </select>
+                    <hr>
+                 <div v-if="hidden"   Selected: {{selectedPatient}}></div>
                 </div>
+                
             </div>
-            <div class="row">
-                <div class="col-25">
-                    <label for="name">Patient's surname:</label>
-                </div>
-                <div class="col-75">
-                    <input type="text" id="surname" name="surname" v-model="surname" placeholder="Patietns surname..">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-25">
-                    <label for="town">Medicine ID number:</label>
-                </div>
-                <div class="col-75">
-                    <input type="text" id="medIdNumber" name="medIdNumber" v-model="medIdNumber" placeholder="Medicine id number..">
-                </div>
-            </div>
+          
+           
             <div class="row">
                 <div class="col-15">
                     <label for="apiKey">Medication:</label>
@@ -97,12 +91,34 @@
                 showSpecification: false,
                 selected: null,
                 pharmacies: [], 
-                explanation :""
+                explanation: "",
+                patients: [],
+                selectedPatient: null,
+                hidden : false
             }
         },
         methods: {
             send: function () {
-               
+                const data = {
+                    name: this.selectedPatient.firstName,
+                    surname: this.selectedPatient.secondName,
+                    medicalIDNumber: this.selectedPatient.medicalIdNumber,
+                    medicine: this.selected,
+                    quantity: this.quantity,
+                    usage: this.explanation
+                };
+                this.axios.post('api/sharingPrescription/http', data)
+                    .then(res => {
+                        this.sent = true;
+                        this.notSent = false;
+                        console.log(res);
+                    })
+                    .catch(res => {
+                        this.sent = false;
+                        this.notSent = true;
+                        console.log(res);
+                    })
+
             },
             specification: function () {
                 this.showSpecification = true;
@@ -119,15 +135,25 @@
                     .catch(res=> {
                         console.log(res);
                     });
-            },
+            }, 
+            showMedId: function () {
+                this.medIdNumber = this.selectedPatient.medicalIdNumber;
+            }
 
 
         },
         mounted() {
             this.axios.get('api/sharingPrescription')
                 .then(res => {
-                    alert("OK");
                     this.medications = res.data;
+                })
+                .catch(res => {
+                    console.log(res);
+                });
+            this.axios.get('api/sharingPrescription/patients')
+                .then(res => {
+                    this.patients = res.data;
+                    alert("OK");
                 })
                 .catch(res => {
                     alert("NOT OK");

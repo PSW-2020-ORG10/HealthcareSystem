@@ -33,6 +33,10 @@ namespace HealthClinic.CL.Service
             PatientsRepository = patientsRepository;
             EmailVerificationService = emailVerificationService;
         }
+        public PatientService(MyDbContext context)
+        {
+            PatientsRepository = new PatientsRepository(context);
+        }
 
         /// <summary> This method converts <paramref name="patientDto"/> to <c>PatientUser</c> using <c>PatientAdapter</c> and sends it to <c>PatientsRepository</c>. </summary>
         /// <returns>Returns successfully created patient; otherwise, return <c>null</c></returns>
