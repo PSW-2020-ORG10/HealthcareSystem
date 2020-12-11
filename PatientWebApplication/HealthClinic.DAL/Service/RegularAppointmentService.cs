@@ -190,19 +190,32 @@ namespace HealthClinic.CL.Service
                 {
                     continue;
                 }
+                
                 TimeSpan time = TimeSpan.Parse(doctorShift.startTime);
-                while (time != TimeSpan.Parse(doctorShift.endTime))
-                {
-                    if (!startTimesAppointments.Contains(time) && !IsTermNotAvailable(doctorService.GetByid(doctorId), time, MakeStringFromDate(date), _patientRepository.Find(patientId)))
-                    {
-                        availableAppointments.Add((new DoctorAppointment(0, time, MakeStringFromDate(date), _patientRepository.Find(patientId), doctorService.GetByid(doctorId), new List<Referral>(), doctorService.GetByid(doctorId).ordination)));
-                        if (availableAppointments.Count >= 5)
-                        {
-                            return availableAppointments;
-                        }
-                    }
-                    time = time.Add(TimeSpan.FromMinutes(15));
-                }
+
+                availableAppointments = GetAvailableForFreeTime(time, availableAppointments, doctorShift, doctorId, date, patientId, startTimesAppointments);
+        
+            }
+
+            return availableAppointments;
+        }
+
+        private List<DoctorAppointment> GetAvailableForFreeTime(TimeSpan time, List<DoctorAppointment> availableAppointments, Shift doctorShift, int doctorId, DateTime date, int patientId, List<TimeSpan> startTimesAppointments)
+        {
+            while (time != TimeSpan.Parse(doctorShift.endTime) && availableAppointments.Count < 5)
+            {
+                availableAppointments = GetListAvailableAppointments(availableAppointments, doctorId, time, date, patientId, startTimesAppointments);
+
+                time = time.Add(TimeSpan.FromMinutes(15));
+            }
+            return availableAppointments;
+        }
+
+        private List<DoctorAppointment> GetListAvailableAppointments(List<DoctorAppointment> availableAppointments, int doctorId, TimeSpan time, DateTime date, int patientId, List<TimeSpan> startTimesAppointments)
+        {
+            if ((!startTimesAppointments.Contains(time) && !IsTermNotAvailable(doctorService.GetByid(doctorId), time, MakeStringFromDate(date), _patientRepository.Find(patientId)) || availableAppointments.Count >= 5))
+            {
+                availableAppointments.Add((new DoctorAppointment(0, time, MakeStringFromDate(date), _patientRepository.Find(patientId), doctorService.GetByid(doctorId), new List<Referral>(), doctorService.GetByid(doctorId).ordination)));
             }
 
             return availableAppointments;
