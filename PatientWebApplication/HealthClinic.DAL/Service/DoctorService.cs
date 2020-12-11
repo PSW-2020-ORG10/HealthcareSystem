@@ -159,7 +159,7 @@ namespace HealthClinic.CL.Service
 
             foreach (Schedule schedule in listOfSchedule)
             {
-                if (schedule.employeeid.Equals(doctorUser.id.ToString())) removeDoctorFromRepositories(schedule.id, doctor);
+                if (schedule.EmployeeId.Equals(doctorUser.id.ToString()))  removeDoctorFromRepositories(schedule.id, doctor);
             }
         }
 
@@ -204,8 +204,8 @@ namespace HealthClinic.CL.Service
             if (listOfAppointments == null) return false;
 
             foreach (DoctorAppointment appointment in listOfAppointments)
-            {
-                if (areDatesEqual(appointment.Date, date) && checkIfDoctorIsBusyForAppointment(appointment, time)) return true;
+            {   
+                if (!appointment.IsCanceled && areDatesEqual(appointment.Date, date) && checkIfDoctorIsBusyForAppointment(appointment, time)) return true;          
             }
             return false;
         }

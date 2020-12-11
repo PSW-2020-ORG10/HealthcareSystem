@@ -48,7 +48,7 @@ namespace HealthClinic.CL.Service
 
         private bool isScheduleForDoctor(Schedule schedule, DoctorUser doctor)
         {
-            if (schedule.employeeid.Equals(doctor.id.ToString())) return true;
+            if (schedule.EmployeeId == doctor.id) return true;
             return false;
         }
 

@@ -37,6 +37,7 @@
   <ItemGroup>
     <None Remove="ClientApp\src\components\AllPatientsAppointments.tsx" />
     <None Remove="ClientApp\src\components\AllRates.tsx" />
+    <None Remove="ClientApp\src\components\ChooseAppointmentType.tsx" />
     <None Remove="ClientApp\src\components\CreateSurvey.tsx" />
     <None Remove="ClientApp\src\components\AppointmentReportSimpleSearch.tsx" />
     <None Remove="ClientApp\src\components\DoctorRates.tsx" />
@@ -45,6 +46,7 @@
     <None Remove="ClientApp\src\components\PatientRegister.tsx" />
     <None Remove="ClientApp\src\components\PrescriptionsAdvanced.tsx" />
     <None Remove="ClientApp\src\components\PrescriptionsSimple.tsx" />
+    <None Remove="ClientApp\src\components\RecommendedAppointment.tsx" />
     <None Remove="ClientApp\src\components\ScheduleAppointment.tsx" />
   </ItemGroup>
 
@@ -60,6 +62,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\components\AllPatientsAppointments.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\AllRates.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\components\ChooseAppointmentType.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\CreateSurvey.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\AppointmentReportSimpleSearch.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\DoctorRates.tsx" />
@@ -68,6 +71,7 @@
     <TypeScriptCompile Include="ClientApp\src\components\PatientRegister.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\PrescriptionsAdvanced.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\PrescriptionsSimple.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\components\RecommendedAppointment.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\ScheduleAppointment.tsx" />
   </ItemGroup>
 

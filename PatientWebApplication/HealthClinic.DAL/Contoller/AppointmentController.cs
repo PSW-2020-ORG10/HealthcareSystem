@@ -47,15 +47,15 @@ namespace HealthClinic.CL.Contoller
 
         public Boolean isTermNotAvailable(DoctorUser doctor, TimeSpan time, String dateToString, PatientUser patient)
         {
-            return regularAppointmentService.isTermNotAvailable(doctor, time, dateToString, patient);
+            return regularAppointmentService.IsTermNotAvailable(doctor, time, dateToString, patient);
         }
         public DoctorAppointment RecommendAnAppointment(DoctorUser doctor, DateTime date1, DateTime date2, PatientUser patient)
         {
             return regularAppointmentService.RecommendAnAppointment(doctor, date1, date2, patient);
         }
-        public DoctorAppointment recommenedAnAppointmentDatePriority(DateTime date1, DateTime date2, PatientUser patient)
+        public List<DoctorAppointment> recommenedAnAppointmentDatePriority(DateTime date1, DateTime date2, PatientUser patient)
         {
-            return regularAppointmentService.recommenedAnAppointmentDatePriority(date1, date2, patient);
+            return regularAppointmentService.RecommenedAnAppointmentDatePriority(date1, date2, patient, "Speciality");
         }
 
 

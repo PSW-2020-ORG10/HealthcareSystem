@@ -23,10 +23,11 @@ namespace HealthClinic.CL.Service
         bool isTermNotAvailable(DoctorUser doctor, TimeSpan time, string dateToString, PatientUser patient);
         DoctorAppointment New(DoctorAppointment appointment, Operation operation);
         DoctorAppointment RecommendAnAppointment(DoctorUser doctor, DateTime date1, DateTime date2, PatientUser patient);
-        DoctorAppointment recommenedAnAppointmentDatePriority(DateTime date1, DateTime date2, PatientUser patient);
+        DoctorAppointment RecommenedAnAppointmentDatePriority(DateTime date1, DateTime date2, PatientUser patient, string speciality);
         void Remove(int appointmentid);
         List<DoctorAppointment> SimpleSearchAppointments(AppointmentReportSearchDto appointmentReportSearchDto);
         void Update(DoctorAppointment appointment, Operation operation);
+        DoctorAppointment GetRecommendedAppointment(RecommendedAppointmentDto dto);
         DoctorAppointment CancelAppointment(DoctorAppointment appointment);
     }
 }

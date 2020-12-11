@@ -151,16 +151,32 @@ namespace HealthClinic.CL.DbContextModel
             modelBuilder.Entity<Shift>().HasData(
 
             new Shift(1, "14:00", "16:00"),
-            new Shift(2, "12:00", "12:30")
+            new Shift(2, "12:00", "12:30"),
+            new Shift(3, "08:00", "19:00")
 
             );
 
             modelBuilder.Entity<Schedule>().HasData(
 
-            new Schedule(1, "2", "23/12/2020", true, "EmployeeName", "EmployeeSurname", 1, "1"),
-            new Schedule(2, "1", "22/12/2020", true, "EmployeeName", "EmployeeSurname", 2, "1"),
-            new Schedule(3, "3", "22/12/2020", true, "EmployeeName", "EmployeeSurname", 1, "1"),
-            new Schedule(4, "4", "23/12/2020", true, "EmployeeName", "EmployeeSurname", 1, "1")
+            new Schedule(1, 1, "08/12/2020", true, 3, "Ordination 1"),
+            new Schedule(2, 1, "09/12/2020", true, 3, "Ordination 1"),
+            new Schedule(3, 1, "10/12/2020", true, 3, "Ordination 1"),
+            new Schedule(4, 1, "11/12/2020", true, 3, "Ordination 1"),
+            new Schedule(5, 1, "12/12/2020", true, 3, "Ordination 1"),
+            new Schedule(6, 1, "13/12/2020", true, 3, "Ordination 1"),
+            new Schedule(7, 1, "14/12/2020", true, 3, "Ordination 1"),
+            new Schedule(8, 1, "15/12/2020", true, 3, "Ordination 1"),
+            new Schedule(9, 1, "16/12/2020", true, 3, "Ordination 1"),
+            new Schedule(10, 1, "17/12/2020", true, 3, "Ordination 1"),
+            new Schedule(11, 1, "18/12/2020", true, 3, "Ordination 1"),
+            new Schedule(12, 1, "19/12/2020", true, 3, "Ordination 1"),
+            new Schedule(13, 1, "20/12/2020", true, 3, "Ordination 1"),
+            new Schedule(14, 1, "21/12/2020", true, 3, "Ordination 1"),
+            new Schedule(15, 1, "23/12/2020", true, 3, "Ordination 1"),
+            new Schedule(16, 2, "23/12/2020", true, 1, "1"),
+            new Schedule(17, 1, "22/12/2020", true, 2, "1"),
+            new Schedule(18, 3, "22/12/2020", true, 1, "1"),
+            new Schedule(19, 4, "23/12/2020", true, 1, "1")
 
            );
 
@@ -279,7 +295,7 @@ namespace HealthClinic.CL.DbContextModel
 
             modelBuilder.Entity<SecretaryUser>().HasData(
 
-            new SecretaryUser(1, "Secretary Name", "Secretary Surname", "1234", "12/12/2012", "123", "email", "pass", "Grad",
+            new SecretaryUser(162, "Secretary Name", "Secretary Surname", "1234", "12/12/2012", "123", "email", "pass", "Grad",
             133, "Room")
 
             );

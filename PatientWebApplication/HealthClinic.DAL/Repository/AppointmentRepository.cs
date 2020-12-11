@@ -33,6 +33,13 @@ namespace HealthClinic.CL.Repository
             return appointment;
         }
 
+        public DoctorAppointment Create(DoctorAppointment appointment)
+        {
+            dbContext.DoctorAppointments.Add(appointment);
+            dbContext.SaveChanges();
+            return appointment;
+        }
+
         public void Update(DoctorAppointment appointment)
         {
             dbContext.DoctorAppointments.Update(appointment);

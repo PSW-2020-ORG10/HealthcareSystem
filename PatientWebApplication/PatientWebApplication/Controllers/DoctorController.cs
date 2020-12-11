@@ -28,5 +28,11 @@ namespace PatientWebApplication.Controllers
         {
             return Ok(new DoctorAdapter().ConvertDoctorListToDoctorDtoList(doctorService.GetDoctorsBySpecialty(specialty)));
         }
+
+        [HttpGet]       // GET /api/doctor
+        public IActionResult Get()
+        {
+            return Ok(doctorService.GetAll());
+        }
     }
 }

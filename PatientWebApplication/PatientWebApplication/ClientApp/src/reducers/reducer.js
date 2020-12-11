@@ -16,6 +16,9 @@
     LOADED_ALL_RATES,
     LOADED_ALL_DOCTOR_RATES,
     LOADED_APPOINTMENTSURVEY,
+    LOADED_ALL_DOCTORS,
+    RECOMMEND_APPOINTMENT,
+    CREATE_RECOMMEND_APPOINTMENT,
     LOADED_ALL_AVAILABLE_DOCTORS,
     LOADED_ALL_AVAILABLE_DOCTORS_ERROR,
     LOADED_ALL_AVAILABLE_APPOINTMENTS,
@@ -24,7 +27,7 @@
     LOADED_ALL_PATIENT_APPOINTMENTS_INFUTURE,
     CANCEL_APPOINTMENT,
     LOADED_ALL_PATIENT_APPOINTMENTS_WITH_SURVEYS,
-    LOADED_ALL_PATIENT_APPOINTMENTS_WITHOUT_SURVEYS,
+    LOADED_ALL_PATIENT_APPOINTMENTS_WITHOUT_SURVEYS
 } from "../types/types"
 
 function addFeedback(state=initialState, action) {
@@ -69,6 +72,10 @@ const initialState = {
     surveyList: [], 
     patientAppointments: [],
     doctorRatesList: [],
+    allRates: {},
+    doctorList: [],
+    recommendedAppointments: [],
+    createdRecommendedAppointment: {},
     patientAppointmentsInTwoDaysList: [],
     patientAppointmentsInFutureList: [],
     patientAppointmentsWithSurveys: [],
@@ -212,7 +219,25 @@ function reducer(state = initialState, action) {
             return {
                 ...state,
                 patientAppointmentsWithoutSurveys: action.payload
-            };     
+            }; 
+        case LOADED_ALL_DOCTORS:
+            return {
+                ...state,
+                doctorList: action.payload
+
+            };
+        case RECOMMEND_APPOINTMENT:
+            return {
+                ...state,
+                recommendedAppointments: action.payload
+
+            };
+        case CREATE_RECOMMEND_APPOINTMENT:
+            return {
+                ...state,
+                createdRecommendedAppointment: action.payload
+
+            };    
         default:
             return state;
     }
