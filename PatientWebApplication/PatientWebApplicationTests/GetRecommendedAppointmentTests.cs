@@ -196,7 +196,6 @@ namespace PatientWebApplicationTests
         private static IPatientsRepository CreatePatientStubRepository()
         {
             var stubRepository = new Mock<IPatientsRepository>();
-            List<PatientUser> patients = new List<PatientUser>();
             PatientUser patient = new PatientUser(2, "PatientName2", "PatientSurname2", "Female", "1234", "2/2/2020", "123", "2112313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null);
 
             stubRepository.Setup(m => m.Find(patient.id)).Returns(patient);
