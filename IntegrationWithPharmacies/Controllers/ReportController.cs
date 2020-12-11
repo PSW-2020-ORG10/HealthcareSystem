@@ -12,6 +12,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Text;
 
 namespace IntegrationWithPharmacies.Controllers
@@ -39,26 +40,31 @@ namespace IntegrationWithPharmacies.Controllers
         [HttpPost]
         public IActionResult Post(DateOfOrder date)
         {
+            Random random = new Random();
+            int number = random.Next(1, 100);
             var sftpService = new SftpService(new NullLogger<SftpService>(), getConfig());
-            var testFile = @"..\TextFile.txt";
+
+            String complete = @"FileReports\..\Report_" + DateTime.Now.ToString("dd-MM-yyyy") + "_" + number + ".txt";
             StringBuilder stringBuilder = new StringBuilder();
 
             foreach (RegistrationInPharmacy registration in RegistrationInPharmacyService.GetAll())
             {
                 stringBuilder.Append(registration.ApiKey + ";");
             }
-            System.IO.File.WriteAllText(testFile, stringBuilder.ToString() + "!    Report about consumption of medicine\n\n\n" + getReportText(date));
-            sftpService.UploadFile(testFile, @"\pub\" + Path.GetFileName(testFile));
+            System.IO.File.WriteAllText(complete, stringBuilder.ToString() + "!    Report about consumption of medicine\n\n\n" + getReportText(date));
+            sftpService.UploadFile(complete, @"\pub\" + complete);
+            SendNotificationAboutReport();
             return Ok();
         }
       
         [HttpPost("http")]
         public IActionResult PostHttp(DateOfOrder date)
         {
-            
+            Random random = new Random();
+            int number = random.Next(1, 100);
             var testFile = @"..\test.txt";
-            String newFile = @"Report;" + DateTime.Now.ToString("dd-MM-yyyy") + ".txt";
-            String complete = @"FileReports\..\Report_" + DateTime.Now.ToString("dd-MM-yyyy") + ".txt";
+            String newFile = @"Report;" + DateTime.Now.ToString("dd-MM-yyyy") +"_"+number+ ".txt";
+            String complete = @"FileReports\..\Report_" + DateTime.Now.ToString("dd-MM-yyyy") + "_" + number + ".txt";
             StringBuilder stringBuilder = new StringBuilder();
 
             foreach (RegistrationInPharmacy registration in RegistrationInPharmacyService.GetAll())
@@ -87,7 +93,7 @@ namespace IntegrationWithPharmacies.Controllers
                 client.UploadFile(uri, "POST", complete);
                 client.Dispose();
 
-            
+                SendNotificationAboutReport();
                 return Ok(JsonConvert.SerializeObject(testFile));
             }
             catch(Exception e) {
@@ -190,7 +196,48 @@ namespace IntegrationWithPharmacies.Controllers
         {
             return new SftpConfig { Host = "192.168.1.244", Port = 22, UserName = "tester", Password = "password" };
         }
-    }
+        public void SendNotificationAboutReport()
+        {
+            try
+            {
+                Console.WriteLine("SALJE MEJL");
+                MailMessage mail = new MailMessage();
+                Console.WriteLine("************* 1 ***************");
 
+                SmtpClient SmptServer = new SmtpClient("smtp.gmail.com");
+                Console.WriteLine("************* 2 ***************");
+
+                mail.From = new MailAddress("ourhospital9@gmail.com");
+                Console.WriteLine("************* 3 ***************");
+
+                mail.To.Add("pharmacyisa@gmail.com");
+                Console.WriteLine("************* 4 ***************");
+
+                mail.Subject = "Notification about send file";
+                Console.WriteLine("************* 5 ***************");
+
+                mail.Body = "Body of mail address";
+                Console.WriteLine("************* 6 ***************");
+
+
+                SmptServer.Port = 587;
+                Console.WriteLine("************* 7 ***************");
+
+                SmptServer.Credentials = new System.Net.NetworkCredential("ourhospital9@gmail.com", "hospital.9");
+                Console.WriteLine("************* 8 ***************");
+
+                SmptServer.EnableSsl = true;
+
+                Console.WriteLine("*************  9 ***************");
+
+                SmptServer.Send(mail);
+                Console.WriteLine("*************  10 ***************");
+
+            }
+            catch (SmtpException ex) {
+            }
+
+        }
+    }
 
 }

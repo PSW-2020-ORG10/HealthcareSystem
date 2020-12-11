@@ -54,7 +54,7 @@
             </div>
             <div v-if="showSpecification" class="row">
                 <div class="col-25" style="border:thick solid #000000">
-                    Specifikacija lijeka
+                    {{medSpecification}}
                 </div>
             </div>
             <div class="row">
@@ -67,7 +67,8 @@
             </div>
 
             <div class="row">
-                <button class="button" v-on:click="send">Send prescription to pharmacy</button>
+                <button class="button" v-on:click="send">Send(HTTP)</button>
+                <button class="button" v-on:click="sendSftp">Send(SFTP)</button>
             </div>
             <div class="row">
                 <label v-if="sent" style="color:lightgreen;font-size:25px;">Successfully sent prescription!</label>
@@ -94,7 +95,8 @@
                 explanation: "",
                 patients: [],
                 selectedPatient: null,
-                hidden : false
+                hidden: false,
+                medSpecification:""
             }
         },
         methods: {
@@ -120,8 +122,32 @@
                     })
 
             },
+            sendSftp: function () {
+                const data = {
+                    name: this.selectedPatient.firstName,
+                    surname: this.selectedPatient.secondName,
+                    medicalIDNumber: this.selectedPatient.medicalIdNumber,
+                    medicine: this.selected,
+                    quantity: this.quantity,
+                    usage: this.explanation
+                };
+                this.axios.post('api/sharingPrescription', data)
+                    .then(res => {
+                        this.sent = true;
+                        this.notSent = false;
+                        console.log(res);
+                    })
+                    .catch(res => {
+                        this.sent = false;
+                        this.notSent = true;
+                        console.log(res);
+                    })
+
+            },
             specification: function () {
+                alert(this.selected);
                 this.showSpecification = true;
+                this.medSpecification = this.selected;
             },
             showAvailability: function () {
                 var parametres = {
