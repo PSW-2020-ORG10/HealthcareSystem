@@ -48,13 +48,13 @@ namespace PatientWebApplication.Controllers
         [HttpGet]      
         public IActionResult Get()
         {                  
-            return Ok(regularAppointmentService.FindAllValidAppointmentsWithoutSurvey(regularAppointmentService.GetAppointmentsForPatient(1), SurveyService.GetAllSurveysForPatientId(1)));
+            return Ok(regularAppointmentService.FindAllValidAppointmentsWithoutSurvey(regularAppointmentService.GetAppointmentsForPatient(2), SurveyService.GetAllSurveysForPatientId(2)));
         }
 
         [HttpGet("getWithSurveys")]
         public IActionResult GetWithSurveys()
         {
-            return Ok(regularAppointmentService.FindAllValidAppointmentsWithSurvey(regularAppointmentService.GetAppointmentsForPatient(1), SurveyService.GetAllSurveysForPatientId(1)));
+            return Ok(regularAppointmentService.FindAllValidAppointmentsWithSurvey(regularAppointmentService.GetAppointmentsForPatient(2), SurveyService.GetAllSurveysForPatientId(2)));
         }
         /// <summary> This method is calling <c>FeedbackService</c> to get rates for doctors, medical staff and hospital in general. </summary>
         /// <returns> If returned <c>SurveyAverageDto</c> is null returns 400 Bad Request; If returned <c>SurveyAverageDto</c> is not null, returns 200 OK with found dto</returns>

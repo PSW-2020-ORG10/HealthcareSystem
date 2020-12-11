@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HealthClinic.CL.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20201209211124_MergedMigration")]
-    partial class MergedMigration
+    [Migration("20201211142642_FinalMigration")]
+    partial class FinalMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -119,7 +119,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
-                            Date = "03/03/2020",
+                            Date = "23/12/2020",
                             DoctorUserId = 1,
                             PatientUserId = 2,
                             RoomId = "room1",
@@ -472,6 +472,123 @@ namespace HealthClinic.CL.Migrations
                             isOnDuty = true,
                             room = "Ordination 1",
                             shiftId = 3
+                        },
+                        new
+                        {
+                            id = 7,
+                            EmployeeId = 1,
+                            date = "14/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 3
+                        },
+                        new
+                        {
+                            id = 8,
+                            EmployeeId = 1,
+                            date = "15/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 3
+                        },
+                        new
+                        {
+                            id = 9,
+                            EmployeeId = 1,
+                            date = "16/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 3
+                        },
+                        new
+                        {
+                            id = 10,
+                            EmployeeId = 1,
+                            date = "17/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 3
+                        },
+                        new
+                        {
+                            id = 11,
+                            EmployeeId = 1,
+                            date = "18/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 3
+                        },
+                        new
+                        {
+                            id = 12,
+                            EmployeeId = 1,
+                            date = "19/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 3
+                        },
+                        new
+                        {
+                            id = 13,
+                            EmployeeId = 1,
+                            date = "20/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 3
+                        },
+                        new
+                        {
+                            id = 14,
+                            EmployeeId = 1,
+                            date = "21/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 3
+                        },
+                        new
+                        {
+                            id = 15,
+                            EmployeeId = 1,
+                            date = "23/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 3
+                        },
+                        new
+                        {
+                            id = 16,
+                            EmployeeId = 2,
+                            date = "23/12/2020",
+                            isOnDuty = true,
+                            room = "1",
+                            shiftId = 1
+                        },
+                        new
+                        {
+                            id = 17,
+                            EmployeeId = 1,
+                            date = "22/12/2020",
+                            isOnDuty = true,
+                            room = "1",
+                            shiftId = 2
+                        },
+                        new
+                        {
+                            id = 18,
+                            EmployeeId = 3,
+                            date = "22/12/2020",
+                            isOnDuty = true,
+                            room = "1",
+                            shiftId = 1
+                        },
+                        new
+                        {
+                            id = 19,
+                            EmployeeId = 4,
+                            date = "23/12/2020",
+                            isOnDuty = true,
+                            room = "1",
+                            shiftId = 1
                         });
                 });
 
@@ -866,7 +983,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
-                            Date = "03/03/2020",
+                            Date = "23/12/2020",
                             DoctorUserId = 1,
                             IsCanceled = false,
                             PatientUserId = 2,
@@ -876,7 +993,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 2,
-                            Date = "03/03/2020",
+                            Date = "23/12/2020",
                             DoctorUserId = 2,
                             IsCanceled = false,
                             PatientUserId = 2,
@@ -886,7 +1003,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 3,
-                            Date = "03/03/2020",
+                            Date = "23/12/2020",
                             DoctorUserId = 2,
                             IsCanceled = false,
                             PatientUserId = 1,
@@ -896,7 +1013,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 4,
-                            Date = "03/03/2020",
+                            Date = "23/12/2020",
                             DoctorUserId = 2,
                             IsCanceled = false,
                             PatientUserId = 1,
@@ -906,7 +1023,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 5,
-                            Date = "02/02/2020",
+                            Date = "22/12/2020",
                             DoctorUserId = 1,
                             IsCanceled = false,
                             PatientUserId = 1,
@@ -916,7 +1033,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 6,
-                            Date = "02/02/2020",
+                            Date = "22/12/2020",
                             DoctorUserId = 3,
                             IsCanceled = false,
                             PatientUserId = 2,
@@ -1481,7 +1598,7 @@ namespace HealthClinic.CL.Migrations
                         {
                             id = 1,
                             city = "Grad",
-                            dateOfBirth = "2/2/2020",
+                            dateOfBirth = "02/02/1975",
                             email = "email",
                             firstName = "Konstantin",
                             password = "pass",
@@ -1497,7 +1614,7 @@ namespace HealthClinic.CL.Migrations
                         {
                             id = 2,
                             city = "Grad",
-                            dateOfBirth = "2/2/2020",
+                            dateOfBirth = "02/02/1982",
                             email = "email",
                             firstName = "Novak",
                             password = "pass",
@@ -1506,14 +1623,14 @@ namespace HealthClinic.CL.Migrations
                             secondName = "Maric",
                             uniqueCitizensidentityNumber = "12345",
                             isSpecialist = false,
-                            ordination = "Ordination 1",
+                            ordination = "Ordination 2",
                             speciality = "Pulmonology"
                         },
                         new
                         {
                             id = 3,
                             city = "Grad",
-                            dateOfBirth = "2/2/2020",
+                            dateOfBirth = "02/02/1988",
                             email = "email",
                             firstName = "Milica",
                             password = "pass",
@@ -1522,8 +1639,24 @@ namespace HealthClinic.CL.Migrations
                             secondName = "Tadic",
                             uniqueCitizensidentityNumber = "12346",
                             isSpecialist = false,
-                            ordination = "Ordination 1",
+                            ordination = "Ordination 3",
                             speciality = "Cardiology"
+                        },
+                        new
+                        {
+                            id = 4,
+                            city = "Grad",
+                            dateOfBirth = "02/02/1988",
+                            email = "email",
+                            firstName = "Jovan",
+                            password = "pass",
+                            phoneNumber = "123",
+                            salary = 200.0,
+                            secondName = "Jovanovic",
+                            uniqueCitizensidentityNumber = "12346",
+                            isSpecialist = false,
+                            ordination = "Ordination 4",
+                            speciality = "Pulmonology"
                         });
                 });
 

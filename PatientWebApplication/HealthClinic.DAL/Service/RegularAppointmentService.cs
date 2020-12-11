@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using HealthClinic.CL.Utility;
 using System.Linq;
+using HealthClinic.CL.DbContextModel;
 
 namespace HealthClinic.CL.Service
 {
@@ -37,6 +38,15 @@ namespace HealthClinic.CL.Service
             this.operationService = operationService;
         }
 
+        public RegularAppointmentService(MyDbContext context)
+        {
+            this._appointmentRepository = new AppointmentRepository(context);
+            this._patientRepository = new PatientsRepository(context);
+            this.operationService = new OperationService(new OperationRepository(context));
+            this.employeesScheduleService = new EmployeesScheduleService(new EmployeesScheduleRepository(context));
+            this.doctorService = new DoctorService(new OperationRepository(context), _appointmentRepository, new EmployeesScheduleRepository(context), new DoctorRepository(context));
+        }
+
         /// <summary> This method is calling <c>AppointmentRepository</c> to get list of all appointments. </summary>
         /// <returns> List of all appointments. </returns>
         public List<DoctorAppointment> GetAll()
@@ -53,12 +63,21 @@ namespace HealthClinic.CL.Service
             _appointmentRepository.New(appointment);
         }
 
+
         /// <summary> This method is calling <c>AppointmentRepository</c> to create new appointment. </summary>
         /// <param name="appointment"><c>appointment</c> is appointment we want to create.</param>
         /// <returns> Created appointment. </returns>
         public DoctorAppointment CreateRecommended(DoctorAppointment appointment)
         {
             return _appointmentRepository.Create(appointment);
+        }
+
+        public DoctorAppointment CreateRegular(DoctorAppointment appointment)
+        {
+            var appointments = GetAllAvailableAppointmentsForDate(appointment.Date, appointment.DoctorUserId, appointment.PatientUserId);
+            if (!appointments.Contains(appointment)) return null;
+            return _appointmentRepository.New(appointment);
+
         }
 
         /// <summary> This method is calling <c>AppointmentRepository</c> to update appointment. </summary>
@@ -114,6 +133,9 @@ namespace HealthClinic.CL.Service
             return _appointmentRepository.GetAppointmentsForDoctor(id);
         }
 
+        /// <summary> This method is getting List of <c>DoctorAppointment</c> that matches recoomended filters </summary>
+        /// <param name="dto"><c>RecommendedAppointmentDto</c> is Data Transfer Object that is being used to get Recommended Appointments</param>
+        /// <returns> List of recommended appointments</returns>
         public List<DoctorAppointment> GetRecommendedAppointment(RecommendedAppointmentDto dto)
         {
             DoctorUser doctor = doctorService.GetByid(dto.DoctorId);
@@ -150,6 +172,12 @@ namespace HealthClinic.CL.Service
             return null;
         }
 
+        /// <summary> This method is getting List of <c>DoctorAppointment</c> when doctor and patient are available </summary>
+        /// <param name="doctorId"><c>DoctorUser</c> id of doctor who will execute appointment</param>
+        /// <param name="startDate">From which date we want to get recommended appointment</param>
+        /// <param name="endDate">To which date we want to get recommended appointment</param>
+        /// <param name="patientId"><c>PatientUser</c> id of patient that is scheduling appointment</param>
+        /// <returns> List of recommended appointments</returns>
         public List<DoctorAppointment> GetAllAvailableAppointmentsForRecommendedDates(int doctorId, DateTime startDate, DateTime endDate, int patientId)
         {
             List<DoctorAppointment> availableAppointments = new List<DoctorAppointment>();
@@ -182,12 +210,12 @@ namespace HealthClinic.CL.Service
 
         private List<DoctorAppointment> GetAllAppointmentsByDateAndDoctor(DateTime date, int doctorId)
         {
-            return GetAppointmentsForDoctor(doctorId).Where(appointment => (date == UtilityMethods.ParseDateInCorrectFormat(appointment.Date))).ToList();
+            return GetAppointmentsForDoctor(doctorId).Where(appointment => (date == UtilityMethods.ParseDateInCorrectFormat(appointment.Date) && !appointment.IsCanceled)).ToList();
         }
 
         private List<DoctorAppointment> GetAllAppointmentsByDateAndPatient(DateTime date, int patientId)
         {
-            return GetAppointmentsForPatient(patientId).Where(appointment => (date == UtilityMethods.ParseDateInCorrectFormat(appointment.Date))).ToList();
+            return GetAppointmentsForPatient(patientId).Where(appointment => (date == UtilityMethods.ParseDateInCorrectFormat(appointment.Date) && !appointment.IsCanceled)).ToList();
         }
 
         private DoctorAppointment GetAvailableTerm(DoctorUser doctor, DateTime date, TimeSpan time1, PatientUser patient)
@@ -229,6 +257,9 @@ namespace HealthClinic.CL.Service
             return appointmentsSet;
         }
 
+        /// <summary> This method is getting List of Start Times of already scheduled <c>DoctorAppointment</c> </summary>
+        /// <param name="appointments">List of <c>DoctorAppointment</c> that are already scheduled</param>
+        /// <returns> List of start times for scheduled appointments</returns>
         private List<TimeSpan> GetAllStartTimes(List<DoctorAppointment> appointments)
         {
             List <TimeSpan> startTimes = new List<TimeSpan>();
@@ -291,15 +322,21 @@ namespace HealthClinic.CL.Service
             return int.Parse(partsEnd[1]);
         }
 
-        public List<DoctorAppointment> RecommenedAnAppointmentDatePriority(DateTime date1, DateTime date2, PatientUser patient, string speciality)
+        /// <summary> This method is getting List of <c>DoctorAppointment</c> when priority is date </summary>
+        /// <param name="startDate">From which date we want to get recommended appointment</param>
+        /// <param name="endDate">To which date we want to get recommended appointment</param>
+        /// <param name="patient"><c>PatientUser</c> who is scheduling appointment</param>
+        /// <param name="speciality">Speciality of doctor which patient wanted first to execute appointment</param>
+        /// <returns>List of <c>DoctorAppointment</c></returns>
+        public List<DoctorAppointment> RecommenedAnAppointmentDatePriority(DateTime startDate, DateTime endDate, PatientUser patient, string speciality)
         {
             List<DoctorUser> doctorsList = doctorService.GetAll();
             List<DoctorAppointment> appointments = new List<DoctorAppointment>();
 
             foreach (DoctorUser doctor in doctorsList)
             {
-                if (doctor.speciality.Equals(speciality) && GetAllAvailableAppointmentsForRecommendedDates(doctor.id, date1, date2, patient.id).Any())
-                    return GetAllAvailableAppointmentsForRecommendedDates(doctor.id, date1, date2, patient.id);
+                if (doctor.speciality.Equals(speciality) && GetAllAvailableAppointmentsForRecommendedDates(doctor.id, startDate, endDate, patient.id).Any())
+                    return GetAllAvailableAppointmentsForRecommendedDates(doctor.id, startDate, endDate, patient.id);
             }
             return appointments;
         }
