@@ -55,7 +55,6 @@ namespace HealthClinic.CL.Service
         private Shift getScheduleShiftForDoctor(DoctorUser doctor, string date, Schedule schedule)
         {
             if (isScheduleForDoctor(schedule, doctor) && schedule.date.Equals(date)) return schedule.shift;
-            
             return null;
         }
 
@@ -65,11 +64,9 @@ namespace HealthClinic.CL.Service
             {
                 return null;
             }
-            List<Schedule> listOfSchedule = _employeesScheduleRepository.GetAll();
-            foreach (Schedule schedule in listOfSchedule)
+            foreach (Schedule schedule in _employeesScheduleRepository.GetAll())
             {
-                Shift scheduleShiftForDoctor = getScheduleShiftForDoctor(doctor, date, schedule);
-                if (scheduleShiftForDoctor != null) return scheduleShiftForDoctor;
+                if (getScheduleShiftForDoctor(doctor, date, schedule) != null) return getScheduleShiftForDoctor(doctor, date, schedule);
             }
             return null;
         }
