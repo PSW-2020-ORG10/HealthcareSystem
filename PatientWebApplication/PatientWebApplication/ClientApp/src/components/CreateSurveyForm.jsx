@@ -14,7 +14,7 @@ class CreateSurveyForm extends Component {
     }
     state = { 
         
-        patientId: 1,
+        patientId: 2,
         appointmentId:0,
         doctorsProfessionalism: 1,
         doctorsPoliteness: 1,
@@ -94,6 +94,13 @@ class CreateSurveyForm extends Component {
                         type="text"
                         defaultValue={this.state.appointmentId = this.props.appointment.id}
                         name={this.state.appointmentId}
+                        hidden={true}
+                    />
+                    <input
+                        className="field"
+                        type="text"
+                        defaultValue={this.state.patientId = this.props.appointment.patientUserId}
+                        name={this.state.patientId}
                         hidden={true}
                     />   
                 
