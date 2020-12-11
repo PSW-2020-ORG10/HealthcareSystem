@@ -12,9 +12,11 @@
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="9.2.2" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="9.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.9" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="3.1.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.9">
@@ -43,6 +45,7 @@
     <None Remove="ClientApp\src\components\PatientRegister.tsx" />
     <None Remove="ClientApp\src\components\PrescriptionsAdvanced.tsx" />
     <None Remove="ClientApp\src\components\PrescriptionsSimple.tsx" />
+    <None Remove="ClientApp\src\components\ScheduleAppointment.tsx" />
   </ItemGroup>
 
   <ItemGroup>
@@ -65,6 +68,7 @@
     <TypeScriptCompile Include="ClientApp\src\components\PatientRegister.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\PrescriptionsAdvanced.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\PrescriptionsSimple.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\components\ScheduleAppointment.tsx" />
   </ItemGroup>
 
   <ItemGroup>

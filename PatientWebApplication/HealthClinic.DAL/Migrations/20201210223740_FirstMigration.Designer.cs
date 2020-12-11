@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HealthClinic.CL.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20201205212826_FirstMigration")]
+    [Migration("20201210223740_FirstMigration")]
     partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -134,7 +134,7 @@ namespace HealthClinic.CL.Migrations
                         {
                             id = 1,
                             city = "Grad",
-                            dateOfBirth = "2/2/2020",
+                            dateOfBirth = "02/02/1975",
                             email = "email",
                             firstName = "Konstantin",
                             isSpecialist = false,
@@ -150,11 +150,11 @@ namespace HealthClinic.CL.Migrations
                         {
                             id = 2,
                             city = "Grad",
-                            dateOfBirth = "2/2/2020",
+                            dateOfBirth = "02/02/1982",
                             email = "email",
                             firstName = "Novak",
                             isSpecialist = false,
-                            ordination = "Ordination 1",
+                            ordination = "Ordination 2",
                             password = "pass",
                             phoneNumber = "123",
                             salary = 200.0,
@@ -166,16 +166,32 @@ namespace HealthClinic.CL.Migrations
                         {
                             id = 3,
                             city = "Grad",
-                            dateOfBirth = "2/2/2020",
+                            dateOfBirth = "02/02/1988",
                             email = "email",
                             firstName = "Milica",
                             isSpecialist = false,
-                            ordination = "Ordination 1",
+                            ordination = "Ordination 3",
                             password = "pass",
                             phoneNumber = "123",
                             salary = 200.0,
                             secondName = "Tadic",
                             speciality = "Cardiology",
+                            uniqueCitizensidentityNumber = "12346"
+                        },
+                        new
+                        {
+                            id = 4,
+                            city = "Grad",
+                            dateOfBirth = "02/02/1988",
+                            email = "email",
+                            firstName = "Jovan",
+                            isSpecialist = false,
+                            ordination = "Ordination 4",
+                            password = "pass",
+                            phoneNumber = "123",
+                            salary = 200.0,
+                            secondName = "Jovanovic",
+                            speciality = "Pulmonology",
                             uniqueCitizensidentityNumber = "12346"
                         });
                 });
@@ -216,7 +232,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
-                            Date = "03/03/2020",
+                            Date = "23/12/2020",
                             DoctorUserId = 1,
                             PatientUserId = 2,
                             RoomId = "room1",
@@ -479,7 +495,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
-                            date = "03/03/2020",
+                            date = "23/12/2020",
                             employeeFirst = "EmployeeName",
                             employeeLast = "EmployeeSurname",
                             employeeid = "2",
@@ -490,7 +506,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 2,
-                            date = "02/02/2020",
+                            date = "22/12/2020",
                             employeeFirst = "EmployeeName",
                             employeeLast = "EmployeeSurname",
                             employeeid = "1",
@@ -501,10 +517,21 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 3,
-                            date = "02/02/2020",
+                            date = "22/12/2020",
                             employeeFirst = "EmployeeName",
                             employeeLast = "EmployeeSurname",
                             employeeid = "3",
+                            isOnDuty = true,
+                            room = "1",
+                            shiftId = 1
+                        },
+                        new
+                        {
+                            id = 4,
+                            date = "23/12/2020",
+                            employeeFirst = "EmployeeName",
+                            employeeLast = "EmployeeSurname",
+                            employeeid = "4",
                             isOnDuty = true,
                             room = "1",
                             shiftId = 1
@@ -916,6 +943,9 @@ namespace HealthClinic.CL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("CancelDateString")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<string>("Date")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -946,7 +976,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
-                            Date = "03/03/2020",
+                            Date = "23/12/2020",
                             DoctorUserId = 1,
                             IsCanceled = false,
                             PatientUserId = 2,
@@ -956,7 +986,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 2,
-                            Date = "03/03/2020",
+                            Date = "23/12/2020",
                             DoctorUserId = 2,
                             IsCanceled = false,
                             PatientUserId = 2,
@@ -966,7 +996,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 3,
-                            Date = "03/03/2020",
+                            Date = "23/12/2020",
                             DoctorUserId = 2,
                             IsCanceled = false,
                             PatientUserId = 1,
@@ -976,7 +1006,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 4,
-                            Date = "03/03/2020",
+                            Date = "23/12/2020",
                             DoctorUserId = 2,
                             IsCanceled = false,
                             PatientUserId = 1,
@@ -986,7 +1016,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 5,
-                            Date = "02/02/2020",
+                            Date = "22/12/2020",
                             DoctorUserId = 1,
                             IsCanceled = false,
                             PatientUserId = 1,
@@ -996,7 +1026,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 6,
-                            Date = "02/02/2020",
+                            Date = "22/12/2020",
                             DoctorUserId = 3,
                             IsCanceled = false,
                             PatientUserId = 2,
@@ -1016,7 +1046,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 8,
-                            Date = "06/12/2020",
+                            Date = "07/12/2020",
                             DoctorUserId = 2,
                             IsCanceled = false,
                             PatientUserId = 1,
@@ -1504,75 +1534,6 @@ namespace HealthClinic.CL.Migrations
                             medicalStaffsSkill = 2,
                             medicalStaffsTechnicality = 4,
                             medicalStaffsWorkingPace = 3,
-                            patientId = 1
-                        },
-                        new
-                        {
-                            id = 3,
-                            appointmentId = 5,
-                            doctorsKnowledge = 4,
-                            doctorsPoliteness = 5,
-                            doctorsProfessionalism = 4,
-                            doctorsSkill = 3,
-                            doctorsTechnicality = 1,
-                            doctorsWorkingPace = 5,
-                            hospitalEnvironment = 1,
-                            hospitalEquipment = 2,
-                            hospitalHygiene = 2,
-                            hospitalPrices = 1,
-                            hospitalWaitingTime = 5,
-                            medicalStaffsKnowledge = 5,
-                            medicalStaffsPoliteness = 2,
-                            medicalStaffsProfessionalism = 3,
-                            medicalStaffsSkill = 1,
-                            medicalStaffsTechnicality = 5,
-                            medicalStaffsWorkingPace = 4,
-                            patientId = 1
-                        },
-                        new
-                        {
-                            id = 4,
-                            appointmentId = 6,
-                            doctorsKnowledge = 5,
-                            doctorsPoliteness = 5,
-                            doctorsProfessionalism = 4,
-                            doctorsSkill = 5,
-                            doctorsTechnicality = 2,
-                            doctorsWorkingPace = 1,
-                            hospitalEnvironment = 1,
-                            hospitalEquipment = 3,
-                            hospitalHygiene = 1,
-                            hospitalPrices = 3,
-                            hospitalWaitingTime = 5,
-                            medicalStaffsKnowledge = 2,
-                            medicalStaffsPoliteness = 2,
-                            medicalStaffsProfessionalism = 3,
-                            medicalStaffsSkill = 2,
-                            medicalStaffsTechnicality = 4,
-                            medicalStaffsWorkingPace = 3,
-                            patientId = 1
-                        },
-                        new
-                        {
-                            id = 5,
-                            appointmentId = 7,
-                            doctorsKnowledge = 4,
-                            doctorsPoliteness = 5,
-                            doctorsProfessionalism = 4,
-                            doctorsSkill = 2,
-                            doctorsTechnicality = 4,
-                            doctorsWorkingPace = 5,
-                            hospitalEnvironment = 1,
-                            hospitalEquipment = 1,
-                            hospitalHygiene = 2,
-                            hospitalPrices = 5,
-                            hospitalWaitingTime = 1,
-                            medicalStaffsKnowledge = 5,
-                            medicalStaffsPoliteness = 2,
-                            medicalStaffsProfessionalism = 1,
-                            medicalStaffsSkill = 3,
-                            medicalStaffsTechnicality = 4,
-                            medicalStaffsWorkingPace = 2,
                             patientId = 1
                         });
                 });

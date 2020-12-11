@@ -15,12 +15,16 @@
     SURVEY_CREATED,
     LOADED_ALL_RATES,
     LOADED_ALL_DOCTOR_RATES,
+    LOADED_APPOINTMENTSURVEY,
+    LOADED_ALL_AVAILABLE_DOCTORS,
+    LOADED_ALL_AVAILABLE_DOCTORS_ERROR,
+    LOADED_ALL_AVAILABLE_APPOINTMENTS,
+    LOADED_ALL_AVAILABLE_APPOINTMENTS_ERROR,
     LOADED_ALL_PATIENT_APPOINTMENTS_INTWODAYS,
     LOADED_ALL_PATIENT_APPOINTMENTS_INFUTURE,
     CANCEL_APPOINTMENT,
     LOADED_ALL_PATIENT_APPOINTMENTS_WITH_SURVEYS,
     LOADED_ALL_PATIENT_APPOINTMENTS_WITHOUT_SURVEYS,
-    LOADED_APPOINTMENTSURVEY
 } from "../types/types"
 
 function addFeedback(state=initialState, action) {
@@ -70,7 +74,9 @@ const initialState = {
     patientAppointmentsWithSurveys: [],
     patientAppointmentsWithoutSurveys: [],
     canceledAppointment: {},
-    allRates: {}
+    allRates: {},
+    availableDoctors: [],
+    availableAppointments: []
 };
 
 
@@ -171,6 +177,16 @@ function reducer(state = initialState, action) {
             return {
                 ...state,
                 doctorRatesList: action.payload
+            };
+        case LOADED_ALL_AVAILABLE_DOCTORS:
+            return {
+                ...state,
+                availableDoctors: action.payload
+            };
+        case LOADED_ALL_AVAILABLE_APPOINTMENTS:
+            return {
+                ...state,
+                availableAppointments: action.payload
             };   
         case LOADED_ALL_PATIENT_APPOINTMENTS_INTWODAYS:
             return {

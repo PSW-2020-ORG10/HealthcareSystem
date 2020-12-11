@@ -5,6 +5,7 @@
  ***********************************************************************/
 
 using HealthClinic.CL.Contoller;
+using HealthClinic.CL.DbContextModel;
 using HealthClinic.CL.Model.Doctor;
 using HealthClinic.CL.Model.Employee;
 using HealthClinic.CL.Model.Hospital;
@@ -41,6 +42,16 @@ namespace HealthClinic.CL.Service
             this._employeesScheduleRepository = employeesScheduleRepository;
             this.regularAppointmentService = new RegularAppointmentService(appointmentRepository, employeesScheduleRepository, this, new PatientsRepository(), new OperationService(operationRepository));
         }
+
+        public DoctorService(MyDbContext context)
+        {
+            this._doctorRepository = new DoctorRepository(context);
+            this._operationRepository = new OperationRepository(context);
+            this._appointmentRepository = new AppointmentRepository(context);
+            this._employeesScheduleRepository = new EmployeesScheduleRepository(context);
+            this.regularAppointmentService = new RegularAppointmentService(_appointmentRepository, _employeesScheduleRepository, this, new PatientsRepository(context), new OperationService(_operationRepository));
+        }
+
         public override List<DoctorUser> GetAll()
         {
             return _doctorRepository.GetAll();
@@ -252,7 +263,7 @@ namespace HealthClinic.CL.Service
             return false;
         }
 
-        private List<DoctorUser> GetDoctorsBySpecialty(string specialty)
+        public List<DoctorUser> GetDoctorsBySpecialty(string specialty)
         {
             return GetAll().FindAll(doctor => UtilityMethods.CheckForSpecialty(doctor, specialty));
         }

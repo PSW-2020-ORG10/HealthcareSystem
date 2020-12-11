@@ -26,12 +26,18 @@
     ADVANCED_SEARCH_PATIENT_APPOINTMENTS,
     ADVANCED_SEARCH_APPOINTMENTS_ERROR,
     LOADED_ALL_PATIENT_APPOINTMENTS,
+    OBSERVE_PATIENT_APPOINTMENTS_ERROR,
+    LOADED_ALL_AVAILABLE_DOCTORS,
+    LOADED_ALL_AVAILABLE_DOCTORS_ERROR,
+    LOADED_ALL_AVAILABLE_APPOINTMENTS,
+    LOADED_ALL_AVAILABLE_APPOINTMENTS_ERROR,
+    APPOINTMENT_SCHEDULED,
+    APPOINTMENT_SCHEDULED_ERROR,
     LOADED_ALL_PATIENT_APPOINTMENTS_INTWODAYS,
     LOADED_ALL_PATIENT_APPOINTMENTS_INFUTURE,
     CANCEL_APPOINTMENT,
     LOADED_ALL_PATIENT_APPOINTMENTS_WITH_SURVEYS,
     LOADED_ALL_PATIENT_APPOINTMENTS_WITHOUT_SURVEYS,
-    OBSERVE_PATIENT_APPOINTMENTS_ERROR
 } from "../types/types"
 import axios from "axios";
 
@@ -360,6 +366,23 @@ export const loadedAllDoctorRates = () => async (dispatch) => {
     }
 };
 
+export const loadedAllAvailableDoctors = (specialty, date, patientId) => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.get("http://localhost:60198/api/doctor/available?specialty=" + specialty+ "&date=" + date + "&patientId=" + patientId);
+        debugger;
+        dispatch({
+            type: LOADED_ALL_AVAILABLE_DOCTORS,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: LOADED_ALL_AVAILABLE_DOCTORS_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
 export const loadedAllPatientAppointmentsInTwoDays = () => async (dispatch) => {
     try {
         debugger;
@@ -377,6 +400,22 @@ export const loadedAllPatientAppointmentsInTwoDays = () => async (dispatch) => {
     }
 };
 
+export const loadedAllAvailableAppointments = (dto) => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.post("http://localhost:60198/api/doctorappointment/availableappointments", dto);
+        debugger;
+        dispatch({
+            type: LOADED_ALL_AVAILABLE_APPOINTMENTS,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: LOADED_ALL_AVAILABLE_APPOINTMENTS_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
 export const loadedAllPatientAppointmentsInFuture = () => async (dispatch) => {
     try {
         debugger;
@@ -389,6 +428,23 @@ export const loadedAllPatientAppointmentsInFuture = () => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: OBSERVE_PATIENT_APPOINTMENTS_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const appointmentScheduled = (appointment) => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.post("http://localhost:60198/api/doctorappointment", appointment);
+        debugger;
+        dispatch({
+            type: APPOINTMENT_SCHEDULED,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: APPOINTMENT_SCHEDULED_ERROR,
             payload: console.log(e),
         });
     }

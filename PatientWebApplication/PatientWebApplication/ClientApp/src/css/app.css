@@ -1,4 +1,32 @@
-﻿/*--------------------------------------------------------------
+﻿#datepickerInput {
+    border: solid grey 1px;
+    width: 400px !important;
+    font-size: 24px;
+    color: grey;
+}
+
+#appointmentTable {
+    height: 350px !important;
+    overflow: scroll;
+    overflow-x: hidden
+}
+
+.modalFooter {
+    display: block !important;
+}
+
+.react-datepicker__header {
+    background-color: #66a4fa;
+}
+
+.react-datepicker__current-month {
+    color: white;
+}
+
+.react-datepicker__day-name {
+    color: white;
+}
+/*--------------------------------------------------------------
 ## Fonts
 --------------------------------------------------------------*/
 @font-face {
