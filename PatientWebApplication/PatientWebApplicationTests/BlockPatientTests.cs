@@ -29,14 +29,6 @@ namespace PatientWebApplicationTests
             patient.ShouldBeNull();
         }
 
-        [Fact]
-        public void Find_Malicious_Patient_Successffuly()
-        {
-            PatientService service = new PatientService(CreateStubRepositoryMalicious(), new Mock<IEmailVerificationService>().Object, new RegularAppointmentService(new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorService(new OperationRepository(), new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorRepository()), new PatientsRepository(), new OperationService(new OperationRepository())));
-            List<PatientUser> patient = service.GetMaliciousPatients();
-            patient.ShouldNotBeNull();
-        }
-
         private static IPatientsRepository CreateStubRepository()
         {
             var stubRepository = new Mock<IPatientsRepository>();
@@ -55,24 +47,7 @@ namespace PatientWebApplicationTests
             }
             ).Returns(blockedPatient);
 
-
             return stubRepository.Object;
         }
-
-        private static IPatientsRepository CreateStubRepositoryMalicious()
-        {
-            var stubRepository = new Mock<IPatientsRepository>();
-
-            var patients = new List<PatientUser>();
-
-            PatientUser maliciousPatient = new PatientUser(1, "Pera2", "Peric", "Male", "1234", "2/2/2020", "123", "212313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null);
-
-            patients.Add(maliciousPatient);
-
-            stubRepository.Setup(m => m.FindOne(1)).Returns(patients.SingleOrDefault(patientUser => patientUser.id == 1));
-
-            return stubRepository.Object;
-        }
-
     }
 }
