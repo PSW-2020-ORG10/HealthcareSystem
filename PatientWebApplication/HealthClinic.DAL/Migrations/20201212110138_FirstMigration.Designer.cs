@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HealthClinic.CL.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20201205212826_FirstMigration")]
+    [Migration("20201212110138_FirstMigration")]
     partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -83,103 +83,6 @@ namespace HealthClinic.CL.Migrations
                         });
                 });
 
-            modelBuilder.Entity("HealthClinic.CL.Model.Doctor.DoctorUser", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("city")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("dateOfBirth")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("email")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("firstName")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<bool>("isSpecialist")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("ordination")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("password")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("phoneNumber")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<double>("salary")
-                        .HasColumnType("double");
-
-                    b.Property<string>("secondName")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("speciality")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("uniqueCitizensidentityNumber")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.HasKey("id");
-
-                    b.ToTable("Doctors");
-
-                    b.HasData(
-                        new
-                        {
-                            id = 1,
-                            city = "Grad",
-                            dateOfBirth = "2/2/2020",
-                            email = "email",
-                            firstName = "Konstantin",
-                            isSpecialist = false,
-                            ordination = "Ordination 1",
-                            password = "pass",
-                            phoneNumber = "123",
-                            salary = 200.0,
-                            secondName = "Davidovic",
-                            speciality = "Cardiology",
-                            uniqueCitizensidentityNumber = "1234"
-                        },
-                        new
-                        {
-                            id = 2,
-                            city = "Grad",
-                            dateOfBirth = "2/2/2020",
-                            email = "email",
-                            firstName = "Novak",
-                            isSpecialist = false,
-                            ordination = "Ordination 1",
-                            password = "pass",
-                            phoneNumber = "123",
-                            salary = 200.0,
-                            secondName = "Maric",
-                            speciality = "Pulmonology",
-                            uniqueCitizensidentityNumber = "12345"
-                        },
-                        new
-                        {
-                            id = 3,
-                            city = "Grad",
-                            dateOfBirth = "2/2/2020",
-                            email = "email",
-                            firstName = "Milica",
-                            isSpecialist = false,
-                            ordination = "Ordination 1",
-                            password = "pass",
-                            phoneNumber = "123",
-                            salary = 200.0,
-                            secondName = "Tadic",
-                            speciality = "Cardiology",
-                            uniqueCitizensidentityNumber = "12346"
-                        });
-                });
-
             modelBuilder.Entity("HealthClinic.CL.Model.Doctor.Operation", b =>
                 {
                     b.Property<int>("id")
@@ -216,7 +119,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
-                            Date = "03/03/2020",
+                            Date = "23/12/2020",
                             DoctorUserId = 1,
                             PatientUserId = 2,
                             RoomId = "room1",
@@ -442,22 +345,60 @@ namespace HealthClinic.CL.Migrations
                         });
                 });
 
+            modelBuilder.Entity("HealthClinic.CL.Model.Employee.EmployeeUser", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("city")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("dateOfBirth")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("email")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("firstName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("password")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("phoneNumber")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<double>("salary")
+                        .HasColumnType("double");
+
+                    b.Property<string>("secondName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("uniqueCitizensidentityNumber")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("id");
+
+                    b.ToTable("EmployeeUser");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("EmployeeUser");
+                });
+
             modelBuilder.Entity("HealthClinic.CL.Model.Employee.Schedule", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
                     b.Property<string>("date")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("employeeFirst")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("employeeLast")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("employeeid")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<bool>("isOnDuty")
@@ -471,6 +412,8 @@ namespace HealthClinic.CL.Migrations
 
                     b.HasKey("id");
 
+                    b.HasIndex("EmployeeId");
+
                     b.HasIndex("shiftId");
 
                     b.ToTable("Schedules");
@@ -479,32 +422,170 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
-                            date = "03/03/2020",
-                            employeeFirst = "EmployeeName",
-                            employeeLast = "EmployeeSurname",
-                            employeeid = "2",
+                            EmployeeId = 1,
+                            date = "08/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 3
+                        },
+                        new
+                        {
+                            id = 2,
+                            EmployeeId = 1,
+                            date = "09/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 3
+                        },
+                        new
+                        {
+                            id = 3,
+                            EmployeeId = 1,
+                            date = "10/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 3
+                        },
+                        new
+                        {
+                            id = 4,
+                            EmployeeId = 1,
+                            date = "11/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 3
+                        },
+                        new
+                        {
+                            id = 5,
+                            EmployeeId = 1,
+                            date = "12/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 3
+                        },
+                        new
+                        {
+                            id = 6,
+                            EmployeeId = 1,
+                            date = "13/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 3
+                        },
+                        new
+                        {
+                            id = 7,
+                            EmployeeId = 1,
+                            date = "14/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 3
+                        },
+                        new
+                        {
+                            id = 8,
+                            EmployeeId = 1,
+                            date = "15/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 3
+                        },
+                        new
+                        {
+                            id = 9,
+                            EmployeeId = 1,
+                            date = "16/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 3
+                        },
+                        new
+                        {
+                            id = 10,
+                            EmployeeId = 1,
+                            date = "17/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 3
+                        },
+                        new
+                        {
+                            id = 11,
+                            EmployeeId = 1,
+                            date = "18/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 3
+                        },
+                        new
+                        {
+                            id = 12,
+                            EmployeeId = 1,
+                            date = "19/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 3
+                        },
+                        new
+                        {
+                            id = 13,
+                            EmployeeId = 1,
+                            date = "20/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 3
+                        },
+                        new
+                        {
+                            id = 14,
+                            EmployeeId = 1,
+                            date = "21/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 3
+                        },
+                        new
+                        {
+                            id = 15,
+                            EmployeeId = 1,
+                            date = "23/12/2020",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 3
+                        },
+                        new
+                        {
+                            id = 16,
+                            EmployeeId = 2,
+                            date = "23/12/2020",
                             isOnDuty = true,
                             room = "1",
                             shiftId = 1
                         },
                         new
                         {
-                            id = 2,
-                            date = "02/02/2020",
-                            employeeFirst = "EmployeeName",
-                            employeeLast = "EmployeeSurname",
-                            employeeid = "1",
+                            id = 17,
+                            EmployeeId = 1,
+                            date = "22/12/2020",
                             isOnDuty = true,
                             room = "1",
                             shiftId = 2
                         },
                         new
                         {
-                            id = 3,
-                            date = "02/02/2020",
-                            employeeFirst = "EmployeeName",
-                            employeeLast = "EmployeeSurname",
-                            employeeid = "3",
+                            id = 18,
+                            EmployeeId = 3,
+                            date = "22/12/2020",
+                            isOnDuty = true,
+                            room = "1",
+                            shiftId = 1
+                        },
+                        new
+                        {
+                            id = 19,
+                            EmployeeId = 4,
+                            date = "23/12/2020",
                             isOnDuty = true,
                             room = "1",
                             shiftId = 1
@@ -539,6 +620,12 @@ namespace HealthClinic.CL.Migrations
                             id = 2,
                             endTime = "12:30",
                             startTime = "12:00"
+                        },
+                        new
+                        {
+                            id = 3,
+                            endTime = "19:00",
+                            startTime = "08:00"
                         });
                 });
 
@@ -711,59 +798,6 @@ namespace HealthClinic.CL.Migrations
                     b.ToTable("ManagerNotification");
                 });
 
-            modelBuilder.Entity("HealthClinic.CL.Model.Manager.ManagerUser", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("city")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("dateOfBirth")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("email")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("firstName")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("password")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("phoneNumber")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<double>("salary")
-                        .HasColumnType("double");
-
-                    b.Property<string>("secondName")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("uniqueCitizensidentityNumber")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.HasKey("id");
-
-                    b.ToTable("ManagerUsers");
-
-                    b.HasData(
-                        new
-                        {
-                            id = 17,
-                            city = "Grad",
-                            dateOfBirth = "22/04/1993",
-                            email = "email",
-                            firstName = "Manager Name",
-                            password = "pass",
-                            phoneNumber = "123",
-                            salary = 200.0,
-                            secondName = "Manager Surname",
-                            uniqueCitizensidentityNumber = "1234"
-                        });
-                });
-
             modelBuilder.Entity("HealthClinic.CL.Model.Orders.DoctorsOrder", b =>
                 {
                     b.Property<int>("id")
@@ -916,6 +950,9 @@ namespace HealthClinic.CL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("CancelDateString")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<string>("Date")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -946,7 +983,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 1,
-                            Date = "03/03/2020",
+                            Date = "23/12/2020",
                             DoctorUserId = 1,
                             IsCanceled = false,
                             PatientUserId = 2,
@@ -956,7 +993,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 2,
-                            Date = "03/03/2020",
+                            Date = "23/12/2020",
                             DoctorUserId = 2,
                             IsCanceled = false,
                             PatientUserId = 2,
@@ -966,7 +1003,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 3,
-                            Date = "03/03/2020",
+                            Date = "23/12/2020",
                             DoctorUserId = 2,
                             IsCanceled = false,
                             PatientUserId = 1,
@@ -976,7 +1013,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 4,
-                            Date = "03/03/2020",
+                            Date = "23/12/2020",
                             DoctorUserId = 2,
                             IsCanceled = false,
                             PatientUserId = 1,
@@ -986,7 +1023,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 5,
-                            Date = "02/02/2020",
+                            Date = "22/12/2020",
                             DoctorUserId = 1,
                             IsCanceled = false,
                             PatientUserId = 1,
@@ -996,7 +1033,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 6,
-                            Date = "02/02/2020",
+                            Date = "22/12/2020",
                             DoctorUserId = 3,
                             IsCanceled = false,
                             PatientUserId = 2,
@@ -1016,7 +1053,7 @@ namespace HealthClinic.CL.Migrations
                         new
                         {
                             id = 8,
-                            Date = "06/12/2020",
+                            Date = "07/12/2020",
                             DoctorUserId = 2,
                             IsCanceled = false,
                             PatientUserId = 1,
@@ -1201,6 +1238,9 @@ namespace HealthClinic.CL.Migrations
                     b.Property<bool>("guest")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<bool>("isBlocked")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<bool>("isMarried")
                         .HasColumnType("tinyint(1)");
 
@@ -1245,6 +1285,7 @@ namespace HealthClinic.CL.Migrations
                             firstName = "Pera2",
                             gender = "Male",
                             guest = false,
+                            isBlocked = false,
                             isMarried = false,
                             isRegisteredBySecretary = false,
                             isVerified = false,
@@ -1267,6 +1308,7 @@ namespace HealthClinic.CL.Migrations
                             firstName = "Pera3",
                             gender = "Female",
                             guest = false,
+                            isBlocked = false,
                             isMarried = false,
                             isRegisteredBySecretary = false,
                             isVerified = false,
@@ -1275,6 +1317,52 @@ namespace HealthClinic.CL.Migrations
                             password = "pass",
                             phoneNumber = "123",
                             secondName = "Peric",
+                            uniqueCitizensidentityNumber = "1234"
+                        },
+                        new
+                        {
+                            id = 3,
+                            allergie = "Alergija",
+                            bornIn = "Grad2",
+                            city = "Grad",
+                            dateOfBirth = "2/2/2020",
+                            email = "email",
+                            exLastname = "",
+                            firstName = "Stefan",
+                            gender = "Male",
+                            guest = false,
+                            isBlocked = false,
+                            isMarried = false,
+                            isRegisteredBySecretary = false,
+                            isVerified = false,
+                            medicalIdNumber = "212313",
+                            parentName = "Roditelj",
+                            password = "pass",
+                            phoneNumber = "123",
+                            secondName = "Lelic",
+                            uniqueCitizensidentityNumber = "1234"
+                        },
+                        new
+                        {
+                            id = 4,
+                            allergie = "Alergija",
+                            bornIn = "Grad2",
+                            city = "Grad",
+                            dateOfBirth = "2/2/2020",
+                            email = "email",
+                            exLastname = "",
+                            firstName = "Marko",
+                            gender = "Female",
+                            guest = false,
+                            isBlocked = false,
+                            isMarried = false,
+                            isRegisteredBySecretary = false,
+                            isVerified = false,
+                            medicalIdNumber = "2112313",
+                            parentName = "Roditelj",
+                            password = "pass",
+                            phoneNumber = "123",
+                            secondName = "Lazarevic",
                             uniqueCitizensidentityNumber = "1234"
                         });
                 });
@@ -1505,75 +1593,6 @@ namespace HealthClinic.CL.Migrations
                             medicalStaffsTechnicality = 4,
                             medicalStaffsWorkingPace = 3,
                             patientId = 1
-                        },
-                        new
-                        {
-                            id = 3,
-                            appointmentId = 5,
-                            doctorsKnowledge = 4,
-                            doctorsPoliteness = 5,
-                            doctorsProfessionalism = 4,
-                            doctorsSkill = 3,
-                            doctorsTechnicality = 1,
-                            doctorsWorkingPace = 5,
-                            hospitalEnvironment = 1,
-                            hospitalEquipment = 2,
-                            hospitalHygiene = 2,
-                            hospitalPrices = 1,
-                            hospitalWaitingTime = 5,
-                            medicalStaffsKnowledge = 5,
-                            medicalStaffsPoliteness = 2,
-                            medicalStaffsProfessionalism = 3,
-                            medicalStaffsSkill = 1,
-                            medicalStaffsTechnicality = 5,
-                            medicalStaffsWorkingPace = 4,
-                            patientId = 1
-                        },
-                        new
-                        {
-                            id = 4,
-                            appointmentId = 6,
-                            doctorsKnowledge = 5,
-                            doctorsPoliteness = 5,
-                            doctorsProfessionalism = 4,
-                            doctorsSkill = 5,
-                            doctorsTechnicality = 2,
-                            doctorsWorkingPace = 1,
-                            hospitalEnvironment = 1,
-                            hospitalEquipment = 3,
-                            hospitalHygiene = 1,
-                            hospitalPrices = 3,
-                            hospitalWaitingTime = 5,
-                            medicalStaffsKnowledge = 2,
-                            medicalStaffsPoliteness = 2,
-                            medicalStaffsProfessionalism = 3,
-                            medicalStaffsSkill = 2,
-                            medicalStaffsTechnicality = 4,
-                            medicalStaffsWorkingPace = 3,
-                            patientId = 1
-                        },
-                        new
-                        {
-                            id = 5,
-                            appointmentId = 7,
-                            doctorsKnowledge = 4,
-                            doctorsPoliteness = 5,
-                            doctorsProfessionalism = 4,
-                            doctorsSkill = 2,
-                            doctorsTechnicality = 4,
-                            doctorsWorkingPace = 5,
-                            hospitalEnvironment = 1,
-                            hospitalEquipment = 1,
-                            hospitalHygiene = 2,
-                            hospitalPrices = 5,
-                            hospitalWaitingTime = 1,
-                            medicalStaffsKnowledge = 5,
-                            medicalStaffsPoliteness = 2,
-                            medicalStaffsProfessionalism = 1,
-                            medicalStaffsSkill = 3,
-                            medicalStaffsTechnicality = 4,
-                            medicalStaffsWorkingPace = 2,
-                            patientId = 1
                         });
                 });
 
@@ -1610,60 +1629,133 @@ namespace HealthClinic.CL.Migrations
                         });
                 });
 
-            modelBuilder.Entity("HealthClinic.CL.Model.Secretary.SecretaryUser", b =>
+            modelBuilder.Entity("HealthClinic.CL.Model.Doctor.DoctorUser", b =>
                 {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.HasBaseType("HealthClinic.CL.Model.Employee.EmployeeUser");
 
-                    b.Property<string>("city")
+                    b.Property<bool>("isSpecialist")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("ordination")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("dateOfBirth")
+                    b.Property<string>("speciality")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("email")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("firstName")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("password")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("phoneNumber")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("room")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<double>("salary")
-                        .HasColumnType("double");
-
-                    b.Property<string>("secondName")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("uniqueCitizensidentityNumber")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.HasKey("id");
-
-                    b.ToTable("SecretaryUsers");
+                    b.HasDiscriminator().HasValue("DoctorUser");
 
                     b.HasData(
                         new
                         {
                             id = 1,
                             city = "Grad",
+                            dateOfBirth = "02/02/1975",
+                            email = "email",
+                            firstName = "Konstantin",
+                            password = "pass",
+                            phoneNumber = "123",
+                            salary = 200.0,
+                            secondName = "Davidovic",
+                            uniqueCitizensidentityNumber = "1234",
+                            isSpecialist = false,
+                            ordination = "Ordination 1",
+                            speciality = "Cardiology"
+                        },
+                        new
+                        {
+                            id = 2,
+                            city = "Grad",
+                            dateOfBirth = "02/02/1982",
+                            email = "email",
+                            firstName = "Novak",
+                            password = "pass",
+                            phoneNumber = "123",
+                            salary = 200.0,
+                            secondName = "Maric",
+                            uniqueCitizensidentityNumber = "12345",
+                            isSpecialist = false,
+                            ordination = "Ordination 2",
+                            speciality = "Pulmonology"
+                        },
+                        new
+                        {
+                            id = 3,
+                            city = "Grad",
+                            dateOfBirth = "02/02/1988",
+                            email = "email",
+                            firstName = "Milica",
+                            password = "pass",
+                            phoneNumber = "123",
+                            salary = 200.0,
+                            secondName = "Tadic",
+                            uniqueCitizensidentityNumber = "12346",
+                            isSpecialist = false,
+                            ordination = "Ordination 3",
+                            speciality = "Cardiology"
+                        },
+                        new
+                        {
+                            id = 4,
+                            city = "Grad",
+                            dateOfBirth = "02/02/1988",
+                            email = "email",
+                            firstName = "Jovan",
+                            password = "pass",
+                            phoneNumber = "123",
+                            salary = 200.0,
+                            secondName = "Jovanovic",
+                            uniqueCitizensidentityNumber = "12346",
+                            isSpecialist = false,
+                            ordination = "Ordination 4",
+                            speciality = "Pulmonology"
+                        });
+                });
+
+            modelBuilder.Entity("HealthClinic.CL.Model.Manager.ManagerUser", b =>
+                {
+                    b.HasBaseType("HealthClinic.CL.Model.Employee.EmployeeUser");
+
+                    b.HasDiscriminator().HasValue("ManagerUser");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 17,
+                            city = "Grad",
+                            dateOfBirth = "22/04/1993",
+                            email = "email",
+                            firstName = "Manager Name",
+                            password = "pass",
+                            phoneNumber = "123",
+                            salary = 200.0,
+                            secondName = "Manager Surname",
+                            uniqueCitizensidentityNumber = "1234"
+                        });
+                });
+
+            modelBuilder.Entity("HealthClinic.CL.Model.Secretary.SecretaryUser", b =>
+                {
+                    b.HasBaseType("HealthClinic.CL.Model.Employee.EmployeeUser");
+
+                    b.Property<string>("room")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasDiscriminator().HasValue("SecretaryUser");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 162,
+                            city = "Grad",
                             dateOfBirth = "12/12/2012",
                             email = "email",
                             firstName = "Secretary Name",
                             password = "pass",
                             phoneNumber = "123",
-                            room = "Room",
                             salary = 133.0,
                             secondName = "Secretary Surname",
-                            uniqueCitizensidentityNumber = "1234"
+                            uniqueCitizensidentityNumber = "1234",
+                            room = "Room"
                         });
                 });
 
@@ -1796,6 +1888,12 @@ namespace HealthClinic.CL.Migrations
 
             modelBuilder.Entity("HealthClinic.CL.Model.Employee.Schedule", b =>
                 {
+                    b.HasOne("HealthClinic.CL.Model.Employee.EmployeeUser", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("HealthClinic.CL.Model.Employee.Shift", "shift")
                         .WithMany()
                         .HasForeignKey("shiftId")

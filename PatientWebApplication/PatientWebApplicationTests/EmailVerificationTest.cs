@@ -18,7 +18,7 @@ namespace PatientWebApplicationTests
         public void Sends_verification_email()
         {
             var mockVerify = new Mock<IEmailVerificationService>();
-            PatientService patientService = new PatientService(CreateStubRepository(), mockVerify.Object);
+            PatientService patientService = new PatientService(CreateStubRepository(), mockVerify.Object, new RegularAppointmentService(new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorService(new OperationRepository(), new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorRepository()), new PatientsRepository(), new OperationService(new OperationRepository())));
 
             PatientUser patient1 = patientService.Create(new PatientDto("Pera2", "Peric", "Male", "1234", "11/11/2000", "1231412", "21312312", "Alergija", "Grad", "email@gmail.com", "pass", false, "Grad2", "Roditelj", "", ""));
 
@@ -29,7 +29,7 @@ namespace PatientWebApplicationTests
         public void Validates_registered_patient()
         {
             var mockVerify = new Mock<IEmailVerificationService>();
-            PatientService patientService = new PatientService(CreateStubRepository(), mockVerify.Object);
+            PatientService patientService = new PatientService(CreateStubRepository(), mockVerify.Object, new RegularAppointmentService(new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorService(new OperationRepository(), new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorRepository()), new PatientsRepository(), new OperationService(new OperationRepository())));
 
             PatientUser patient = patientService.Validate(1);
 

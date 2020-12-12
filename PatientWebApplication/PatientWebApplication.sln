@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthClinic.CL", "HealthCl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatientWebApplicationTests", "PatientWebApplicationTests\PatientWebApplicationTests.csproj", "{C222DD74-E9CE-4CC1-85CD-79C11CF68D64}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatientWebApplicationIntegrationTests", "PatientWebApplicationIntegrationTests\PatientWebApplicationIntegrationTests.csproj", "{3BD842B8-0651-4F8E-A2C3-40A35DD239E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{C222DD74-E9CE-4CC1-85CD-79C11CF68D64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C222DD74-E9CE-4CC1-85CD-79C11CF68D64}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C222DD74-E9CE-4CC1-85CD-79C11CF68D64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BD842B8-0651-4F8E-A2C3-40A35DD239E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BD842B8-0651-4F8E-A2C3-40A35DD239E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BD842B8-0651-4F8E-A2C3-40A35DD239E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BD842B8-0651-4F8E-A2C3-40A35DD239E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

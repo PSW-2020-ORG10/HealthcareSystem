@@ -10,7 +10,7 @@ namespace HealthClinic.CL.Adapters
     {
         public DoctorDto DoctorToDoctorDto(DoctorUser doctor)
         {
-            return new DoctorDto(doctor.firstName + " " + doctor.secondName, doctor.speciality);
+            return new DoctorDto(doctor.id, doctor.firstName + " " + doctor.secondName, doctor.speciality);
         }
 
         public List<DoctorDto> ConvertDoctorListToDoctorDtoList(List<DoctorUser> doctors)

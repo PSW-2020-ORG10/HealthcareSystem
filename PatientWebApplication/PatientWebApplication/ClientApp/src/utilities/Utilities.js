@@ -4,7 +4,9 @@ import 'react-toastify/dist/ReactToastify.css';
 export function formatDate(dateString) {
     var date = new Date(Date.parse(dateString));
     var month = date.getMonth() + 1;
-    return date.getDate() + "/" + month + "/" + date.getFullYear();
+    if (date.getDate() < 10) var day = "0" + date.getDate();
+    else var day = date.getDate();
+    return day + "/" + month + "/" + date.getFullYear();
 }
 
 export function showErrorToast() {

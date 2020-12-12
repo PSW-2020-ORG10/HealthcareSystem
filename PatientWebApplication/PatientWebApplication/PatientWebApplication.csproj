@@ -12,9 +12,11 @@
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="9.2.2" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="9.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.9" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="3.1.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.9">
@@ -35,14 +37,18 @@
   <ItemGroup>
     <None Remove="ClientApp\src\components\AllPatientsAppointments.tsx" />
     <None Remove="ClientApp\src\components\AllRates.tsx" />
+    <None Remove="ClientApp\src\components\ChooseAppointmentType.tsx" />
     <None Remove="ClientApp\src\components\CreateSurvey.tsx" />
     <None Remove="ClientApp\src\components\AppointmentReportSimpleSearch.tsx" />
     <None Remove="ClientApp\src\components\DoctorRates.tsx" />
     <None Remove="ClientApp\src\components\AppointmentsAdvanced.tsx" />
+    <None Remove="ClientApp\src\components\MaliciousPatient.tsx" />
     <None Remove="ClientApp\src\components\MyInformation.tsx" />
     <None Remove="ClientApp\src\components\PatientRegister.tsx" />
     <None Remove="ClientApp\src\components\PrescriptionsAdvanced.tsx" />
     <None Remove="ClientApp\src\components\PrescriptionsSimple.tsx" />
+    <None Remove="ClientApp\src\components\RecommendedAppointment.tsx" />
+    <None Remove="ClientApp\src\components\ScheduleAppointment.tsx" />
   </ItemGroup>
 
   <ItemGroup>
@@ -57,14 +63,18 @@
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\components\AllPatientsAppointments.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\AllRates.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\components\ChooseAppointmentType.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\CreateSurvey.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\AppointmentReportSimpleSearch.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\DoctorRates.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\AppointmentsAdvanced.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\components\MaliciousPatient.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\MyInformation.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\PatientRegister.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\PrescriptionsAdvanced.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\PrescriptionsSimple.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\components\RecommendedAppointment.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\components\ScheduleAppointment.tsx" />
   </ItemGroup>
 
   <ItemGroup>

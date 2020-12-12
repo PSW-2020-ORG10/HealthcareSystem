@@ -48,27 +48,26 @@ namespace HealthClinic.CL.Service
 
         private bool isScheduleForDoctor(Schedule schedule, DoctorUser doctor)
         {
-            if (schedule.employeeid.Equals(doctor.id.ToString())) return true;
+            if (schedule.EmployeeId == doctor.id) return true;
             return false;
         }
 
         private Shift getScheduleShiftForDoctor(DoctorUser doctor, string date, Schedule schedule)
         {
             if (isScheduleForDoctor(schedule, doctor) && schedule.date.Equals(date)) return schedule.shift;
-            
             return null;
         }
 
         public Shift getShiftForDoctorForSpecificDay(string date, DoctorUser doctor)
         {
-            List<Schedule> listOfSchedule = _employeesScheduleRepository.GetAll();
-
-            foreach (Schedule schedule in listOfSchedule)
+            if(doctor == null)
             {
-                Shift scheduleShiftForDoctor = getScheduleShiftForDoctor(doctor, date, schedule);
-                if (scheduleShiftForDoctor != null) return scheduleShiftForDoctor;
+                return null;
             }
-
+            foreach (Schedule schedule in _employeesScheduleRepository.GetAll())
+            {
+                if (getScheduleShiftForDoctor(doctor, date, schedule) != null) return getScheduleShiftForDoctor(doctor, date, schedule);
+            }
             return null;
         }
 

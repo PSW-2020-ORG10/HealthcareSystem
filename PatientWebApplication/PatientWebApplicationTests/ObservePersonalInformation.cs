@@ -17,7 +17,7 @@ namespace PatientWebApplicationTests
         public void Find_Patient()
         {
             var mockVerify = new Mock<IEmailVerificationService>();
-            PatientService service = new PatientService(CreateStubRepository(), mockVerify.Object);
+            PatientService service = new PatientService(CreateStubRepository(), mockVerify.Object, new RegularAppointmentService(new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorService(new OperationRepository(), new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorRepository()), new PatientsRepository(), new OperationService(new OperationRepository())));
 
             PatientUser foundPatient = service.GetOne(1);
 
@@ -28,7 +28,7 @@ namespace PatientWebApplicationTests
         public void Find_Not_Patient()
         {
             var mockVerify = new Mock<IEmailVerificationService>();
-            PatientService service = new PatientService(CreateStubRepository(), mockVerify.Object);
+            PatientService service = new PatientService(CreateStubRepository(), mockVerify.Object, new RegularAppointmentService(new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorService(new OperationRepository(), new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorRepository()), new PatientsRepository(), new OperationService(new OperationRepository())));
 
             PatientUser foundPatient = service.GetOne(2);
 

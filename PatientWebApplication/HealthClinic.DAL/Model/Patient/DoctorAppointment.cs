@@ -42,7 +42,7 @@ namespace HealthClinic.CL.Model.Patient
             {
                 return false;
             }
-            return UtilityMethods.CheckIfStringsMatch(this.Date, item.Date) && this.DoctorUserId == item.DoctorUserId && this.PatientUserId == item.PatientUserId && UtilityMethods.CheckIfStringsMatch(this.RoomId, item.RoomId);
+            return UtilityMethods.CheckIfStringsMatch(this.Date, item.Date) && this.DoctorUserId == item.DoctorUserId && this.PatientUserId == item.PatientUserId && UtilityMethods.CheckIfStringsMatch(this.RoomId, item.RoomId) && this.Start == item.Start;
         }
 
     }
