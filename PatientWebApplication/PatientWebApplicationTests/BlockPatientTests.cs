@@ -43,17 +43,17 @@ namespace PatientWebApplicationTests
 
             var patients = new List<PatientUser>();
 
-            PatientUser BlockedPatient = new PatientUser(1, "Pera2", "Peric", "Male", "1234", "2/2/2020", "123", "212313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null);
+            PatientUser blockedPatient = new PatientUser(1, "Pera2", "Peric", "Male", "1234", "2/2/2020", "123", "212313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null);
           
-            patients.Add(BlockedPatient);
+            patients.Add(blockedPatient);
 
-            stubRepository.Setup(m => m.FindOne(1)).Returns(patients.SingleOrDefault(pat => pat.id == 1));
+            stubRepository.Setup(m => m.FindOne(1)).Returns(patients.SingleOrDefault(patientUser => patientUser.id == 1));
             stubRepository.Setup(m => m.BlockPatient(It.IsAny<PatientUser>())).Callback((PatientUser patient) =>
             {
-                PatientUser pat = (patients.SingleOrDefault(pat => pat.id == 1));
-                pat.isBlocked = true;
+                PatientUser patientUser = (patients.SingleOrDefault(patientUser => patientUser.id == 1));
+                patientUser.isBlocked = true;
             }
-            ).Returns(BlockedPatient);
+            ).Returns(blockedPatient);
 
 
             return stubRepository.Object;
@@ -65,11 +65,11 @@ namespace PatientWebApplicationTests
 
             var patients = new List<PatientUser>();
 
-            PatientUser MaliciousPatient = new PatientUser(1, "Pera2", "Peric", "Male", "1234", "2/2/2020", "123", "212313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null);
+            PatientUser maliciousPatient = new PatientUser(1, "Pera2", "Peric", "Male", "1234", "2/2/2020", "123", "212313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null);
 
-            patients.Add(MaliciousPatient);
+            patients.Add(maliciousPatient);
 
-            stubRepository.Setup(m => m.FindOne(1)).Returns(patients.SingleOrDefault(pat => pat.id == 1));
+            stubRepository.Setup(m => m.FindOne(1)).Returns(patients.SingleOrDefault(patientUser => patientUser.id == 1));
 
             return stubRepository.Object;
         }
