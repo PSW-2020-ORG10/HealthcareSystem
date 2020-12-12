@@ -59,6 +59,7 @@ namespace PatientWebApplicationIntegrationTests
             var appointments = await response.Content.ReadAsAsync<List<DoctorAppointment>>();
             appointments.ShouldNotBeEmpty();
         }
+
         [Fact]
         public async Task Schedule_Appointment()
         {

@@ -50,6 +50,13 @@ namespace HealthClinic.CL.Repository
         {
             return dbContext.Patients.SingleOrDefault(PatientUser => PatientUser.id == id);
         }
+
+        public PatientUser BlockPatient(PatientUser patient)
+        {
+            patient.isBlocked = true;
+            dbContext.SaveChanges();
+            return patient;
+        }
     }
 
 }

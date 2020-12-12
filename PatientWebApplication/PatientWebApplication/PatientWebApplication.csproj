@@ -42,6 +42,7 @@
     <None Remove="ClientApp\src\components\AppointmentReportSimpleSearch.tsx" />
     <None Remove="ClientApp\src\components\DoctorRates.tsx" />
     <None Remove="ClientApp\src\components\AppointmentsAdvanced.tsx" />
+    <None Remove="ClientApp\src\components\MaliciousPatient.tsx" />
     <None Remove="ClientApp\src\components\MyInformation.tsx" />
     <None Remove="ClientApp\src\components\PatientRegister.tsx" />
     <None Remove="ClientApp\src\components\PrescriptionsAdvanced.tsx" />
@@ -67,6 +68,7 @@
     <TypeScriptCompile Include="ClientApp\src\components\AppointmentReportSimpleSearch.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\DoctorRates.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\AppointmentsAdvanced.tsx" />
+    <TypeScriptCompile Include="ClientApp\src\components\MaliciousPatient.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\MyInformation.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\PatientRegister.tsx" />
     <TypeScriptCompile Include="ClientApp\src\components\PrescriptionsAdvanced.tsx" />
