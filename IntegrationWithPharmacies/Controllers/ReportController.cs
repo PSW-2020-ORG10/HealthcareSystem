@@ -21,8 +21,7 @@ namespace IntegrationWithPharmacies.Controllers
     [ApiController]
     public class ReportController : ControllerBase
     {
-   
-
+        private String Environment { get; set; }
         private ReportService ReportService { get; set; }
         private DoctorOrderService DoctorOrderService { get; set; }
         private MedicineForOrderingService MedicineService { get; set; }
@@ -34,19 +33,31 @@ namespace IntegrationWithPharmacies.Controllers
             MedicineService = new MedicineForOrderingService(context);
             DoctorOrderService = new DoctorOrderService(context);
             RegistrationInPharmacyService = new RegistrationInPharmacyService(context);
+            Environment = "Local";
         }
 
 
         [HttpPost]
         public IActionResult Post(DateOfOrder date)
         {
-            Random random = new Random();
-            int number = random.Next(1, 100);
-            var sftpService = new SftpService(new NullLogger<SftpService>(), getConfig());
+            if (Environment.Equals("Local"))
+            {
+                return writeInFileSftp(date);
+            }
+            return BadRequest();
+        }
 
-            String complete = @"FileReports\..\Report_" + DateTime.Now.ToString("dd-MM-yyyy") + "_" + number + ".txt";
+        private IActionResult writeInFileSftp(DateOfOrder date)
+        {
+            var sftpService = new SftpService(new NullLogger<SftpService>(), getConfig());
+            String complete = @"FileReports\..\Report_" + DateTime.Now.ToString("dd-MM-yyyy") + "_" + getRandomNumber() + ".txt";
             StringBuilder stringBuilder = new StringBuilder();
 
+            return writeReportSftp(date, sftpService, complete, stringBuilder);
+        }
+
+        private IActionResult writeReportSftp(DateOfOrder date, SftpService sftpService, string complete, StringBuilder stringBuilder)
+        {
             foreach (RegistrationInPharmacy registration in RegistrationInPharmacyService.GetAll())
             {
                 stringBuilder.Append(registration.ApiKey + ";");
@@ -56,61 +67,65 @@ namespace IntegrationWithPharmacies.Controllers
             SendNotificationAboutReport();
             return Ok();
         }
-      
+
+        public int getRandomNumber()
+        {
+            return new Random().Next(1, 100);
+        }
         [HttpPost("http")]
         public IActionResult PostHttp(DateOfOrder date)
         {
-            Random random = new Random();
-            int number = random.Next(1, 100);
+            if (Environment.Equals("Development"))
+            {
+                return writeInFileHttp(date);
+            }
+            return BadRequest();
+        }
+
+        private IActionResult writeInFileHttp(DateOfOrder date)
+        {
             var testFile = @"..\test.txt";
-            String newFile = @"Report;" + DateTime.Now.ToString("dd-MM-yyyy") +"_"+number+ ".txt";
-            String complete = @"FileReports\..\Report_" + DateTime.Now.ToString("dd-MM-yyyy") + "_" + number + ".txt";
+            String complete = @"FileReports\..\Report_" + DateTime.Now.ToString("dd-MM-yyyy") + "_" + getRandomNumber() + ".txt";
             StringBuilder stringBuilder = new StringBuilder();
 
             foreach (RegistrationInPharmacy registration in RegistrationInPharmacyService.GetAll())
             {
                 stringBuilder.Append(registration.ApiKey + ";");
             }
+            return writeReportHttp(date, testFile, complete, stringBuilder);
+        }
+
+        private IActionResult writeReportHttp(DateOfOrder date, string testFile, string complete, StringBuilder stringBuilder)
+        {
             System.IO.FileStream fs = System.IO.File.Create(complete);
             fs.Close();
             System.IO.File.WriteAllText(complete, stringBuilder.ToString() + "!    Report about consumption of medicine\n\n\n" + getReportText(date));
-            
-
-            string[] lines = System.IO.File.ReadAllLines(@"..\TextFile.txt");
-
-            foreach (string line in lines)
-            {
-                // Use a tab to indent each line of the file.
-                Console.WriteLine("\t" + line);
-            }
-
             try
             {
-
-                WebClient client = new WebClient();
-                Uri uri = new Uri(@"http://localhost:8082/download/file/http");
-                client.Credentials = CredentialCache.DefaultCredentials;
-                client.UploadFile(uri, "POST", complete);
-                client.Dispose();
-
-                SendNotificationAboutReport();
+                uploadFile(complete);
                 return Ok(JsonConvert.SerializeObject(testFile));
             }
-            catch(Exception e) {
-             
+            catch (Exception e)
+            {
+
             }
             return Ok();
+        }
+
+        public void uploadFile(String complete)
+        {
+               WebClient client = new WebClient();
+               Uri uri = new Uri(@"http://localhost:8082/download/file/http");
+               client.Credentials = CredentialCache.DefaultCredentials;
+               client.UploadFile(uri, "POST", complete);
+               client.Dispose();
+               SendNotificationAboutReport();
         }
 
 
         [HttpGet("http/recieve")]
         public void GetHttpRecieveFile()
         {
-            /*var client = new RestSharp.RestClient("http://localhost:8082");
-            var request = new RestRequest("/upload/medicine/Panadol");
-            Console.WriteLine("**********************    1 ****************************");
-
-            IRestResponse response = client.Get(request);*/
             using (WebClient webClient = new WebClient())
             {
                 Console.WriteLine("**********************    2 ****************************");
@@ -200,43 +215,33 @@ namespace IntegrationWithPharmacies.Controllers
         {
             try
             {
-                Console.WriteLine("SALJE MEJL");
-                MailMessage mail = new MailMessage();
-                Console.WriteLine("************* 1 ***************");
-
-                SmtpClient SmptServer = new SmtpClient("smtp.gmail.com");
-                Console.WriteLine("************* 2 ***************");
-
-                mail.From = new MailAddress("ourhospital9@gmail.com");
-                Console.WriteLine("************* 3 ***************");
-
-                mail.To.Add("pharmacyisa@gmail.com");
-                Console.WriteLine("************* 4 ***************");
-
-                mail.Subject = "Notification about send file";
-                Console.WriteLine("************* 5 ***************");
-
-                mail.Body = "Body of mail address";
-                Console.WriteLine("************* 6 ***************");
-
-
-                SmptServer.Port = 587;
-                Console.WriteLine("************* 7 ***************");
-
-                SmptServer.Credentials = new System.Net.NetworkCredential("ourhospital9@gmail.com", "hospital.9");
-                Console.WriteLine("************* 8 ***************");
-
-                SmptServer.EnableSsl = true;
-
-                Console.WriteLine("*************  9 ***************");
-
-                SmptServer.Send(mail);
-                Console.WriteLine("*************  10 ***************");
-
+                sendMail();
             }
             catch (SmtpException ex) {
             }
 
+        }
+
+        private static void sendMail()
+        {
+            MailMessage mail = new MailMessage();
+            SmtpClient SmptServer = new SmtpClient("smtp.gmail.com");
+
+            mail.From = new MailAddress("ourhospital9@gmail.com");
+
+            mail.To.Add("pharmacyisa@gmail.com");
+
+            mail.Subject = "Notification about send file";
+
+            mail.Body = "Body of mail address";
+
+            SmptServer.Port = 587;
+
+            SmptServer.Credentials = new System.Net.NetworkCredential("ourhospital9@gmail.com", "hospital.9");
+
+            SmptServer.EnableSsl = true;
+
+            SmptServer.Send(mail);
         }
     }
 

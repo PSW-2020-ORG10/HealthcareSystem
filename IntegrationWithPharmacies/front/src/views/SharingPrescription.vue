@@ -7,17 +7,17 @@
         <div class="container">
 
             <div class="row">
-                <div class="col-25">
-                    <label for="name">Patient's name:</label>
+                <div class="col-15">
+                    <label for="name">Patient:</label>
                 </div>
                 <div class="col-45">
                     <select v-model="selectedPatient">
                         <option v-for="pat in patients" :value="pat" :key="pat.id" v-on:select="showMedId">
-                            {{pat.firstName}}&nbsp;{{pat.secondName}}&nbsp;&nbsp;|MedID: {{pat.medicalIdNumber}}
+                            {{pat.firstName}}&nbsp;{{pat.secondName}}&nbsp;&nbsp;MedID: {{pat.medicalIdNumber}}
                         </option>
 
                     </select>
-                    <hr>
+                   
                  <div v-if="hidden"   Selected: {{selectedPatient}}></div>
                 </div>
                 
@@ -46,11 +46,8 @@
             </div>
 
             <div class="row">
-                <button class="button2 col-25" v-on:click="specification">Show selected medicine specification</button>
-                <div class="col-75" v-for="pharmacy in pharmacies" :key="pharmacy.id">
-                    {{pharmacy.name}}
-                    Apoteka Jankovic 2, Novi Sad
-                </div>
+                <button class="button2" v-on:click="specification">Show selected medicine specification</button>
+                
             </div>
             <div v-if="showSpecification" class="row">
                 <div class="col-25" style="border:thick solid #000000">
@@ -67,8 +64,33 @@
             </div>
 
             <div class="row">
-                <button class="button" v-on:click="send">Send(HTTP)</button>
-                <button class="button" v-on:click="sendSftp">Send(SFTP)</button>
+                <button class="button3" v-on:click="showAvailability">Show availability</button>
+               
+            </div>
+            <div class="row">
+                <table id="customers" v-if="showTable">
+                    <thead>
+                        <tr style="font-weight: bold; ">
+                            <th style="width: 200px;" scope="col">Name of pharmacy</th>
+                            <th style="width: 200px;" scope="col">Medicine</th>
+                            <th style="width: 200px;" scope="col">Quantity</th>
+                            <th style="width: 200px;" scope="col">Avaible</th>
+                            <th style="width: 200px;" scope="col"></th>
+                            <th style="width: 200px;" scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="pharmacy in pharmacies" :key="pharmacy.id">
+                            <td>{{pharmacy}}</td>
+                            <td>{{quantity}}</td>
+                            <td>{{selected}}</td>
+                            <td><div style="background-color:lightgreen">YES</div></td>
+                            <td><button v-on:click="sendSftp($event, pharmacy)">Send(Sftp)</button></td>
+                            <td><button v-on:click="sendHttp($event, pharmacy)">Send(Http)</button></td>
+                        </tr>
+
+                    </tbody>
+                </table>
             </div>
             <div class="row">
                 <label v-if="sent" style="color:lightgreen;font-size:25px;">Successfully sent prescription!</label>
@@ -96,12 +118,40 @@
                 patients: [],
                 selectedPatient: null,
                 hidden: false,
-                medSpecification:""
+                medSpecification: "",
+                showTable : false
+              
             }
         },
         methods: {
-            send: function () {
+          
+            specification: function () {
+                alert(this.selected);
+                this.showSpecification = true;
+                this.medSpecification = this.selected;
+            },
+            //LUPILA SAM PUTANJU U KONTROLERU, TO JE ONO ZA DOBAVLJANJE LIJEKOVA U APOTEKAMA, PROSLEDJUJEM LIJEK I KOLICINU A DOBIJAM APOTEKU ILI IME APOTEKE, SVEJEDNO
+            showAvailability: function () {
+                this.showTable = true;
+                var parametres = {
+                    medication: this.selected,
+                    quantity: this.quantity
+                }
+                this.axios.post('api/sharingPrescription/pharmacyAvailability', parametres)
+                    .then(res => {
+                        this.pharmacies = res.pharmacies;
+                    })
+                    .catch(res=> {
+                        console.log(res);
+                    });
+            }, 
+            showMedId: function () {
+                this.medIdNumber = this.selectedPatient.medicalIdNumber;
+            },
+            //DODALA SAM OVDE I PHARMACY DA SE PROSLEDJUJE
+            sendHttp: function (event, pharmacy) {
                 const data = {
+                    pharmacy: this.pharmacy,
                     name: this.selectedPatient.firstName,
                     surname: this.selectedPatient.secondName,
                     medicalIDNumber: this.selectedPatient.medicalIdNumber,
@@ -120,10 +170,11 @@
                         this.notSent = true;
                         console.log(res);
                     })
-
             },
-            sendSftp: function () {
+            //DODALA SAM OVDE I PHARMACY DA SE PROSLEDJUJE
+             sendSftp: function (event, pharmacy) {
                 const data = {
+                    pharmacy: this.pharmacy,
                     name: this.selectedPatient.firstName,
                     surname: this.selectedPatient.secondName,
                     medicalIDNumber: this.selectedPatient.medicalIdNumber,
@@ -142,29 +193,7 @@
                         this.notSent = true;
                         console.log(res);
                     })
-
             },
-            specification: function () {
-                alert(this.selected);
-                this.showSpecification = true;
-                this.medSpecification = this.selected;
-            },
-            showAvailability: function () {
-                var parametres = {
-                    medication: this.selected,
-                    quantity: this.quantity
-                }
-                this.axios.post('api/sharingPrescription', parametres)
-                    .then(res => {
-                        this.pharmacies = res.pharmacies;
-                    })
-                    .catch(res=> {
-                        console.log(res);
-                    });
-            }, 
-            showMedId: function () {
-                this.medIdNumber = this.selectedPatient.medicalIdNumber;
-            }
 
 
         },
@@ -191,10 +220,38 @@
 
 <style scoped>
     <style >
+
     * {
         box-sizing: content-box;
     }
+    #customers {
+        font-family: Arial, Helvetica, sans-serif;
+    }
 
+        #customers td, #customers th {
+            border: 1px solid #ddd;
+            padding: 8px;
+            background-color: #ddd;
+            font-size: 28px;
+        }
+
+        #customers tr:nth-child(even) {
+            background-color: #ddd;
+            font-size: 28px;
+        }
+
+        #customers tr:hover {
+            background-color: #ddd;
+            font-size: 28px;
+        }
+
+        #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #1D8288;
+            color: white;
+        }
     input[type=text], select, textarea,input[type=number] {
         width: 80%;
         margin: 10px;
@@ -283,7 +340,7 @@
         cursor: pointer;
     }
     .button2 {
-        background-color: #FFEF33;
+        background-color: lightgreen;
         border: double;
         color: white;
         padding: 15px 32px;
@@ -295,4 +352,18 @@
         margin: 4px 2px;
         cursor: pointer;
     }
+    .button3 {
+        background-color: lightgreen;
+        border: double;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 25px;
+        float: initial;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+   
 </style>

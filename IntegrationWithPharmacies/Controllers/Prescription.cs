@@ -7,6 +7,7 @@ namespace IntegrationWithPharmacies.Controllers
 {
     public class Prescription
     {
+        public String Pharmacy { get; set; }
         public String Name { get; set; }
         public String Surname { get; set; }
         public String MedicalIDNumber { get; set; }
