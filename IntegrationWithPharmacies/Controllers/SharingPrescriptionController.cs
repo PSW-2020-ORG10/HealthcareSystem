@@ -26,5 +26,12 @@ namespace IntegrationWithPharmacies.Controllers
             return Ok();
         }
 
+        [HttpGet("http/recieve/{medicine}")]
+        public IActionResult GetMedicineDescription(string medicine)
+        {
+            string response = new ClientScheduledService().SendMessage(medicine).Result;
+            return Ok(response);
+        }
+
     }
 }

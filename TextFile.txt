@@ -1,0 +1,6 @@
+api1;!    Report about consumption of medicine
+
+
+
+
+   Total ordered quatity: 0

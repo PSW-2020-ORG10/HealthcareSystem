@@ -3,6 +3,7 @@ using HealthClinic.CL.Model.ActionsAndBenefits;
 using HealthClinic.CL.Model.Pharmacy;
 using HealthClinic.CL.Service;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -25,7 +26,7 @@ namespace IntegrationWithPharmacies.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-           return Ok(MessageService.GetAll().Where(message => (RegistrationInPharmacyService.GetRegistrationByPharmacyName(GetName(message)) != null)));
+            return Ok(MessageService.GetAll().Where(message => (RegistrationInPharmacyService.GetRegistrationByPharmacyName(GetName(message)) != null)));
         }
      
         private static string GetName(Message message)

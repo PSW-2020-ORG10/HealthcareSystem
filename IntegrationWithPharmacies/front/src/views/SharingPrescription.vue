@@ -60,7 +60,7 @@
             </div>
             <div v-if="showSpecification" class="row">
                 <div class="col-25" style="border:thick solid #000000">
-                    Specifikacija lijeka
+                    {{medicineSpecification}}
                 </div>
             </div>
             <div class="row">
@@ -97,7 +97,8 @@
                 showSpecification: false,
                 selected: null,
                 pharmacies: [], 
-                explanation :""
+                explanation: "",
+                medicineSpecification: ""
             }
         },
         methods: {
@@ -106,6 +107,14 @@
             },
             specification: function () {
                 this.showSpecification = true;
+                this.axios.get('api/sharingPrescription/http/recieve/' + this.selected)
+                    .then(res => {
+                        this.medicineSpecification = res.data;
+                    })
+                    .catch(res => {
+                        console.log(res);
+                    });
+             
             },
             showAvailability: function () {
                 var parametres = {
@@ -120,8 +129,6 @@
                         console.log(res);
                     });
             },
-
-
         },
         mounted() {
             this.axios.get('api/sharingPrescription')

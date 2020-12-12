@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Grpc.Core;
 using HealthClinic.CL.DbContextModel;
 using IntegrationWithPharmacies.Controllers;
+using IntegrationWithPharmacies.Protos;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -39,6 +41,11 @@ namespace IntegrationWithPharmacies
                     builder.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:57942")));
         }
 
+
+
+
+
+        private Server server;
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -68,6 +75,60 @@ namespace IntegrationWithPharmacies
                 }
             });
             app.UseCors("VueCorsPolicy");
+        }
+
+
+
+
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+       /* public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime applicationLifetime)
+        {
+
+            // add following statements
+            app.UseSpaStaticFiles();
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "front";
+                if (env.IsDevelopment())
+                {
+                    // Launch development server for Vue.js
+                    spa.UseVueDevelopmentServer();
+                }
+            });
+            app.UseCors("VueCorsPolicy");
+
+
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+
+            server = new Server
+            {
+                Services = { NetGrpcService.BindService(new NetGrpcServiceImpl()) },
+                Ports = { new ServerPort("localhost", 4111, ServerCredentials.Insecure) }
+            };
+            server.Start();
+
+            applicationLifetime.ApplicationStopping.Register(OnShutdown);
+        }*/
+
+        private void OnShutdown()
+        {
+            if (server != null)
+            {
+                server.ShutdownAsync().Wait();
+            }
+
         }
     }
 }
