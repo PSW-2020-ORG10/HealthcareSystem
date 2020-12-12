@@ -62,7 +62,7 @@ namespace HealthClinic.CL.Model.Patient
             this.parentName = parentName;
             this.exLastname = exLastname;
             this.file = file;
-            isBlocked = false;
+            this.isBlocked = false;
         }
         public PatientUser(int id, string name, string secondname, string gender, string ucin, String date, string phone, String medicalid, String allergie, String city, Boolean guest,
             String email, String password, bool isMarried, string bornIn, string parentName, string file)
@@ -83,7 +83,7 @@ namespace HealthClinic.CL.Model.Patient
             this.parentName = parentName;
             this.exLastname = "";
             this.file = file;
-            isBlocked = false;
+            this.isBlocked = false;
         }
       
 
@@ -107,7 +107,7 @@ namespace HealthClinic.CL.Model.Patient
             this.parentName = parentName;
             this.exLastname = exLastname;
             this.file = file;
-            isBlocked = false;
+            this.isBlocked = false;
         }
         public PatientUser(string name, string secondname, string gender, string ucin, String date, string phone, String allergie, String city, Boolean guest,
            String email, String password, bool isMarried, string bornIn, string parentName, string file)
@@ -128,7 +128,7 @@ namespace HealthClinic.CL.Model.Patient
             this.parentName = parentName;
             this.exLastname = "";
             this.file = file;
-            isBlocked = false;
+            this.isBlocked = false;
         }
 
         public PatientUser(PatientUser patient)

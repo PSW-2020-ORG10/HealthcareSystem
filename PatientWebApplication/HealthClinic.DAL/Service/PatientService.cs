@@ -132,15 +132,22 @@ namespace HealthClinic.CL.Service
             {
                 if (appointment.IsCanceled == true && CheckIfAppointmentsAreInPastOneMonthFromToday(appointment) != null)
                 {
-                    if (dict.ContainsKey(appointment.PatientUserId))
-                        dict[appointment.PatientUserId]++;
-                    else
-                        dict[appointment.PatientUserId] = 1;
+                    GetPatients(dict, appointment);
                 }
             }
             return dict;
         }
-        private DoctorAppointment CheckIfAppointmentsAreInPastOneMonthFromToday(DoctorAppointment appointment)
+
+        private static void GetPatients(Dictionary<int, int> dict, DoctorAppointment appointment)
+        {
+            if (dict.ContainsKey(appointment.PatientUserId))
+                dict[appointment.PatientUserId]++;
+            else
+                dict[appointment.PatientUserId] = 1;
+        }
+
+
+            private DoctorAppointment CheckIfAppointmentsAreInPastOneMonthFromToday(DoctorAppointment appointment)
         {
             return (UtilityMethods.ParseDateInCorrectFormat(appointment.CancelDateString) > DateTime.Now.AddDays(-32)) ? appointment : null;
         }

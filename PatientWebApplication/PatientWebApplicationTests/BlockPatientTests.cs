@@ -43,9 +43,9 @@ namespace PatientWebApplicationTests
 
             var patients = new List<PatientUser>();
 
-            PatientUser patient1 = new PatientUser(1, "Pera2", "Peric", "Male", "1234", "2/2/2020", "123", "212313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null);
+            PatientUser BlockedPatient = new PatientUser(1, "Pera2", "Peric", "Male", "1234", "2/2/2020", "123", "212313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null);
           
-            patients.Add(patient1);
+            patients.Add(BlockedPatient);
 
             stubRepository.Setup(m => m.FindOne(1)).Returns(patients.SingleOrDefault(pat => pat.id == 1));
             stubRepository.Setup(m => m.BlockPatient(It.IsAny<PatientUser>())).Callback((PatientUser patient) =>
@@ -53,7 +53,7 @@ namespace PatientWebApplicationTests
                 PatientUser pat = (patients.SingleOrDefault(pat => pat.id == 1));
                 pat.isBlocked = true;
             }
-            ).Returns(patient1);
+            ).Returns(BlockedPatient);
 
 
             return stubRepository.Object;
@@ -65,9 +65,9 @@ namespace PatientWebApplicationTests
 
             var patients = new List<PatientUser>();
 
-            PatientUser patient1 = new PatientUser(1, "Pera2", "Peric", "Male", "1234", "2/2/2020", "123", "212313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null);
+            PatientUser MaliciousPatient = new PatientUser(1, "Pera2", "Peric", "Male", "1234", "2/2/2020", "123", "212313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null);
 
-            patients.Add(patient1);
+            patients.Add(MaliciousPatient);
 
             stubRepository.Setup(m => m.FindOne(1)).Returns(patients.SingleOrDefault(pat => pat.id == 1));
 
