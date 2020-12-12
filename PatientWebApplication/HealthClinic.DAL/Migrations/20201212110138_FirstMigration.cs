@@ -9,7 +9,7 @@ namespace HealthClinic.CL.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Doctors",
+                name: "EmployeeUser",
                 columns: table => new
                 {
                     id = table.Column<int>(nullable: false)
@@ -23,13 +23,15 @@ namespace HealthClinic.CL.Migrations
                     city = table.Column<string>(nullable: true),
                     email = table.Column<string>(nullable: true),
                     password = table.Column<string>(nullable: true),
-                    isSpecialist = table.Column<bool>(nullable: false),
+                    Discriminator = table.Column<string>(nullable: false),
+                    isSpecialist = table.Column<bool>(nullable: true),
                     ordination = table.Column<string>(nullable: true),
-                    speciality = table.Column<string>(nullable: true)
+                    speciality = table.Column<string>(nullable: true),
+                    room = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Doctors", x => x.id);
+                    table.PrimaryKey("PK_EmployeeUser", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -57,27 +59,6 @@ namespace HealthClinic.CL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ManagersOrders", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ManagerUsers",
-                columns: table => new
-                {
-                    id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    firstName = table.Column<string>(nullable: true),
-                    secondName = table.Column<string>(nullable: true),
-                    uniqueCitizensidentityNumber = table.Column<string>(nullable: true),
-                    dateOfBirth = table.Column<string>(nullable: true),
-                    phoneNumber = table.Column<string>(nullable: true),
-                    salary = table.Column<double>(nullable: false),
-                    city = table.Column<string>(nullable: true),
-                    email = table.Column<string>(nullable: true),
-                    password = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ManagerUsers", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -233,28 +214,6 @@ namespace HealthClinic.CL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SecretaryUsers",
-                columns: table => new
-                {
-                    id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    firstName = table.Column<string>(nullable: true),
-                    secondName = table.Column<string>(nullable: true),
-                    uniqueCitizensidentityNumber = table.Column<string>(nullable: true),
-                    dateOfBirth = table.Column<string>(nullable: true),
-                    phoneNumber = table.Column<string>(nullable: true),
-                    salary = table.Column<double>(nullable: false),
-                    city = table.Column<string>(nullable: true),
-                    email = table.Column<string>(nullable: true),
-                    password = table.Column<string>(nullable: true),
-                    room = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SecretaryUsers", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Shifts",
                 columns: table => new
                 {
@@ -281,9 +240,29 @@ namespace HealthClinic.CL.Migrations
                 {
                     table.PrimaryKey("PK_DoctorNotifications", x => x.id);
                     table.ForeignKey(
-                        name: "FK_DoctorNotifications_Doctors_DoctorUserId",
+                        name: "FK_DoctorNotifications_EmployeeUser_DoctorUserId",
                         column: x => x.DoctorUserId,
-                        principalTable: "Doctors",
+                        principalTable: "EmployeeUser",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ManagerNotification",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Data = table.Column<string>(nullable: true),
+                    ManagerUserId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ManagerNotification", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_ManagerNotification_EmployeeUser_ManagerUserId",
+                        column: x => x.ManagerUserId,
+                        principalTable: "EmployeeUser",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -303,9 +282,9 @@ namespace HealthClinic.CL.Migrations
                 {
                     table.PrimaryKey("PK_Prescriptions", x => x.id);
                     table.ForeignKey(
-                        name: "FK_Prescriptions_Doctors_DoctorId",
+                        name: "FK_Prescriptions_EmployeeUser_DoctorId",
                         column: x => x.DoctorId,
-                        principalTable: "Doctors",
+                        principalTable: "EmployeeUser",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -335,26 +314,6 @@ namespace HealthClinic.CL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ManagerNotification",
-                columns: table => new
-                {
-                    id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Data = table.Column<string>(nullable: true),
-                    ManagerUserId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ManagerNotification", x => x.id);
-                    table.ForeignKey(
-                        name: "FK_ManagerNotification_ManagerUsers_ManagerUserId",
-                        column: x => x.ManagerUserId,
-                        principalTable: "ManagerUsers",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "DoctorAppointments",
                 columns: table => new
                 {
@@ -372,9 +331,9 @@ namespace HealthClinic.CL.Migrations
                 {
                     table.PrimaryKey("PK_DoctorAppointments", x => x.id);
                     table.ForeignKey(
-                        name: "FK_DoctorAppointments_Doctors_DoctorUserId",
+                        name: "FK_DoctorAppointments_EmployeeUser_DoctorUserId",
                         column: x => x.DoctorUserId,
-                        principalTable: "Doctors",
+                        principalTable: "EmployeeUser",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -426,9 +385,9 @@ namespace HealthClinic.CL.Migrations
                 {
                     table.PrimaryKey("PK_Operations", x => x.id);
                     table.ForeignKey(
-                        name: "FK_Operations_Doctors_DoctorUserId",
+                        name: "FK_Operations_EmployeeUser_DoctorUserId",
                         column: x => x.DoctorUserId,
-                        principalTable: "Doctors",
+                        principalTable: "EmployeeUser",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -505,9 +464,7 @@ namespace HealthClinic.CL.Migrations
                 {
                     id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    employeeFirst = table.Column<string>(nullable: true),
-                    employeeLast = table.Column<string>(nullable: true),
-                    employeeid = table.Column<string>(nullable: true),
+                    EmployeeId = table.Column<int>(nullable: false),
                     date = table.Column<string>(nullable: true),
                     isOnDuty = table.Column<bool>(nullable: false),
                     shiftId = table.Column<int>(nullable: false),
@@ -516,6 +473,12 @@ namespace HealthClinic.CL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Schedules", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_Schedules_EmployeeUser_EmployeeId",
+                        column: x => x.EmployeeId,
+                        principalTable: "EmployeeUser",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Schedules_Shifts_shiftId",
                         column: x => x.shiftId,
@@ -563,9 +526,9 @@ namespace HealthClinic.CL.Migrations
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Equipment_Doctors_doctorId",
+                        name: "FK_Equipment_EmployeeUser_doctorId",
                         column: x => x.doctorId,
-                        principalTable: "Doctors",
+                        principalTable: "EmployeeUser",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -682,19 +645,34 @@ namespace HealthClinic.CL.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Doctors",
-                columns: new[] { "id", "city", "dateOfBirth", "email", "firstName", "isSpecialist", "ordination", "password", "phoneNumber", "salary", "secondName", "speciality", "uniqueCitizensidentityNumber" },
-                values: new object[,]
-                {
-                    { 1, "Grad", "2/2/2020", "email", "Konstantin", false, "Ordination 1", "pass", "123", 200.0, "Davidovic", "Cardiology", "1234" },
-                    { 2, "Grad", "2/2/2020", "email", "Novak", false, "Ordination 1", "pass", "123", 200.0, "Maric", "Pulmonology", "12345" },
-                    { 3, "Grad", "2/2/2020", "email", "Milica", false, "Ordination 1", "pass", "123", 200.0, "Tadic", "Cardiology", "12346" }
-                });
-
-            migrationBuilder.InsertData(
                 table: "DoctorsOrders",
                 columns: new[] { "id", "DateEnd", "DateStart", "IsFinished", "IsOrdered", "IsUrgent", "ManagersOrderid" },
                 values: new object[] { 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), true, true, false, null });
+
+            migrationBuilder.InsertData(
+                table: "EmployeeUser",
+                columns: new[] { "id", "Discriminator", "city", "dateOfBirth", "email", "firstName", "password", "phoneNumber", "salary", "secondName", "uniqueCitizensidentityNumber" },
+                values: new object[] { 17, "ManagerUser", "Grad", "22/04/1993", "email", "Manager Name", "pass", "123", 200.0, "Manager Surname", "1234" });
+
+            migrationBuilder.InsertData(
+                table: "EmployeeUser",
+                columns: new[] { "id", "Discriminator", "city", "dateOfBirth", "email", "firstName", "password", "phoneNumber", "salary", "secondName", "uniqueCitizensidentityNumber", "isSpecialist", "ordination", "speciality" },
+                values: new object[] { 4, "DoctorUser", "Grad", "02/02/1988", "email", "Jovan", "pass", "123", 200.0, "Jovanovic", "12346", false, "Ordination 4", "Pulmonology" });
+
+            migrationBuilder.InsertData(
+                table: "EmployeeUser",
+                columns: new[] { "id", "Discriminator", "city", "dateOfBirth", "email", "firstName", "password", "phoneNumber", "salary", "secondName", "uniqueCitizensidentityNumber", "room" },
+                values: new object[] { 162, "SecretaryUser", "Grad", "12/12/2012", "email", "Secretary Name", "pass", "123", 133.0, "Secretary Surname", "1234", "Room" });
+
+            migrationBuilder.InsertData(
+                table: "EmployeeUser",
+                columns: new[] { "id", "Discriminator", "city", "dateOfBirth", "email", "firstName", "password", "phoneNumber", "salary", "secondName", "uniqueCitizensidentityNumber", "isSpecialist", "ordination", "speciality" },
+                values: new object[,]
+                {
+                    { 2, "DoctorUser", "Grad", "02/02/1982", "email", "Novak", "pass", "123", 200.0, "Maric", "12345", false, "Ordination 2", "Pulmonology" },
+                    { 3, "DoctorUser", "Grad", "02/02/1988", "email", "Milica", "pass", "123", 200.0, "Tadic", "12346", false, "Ordination 3", "Cardiology" },
+                    { 1, "DoctorUser", "Grad", "02/02/1975", "email", "Konstantin", "pass", "123", 200.0, "Davidovic", "1234", false, "Ordination 1", "Cardiology" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Equipment",
@@ -705,11 +683,6 @@ namespace HealthClinic.CL.Migrations
                 table: "FinishedOrders",
                 column: "id",
                 value: 1);
-
-            migrationBuilder.InsertData(
-                table: "ManagerUsers",
-                columns: new[] { "id", "city", "dateOfBirth", "email", "firstName", "password", "phoneNumber", "salary", "secondName", "uniqueCitizensidentityNumber" },
-                values: new object[] { 17, "Grad", "22/04/1993", "email", "Manager Name", "pass", "123", 200.0, "Manager Surname", "1234" });
 
             migrationBuilder.InsertData(
                 table: "ManagersOrders",
@@ -768,15 +741,11 @@ namespace HealthClinic.CL.Migrations
                 values: new object[] { 1, true, "typeOfRoom" });
 
             migrationBuilder.InsertData(
-                table: "SecretaryUsers",
-                columns: new[] { "id", "city", "dateOfBirth", "email", "firstName", "password", "phoneNumber", "room", "salary", "secondName", "uniqueCitizensidentityNumber" },
-                values: new object[] { 1, "Grad", "12/12/2012", "email", "Secretary Name", "pass", "123", "Room", 133.0, "Secretary Surname", "1234" });
-
-            migrationBuilder.InsertData(
                 table: "Shifts",
                 columns: new[] { "id", "endTime", "startTime" },
                 values: new object[,]
                 {
+                    { 3, "19:00", "08:00" },
                     { 2, "12:30", "12:00" },
                     { 1, "16:00", "14:00" }
                 });
@@ -786,18 +755,18 @@ namespace HealthClinic.CL.Migrations
                 columns: new[] { "id", "CancelDateString", "Date", "DoctorUserId", "IsCanceled", "PatientUserId", "RoomId", "Start" },
                 values: new object[,]
                 {
-                    { 7, null, "07/02/2031", 3, false, 1, "1", new TimeSpan(0, 0, 0, 0, 0) },
-                    { 6, null, "02/02/2020", 3, false, 2, "1", new TimeSpan(0, 12, 15, 0, 0) },
-                    { 2, null, "03/03/2020", 2, false, 2, "1", new TimeSpan(0, 14, 30, 0, 0) },
-                    { 1, null, "03/03/2020", 1, false, 2, "1", new TimeSpan(0, 14, 15, 0, 0) },
+                    { 12, null, "11/11/2010", 2, false, 2, "B3", new TimeSpan(0, 0, 0, 0, 0) },
+                    { 6, null, "22/12/2020", 3, false, 2, "1", new TimeSpan(0, 12, 15, 0, 0) },
+                    { 2, null, "23/12/2020", 2, false, 2, "1", new TimeSpan(0, 14, 30, 0, 0) },
+                    { 1, null, "23/12/2020", 1, false, 2, "1", new TimeSpan(0, 14, 15, 0, 0) },
                     { 10, null, "11/11/2030", 2, false, 1, "1", new TimeSpan(0, 0, 0, 0, 0) },
                     { 9, null, "05/12/2030", 1, false, 1, "1", new TimeSpan(0, 0, 0, 0, 0) },
                     { 8, null, "07/12/2020", 2, false, 1, "1", new TimeSpan(0, 0, 0, 0, 0) },
-                    { 11, null, "14/03/2016", 1, false, 2, "A2", new TimeSpan(0, 0, 0, 0, 0) },
-                    { 5, null, "02/02/2020", 1, false, 1, "1", new TimeSpan(0, 12, 0, 0, 0) },
-                    { 4, null, "03/03/2020", 2, false, 1, "1", new TimeSpan(0, 15, 45, 0, 0) },
-                    { 12, null, "11/11/2010", 2, false, 2, "B3", new TimeSpan(0, 0, 0, 0, 0) },
-                    { 3, null, "03/03/2020", 2, false, 1, "1", new TimeSpan(0, 15, 0, 0, 0) }
+                    { 7, null, "07/02/2031", 3, false, 1, "1", new TimeSpan(0, 0, 0, 0, 0) },
+                    { 5, null, "22/12/2020", 1, false, 1, "1", new TimeSpan(0, 12, 0, 0, 0) },
+                    { 4, null, "23/12/2020", 2, false, 1, "1", new TimeSpan(0, 15, 45, 0, 0) },
+                    { 3, null, "23/12/2020", 2, false, 1, "1", new TimeSpan(0, 15, 0, 0, 0) },
+                    { 11, null, "14/03/2016", 1, false, 2, "A2", new TimeSpan(0, 0, 0, 0, 0) }
                 });
 
             migrationBuilder.InsertData(
@@ -811,9 +780,9 @@ namespace HealthClinic.CL.Migrations
                 values: new object[,]
                 {
                     { 4, new DateTime(2020, 9, 11, 0, 0, 0, 0, DateTimeKind.Unspecified), false, true, false, "Fourth message", 1 },
+                    { 3, new DateTime(2020, 2, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), false, true, false, "Third message", 1 },
                     { 2, new DateTime(2019, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified), false, false, false, "Second message", 1 },
-                    { 1, new DateTime(2020, 11, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), true, true, false, "First message", 1 },
-                    { 3, new DateTime(2020, 2, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), false, true, false, "Third message", 1 }
+                    { 1, new DateTime(2020, 11, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), true, true, false, "First message", 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -821,7 +790,7 @@ namespace HealthClinic.CL.Migrations
                 columns: new[] { "id", "Date", "DoctorUserId", "PatientUserId", "RoomId", "Start", "end" },
                 values: new object[,]
                 {
-                    { 1, "03/03/2020", 1, 2, "room1", new TimeSpan(0, 14, 0, 0, 0), new TimeSpan(0, 15, 0, 0, 0) },
+                    { 1, "23/12/2020", 1, 2, "room1", new TimeSpan(0, 14, 0, 0, 0), new TimeSpan(0, 15, 0, 0, 0) },
                     { 2, "03/10/2020", 2, 1, "room1", new TimeSpan(0, 15, 0, 0, 0), new TimeSpan(0, 15, 15, 0, 0) }
                 });
 
@@ -835,20 +804,36 @@ namespace HealthClinic.CL.Migrations
                 columns: new[] { "id", "DoctorId", "comment", "isUsed", "patientsid" },
                 values: new object[,]
                 {
-                    { 8, 1, "After lunch", true, 1 },
-                    { 6, 1, "When needed", true, 2 },
                     { 5, 1, "Use every day", false, 1 },
+                    { 6, 1, "When needed", true, 2 },
+                    { 8, 1, "After lunch", true, 1 },
                     { 7, 2, "On every 12 hours", true, 1 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Schedules",
-                columns: new[] { "id", "date", "employeeFirst", "employeeLast", "employeeid", "isOnDuty", "room", "shiftId" },
+                columns: new[] { "id", "EmployeeId", "date", "isOnDuty", "room", "shiftId" },
                 values: new object[,]
                 {
-                    { 1, "03/03/2020", "EmployeeName", "EmployeeSurname", "2", true, "1", 1 },
-                    { 3, "02/02/2020", "EmployeeName", "EmployeeSurname", "3", true, "1", 1 },
-                    { 2, "02/02/2020", "EmployeeName", "EmployeeSurname", "1", true, "1", 2 }
+                    { 5, 1, "12/12/2020", true, "Ordination 1", 3 },
+                    { 16, 2, "23/12/2020", true, "1", 1 },
+                    { 18, 3, "22/12/2020", true, "1", 1 },
+                    { 19, 4, "23/12/2020", true, "1", 1 },
+                    { 17, 1, "22/12/2020", true, "1", 2 },
+                    { 1, 1, "08/12/2020", true, "Ordination 1", 3 },
+                    { 2, 1, "09/12/2020", true, "Ordination 1", 3 },
+                    { 15, 1, "23/12/2020", true, "Ordination 1", 3 },
+                    { 14, 1, "21/12/2020", true, "Ordination 1", 3 },
+                    { 3, 1, "10/12/2020", true, "Ordination 1", 3 },
+                    { 12, 1, "19/12/2020", true, "Ordination 1", 3 },
+                    { 11, 1, "18/12/2020", true, "Ordination 1", 3 },
+                    { 10, 1, "17/12/2020", true, "Ordination 1", 3 },
+                    { 9, 1, "16/12/2020", true, "Ordination 1", 3 },
+                    { 8, 1, "15/12/2020", true, "Ordination 1", 3 },
+                    { 7, 1, "14/12/2020", true, "Ordination 1", 3 },
+                    { 6, 1, "13/12/2020", true, "Ordination 1", 3 },
+                    { 4, 1, "11/12/2020", true, "Ordination 1", 3 },
+                    { 13, 1, "20/12/2020", true, "Ordination 1", 3 }
                 });
 
             migrationBuilder.InsertData(
@@ -1001,6 +986,11 @@ namespace HealthClinic.CL.Migrations
                 column: "AppointmentId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Schedules_EmployeeId",
+                table: "Schedules",
+                column: "EmployeeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Schedules_shiftId",
                 table: "Schedules",
                 column: "shiftId");
@@ -1070,16 +1060,10 @@ namespace HealthClinic.CL.Migrations
                 name: "Schedules");
 
             migrationBuilder.DropTable(
-                name: "SecretaryUsers");
-
-            migrationBuilder.DropTable(
                 name: "Surveys");
 
             migrationBuilder.DropTable(
                 name: "ManagersOrders");
-
-            migrationBuilder.DropTable(
-                name: "ManagerUsers");
 
             migrationBuilder.DropTable(
                 name: "Rooms");
@@ -1109,7 +1093,7 @@ namespace HealthClinic.CL.Migrations
                 name: "Patients");
 
             migrationBuilder.DropTable(
-                name: "Doctors");
+                name: "EmployeeUser");
         }
     }
 }
