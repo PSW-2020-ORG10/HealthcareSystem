@@ -110,11 +110,11 @@ namespace HealthClinic.CL.Service
         /// <returns> List of filtered malicious patients. </returns>
         public List<PatientUser> GetMaliciousPatients()
         {
-            Dictionary<int,int> dict = new Dictionary<int, int>();
-            List<PatientUser> maliciousPatients = new List<PatientUser>();
-            List<DoctorAppointment> appointments = _regularAppointmentService.GetAll();
-            dict = GetCanceledAppointmentsInLastMonth(appointments);
-            return GetValidPatientsInLastMonth(dict);
+           // Dictionary<int,int> dict = new Dictionary<int, int>();
+           // List<PatientUser> maliciousPatients = new List<PatientUser>();
+           // List<DoctorAppointment> appointments = _regularAppointmentService.GetAll();
+           // dict = GetCanceledAppointmentsInLastMonth(appointments);
+            return GetValidPatientsInLastMonth(GetCanceledAppointmentsInLastMonth(_regularAppointmentService.GetAll()));
         }
 
         private List<PatientUser> GetValidPatientsInLastMonth(Dictionary<int, int> dict) {
