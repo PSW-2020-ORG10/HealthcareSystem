@@ -16,12 +16,24 @@ namespace HealthClinic.CL.Repository
     public class AppointmentRepository : IAppointmentRepository
     {
         private readonly MyDbContext dbContext;
+        public AppointmentRepository(MyDbContext context)
+        {
+            this.dbContext = context;
+        }
+
         public AppointmentRepository()
         {
             this.dbContext = new MyDbContext(new DbContextOptionsBuilder<MyDbContext>().UseMySql("Server=localhost;port=3306;Database=MYSQLHealtcareDB;user=root;password=root").UseLazyLoadingProxies().Options);
         }
 
         public DoctorAppointment New(DoctorAppointment appointment)
+        {
+            dbContext.DoctorAppointments.Add(appointment);
+            dbContext.SaveChanges();
+            return appointment;
+        }
+
+        public DoctorAppointment Create(DoctorAppointment appointment)
         {
             dbContext.DoctorAppointments.Add(appointment);
             dbContext.SaveChanges();

@@ -10,9 +10,8 @@ namespace HealthClinic.CL.Model.Employee
 {
     public class Schedule : Entity
     {
-        public string employeeFirst { get; set; }
-        public string employeeLast { get; set; }
-        public string employeeid { get; set; }
+        public virtual EmployeeUser Employee { get; set; }
+        public int EmployeeId { get; set; }
 
         public string date { get; set; }
         public bool isOnDuty { get; set; }
@@ -23,30 +22,22 @@ namespace HealthClinic.CL.Model.Employee
         public string room { get; set; }
         public Schedule() : base() { }
 
-
-        public Schedule(int id, string employeeid, string date, bool isOnDuty, string employeeFirst, string employeeLast, Shift shift, string room) : base(id)
+        public Schedule(int id, int employeeId, string date, bool isOnDuty, int shiftId, string room) : base(id)
         {
-            this.employeeid = employeeid;
+            this.EmployeeId = employeeId;
             this.date = date;
             this.isOnDuty = isOnDuty;
-            this.employeeFirst = employeeFirst;
-            this.employeeLast = employeeLast;
-            this.shift = shift;
-            this.room = room;
-        }
-
-        public Schedule(int id, string employeeid, string date, bool isOnDuty, string employeeFirst, string employeeLast, int shiftId, string room) : base(id)
-        {
-            this.employeeid = employeeid;
-            this.date = date;
-            this.isOnDuty = isOnDuty;
-            this.employeeFirst = employeeFirst;
-            this.employeeLast = employeeLast;
             this.shiftId = shiftId;
             this.room = room;
         }
 
-
-
+        public Schedule(int id, int employeeId, string date, bool isOnDuty, Shift shift, string room) : base(id)
+        {
+            this.EmployeeId = employeeId;
+            this.date = date;
+            this.isOnDuty = isOnDuty;
+            this.shift = shift;
+            this.room = room;
+        }
     }
 }

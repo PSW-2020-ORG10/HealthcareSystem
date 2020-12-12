@@ -131,9 +131,9 @@ namespace PatientWebApplicationTests
         {
             var stubRepository = new Mock<IEmployeesScheduleRepository>();
             List<Schedule> schedules = new List<Schedule>();
-            Schedule schedule1 = new Schedule(2, "2", "03/03/2020", true, "EmployeeName1", "EmployeeSurname1", new Shift(1, "14:00", "16:00"), "1");
-            Schedule schedule2 = new Schedule(1, "1", "02/02/2020", true, "EmployeeName2", "EmployeeSurname2", new Shift(2, "12:00", "12:30"), "1");
-            Schedule schedule3 = new Schedule(3, "3", "02/02/2020", true, "EmployeeName2", "EmployeeSurname2", new Shift(1, "14:00", "16:00"), "1");
+            Schedule schedule1 = new Schedule(2, 2, "03/03/2020", true, new Shift(1, "14:00", "16:00"), "1");
+            Schedule schedule2 = new Schedule(1, 1, "02/02/2020", true, new Shift(2, "12:00", "12:30"), "1");
+            Schedule schedule3 = new Schedule(3, 3, "02/02/2020", true, new Shift(1, "14:00", "16:00"), "1");
 
             schedules.Add(schedule1);
             schedules.Add(schedule2);

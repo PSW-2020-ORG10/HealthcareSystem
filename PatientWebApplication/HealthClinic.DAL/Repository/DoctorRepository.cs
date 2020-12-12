@@ -15,6 +15,11 @@ namespace HealthClinic.CL.Repository
     public class DoctorRepository : IDoctorRepository
     {
         private readonly MyDbContext dbContext;
+        public DoctorRepository(MyDbContext context)
+        {
+            this.dbContext = context;
+        }
+
         public DoctorRepository()
         {
             this.dbContext = new MyDbContext(new DbContextOptionsBuilder<MyDbContext>().UseMySql("Server=localhost;port=3306;Database=MYSQLHealtcareDB;user=root;password=root").UseLazyLoadingProxies().Options);
