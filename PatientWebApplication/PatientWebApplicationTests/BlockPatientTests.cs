@@ -14,13 +14,28 @@ namespace PatientWebApplicationTests
     public class BlockPatientTests
     {
         [Fact]
-        public void Block_Patient_Successfuly()
+        public void Block_Patient_Successffuly()
         {
             PatientService service = new PatientService(CreateStubRepository(), new Mock<IEmailVerificationService>().Object, new RegularAppointmentService(new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorService(new OperationRepository(), new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorRepository()), new PatientsRepository(), new OperationService(new OperationRepository())));
             PatientUser patient = service.BlockPatient(1);
             patient.isBlocked.ShouldBe(true);
         }
 
+        [Fact]
+        public void Block_Patient_Unsuccessffuly()
+        {
+            PatientService service = new PatientService(CreateStubRepository(), new Mock<IEmailVerificationService>().Object, new RegularAppointmentService(new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorService(new OperationRepository(), new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorRepository()), new PatientsRepository(), new OperationService(new OperationRepository())));
+            PatientUser patient = service.BlockPatient(2);
+            patient.ShouldBeNull();
+        }
+
+        [Fact]
+        public void Find_Malicious_Patient_Successffuly()
+        {
+            PatientService service = new PatientService(CreateStubRepositoryMalicious(), new Mock<IEmailVerificationService>().Object, new RegularAppointmentService(new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorService(new OperationRepository(), new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorRepository()), new PatientsRepository(), new OperationService(new OperationRepository())));
+            List<PatientUser> patient = service.GetMaliciousPatients();
+            patient.ShouldNotBeNull();
+        }
 
         private static IPatientsRepository CreateStubRepository()
         {
@@ -40,6 +55,21 @@ namespace PatientWebApplicationTests
             }
             ).Returns(patient1);
 
+
+            return stubRepository.Object;
+        }
+
+        private static IPatientsRepository CreateStubRepositoryMalicious()
+        {
+            var stubRepository = new Mock<IPatientsRepository>();
+
+            var patients = new List<PatientUser>();
+
+            PatientUser patient1 = new PatientUser(1, "Pera2", "Peric", "Male", "1234", "2/2/2020", "123", "212313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null);
+
+            patients.Add(patient1);
+
+            stubRepository.Setup(m => m.FindOne(1)).Returns(patients.SingleOrDefault(pat => pat.id == 1));
 
             return stubRepository.Object;
         }

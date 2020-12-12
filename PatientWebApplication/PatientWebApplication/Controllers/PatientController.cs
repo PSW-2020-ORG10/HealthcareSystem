@@ -100,21 +100,30 @@ namespace PatientWebApplication.Controllers
                 return BadRequest();
             }
             return Ok(patient);
-
         }
 
+        /// <summary> This method is calling <c>PatientService</c> to get list of all patients. </summary>
+        /// <returns> 200 Ok with list of all patients. </returns>
         [HttpGet]       
         public IActionResult Get()
         {
-            List<PatientUser> result = PatientService.GetAll();
-            return Ok(result);
+            //List<PatientUser> result = PatientService.GetAll();
+            return Ok(PatientService.GetAll());
         }
+
+        /// <summary> This method is calling <c>PatientService</c> to get malicious <c>PatientUser</c>. </summary>
+        /// <returns> 200 Ok with list of all malicious patients.</returns>
         [HttpGet("malicious")]    
         public IActionResult GetMalicious()
         {
-            List<PatientUser> result = PatientService.GetMaliciousPatients();
-            return Ok(result); 
+           // List<PatientUser> result = PatientService.GetMaliciousPatients();
+            return Ok(PatientService.GetMaliciousPatients()); 
         }
+
+        /// <summary> This method provides <paramref name="patientId"/> and sends it to <c>PatientService</c> there patient.IsBlocked will be set to true. </summary>
+        /// <param name="patientId"> is <c>PatientUser</c> that needs to be blocked.
+        /// </param>
+        /// <returns>200 Ok with blocked patient.</returns>
         [HttpPut("{patientId}")]
         public IActionResult BlockPatient(int patientId)
         {

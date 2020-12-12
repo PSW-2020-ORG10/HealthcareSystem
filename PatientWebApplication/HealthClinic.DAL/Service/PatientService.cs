@@ -96,46 +96,49 @@ namespace HealthClinic.CL.Service
             return PatientsRepository.FindOne(id);
         }
 
+        /// <summary> This method provides <c>PatientUser</c> <paramref name="patientId"/> and sends it to <c>PatientsRepository</c> there patient.IsBlocked will be set to true. </summary>
+        /// <param name="patientId"><c>PatientUser</c> is <c>PatientUser</c> that needs to be blocked.
+        /// </param>
+        /// <returns>null if PatientUser is not valid; otherwise, succesfully blocked PatientUser. </returns>
         public PatientUser BlockPatient(int patientId)
         {
             PatientUser patient = PatientsRepository.FindOne(patientId);
             return (patient == null) ? null : PatientsRepository.BlockPatient(patient);
         }
+
+        /// <summary> This method is getting list of filtered malicious<c>PatientUser</c>.</summary>
+        /// <returns> List of filtered malicious patients. </returns>
         public List<PatientUser> GetMaliciousPatients()
         {
-            Dictionary<int,int> hashMap = new Dictionary<int, int>();
+            Dictionary<int,int> dict = new Dictionary<int, int>();
             List<PatientUser> maliciousPatients = new List<PatientUser>();
             List<DoctorAppointment> appointments = _regularAppointmentService.GetAll();
-            // List<PatientUser> patient = GetAll();
-            // List<int> allValidPatients = new List<int>();
-            foreach (DoctorAppointment appointment in appointments) {
-                if (appointment.IsCanceled == true && CheckIfAppointmentsAreInPastOneMonthFromToday(appointment) != null)
-                {
-                    if (hashMap.ContainsKey(appointment.PatientUserId))
-                    {
-                        hashMap[appointment.PatientUserId]++;
-                        // maliciousPatients.Add(id, GetOne(id));
-                        //allValidPatients.Add(appointment.id);
-                    }
-                    else
-                    {
-                        hashMap[appointment.PatientUserId] = 1;
-                    }
-                }
-            }
-            foreach(int key in hashMap.Keys) {
-                if(hashMap[key] >= 3)
+            dict = GetCanceledAppointmentsInLastMonth(appointments);
+            return GetValidPatientsInLastMonth(dict);
+        }
+
+        private List<PatientUser> GetValidPatientsInLastMonth(Dictionary<int, int> dict) {
+            List<PatientUser> maliciousPatients = new List<PatientUser>();
+            foreach (int key in dict.Keys)
+            {
+                if (dict[key] >= 3)
                     maliciousPatients.Add(GetOne(key));
             }
-
-                
-            
-            /*foreach (int validPatient in allValidPatients) {
-                if (brojac == 3) {
-                    maliciousPatients.Add(GetOne(validPatient));
-                }
-            }*/
             return maliciousPatients;
+        }
+        private Dictionary<int, int> GetCanceledAppointmentsInLastMonth(List<DoctorAppointment> appointments) {
+            Dictionary<int, int> dict = new Dictionary<int, int>();
+            foreach (DoctorAppointment appointment in appointments)
+            {
+                if (appointment.IsCanceled == true && CheckIfAppointmentsAreInPastOneMonthFromToday(appointment) != null)
+                {
+                    if (dict.ContainsKey(appointment.PatientUserId))
+                        dict[appointment.PatientUserId]++;
+                    else
+                        dict[appointment.PatientUserId] = 1;
+                }
+            }
+            return dict;
         }
         private DoctorAppointment CheckIfAppointmentsAreInPastOneMonthFromToday(DoctorAppointment appointment)
         {

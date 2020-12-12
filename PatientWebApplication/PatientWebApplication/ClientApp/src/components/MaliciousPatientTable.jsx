@@ -29,7 +29,8 @@ class MaliciousPatientTable extends Component {
                     <thead>
                         <tr>
                             <th style={{ textAlign: "center" }}>Patient</th>
-                            <th style={{ textAlign: "center" }}>Number of canceled appointment</th>
+                            <th style={{ textAlign: "center" }}>Phone number</th>
+                            <th style={{ textAlign: "center" }}>Email</th>
                             <th style={{ textAlign: "center" }}></th>
                         </tr>
                     </thead>
@@ -37,7 +38,8 @@ class MaliciousPatientTable extends Component {
                         <tbody key={f}>
                             <tr key={f}>
                                 <td style={{ textAlign: "center" }} >{f.firstName + ' ' + f.secondName}</td>
-                                <td style={{ textAlign: "center" }} ></td>
+                                <td style={{ textAlign: "center" }} >{f.phoneNumber}</td>
+                                <td style={{ textAlign: "center" }} >{f.email}</td>
                                 <td style={{ textAlign: "center" }}><BlockPatientButton patient={f}> </BlockPatientButton></td >
                             </tr>
                         </tbody>
