@@ -15,6 +15,11 @@ namespace HealthClinic.CL.Repository
     public class EmployeesScheduleRepository : IEmployeesScheduleRepository
     {
         private readonly MyDbContext dbContext;
+        public EmployeesScheduleRepository(MyDbContext context)
+        {
+            this.dbContext = context;
+        }
+
         public EmployeesScheduleRepository()
         {
             this.dbContext = new MyDbContext(new DbContextOptionsBuilder<MyDbContext>().UseMySql("Server=localhost;port=3306;Database=MYSQLHealtcareDB;user=root;password=root").UseLazyLoadingProxies().Options);
@@ -50,7 +55,7 @@ namespace HealthClinic.CL.Repository
 
         public List<Schedule> GetScheduleForDoctor(string id)
         {
-            return dbContext.Schedules.ToList().FindAll(schedule => schedule.employeeid.Equals(id));
+            return dbContext.Schedules.ToList().FindAll(schedule => schedule.EmployeeId.ToString().Equals(id));
         }
     }
 }

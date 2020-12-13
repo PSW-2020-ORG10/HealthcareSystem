@@ -9,13 +9,14 @@ namespace HealthClinic.CL.Repository
     public class PatientsRepository : IPatientsRepository
     {
         private readonly MyDbContext dbContext;
-        public PatientsRepository()
-        {           
-            this.dbContext = new MyDbContext(new DbContextOptionsBuilder<MyDbContext>().UseMySql("Server=localhost;port=3306;Database=MYSQLHealtcareDB;user=root;password=root").UseLazyLoadingProxies().Options);
-        }
-        public PatientsRepository(MyDbContext dbContext)
+        public PatientsRepository(MyDbContext context)
         {
-            this.dbContext = dbContext;
+            this.dbContext = context;
+        }
+
+        public PatientsRepository()
+        {
+            this.dbContext = new MyDbContext(new DbContextOptionsBuilder<MyDbContext>().UseMySql("Server=localhost;port=3306;Database=MYSQLHealtcareDB;user=root;password=root").UseLazyLoadingProxies().Options);
         }
 
         public PatientUser Add(PatientUser patient)
@@ -48,6 +49,13 @@ namespace HealthClinic.CL.Repository
         public PatientUser FindOne(int id)
         {
             return dbContext.Patients.SingleOrDefault(PatientUser => PatientUser.id == id);
+        }
+
+        public PatientUser BlockPatient(PatientUser patient)
+        {
+            patient.isBlocked = true;
+            dbContext.SaveChanges();
+            return patient;
         }
     }
 

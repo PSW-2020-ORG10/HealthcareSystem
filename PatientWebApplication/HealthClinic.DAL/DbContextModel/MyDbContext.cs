@@ -62,7 +62,7 @@ namespace HealthClinic.CL.DbContextModel
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            PatientUser patient = new PatientUser(1, "Pera", "Peric","Male", "1234", "2/2/2020", "123","213", "Alergija", "Grad", false, "email", "pass", false,"Grad2", "Roditelj",null);
+            PatientUser patient = new PatientUser(1, "Pera", "Peric","Male", "1234", "02/02/2020", "123","213", "Alergija", "Grad", false, "email", "pass", false,"Grad2", "Roditelj",null);
             List<ModelNotification> patientNotifications = new List<ModelNotification>();
             patientNotifications.Add(new ModelNotification(3, "3. string", 1));
             modelBuilder.Entity<ModelNotification>().HasData(
@@ -87,12 +87,14 @@ namespace HealthClinic.CL.DbContextModel
 
             modelBuilder.Entity<DoctorUser>().HasData(
 
-           new DoctorUser(1, "Konstantin", "Davidovic", "1234", "2/2/2020", "123", "email", "pass", "Grad",
+           new DoctorUser(1, "Konstantin", "Davidovic", "1234", "02/02/1975", "123", "email", "pass", "Grad",
              200.0, false, "Cardiology", new List<DoctorNotification>(), "Ordination 1"),
-           new DoctorUser(2, "Novak", "Maric", "12345", "2/2/2020", "123", "email", "pass", "Grad",
-             200.0, false, "Pulmonology", new List<DoctorNotification>(), "Ordination 1"),
-            new DoctorUser(3, "Milica", "Tadic", "12346", "2/2/2020", "123", "email", "pass", "Grad",
-             200.0, false, "Cardiology", new List<DoctorNotification>(), "Ordination 1")
+           new DoctorUser(2, "Novak", "Maric", "12345", "02/02/1982", "123", "email", "pass", "Grad",
+             200.0, false, "Pulmonology", new List<DoctorNotification>(), "Ordination 2"),
+            new DoctorUser(3, "Milica", "Tadic", "12346", "02/02/1988", "123", "email", "pass", "Grad",
+             200.0, false, "Cardiology", new List<DoctorNotification>(), "Ordination 3"),
+             new DoctorUser(4, "Jovan", "Jovanovic", "12346", "02/02/1988", "123", "email", "pass", "Grad",
+             200.0, false, "Pulmonology", new List<DoctorNotification>(), "Ordination 4")
 
 
            ) ;
@@ -100,7 +102,9 @@ namespace HealthClinic.CL.DbContextModel
             modelBuilder.Entity<PatientUser>().HasData(
 
             new PatientUser(1, "Pera2", "Peric","Male", "1234", "2/2/2020", "123", "212313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null),
-            new PatientUser(2, "Pera3", "Peric", "Female", "1234", "2/2/2020", "123", "2112313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null)
+            new PatientUser(2, "Pera3", "Peric", "Female", "1234", "2/2/2020", "123", "2112313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null),
+            new PatientUser(3, "Stefan", "Lelic", "Male", "1234", "2/2/2020", "123", "212313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null),
+            new PatientUser(4, "Marko", "Lazarevic", "Female", "1234", "2/2/2020", "123", "2112313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null)
 
             );
 
@@ -139,7 +143,7 @@ namespace HealthClinic.CL.DbContextModel
 
             modelBuilder.Entity<Operation>().HasData(
 
-            new Operation(1, 2, "03/03/2020", new TimeSpan(0, 14, 0, 0), new TimeSpan(0, 15, 0, 0, 0), 1, "room1"),
+            new Operation(1, 2, "23/12/2020", new TimeSpan(0, 14, 0, 0), new TimeSpan(0, 15, 0, 0, 0), 1, "room1"),
             new Operation(2, 1, "03/10/2020", new TimeSpan(0, 15, 0, 0), new TimeSpan(0, 15, 15, 0, 0), 2, "room1")
 
             );
@@ -149,15 +153,32 @@ namespace HealthClinic.CL.DbContextModel
             modelBuilder.Entity<Shift>().HasData(
 
             new Shift(1, "14:00", "16:00"),
-            new Shift(2, "12:00", "12:30")
+            new Shift(2, "12:00", "12:30"),
+            new Shift(3, "08:00", "19:00")
 
             );
 
             modelBuilder.Entity<Schedule>().HasData(
 
-            new Schedule(1, "2", "03/03/2020", true, "EmployeeName", "EmployeeSurname", 1, "1"),
-            new Schedule(2, "1", "02/02/2020", true, "EmployeeName", "EmployeeSurname", 2, "1"),
-            new Schedule(3, "3", "02/02/2020", true, "EmployeeName", "EmployeeSurname", 1, "1")
+            new Schedule(1, 1, "08/12/2020", true, 3, "Ordination 1"),
+            new Schedule(2, 1, "09/12/2020", true, 3, "Ordination 1"),
+            new Schedule(3, 1, "10/12/2020", true, 3, "Ordination 1"),
+            new Schedule(4, 1, "11/12/2020", true, 3, "Ordination 1"),
+            new Schedule(5, 1, "12/12/2020", true, 3, "Ordination 1"),
+            new Schedule(6, 1, "13/12/2020", true, 3, "Ordination 1"),
+            new Schedule(7, 1, "14/12/2020", true, 3, "Ordination 1"),
+            new Schedule(8, 1, "15/12/2020", true, 3, "Ordination 1"),
+            new Schedule(9, 1, "16/12/2020", true, 3, "Ordination 1"),
+            new Schedule(10, 1, "17/12/2020", true, 3, "Ordination 1"),
+            new Schedule(11, 1, "18/12/2020", true, 3, "Ordination 1"),
+            new Schedule(12, 1, "19/12/2020", true, 3, "Ordination 1"),
+            new Schedule(13, 1, "20/12/2020", true, 3, "Ordination 1"),
+            new Schedule(14, 1, "21/12/2020", true, 3, "Ordination 1"),
+            new Schedule(15, 1, "23/12/2020", true, 3, "Ordination 1"),
+            new Schedule(16, 2, "23/12/2020", true, 1, "1"),
+            new Schedule(17, 1, "22/12/2020", true, 2, "1"),
+            new Schedule(18, 3, "22/12/2020", true, 1, "1"),
+            new Schedule(19, 4, "23/12/2020", true, 1, "1")
 
            );
 
@@ -225,15 +246,15 @@ namespace HealthClinic.CL.DbContextModel
 
             modelBuilder.Entity<DoctorAppointment>().HasData(
 
-            new DoctorAppointment(1, new TimeSpan(0, 14, 15, 0, 0), "03/03/2020", 2, 1, new List<Referral>(), "1"),
-            new DoctorAppointment(2, new TimeSpan(0, 14, 30, 0, 0), "03/03/2020", 2, 2, new List<Referral>(), "1"),
-            new DoctorAppointment(3, new TimeSpan(0, 15, 0, 0, 0), "03/03/2020", 1, 2, new List<Referral>(), "1"),
-            new DoctorAppointment(4, new TimeSpan(0, 15, 45, 0, 0), "03/03/2020", 1, 2, new List<Referral>(), "1"),
-            new DoctorAppointment(5, new TimeSpan(0, 12, 0, 0, 0), "02/02/2020", 1, 1, new List<Referral>(), "1"),
-            new DoctorAppointment(6, new TimeSpan(0, 12, 15, 0, 0), "02/02/2020", 2, 3, new List<Referral>(), "1"),
-            new DoctorAppointment(7, new TimeSpan(), "07/02/2011", 1, 3, new List<Referral>(), "1"),
-            new DoctorAppointment(8, new TimeSpan(), "01/03/2020", 1, 2, new List<Referral>(), "1"),
-            new DoctorAppointment(9, new TimeSpan(), "14/03/2016", 1, 1, new List<Referral>(), "1"),
+            new DoctorAppointment(1, new TimeSpan(0, 14, 15, 0, 0), "23/12/2020", 2, 1, new List<Referral>(), "1"),
+            new DoctorAppointment(2, new TimeSpan(0, 14, 30, 0, 0), "23/12/2020", 2, 2, new List<Referral>(), "1"),
+            new DoctorAppointment(3, new TimeSpan(0, 15, 0, 0, 0), "23/12/2020", 1, 2, new List<Referral>(), "1"),
+            new DoctorAppointment(4, new TimeSpan(0, 15, 45, 0, 0), "23/12/2020", 1, 2, new List<Referral>(), "1"),
+            new DoctorAppointment(5, new TimeSpan(0, 12, 0, 0, 0), "22/12/2020", 1, 1, new List<Referral>(), "1"),
+            new DoctorAppointment(6, new TimeSpan(0, 12, 15, 0, 0), "22/12/2020", 2, 3, new List<Referral>(), "1"),
+            new DoctorAppointment(7, new TimeSpan(), "07/02/2031", 1, 3, new List<Referral>(), "1"),
+            new DoctorAppointment(8, new TimeSpan(), "07/12/2020", 1, 2, new List<Referral>(), "1"),
+            new DoctorAppointment(9, new TimeSpan(), "05/12/2030", 1, 1, new List<Referral>(), "1"),
             new DoctorAppointment(10, new TimeSpan(), "11/11/2030", 1, 2, new List<Referral>(), "1"),
             new DoctorAppointment(11, new TimeSpan(), "14/03/2016", 2, 1, new List<Referral>(), "A2"),
             new DoctorAppointment(12, new TimeSpan(), "11/11/2010", 2, 2, new List<Referral>(), "B3")
@@ -276,7 +297,7 @@ namespace HealthClinic.CL.DbContextModel
 
             modelBuilder.Entity<SecretaryUser>().HasData(
 
-            new SecretaryUser(1, "Secretary Name", "Secretary Surname", "1234", "12/12/2012", "123", "email", "pass", "Grad",
+            new SecretaryUser(162, "Secretary Name", "Secretary Surname", "1234", "12/12/2012", "123", "email", "pass", "Grad",
             133, "Room")
 
             );
@@ -295,14 +316,9 @@ namespace HealthClinic.CL.DbContextModel
             modelBuilder.Entity<Survey>().HasData(
 
             new Survey(1, 1, 3, 4, 5, 4, 5, 4, 5, 4, 5, 5, 5, 5, 4, 3, 3, 2, 2, 5),
-            new Survey(2, 1, 4, 4, 5, 3, 1, 5, 5, 2, 2, 4, 2, 5, 3, 1, 3, 3, 3, 5),
-            new Survey(3, 1, 5, 4, 5, 1, 3, 4, 5, 3, 2, 5, 1, 5, 4, 1, 2, 2, 1, 5),
-            new Survey(4, 1, 6, 4, 5, 2, 5, 5, 1, 3, 2, 4, 2, 2, 3, 1, 3, 1, 3, 5),
-            new Survey(5, 1, 7, 4, 5, 4, 2, 4, 5, 1, 2, 4, 3, 5, 2, 1, 1, 2, 5, 1)
-
+            new Survey(2, 1, 4, 4, 5, 3, 1, 5, 5, 2, 2, 4, 2, 5, 3, 1, 3, 3, 3, 5)        
             );
-
-
+         
         }
 
     }

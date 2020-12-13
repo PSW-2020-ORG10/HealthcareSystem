@@ -16,15 +16,21 @@ namespace HealthClinic.CL.Model.Patient
     {
         [ForeignKey("AppointmentId")]
         public virtual List<Referral> referral { get; set; }
+        public bool IsCanceled { get; set; }
+        public String CancelDateString { get; set; }
 
         public DoctorAppointment(int id, TimeSpan time, string date, PatientUser patient, DoctorUser doctor, List<Referral> referrals, string roomid) : base(id, time, date, patient, doctor, roomid)
         {
             referral = referrals;
+            IsCanceled = false;
+            CancelDateString = null;
         }
      
         public DoctorAppointment(int id, TimeSpan time, string date, int patientId, int doctorId, List<Referral> referrals, string roomid) : base(id, time, date, patientId, doctorId, roomid)
         {
             referral = referrals;
+            IsCanceled = false;
+            CancelDateString = null;
         }
 
         public DoctorAppointment() : base() { }
@@ -36,7 +42,7 @@ namespace HealthClinic.CL.Model.Patient
             {
                 return false;
             }
-            return UtilityMethods.CheckIfStringsMatch(this.Date, item.Date) && this.DoctorUserId == item.DoctorUserId && this.PatientUserId == item.PatientUserId && UtilityMethods.CheckIfStringsMatch(this.RoomId, item.RoomId);
+            return UtilityMethods.CheckIfStringsMatch(this.Date, item.Date) && this.DoctorUserId == item.DoctorUserId && this.PatientUserId == item.PatientUserId && UtilityMethods.CheckIfStringsMatch(this.RoomId, item.RoomId) && this.Start == item.Start;
         }
 
     }
