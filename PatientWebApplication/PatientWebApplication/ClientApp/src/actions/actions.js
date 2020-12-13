@@ -27,6 +27,8 @@
     ADVANCED_SEARCH_APPOINTMENTS_ERROR,
     LOADED_ALL_PATIENT_APPOINTMENTS,
     OBSERVE_PATIENT_APPOINTMENTS_ERROR,
+    LOADED_ALL_PATIENTS,
+    OBSERVE_PATIENTS_ERROR,
     LOADED_ALL_DOCTORS,
     OBSERVE_DOCTORS_ERROR,
     RECOMMEND_APPOINTMENT,
@@ -42,8 +44,12 @@
     LOADED_ALL_PATIENT_APPOINTMENTS_INTWODAYS,
     LOADED_ALL_PATIENT_APPOINTMENTS_INFUTURE,
     CANCEL_APPOINTMENT,
+    BLOCK_PATIENT,
+    OBSERVE_BLOCK_PATIENT_ERROR,
     LOADED_ALL_PATIENT_APPOINTMENTS_WITH_SURVEYS,
-    LOADED_ALL_PATIENT_APPOINTMENTS_WITHOUT_SURVEYS
+    LOADED_ALL_PATIENT_APPOINTMENTS_WITHOUT_SURVEYS,
+    LOADED_MALICIOUS_PATIENTS,
+    OBSERVE_MALICIOUS_ERROR
 } from "../types/types"
 import axios from "axios";
 
@@ -555,6 +561,58 @@ export const createRecommendAppointment = (appointment) => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: CREATE_RECOMMEND_APPOINTMENT_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+
+export const loadedAllPatients = () => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.get("http://localhost:60198/api/patientuser");
+        debugger;
+        dispatch({
+            type: LOADED_ALL_PATIENTS,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: OBSERVE_PATIENTS_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const blockPatient = (patientId) => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.put("http://localhost:60198/api/patientuser/" + patientId);
+        debugger;
+        dispatch({
+            type: BLOCK_PATIENT,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: OBSERVE_BLOCK_PATIENT_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const loadedMaliciousPatients = () => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.get("http://localhost:60198/api/patientuser/malicious");
+        debugger;
+        dispatch({
+            type: LOADED_MALICIOUS_PATIENTS,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: OBSERVE_MALICIOUS_ERROR,
             payload: console.log(e),
         });
     }

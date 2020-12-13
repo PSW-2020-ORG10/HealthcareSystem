@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HealthClinic.CL.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20201211142642_FinalMigration")]
-    partial class FinalMigration
+    [Migration("20201212110138_FirstMigration")]
+    partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -1238,6 +1238,9 @@ namespace HealthClinic.CL.Migrations
                     b.Property<bool>("guest")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<bool>("isBlocked")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<bool>("isMarried")
                         .HasColumnType("tinyint(1)");
 
@@ -1282,6 +1285,7 @@ namespace HealthClinic.CL.Migrations
                             firstName = "Pera2",
                             gender = "Male",
                             guest = false,
+                            isBlocked = false,
                             isMarried = false,
                             isRegisteredBySecretary = false,
                             isVerified = false,
@@ -1304,6 +1308,7 @@ namespace HealthClinic.CL.Migrations
                             firstName = "Pera3",
                             gender = "Female",
                             guest = false,
+                            isBlocked = false,
                             isMarried = false,
                             isRegisteredBySecretary = false,
                             isVerified = false,
@@ -1312,6 +1317,52 @@ namespace HealthClinic.CL.Migrations
                             password = "pass",
                             phoneNumber = "123",
                             secondName = "Peric",
+                            uniqueCitizensidentityNumber = "1234"
+                        },
+                        new
+                        {
+                            id = 3,
+                            allergie = "Alergija",
+                            bornIn = "Grad2",
+                            city = "Grad",
+                            dateOfBirth = "2/2/2020",
+                            email = "email",
+                            exLastname = "",
+                            firstName = "Stefan",
+                            gender = "Male",
+                            guest = false,
+                            isBlocked = false,
+                            isMarried = false,
+                            isRegisteredBySecretary = false,
+                            isVerified = false,
+                            medicalIdNumber = "212313",
+                            parentName = "Roditelj",
+                            password = "pass",
+                            phoneNumber = "123",
+                            secondName = "Lelic",
+                            uniqueCitizensidentityNumber = "1234"
+                        },
+                        new
+                        {
+                            id = 4,
+                            allergie = "Alergija",
+                            bornIn = "Grad2",
+                            city = "Grad",
+                            dateOfBirth = "2/2/2020",
+                            email = "email",
+                            exLastname = "",
+                            firstName = "Marko",
+                            gender = "Female",
+                            guest = false,
+                            isBlocked = false,
+                            isMarried = false,
+                            isRegisteredBySecretary = false,
+                            isVerified = false,
+                            medicalIdNumber = "2112313",
+                            parentName = "Roditelj",
+                            password = "pass",
+                            phoneNumber = "123",
+                            secondName = "Lazarevic",
                             uniqueCitizensidentityNumber = "1234"
                         });
                 });

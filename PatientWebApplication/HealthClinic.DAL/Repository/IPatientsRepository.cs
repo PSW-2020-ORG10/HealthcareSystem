@@ -9,6 +9,7 @@ namespace HealthClinic.CL.Repository
         PatientUser Find(int id);
         PatientUser Validate(PatientUser patient);
         List<PatientUser> GetAll();
-        PatientUser FindOne(int id);     
+        PatientUser FindOne(int id);
+        PatientUser BlockPatient(PatientUser patient);
     }
 }

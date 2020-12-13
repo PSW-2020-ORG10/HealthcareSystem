@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HealthClinic.CL.Migrations
 {
-    public partial class FinalMigration : Migration
+    public partial class FirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -118,7 +118,8 @@ namespace HealthClinic.CL.Migrations
                     parentName = table.Column<string>(nullable: true),
                     exLastname = table.Column<string>(nullable: true),
                     gender = table.Column<string>(nullable: true),
-                    file = table.Column<string>(nullable: true)
+                    file = table.Column<string>(nullable: true),
+                    isBlocked = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -700,11 +701,13 @@ namespace HealthClinic.CL.Migrations
 
             migrationBuilder.InsertData(
                 table: "Patients",
-                columns: new[] { "id", "allergie", "bornIn", "city", "dateOfBirth", "email", "exLastname", "file", "firstName", "gender", "guest", "isMarried", "isRegisteredBySecretary", "isVerified", "medicalIdNumber", "parentName", "password", "phoneNumber", "secondName", "uniqueCitizensidentityNumber" },
+                columns: new[] { "id", "allergie", "bornIn", "city", "dateOfBirth", "email", "exLastname", "file", "firstName", "gender", "guest", "isBlocked", "isMarried", "isRegisteredBySecretary", "isVerified", "medicalIdNumber", "parentName", "password", "phoneNumber", "secondName", "uniqueCitizensidentityNumber" },
                 values: new object[,]
                 {
-                    { 1, "Alergija", "Grad2", "Grad", "2/2/2020", "email", "", null, "Pera2", "Male", false, false, false, false, "212313", "Roditelj", "pass", "123", "Peric", "1234" },
-                    { 2, "Alergija", "Grad2", "Grad", "2/2/2020", "email", "", null, "Pera3", "Female", false, false, false, false, "2112313", "Roditelj", "pass", "123", "Peric", "1234" }
+                    { 1, "Alergija", "Grad2", "Grad", "2/2/2020", "email", "", null, "Pera2", "Male", false, false, false, false, false, "212313", "Roditelj", "pass", "123", "Peric", "1234" },
+                    { 2, "Alergija", "Grad2", "Grad", "2/2/2020", "email", "", null, "Pera3", "Female", false, false, false, false, false, "2112313", "Roditelj", "pass", "123", "Peric", "1234" },
+                    { 3, "Alergija", "Grad2", "Grad", "2/2/2020", "email", "", null, "Stefan", "Male", false, false, false, false, false, "212313", "Roditelj", "pass", "123", "Lelic", "1234" },
+                    { 4, "Alergija", "Grad2", "Grad", "2/2/2020", "email", "", null, "Marko", "Female", false, false, false, false, false, "2112313", "Roditelj", "pass", "123", "Lazarevic", "1234" }
                 });
 
             migrationBuilder.InsertData(
@@ -742,9 +745,9 @@ namespace HealthClinic.CL.Migrations
                 columns: new[] { "id", "endTime", "startTime" },
                 values: new object[,]
                 {
+                    { 3, "19:00", "08:00" },
                     { 2, "12:30", "12:00" },
-                    { 1, "16:00", "14:00" },
-                    { 3, "19:00", "08:00" }
+                    { 1, "16:00", "14:00" }
                 });
 
             migrationBuilder.InsertData(
