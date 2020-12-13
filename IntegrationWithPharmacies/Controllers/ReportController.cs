@@ -8,8 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging.Abstractions;
 using Newtonsoft.Json;
 using System;
-using System.ComponentModel;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -105,11 +103,7 @@ namespace IntegrationWithPharmacies.Controllers
                 uploadFile(complete);
                 return Ok(JsonConvert.SerializeObject(testFile));
             }
-            catch (Exception e)
-            {
-
-            }
-            return Ok();
+            catch (Exception e) { return BadRequest(); }
         }
 
         public void uploadFile(String complete)
@@ -121,44 +115,6 @@ namespace IntegrationWithPharmacies.Controllers
                client.Dispose();
                SendNotificationAboutReport();
         }
-
-
-        [HttpGet("http/recieve")]
-        public void GetHttpRecieveFile()
-        {
-            using (WebClient webClient = new WebClient())
-            {
-                Console.WriteLine("**********************    2 ****************************");
-                //wc.Headers.Add("Cookie: Authentication=user"); // add a cookie header to the request
-                try
-                {   String filename = "noviPSw.txt";
-                    Console.WriteLine("**********************    3 ****************************");
-                    //string filename = System.Guid.NewGuid().ToString("N"); // use global unique identifier for file name to avoid conflicts
-                    webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
-                    webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(ProgressChanged);
-                    webClient.DownloadFileAsync(new Uri("http://localhost:8082/upload/medicine/Panadol"), @"..\" + filename);
-                   // wc.DownloadFile("http://localhost:8082/upload/medicine/{medicine}", @"..\" + filename); // could add file extension here
-                    Console.WriteLine("**********************    4 ****************************");                                                                           // do something with file
-                }
-                catch (System.Exception ex)
-                {
-                    // check exception object for the error
-                }
-            }
-          
-
-        }
-        private void ProgressChanged(object sender, DownloadProgressChangedEventArgs e)
-        {
-            
-        }
-
-        private void Completed(object sender, AsyncCompletedEventArgs e)
-        {
-            Console.WriteLine("GOTOVO");
-        }
-
-
 
         private String getReportText(DateOfOrder date)
         {
@@ -213,12 +169,8 @@ namespace IntegrationWithPharmacies.Controllers
         }
         public void SendNotificationAboutReport()
         {
-            try
-            {
-                sendMail();
-            }
-            catch (SmtpException ex) {
-            }
+            try {sendMail();}
+            catch (SmtpException exception) { Console.WriteLine(exception.Message); }
 
         }
 

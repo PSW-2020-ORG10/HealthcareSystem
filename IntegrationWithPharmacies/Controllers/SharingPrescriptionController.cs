@@ -90,8 +90,7 @@ namespace IntegrationWithPharmacies.Controllers
             HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse();
             Stream response = webResponse.GetResponseStream();
             StreamReader readStream = new StreamReader(response, System.Text.Encoding.GetEncoding("utf-8"));
-            string availability = readStream.ReadToEnd();
-            return FormMedicineAvailability(availability);
+            return FormMedicineAvailability(readStream.ReadToEnd());
         }
 
         private IActionResult FormMedicineAvailability(string availability)
@@ -121,8 +120,8 @@ namespace IntegrationWithPharmacies.Controllers
         private static void GetOnlyOnePharmacy(string availability, List<MedicineName> medicines)
         {
             String[] nameParts = availability.Split("_");
-            MedicineName med = new MedicineName("Pharmacy: " + nameParts[0] + ", city: " + nameParts[1], nameParts[2]);
-            medicines.Add(med);
+            MedicineName medicine = new MedicineName("Pharmacy: " + nameParts[0] + ", city: " + nameParts[1], nameParts[2]);
+            medicines.Add(medicine);
         }
 
         private int getRandomNumber()
@@ -169,7 +168,7 @@ namespace IntegrationWithPharmacies.Controllers
         public void SendNotificationAboutReport()
         {
             try { sendEmail();  }
-            catch (SmtpException ex) { }
+            catch (SmtpException ex) { Console.WriteLine(ex.Message); }
         }
 
         private static void sendEmail()
