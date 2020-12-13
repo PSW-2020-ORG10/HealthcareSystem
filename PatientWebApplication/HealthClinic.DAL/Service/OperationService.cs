@@ -197,23 +197,31 @@ namespace HealthClinic.CL.Service
             return stringToCheck.Equals("Operation");
         }
 
+        /// <summary> This method is getting all operations of one doctor on given date. </summary>
+        /// <returns> list of all doctor's operations on specific date. </returns>
         private List<Operation> GetAllOperationsByDateAndDoctor(DateTime date, int doctorId)
         {
             return _operationRepository.GetOperationsForDoctor(doctorId).FindAll(operation => date == UtilityMethods.ParseDateInCorrectFormat(operation.Date));
         }
 
+        /// <summary> This method is getting all operations of one patient on given date. </summary>
+        /// <returns> list of all patient's operations on specific date. </returns>
         private List<Operation> GetAllOperationsByDateAndPatient(DateTime date, int patientId)
         {
             return GetOperationsForPatient(patientId).FindAll(operation => date == UtilityMethods.ParseDateInCorrectFormat(operation.Date));
         }
 
+        /// <summary> This method is creating a set out of list of doctor's and patient's operations on specific date. </summary>
+        /// <returns> <c>HashSet</c> of operations. </returns>
         public HashSet<Operation> CreateOperationtSetForDate(DateTime date, int doctorId, int patientId)
         {
             HashSet<Operation> appointmentsSet = new HashSet<Operation>(GetAllOperationsByDateAndDoctor(date, doctorId));
             appointmentsSet.UnionWith(GetAllOperationsByDateAndPatient(date, patientId));
             return appointmentsSet;
         }
-        
+
+        /// <summary> This method is creating a set out of list of doctor's and patient's operations on specific date. </summary>
+        /// <returns> <c>HashSet</c> of operations. </returns>
         public Boolean IsOperationInTimePeriod(TimeSpan time, List<Operation> operations)
         {
             foreach(Operation operation in operations)

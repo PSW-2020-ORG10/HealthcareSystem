@@ -1,0 +1,8 @@
+api3
+          Precription for medicine
+
+Patients name: Pera3
+Patients surname: Peric
+Patients medical ID number: 2112313
+Medication: Defrinol     Quantity: 31
+Usage: 3 times per week

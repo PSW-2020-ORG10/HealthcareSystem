@@ -20,18 +20,10 @@ class AppointmentMenu extends Component {
         return (
             <div>
                 {this.state.modalShowRecommended ? <RecommendedAppointmentScheduling show={this.state.modalShowRecommended} onShowChange={this.displayModalRecommended.bind(this)} /> : null}
-                <table>
-                        <tbody>
-                            <tr>
                                 {this.state.modalShow ? <ScheduleRegularAppointmentModal show={this.state.modalShow} onShowChange={this.displayModal.bind(this)} /> : null}
-                                <td><button onClick={() => { this.displayModal() }} className="btn-primary btn-lg">Schedule regular appointment</button></td>
-                            </tr>
-                            <tr>
-                                <td style={{ textAlign: "right" }}><button onClick={() => { this.displayModalRecommended() }} className="btn-primary  btn-lg">Schedule recommended appointment</button></td >
-                            </tr>
-                        </tbody>
-                   
-                </table>
+                <button onClick={() => { this.displayModal() }} className="btn-primary btn-lg btn-block mt-5">Schedule regular appointment</button>
+                <label className="label justify-content-center align-items-center text-center mt-3 mb-3"> - OR - </label>
+                <button onClick={() => { this.displayModalRecommended() }} className="btn-primary btn-lg  btn-block">Schedule recommended appointment</button>
 
             </div>
 

@@ -4,14 +4,14 @@
         <div style="        background-color: #1D8288">
             <h3 style="color:white;font-size: 35px;font-weight:bold">Send report to pharmacy about consumption of medicine in specified period</h3>
         </div>
-            <div class="container">
+        <div class="container">
 
             <div class="row">
                 <div class="col-25">
                     <label for="name">Start date:</label>
                 </div>
                 <div class="col-75">
-                    <input type="text" id="startDate" v-model ="startDate"  placeholder="01/01/2020"/>
+                    <input type="text" id="startDate" v-model="startDate" placeholder="01/01/2020" />
                 </div>
             </div>
             <div class="row">
@@ -19,10 +19,10 @@
                     <label for="town">End date:</label>
                 </div>
                 <div class="col-75">
-                    <input type="text" id="endDate" v-model ="endDate" placeholder="01/01/2020">
+                    <input type="text" id="endDate" v-model="endDate" placeholder="01/01/2020">
                 </div>
             </div>
-            
+
             <div class="row">
                 <label v-if="sent" style="color:aqua;font-size:25px;">Successfully sent report to pharmacy!</label>
                 <label v-if="notSent" style="color:red;font-size:25px;">Error occured while sending report!</label>
@@ -32,7 +32,10 @@
 
 
             <div class="row">
-                <button class="button" v-on:click="send">Send</button>
+                <button class="button" v-on:click="send">Send SFTP</button>
+            </div>
+            <div class="row">
+                <button class="button" v-on:click="sendHttp">Send HTTP</button>
             </div>
         </div>
 
@@ -60,6 +63,25 @@
                     endDate: this.endDate
                 };
                 this.axios.post('api/report/', date)
+                    .then(res => {
+                        this.sent = true;
+                        this.notSent = false;
+                        console.log(res);
+                    })
+                    .catch(res => {
+                        this.sent = false;
+                        this.notSent = true;
+                        console.log(res);
+                    })
+
+
+            },
+            sendHttp: function () {
+                const date = {
+                    startDate: this.startDate,
+                    endDate: this.endDate
+                };
+                this.axios.post('api/report/http', date)
                     .then(res => {
                         this.sent = true;
                         this.notSent = false;

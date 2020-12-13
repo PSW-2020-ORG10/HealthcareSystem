@@ -7,7 +7,7 @@ using Renci.SshNet.Sftp;
 
 namespace IntegrationWithPharmacies.FileProtocol
 {
-    public class SftpService : ISpftService
+    public class SftpService : ISftpService
     {
         private readonly ILogger<SftpService> Logger;
         private readonly SftpConfig Config;
@@ -20,20 +20,21 @@ namespace IntegrationWithPharmacies.FileProtocol
 
         public Boolean UploadFile(string localFilePath, string remoteFilePath)
         {
-            using var client = new SftpClient("192.168.56.1", 22, "tester", "password");
+            using var client = new SftpClient("192.168.1.244", 22, "tester", "password");
             try
             {   client.Connect();
                 client.UploadFile(File.OpenRead(localFilePath), remoteFilePath);
                 return true;
             }
-            catch (Exception exception) { return false; }
+
+            catch (Exception exceptione) { return false; }
+
             finally  { client.Disconnect(); }
         }
 
-
-        IEnumerable<SftpFile> ISpftService.ListAllFiles(string remoteDirectory)
+        IEnumerable<SftpFile> ISftpService.ListAllFiles(string remoteDirectory)
         {
-            using var client = new SftpClient("192.168.56.1", 22, "tester", "password");
+            using var client = new SftpClient("192.168.1.244", 22, "tester", "password");
             try
             {   client.Connect();
                 return client.ListDirectory(remoteDirectory);

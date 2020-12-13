@@ -37,6 +37,9 @@ class SelectSpecialtyForm extends Component {
                     <option value=""></option>
                     <option value="Cardiology">Cardiology</option>
                     <option value="Pulmonology">Pulmonology</option>
+                    <option value="Neurology">Neurology</option>
+                    <option value="Otorhinolaryngology">Otorhinolaryngology</option>
+                    <option value="Dermatology">Dermatology</option>
                 </select>
             </div>
             )
