@@ -43,12 +43,10 @@ namespace IntegrationWithPharmacies.Controllers
         public IActionResult GetMedicinesFromIsa()
         {
             var client = new RestSharp.RestClient("http://localhost:8082");
-            var request = new RestRequest("/medicineRequested");
-            var response = client.Get<List<MedicineName>>(request);
+            var response = client.Get<List<MedicineName>>(new RestRequest("/medicineRequested"));
             Console.WriteLine("Status: " + response.StatusCode.ToString());
-            List<MedicineName> result = response.Data;
-            result.ForEach(medicine => Console.WriteLine(medicine.ToString()));
-            return Ok(result);
+            response.Data.ForEach(medicine => Console.WriteLine(medicine.ToString()));
+            return Ok(response.Data);
         }
 
         [HttpPost]
@@ -73,8 +71,7 @@ namespace IntegrationWithPharmacies.Controllers
         [HttpGet("http/recieve/{medicine}")]
         public IActionResult GetMedicineDescription(string medicine)
         {
-            var url = "http://localhost:8082/upload/medicine/" + medicine;
-            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(url);
+            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create("http://localhost:8082/upload/medicine/" + medicine);
             HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse();
             Stream response = webResponse.GetResponseStream();
             StreamReader readStream = new StreamReader(response, System.Text.Encoding.GetEncoding("utf-8"));
@@ -120,8 +117,7 @@ namespace IntegrationWithPharmacies.Controllers
         private static void GetOnlyOnePharmacy(string availability, List<MedicineName> medicines)
         {
             String[] nameParts = availability.Split("_");
-            MedicineName medicine = new MedicineName("Pharmacy: " + nameParts[0] + ", city: " + nameParts[1], nameParts[2]);
-            medicines.Add(medicine);
+            medicines.Add(new MedicineName("Pharmacy: " + nameParts[0] + ", city: " + nameParts[1], nameParts[2]));
         }
 
         private int getRandomNumber()
@@ -130,9 +126,7 @@ namespace IntegrationWithPharmacies.Controllers
         }
         private String getTextForPrescription(Prescription prescription)
         {
-            StringBuilder stringBuilder = new StringBuilder();
-            return stringBuilder.Append(prescription.Pharmacy+"          Precription for medicine\n\nPatients name: " + prescription.Name + "\nPatients surname: " + prescription.Surname + "\nPatients medical ID number: " + prescription.MedicalIDNumber + "\nMedication: " + prescription.Medicine + "     Quantity: " + prescription.Quantity + "\nUsage: " + prescription.Usage + "\n").ToString();
-         
+            return prescription.Pharmacy + " Precription for medicine\n\nPatients name: " + prescription.Name + "\nPatients surname: " + prescription.Surname + "\nPatients medical ID number: " + prescription.MedicalIDNumber + "\nMedication: " + prescription.Medicine + " Quantity: " + prescription.Quantity + "\nUsage: " + prescription.Usage + "\n";
         }
         [HttpPost("http")]
         public IActionResult PostHttp(Prescription prescription)
@@ -158,9 +152,8 @@ namespace IntegrationWithPharmacies.Controllers
         public void uploadFile(String complete)
         {
             WebClient client = new WebClient();
-            Uri uri = new Uri(@"http://localhost:8082/download/prescription/http");
             client.Credentials = CredentialCache.DefaultCredentials;
-            client.UploadFile(uri, "POST", complete);
+            client.UploadFile(new Uri(@"http://localhost:8082/download/prescription/http"), "POST", complete);
             client.Dispose();
             SendNotificationAboutReport();
         }
@@ -172,8 +165,7 @@ namespace IntegrationWithPharmacies.Controllers
         }
 
         private static void sendEmail()
-        {   SmtpClient SmptServer = new SmtpClient("smtp.gmail.com");
-            SmptServer.Port = 587;
+        {   SmtpClient SmptServer = new SmtpClient("smtp.gmail.com",587);
             SmptServer.Credentials = new System.Net.NetworkCredential("ourhospital9@gmail.com", "hospital.9");
             SmptServer.EnableSsl = true;
             SmptServer.Send(GetMailInformation());
@@ -181,12 +173,7 @@ namespace IntegrationWithPharmacies.Controllers
 
         private static MailMessage GetMailInformation()
         {
-            MailMessage mail = new MailMessage();
-            mail.From = new MailAddress("ourhospital9@gmail.com");
-            mail.To.Add("pharmacyisa@gmail.com");
-            mail.Subject = "Notification about sent file";
-            mail.Body = "Body of mail address";
-            return mail;
+            return new MailMessage("ourhospital9@gmail.com", "pharmacyisa@gmail.com", "Notification about sent file", "Body of mail address");
         }
 
         private SftpConfig getConfig()

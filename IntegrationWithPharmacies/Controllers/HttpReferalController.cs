@@ -15,11 +15,8 @@ namespace IntegrationWithPharmacies.Controllers
         private static void SendGetRequestWithRestSharp()
         {
             var client = new RestSharp.RestClient("http://localhost:8082");
-            var request = new RestRequest("/medicine/description/Panadol");
-            var response = client.Get<String>(request);
-            Console.WriteLine("Status: " + response.StatusCode.ToString());
-            String result = response.Data;
-            Console.WriteLine(result);
+            var response = client.Get<String>(new RestRequest("/medicine/description/Panadol"));
+            Console.WriteLine("Status: " + response.StatusCode.ToString()+"\n"+response.Data);
         }
     }
 }

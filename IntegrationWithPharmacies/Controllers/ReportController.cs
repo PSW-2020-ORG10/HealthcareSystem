@@ -109,9 +109,8 @@ namespace IntegrationWithPharmacies.Controllers
         public void uploadFile(String complete)
         {
                WebClient client = new WebClient();
-               Uri uri = new Uri(@"http://localhost:8082/download/file/http");
                client.Credentials = CredentialCache.DefaultCredentials;
-               client.UploadFile(uri, "POST", complete);
+               client.UploadFile(new Uri(@"http://localhost:8082/download/file/http"), "POST", complete);
                client.Dispose();
                SendNotificationAboutReport();
         }
@@ -176,23 +175,10 @@ namespace IntegrationWithPharmacies.Controllers
 
         private static void sendMail()
         {
-            MailMessage mail = new MailMessage();
-            SmtpClient SmptServer = new SmtpClient("smtp.gmail.com");
-
-            mail.From = new MailAddress("ourhospital9@gmail.com");
-
-            mail.To.Add("pharmacyisa@gmail.com");
-
-            mail.Subject = "Notification about send file";
-
-            mail.Body = "Body of mail address";
-
-            SmptServer.Port = 587;
-
+            MailMessage mail = new MailMessage("ourhospital9@gmail.com", "pharmacyisa@gmail.com", "Notification about send file", "Body of mail address");
+            SmtpClient SmptServer = new SmtpClient("smtp.gmail.com",587);
             SmptServer.Credentials = new System.Net.NetworkCredential("ourhospital9@gmail.com", "hospital.9");
-
             SmptServer.EnableSsl = true;
-
             SmptServer.Send(mail);
         }
     }
