@@ -263,11 +263,15 @@ namespace HealthClinic.CL.Service
             return false;
         }
 
+        /// <summary> This method is getting all doctors that have same specialty given as parameter. </summary>
+        /// <returns> list of all doctors that have same specialty. </returns>
         public List<DoctorUser> GetDoctorsBySpecialty(string specialty)
         {
             return GetAll().FindAll(doctor => UtilityMethods.CheckForSpecialty(doctor, specialty));
         }
 
+        /// <summary> This method is getting all available doctors on given date, that have correct specialty. </summary>
+        /// <returns> list of all doctors that have are available. </returns>
         public List<DoctorUser> GetAvailableDoctors(string specialty, string date, int patientId)
         {
             return GetDoctorsBySpecialty(specialty).FindAll(doctor => this.regularAppointmentService.GetAllAvailableAppointmentsForDate(date, doctor.id, patientId).Count != 0);

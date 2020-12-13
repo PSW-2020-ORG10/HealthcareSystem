@@ -40,7 +40,7 @@ namespace PatientWebApplication.Controllers
 
 
         /// <summary> This method is calling <c>RegularAppointmentService</c> to get list of all patient <c>DoctorAppointment</c> that matches search dto. </summary>
-        /// <param name="dto"><c>dto</c> is Data Transfer Object that contains <c>DoctorNameAndSurname</c>, <c>Start</c>, <c>End</c>, <c>AppointmentType</c>, <c>PatientId</c> and will be used for filtering operations. 
+        /// <param name="dto"><c>dto</c> is Data Transfer Object that contains <c>DoctorNameAndSurname</c>, <c>Start</c>, <c>End</c>, <c>AppointmentType</c>, <c>PatientId</c> and will be used for filtering appointments. 
         /// </param>
         /// <returns> 200 Ok with list of filtered patient appointments. </returns>
         [HttpPost("search")]
@@ -49,8 +49,8 @@ namespace PatientWebApplication.Controllers
             return Ok(new AppointmentAdapter().ConvertAppointmentListToAppointmentDtoList(this.regularAppointmentService.SimpleSearchAppointments(dto)));
         }
 
-        /// <summary> This method is calling <c>regularAppointmentService</c> to get list of all <c>DoctorAppointment</c> that already happend. </summary>
-        /// <returns> 200 Ok with list of all patient prescriptions. </returns>
+        /// <summary> This method is calling <c>regularAppointmentService</c> to get list of all <c>DoctorAppointment</c> that already happened. </summary>
+        /// <returns> 200 Ok with list of all patient's appointments that already happened. </returns>
         [HttpGet("patient")]       
         public IActionResult GetAppointmentsForPatient()
         {
@@ -58,15 +58,15 @@ namespace PatientWebApplication.Controllers
         }
 
         /// <summary> This method is calling <c>regularAppointmentService</c> to get list of all <c>DoctorAppointment</c> that is happening in two days. </summary>
-        /// <returns> 200 Ok with list of all patient prescriptions. </returns>
+        /// <returns> 200 Ok with list of all patient's appointments that's going to happen in two days. </returns>
         [HttpGet("patientInTwoDays")]
         public IActionResult GetAppointmentsForPatientInTwoDays()
         {
             return Ok(this.regularAppointmentService.GetAppointmentsForPatientInTwoDays(2));
         }
 
-        /// <summary> This method is calling <c>regularAppointmentService</c> to get list of all <c>DoctorAppointment</c> that already happend. </summary>
-        /// <returns> 200 Ok with list of all patient prescriptions. </returns>
+        /// <summary> This method is calling <c>regularAppointmentService</c> to get list of all <c>DoctorAppointment</c> that are going to happen. </summary>
+        /// <returns> 200 Ok with list of all patient's appointments that's going to happen in future. </returns>
         [HttpGet("patientInFuture")]
         public IActionResult GetAppointmentsForPatientInFuture()
         {
@@ -95,24 +95,40 @@ namespace PatientWebApplication.Controllers
             return Ok(this.regularAppointmentService.AdvancedSearchAppointments(dto));
         }
 
+        /// <summary> This method is calling <c>regularAppointmentService</c> to get list of all recommended appointments. </summary>
+        /// <param name="dto"><c>dto</c> is Data Transfer Object that contains doctor id, start date, end date and priority and will be used for getting recommended appointments. 
+        /// </param>
+        /// <returns> 200 Ok with list of all recommended appointments. </returns>
         [HttpPost("recommend")]
         public IActionResult RecommendAppointmentSchedule(RecommendedAppointmentDto dto)
         {
             return Ok(this.regularAppointmentService.GetRecommendedAppointment(dto));
         }
 
+        /// <summary> This method is calling <c>regularAppointmentService</c> to schedule recommended appointment. </summary>
+        /// <param name="appointment"> Recommended appointment that is going to be scheduled.
+        /// </param>
+        /// <returns> 200 Ok with recommended appointment. </returns>
         [HttpPost("createRecommended")]
         public IActionResult CreateRecommended(DoctorAppointment appointment)
         {
             return Ok(this.regularAppointmentService.CreateRecommended(appointment));
         }
 
+        /// <summary> This method is calling <c>regularAppointmentService</c> to get all available appointments based on dto object. </summary>
+        /// <param name="dto"><c>dto</c> is Data Transfer Object that contains date, doctor id and patient id and will be used for getting available appointments. 
+        /// </param>
+        /// <returns> 200 Ok with list of all available appointments. </returns>
         [HttpPost("availableappointments")]
         public IActionResult GetAvailableAppointments(AvailableAppointmentsSearchDto dto)
         {
             return Ok(this.regularAppointmentService.GetAllAvailableAppointmentsForDate(dto.Date, dto.DoctorId, dto.PatientId));
         }
 
+        /// <summary> This method is calling <c>regularAppointmentService</c> to schedule regular appointment. </summary>
+        /// <param name="appointment"> Appointment that is going to be scheduled.
+        /// </param>
+        /// <returns> if <paramref name="appointment"/> is invalid send 400 Bad Request; otherwise 200 Ok with scheduled regular appointment </returns>
         [HttpPost]
         public IActionResult Post(DoctorAppointment appointment)
         {
