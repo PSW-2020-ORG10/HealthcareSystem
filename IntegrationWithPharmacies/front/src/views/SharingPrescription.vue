@@ -73,24 +73,29 @@
                         <tr style="font-weight: bold; ">
                             <th style="width: 200px;" scope="col">Name of pharmacy</th>
                             <th style="width: 200px;" scope="col">Medicine</th>
-                            <th style="width: 200px;" scope="col">Quantity</th>
+    
                             <th style="width: 200px;" scope="col">Avaible</th>
                             <th style="width: 200px;" scope="col"></th>
                             <th style="width: 200px;" scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="pharmacy in pharmacies" :key="pharmacy.id">
-                            <td>{{pharmacy}}</td>
-                            <td>{{quantity}}</td>
+                        <tr v-for="pharmacy in pharmacies" :key="pharmacy.api">
+                            <td>{{pharmacy.name}}</td>
                             <td>{{selected}}</td>
                             <td><div style="background-color:lightgreen">YES</div></td>
-                            <td><button v-on:click="sendSftp($event, pharmacy)">Send(Sftp)</button></td>
-                            <td><button v-on:click="sendHttp($event, pharmacy)">Send(Http)</button></td>
+                            <td><button v-on:click="sendSftp($event, pharmacy.api)">Send(Sftp)</button></td>
+                            <td><button v-on:click="sendHttp($event, pharmacy.api)">Send(Http)</button></td>
+
                         </tr>
 
                     </tbody>
                 </table>
+                  <div v-if="showTableAvailability" class="row">
+                <div class="col-25" style="border:thick solid #000000">
+                     Medicine is not available.
+                </div>
+            </div>
             </div>
             <div class="row">
                 <label v-if="sent" style="color:lightgreen;font-size:25px;">Successfully sent prescription!</label>
@@ -119,39 +124,43 @@
                 selectedPatient: null,
                 hidden: false,
                 medSpecification: "",
-                showTable : false
+                showTable: false,
+                showTableAvailability : false
               
             }
         },
         methods: {
           
             specification: function () {
-                alert(this.selected);
                 this.showSpecification = true;
-                this.medSpecification = this.selected;
+                this.axios.get('api/sharingPrescription/http/recieve/' + this.selected)
+                    .then(res => {
+                        this.medSpecification = res.data;
+                    })
+                    .catch(res => {
+                        console.log(res);
+                    });
             },
-            //LUPILA SAM PUTANJU U KONTROLERU, TO JE ONO ZA DOBAVLJANJE LIJEKOVA U APOTEKAMA, PROSLEDJUJEM LIJEK I KOLICINU A DOBIJAM APOTEKU ILI IME APOTEKE, SVEJEDNO
+
             showAvailability: function () {
                 this.showTable = true;
-                var parametres = {
-                    medication: this.selected,
-                    quantity: this.quantity
-                }
-                this.axios.post('api/sharingPrescription/pharmacyAvailability', parametres)
+          
+                this.axios.get('api/sharingPrescription/http/medicineAvailability/'+this.selected + "_"+this.quantity)
                     .then(res => {
-                        this.pharmacies = res.pharmacies;
+                        this.pharmacies = res.data;
+                        this.showTableAvailability = false;
                     })
-                    .catch(res=> {
+                    .catch(res => {
+                        this.showTableAvailability = true;
                         console.log(res);
                     });
             }, 
             showMedId: function () {
                 this.medIdNumber = this.selectedPatient.medicalIdNumber;
             },
-            //DODALA SAM OVDE I PHARMACY DA SE PROSLEDJUJE
-            sendHttp: function (event, pharmacy) {
+            sendHttp: function (event,pharmacy2) {
                 const data = {
-                    pharmacy: this.pharmacy,
+                    pharmacy: pharmacy2,
                     name: this.selectedPatient.firstName,
                     surname: this.selectedPatient.secondName,
                     medicalIDNumber: this.selectedPatient.medicalIdNumber,
@@ -171,10 +180,9 @@
                         console.log(res);
                     })
             },
-            //DODALA SAM OVDE I PHARMACY DA SE PROSLEDJUJE
-             sendSftp: function (event, pharmacy) {
+            sendSftp: function (event, pharmacy2) {
                 const data = {
-                    pharmacy: this.pharmacy,
+                    pharmacy: pharmacy2,
                     name: this.selectedPatient.firstName,
                     surname: this.selectedPatient.secondName,
                     medicalIDNumber: this.selectedPatient.medicalIdNumber,
@@ -198,7 +206,7 @@
 
         },
         mounted() {
-            this.axios.get('api/sharingPrescription')
+            this.axios.get('api/sharingPrescription/medicinesIsa')
                 .then(res => {
                     this.medications = res.data;
                 })
