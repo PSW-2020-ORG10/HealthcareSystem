@@ -32,6 +32,7 @@ namespace PatientWebApplicationIntegrationTests
             _context = server.Host.Services.GetService(typeof(MyDbContext)) as MyDbContext;
             _client = server.CreateClient();
         }
+
         [Fact]
         public async Task Find_No_Available_Appointments()
         {
@@ -41,17 +42,14 @@ namespace PatientWebApplicationIntegrationTests
             var appointments = await response.Content.ReadAsAsync<List<DoctorAppointment>>();
             appointments.ShouldBeEmpty();
         }
+
         [Fact]
         public async Task Find_Available_Appointments()
         {
-            var doctor1 = new DoctorUser(1, "TestDoctorName1", "TestDoctorNameSurname1", "1234", "02/02/2020", "123", "email", "pass", "Grad", 200.0, false, "Cardiology", new List<DoctorNotification>(), "Ordination 1");
-            var patient1 = new PatientUser(1, "PatientName1", "PatientSurname1", "Female", "1234", "2/2/2020", "123", "2112313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null);
-            var shift1 = new Shift(1, "14:00", "16:00");
-            var schedule1 = new Schedule(1, 1, "03/03/2021", true, 1, "1");
-            _context.Doctors.Add(doctor1);
-            _context.Patients.Add(patient1);
-            _context.Shifts.Add(shift1);
-            _context.Schedules.Add(schedule1);
+            _context.Doctors.Add(new DoctorUser(1, "TestDoctorName1", "TestDoctorNameSurname1", "1234", "02/02/2020", "123", "email", "pass", "Grad", 200.0, false, "Cardiology", new List<DoctorNotification>(), "Ordination 1"));
+            _context.Patients.Add(new PatientUser(1, "PatientName1", "PatientSurname1", "Female", "1234", "2/2/2020", "123", "2112313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null));
+            _context.Shifts.Add(new Shift(1, "14:00", "16:00"));
+            _context.Schedules.Add(new Schedule(1, 1, "03/03/2021", true, 1, "1"));
             _context.SaveChanges();
             var stringContent = new StringContent(JsonConvert.SerializeObject(new AvailableAppointmentsSearchDto("03/03/2021", 1, 1)), Encoding.UTF8, "application/json");
             var response = await _client.PostAsync("http://localhost:60198/api/doctorappointment/availableappointments", stringContent);
@@ -63,10 +61,11 @@ namespace PatientWebApplicationIntegrationTests
         [Fact]
         public async Task Schedule_Appointment()
         {
-            var stringContent = new StringContent(JsonConvert.SerializeObject(new DoctorAppointment(0, new TimeSpan(15,30,0), "03/03/2021", 1, 1, new List<Referral>(), "Ordination 1")), Encoding.UTF8, "application/json");
+            var stringContent = new StringContent(JsonConvert.SerializeObject(new DoctorAppointment(0, new TimeSpan(15, 30, 0), "03/03/2021", 1, 1, new List<Referral>(), "Ordination 1")), Encoding.UTF8, "application/json");
             var response = await _client.PostAsync("http://localhost:60198/api/doctorappointment", stringContent);
             response.StatusCode.ShouldBe(HttpStatusCode.OK);
         }
+
         [Fact]
         public async Task Try_To_Schedule_Unvalid_Appointment()
         {
