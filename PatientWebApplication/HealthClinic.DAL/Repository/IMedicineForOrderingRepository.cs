@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace HealthClinic.CL.Repository
 {
-    interface IMedicineForOrderingRepository
+    public interface IMedicineForOrderingRepository
     {
         MedicineForOrdering Create(MedicineForOrdering medicine);
         List<MedicineForOrdering> GetAll();

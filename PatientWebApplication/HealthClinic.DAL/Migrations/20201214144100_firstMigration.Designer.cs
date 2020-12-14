@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HealthClinic.CL.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20201212110138_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20201214144100_firstMigration")]
+    partial class firstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -1279,10 +1279,10 @@ namespace HealthClinic.CL.Migrations
                             allergie = "Alergija",
                             bornIn = "Grad2",
                             city = "Grad",
-                            dateOfBirth = "2/2/2020",
+                            dateOfBirth = "02/02/1990",
                             email = "email",
                             exLastname = "",
-                            firstName = "Pera2",
+                            firstName = "Pera",
                             gender = "Male",
                             guest = false,
                             isBlocked = false,
@@ -1302,11 +1302,11 @@ namespace HealthClinic.CL.Migrations
                             allergie = "Alergija",
                             bornIn = "Grad2",
                             city = "Grad",
-                            dateOfBirth = "2/2/2020",
-                            email = "email",
+                            dateOfBirth = "21/07/1989",
+                            email = "marko_markovic@gmail.com",
                             exLastname = "",
-                            firstName = "Pera3",
-                            gender = "Female",
+                            firstName = "Marko",
+                            gender = "Male",
                             guest = false,
                             isBlocked = false,
                             isMarried = false,
@@ -1315,9 +1315,9 @@ namespace HealthClinic.CL.Migrations
                             medicalIdNumber = "2112313",
                             parentName = "Roditelj",
                             password = "pass",
-                            phoneNumber = "123",
-                            secondName = "Peric",
-                            uniqueCitizensidentityNumber = "1234"
+                            phoneNumber = "555333",
+                            secondName = "Markovic",
+                            uniqueCitizensidentityNumber = "123456789"
                         },
                         new
                         {
@@ -1594,6 +1594,38 @@ namespace HealthClinic.CL.Migrations
                             medicalStaffsWorkingPace = 3,
                             patientId = 1
                         });
+                });
+
+            modelBuilder.Entity("HealthClinic.CL.Model.Pharmacy.EPrescription", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("MedicalIDNumber")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Medicine")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Pharmacy")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Surname")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Usage")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("id");
+
+                    b.ToTable("EPrescriptions");
                 });
 
             modelBuilder.Entity("HealthClinic.CL.Model.Pharmacy.RegistrationInPharmacy", b =>

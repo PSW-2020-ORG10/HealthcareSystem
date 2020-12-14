@@ -31,18 +31,19 @@ namespace IntegrationWithPharmacies.Controllers
             MedicineService = new MedicineForOrderingService(context);
             DoctorOrderService = new DoctorOrderService(context);
             RegistrationInPharmacyService = new RegistrationInPharmacyService(context);
-            Environment = "Local";
+            Environment = Program.Environment;
         }
 
 
         [HttpPost]
         public IActionResult Post(DateOfOrder date)
         {
-            if (Environment.Equals("Local"))
-            {
-                return writeInFileSftp(date);
-            }
-            return BadRequest();
+            /*  if (Environment.Equals("Local"))
+              {
+                  return writeInFileSftp(date);
+              }
+              return BadRequest();*/
+            return writeInFileSftp(date);
         }
 
         private IActionResult writeInFileSftp(DateOfOrder date)
@@ -73,11 +74,12 @@ namespace IntegrationWithPharmacies.Controllers
         [HttpPost("http")]
         public IActionResult PostHttp(DateOfOrder date)
         {
-            if (Environment.Equals("Development"))
-            {
-                return writeInFileHttp(date);
-            }
-            return BadRequest();
+            /* if (Environment.Equals("Development"))
+             {
+                 return writeInFileHttp(date);
+             }
+             return BadRequest();*/
+            return writeInFileHttp(date);
         }
 
         private IActionResult writeInFileHttp(DateOfOrder date)
@@ -164,7 +166,7 @@ namespace IntegrationWithPharmacies.Controllers
         }
         private SftpConfig getConfig()
         {
-            return new SftpConfig { Host = "192.168.1.244", Port = 22, UserName = "tester", Password = "password" };
+            return new SftpConfig { Host = "192.168.1.5", Port = 22, UserName = "tester", Password = "password" };
         }
         public void SendNotificationAboutReport()
         {

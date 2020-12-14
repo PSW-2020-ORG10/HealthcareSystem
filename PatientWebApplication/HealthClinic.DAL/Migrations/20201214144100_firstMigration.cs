@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HealthClinic.CL.Migrations
 {
-    public partial class FirstMigration : Migration
+    public partial class firstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -32,6 +32,25 @@ namespace HealthClinic.CL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_EmployeeUser", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EPrescriptions",
+                columns: table => new
+                {
+                    id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Pharmacy = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    Surname = table.Column<string>(nullable: true),
+                    MedicalIDNumber = table.Column<string>(nullable: true),
+                    Medicine = table.Column<string>(nullable: true),
+                    Quantity = table.Column<int>(nullable: false),
+                    Usage = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EPrescriptions", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -704,8 +723,8 @@ namespace HealthClinic.CL.Migrations
                 columns: new[] { "id", "allergie", "bornIn", "city", "dateOfBirth", "email", "exLastname", "file", "firstName", "gender", "guest", "isBlocked", "isMarried", "isRegisteredBySecretary", "isVerified", "medicalIdNumber", "parentName", "password", "phoneNumber", "secondName", "uniqueCitizensidentityNumber" },
                 values: new object[,]
                 {
-                    { 1, "Alergija", "Grad2", "Grad", "2/2/2020", "email", "", null, "Pera2", "Male", false, false, false, false, false, "212313", "Roditelj", "pass", "123", "Peric", "1234" },
-                    { 2, "Alergija", "Grad2", "Grad", "2/2/2020", "email", "", null, "Pera3", "Female", false, false, false, false, false, "2112313", "Roditelj", "pass", "123", "Peric", "1234" },
+                    { 1, "Alergija", "Grad2", "Grad", "02/02/1990", "email", "", null, "Pera", "Male", false, false, false, false, false, "212313", "Roditelj", "pass", "123", "Peric", "1234" },
+                    { 2, "Alergija", "Grad2", "Grad", "21/07/1989", "marko_markovic@gmail.com", "", null, "Marko", "Male", false, false, false, false, false, "2112313", "Roditelj", "pass", "555333", "Markovic", "123456789" },
                     { 3, "Alergija", "Grad2", "Grad", "2/2/2020", "email", "", null, "Stefan", "Male", false, false, false, false, false, "212313", "Roditelj", "pass", "123", "Lelic", "1234" },
                     { 4, "Alergija", "Grad2", "Grad", "2/2/2020", "email", "", null, "Marko", "Female", false, false, false, false, false, "2112313", "Roditelj", "pass", "123", "Lazarevic", "1234" }
                 });
@@ -1013,6 +1032,9 @@ namespace HealthClinic.CL.Migrations
 
             migrationBuilder.DropTable(
                 name: "DoctorsOrders");
+
+            migrationBuilder.DropTable(
+                name: "EPrescriptions");
 
             migrationBuilder.DropTable(
                 name: "Feedbacks");

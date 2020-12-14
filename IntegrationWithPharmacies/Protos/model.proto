@@ -1,0 +1,15 @@
+﻿syntax = "proto3";
+
+package rs.ac.uns.ftn.grpc;
+option csharp_namespace = "IntegrationWithPharmacies.Protos";
+
+message MessageProto {
+  string message = 1;
+  int64 randomInteger = 2;
+}
+
+message MessageResponseProto {
+  string response = 1;
+  string status = 2;
+}
+

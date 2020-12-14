@@ -9,6 +9,7 @@ namespace HealthClinic.CL.Service
     public class DoctorOrderService
     {
         public DoctorOrderRepository DoctorOrderRepository { get; }
+        public IDoctorOrderRepositoy IdoctorOrderRepository { get; }
         public object DoctorOrderAdapter { get; private set; }
 
         public DoctorOrderService() { }
@@ -17,6 +18,10 @@ namespace HealthClinic.CL.Service
         {
             DoctorOrderRepository = new DoctorOrderRepository(context);
         }
+        public DoctorOrderService(IDoctorOrderRepositoy orderRepository)
+        {
+            IdoctorOrderRepository = orderRepository;
+        }
         public List<DoctorsOrder> GetAll()
         {
             return DoctorOrderRepository.GetAll();
@@ -24,6 +29,10 @@ namespace HealthClinic.CL.Service
         public DoctorsOrder Create(DoctorsOrderDto dto)
         {
             return DoctorOrderRepository.Add(DoctorsOrderAdapter.DoctorsOrderDtoToDoctorsOrder(dto));
+        }
+        public List<DoctorsOrder> GetAllForStub()
+        {
+            return IdoctorOrderRepository.GetAll();
         }
     }
 }
