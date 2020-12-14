@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using HealthClinic.CL.Adapters;
+﻿using HealthClinic.CL.Adapters;
 using HealthClinic.CL.DbContextModel;
 using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Orders;
 using HealthClinic.CL.Repository;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace HealthClinic.CL.Service
 {
-    public class MedicineDescriptionService
+    public class MedicineDescriptionService : IMedicineDescriptionService
     {
         public MedicineDescriptionRepository MedicineDescriptionRepository { get; }
         public MedicineDescriptionService() { }
@@ -18,13 +18,15 @@ namespace HealthClinic.CL.Service
         {
             MedicineDescriptionRepository = new MedicineDescriptionRepository(context);
         }
-        public List<MedicineDescription> GetAll()
-        {
-            return MedicineDescriptionRepository.GetAll();
-        }
+      
         public MedicineDescription Create(MedicineDescriptionDto dto)
         {
             return MedicineDescriptionRepository.Create(MedicineDescriptionAdapter.MedicineDescriptionDtoToMedicineDescription(dto));
+        }
+
+        public List<MedicineDescription> GetAll()
+        {
+            return MedicineDescriptionRepository.GetAll();
         }
     }
 }

@@ -3,7 +3,7 @@ using HealthClinic.CL.Model.Orders;
 
 namespace HealthClinic.CL.Adapters
 {
-    class MedicineDescriptionAdapter
+    public class MedicineDescriptionAdapter
     {
         public static MedicineDescription MedicineDescriptionDtoToMedicineDescription(MedicineDescriptionDto dto)
         {

@@ -166,7 +166,7 @@ namespace IntegrationWithPharmacies.Controllers
         }
         private SftpConfig getConfig()
         {
-            return new SftpConfig { Host = "192.168.1.5", Port = 22, UserName = "tester", Password = "password" };
+            return new SftpConfig { Host = "192.168.56.1", Port = 22, UserName = "tester", Password = "password" };
         }
         public void SendNotificationAboutReport()
         {

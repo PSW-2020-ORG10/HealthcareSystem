@@ -1,12 +1,13 @@
-﻿using System;
+﻿using HealthClinic.CL.Model.Orders;
+using System;
 using System.Collections.Generic;
-using HealthClinic.CL.Model.Orders;
+using System.Text;
 
 namespace HealthClinic.CL.Repository
 {
     public interface IMedicineDescriptionRepository
     {
-        MedicineDescription Create(MedicineDescription medicineDescription);
+        MedicineDescription Create(MedicineDescription medicine);
         List<MedicineDescription> GetAll();
     }
 }

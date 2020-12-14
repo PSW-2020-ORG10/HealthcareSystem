@@ -57,8 +57,8 @@ namespace HealthClinic.CL.DbContextModel
 
         public DbSet<Survey> Surveys { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<MedicineDescription> MedicineDescriptions { get; set; }
         public DbSet<EPrescription> EPrescriptions { get; set; }
-        public DbSet<MedicineDescription> MedicineDescription { get; set; }
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
@@ -258,10 +258,10 @@ namespace HealthClinic.CL.DbContextModel
                 new Survey(2, 1, 4, 4, 5, 3, 1, 5, 5, 2, 2, 4, 2, 5, 3, 1, 3, 3, 3, 5)        
             );
             modelBuilder.Entity<MedicineDescription>().HasData(
+               new MedicineDescription(1,"Analgin", "Analgin has anti - inflammatory, analgesic, antifebrile action.", 1)
+               
+           );
 
-                new MedicineDescription(1, "Analgin", "Analgin[metamizole] is a painkiller, spasm reliever and fever reliever", 1)
-
-       );
 
         }
 

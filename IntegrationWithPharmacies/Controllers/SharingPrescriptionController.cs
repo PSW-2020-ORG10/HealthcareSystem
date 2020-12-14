@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Text;
 using HealthClinic.CL.DbContextModel;
+using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Orders;
 using HealthClinic.CL.Model.Pharmacy;
 using HealthClinic.CL.Service;
@@ -29,7 +30,7 @@ namespace IntegrationWithPharmacies.Controllers
             MedicineService = new MedicineService(context);
             PatientService = new PatientService(context);
             Environment = Program.Environment;
-            MedicineDescriptionService = new MedicineDescriptionService();
+            MedicineDescriptionService = new MedicineDescriptionService(context);
         }
         
         [HttpGet("patients")]
@@ -68,7 +69,7 @@ namespace IntegrationWithPharmacies.Controllers
             System.IO.FileStream fs = System.IO.File.Create(complete);
             fs.Close();
             System.IO.File.WriteAllText(complete, getTextForPrescription(prescription));
-            sftpService.UploadFile(@"..\test.txt", @"\pub\" + complete);
+            sftpService.UploadFile(complete, @"\pub\" + complete);
             SendNotificationAboutReport();
             return Ok();
         }
@@ -76,19 +77,19 @@ namespace IntegrationWithPharmacies.Controllers
         [HttpGet("http/recieve/{medicine}")]
         public IActionResult GetMedicineDescription(string medicine)
         {
-           /* foreach (MedicineDescription med in MedicineDescriptionService.GetAll())
+            foreach (MedicineDescription med in MedicineDescriptionService.GetAll())
             {
                 if (med.Name.ToString().Equals(medicine))
                 {
                     return Ok(med.Description.ToString());
                 }
-            }*/
+            }
             HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create("http://localhost:8082/upload/medicine/" + medicine);
             HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse();
             Stream response = webResponse.GetResponseStream();
             StreamReader readStream = new StreamReader(response, System.Text.Encoding.GetEncoding("utf-8"));
             string description = readStream.ReadToEnd();
-          //  MedicineDescriptionService.Create(new HealthClinic.CL.Dtos.MedicineDescriptionDto(medicine,description,1));
+            MedicineDescriptionService.Create(new HealthClinic.CL.Dtos.MedicineDescriptionDto(medicine, description, 1));
             if (description.Length != 0) return Ok(description);
             return BadRequest();
             
@@ -192,21 +193,21 @@ namespace IntegrationWithPharmacies.Controllers
 
         private SftpConfig getConfig()
         {
-            return new SftpConfig { Host = "192.168.1.5", Port = 22, UserName = "tester", Password = "password" };
+            return new SftpConfig { Host = "192.168.56.1", Port = 22, UserName = "tester", Password = "password" };
         }
 
         [HttpGet("grpc/recieve/{medicine}")]
         public IActionResult GetMedicineDescriptionGrpc(string medicine)
         {
-            /*foreach (MedicineDescription med in MedicineDescriptionService.GetAll())
+            foreach (MedicineDescription med in MedicineDescriptionService.GetAll())
             {
                 if (med.Name.ToString().Equals(medicine))
                 {
                     return Ok(med.Description.ToString());
                 }
-            }*/
+            }
             string response = new ClientScheduledService().SendMessage(medicine).Result;
-            //MedicineDescriptionService.Create(new HealthClinic.CL.Dtos.MedicineDescriptionDto(medicine, response.ToString(), 1));
+            MedicineDescriptionService.Create(new HealthClinic.CL.Dtos.MedicineDescriptionDto(medicine, response, 1));
             return Ok(response);
         }
 
