@@ -2,10 +2,12 @@
 using HealthClinic.CL.Model.Patient;
 using HealthClinic.CL.Repository;
 using HealthClinic.CL.Service;
+using HealthClinic.CL.Utility;
 using Moq;
 using Shouldly;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using Xunit;
@@ -44,8 +46,8 @@ namespace PatientWebApplicationTests
             PatientUser patient1 = new PatientUser(1, "Pera2", "Peric", "Male", "1234", "2/2/2020", "123", "212313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null);
             PatientUser patient2 = new PatientUser(2, "Pera3", "Peric", "Female", "1234", "2/2/2020", "123", "2112313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null);
 
-            DoctorAppointment appointment1 = new DoctorAppointment(4, new TimeSpan(), "17/12/2020", patient1, doctor1, new List<Referral>(), "1");
-            DoctorAppointment appointment2 = new DoctorAppointment(5, new TimeSpan(), "17/12/2020", patient1, doctor2, new List<Referral>(), "1");
+            DoctorAppointment appointment1 = new DoctorAppointment(4, new TimeSpan(), DateTime.Now.AddDays(5).ToString("dd/MM/yyy", CultureInfo.InvariantCulture), patient1, doctor1, new List<Referral>(), "1");
+            DoctorAppointment appointment2 = new DoctorAppointment(5, new TimeSpan(), "17/12/2019", patient1, doctor2, new List<Referral>(), "1");
 
 
 

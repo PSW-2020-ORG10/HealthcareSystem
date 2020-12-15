@@ -587,6 +587,15 @@ namespace HealthClinic.CL.Migrations
                             isOnDuty = true,
                             room = "1",
                             shiftId = 1
+                        },
+                        new
+                        {
+                            id = 20,
+                            EmployeeId = 1,
+                            date = "12/01/2021",
+                            isOnDuty = true,
+                            room = "Ordination 1",
+                            shiftId = 3
                         });
                 });
 
@@ -1277,10 +1286,10 @@ namespace HealthClinic.CL.Migrations
                             allergie = "Alergija",
                             bornIn = "Grad2",
                             city = "Grad",
-                            dateOfBirth = "2/2/2020",
+                            dateOfBirth = "02/02/1990",
                             email = "email",
                             exLastname = "",
-                            firstName = "Pera2",
+                            firstName = "Pera",
                             gender = "Male",
                             guest = false,
                             isBlocked = false,
@@ -1300,11 +1309,11 @@ namespace HealthClinic.CL.Migrations
                             allergie = "Alergija",
                             bornIn = "Grad2",
                             city = "Grad",
-                            dateOfBirth = "2/2/2020",
-                            email = "email",
+                            dateOfBirth = "21/07/1989",
+                            email = "marko_markovic@gmail.com",
                             exLastname = "",
-                            firstName = "Pera3",
-                            gender = "Female",
+                            firstName = "Marko",
+                            gender = "Male",
                             guest = false,
                             isBlocked = false,
                             isMarried = false,
@@ -1313,9 +1322,9 @@ namespace HealthClinic.CL.Migrations
                             medicalIdNumber = "2112313",
                             parentName = "Roditelj",
                             password = "pass",
-                            phoneNumber = "123",
-                            secondName = "Peric",
-                            uniqueCitizensidentityNumber = "1234"
+                            phoneNumber = "555333",
+                            secondName = "Markovic",
+                            uniqueCitizensidentityNumber = "123456789"
                         },
                         new
                         {
