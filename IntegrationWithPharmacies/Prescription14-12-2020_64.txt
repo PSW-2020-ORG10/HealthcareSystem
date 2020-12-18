@@ -1,8 +1,0 @@
-api4
- Precription for medicine
-
-Patients name: Pera
-Patients surname: Peric
-Patients medical ID number: 212313
-Medication: Defrinol Quantity: 5
-Usage: 5 times a day

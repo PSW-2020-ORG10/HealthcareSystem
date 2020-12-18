@@ -4,5 +4,5 @@ api4
 Patients name: Marko
 Patients surname: Markovic
 Patients medical ID number: 2112313
-Medication: Pancef Quantity: 50
+Medication: Defrinol Quantity: 2
 Usage: once a day

@@ -1,8 +1,0 @@
-api2
-          Precription for medicine
-
-Patients name: Pera3
-Patients surname: Peric
-Patients medical ID number: 2112313
-Medication: Paracetamol     Quantity: 3
-Usage: 

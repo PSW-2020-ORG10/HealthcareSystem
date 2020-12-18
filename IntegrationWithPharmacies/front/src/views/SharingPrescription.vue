@@ -137,7 +137,7 @@
           
             specification: function () {
                 this.showSpecification = true;
-                this.axios.get('api/sharingPrescription/http/recieve/' + this.selected)
+                this.axios.get('api/sharingPrescription/http/description/' + this.selected)
                     .then(res => {
                         this.medSpecification = res.data;
                     })
@@ -148,7 +148,7 @@
 
             specificationGrpc: function () {
                 this.showSpecification = true;
-                this.axios.get('api/sharingPrescription/grpc/recieve/' + this.selected)
+                this.axios.get('api/sharingPrescription/grpc/description/' + this.selected)
                     .then(res => {
                         this.medSpecification = res.data;
                     })

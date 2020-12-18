@@ -1,18 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Net;
-using System.Net.Mail;
-using System.Text;
 using HealthClinic.CL.DbContextModel;
 using HealthClinic.CL.Dtos;
-using HealthClinic.CL.Model.Orders;
 using HealthClinic.CL.Model.Pharmacy;
 using HealthClinic.CL.Service;
 using IntegrationWithPharmacies.FileProtocol;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging.Abstractions;
-using RestSharp;
 
 namespace IntegrationWithPharmacies.Controllers
 {
@@ -21,23 +14,30 @@ namespace IntegrationWithPharmacies.Controllers
     [ApiController]
     public class SharingPrescriptionController : Controller
     {
-        private String Environment { get; set; }
-        private MedicineService MedicineService { get; set; }
+        private String Environment { get; }
+        private MedicineService MedicineService { get; }
         private PatientService PatientService { get; set; }
-        private MedicineDescriptionService MedicineDescriptionService { get; set; }
+        private MedicineDescriptionService MedicineDescriptionService { get; }
+        private PrescriptionFileService PrescriptionFileService { get; }
+        private MedicineAvailabilityTable MedicineAvailabilityTable { get; }
+
+
         public SharingPrescriptionController(MyDbContext context)
         {
             MedicineService = new MedicineService(context);
             PatientService = new PatientService(context);
-            Environment = Program.Environment;
             MedicineDescriptionService = new MedicineDescriptionService(context);
+            PrescriptionFileService = new PrescriptionFileService(context);
+            MedicineAvailabilityTable = new MedicineAvailabilityTable();
+            Environment = Program.Environment;
         }
-        
+
         [HttpGet("patients")]
         public IActionResult GetPatients()
         {
             return Ok(PatientService.GetAll());
         }
+
         [HttpGet]
         public IActionResult Get()
         {
@@ -47,168 +47,55 @@ namespace IntegrationWithPharmacies.Controllers
         [HttpGet("medicinesIsa")]
         public IActionResult GetMedicinesFromIsa()
         {
-            var client = new RestSharp.RestClient("http://localhost:8082");
-            var response = client.Get<List<MedicineName>>(new RestRequest("/medicineRequested"));
-            Console.WriteLine("Status: " + response.StatusCode.ToString());
-            response.Data.ForEach(medicine => Console.WriteLine(medicine.ToString()));
-            return Ok(response.Data);
+            return Ok(HttpService.FormMedicineFromIsaRequest().Data);
         }
 
         [HttpPost]
         public IActionResult Post(EPrescription prescription)
-        {
-            // if (Environment.Equals("Local")) return sendPrescriptionSftp(prescription);
-            //return BadRequest();
-            return sendPrescriptionSftp(prescription);
-        }
-
-        private IActionResult sendPrescriptionSftp(EPrescription prescription)
-        {
-            var sftpService = new SftpService(new NullLogger<SftpService>(), getConfig());
-            String complete = @"FilePrescriptions\..\Prescription" + DateTime.Now.ToString("dd-MM-yyyy") + "_" + getRandomNumber() + ".txt";
-            System.IO.FileStream fs = System.IO.File.Create(complete);
-            fs.Close();
-            System.IO.File.WriteAllText(complete, getTextForPrescription(prescription));
-            sftpService.UploadFile(complete, @"\pub\" + complete);
-            SendNotificationAboutReport();
-            return Ok();
-        }
-
-        [HttpGet("http/recieve/{medicine}")]
-        public IActionResult GetMedicineDescription(string medicine)
-        {
-            foreach (MedicineDescription med in MedicineDescriptionService.GetAll())
-            {
-                if (med.Name.ToString().Equals(medicine))
-                {
-                    return Ok(med.Description.ToString());
-                }
-            }
-            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create("http://localhost:8082/upload/medicine/" + medicine);
-            HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse();
-            Stream response = webResponse.GetResponseStream();
-            StreamReader readStream = new StreamReader(response, System.Text.Encoding.GetEncoding("utf-8"));
-            string description = readStream.ReadToEnd();
-            MedicineDescriptionService.Create(new HealthClinic.CL.Dtos.MedicineDescriptionDto(medicine, description, 1));
-            if (description.Length != 0) return Ok(description);
+        {         
+            if (PrescriptionFileService.SendPrescriptionSftp(prescription)) return Ok();
             return BadRequest();
-            
-        }
-        [HttpGet("http/medicineAvailability/{medicine}")]
-        public IActionResult GetMedicineAvailability(String medicine)
-        {
-            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create("http://localhost:8082/medicinePharmacy/" + medicine);
-            HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse();
-            Stream response = webResponse.GetResponseStream();
-            StreamReader readStream = new StreamReader(response, System.Text.Encoding.GetEncoding("utf-8"));
-            return FormMedicineAvailability(readStream.ReadToEnd());
         }
 
-        private IActionResult FormMedicineAvailability(string availability)
-        {
-            if (availability.Length > 5) return GetMedicineAvailabilityTable(availability);
-            return BadRequest();    
-        }
-
-        private IActionResult GetMedicineAvailabilityTable(string availability)
-        {
-            List<MedicineName> medicines = new List<MedicineName>();
-            String[] fileParts = availability.Split(";");
-            if (fileParts.Length == 0) GetOnlyOnePharmacy(availability, medicines);
-            else GetAllPharmacies(medicines, fileParts);
-            return Ok(medicines);
-        }
-
-        private static void GetAllPharmacies(List<MedicineName> medicines, string[] fileParts)
-        {
-            for (int i = 0; i < fileParts.Length; i++)
-            {
-                String[] nameParts = fileParts[i].Split("_");
-                medicines.Add(new MedicineName("Pharmacy: " + nameParts[0] + ", city: " + nameParts[1], nameParts[2]));
-            }
-        }
-
-        private static void GetOnlyOnePharmacy(string availability, List<MedicineName> medicines)
-        {
-            String[] nameParts = availability.Split("_");
-            medicines.Add(new MedicineName("Pharmacy: " + nameParts[0] + ", city: " + nameParts[1], nameParts[2]));
-        }
-
-        private int getRandomNumber()
-        {
-            return new Random().Next(1, 100);
-        }
-        private String getTextForPrescription(EPrescription prescription)
-        {
-            return prescription.Pharmacy + " Precription for medicine\n\nPatients name: " + prescription.Name + "\nPatients surname: " + prescription.Surname + "\nPatients medical ID number: " + prescription.MedicalIDNumber + "\nMedication: " + prescription.Medicine + " Quantity: " + prescription.Quantity + "\nUsage: " + prescription.Usage + "\n";
-        }
         [HttpPost("http")]
         public IActionResult PostHttp(EPrescription prescription)
         {
-            // if (Environment.Equals("Development"))return sendPrescriptionHttp(prescription);
-            //return BadRequest();
-            return sendPrescriptionHttp(prescription);
+            if (PrescriptionFileService.SendPrescriptionHttp(prescription)) return Ok();
+            return BadRequest();
         }
 
-        private IActionResult sendPrescriptionHttp(EPrescription prescription)
+        [HttpGet("http/description/{medicine}")]
+        public IActionResult GetMedicineDescription(string medicine)
         {
-            String complete = @"FilePrescriptions\..\Prescription" + DateTime.Now.ToString("dd-MM-yyyy") + "_" + getRandomNumber() + ".txt";
-            System.IO.FileStream fs = System.IO.File.Create(complete);
-            fs.Close();
-            System.IO.File.WriteAllText(complete, getTextForPrescription(prescription));
-            try
-            {   uploadFile(complete);
-                return Ok();
-            }
-            catch (Exception e) { return BadRequest(); }
-           
+            String medicineDescription = MedicineDescriptionService.GetMedicineDescriptionFromDatabase(medicine);
+            if (medicineDescription.Equals(""))return GetMedicineDescriptionFromIsa(medicine);
+            return Ok(medicineDescription);
         }
 
-        public void uploadFile(String complete)
+        public IActionResult GetMedicineDescriptionFromIsa(string medicine)
         {
-            WebClient client = new WebClient();
-            client.Credentials = CredentialCache.DefaultCredentials;
-            client.UploadFile(new Uri(@"http://localhost:8082/download/prescription/http"), "POST", complete);
-            client.Dispose();
-            SendNotificationAboutReport();
+            String description = HttpService.FormMedicineDescriptionRequest(medicine);
+            MedicineDescriptionService.Create(new MedicineDescriptionDto(medicine, description, 1));
+            if (description.Length != 0) return Ok(description);
+            return BadRequest();
         }
 
-        public void SendNotificationAboutReport()
-        {
-            try { sendEmail();  }
-            catch (SmtpException ex) { Console.WriteLine(ex.Message); }
-        }
-
-        private static void sendEmail()
-        {   SmtpClient SmptServer = new SmtpClient("smtp.gmail.com",587);
-            SmptServer.Credentials = new System.Net.NetworkCredential("ourhospital9@gmail.com", "hospital.9");
-            SmptServer.EnableSsl = true;
-            SmptServer.Send(GetMailInformation());
-        }
-
-        private static MailMessage GetMailInformation()
-        {
-            return new MailMessage("ourhospital9@gmail.com", "pharmacyisa@gmail.com", "Notification about sent file", "Body of mail address");
-        }
-
-        private SftpConfig getConfig()
-        {
-            return new SftpConfig { Host = "192.168.56.1", Port = 22, UserName = "tester", Password = "password" };
-        }
-
-        [HttpGet("grpc/recieve/{medicine}")]
+        [HttpGet("grpc/description/{medicine}")]
         public IActionResult GetMedicineDescriptionGrpc(string medicine)
         {
-            foreach (MedicineDescription med in MedicineDescriptionService.GetAll())
-            {
-                if (med.Name.ToString().Equals(medicine))
-                {
-                    return Ok(med.Description.ToString());
-                }
-            }
+            String medicineDescription = MedicineDescriptionService.GetMedicineDescriptionFromDatabase(medicine);
+            if(medicineDescription.Equals("")) return GetMedicineDescriptionFromIsa(medicine);
             string response = new ClientScheduledService().SendMessage(medicine).Result;
-            MedicineDescriptionService.Create(new HealthClinic.CL.Dtos.MedicineDescriptionDto(medicine, response, 1));
+            MedicineDescriptionService.Create(new MedicineDescriptionDto(medicine, response, 1));
             return Ok(response);
+        }
+
+        [HttpGet("http/medicineAvailability/{medicine}")]
+        public IActionResult GetMedicineAvailability(String medicine)
+        {
+            List<MedicineName> pharmaciesWithMedicine = MedicineAvailabilityTable.FormMedicineAvailability(HttpService.FormMedicineAvailabilityRequest(medicine));
+            if (pharmaciesWithMedicine == null) return BadRequest();
+            return Ok(pharmaciesWithMedicine);
         }
 
     }

@@ -54,7 +54,7 @@ namespace HealthClinic.CL.Service
         {
             return EPrescriptionAdapter.EPrescriptionDtoToEPresctiption(dto);
         }
-        private String getTextForPrescription(EPrescription prescription)
+        public String getTextForPrescription(EPrescription prescription)
         {
             return prescription.Pharmacy + " Precription for medicine\n\nPatients name: " + prescription.Name + "\nPatients surname: " + prescription.Surname + "\nPatients medical ID number: " + prescription.MedicalIDNumber + "\nMedication: " + prescription.Medicine + " Quantity: " + prescription.Quantity + "\nUsage: " + prescription.Usage + "\n";
         }

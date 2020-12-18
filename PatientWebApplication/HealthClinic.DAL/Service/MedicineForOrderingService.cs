@@ -35,16 +35,6 @@ namespace HealthClinic.CL.Service
             return ImedicineForOrderingRepository.GetAll();
         }
 
-        public string GetMedicineDescription(string medicineName)
-        {
-            foreach (MedicineForOrdering medicine in GetAllForStub())
-            {
-                if (medicine.Name.Equals(medicineName))
-                {
-                    return medicine.Description;
-                }
-            }
-            return "";
-        }
+        
     }
 }
