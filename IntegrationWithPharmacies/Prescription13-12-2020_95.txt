@@ -1,0 +1,8 @@
+api1
+          Precription for medicine
+
+Patients name: Pera2
+Patients surname: Peric
+Patients medical ID number: 212313
+Medication: Brufen     Quantity: 2
+Usage: 5 times per day

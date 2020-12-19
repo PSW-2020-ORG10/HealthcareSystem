@@ -1,10 +1,9 @@
 ﻿using HealthClinic.CL.DbContextModel;
 using HealthClinic.CL.Model.ActionsAndBenefits;
-using HealthClinic.CL.Model.Pharmacy;
 using HealthClinic.CL.Service;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Linq;
+
 
 namespace IntegrationWithPharmacies.Controllers
 {
@@ -15,7 +14,7 @@ namespace IntegrationWithPharmacies.Controllers
     {
         private MessageService MessageService { get; set; }
         private RegistrationInPharmacyService RegistrationInPharmacyService { get; set; }
-   
+
         public ActionsAndBenefitsController(MyDbContext context)
         {
             MessageService = new MessageService(context);
@@ -32,6 +31,8 @@ namespace IntegrationWithPharmacies.Controllers
         {
             return message.Text.Split(':')[0].Trim();
         }
+
+      
     }
 }
 
