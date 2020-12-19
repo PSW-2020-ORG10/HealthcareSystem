@@ -30,8 +30,10 @@
     BLOCK_PATIENT,
     LOADED_ALL_PATIENT_APPOINTMENTS_WITH_SURVEYS,
     LOADED_ALL_PATIENT_APPOINTMENTS_WITHOUT_SURVEYS,
-    LOADED_MALICIOUS_PATIENTS
-} from "../types/types"
+    LOADED_MALICIOUS_PATIENTS,
+    APPOINTMENT_SCHEDULED,
+} from "../types/types";
+import { parseStringToDate } from '../utilities/Utilities';
 
 function addFeedback(state=initialState, action) {
     return {
@@ -251,10 +253,41 @@ function reducer(state = initialState, action) {
                 recommendedAppointments: action.payload
             };
         case CREATE_RECOMMEND_APPOINTMENT:
-            return {
-                ...state,
-                createdRecommendedAppointment: action.payload
-            };    
+            debugger;
+            var date = new Date();
+            date.setDate(date.getDate() + 2);
+            var appointmentDate = parseStringToDate(action.payload.date);
+            if (appointmentDate <= date) {
+                return {
+                    ...state,
+                    patientAppointmentsInTwoDaysList: state.patientAppointmentsInTwoDaysList.concat(action.payload),
+                    createdRecommendedAppointment: action.payload
+                }
+            }
+            else {
+                return {
+                    ...state,
+                    patientAppointmentsInFutureList: state.patientAppointmentsInFutureList.concat(action.payload),
+                    createdRecommendedAppointment: action.payload
+                };
+            }
+        case APPOINTMENT_SCHEDULED:
+            debugger;
+            var date = new Date();
+            date.setDate(date.getDate() + 2);
+            var appointmentDate = parseStringToDate(action.payload.date);
+            if (appointmentDate <= date) {
+                return {
+                    ...state,
+                    patientAppointmentsInTwoDaysList: state.patientAppointmentsInTwoDaysList.concat(action.payload)
+                }
+            }
+            else {
+                return {
+                    ...state,
+                    patientAppointmentsInFutureList: state.patientAppointmentsInFutureList.concat(action.payload)
+                };
+            }
         default:
             return state;
     }

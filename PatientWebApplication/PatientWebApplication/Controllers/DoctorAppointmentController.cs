@@ -112,7 +112,7 @@ namespace PatientWebApplication.Controllers
         [HttpPost("createRecommended")]
         public IActionResult CreateRecommended(DoctorAppointment appointment)
         {
-            return Ok(this.regularAppointmentService.CreateRecommended(appointment));
+            return Ok(this.regularAppointmentService.CreateRegular(appointment));
         }
 
         /// <summary> This method is calling <c>regularAppointmentService</c> to get all available appointments based on dto object. </summary>

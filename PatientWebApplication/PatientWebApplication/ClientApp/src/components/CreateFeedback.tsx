@@ -5,6 +5,7 @@ import { ApplicationState } from '../store';
 import * as CounterStore from '../store/Counter';
 import Header from './Header';
 import CreateForm from './CreateForm';
+import PublishedFeedbackTable from './PublishedFeedbackTable'
 
 type CounterProps =
     CounterStore.CounterState &
@@ -17,6 +18,8 @@ class PatientFeedback extends React.PureComponent<CounterProps> {
             <React.Fragment>
                 <Header title="Send feedback" description="Send your personal feedback." />
                 <CreateForm />
+                <br/>
+                <PublishedFeedbackTable />
             </React.Fragment>
         );
     }
