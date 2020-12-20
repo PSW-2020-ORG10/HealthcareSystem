@@ -1,0 +1,24 @@
+api1;api2;!    Report about consumption of medicine
+
+
+
+     Medicine name: Ibuprofen
+     Ordered quantity: 80 (Date:  09/10/2020 0:00:00 )
+
+     Medicine name: Jomelop
+     Ordered quantity: 25 (Date:  09/10/2020 0:00:00 )
+
+     Medicine name: Antiseptics
+     Ordered quantity: 200 (Date:  09/10/2020 0:00:00 )
+
+     Medicine name: Ibuprofen
+     Ordered quantity: 80 (Date:  09/10/2020 0:00:00 )
+
+     Medicine name: Jomelop
+     Ordered quantity: 25 (Date:  09/10/2020 0:00:00 )
+
+     Medicine name: Antiseptics
+     Ordered quantity: 200 (Date:  09/10/2020 0:00:00 )
+
+
+   Total ordered quatity: 305
