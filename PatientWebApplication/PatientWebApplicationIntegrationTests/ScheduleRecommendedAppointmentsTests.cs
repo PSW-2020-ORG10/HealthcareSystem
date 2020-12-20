@@ -20,7 +20,7 @@ namespace PatientWebApplicationIntegrationTests
 {
     public class ScheduleRecommendedAppointmentsTests
     {
-        private readonly HttpClient _client;
+        /*private readonly HttpClient _client;
         private readonly MyDbContext _context;
 
         public ScheduleRecommendedAppointmentsTests()
@@ -87,6 +87,6 @@ namespace PatientWebApplicationIntegrationTests
             var response = await _client.PostAsync("http://localhost:60198/api/doctorappointment/createRecommended", stringContent);
 
             response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
-        }
+        }*/
     }
 }

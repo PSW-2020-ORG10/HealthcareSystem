@@ -19,7 +19,7 @@ class AppointmentReportSimpleSearch extends React.PureComponent<CounterProps> {
     public render() {
         return (
             <React.Fragment>
-                <Header title="Simple Appointments Search" description="Search appointments." />
+                <Header title="Appointments Search" description="Search appointments." />
                 <br/>
                 {this.state.showSimple ? <button className="btn-lg btn-primary" onClick={this.showAdvanced.bind(this)}>Advanced Search</button> : <button className="btn-lg btn-primary" onClick={this.showSimple.bind(this)}>Simple Search</button>}
                 {this.state.showSimple ? <AppointmentReportSimpleSearchTable /> : <AppointmentsSearchAdvancedTable/>}

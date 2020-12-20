@@ -30,7 +30,7 @@ var AppointmentReportSimpleSearch = /** @class */ (function (_super) {
     }
     AppointmentReportSimpleSearch.prototype.render = function () {
         return (React.createElement(React.Fragment, null,
-            React.createElement(Header_1.default, { title: "Simple Appointments Search", description: "Search appointments." }),
+            React.createElement(Header_1.default, { title: "Appointments Search", description: "Search appointments." }),
             React.createElement("br", null),
             this.state.showSimple ? React.createElement("button", { className: "btn-lg btn-primary", onClick: this.showAdvanced.bind(this) }, "Advanced Search") : React.createElement("button", { className: "btn-lg btn-primary", onClick: this.showSimple.bind(this) }, "Simple Search"),
             this.state.showSimple ? React.createElement(AppointmentReportSimpleSearchTable_1.default, null) : React.createElement(AppointmentsSearchAdvancedTable_1.default, null)));
