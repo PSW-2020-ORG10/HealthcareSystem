@@ -1,0 +1,44 @@
+[
+  {
+    "typeOfRoom": "SecretarysRoom",
+    "equipment": null,
+    "medicine": null,
+    "forUse": true,
+    "id": 2
+  },
+  {
+    "typeOfRoom": "Operation room 30",
+    "equipment": null,
+    "medicine": null,
+    "forUse": true,
+    "id": 7
+  },
+  {
+    "typeOfRoom": "Room 500",
+    "equipment": null,
+    "medicine": null,
+    "forUse": true,
+    "id": 3
+  },
+  {
+    "typeOfRoom": "Operation room 200",
+    "equipment": null,
+    "medicine": null,
+    "forUse": true,
+    "id": 6
+  },
+  {
+    "typeOfRoom": "Room 600",
+    "equipment": null,
+    "medicine": null,
+    "forUse": true,
+    "id": 5
+  },
+  {
+    "typeOfRoom": "Magacin",
+    "equipment": null,
+    "medicine": null,
+    "forUse": true,
+    "id": 1
+  }
+]
