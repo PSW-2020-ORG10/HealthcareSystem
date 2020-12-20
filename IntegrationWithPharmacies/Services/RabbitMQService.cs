@@ -2,6 +2,7 @@
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.ActionsAndBenefits;
 using HealthClinic.CL.Service;
 using Microsoft.Extensions.Hosting;
@@ -28,18 +29,21 @@ namespace IntegrationWithPharmacies
                 byte[] body = ea.Body.ToArray();
                 var jsonMessage = Encoding.UTF8.GetString(body);
                 Message message;
-                try{  message = JsonConvert.DeserializeObject<Message>(jsonMessage); }
-                catch (Exception)   
+                try { message = JsonConvert.DeserializeObject<Message>(jsonMessage); }
+                catch (Exception)
                 {
                     message = JsonConvert.DeserializeObject<Message>(jsonMessage, new MyDateTimeConverter());
                 }
                 Program.ListOfMessages.Add(message);
-             
+                Console.WriteLine(message.TimeStamp);
+                string dates = message.TimeStamp.ToString();
+                string[] listOfDates = dates.Split(' ');
+
                 MessageService messageService = new MessageService();
-                //messageService.Create(new MessageDto(message.Text, message.TimeStamp, "Apoteka Jankovic", message.DateAction));
+                messageService.Create(new MessageDto(message.Text, listOfDates[0], message.TimeStamp, "Apoteka Jankovic", message.DateAction));
 
             };
-            channel.BasicConsume(queue: "hello",autoAck: true, consumer: consumer);
+            channel.BasicConsume(queue: "hello", autoAck: true, consumer: consumer);
             return base.StartAsync(cancellationToken);
         }
 

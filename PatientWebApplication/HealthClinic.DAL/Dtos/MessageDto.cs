@@ -8,19 +8,22 @@ namespace HealthClinic.CL.Dtos
 
         public DateTime TimeStamp { get; set; }
 
+        public string DateStamp { get; set; }
+
         public string PharmacyName { get; set; }
 
         public string DateAction { get; set; }
 
-        public MessageDto(string text, DateTime timestamp, string pharmacyname, string dateaction)
+        public MessageDto(string text, string datestamp, DateTime timestamp, string pharmacyname, string dateaction)
         {
             Text = text;
             TimeStamp = timestamp;
             PharmacyName = pharmacyname;
             DateAction = dateaction;
+            DateStamp = datestamp;
         }
 
-        public MessageDto() {}
+        public MessageDto() { }
 
         public override string ToString()
         {

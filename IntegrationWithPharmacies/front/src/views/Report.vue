@@ -24,16 +24,15 @@
             </div>
 
             <div class="row">
-                <label v-if="sent" style="color:aqua;font-size:25px;">Successfully sent report to pharmacy!</label>
+                <label v-if="sent" style="color:blue;font-size:25px;">Successfully sent report to pharmacies!</label>
                 <label v-if="notSent" style="color:red;font-size:25px;">Error occured while sending report!</label>
             </div>
-
-
 
 
             <div class="row">
                 <button class="button" v-on:click="send">Send SFTP</button>
             </div>
+
             <div class="row">
                 <button class="button" v-on:click="sendHttp">Send HTTP</button>
             </div>

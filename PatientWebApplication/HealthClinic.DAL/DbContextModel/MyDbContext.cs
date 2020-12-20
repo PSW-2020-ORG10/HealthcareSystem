@@ -190,8 +190,10 @@ namespace HealthClinic.CL.DbContextModel
             );
 
             modelBuilder.Entity<Message>().HasData(
-               new Message(1, "Message", new DateTime(), false, "Apoteka Jankovic", "02/02/2020")
-            );
+
+                 new Message(1, "Message", "03/12/2020", new DateTime(), false, "Apoteka Jankovic", "02/02/2020")
+
+              );
 
             modelBuilder.Entity<ManagersOrder>().HasData(
                 new ManagersOrder(1, true, new List <DoctorsOrder>(), new DateTime(), true)
