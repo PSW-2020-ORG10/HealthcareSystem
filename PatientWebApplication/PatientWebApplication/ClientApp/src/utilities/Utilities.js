@@ -9,6 +9,22 @@ export function formatDate(dateString) {
     return day + "/" + month + "/" + date.getFullYear();
 }
 
+export function parseStringToDate(dateString) {
+    debugger;
+    var string = dateString.split('/');
+    var date = string[0];
+    if (date[0] === '0'){
+        date = date.slice(1);
+    }
+    var month = string[1];
+    var year = string[2];
+    var retVal = new Date()
+    retVal.setDate(date);
+    retVal.setMonth(month - 1);
+    retVal.setFullYear(year);
+    return retVal;
+}
+
 export function showErrorToast() {
     toast.configure();
 

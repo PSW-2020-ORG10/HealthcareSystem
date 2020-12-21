@@ -1,7 +1,0 @@
-api3          Precription for medicine
-
-Patients name: Pera2
-Patients surname: Peric
-Patients medical ID number: 212313
-Medication: Defrinol     Quantity: 10
-Usage: 

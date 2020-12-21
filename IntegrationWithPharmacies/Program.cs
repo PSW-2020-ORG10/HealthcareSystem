@@ -10,11 +10,12 @@ namespace IntegrationWithPharmacies
     {
         public static object Messages { get; internal set; }
         public static List<Message> ListOfMessages = new List<Message>();
-
+        public static string Environment = "Local";
         public static void Main(string[] args)
         {
             CreateHostBuilderMessages(args).Build().Run();
             CreateHostBuilder(args).Build().Run();
+
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

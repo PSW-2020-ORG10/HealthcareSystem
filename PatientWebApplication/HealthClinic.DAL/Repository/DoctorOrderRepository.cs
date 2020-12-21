@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace HealthClinic.CL.Repository
 {
-    public class DoctorOrderRepository
+    public class DoctorOrderRepository : IDoctorOrderRepositoy
     {
         private readonly MyDbContext DbContext;
     

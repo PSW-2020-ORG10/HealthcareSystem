@@ -57,6 +57,8 @@ namespace HealthClinic.CL.DbContextModel
 
         public DbSet<Survey> Surveys { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<MedicineDescription> MedicineDescriptions { get; set; }
+        public DbSet<EPrescription> EPrescriptions { get; set; }
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
@@ -90,8 +92,8 @@ namespace HealthClinic.CL.DbContextModel
 
             modelBuilder.Entity<PatientUser>().HasData(
                 new PatientUser(1, "Pera", "Peric","Male", "1234", "02/02/1990", "123", "212313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null),
-                new PatientUser(2, "Marko", "Markovic", "Male", "123456789", "21/07/1989", "555333", "2112313", "Alergija", "Grad", false, "marko_markovic@gmail.com", "pass", false, "Grad2", "Roditelj", null),
-                new PatientUser(3, "Stefan", "Lelic", "Male", "1234", "2/2/2020", "123", "212313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null),
+                new PatientUser(2, "Marko", "Markovic", "Male", "123456789", "21/07/1989", "555333", "2112313", "Alergija", "Grad", false, "marko_markovic@gmail.com", "pass", false, "Grad2", "Roditelj", "images.jfif"),
+                new PatientUser(3, "Stefan", "Lelic", "Male", "1234", "2/2/2020", "123", "212313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", "download.jfif"),
                 new PatientUser(4, "Marko", "Lazarevic", "Female", "1234", "2/2/2020", "123", "2112313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null)
             );
 
@@ -132,7 +134,8 @@ namespace HealthClinic.CL.DbContextModel
             modelBuilder.Entity<Shift>().HasData(
                 new Shift(1, "14:00", "16:00"),
                 new Shift(2, "12:00", "12:30"),
-                new Shift(3, "08:00", "19:00")
+                new Shift(3, "08:00", "19:00"),
+                new Shift(4, "08:00", "23:00")
             );
 
             modelBuilder.Entity<Schedule>().HasData(
@@ -147,14 +150,15 @@ namespace HealthClinic.CL.DbContextModel
                 new Schedule(9, 1, "16/12/2020", true, 3, "Ordination 1"),
                 new Schedule(10, 1, "17/12/2020", true, 3, "Ordination 1"),
                 new Schedule(11, 1, "18/12/2020", true, 3, "Ordination 1"),
-                new Schedule(12, 1, "19/12/2020", true, 3, "Ordination 1"),
+                new Schedule(12, 1, "19/12/2020", true, 4, "Ordination 1"),
                 new Schedule(13, 1, "20/12/2020", true, 3, "Ordination 1"),
                 new Schedule(14, 1, "21/12/2020", true, 3, "Ordination 1"),
                 new Schedule(15, 1, "23/12/2020", true, 3, "Ordination 1"),
                 new Schedule(16, 2, "23/12/2020", true, 1, "1"),
                 new Schedule(17, 1, "22/12/2020", true, 2, "1"),
                 new Schedule(18, 3, "22/12/2020", true, 1, "1"),
-                new Schedule(19, 4, "23/12/2020", true, 1, "1")
+                new Schedule(19, 4, "23/12/2020", true, 1, "1"),
+                new Schedule(20, 1, "12/01/2021", true, 3, "Ordination 1")
            );
 
             modelBuilder.Entity<ModelRoom>().HasData(
@@ -188,8 +192,10 @@ namespace HealthClinic.CL.DbContextModel
             );
 
             modelBuilder.Entity<Message>().HasData(
-               new Message(1, "Message", new DateTime(), false, "Apoteka Jankovic", "02/02/2020")
-            );
+
+                 new Message(1, "Message", "03/12/2020", new DateTime(), false, "Apoteka Jankovic", "02/02/2020")
+
+              );
 
             modelBuilder.Entity<ManagersOrder>().HasData(
                 new ManagersOrder(1, true, new List <DoctorsOrder>(), new DateTime(), true)
@@ -255,7 +261,12 @@ namespace HealthClinic.CL.DbContextModel
                 new Survey(1, 1, 3, 4, 5, 4, 5, 4, 5, 4, 5, 5, 5, 5, 4, 3, 3, 2, 2, 5),
                 new Survey(2, 1, 4, 4, 5, 3, 1, 5, 5, 2, 2, 4, 2, 5, 3, 1, 3, 3, 3, 5)        
             );
-         
+            modelBuilder.Entity<MedicineDescription>().HasData(
+               new MedicineDescription(1,"Analgin", "Analgin has anti - inflammatory, analgesic, antifebrile action.", 1)
+               
+           );
+
+
         }
 
     }

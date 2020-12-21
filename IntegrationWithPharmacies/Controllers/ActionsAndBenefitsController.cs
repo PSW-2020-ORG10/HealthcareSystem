@@ -12,8 +12,8 @@ namespace IntegrationWithPharmacies.Controllers
     [ApiController]
     public class ActionsAndBenefitsController : Controller
     {
-        private MessageService MessageService { get; set; }
-        private RegistrationInPharmacyService RegistrationInPharmacyService { get; set; }
+        private MessageService MessageService { get;}
+        private RegistrationInPharmacyService RegistrationInPharmacyService { get; }
 
         public ActionsAndBenefitsController(MyDbContext context)
         {
@@ -24,7 +24,7 @@ namespace IntegrationWithPharmacies.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-           return Ok(MessageService.GetAll().Where(message => (RegistrationInPharmacyService.GetRegistrationByPharmacyName(GetName(message)) != null)));
+            return Ok(MessageService.GetAll().Where(message => (RegistrationInPharmacyService.GetRegistrationByPharmacyName(GetName(message)) != null)));
         }
      
         private static string GetName(Message message)
