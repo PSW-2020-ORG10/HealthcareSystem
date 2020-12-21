@@ -43,17 +43,12 @@ namespace HealthClinic.CL.Utility
 
         public static Boolean CheckIfDateIsToday(string dateString)
         {
-            var date = ParseDateInCorrectFormat(dateString);
-            var today = DateTime.Now;
-            if (date.Date == today.Date && date.Month == today.Month && date.Year == today.Year) return true;
-            return false;
+            return ParseDateInCorrectFormat(dateString).Date == DateTime.Now.Date && ParseDateInCorrectFormat(dateString).Month == DateTime.Now.Month && ParseDateInCorrectFormat(dateString).Year == DateTime.Now.Year;
         }
 
         public static Boolean CheckIfDateIsToday(DateTime date)
         {
-            var today = DateTime.Now;
-            if (date.Date == today.Date && date.Month == today.Month && date.Year == today.Year) return true;
-            return false;
+            return date.Date == DateTime.Now.Date && date.Month == DateTime.Now.Month && date.Year == DateTime.Now.Year;
         }
     }
 }
