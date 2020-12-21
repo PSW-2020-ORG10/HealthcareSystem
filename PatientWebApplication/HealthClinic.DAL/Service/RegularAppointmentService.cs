@@ -183,8 +183,6 @@ namespace HealthClinic.CL.Service
             List<DoctorAppointment> availableAppointments = new List<DoctorAppointment>();
             for (var date = startDate; date <= endDate; date = date.AddDays(1))
             {
-                List<TimeSpan> startTimesAppointments = GetAllStartTimes(CreateAppointmentSetForDate(date, doctorId, patientId).ToList());
-                List<Operation> operations = operationService.CreateOperationtSetForDate(date, doctorId, patientId).ToList();
                 Shift doctorShift = employeesScheduleService.getShiftForDoctorForSpecificDay(MakeStringFromDate(date), doctorService.GetByid(doctorId));
                 if (doctorShift == null)
                 {
@@ -193,14 +191,13 @@ namespace HealthClinic.CL.Service
                 
                 TimeSpan time = TimeSpan.Parse(doctorShift.startTime);
 
-                availableAppointments = GetAvailableForFreeTime(time, availableAppointments, doctorShift, doctorId, date, patientId, startTimesAppointments, operations);
-        
+                availableAppointments = GetAvailableForFreeTime(time, availableAppointments, doctorShift, doctorId, date, patientId);       
             }
 
             return availableAppointments;
         }
 
-        private List<DoctorAppointment> GetAvailableForFreeTime(TimeSpan time, List<DoctorAppointment> availableAppointments, Shift doctorShift, int doctorId, DateTime date, int patientId, List<TimeSpan> startTimesAppointments, List<Operation> operations)
+        private List<DoctorAppointment> GetAvailableForFreeTime(TimeSpan time, List<DoctorAppointment> availableAppointments, Shift doctorShift, int doctorId, DateTime date, int patientId)
         {
             while (time != TimeSpan.Parse(doctorShift.endTime) && availableAppointments.Count < 5)
             {
@@ -209,14 +206,16 @@ namespace HealthClinic.CL.Service
                     time = time.Add(TimeSpan.FromMinutes(15));
                     continue;
                 }
-                availableAppointments = GetListAvailableAppointments(availableAppointments, doctorId, time, date, patientId, startTimesAppointments, operations);
+                availableAppointments = GetListAvailableAppointments(availableAppointments, doctorId, time, date, patientId);
                 time = time.Add(TimeSpan.FromMinutes(15));
             }
             return availableAppointments;
         }
 
-        private List<DoctorAppointment> GetListAvailableAppointments(List<DoctorAppointment> availableAppointments, int doctorId, TimeSpan time, DateTime date, int patientId, List<TimeSpan> startTimesAppointments, List<Operation> operations)
+        private List<DoctorAppointment> GetListAvailableAppointments(List<DoctorAppointment> availableAppointments, int doctorId, TimeSpan time, DateTime date, int patientId)
         {
+            List<TimeSpan> startTimesAppointments = GetAllStartTimes(CreateAppointmentSetForDate(date, doctorId, patientId).ToList());
+            List<Operation> operations = operationService.CreateOperationtSetForDate(date, doctorId, patientId).ToList();
             if ((!startTimesAppointments.Contains(time) && !operationService.IsOperationInTimePeriod(time, operations)) || availableAppointments.Count >= 5)
             {
                 availableAppointments.Add((new DoctorAppointment(0, time, MakeStringFromDate(date), _patientRepository.Find(patientId), doctorService.GetByid(doctorId), new List<Referral>(), doctorService.GetByid(doctorId).ordination)));
