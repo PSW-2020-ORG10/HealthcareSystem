@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { ApplicationState } from '../store';
 import * as CounterStore from '../store/Counter';
-import AllPatientsAppointmentsTable from './AllPatientsAppointmentsTable'
+import AllPatientsAppointmentsTable from './AllPatientsAppointmentsTable';
+import AppointmentMenu from './AppointmentMenu';
 import Header from './Header';
 
 type CounterProps =
@@ -16,6 +17,9 @@ class AllPatientsAppointments extends React.PureComponent<CounterProps> {
         return (
             <React.Fragment>
                 <Header title="My Appointments" description="All of my appointments." />
+                <AppointmentMenu />
+                <br />
+                <br />
                 <AllPatientsAppointmentsTable />
             </React.Fragment>
         );

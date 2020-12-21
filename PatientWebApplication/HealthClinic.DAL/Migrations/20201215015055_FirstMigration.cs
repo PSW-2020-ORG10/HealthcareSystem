@@ -704,8 +704,8 @@ namespace HealthClinic.CL.Migrations
                 columns: new[] { "id", "allergie", "bornIn", "city", "dateOfBirth", "email", "exLastname", "file", "firstName", "gender", "guest", "isBlocked", "isMarried", "isRegisteredBySecretary", "isVerified", "medicalIdNumber", "parentName", "password", "phoneNumber", "secondName", "uniqueCitizensidentityNumber" },
                 values: new object[,]
                 {
-                    { 1, "Alergija", "Grad2", "Grad", "2/2/2020", "email", "", null, "Pera2", "Male", false, false, false, false, false, "212313", "Roditelj", "pass", "123", "Peric", "1234" },
-                    { 2, "Alergija", "Grad2", "Grad", "2/2/2020", "email", "", null, "Pera3", "Female", false, false, false, false, false, "2112313", "Roditelj", "pass", "123", "Peric", "1234" },
+                    { 1, "Alergija", "Grad2", "Grad", "02/02/1990", "email", "", null, "Pera", "Male", false, false, false, false, false, "212313", "Roditelj", "pass", "123", "Peric", "1234" },
+                    { 2, "Alergija", "Grad2", "Grad", "21/07/1989", "marko_markovic@gmail.com", "", null, "Marko", "Male", false, false, false, false, false, "2112313", "Roditelj", "pass", "555333", "Markovic", "123456789" },
                     { 3, "Alergija", "Grad2", "Grad", "2/2/2020", "email", "", null, "Stefan", "Male", false, false, false, false, false, "212313", "Roditelj", "pass", "123", "Lelic", "1234" },
                     { 4, "Alergija", "Grad2", "Grad", "2/2/2020", "email", "", null, "Marko", "Female", false, false, false, false, false, "2112313", "Roditelj", "pass", "123", "Lazarevic", "1234" }
                 });
@@ -822,9 +822,10 @@ namespace HealthClinic.CL.Migrations
                     { 17, 1, "22/12/2020", true, "1", 2 },
                     { 1, 1, "08/12/2020", true, "Ordination 1", 3 },
                     { 2, 1, "09/12/2020", true, "Ordination 1", 3 },
+                    { 20, 1, "12/01/2021", true, "Ordination 1", 3 },
                     { 15, 1, "23/12/2020", true, "Ordination 1", 3 },
-                    { 14, 1, "21/12/2020", true, "Ordination 1", 3 },
                     { 3, 1, "10/12/2020", true, "Ordination 1", 3 },
+                    { 13, 1, "20/12/2020", true, "Ordination 1", 3 },
                     { 12, 1, "19/12/2020", true, "Ordination 1", 3 },
                     { 11, 1, "18/12/2020", true, "Ordination 1", 3 },
                     { 10, 1, "17/12/2020", true, "Ordination 1", 3 },
@@ -833,7 +834,7 @@ namespace HealthClinic.CL.Migrations
                     { 7, 1, "14/12/2020", true, "Ordination 1", 3 },
                     { 6, 1, "13/12/2020", true, "Ordination 1", 3 },
                     { 4, 1, "11/12/2020", true, "Ordination 1", 3 },
-                    { 13, 1, "20/12/2020", true, "Ordination 1", 3 }
+                    { 14, 1, "21/12/2020", true, "Ordination 1", 3 }
                 });
 
             migrationBuilder.InsertData(
