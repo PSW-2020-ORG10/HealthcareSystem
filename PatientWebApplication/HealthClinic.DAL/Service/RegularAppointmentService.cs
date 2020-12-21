@@ -204,12 +204,10 @@ namespace HealthClinic.CL.Service
         {
             while (time != TimeSpan.Parse(doctorShift.endTime) && availableAppointments.Count < 5)
             {
-                if (time < DateTime.Now.TimeOfDay && UtilityMethods.CheckIfDateIsToday(date))
+                if (time > DateTime.Now.TimeOfDay && !UtilityMethods.CheckIfDateIsToday(date))
                 {
-                    time = time.Add(TimeSpan.FromMinutes(15));
-                    continue;
+                    availableAppointments = GetListAvailableAppointments(availableAppointments, doctorId, time, date, patientId, startTimesAppointments, operations);
                 }
-                availableAppointments = GetListAvailableAppointments(availableAppointments, doctorId, time, date, patientId, startTimesAppointments, operations);
                 time = time.Add(TimeSpan.FromMinutes(15));
             }
             return availableAppointments;
@@ -273,12 +271,7 @@ namespace HealthClinic.CL.Service
             TimeSpan time = TimeSpan.Parse(doctorShift.startTime);
             while (time != TimeSpan.Parse(doctorShift.endTime))
             {   
-                if(time < DateTime.Now.TimeOfDay && UtilityMethods.CheckIfDateIsToday(dateString))
-                {
-                    time = time.Add(TimeSpan.FromMinutes(15));
-                    continue;
-                }
-                if (!startTimesAppointments.Contains(time) && !operationService.IsOperationInTimePeriod(time, operations))
+                if (!startTimesAppointments.Contains(time) && !operationService.IsOperationInTimePeriod(time, operations) && !(time < DateTime.Now.TimeOfDay && UtilityMethods.CheckIfDateIsToday(dateString)))
                 {
                     availableAppointments.Add(new DoctorAppointment(0, time, dateString, patientId, doctorId, new List<Referral>(), doctorService.GetByid(doctorId).ordination));
                 }
