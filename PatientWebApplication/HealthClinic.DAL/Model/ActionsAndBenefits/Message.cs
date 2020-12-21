@@ -19,28 +19,26 @@ namespace HealthClinic.CL.Model.ActionsAndBenefits
         public string DateAction { get; set; }
 
 
-        public Message() : base()
-        {
-        }
+        public Message() : base(){ }
 
-        public Message(int id, string text, string datestamp, DateTime timestamp, bool isremoved, string pharmacyname, string dateaction) : base(id)
+        public Message(int id, string text, string dateStamp, DateTime timeStamp, bool isRemoved, string pharmacyName, string dateaction) : base(id)
         {
             Text = text;
-            TimeStamp = timestamp;
-            IsRemoved = isremoved;
-            PharmacyName = pharmacyname;
+            TimeStamp = timeStamp;
+            IsRemoved = isRemoved;
+            PharmacyName = pharmacyName;
             DateAction = dateaction;
-            DateStamp = datestamp;
+            DateStamp = dateStamp;
         }
 
-        public Message(string text, string datestamp, DateTime timestamp, bool isremoved, string pharmacyname, string dateaction)
+        public Message(string text, string dateStamp, DateTime timeStamp, bool isRemoved, string pharmacyName, string dateaction)
         {
             Text = text;
-            TimeStamp = timestamp;
-            IsRemoved = isremoved;
-            PharmacyName = pharmacyname;
+            TimeStamp = timeStamp;
+            IsRemoved = isRemoved;
+            PharmacyName = pharmacyName;
             DateAction = dateaction;
-            DateStamp = datestamp;
+            DateStamp = dateStamp;
         }
 
         public override string ToString()

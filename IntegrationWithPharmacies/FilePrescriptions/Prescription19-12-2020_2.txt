@@ -1,7 +1,0 @@
-api3 Precription for medicine
-
-Patients name: Marko
-Patients surname: Markovic
-Patients medical ID number: 2112313
-Medication: Pancef Quantity: 3
-Usage: 2 times a day

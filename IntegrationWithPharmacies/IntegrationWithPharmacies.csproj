@@ -69,7 +69,6 @@
 
   <ItemGroup>
     <Folder Include="front\src\NewFolder\" />
-    <Folder Include="HelperClasses\" />
   </ItemGroup>
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->

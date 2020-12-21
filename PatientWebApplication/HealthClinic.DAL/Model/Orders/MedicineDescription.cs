@@ -11,17 +11,17 @@ namespace HealthClinic.CL.Model.Orders
 
         public MedicineDescription() : base() { }
 
-        public MedicineDescription(int id, string name, String description, int medicineID) : base(id)
+        public MedicineDescription(int id, string name, String description, int medicineDescriptionId) : base(id)
         {
             Name = name;
             Description = description;
-            MedicineDescriptionId = medicineID;
+            MedicineDescriptionId = medicineDescriptionId;
         }
-        public MedicineDescription(string name, String description, int medicineID)
+        public MedicineDescription(string name, String description, int medicineDescriptionId)
         {
             Name = name;
             Description = description;
-            MedicineDescriptionId = medicineID;
+            MedicineDescriptionId = medicineDescriptionId;
         }
     }
 }

@@ -26,8 +26,7 @@ namespace IntegrationWithPharmacies.FileProtocol
         private static MailMessage CreateMailMessage(String filePath, String type)
         {
             MailMessage message = GetMessageInformation(type);
-            Attachment data = new Attachment(filePath, MediaTypeNames.Application.Octet);
-            message.Attachments.Add(data);
+            message.Attachments.Add(new Attachment(filePath, MediaTypeNames.Application.Octet));
             return message;
         }
 

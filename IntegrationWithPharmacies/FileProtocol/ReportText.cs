@@ -2,7 +2,6 @@
 using HealthClinic.CL.Model.Orders;
 using HealthClinic.CL.Model.Pharmacy;
 using HealthClinic.CL.Service;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Text;
@@ -39,13 +38,11 @@ namespace IntegrationWithPharmacies.FileProtocol
         {
             StringBuilder stringBuilder = new StringBuilder();
             int totalQuatity = 0;
-            int i = 1;
 
             foreach (DoctorsOrder order in DoctorOrderService.GetAll())
             {
                 stringBuilder.Append(getText(date, order, stringBuilder));
                 totalQuatity += getQuantity(date, totalQuatity, order);
-                i++;
             }
             return stringBuilder.Append("\n\n   Total ordered quatity: " + totalQuatity + "\n").ToString();
         }
