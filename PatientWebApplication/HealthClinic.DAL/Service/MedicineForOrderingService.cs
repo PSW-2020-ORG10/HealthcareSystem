@@ -10,11 +10,16 @@ namespace HealthClinic.CL.Service
     public class MedicineForOrderingService
     {
         public MedicineForOrderingRepository MedicineForOrderingRepository { get; }
+        public IMedicineForOrderingRepository ImedicineForOrderingRepository { get; }
         public MedicineForOrderingService() { }
 
         public MedicineForOrderingService(MyDbContext context)
         {
             MedicineForOrderingRepository = new MedicineForOrderingRepository(context);
+        }
+        public MedicineForOrderingService(IMedicineForOrderingRepository medicineRepository)
+        {
+            ImedicineForOrderingRepository = medicineRepository;
         }
         public List<MedicineForOrdering> GetAll()
         {
@@ -24,5 +29,12 @@ namespace HealthClinic.CL.Service
         {
             return MedicineForOrderingRepository.Create(MedicineForOrderingAdapter.MedicineOrderDtoToMedicineOrder(dto));
         }
+
+        public List<MedicineForOrdering> GetAllForStub()
+        {
+            return ImedicineForOrderingRepository.GetAll();
+        }
+
+        
     }
 }

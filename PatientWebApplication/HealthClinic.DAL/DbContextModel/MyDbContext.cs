@@ -57,6 +57,8 @@ namespace HealthClinic.CL.DbContextModel
 
         public DbSet<Survey> Surveys { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<MedicineDescription> MedicineDescriptions { get; set; }
+        public DbSet<EPrescription> EPrescriptions { get; set; }
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
@@ -190,8 +192,10 @@ namespace HealthClinic.CL.DbContextModel
             );
 
             modelBuilder.Entity<Message>().HasData(
-               new Message(1, "Message", new DateTime(), false, "Apoteka Jankovic", "02/02/2020")
-            );
+
+                 new Message(1, "Message", "03/12/2020", new DateTime(), false, "Apoteka Jankovic", "02/02/2020")
+
+              );
 
             modelBuilder.Entity<ManagersOrder>().HasData(
                 new ManagersOrder(1, true, new List <DoctorsOrder>(), new DateTime(), true)
@@ -257,7 +261,12 @@ namespace HealthClinic.CL.DbContextModel
                 new Survey(1, 1, 3, 4, 5, 4, 5, 4, 5, 4, 5, 5, 5, 5, 4, 3, 3, 2, 2, 5),
                 new Survey(2, 1, 4, 4, 5, 3, 1, 5, 5, 2, 2, 4, 2, 5, 3, 1, 3, 3, 3, 5)        
             );
-         
+            modelBuilder.Entity<MedicineDescription>().HasData(
+               new MedicineDescription(1,"Analgin", "Analgin has anti - inflammatory, analgesic, antifebrile action.", 1)
+               
+           );
+
+
         }
 
     }

@@ -13,7 +13,7 @@
             <tr v-for="action in this.actionsAndBenefits" v-bind:key="action.id">
                 <td>{{action.pharmacyName}}</td>
                 <td>{{action.text}}</td>
-                <td>{{action.timeStamp}}</td>
+                <td>{{action.dateStamp}}</td>
                 <td>{{action.dateAction}}</td>
                 <td><button v-on:click="ignore($event, action)" v-if="notIgnored">Ignore</button></td>
             </tr>

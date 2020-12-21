@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Grpc.Core;
 using HealthClinic.CL.DbContextModel;
 using IntegrationWithPharmacies.Controllers;
+using IntegrationWithPharmacies.Protos;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -39,6 +41,11 @@ namespace IntegrationWithPharmacies
                     builder.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:57942")));
         }
 
+
+
+
+
+        private Server server;
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -55,7 +62,7 @@ namespace IntegrationWithPharmacies
             {
                 endpoints.MapControllers();
             });
-        
+
             // add following statements
             app.UseSpaStaticFiles();
             app.UseSpa(spa =>
@@ -68,6 +75,16 @@ namespace IntegrationWithPharmacies
                 }
             });
             app.UseCors("VueCorsPolicy");
+        }
+
+
+        private void OnShutdown()
+        {
+            if (server != null)
+            {
+                server.ShutdownAsync().Wait();
+            }
+
         }
     }
 }

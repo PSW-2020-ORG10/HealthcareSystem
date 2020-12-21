@@ -1,0 +1,9 @@
+﻿syntax = "proto3";
+
+package rs.ac.uns.ftn.grpc;
+option csharp_namespace = "IntegrationWithPharmacies.Protos";
+import "Protos/model.proto";
+
+service NetGrpcService {
+  rpc transfer (MessageProto) returns (MessageResponseProto);
+}

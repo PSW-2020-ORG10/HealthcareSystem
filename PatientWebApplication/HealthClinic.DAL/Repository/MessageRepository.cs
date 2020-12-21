@@ -1,5 +1,6 @@
 ﻿using HealthClinic.CL.DbContextModel;
 using HealthClinic.CL.Model.ActionsAndBenefits;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,7 +12,7 @@ namespace HealthClinic.CL.Repository
 
         public MessageRepository()
         {
-            //DbContext = new MyDbContext(new DbContextOptionsBuilder<MyDbContext>().UseMySql("Server=localhost;port=3306;Database=MYSQLHealtcareDB;user=root;password=root").UseLazyLoadingProxies().Options);
+            DbContext = new MyDbContext(new DbContextOptionsBuilder<MyDbContext>().UseMySql("Server=localhost;port=3306;Database=MYSQLHealtcareDB;user=root;password=root").UseLazyLoadingProxies().Options);
         }
 
         public MessageRepository(MyDbContext dbContext)

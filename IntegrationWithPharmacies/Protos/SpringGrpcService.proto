@@ -1,0 +1,10 @@
+﻿
+syntax = "proto3";
+
+package rs.ac.uns.ftn.grpc;
+option csharp_namespace = "IntegrationWithPharmacies.Protos";
+import "Protos/model.proto";
+
+service SpringGrpcService {
+  rpc communicate (MessageProto) returns (MessageResponseProto);
+}
