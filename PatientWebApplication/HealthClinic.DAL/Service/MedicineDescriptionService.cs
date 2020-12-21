@@ -5,6 +5,7 @@ using HealthClinic.CL.Model.Orders;
 using HealthClinic.CL.Repository;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace HealthClinic.CL.Service
@@ -19,7 +20,7 @@ namespace HealthClinic.CL.Service
         {
             MedicineDescriptionRepository = new MedicineDescriptionRepository(context);
         }
-      
+
         public MedicineDescription Create(MedicineDescriptionDto dto)
         {
             return MedicineDescriptionRepository.Create(MedicineDescriptionAdapter.MedicineDescriptionDtoToMedicineDescription(dto));
@@ -39,35 +40,24 @@ namespace HealthClinic.CL.Service
         }
         public string GetMedicineDescriptionFromStub(string medicineName)
         {
-            foreach (MedicineDescription medicine in GetAllForStub())
-            {
-                if (medicine.Name.Equals(medicineName))
-                {
-                    return medicine.Description;
-                }
-            }
-            return "";
+            MedicineDescription medicineDescription = GetAllForStub().SingleOrDefault(medicineDescriptionIt => (medicineDescriptionIt.Name.Equals(medicineName)));
+            return (medicineDescription != null ? medicineDescription.Description : "");
         }
-        public String GetMedicineDescriptionFromDatabase(String medicine)
+        public string GetMedicineDescriptionFromDatabase(String medicineName)
         {
-            foreach (MedicineDescription medicineDescription in GetAll())
-            {
-                if (medicineDescription.Name.ToString().Equals(medicine))
-                {
-                    return medicineDescription.Description.ToString();
-                }
-            }
-            return "";
+            MedicineDescription medicineDescription = GetAll().SingleOrDefault(medicineDescriptionIt => (medicineDescriptionIt.Name.Equals(medicineName)));
+            return (medicineDescription != null ? medicineDescription.Description : "");
         }
 
         public MedicineDescription createIMedicineDescription(MedicineDescriptionDto dto)
         {
-            foreach (MedicineDescription medicine in IMedicineDescriptionRepository.GetAll())
-            {
-                if (medicine.Name.Equals(MedicineDescriptionAdapter.MedicineDescriptionDtoToMedicineDescription(dto).Name)) return null;
-            }
-            return MedicineDescriptionAdapter.MedicineDescriptionDtoToMedicineDescription(dto);
+            MedicineDescription medicineDescription = IMedicineDescriptionRepository.GetAll().SingleOrDefault(medicineDescriptionIt => CheckMedicineNameEquality(dto, medicineDescriptionIt));
+            return (medicineDescription == null ? MedicineDescriptionAdapter.MedicineDescriptionDtoToMedicineDescription(dto) : null);
         }
 
+        private static bool CheckMedicineNameEquality(MedicineDescriptionDto dto, MedicineDescription medicineDescription)
+        {
+            return medicineDescription.Name.Equals(MedicineDescriptionAdapter.MedicineDescriptionDtoToMedicineDescription(dto).Name);
+        }
     }
 }

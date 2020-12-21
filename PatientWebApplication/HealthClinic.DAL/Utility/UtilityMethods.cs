@@ -40,5 +40,15 @@ namespace HealthClinic.CL.Utility
             var time = new TimeSpan();
             return TimeSpan.TryParseExact(timeSpan, "hh:\\mm\\:ss", CultureInfo.InvariantCulture, out time);
         }
+
+        public static Boolean CheckIfDateIsToday(string dateString)
+        {
+            return ParseDateInCorrectFormat(dateString).Date == DateTime.Now.Date && ParseDateInCorrectFormat(dateString).Month == DateTime.Now.Month && ParseDateInCorrectFormat(dateString).Year == DateTime.Now.Year;
+        }
+
+        public static Boolean CheckIfDateIsToday(DateTime date)
+        {
+            return date.Date == DateTime.Now.Date && date.Month == DateTime.Now.Month && date.Year == DateTime.Now.Year;
+        }
     }
 }

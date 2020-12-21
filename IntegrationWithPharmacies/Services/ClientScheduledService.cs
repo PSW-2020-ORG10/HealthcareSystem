@@ -13,8 +13,7 @@ namespace IntegrationWithPharmacies
 
         public async Task<string> SendMessage(string name)
         {
-            channel = new Channel("127.0.0.1:8787", ChannelCredentials.Insecure);
-            client = new SpringGrpcService.SpringGrpcServiceClient(channel);
+            client = new SpringGrpcService.SpringGrpcServiceClient(new Channel("127.0.0.1:8787", ChannelCredentials.Insecure));
 
             MessageResponseProto response = await client.communicateAsync(new MessageProto() { Message = name });
             return response.Response;

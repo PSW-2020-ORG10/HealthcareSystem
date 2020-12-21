@@ -14,12 +14,12 @@ namespace HealthClinic.CL.Dtos
 
         public string DateAction { get; set; }
 
-        public MessageDto(string text, string dateStamp, DateTime timeStamp, string pharmacyName, string dateaction)
+        public MessageDto(string text, string dateStamp, DateTime timeStamp, string pharmacyName, string dateAction)
         {
             Text = text;
             TimeStamp = timeStamp;
             PharmacyName = pharmacyName;
-            DateAction = dateaction;
+            DateAction = dateAction;
             DateStamp = dateStamp;
         }
 

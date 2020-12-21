@@ -5,6 +5,7 @@ using HealthClinic.CL.Model.Pharmacy;
 using HealthClinic.CL.Repository;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace HealthClinic.CL.Service
@@ -39,15 +40,8 @@ namespace HealthClinic.CL.Service
 
         public String GeneratePrescriptionForPatient(string medicalIdNumber)
         {
-            List<EPrescription> prescriptions = GetAllForStub();
-            foreach (EPrescription prescription in prescriptions)
-            {
-                if (prescription.MedicalIDNumber.Equals(medicalIdNumber))
-                {
-                    return getTextForPrescription(prescription);
-                }
-            }
-            return "";
+            EPrescription prescription = GetAllForStub().SingleOrDefault(prescriptionIt => (prescriptionIt.MedicalIDNumber.Equals(medicalIdNumber)));
+            return (prescription != null ? getTextForPrescription(prescription) : "");
         }
 
         public EPrescription createIPrescription(EPrescriptionDto dto)

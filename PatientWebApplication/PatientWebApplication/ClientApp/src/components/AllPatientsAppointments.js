@@ -17,6 +17,7 @@ var React = require("react");
 var react_redux_1 = require("react-redux");
 var CounterStore = require("../store/Counter");
 var AllPatientsAppointmentsTable_1 = require("./AllPatientsAppointmentsTable");
+var AppointmentMenu_1 = require("./AppointmentMenu");
 var Header_1 = require("./Header");
 var AllPatientsAppointments = /** @class */ (function (_super) {
     __extends(AllPatientsAppointments, _super);
@@ -26,6 +27,9 @@ var AllPatientsAppointments = /** @class */ (function (_super) {
     AllPatientsAppointments.prototype.render = function () {
         return (React.createElement(React.Fragment, null,
             React.createElement(Header_1.default, { title: "My Appointments", description: "All of my appointments." }),
+            React.createElement(AppointmentMenu_1.default, null),
+            React.createElement("br", null),
+            React.createElement("br", null),
             React.createElement(AllPatientsAppointmentsTable_1.default, null)));
     };
     return AllPatientsAppointments;

@@ -18,15 +18,32 @@ var react_redux_1 = require("react-redux");
 var CounterStore = require("../store/Counter");
 var Header_1 = require("./Header");
 var PrescriptionsSearchSimpleTable_1 = require("./PrescriptionsSearchSimpleTable");
+var PrescriptionsSearchAdvancedTable_1 = require("./PrescriptionsSearchAdvancedTable");
 var PrescriptionsSimple = /** @class */ (function (_super) {
     __extends(PrescriptionsSimple, _super);
     function PrescriptionsSimple() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.state = {
+            showSimple: true
+        };
+        return _this;
     }
     PrescriptionsSimple.prototype.render = function () {
         return (React.createElement(React.Fragment, null,
-            React.createElement(Header_1.default, { title: "Simple Prescriptions Search", description: "Search prescriptions." }),
-            React.createElement(PrescriptionsSearchSimpleTable_1.default, null)));
+            React.createElement(Header_1.default, { title: "Prescriptions Search", description: "Search prescriptions." }),
+            React.createElement("br", null),
+            this.state.showSimple ? React.createElement("button", { className: "btn-lg btn-primary", onClick: this.showAdvanced.bind(this) }, "Advanced Search") : React.createElement("button", { className: "btn-lg btn-primary", onClick: this.showSimple.bind(this) }, "Simple Search"),
+            this.state.showSimple ? React.createElement(PrescriptionsSearchSimpleTable_1.default, null) : React.createElement(PrescriptionsSearchAdvancedTable_1.default, null)));
+    };
+    PrescriptionsSimple.prototype.showSimple = function () {
+        this.setState({
+            showSimple: true
+        });
+    };
+    PrescriptionsSimple.prototype.showAdvanced = function () {
+        this.setState({
+            showSimple: false
+        });
     };
     return PrescriptionsSimple;
 }(React.PureComponent));

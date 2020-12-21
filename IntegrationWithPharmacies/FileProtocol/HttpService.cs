@@ -27,15 +27,13 @@ namespace IntegrationWithPharmacies.FileProtocol
         {
             HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create("http://localhost:8082/medicinePharmacy/" + medicine);
             HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse();
-            Stream response = webResponse.GetResponseStream();
-            return new StreamReader(response, System.Text.Encoding.GetEncoding("utf-8")).ReadToEnd();
+            return new StreamReader(webResponse.GetResponseStream(), System.Text.Encoding.GetEncoding("utf-8")).ReadToEnd();
         }
         public static string FormMedicineDescriptionRequest(string medicine)
         {
             HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create("http://localhost:8082/description/medicine/" + medicine);
             HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse();
-            Stream response = webResponse.GetResponseStream();
-            return new StreamReader(response, System.Text.Encoding.GetEncoding("utf-8")).ReadToEnd();
+            return new StreamReader(webResponse.GetResponseStream(), System.Text.Encoding.GetEncoding("utf-8")).ReadToEnd();
         }
         public static IRestResponse<List<MedicineName>> FormMedicineFromIsaRequest()
         {

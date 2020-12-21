@@ -21,23 +21,23 @@ namespace HealthClinic.CL.Model.ActionsAndBenefits
 
         public Message() : base(){ }
 
-        public Message(int id, string text, string dateStamp, DateTime timeStamp, bool isRemoved, string pharmacyName, string dateaction) : base(id)
+        public Message(int id, string text, string dateStamp, DateTime timeStamp, bool isRemoved, string pharmacyName, string dateAction) : base(id)
         {
             Text = text;
             TimeStamp = timeStamp;
             IsRemoved = isRemoved;
             PharmacyName = pharmacyName;
-            DateAction = dateaction;
+            DateAction = dateAction;
             DateStamp = dateStamp;
         }
 
-        public Message(string text, string dateStamp, DateTime timeStamp, bool isRemoved, string pharmacyName, string dateaction)
+        public Message(string text, string dateStamp, DateTime timeStamp, bool isRemoved, string pharmacyName, string dateAction)
         {
             Text = text;
             TimeStamp = timeStamp;
             IsRemoved = isRemoved;
             PharmacyName = pharmacyName;
-            DateAction = dateaction;
+            DateAction = dateAction;
             DateStamp = dateStamp;
         }
 

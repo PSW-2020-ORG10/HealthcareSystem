@@ -62,8 +62,8 @@ namespace IntegrationWithPharmaciesTest
         {
             MedicineDescriptionService medicineDescriptionService = new MedicineDescriptionService(Create_stub_repository_medicines());
 
-            MedicineDescription description = medicineDescriptionService.createIMedicineDescription(new MedicineDescriptionDto("Clyndamicin", "Description", 1));
-            Assert.NotNull(description);
+            MedicineDescription description = medicineDescriptionService.createIMedicineDescription(new MedicineDescriptionDto("Paracetamol", "Description", 1));
+            Assert.Null(description);
         }
         public static IEPrescriptionRepository Create_stub_repository()
         {
