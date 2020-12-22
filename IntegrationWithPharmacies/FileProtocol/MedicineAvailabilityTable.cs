@@ -13,16 +13,15 @@ namespace IntegrationWithPharmacies.FileProtocol
             if (availability.Length > 5) return GetMedicineAvailabilityTable(availability);
             return null;
         }
-
         public List<MedicineName> GetMedicineAvailabilityTable(string availability)
         {
+            Console.WriteLine("DOSAO DO GetMedicineAvailabilityTable");
             List<MedicineName> medicines = new List<MedicineName>();
             String[] fileParts = availability.Split(";");
             if (fileParts.Length == 0) GetOnlyOnePharmacy(availability, medicines);
             else GetAllPharmacies(medicines, fileParts);
             return medicines;
         }
-
         public static void GetAllPharmacies(List<MedicineName> medicines, string[] fileParts)
         {
             for (int i = 0; i < fileParts.Length; i++)

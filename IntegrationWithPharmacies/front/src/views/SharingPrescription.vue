@@ -1,6 +1,8 @@
 <template>
-    <div id="sharePrescription" style="background-image: url('images/wgMLUS.jpg');background-repeat: no-repeat;
-  background-size: 175% 100%;  height: 1000px">
+    <div id="sharePrescription" style="        background-image: url('images/wgMLUS.jpg');
+        background-repeat: no-repeat;
+        background-size: 175% 100%;
+        height: 1000px">
         <div style="        background-color: #1D8288">
             <h3 style="color:white;font-size: 35px;font-weight:bold;align-content:center;margin: 0 auto;">Share patient's prescription with pharmacy</h3>
         </div>
