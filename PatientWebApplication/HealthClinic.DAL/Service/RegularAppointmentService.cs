@@ -58,7 +58,7 @@ namespace HealthClinic.CL.Service
         /// <returns> Created appointment. </returns>
         public DoctorAppointment CreateRecommended(DoctorAppointment appointment)
         {
-            return _appointmentRepository.Create(appointment);
+            return _appointmentRepository.New(appointment);
         }
 
         public DoctorAppointment CreateRegular(DoctorAppointment appointment)
@@ -125,13 +125,13 @@ namespace HealthClinic.CL.Service
         /// <summary> This method is getting List of <c>DoctorAppointment</c> that matches recoomended filters </summary>
         /// <param name="dto"><c>RecommendedAppointmentDto</c> is Data Transfer Object that is being used to get Recommended Appointments</param>
         /// <returns> List of recommended appointments</returns>
-        public async Task<List<DoctorAppointment>> GetRecommendedAppointmentAsync(RecommendedAppointmentDto dto)
+        public List<DoctorAppointment> GetRecommendedAppointmentAsync(RecommendedAppointmentDto dto)
         {
-            DoctorUser doctor = await HttpRequests.GetDoctorByIdAsync(dto.DoctorId);
+            DoctorUser doctor = HttpRequests.GetDoctorByIdAsync(dto.DoctorId).Result;
             DateTime startDate = UtilityMethods.ParseDateInCorrectFormat(dto.Start);
             DateTime endDate = UtilityMethods.ParseDateInCorrectFormat(dto.End);
-            PatientUser patient = await HttpRequests.GetOnePatient(2); //still no login, change after login, id set to 1
-            List<DoctorAppointment> recomendedAppointments = await GetAllAvailableAppointmentsForRecommendedDatesAsync(dto.DoctorId, startDate, endDate, patient.id);
+            PatientUser patient = HttpRequests.GetOnePatient(2).Result; //still no login, change after login, id set to 1
+            List<DoctorAppointment> recomendedAppointments = GetAllAvailableAppointmentsForRecommendedDatesAsync(dto.DoctorId, startDate, endDate, patient.id).Result;
 
             if (!recomendedAppointments.Any())
             {
@@ -139,15 +139,20 @@ namespace HealthClinic.CL.Service
                 {
                     endDate = (endDate - startDate).TotalDays > 20 ? endDate.AddDays(10) : (endDate - startDate).TotalDays > 10 ? endDate.AddDays(5) : endDate.AddDays(3);
 
-                    recomendedAppointments = await GetAllAvailableAppointmentsForRecommendedDatesAsync(dto.DoctorId, startDate, endDate, patient.id);
+                    recomendedAppointments = GetAllAvailableAppointmentsForRecommendedDatesAsync(dto.DoctorId, startDate, endDate, patient.id).Result;
                 }
                 else
                 {
-                    recomendedAppointments = RecommenedAnAppointmentDatePriorityAsync(startDate, endDate, patient, doctor.speciality).Result;
+                    recomendedAppointments =  RecommenedAnAppointmentDatePriorityAsync(startDate, endDate, patient, doctor.speciality).Result;
                 }
             }
 
             return recomendedAppointments;
+        }
+
+        private List<DoctorAppointment> Test(List<DoctorAppointment> appointments)
+        {
+            return appointments;
         }
 
         public DoctorAppointment RecommendAnAppointment(DoctorUser doctor, DateTime startDate, DateTime endDate, PatientUser patient)

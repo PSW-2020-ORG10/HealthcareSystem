@@ -102,7 +102,7 @@ namespace PatientWebApplication.Controllers
             return Ok(patient);
         }
 
-        [HttpGet("findOne/{id}")]
+        [HttpGet("find/{id}")]
         public IActionResult GetOnePatient(int id)
         {
             PatientUser patient = PatientService.GetOne(id);

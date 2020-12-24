@@ -42,7 +42,7 @@ namespace PatientWebApplicationTests
 
             PatientUser patient1 = new PatientUser(4, "Pera2", "Peric", "Male", "1234", "11/11/2020", "123", "212313", "Alergija", "Grad", false, "email@gmail.com", "pass", false, "Grad2", "Roditelj", null);
 
-            stubRepository.Setup(e => e.Find(It.IsAny<int>())).Returns(patient1);
+            stubRepository.Setup(e => e.FindOne(It.IsAny<int>())).Returns(patient1);
             stubRepository.Setup(e => e.Validate(patient1)).Returns<PatientUser>(patient => new PatientUser(patient1));
             stubRepository.Setup(m => m.Add(It.IsAny<PatientUser>())).Returns(patient1);
 

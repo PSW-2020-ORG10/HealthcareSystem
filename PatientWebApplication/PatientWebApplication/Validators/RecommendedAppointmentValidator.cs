@@ -12,7 +12,7 @@ namespace PatientWebApplication.Validators
     {
         public RecommendedAppointmentValidator()
         {
-            RuleFor(f => f.DoctorId).NotNull();
+            /*RuleFor(f => f.DoctorId).NotNull();
             RuleFor(f => f.DoctorId > 0);
             RuleFor(f => f.Start).NotNull();
             RuleFor(f => f.Start).NotEmpty();
@@ -22,7 +22,7 @@ namespace PatientWebApplication.Validators
             RuleFor(f => f.End).NotNull();
             RuleFor(f => f.End).NotEmpty();
             RuleFor(f => f.Priority).NotNull();
-            RuleFor(f => f.Priority).NotEmpty();
+            RuleFor(f => f.Priority).NotEmpty();*/
         }
     }
 }

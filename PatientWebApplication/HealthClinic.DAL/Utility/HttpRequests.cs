@@ -50,7 +50,7 @@ namespace HealthClinic.CL.Utility
 
         public static async Task<PatientUser> GetOnePatient(int id)
         {
-            var responseString = await client.GetAsync("http://localhost:60198/api/patient/findOne/" +id);
+            var responseString = await client.GetAsync("http://localhost:60198/api/patientUser/find/" +id);
             return await responseString.Content.ReadAsAsync<PatientUser>();
         }
     }

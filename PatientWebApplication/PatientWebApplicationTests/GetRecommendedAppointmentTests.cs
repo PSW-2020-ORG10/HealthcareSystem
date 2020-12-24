@@ -17,61 +17,61 @@ namespace PatientWebApplicationTests
     public class GetRecommendedAppointmentTests
     {
         [Fact]
-        public async void Find_Available_AppointmentAsync()
+        public void Find_Available_AppointmentAsync()
         {
             RegularAppointmentService service = new RegularAppointmentService(CreateAppointmentStubRepository(), new OperationService(new Mock<IOperationRepository>().Object));
 
-            List<DoctorAppointment> appointments = await service.GetRecommendedAppointmentAsync(new RecommendedAppointmentDto(2, "02/03/2020", "04/03/2020", "doctor"));
+            List<DoctorAppointment> appointments = service.GetRecommendedAppointmentAsync(new RecommendedAppointmentDto(2, "02/03/2020", "04/03/2020", "doctor"));
 
             appointments.ShouldNotBeEmpty();
         }
 
         [Fact]
-        public async void Find_No_Available_AppointmentAsync()
+        public void Find_No_Available_AppointmentAsync()
         {
             RegularAppointmentService service = new RegularAppointmentService(CreateAppointmentStubRepository(), new OperationService(new Mock<IOperationRepository>().Object));
 
-            List<DoctorAppointment> appointments = await service.GetRecommendedAppointmentAsync(new RecommendedAppointmentDto(1, "07/02/2020", "08/02/2020", "doctor"));
+            List<DoctorAppointment> appointments = service.GetRecommendedAppointmentAsync(new RecommendedAppointmentDto(1, "07/02/2020", "08/02/2020", "doctor"));
 
             appointments.ShouldBeEmpty();
         }
 
         [Fact]
-        public async void Find_Available_Appointment_For_Another_Doctor_Date_Priority()
+        public void Find_Available_Appointment_For_Another_Doctor_Date_Priority()
         {
             RegularAppointmentService service = new RegularAppointmentService(CreateAppointmentStubRepository(), new OperationService(new Mock<IOperationRepository>().Object));
 
-            List<DoctorAppointment> appointments = await service.GetRecommendedAppointmentAsync(new RecommendedAppointmentDto(1, "05/02/2020", "08/02/2020", "date"));
+            List<DoctorAppointment> appointments = service.GetRecommendedAppointmentAsync(new RecommendedAppointmentDto(1, "05/02/2020", "08/02/2020", "date"));
 
             appointments.ShouldNotBeEmpty();
         }
 
         [Fact]
-        public async void Find_Available_Appointment_For_Another_Date_Doctor_Priority()
+        public void Find_Available_Appointment_For_Another_Date_Doctor_Priority()
         {
             RegularAppointmentService service = new RegularAppointmentService(CreateAppointmentStubRepository(), new OperationService(new Mock<IOperationRepository>().Object));
 
-            List<DoctorAppointment> appointments = await service.GetRecommendedAppointmentAsync(new RecommendedAppointmentDto(2, "01/03/2020", "02/03/2020", "doctor"));
+            List<DoctorAppointment> appointments = service.GetRecommendedAppointmentAsync(new RecommendedAppointmentDto(2, "01/03/2020", "02/03/2020", "doctor"));
 
             appointments.ShouldNotBeEmpty();
         }
 
         [Fact]
-        public async void Find_No_Available_Appointment_Doctor_Busy()
+        public void Find_No_Available_Appointment_Doctor_Busy()
         {
             RegularAppointmentService service = new RegularAppointmentService(CreateAppointmentStubRepository(), new OperationService(new Mock<IOperationRepository>().Object));
 
-            List<DoctorAppointment> appointments = await service.GetRecommendedAppointmentAsync(new RecommendedAppointmentDto(1, "06/03/2020", "08/03/2020", "doctor"));
+            List<DoctorAppointment> appointments = service.GetRecommendedAppointmentAsync(new RecommendedAppointmentDto(1, "06/03/2020", "08/03/2020", "doctor"));
 
             appointments.ShouldBeEmpty();
         }
 
         [Fact]
-        public async void Find_Available_Appointment_Doctor_Busy_But_Priority_Date()
+        public void Find_Available_Appointment_Doctor_Busy_But_Priority_Date()
         {
             RegularAppointmentService service = new RegularAppointmentService(CreateAppointmentStubRepository(), new OperationService(new Mock<IOperationRepository>().Object));
 
-            List<DoctorAppointment> appointments = await service.GetRecommendedAppointmentAsync(new RecommendedAppointmentDto(1, "06/03/2020", "08/03/2020", "date"));
+            List<DoctorAppointment> appointments = service.GetRecommendedAppointmentAsync(new RecommendedAppointmentDto(1, "06/03/2020", "08/03/2020", "date"));
 
             appointments.ShouldNotBeEmpty();
         }
@@ -199,7 +199,7 @@ namespace PatientWebApplicationTests
             var stubRepository = new Mock<IPatientsRepository>();
             PatientUser patient = new PatientUser(2, "PatientName2", "PatientSurname2", "Female", "1234", "2/2/2020", "123", "2112313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null);
 
-            stubRepository.Setup(m => m.Find(patient.id)).Returns(patient);
+            stubRepository.Setup(m => m.FindOne(patient.id)).Returns(patient);
 
             return stubRepository.Object;
         }

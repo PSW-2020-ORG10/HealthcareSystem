@@ -26,11 +26,6 @@ namespace HealthClinic.CL.Repository
             return patient;
         }
 
-        public PatientUser Find(int id)
-        {
-            return dbContext.Patients.SingleOrDefault(patient => patient.id == id);
-        }
-
         public PatientUser Validate(PatientUser patient)
         {
             patient.isVerified = true;
@@ -42,13 +37,14 @@ namespace HealthClinic.CL.Repository
         {
             return dbContext.Patients.ToList();
         }
+
         /// <summary> This method searches for patient based on <paramref name="id"/>. </summary>
         /// <param name="id"><c>id</c> is <c>id</c> of a <c>PatientUser/c> that needs to be found.
         /// </param>
         /// <returns> Found patient if search was successful; otherwise, default PatientUser object.</returns>
         public PatientUser FindOne(int id)
         {
-            return dbContext.Patients.SingleOrDefault(PatientUser => PatientUser.id == id);
+            return dbContext.Patients.SingleOrDefault(patient => patient.id == id);
         }
 
         public PatientUser BlockPatient(PatientUser patient)

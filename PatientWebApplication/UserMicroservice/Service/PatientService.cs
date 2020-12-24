@@ -53,7 +53,7 @@ namespace HealthClinic.CL.Service
         /// <returns>if validated patient exists returns successfully validated patient; otherwise, return <c>null</c></returns>
         public PatientUser Validate(int id)
         {
-            PatientUser patient = PatientsRepository.Find(id);
+            PatientUser patient = PatientsRepository.FindOne(id);
             if (patient != null)
             {
                 return PatientsRepository.Validate(patient);
