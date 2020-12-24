@@ -13,7 +13,7 @@ namespace PatientWebApplicationTests
 {
     public class PatientRegistrationTests 
     {
-        [Fact]
+        /*[Fact]
         public void Create_Registration_Successfuly()
         {
             var mockVerify = new Mock<IEmailVerificationService>();
@@ -38,6 +38,6 @@ namespace PatientWebApplicationTests
 
             return stubRepository.Object;
 
-        }
+        }*/
     }
 }

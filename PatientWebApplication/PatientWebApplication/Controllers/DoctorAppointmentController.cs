@@ -102,7 +102,7 @@ namespace PatientWebApplication.Controllers
         [HttpPost("recommend")]
         public IActionResult RecommendAppointmentSchedule(RecommendedAppointmentDto dto)
         {
-            return Ok(this.regularAppointmentService.GetRecommendedAppointment(dto));
+            return Ok(this.regularAppointmentService.GetRecommendedAppointmentAsync(dto));
         }
 
         /// <summary> This method is calling <c>regularAppointmentService</c> to schedule recommended appointment. </summary>
@@ -120,9 +120,9 @@ namespace PatientWebApplication.Controllers
         /// </param>
         /// <returns> 200 Ok with list of all available appointments. </returns>
         [HttpPost("availableappointments")]
-        public IActionResult GetAvailableAppointments(AvailableAppointmentsSearchDto dto)
+        public async Task<IActionResult> GetAvailableAppointmentsAsync(AvailableAppointmentsSearchDto dto)
         {
-            return Ok(this.regularAppointmentService.GetAllAvailableAppointmentsForDate(dto.Date, dto.DoctorId, dto.PatientId));
+            return Ok(await this.regularAppointmentService.GetAllAvailableAppointmentsForDateAsync(dto.Date, dto.DoctorId, dto.PatientId));
         }
 
         /// <summary> This method is calling <c>regularAppointmentService</c> to schedule regular appointment. </summary>

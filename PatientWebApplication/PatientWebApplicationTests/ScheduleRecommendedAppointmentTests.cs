@@ -14,7 +14,7 @@ namespace PatientWebApplicationTests
 {
     public class ScheduleRecommendedAppointmentTests
     {
-        [Fact]
+       /* [Fact]
         public void Create_Appointment()
         {
             RegularAppointmentService service = new RegularAppointmentService(CreateAppointmentStubRepository(), CreateScheduleStubRepository(), new DoctorService(CreateOperationStubRepository(), CreateAppointmentStubRepository(), CreateScheduleStubRepository(), CreateDoctorStubRepository()), CreatePatientStubRepository(), new OperationService(CreateOperationStubRepository()));
@@ -153,6 +153,6 @@ namespace PatientWebApplicationTests
             stubRepository.Setup(m => m.Find(patient.id)).Returns(patient);
 
             return stubRepository.Object;
-        }
+        }*/
     }
 }

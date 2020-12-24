@@ -12,7 +12,7 @@ namespace PatientWebApplicationTests
 {
     public class ObservePersonalInformation
     {
-
+/*
         [Fact]
         public void Find_Patient()
         {
@@ -43,6 +43,6 @@ namespace PatientWebApplicationTests
             stubRepository.Setup(m => m.FindOne(1)).Returns(patient);
 
             return stubRepository.Object;
-        }
+        }*/
     }
 }

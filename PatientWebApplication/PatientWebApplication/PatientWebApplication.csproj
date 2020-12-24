@@ -58,6 +58,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HealthClinic.DAL\HealthClinic.CL.csproj" />
+    <ProjectReference Include="..\UserMicroservice\UserMicroservice.csproj" />
   </ItemGroup>
 
   <ItemGroup>

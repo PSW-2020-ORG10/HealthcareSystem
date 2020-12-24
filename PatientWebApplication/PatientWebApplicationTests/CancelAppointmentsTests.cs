@@ -19,7 +19,7 @@ namespace PatientWebApplicationTests
         [Fact]
         public void Cancel_Appointment_Successfuly()
         {
-            RegularAppointmentService service = new RegularAppointmentService(CreateStubRepository(), new Mock<IEmployeesScheduleRepository>().Object, new DoctorService(new Mock<IOperationRepository>().Object, CreateStubRepository(), new Mock<IEmployeesScheduleRepository>().Object, new Mock<IDoctorRepository>().Object), new Mock<IPatientsRepository>().Object, new OperationService(new Mock<IOperationRepository>().Object));
+            RegularAppointmentService service = new RegularAppointmentService(CreateStubRepository(), new OperationService(new Mock<IOperationRepository>().Object));
             DoctorAppointment appointment = service.CancelAppointment(4);
             appointment.IsCanceled.ShouldBe(true);
         }
@@ -27,7 +27,7 @@ namespace PatientWebApplicationTests
         [Fact]
         public void Cancel_Appointment_In_Past()
         {
-            RegularAppointmentService service = new RegularAppointmentService(CreateStubRepositoryInPast(), new Mock<IEmployeesScheduleRepository>().Object, new DoctorService(new Mock<IOperationRepository>().Object, CreateStubRepository(), new Mock<IEmployeesScheduleRepository>().Object, new Mock<IDoctorRepository>().Object), new Mock<IPatientsRepository>().Object, new OperationService(new Mock<IOperationRepository>().Object));            
+            RegularAppointmentService service = new RegularAppointmentService(CreateStubRepository(), new OperationService(new Mock<IOperationRepository>().Object));
             DoctorAppointment appointment = service.CancelAppointment(4);
             appointment.ShouldBeNull();
         }

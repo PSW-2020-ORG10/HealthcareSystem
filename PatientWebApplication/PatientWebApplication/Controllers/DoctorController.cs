@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HealthClinic.CL.Adapters;
+using HealthClinic.CL.Model.Doctor;
 using HealthClinic.CL.Repository;
 using HealthClinic.CL.Service;
 using HealthClinic.CL.Utility;
@@ -33,6 +34,24 @@ namespace PatientWebApplication.Controllers
         public IActionResult Get()
         {
             return Ok(doctorService.GetAll());
+        }
+
+        [HttpGet("{id}")]       
+        public IActionResult GetById(int id)
+        {
+            return Ok(doctorService.GetByid(id));
+        }
+
+        [HttpGet("appointment/{doctorId}/{time}/{date}")]
+        public IActionResult DoesDoctorHaveAnAppointmentAtSpecificTime(int doctorId,TimeSpan time,string dateToString)
+        {           
+            return Ok(doctorService.DoesDoctorHaveAnAppointmentAtSpecificTime(doctorService.GetByid(doctorId), time,dateToString));
+        }
+
+        [HttpGet("operation/{doctorId}/{time}/{date}")]
+        public IActionResult DoesDoctorHaveAnOperationAtSpecificTime(int doctorId, TimeSpan time, string dateToString)
+        {
+            return Ok(doctorService.DoesDoctorHaveAnOperationAtSpecificTime(doctorService.GetByid(doctorId), time, dateToString));
         }
     }
 }

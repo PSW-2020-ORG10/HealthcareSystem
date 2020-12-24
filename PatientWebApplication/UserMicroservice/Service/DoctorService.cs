@@ -4,7 +4,6 @@
  * Purpose: Definition of the Class Doctor.Doctor
  ***********************************************************************/
 
-using HealthClinic.CL.Contoller;
 using HealthClinic.CL.DbContextModel;
 using HealthClinic.CL.Model.Doctor;
 using HealthClinic.CL.Model.Employee;
@@ -26,6 +25,8 @@ namespace HealthClinic.CL.Service
         private IAppointmentRepository _appointmentRepository;
         private IEmployeesScheduleRepository _employeesScheduleRepository;
         private RegularAppointmentService regularAppointmentService;
+        private RoomService RoomService;
+
 
         String path = bingPathToAppDir(@"JsonFiles\doctors.json");
         String path2 = bingPathToAppDir(@"JsonFiles\patients.json");
@@ -40,7 +41,8 @@ namespace HealthClinic.CL.Service
             this._operationRepository = operationRepository;
             this._appointmentRepository = appointmentRepository;
             this._employeesScheduleRepository = employeesScheduleRepository;
-            this.regularAppointmentService = new RegularAppointmentService(appointmentRepository, employeesScheduleRepository, this, new PatientsRepository(), new OperationService(operationRepository));
+            this.regularAppointmentService = new RegularAppointmentService(appointmentRepository, new OperationService(operationRepository));
+            RoomService = new RoomService();
         }
 
         public DoctorService(MyDbContext context)
@@ -49,7 +51,7 @@ namespace HealthClinic.CL.Service
             this._operationRepository = new OperationRepository(context);
             this._appointmentRepository = new AppointmentRepository(context);
             this._employeesScheduleRepository = new EmployeesScheduleRepository(context);
-            this.regularAppointmentService = new RegularAppointmentService(_appointmentRepository, _employeesScheduleRepository, this, new PatientsRepository(context), new OperationService(_operationRepository));
+            this.regularAppointmentService = new RegularAppointmentService(_appointmentRepository, new OperationService(_operationRepository));
         }
 
         public override List<DoctorUser> GetAll()
@@ -89,11 +91,9 @@ namespace HealthClinic.CL.Service
         }
 
         private List<Room> getRoomsForUse()
-        {
-            RoomController roomController = new RoomController();
+        {          
             List<Room> listOfRooms = new List<Room>();
-            listOfRooms = roomController.GetAll();
-
+            listOfRooms = RoomService.GetAll();
             return listOfRooms.Where(room => (room.forUse)).ToList();
         }
 
@@ -105,9 +105,7 @@ namespace HealthClinic.CL.Service
 
         private bool isOrdinationAvailable(Room room)
         {
-            DoctorController doctorController = new DoctorController();
-            List<DoctorUser> listOfDoctors = doctorController.GetAll();
-
+            List<DoctorUser> listOfDoctors = GetAll();
             List<DoctorUser> doctorsWithFreeOrdination = listOfDoctors.Where(doctor => (doctor.ordination.Equals(room.typeOfRoom))).ToList();
             return isListOfDoctorsEmpty(doctorsWithFreeOrdination);
         }
@@ -274,7 +272,7 @@ namespace HealthClinic.CL.Service
         /// <returns> list of all doctors that have are available. </returns>
         public List<DoctorUser> GetAvailableDoctors(string specialty, string date, int patientId)
         {
-            return GetDoctorsBySpecialty(specialty).FindAll(doctor => this.regularAppointmentService.GetAllAvailableAppointmentsForDate(date, doctor.id, patientId).Count != 0);
+            return GetDoctorsBySpecialty(specialty).FindAll(doctor => this.regularAppointmentService.GetAllAvailableAppointmentsForDateAsync(date, doctor.id, patientId).Result.Count != 0);
         }
     }
 }

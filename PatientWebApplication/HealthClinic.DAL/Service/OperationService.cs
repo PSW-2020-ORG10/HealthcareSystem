@@ -3,8 +3,6 @@
  * Author:  Tamara
  * Purpose: Definition of the Class Contoller.OperationService2
  ***********************************************************************/
-using HealthClinic.CL.Adapters;
-using HealthClinic.CL.Contoller;
 using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Doctor;
 using HealthClinic.CL.Model.Patient;
@@ -12,7 +10,6 @@ using HealthClinic.CL.Repository;
 using HealthClinic.CL.Utility;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 
 namespace HealthClinic.CL.Service
 {
@@ -67,7 +64,7 @@ namespace HealthClinic.CL.Service
         {
             _operationRepository.Delete(operationid);
         }
-        public Boolean isTermNotAvailable(DoctorUser doctor, TimeSpan start, TimeSpan end, String dateToString, PatientUser patient)
+        /*public Boolean isTermNotAvailable(DoctorUser doctor, TimeSpan start, TimeSpan end, String dateToString, PatientUser patient)
         {
             PatientController patientController = new PatientController();
             DoctorController doctorController = new DoctorController();
@@ -76,7 +73,7 @@ namespace HealthClinic.CL.Service
             
             if (hasAppointmentDoctor || hasOperationDoctor ) return true;
             return false;
-        }
+        }*/
 
         /// <summary> This method is calling <c>OperationRepository</c> to get all operation's of one patient. </summary>
         /// <param name="id"><c>id</c> is id of patient who's operations we need.</param>

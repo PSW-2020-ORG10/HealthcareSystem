@@ -4,7 +4,6 @@
  * Purpose: Definition of the Class Service.EquipmentService
  ***********************************************************************/
 
-using HealthClinic.CL.Contoller;
 using HealthClinic.CL.Model.Employee;
 using HealthClinic.CL.Model.Hospital;
 using HealthClinic.CL.Repository;
@@ -58,7 +57,7 @@ namespace HealthClinic.CL.Service
 
             removeRoomFromAllEquipments(room);
 
-            removeRoomFromAllSchedules(room);
+            /*removeRoomFromAllSchedules(room);*/
             
             roomRepository.Delete(room.id);
         }
@@ -158,7 +157,7 @@ namespace HealthClinic.CL.Service
 
      
 
-        public void removeRoomFromAllSchedules(Room room)
+       /* public void removeRoomFromAllSchedules(Room room)
         {
             EmployeesScheduleController employeesScheduleController = new EmployeesScheduleController();
             List<Schedule> listOfSchedules = new List<Schedule>();
@@ -169,7 +168,7 @@ namespace HealthClinic.CL.Service
                 if (isScheduleForRoom(schedule, room)) employeesScheduleController.Remove(schedule);
                 
             }
-        }
+        }*/
 
         public List<Room> GetAll()
         {

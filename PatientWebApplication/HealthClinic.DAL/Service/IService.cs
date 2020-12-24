@@ -3,7 +3,7 @@ using HealthClinic.CL.Model.Patient;
 
 namespace HealthClinic.CL.Service
 {
-    interface IService<T> where T : Entity
+    public interface IService<T> where T : Entity
     {
         List<T> GetAll();
 

@@ -18,7 +18,7 @@ namespace PatientWebApplicationTests
         [Fact]
         public void Get_Appointments_Successfuly()
         {
-            RegularAppointmentService service = new RegularAppointmentService(CreateStubRepository(), new Mock<IEmployeesScheduleRepository>().Object, new DoctorService(new Mock<IOperationRepository>().Object, CreateStubRepository(), new Mock<IEmployeesScheduleRepository>().Object, new Mock<IDoctorRepository>().Object), new Mock<IPatientsRepository>().Object, new OperationService(new Mock<IOperationRepository>().Object));
+            RegularAppointmentService service = new RegularAppointmentService(CreateStubRepository(), new OperationService(new Mock<IOperationRepository>().Object));
             List<DoctorAppointment> foundAppointments = service.GetAppointmentsForPatient(1);
             foundAppointments.ShouldNotBeNull();
         }
@@ -26,7 +26,7 @@ namespace PatientWebApplicationTests
         [Fact]
         public void Get_Appointments_Unsuccessfuly()
         {
-            RegularAppointmentService service = new RegularAppointmentService(CreateStubRepositoryForFuture(), new Mock<IEmployeesScheduleRepository>().Object, new DoctorService(new Mock<IOperationRepository>().Object, CreateStubRepository(), new Mock<IEmployeesScheduleRepository>().Object, new Mock<IDoctorRepository>().Object), new Mock<IPatientsRepository>().Object, new OperationService(new Mock<IOperationRepository>().Object));
+            RegularAppointmentService service = new RegularAppointmentService(CreateStubRepository(), new OperationService(new Mock<IOperationRepository>().Object));
             List<DoctorAppointment> foundAppointments = service.GetAppointmentsForPatient(1);
             foundAppointments.ShouldBeEmpty();
         }
@@ -34,7 +34,7 @@ namespace PatientWebApplicationTests
         [Fact]
         public void Get_Appointments_In_Next_Two_Days_Successfuly()
         {
-            RegularAppointmentService service = new RegularAppointmentService(CreateStubRepositoryForNextTwoDays(), new Mock<IEmployeesScheduleRepository>().Object, new DoctorService(new Mock<IOperationRepository>().Object, CreateStubRepository(), new Mock<IEmployeesScheduleRepository>().Object, new Mock<IDoctorRepository>().Object), new Mock<IPatientsRepository>().Object, new OperationService(new Mock<IOperationRepository>().Object));
+            RegularAppointmentService service = new RegularAppointmentService(CreateStubRepository(), new OperationService(new Mock<IOperationRepository>().Object));
             List<DoctorAppointment> foundAppointments = service.GetAppointmentsForPatientInTwoDays(1);
             foundAppointments.ShouldNotBeEmpty();
         }
@@ -42,7 +42,7 @@ namespace PatientWebApplicationTests
         [Fact]
         public void Get_Appointments_In_Next_Two_Days_Unsuccessfuly_Because_They_Happend_Before()
         {
-            RegularAppointmentService service = new RegularAppointmentService(CreateStubRepository(), new Mock<IEmployeesScheduleRepository>().Object, new DoctorService(new Mock<IOperationRepository>().Object, CreateStubRepository(), new Mock<IEmployeesScheduleRepository>().Object, new Mock<IDoctorRepository>().Object), new Mock<IPatientsRepository>().Object, new OperationService(new Mock<IOperationRepository>().Object));
+            RegularAppointmentService service = new RegularAppointmentService(CreateStubRepository(), new OperationService(new Mock<IOperationRepository>().Object));
             List<DoctorAppointment> foundAppointments = service.GetAppointmentsForPatientInTwoDays(1);
             foundAppointments.ShouldBeEmpty();
         }
@@ -51,15 +51,15 @@ namespace PatientWebApplicationTests
         [Fact]
         public void Get_Appointments_In_Next_Two_Days_Unsuccessfuly_Because_They_Happend_After()
         {
-            RegularAppointmentService service = new RegularAppointmentService(CreateStubRepositoryForFuture(), new Mock<IEmployeesScheduleRepository>().Object, new DoctorService(new Mock<IOperationRepository>().Object, CreateStubRepository(), new Mock<IEmployeesScheduleRepository>().Object, new Mock<IDoctorRepository>().Object), new Mock<IPatientsRepository>().Object, new OperationService(new Mock<IOperationRepository>().Object));
+            RegularAppointmentService service = new RegularAppointmentService(CreateStubRepository(), new OperationService(new Mock<IOperationRepository>().Object));
             List<DoctorAppointment> foundAppointments = service.GetAppointmentsForPatientInTwoDays(1);
             foundAppointments.ShouldBeEmpty();
         }
 
         [Fact]
         public void Get_Appointments_In_Future_Successfuly()
-        { 
-            RegularAppointmentService service = new RegularAppointmentService(CreateStubRepositoryForFuture(), new Mock<IEmployeesScheduleRepository>().Object, new DoctorService(new Mock<IOperationRepository>().Object, CreateStubRepository(), new Mock<IEmployeesScheduleRepository>().Object, new Mock<IDoctorRepository>().Object), new Mock<IPatientsRepository>().Object, new OperationService(new Mock<IOperationRepository>().Object));
+        {
+            RegularAppointmentService service = new RegularAppointmentService(CreateStubRepository(), new OperationService(new Mock<IOperationRepository>().Object));
             List<DoctorAppointment> foundAppointments = service.GetAppointmentsForPatientInFuture(1);
             foundAppointments.ShouldNotBeEmpty();
         }
@@ -67,7 +67,7 @@ namespace PatientWebApplicationTests
         [Fact]
         public void Get_Appointments_In_Future_Unsuccessfuly()
         {
-            RegularAppointmentService service = new RegularAppointmentService(CreateStubRepository(), new Mock<IEmployeesScheduleRepository>().Object, new DoctorService(new Mock<IOperationRepository>().Object, CreateStubRepository(), new Mock<IEmployeesScheduleRepository>().Object, new Mock<IDoctorRepository>().Object), new Mock<IPatientsRepository>().Object, new OperationService(new Mock<IOperationRepository>().Object));
+            RegularAppointmentService service = new RegularAppointmentService(CreateStubRepository(), new OperationService(new Mock<IOperationRepository>().Object));
             List<DoctorAppointment> foundAppointments = service.GetAppointmentsForPatientInFuture(1);
             foundAppointments.ShouldBeEmpty();
         }

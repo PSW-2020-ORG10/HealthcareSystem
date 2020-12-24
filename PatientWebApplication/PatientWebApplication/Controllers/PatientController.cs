@@ -27,7 +27,7 @@ namespace PatientWebApplication.Controllers
         /// <summary>This constructor injects the PatientUserController with matching PatientService.</summary>
         public PatientUserController(IWebHostEnvironment env)
         {
-            PatientService = new PatientService(new PatientsRepository(), new EmailVerificationService(), new RegularAppointmentService(new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorService(new OperationRepository(), new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorRepository()), new PatientsRepository(), new OperationService(new OperationRepository())));
+            PatientService = new PatientService(new PatientsRepository(), new EmailVerificationService(), new RegularAppointmentService(new AppointmentRepository(), new OperationService(new OperationRepository())));
             _env = env;
         }
         /// <summary> This method determines if <c>PatientDto</c> provided <paramref name="dto"/> is valid for creating by calling <c>PatientValidator</c>
@@ -95,6 +95,17 @@ namespace PatientWebApplication.Controllers
         public IActionResult GetOne(int id)
         {
             PatientUser patient = PatientService.GetOne(3);
+            if (id < 0 && patient == null)
+            {
+                return BadRequest();
+            }
+            return Ok(patient);
+        }
+
+        [HttpGet("findOne/{id}")]
+        public IActionResult GetOnePatient(int id)
+        {
+            PatientUser patient = PatientService.GetOne(id);
             if (id < 0 && patient == null)
             {
                 return BadRequest();

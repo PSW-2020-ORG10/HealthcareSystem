@@ -4,8 +4,6 @@
  * Purpose: Definition of the Class Service.RegularAppointmentService
  ***********************************************************************/
 using Castle.Core.Internal;
-using HealthClinic.CL.Adapters;
-using HealthClinic.CL.Contoller;
 using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Doctor;
 using HealthClinic.CL.Model.Employee;
@@ -13,38 +11,29 @@ using HealthClinic.CL.Model.Patient;
 using HealthClinic.CL.Repository;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using HealthClinic.CL.Utility;
 using System.Linq;
 using HealthClinic.CL.DbContextModel;
+using System.Threading.Tasks;
 
 namespace HealthClinic.CL.Service
 {
     public class RegularAppointmentService : BingPath, IStrategyAppointment
     {
         private IAppointmentRepository _appointmentRepository;
-        private DoctorService doctorService;
-        private EmployeesScheduleService employeesScheduleService;
-        private IPatientsRepository _patientRepository;
         private OperationService operationService;
         String path = bingPathToAppDir(@"JsonFiles\appointments.json");
 
-        public RegularAppointmentService(IAppointmentRepository appointmentRepository, IEmployeesScheduleRepository employeesScheduleRepository, DoctorService doctorService, IPatientsRepository patientRepository, OperationService operationService)
+        public RegularAppointmentService(IAppointmentRepository appointmentRepository , OperationService operationService)
         {
-            this._appointmentRepository = appointmentRepository;
-            this.doctorService = doctorService;
-            this.employeesScheduleService = new EmployeesScheduleService(employeesScheduleRepository);
-            this._patientRepository = patientRepository;
+            this._appointmentRepository = appointmentRepository;            
             this.operationService = operationService;
         }
 
         public RegularAppointmentService(MyDbContext context)
         {
             this._appointmentRepository = new AppointmentRepository(context);
-            this._patientRepository = new PatientsRepository(context);
-            this.operationService = new OperationService(new OperationRepository(context));
-            this.employeesScheduleService = new EmployeesScheduleService(new EmployeesScheduleRepository(context));
-            this.doctorService = new DoctorService(new OperationRepository(context), _appointmentRepository, new EmployeesScheduleRepository(context), new DoctorRepository(context));
+            this.operationService = new OperationService(new OperationRepository(context));  
         }
 
         /// <summary> This method is calling <c>AppointmentRepository</c> to get list of all appointments. </summary>
@@ -59,7 +48,7 @@ namespace HealthClinic.CL.Service
         /// <returns> Created appointment. </returns>
         public void New(DoctorAppointment appointment, Operation operation)
         {
-            if (!GetAllAvailableAppointmentsForDate(appointment.Date, appointment.DoctorUserId, appointment.PatientUserId).Contains(appointment)) return;
+            if (!GetAllAvailableAppointmentsForDateAsync(appointment.Date, appointment.DoctorUserId, appointment.PatientUserId).Result.Contains(appointment)) return;
             _appointmentRepository.New(appointment);
         }
 
@@ -74,7 +63,7 @@ namespace HealthClinic.CL.Service
 
         public DoctorAppointment CreateRegular(DoctorAppointment appointment)
         {
-            var appointments = GetAllAvailableAppointmentsForDate(appointment.Date, appointment.DoctorUserId, appointment.PatientUserId);
+            var appointments = GetAllAvailableAppointmentsForDateAsync(appointment.Date, appointment.DoctorUserId, appointment.PatientUserId).Result;
             if (!appointments.Contains(appointment)) return null;
             return _appointmentRepository.New(appointment);
 
@@ -136,13 +125,13 @@ namespace HealthClinic.CL.Service
         /// <summary> This method is getting List of <c>DoctorAppointment</c> that matches recoomended filters </summary>
         /// <param name="dto"><c>RecommendedAppointmentDto</c> is Data Transfer Object that is being used to get Recommended Appointments</param>
         /// <returns> List of recommended appointments</returns>
-        public List<DoctorAppointment> GetRecommendedAppointment(RecommendedAppointmentDto dto)
+        public async Task<List<DoctorAppointment>> GetRecommendedAppointmentAsync(RecommendedAppointmentDto dto)
         {
-            DoctorUser doctor = doctorService.GetByid(dto.DoctorId);
+            DoctorUser doctor = await HttpRequests.GetDoctorByIdAsync(dto.DoctorId);
             DateTime startDate = UtilityMethods.ParseDateInCorrectFormat(dto.Start);
             DateTime endDate = UtilityMethods.ParseDateInCorrectFormat(dto.End);
-            PatientUser patient = _patientRepository.Find(2); //still no login, change after login, id set to 1
-            List<DoctorAppointment> recomendedAppointments = GetAllAvailableAppointmentsForRecommendedDates(dto.DoctorId, startDate, endDate, patient.id);
+            PatientUser patient = await HttpRequests.GetOnePatient(2); //still no login, change after login, id set to 1
+            List<DoctorAppointment> recomendedAppointments = await GetAllAvailableAppointmentsForRecommendedDatesAsync(dto.DoctorId, startDate, endDate, patient.id);
 
             if (!recomendedAppointments.Any())
             {
@@ -150,11 +139,11 @@ namespace HealthClinic.CL.Service
                 {
                     endDate = (endDate - startDate).TotalDays > 20 ? endDate.AddDays(10) : (endDate - startDate).TotalDays > 10 ? endDate.AddDays(5) : endDate.AddDays(3);
 
-                    recomendedAppointments = GetAllAvailableAppointmentsForRecommendedDates(dto.DoctorId, startDate, endDate, patient.id);
+                    recomendedAppointments = await GetAllAvailableAppointmentsForRecommendedDatesAsync(dto.DoctorId, startDate, endDate, patient.id);
                 }
                 else
                 {
-                    recomendedAppointments = RecommenedAnAppointmentDatePriority(startDate, endDate, patient, doctor.speciality);
+                    recomendedAppointments = RecommenedAnAppointmentDatePriorityAsync(startDate, endDate, patient, doctor.speciality).Result;
                 }
             }
 
@@ -167,7 +156,7 @@ namespace HealthClinic.CL.Service
 
             for (var date = startDate; date <= endDate; date = date.AddDays(1))
             {
-                if (GetAvailableTerm(doctor, date, time1, patient) != null) return GetAvailableTerm(doctor, date, time1, patient);
+                if (GetAvailableTermAsync(doctor, date, time1, patient).Result != null) return GetAvailableTermAsync(doctor, date, time1, patient).Result;
             }
             return null;
         }
@@ -178,12 +167,12 @@ namespace HealthClinic.CL.Service
         /// <param name="endDate">To which date we want to get recommended appointment</param>
         /// <param name="patientId"><c>PatientUser</c> id of patient that is scheduling appointment</param>
         /// <returns> List of recommended appointments</returns>
-        public List<DoctorAppointment> GetAllAvailableAppointmentsForRecommendedDates(int doctorId, DateTime startDate, DateTime endDate, int patientId)
+        public async Task<List<DoctorAppointment>> GetAllAvailableAppointmentsForRecommendedDatesAsync(int doctorId, DateTime startDate, DateTime endDate, int patientId)
         {
             List<DoctorAppointment> availableAppointments = new List<DoctorAppointment>();
             for (var date = startDate; date <= endDate; date = date.AddDays(1))
             {
-                Shift doctorShift = employeesScheduleService.getShiftForDoctorForSpecificDay(MakeStringFromDate(date), doctorService.GetByid(doctorId));
+                Shift doctorShift = await HttpRequests.GetShiftForDoctorForSpecificDay(new DoctorShiftSearchDto(doctorId, MakeStringFromDate(date)));
                 if (doctorShift == null)
                 {
                     continue;
@@ -191,13 +180,13 @@ namespace HealthClinic.CL.Service
                 
                 TimeSpan time = TimeSpan.Parse(doctorShift.startTime);
 
-                availableAppointments = GetAvailableForFreeTime(time, availableAppointments, doctorShift, doctorId, date, patientId);       
+                availableAppointments = await GetAvailableForFreeTimeAsync(time, availableAppointments, doctorShift, doctorId, date, patientId);       
             }
 
             return availableAppointments;
         }
 
-        private List<DoctorAppointment> GetAvailableForFreeTime(TimeSpan time, List<DoctorAppointment> availableAppointments, Shift doctorShift, int doctorId, DateTime date, int patientId)
+        private async Task<List<DoctorAppointment>> GetAvailableForFreeTimeAsync(TimeSpan time, List<DoctorAppointment> availableAppointments, Shift doctorShift, int doctorId, DateTime date, int patientId)
         {
             while (time != TimeSpan.Parse(doctorShift.endTime) && availableAppointments.Count < 5)
             {
@@ -206,19 +195,19 @@ namespace HealthClinic.CL.Service
                     time = time.Add(TimeSpan.FromMinutes(15));
                     continue;
                 }
-                availableAppointments = GetListAvailableAppointments(availableAppointments, doctorId, time, date, patientId);
+                availableAppointments = await GetListAvailableAppointmentsAsync(availableAppointments, doctorId, time, date, patientId);
                 time = time.Add(TimeSpan.FromMinutes(15));
             }
             return availableAppointments;
         }
 
-        private List<DoctorAppointment> GetListAvailableAppointments(List<DoctorAppointment> availableAppointments, int doctorId, TimeSpan time, DateTime date, int patientId)
+        private async Task<List<DoctorAppointment>> GetListAvailableAppointmentsAsync(List<DoctorAppointment> availableAppointments, int doctorId, TimeSpan time, DateTime date, int patientId)
         {
             List<TimeSpan> startTimesAppointments = GetAllStartTimes(CreateAppointmentSetForDate(date, doctorId, patientId).ToList());
             List<Operation> operations = operationService.CreateOperationtSetForDate(date, doctorId, patientId).ToList();
             if ((!startTimesAppointments.Contains(time) && !operationService.IsOperationInTimePeriod(time, operations)) || availableAppointments.Count >= 5)
             {
-                availableAppointments.Add((new DoctorAppointment(0, time, MakeStringFromDate(date), _patientRepository.Find(patientId), doctorService.GetByid(doctorId), new List<Referral>(), doctorService.GetByid(doctorId).ordination)));
+                availableAppointments.Add(new DoctorAppointment(0, time, MakeStringFromDate(date), await HttpRequests.GetOnePatient(patientId), await HttpRequests.GetDoctorByIdAsync(doctorId), new List<Referral>(), HttpRequests.GetDoctorByIdAsync(doctorId).Result.ordination));
             }
 
             return availableAppointments;
@@ -238,9 +227,9 @@ namespace HealthClinic.CL.Service
             return GetAppointmentsForPatient(patientId).Where(appointment => (date == UtilityMethods.ParseDateInCorrectFormat(appointment.Date) && !appointment.IsCanceled)).ToList();
         }
 
-        private DoctorAppointment GetAvailableTerm(DoctorUser doctor, DateTime date, TimeSpan time1, PatientUser patient)
+        private async Task<DoctorAppointment> GetAvailableTermAsync(DoctorUser doctor, DateTime date, TimeSpan time1, PatientUser patient)
         {
-            Shift doctorShift = employeesScheduleService.getShiftForDoctorForSpecificDay(MakeStringFromDate(date), doctor);
+            Shift doctorShift = await HttpRequests.GetShiftForDoctorForSpecificDay(new DoctorShiftSearchDto(doctor.id, MakeStringFromDate(date)));
 
             if (doctorShift != null && doctorShift.startTime != null && doctorShift.endTime != null)
                 return GetNewDoctorAppointment(doctor, date, time1, patient, doctorShift);
@@ -253,9 +242,9 @@ namespace HealthClinic.CL.Service
         /// <param name="doctorId">Id of doctor for whom this method get's all available appointments</param>
         /// <param name="patientId">Id of patient for whom this method get's all available appointments</param>
         /// <returns> list of all available appointments on specific date for given doctor and patient. </returns>
-        public List<DoctorAppointment> GetAllAvailableAppointmentsForDate(string dateString, int doctorId, int patientId)
+        public async Task<List<DoctorAppointment>> GetAllAvailableAppointmentsForDateAsync(string dateString, int doctorId, int patientId)
         {
-            Shift doctorShift = employeesScheduleService.getShiftForDoctorForSpecificDay(dateString, doctorService.GetByid(doctorId));
+            Shift doctorShift = await HttpRequests.GetShiftForDoctorForSpecificDay(new DoctorShiftSearchDto(doctorId, dateString));
             if (doctorShift == null)
             {
                 return new List<DoctorAppointment>(); 
@@ -287,7 +276,7 @@ namespace HealthClinic.CL.Service
             List<Operation> operations = operationService.CreateOperationtSetForDate(date, doctorId, patientId).ToList();
             if (!startTimesAppointments.Contains(time) && !operationService.IsOperationInTimePeriod(time, operations))
             {
-                availableAppointments.Add(new DoctorAppointment(0, time, dateString, patientId, doctorId, new List<Referral>(), doctorService.GetByid(doctorId).ordination));
+                availableAppointments.Add(new DoctorAppointment(0, time, dateString, patientId, doctorId, new List<Referral>(), HttpRequests.GetDoctorByIdAsync(doctorId).Result.ordination));
             }
         }
 
@@ -320,7 +309,7 @@ namespace HealthClinic.CL.Service
         {
             for (var time = GetStartTimeSpan(doctorShift); time < GetEndTimeSpan(doctorShift); time = time.Add(time1))
             {
-                if (IsTermNotAvailable(doctor, time, MakeStringFromDate(date), patient) == false)
+                if (!IsTermNotAvailableAsync(doctor, time, MakeStringFromDate(date), patient).Result)
                 {
                     return new DoctorAppointment(0, time, MakeStringFromDate(date), patient, doctor, null, doctor.ordination);
                 }
@@ -371,23 +360,23 @@ namespace HealthClinic.CL.Service
         /// <param name="patient"><c>PatientUser</c> who is scheduling appointment</param>
         /// <param name="speciality">Speciality of doctor which patient wanted first to execute appointment</param>
         /// <returns>List of <c>DoctorAppointment</c></returns>
-        public List<DoctorAppointment> RecommenedAnAppointmentDatePriority(DateTime startDate, DateTime endDate, PatientUser patient, string speciality)
+        public async Task<List<DoctorAppointment>> RecommenedAnAppointmentDatePriorityAsync(DateTime startDate, DateTime endDate, PatientUser patient, string speciality)
         {
-            List<DoctorUser> doctorsList = doctorService.GetAll();
+            List<DoctorUser> doctorsList = await HttpRequests.GetAllAsync();
             List<DoctorAppointment> appointments = new List<DoctorAppointment>();
 
             foreach (DoctorUser doctor in doctorsList)
             {
-                if (doctor.speciality.Equals(speciality) && GetAllAvailableAppointmentsForRecommendedDates(doctor.id, startDate, endDate, patient.id).Any())
-                    return GetAllAvailableAppointmentsForRecommendedDates(doctor.id, startDate, endDate, patient.id);
+                if (doctor.speciality.Equals(speciality) && GetAllAvailableAppointmentsForRecommendedDatesAsync(doctor.id, startDate, endDate, patient.id).Result.Any())
+                    return GetAllAvailableAppointmentsForRecommendedDatesAsync(doctor.id, startDate, endDate, patient.id).Result;
             }
             return appointments;
         }
 
-        public Boolean IsTermNotAvailable(DoctorUser doctor, TimeSpan time, String dateToString, PatientUser patient)
+        public async Task<bool> IsTermNotAvailableAsync(DoctorUser doctor, TimeSpan time, String dateToString, PatientUser patient)
         {
-            Boolean hasAppointmentDoctor = doctorService.DoesDoctorHaveAnAppointmentAtSpecificTime(doctor, time, dateToString);
-            Boolean hasOperationDoctor = doctorService.DoesDoctorHaveAnOperationAtSpecificTime(doctor, time, dateToString);
+            Boolean hasAppointmentDoctor = await HttpRequests.DoesDoctorHaveAnAppointmentAtSpecificTime(doctor.id, time, dateToString);
+            Boolean hasOperationDoctor = await HttpRequests.DoesDoctorHaveAnOperationAtSpecificTime(doctor.id, time, dateToString);
            
             if (hasAppointmentDoctor == true || hasOperationDoctor == true ) return true;
 

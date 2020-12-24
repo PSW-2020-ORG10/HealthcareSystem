@@ -5,17 +5,14 @@
  ***********************************************************************/
 
 using HealthClinic.CL.Adapters;
-using HealthClinic.CL.Contoller;
 using HealthClinic.CL.DbContextModel;
 using HealthClinic.CL.Dtos;
-using HealthClinic.CL.Model.Doctor;
 using HealthClinic.CL.Model.Patient;
 using HealthClinic.CL.Repository;
 using HealthClinic.CL.Utility;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Mail;
 
 namespace HealthClinic.CL.Service

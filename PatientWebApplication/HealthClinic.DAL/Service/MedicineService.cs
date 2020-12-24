@@ -4,7 +4,6 @@
  * Purpose: Definition of the Class Service.EquipmentService
  ***********************************************************************/
 
-using HealthClinic.CL.Contoller;
 using HealthClinic.CL.DbContextModel;
 using HealthClinic.CL.Model.Hospital;
 using HealthClinic.CL.Repository;
@@ -57,26 +56,26 @@ namespace HealthClinic.CL.Service
             removeMedicineFromAllRoom(medicine);
 
         }
-        private void removeMedicineFromSpecificRoom(Room room, Medicine medicine,RoomController roomController){
+        private void removeMedicineFromSpecificRoom(Room room, Medicine medicine,RoomService roomService){
             foreach (ModelMedicine modelMedicine in room.medicine)
             {
                 if (modelMedicine.Data.Equals(medicine.name))
                 {
                     room.medicine.Remove(modelMedicine);
-                    roomController.Update(room);
+                    roomService.Update(room);
                 }
             }
 
         }
         public void removeMedicineFromAllRoom(Medicine medicine)
         {
-            RoomController roomController = new RoomController();
+            RoomService roomService = new RoomService();
             List<Room> listOfRooms = new List<Room>();
-            listOfRooms = roomController.GetAll();
+            listOfRooms = roomService.GetAll();
 
             foreach (Room room in listOfRooms)
             {
-                removeMedicineFromSpecificRoom(room, medicine, roomController);
+                removeMedicineFromSpecificRoom(room, medicine, roomService);
             }
 
         }
