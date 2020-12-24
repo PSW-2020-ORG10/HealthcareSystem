@@ -7,7 +7,7 @@
 
         <div style="margin: 0; position: absolute;top :45%; left: 50%; transform: translate(-50%, -50%);">
 
-            <form>
+           <div id="form">
                 <h3>Fill form for urgent procurement:</h3>
                 <label for="fname">Medicine name:</label>
                 <select v-model="medicine">
@@ -21,10 +21,10 @@
                 <button class="button" v-on:click="sendHttp">Send HTTP</button>
                 <button class="button" v-on:click="sendGRpc">Send gRPC</button>
                 <div class="row">
-                    <label v-if="sent" style="color:green;font-size:25px;">Successfully sent to pharmacy&nbsp;{{pharmacy.name}} </label>
-                    <label v-if="notSent" style="color:red;font-size:25px;">Error!</label>
+                    <label v-if="sent" style="color:green;font-size:25px;">Successfully sent to pharmacy {{pharmacy}} </label>
+                    <label v-if="notSent" style="color:red;font-size:25px;">Sorry. There is no pharmacy with this quantity of selected medicine!</label>
                 </div>
-            </form>
+            </div>
 
         </div>
 
@@ -38,72 +38,48 @@
 
 <script>
 export default {
-  data() {
-        return {
-        medications : [],
-        medicine: "",
-        quantity : 0,
-        sent: false,
-        notSent: false,
-        showForm : false,
-        showReport: false,
-        pharmacy : ""
+        data() {
+                return {
+                medications : [],
+                medicine: "",
+                quantity : 0,
+                sent: false,
+                notSent: false,
+                showForm : false,
+                showReport: false,
+                pharmacy : ""
       
-    }
-  },
+                }
+        },
         methods: {
             sendHttp: function () {
-                this.axios.get('api/urgentOrder/http/medicineAvailability/' + this.medicine + "_" + this.quantity)
+                this.axios.get('api/urgentOrder/http/' + this.medicine + "_" + this.quantity)
                     .then(res => {
                         this.pharmacy = res.data;
-                    })
-                    .catch(res => {
-                        console.log(res);
-                    });
-                const data = {
-                    name: this.medicine,
-                    quantity: this.quantity,
-                    pharmacy: this.pharmacy
-                };
-                this.axios.post('api/urgentOrder/http', data)
-                    .then(res => {
                         this.sent = true;
                         this.notSent = false;
-                        window.location.href = "/urgentOrder";
-                        console.log(res);
+
                     })
                     .catch(res => {
                         this.sent = false;
                         this.notSent = true;
                         console.log(res);
-                    })
+                    });              
             },
             sendGRpc: function () {
-                this.axios.get('api/urgentOrder/http/medicineAvailability/' + this.medicine + "_" + this.quantity)
+                this.axios.get('api/urgentOrder/grpc/' + this.medicine + "_" + this.quantity)
                     .then(res => {
                         this.pharmacy = res.data;
-                    })
-                    .catch(res => {
-                        console.log(res);
-                    });
-                const data = {
-                    name: this.medicine,
-                    quantity: this.quantity,
-                    pharmacy: this.pharmacy
-                };
-                this.axios.post('api/urgentOrder', data)
-                    .then(res => {
                         this.sent = true;
                         this.notSent = false;
-                        window.location.href = "/urgentOrder";
-                        console.log(res);
+
                     })
                     .catch(res => {
                         this.sent = false;
                         this.notSent = true;
                         console.log(res);
-                    })
-            },
+                    });       
+            }
         },
 
         mounted() {

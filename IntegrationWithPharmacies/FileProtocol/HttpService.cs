@@ -28,7 +28,6 @@ namespace IntegrationWithPharmacies.FileProtocol
         {
             WebClient client = new WebClient();
             client.Credentials = CredentialCache.DefaultCredentials;
-            Console.WriteLine("-------------ORDER: " + order);
             client.UploadString(new Uri(@"http://localhost:8082/order/urgent/http"), "POST", order);
             client.Dispose();
         }

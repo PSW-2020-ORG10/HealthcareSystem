@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using HealthClinic.CL.DbContextModel;
 using HealthClinic.CL.Model.Orders;
 
 namespace HealthClinic.CL.Repository
 {
-    class UrgentMedicineOrderRepository : IUrgentMedicineOrderRepository
+   public class UrgentMedicineOrderRepository : IUrgentMedicineOrderRepository
     {
         private MyDbContext DbContext;
         public UrgentMedicineOrderRepository(MyDbContext dbContext)

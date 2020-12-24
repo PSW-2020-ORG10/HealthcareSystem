@@ -9,14 +9,16 @@ namespace HealthClinic.CL.Dtos
         public String Name { get; set; }
         public int Quantity { get; set; }
         public String Pharmacy { get; set; }
-        public UrgentMedicineOrderDto() { }
+        public String DateOfOrder { get; set; }
 
-        public UrgentMedicineOrderDto(string name, int quantity, String pharmacy)
+        public UrgentMedicineOrderDto(){ }
+
+        public UrgentMedicineOrderDto(string name, int quantity, String pharmacy, String dateOfOrder)
         {
             Name = name;
             Quantity = quantity;
             Pharmacy = pharmacy;
+            DateOfOrder = dateOfOrder;
         }
-       
     }
 }

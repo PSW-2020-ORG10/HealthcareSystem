@@ -15,7 +15,6 @@ namespace IntegrationWithPharmacies.FileProtocol
         }
         public List<MedicineName> GetMedicineAvailabilityTable(string availability)
         {
-            Console.WriteLine("DOSAO DO GetMedicineAvailabilityTable");
             List<MedicineName> medicines = new List<MedicineName>();
             String[] fileParts = availability.Split(";");
             if (fileParts.Length == 0) GetOnlyOnePharmacy(availability, medicines);

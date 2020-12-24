@@ -266,7 +266,7 @@ namespace HealthClinic.CL.DbContextModel
                
            );
             modelBuilder.Entity<UrgentMedicineOrder>().HasData(
-             new UrgentMedicineOrder(1,"Andol",135,"api 1")
+             new UrgentMedicineOrder(1,"Andol",135,"api 1","12/12/2020")
 
          );
 
