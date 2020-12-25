@@ -118,7 +118,6 @@ namespace PatientWebApplication.Controllers
         [HttpGet]       
         public IActionResult Get()
         {
-            //List<PatientUser> result = PatientService.GetAll();
             return Ok(PatientService.GetAll());
         }
 
@@ -127,7 +126,6 @@ namespace PatientWebApplication.Controllers
         [HttpGet("malicious")]    
         public IActionResult GetMalicious()
         {
-           // List<PatientUser> result = PatientService.GetMaliciousPatients();
             return Ok(PatientService.GetMaliciousPatients()); 
         }
 
