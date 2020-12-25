@@ -46,20 +46,18 @@ namespace IntegrationWithPharmacies.Services
         }
         public Boolean SendOrderHttp(UrgentMedicineOrder order)
         {
-            String medicineOrder = CreateOrder(order);
             try
             {
-                HttpService.SendUrgentOrder(medicineOrder);
+                HttpService.SendUrgentOrder(CreateOrder(order));
                 return true;
             }
             catch (Exception e) { return false; }
         }
         public Boolean SendOrderGrpc(UrgentMedicineOrder order)
         {
-            String medicineOrder = CreateOrder(order);
             try
             {
-                string response = new ClientScheduledService().SendMessage(medicineOrder).Result;
+                string response = new ClientScheduledService().SendMessage(CreateOrder(order)).Result;
                 return true;
             }
             catch (Exception e) { return false; }
@@ -78,8 +76,7 @@ namespace IntegrationWithPharmacies.Services
 
         public List<MedicineName> CheckMedicineAvailability(string medicine)
         {
-            String foundAvailability = HttpService.FormMedicineAvailabilityRequest(medicine);
-            return MedicineAvailabilityTable.FormMedicineAvailability(foundAvailability);
+            return MedicineAvailabilityTable.FormMedicineAvailability(HttpService.FormMedicineAvailabilityRequest(medicine));
         }
     }
 }
