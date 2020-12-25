@@ -3,8 +3,10 @@ using HealthClinic.CL.DbContextModel;
 using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Patient;
 using HealthClinic.CL.Repositories;
+using HealthClinic.CL.Utility;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace HealthClinic.CL.Services
 {
@@ -33,7 +35,8 @@ namespace HealthClinic.CL.Services
             {
                 return null;
             }
-            Feedback feedback = FeedbackAdapter.FeedbackDtoToFeedback(dto, patient);
+             Feedback feedback = FeedbackAdapter.FeedbackDtoToFeedback(dto, patient);
+           // Feedback feedback = HttpRequests.CreateFeedback(dto).Result;
             return FeedbackRepository.Add(feedback);
         }
 
@@ -90,5 +93,7 @@ namespace HealthClinic.CL.Services
                 return feedback;
             }
         }
+
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using HealthClinic.CL.DbContextModel;
 using HealthClinic.CL.Model.Patient;
+using HealthClinic.CL.Utility;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -26,6 +27,7 @@ namespace HealthClinic.CL.Repositories
         {
             dbContext.Feedbacks.Add(feedback);
             dbContext.SaveChanges();
+            feedback.Patient = HttpRequests.GetOnePatient(feedback.PatientId).Result;
             return feedback;
         }
 

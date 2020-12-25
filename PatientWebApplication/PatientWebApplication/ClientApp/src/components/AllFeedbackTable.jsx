@@ -21,7 +21,7 @@ class AllFeedbackTable extends Component {
         const feedbackList = this.props.feedbackList;
         return (
 
-            <div>
+            <div>             
                 <table className='table allFeedback' >
                     <thead>
                         <tr>
@@ -36,13 +36,12 @@ class AllFeedbackTable extends Component {
                             <tr key={f.id}>
                                 <td style={{ flexWrap: "wrap", wordWrap: "break-word", wordBreak: "break-word", width: '35%' }}>{f.message}</td >
                                 <td style={{ textAlign: "center" }} > {formatDate(f.date)}</td >
-                                <td style={{ textAlign: "center" }}>{f.isAnonymous ? "ANONYMOUS" : [f.patient.firstName, ' ', f.patient.secondName].join('')}</td >
+                                <td style={{ textAlign: "center" }}>{f.patient == undefined ? "" : f.isAnonymous ? "ANONYMOUS" : [f.patient.firstName, ' ', f.patient.secondName].join('')}</td >
                                 <td style={{ textAlign: "center" }} ><PublishButton feedback={f}> </PublishButton></td >
                             </tr>
                         </tbody>
                     ))}
                 </table>
-
             </div>
 
 

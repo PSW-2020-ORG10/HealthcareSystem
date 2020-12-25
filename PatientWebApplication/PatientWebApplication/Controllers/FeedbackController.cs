@@ -2,8 +2,9 @@
 using HealthClinic.CL.DbContextModel;
 using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Patient;
-using HealthClinic.CL.Services;
 using Microsoft.AspNetCore.Mvc;
+using HealthClinic.CL.Service;
+using HealthClinic.CL.Services;
 
 namespace PatientWebApplication.Controllers
 {
@@ -88,5 +89,7 @@ namespace PatientWebApplication.Controllers
             }
             return Ok(result);
         }
+
+
     }
 }

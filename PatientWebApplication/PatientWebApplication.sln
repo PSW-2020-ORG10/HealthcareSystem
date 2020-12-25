@@ -11,9 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatientWebApplicationTests"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatientWebApplicationIntegrationTests", "PatientWebApplicationIntegrationTests\PatientWebApplicationIntegrationTests.csproj", "{3BD842B8-0651-4F8E-A2C3-40A35DD239E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserMicroservice", "UserMicroservice\UserMicroservice.csproj", "{4D6CAED8-527A-456F-871E-4053AD6AC5F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserMicroservice", "UserMicroservice\UserMicroservice.csproj", "{4D6CAED8-527A-456F-871E-4053AD6AC5F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppointmentMicroservice", "AppointmentMicroservice\AppointmentMicroservice.csproj", "{3680FFB5-B1F9-4261-B841-816174D5DA40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppointmentMicroservice", "AppointmentMicroservice\AppointmentMicroservice.csproj", "{3680FFB5-B1F9-4261-B841-816174D5DA40}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedbackMicroservice", "FeedbackMicroservice\FeedbackMicroservice.csproj", "{5228368B-2517-410F-ACD8-F485D5494674}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{3680FFB5-B1F9-4261-B841-816174D5DA40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3680FFB5-B1F9-4261-B841-816174D5DA40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3680FFB5-B1F9-4261-B841-816174D5DA40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5228368B-2517-410F-ACD8-F485D5494674}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5228368B-2517-410F-ACD8-F485D5494674}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5228368B-2517-410F-ACD8-F485D5494674}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5228368B-2517-410F-ACD8-F485D5494674}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

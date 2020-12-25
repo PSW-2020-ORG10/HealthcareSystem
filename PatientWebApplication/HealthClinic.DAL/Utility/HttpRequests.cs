@@ -84,5 +84,26 @@ namespace HealthClinic.CL.Utility
             var responseString = await client.GetAsync("http://localhost:60198/api/operation/operationsForDoctor/" + doctorId);
             return await responseString.Content.ReadAsAsync<List<Operation>>();
         }
+
+        /*  public static async Task<List<Feedback>> GetAllFeedback()
+          {
+              var responseString = await client.GetAsync("http://localhost:60198/api/feedback");
+              return await responseString.Content.ReadAsAsync<List<Feedback>>();
+          }
+
+          public static async Task<List<Feedback>> GetPublishedFeedback()
+          {
+              var responseString = await client.GetAsync("http://localhost:60198/api/feedback/published");
+              return await responseString.Content.ReadAsAsync<List<Feedback>>();
+          }*/
+        /*  public static async Task<Feedback> CreateFeedback(FeedbackDto dto)
+          {
+              var stringContent = new StringContent(JsonConvert.SerializeObject(dto), Encoding.UTF8, "application/json");
+              var responseString = await client.PostAsync("http://localhost:60198/api/feedback", stringContent);
+              return await responseString.Content.ReadAsAsync<Feedback>();
+          }*/
+
+ 
+
     }
 }
