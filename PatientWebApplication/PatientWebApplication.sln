@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppointmentMicroservice", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedbackMicroservice", "FeedbackMicroservice\FeedbackMicroservice.csproj", "{5228368B-2517-410F-ACD8-F485D5494674}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchMicroservice", "SearchMicroservice\SearchMicroservice.csproj", "{062122CB-B8C3-4C31-BA66-8D54DF02C90E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{5228368B-2517-410F-ACD8-F485D5494674}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5228368B-2517-410F-ACD8-F485D5494674}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5228368B-2517-410F-ACD8-F485D5494674}.Release|Any CPU.Build.0 = Release|Any CPU
+		{062122CB-B8C3-4C31-BA66-8D54DF02C90E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{062122CB-B8C3-4C31-BA66-8D54DF02C90E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{062122CB-B8C3-4C31-BA66-8D54DF02C90E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{062122CB-B8C3-4C31-BA66-8D54DF02C90E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

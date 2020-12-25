@@ -10,6 +10,7 @@ using HealthClinic.CL.Repository;
 using HealthClinic.CL.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SearchMicroservice.Service;
 
 namespace PatientWebApplication.Controllers
 {
@@ -22,12 +23,14 @@ namespace PatientWebApplication.Controllers
         /// <value>Property <c>RegularAppointmentService</c> represents the service used for handling business logic.</value>
         private RegularAppointmentService regularAppointmentService;
         private DoctorService doctorService;
+        private AppointmentSearchService appointmentSearchService;
 
         /// <summary>This constructor initiates the DoctorAppointmentController's appointment service.</summary>
         public DoctorAppointmentController(MyDbContext context)
         {
             this.regularAppointmentService = new RegularAppointmentService(context);
             this.doctorService = new DoctorService(context);
+            this.appointmentSearchService = new AppointmentSearchService();
         }
 
         [HttpGet("getAll")]
@@ -49,9 +52,9 @@ namespace PatientWebApplication.Controllers
         /// </param>
         /// <returns> 200 Ok with list of filtered patient appointments. </returns>
         [HttpPost("search")]
-        public IActionResult SimpleSearchAppointments(AppointmentReportSearchDto dto)
+        public async Task<IActionResult> SimpleSearchAppointmentsAsync(AppointmentReportSearchDto dto)
         {
-            return Ok(new AppointmentAdapter().ConvertAppointmentListToAppointmentDtoList(this.regularAppointmentService.SimpleSearchAppointments(dto)));
+            return Ok(new AppointmentAdapter().ConvertAppointmentListToAppointmentDtoList(await this.appointmentSearchService.SimpleSearchAppointmentsAsync(dto)));
         }
 
         /// <summary> This method is calling <c>regularAppointmentService</c> to get list of all <c>DoctorAppointment</c> that already happened. </summary>
@@ -95,9 +98,9 @@ namespace PatientWebApplication.Controllers
         /// </param>
         /// <returns> 200 Ok with list of filtered appointments. </returns>
         [HttpPost("advancedsearch")]
-        public IActionResult AdvancedSearchAppointments(AppointmentAdvancedSearchDto dto)
+        public async Task<IActionResult> AdvancedSearchAppointmentsAsync(AppointmentAdvancedSearchDto dto)
         {
-            return Ok(this.regularAppointmentService.AdvancedSearchAppointments(dto));
+            return Ok(await this.appointmentSearchService.AdvancedSearchAppointmentsAsync(dto));
         }
 
         /// <summary> This method is calling <c>regularAppointmentService</c> to get list of all recommended appointments. </summary>
@@ -149,6 +152,12 @@ namespace PatientWebApplication.Controllers
         public IActionResult DoesDoctorHaveAnAppointmentAtSpecificTime(int doctorId)
         {
             return Ok(regularAppointmentService.GetAppointmentsForDoctor(doctorId));
+        }
+
+        [HttpGet("appointmentsForPatient/{patientId}")]
+        public IActionResult GetAppointmentsForPatient(int patientId)
+        {
+            return Ok(regularAppointmentService.GetAppointmentsForPatient(patientId));
         }
     }
 }
