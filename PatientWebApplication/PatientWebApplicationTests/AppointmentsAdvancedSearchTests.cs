@@ -14,7 +14,7 @@ namespace PatientWebApplicationTests
 {
     public class AppointmentsAdvancedSearchTests
     {
-        [Fact]
+       /* [Fact]
         public void Find_Appointments()
         {
 
@@ -84,6 +84,6 @@ namespace PatientWebApplicationTests
             stubRepository.Setup(m => m.GetAppointmentsForPatient(2)).Returns(appointments);
 
             return stubRepository.Object;
-        }
+        }*/
     }
 }
