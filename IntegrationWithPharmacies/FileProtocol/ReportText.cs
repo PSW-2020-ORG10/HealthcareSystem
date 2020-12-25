@@ -2,6 +2,7 @@
 using HealthClinic.CL.Model.Orders;
 using HealthClinic.CL.Model.Pharmacy;
 using HealthClinic.CL.Service;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,11 @@ namespace IntegrationWithPharmacies.FileProtocol
             MedicineService = new MedicineForOrderingService(context);
             HelperFunctions = new HelperFunctions();
         }
-     
+        public ReportText()
+        {
+           DbContext = new MyDbContext(new DbContextOptionsBuilder<MyDbContext>().UseMySql("Server=localhost;port=3306;Database=MYSQLHealtcareDB;user=root;password=root").UseLazyLoadingProxies().Options);
+        }
+
         public String GetRegistredPharmacies()
         {
             StringBuilder stringBuilder = new StringBuilder();
@@ -47,7 +52,7 @@ namespace IntegrationWithPharmacies.FileProtocol
             return stringBuilder.Append("\n\n   Total ordered quatity: " + totalQuatity + "\n").ToString();
         }
 
-        private String getText(DateOfOrder date, DoctorsOrder order, StringBuilder stringBuilder)
+        public String getText(DateOfOrder date, DoctorsOrder order, StringBuilder stringBuilder)
         {
             foreach (MedicineForOrdering medicine in MedicineService.GetAll())
             {

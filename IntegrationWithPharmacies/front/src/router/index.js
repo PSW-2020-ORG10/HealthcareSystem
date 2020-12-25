@@ -7,6 +7,8 @@ import ActionsAndBenefits from '../views/ActionsAndBenefits.vue'
 import MedicineSpecification from '../views/MedicineSpecification.vue'
 import MedicineAvailability from '../views/MedicineAvailability.vue'
 import SharingPrescription from '../views/SharingPrescription.vue'
+import UrgentProcurement from '../views/UrgentOrder.vue'
+
 Vue.use(VueRouter)
 
 
@@ -46,8 +48,12 @@ const routes = [
         path: '/sharingPrescription',
         name: 'SharingPrescription',
         component: SharingPrescription,
+    },
+    {
+        path: '/urgentOrder',
+        name: 'UrgentOrder',
+        component: UrgentProcurement,
     }
-
 ]
 
 const router = new VueRouter({

@@ -59,7 +59,7 @@ namespace HealthClinic.CL.DbContextModel
         public DbSet<Message> Messages { get; set; }
         public DbSet<MedicineDescription> MedicineDescriptions { get; set; }
         public DbSet<EPrescription> EPrescriptions { get; set; }
-
+        public DbSet<UrgentMedicineOrder> UrgentMedicineOrder { get; set; }
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -265,6 +265,10 @@ namespace HealthClinic.CL.DbContextModel
                new MedicineDescription(1,"Analgin", "Analgin has anti - inflammatory, analgesic, antifebrile action.", 1)
                
            );
+            modelBuilder.Entity<UrgentMedicineOrder>().HasData(
+             new UrgentMedicineOrder(1,"Andol",135,"api 1","12/12/2020")
+
+         );
 
 
         }

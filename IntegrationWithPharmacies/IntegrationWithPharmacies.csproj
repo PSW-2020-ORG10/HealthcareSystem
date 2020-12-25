@@ -48,7 +48,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HCI_wireframe\HCI_wireframe.csproj" />
     <ProjectReference Include="..\PatientWebApplication\HealthClinic.DAL\HealthClinic.CL.csproj" />
   </ItemGroup>
 
@@ -63,12 +62,16 @@
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="front\src\NewFolder\**" />
     <None Remove="$(SpaRoot)**" />
+    <None Remove="front\src\NewFolder\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="front\src\NewFolder\" />
+    <Compile Remove="front\src\NewFolder\**" />
+    <EmbeddedResource Remove="front\src\NewFolder\**" />
+    <TypeScriptCompile Remove="front\src\NewFolder\**" />
   </ItemGroup>
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->

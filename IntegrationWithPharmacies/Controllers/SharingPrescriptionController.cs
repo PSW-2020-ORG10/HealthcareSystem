@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Castle.Core.Internal;
 using HealthClinic.CL.DbContextModel;
 using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Pharmacy;
@@ -68,11 +69,11 @@ namespace IntegrationWithPharmacies.Controllers
         public IActionResult GetMedicineDescription(string medicine)
         {
             String medicineDescription = MedicineDescriptionService.GetMedicineDescriptionFromDatabase(medicine);
-            if (medicineDescription.Equals(""))return GetMedicineDescriptionFromIsa(medicine);
+            if (medicineDescription.IsNullOrEmpty()) return GetMedicineDescriptionFromIsaHttp(medicine);
             return Ok(medicineDescription);
         }
 
-        public IActionResult GetMedicineDescriptionFromIsa(string medicine)
+        public IActionResult GetMedicineDescriptionFromIsaHttp(string medicine)
         {
             String description = HttpService.FormMedicineDescriptionRequest(medicine);
             MedicineDescriptionService.Create(new MedicineDescriptionDto(medicine, description, 1));
@@ -84,7 +85,12 @@ namespace IntegrationWithPharmacies.Controllers
         public IActionResult GetMedicineDescriptionGrpc(string medicine)
         {
             String medicineDescription = MedicineDescriptionService.GetMedicineDescriptionFromDatabase(medicine);
-            if(medicineDescription.Equals("")) return GetMedicineDescriptionFromIsa(medicine);
+            if (medicineDescription.IsNullOrEmpty())return GetMedicineDescriptionFromIsaGrpc(medicine);
+            return Ok(medicineDescription);
+        }
+
+        private IActionResult GetMedicineDescriptionFromIsaGrpc(string medicine)
+        {
             string response = new ClientScheduledService().SendMessage(medicine).Result;
             MedicineDescriptionService.Create(new MedicineDescriptionDto(medicine, response, 1));
             return Ok(response);
