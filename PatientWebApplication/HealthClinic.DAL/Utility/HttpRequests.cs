@@ -84,5 +84,11 @@ namespace HealthClinic.CL.Utility
             var responseString = await client.GetAsync("http://localhost:60198/api/operation/operationsForDoctor/" + doctorId);
             return await responseString.Content.ReadAsAsync<List<Operation>>();
         }
+
+        public static async Task<List<DoctorAppointment>> GetAppointmentsForPatient(int patientId)
+        {
+            var responseString = await client.GetAsync("http://localhost:60198/api/doctorAppointment/appointmentsForPatient/" + patientId);
+            return await responseString.Content.ReadAsAsync<List<DoctorAppointment>>();
+        }
     }
 }
