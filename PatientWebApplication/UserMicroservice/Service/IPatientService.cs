@@ -7,6 +7,7 @@
 using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Patient;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace HealthClinic.CL.Service
 {

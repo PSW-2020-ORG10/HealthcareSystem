@@ -21,7 +21,7 @@ namespace PatientWebApplication.Controllers
         /// <summary>This constructor initiates the DoctorAppointmentController's appointment service.</summary>
         public DoctorController()
         {
-            this.doctorService = new DoctorService(new OperationRepository(), new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorRepository());
+            this.doctorService = new DoctorService(new EmployeesScheduleRepository(), new DoctorRepository());
         }
 
         [HttpGet("available")]
@@ -45,13 +45,13 @@ namespace PatientWebApplication.Controllers
         [HttpGet("appointment/{doctorId}/{time}/{date}")]
         public IActionResult DoesDoctorHaveAnAppointmentAtSpecificTime(int doctorId,TimeSpan time,string dateToString)
         {           
-            return Ok(doctorService.DoesDoctorHaveAnAppointmentAtSpecificTime(doctorService.GetByid(doctorId), time,dateToString));
+            return Ok(doctorService.DoesDoctorHaveAnAppointmentAtSpecificTimeAsync(doctorService.GetByid(doctorId), time,dateToString));
         }
 
         [HttpGet("operation/{doctorId}/{time}/{date}")]
         public IActionResult DoesDoctorHaveAnOperationAtSpecificTime(int doctorId, TimeSpan time, string dateToString)
         {
-            return Ok(doctorService.DoesDoctorHaveAnOperationAtSpecificTime(doctorService.GetByid(doctorId), time, dateToString));
+            return Ok(doctorService.DoesDoctorHaveAnOperationAtSpecificTimeAsync(doctorService.GetByid(doctorId), time, dateToString));
         }
     }
 }

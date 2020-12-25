@@ -16,7 +16,7 @@ namespace PatientWebApplicationTests
         [Fact]
         public void Block_Patient_Successffuly()
         {
-            PatientService service = new PatientService(CreateStubRepository(), new Mock<IEmailVerificationService>().Object, new RegularAppointmentService(new AppointmentRepository(), new OperationService(new OperationRepository())));
+            PatientService service = new PatientService(CreateStubRepository(), new Mock<IEmailVerificationService>().Object);
             PatientUser patient = service.BlockPatient(1);
             patient.isBlocked.ShouldBe(true);
         }
@@ -24,7 +24,7 @@ namespace PatientWebApplicationTests
         [Fact]
         public void Block_Patient_Unsuccessffuly()
         {
-            PatientService service = new PatientService(CreateStubRepository(), new Mock<IEmailVerificationService>().Object, new RegularAppointmentService(new AppointmentRepository(), new OperationService(new OperationRepository())));
+            PatientService service = new PatientService(CreateStubRepository(), new Mock<IEmailVerificationService>().Object);
             PatientUser patient = service.BlockPatient(2);
             patient.ShouldBeNull();
         }

@@ -22,7 +22,6 @@ namespace HealthClinic.CL.Service
     {
         private IAppointmentRepository _appointmentRepository;
         private OperationService operationService;
-        String path = bingPathToAppDir(@"JsonFiles\appointments.json");
 
         public RegularAppointmentService(IAppointmentRepository appointmentRepository , OperationService operationService)
         {
@@ -148,11 +147,6 @@ namespace HealthClinic.CL.Service
             }
 
             return recomendedAppointments;
-        }
-
-        private List<DoctorAppointment> Test(List<DoctorAppointment> appointments)
-        {
-            return appointments;
         }
 
         public DoctorAppointment RecommendAnAppointment(DoctorUser doctor, DateTime startDate, DateTime endDate, PatientUser patient)

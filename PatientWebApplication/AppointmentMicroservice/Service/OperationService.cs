@@ -227,5 +227,10 @@ namespace HealthClinic.CL.Service
             }
             return false;
         }
+
+        public List<Operation> GetOperationsForDoctor(int doctorId)
+        {
+            return _operationRepository.GetOperationsForDoctor(doctorId);
+        }
     }
 }

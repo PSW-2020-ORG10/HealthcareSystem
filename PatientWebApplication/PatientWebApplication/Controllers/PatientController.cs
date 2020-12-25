@@ -27,7 +27,7 @@ namespace PatientWebApplication.Controllers
         /// <summary>This constructor injects the PatientUserController with matching PatientService.</summary>
         public PatientUserController(IWebHostEnvironment env)
         {
-            PatientService = new PatientService(new PatientsRepository(), new EmailVerificationService(), new RegularAppointmentService(new AppointmentRepository(), new OperationService(new OperationRepository())));
+            PatientService = new PatientService(new PatientsRepository(), new EmailVerificationService());
             _env = env;
         }
         /// <summary> This method determines if <c>PatientDto</c> provided <paramref name="dto"/> is valid for creating by calling <c>PatientValidator</c>

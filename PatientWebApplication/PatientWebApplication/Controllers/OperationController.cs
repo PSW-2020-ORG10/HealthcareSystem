@@ -25,6 +25,12 @@ namespace PatientWebApplication.Controllers
             this.operationService = new OperationService(new OperationRepository());
         }
 
+        [HttpGet("getAll")]
+        public IActionResult GetAll()
+        {
+            return Ok(operationService.GetAll());
+        }
+
         /// <summary> This method is calling <c>OperationService</c> to get list of all operations of one patient. </summary>
         /// <returns> 200 Ok with list of patient's operations. </returns>
         [HttpGet("{id}")]
@@ -41,6 +47,12 @@ namespace PatientWebApplication.Controllers
         public IActionResult SimpleSearchOperations(AppointmentReportSearchDto dto)
         {
             return Ok(new OperationAdapter().ConvertOperationListToOperationDtoList(this.operationService.SimpleSearchOperations(dto)));
+        }
+
+        [HttpGet("operationsForDoctor/{doctorId}")]
+        public IActionResult DoesDoctorHaveAnAppointmentAtSpecificTime(int doctorId)
+        {
+            return Ok(operationService.GetOperationsForDoctor(doctorId));
         }
     }
 }

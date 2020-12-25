@@ -20,7 +20,7 @@ namespace PatientWebApplication.Controllers
         public EmployeesScheduleController()
         {
             this.employeesScheduleService = new EmployeesScheduleService(new EmployeesScheduleRepository());
-            this.doctorService = new DoctorService(new OperationRepository(), new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorRepository());
+            this.doctorService = new DoctorService(new EmployeesScheduleRepository(), new DoctorRepository());
         }
 
         [HttpPost]

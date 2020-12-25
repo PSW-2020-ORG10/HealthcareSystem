@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Mail;
+using System.Threading.Tasks;
 
 namespace HealthClinic.CL.Service
 {
@@ -21,17 +22,15 @@ namespace HealthClinic.CL.Service
     /// </summary>
     public class PatientService : IPatientService
     {
-        private RegularAppointmentService _regularAppointmentService { get; set; }
         /// <value>Property <c>IPatientsRepository</c> represents the interface of repository used for data access.</value>
         private IPatientsRepository PatientsRepository { get; set; }
         private IEmailVerificationService EmailVerificationService { get; set; }
 
         /// <summary>This constructor injects the PatientService with matching IPatientsRepository.</summary>
-        public PatientService(IPatientsRepository patientsRepository, IEmailVerificationService emailVerificationService, RegularAppointmentService regularAppointmentService)
+        public PatientService(IPatientsRepository patientsRepository, IEmailVerificationService emailVerificationService)
         {
             PatientsRepository = patientsRepository;
             EmailVerificationService = emailVerificationService;
-            _regularAppointmentService = regularAppointmentService;
         }
         public PatientService(MyDbContext context)
         {
@@ -111,7 +110,7 @@ namespace HealthClinic.CL.Service
         /// <returns> List of filtered malicious patients. </returns>
         public List<PatientUser> GetMaliciousPatients()
         {
-            return GetValidPatientsInLastMonth(GetCanceledAppointmentsInLastMonth(_regularAppointmentService.GetAll()));
+            return GetValidPatientsInLastMonth(GetCanceledAppointmentsInLastMonth(HttpRequests.GetAllAppointments().Result));
         }
 
         private List<PatientUser> GetValidPatientsInLastMonth(Dictionary<int, int> dict) {

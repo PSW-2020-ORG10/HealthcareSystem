@@ -5,6 +5,7 @@
  ***********************************************************************/
 
 using HealthClinic.CL.DbContextModel;
+using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Doctor;
 using HealthClinic.CL.Model.Employee;
 using HealthClinic.CL.Model.Hospital;
@@ -14,17 +15,14 @@ using HealthClinic.CL.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace HealthClinic.CL.Service
 {
     public class DoctorService : AbstractUserService<DoctorUser>
     {
-        private IOperationRepository _operationRepository;
-        private PatientsRepository patientsRepository;
         private IDoctorRepository _doctorRepository;
-        private IAppointmentRepository _appointmentRepository;
         private IEmployeesScheduleRepository _employeesScheduleRepository;
-        private RegularAppointmentService regularAppointmentService;
         private RoomService RoomService;
 
 
@@ -35,23 +33,17 @@ namespace HealthClinic.CL.Service
         String path5 = bingPathToAppDir(@"JsonFiles\schedule.json");
 
 
-        public DoctorService(IOperationRepository operationRepository, IAppointmentRepository appointmentRepository, IEmployeesScheduleRepository employeesScheduleRepository, IDoctorRepository doctorRepository)
+        public DoctorService(IEmployeesScheduleRepository employeesScheduleRepository, IDoctorRepository doctorRepository)
         {
             this._doctorRepository = doctorRepository;
-            this._operationRepository = operationRepository;
-            this._appointmentRepository = appointmentRepository;
             this._employeesScheduleRepository = employeesScheduleRepository;
-            this.regularAppointmentService = new RegularAppointmentService(appointmentRepository, new OperationService(operationRepository));
             RoomService = new RoomService();
         }
 
         public DoctorService(MyDbContext context)
         {
             this._doctorRepository = new DoctorRepository(context);
-            this._operationRepository = new OperationRepository(context);
-            this._appointmentRepository = new AppointmentRepository(context);
             this._employeesScheduleRepository = new EmployeesScheduleRepository(context);
-            this.regularAppointmentService = new RegularAppointmentService(_appointmentRepository, new OperationService(_operationRepository));
         }
 
         public override List<DoctorUser> GetAll()
@@ -131,18 +123,18 @@ namespace HealthClinic.CL.Service
             return false;
         }
 
-        public void removeScheduledOperationsForDoctor(DoctorUser doctor)
+        public async void removeScheduledOperationsForDoctor(DoctorUser doctor)
         {
-            List<Operation> listOfOperations = _operationRepository.GetAll();
+            List<Operation> listOfOperations = await HttpRequests.GetAllOperations();
 
             foreach (Operation operation in listOfOperations)
             {
                 if (isDoctorResposableForOperation(doctor, operation)) listOfOperations.Remove(operation);
             }
         }
-        public void removeScheduledAppointmentForDoctor(DoctorUser doctor)
+        public async void removeScheduledAppointmentForDoctor(DoctorUser doctor)
         {
-            List<DoctorAppointment> listOfAppoinments = _appointmentRepository.GetAll();
+            List<DoctorAppointment> listOfAppoinments = await HttpRequests.GetAllAppointments();
 
             foreach (DoctorAppointment appointment in listOfAppoinments)
             {
@@ -196,9 +188,9 @@ namespace HealthClinic.CL.Service
             return false;
         }
 
-        public Boolean DoesDoctorHaveAnAppointmentAtSpecificTime(DoctorUser doctor, TimeSpan time, string date)
+        public async Task<bool> DoesDoctorHaveAnAppointmentAtSpecificTimeAsync(DoctorUser doctor, TimeSpan time, string date)
         {
-            List<DoctorAppointment> listOfAppointments = _appointmentRepository.GetAppointmentsForDoctor(doctor.id);
+            List<DoctorAppointment> listOfAppointments = await HttpRequests.GetAppointmentsForDoctor(doctor.id);
             if (listOfAppointments == null) return false;
 
             foreach (DoctorAppointment appointment in listOfAppointments)
@@ -208,9 +200,9 @@ namespace HealthClinic.CL.Service
             return false;
         }
 
-        public bool doesDoctorHaveAnAppointmentAtSpecificPeriod(DoctorUser doctor, TimeSpan start, TimeSpan end, string date)
+        public async Task<bool> doesDoctorHaveAnAppointmentAtSpecificPeriodAsync(DoctorUser doctor, TimeSpan start, TimeSpan end, string date)
         {
-            List<DoctorAppointment> listOfAppoinments = _appointmentRepository.GetAll();
+            List<DoctorAppointment> listOfAppoinments = await HttpRequests.GetAllAppointments();
             foreach (DoctorAppointment appointment in listOfAppoinments)
             {
                 if (isDoctorsEquals(appointment.Doctor, doctor) && areDatesEqual(appointment.Date, date) &&
@@ -235,9 +227,9 @@ namespace HealthClinic.CL.Service
             return false;
         }
 
-        public Boolean DoesDoctorHaveAnOperationAtSpecificTime(DoctorUser doctor, TimeSpan time, string date)
+        public async Task<bool> DoesDoctorHaveAnOperationAtSpecificTimeAsync(DoctorUser doctor, TimeSpan time, string date)
         {
-            List<Operation> listOfOperation = _operationRepository.GetOperationsForDoctor(doctor.id);
+            List<Operation> listOfOperation = await HttpRequests.GetOperationsForDoctor(doctor.id);
             if (listOfOperation == null) return false;
             foreach (Operation operation in listOfOperation)
             {
@@ -249,9 +241,9 @@ namespace HealthClinic.CL.Service
             return false;
         }
 
-        public bool doesDoctorHaveAnOperationAtSpecificPeriod(DoctorUser doctor, TimeSpan start, TimeSpan end, string date)
+        public async Task<bool> doesDoctorHaveAnOperationAtSpecificPeriodAsync(DoctorUser doctor, TimeSpan start, TimeSpan end, string date)
         {
-            List<Operation> listOfOperation = _operationRepository.GetAll();
+            List<Operation> listOfOperation = await HttpRequests.GetAllOperations();
             foreach (Operation operation in listOfOperation)
             {
                 DoctorUser doctorOnOperation = operation.Doctor;
@@ -272,7 +264,7 @@ namespace HealthClinic.CL.Service
         /// <returns> list of all doctors that have are available. </returns>
         public List<DoctorUser> GetAvailableDoctors(string specialty, string date, int patientId)
         {
-            return GetDoctorsBySpecialty(specialty).FindAll(doctor => this.regularAppointmentService.GetAllAvailableAppointmentsForDateAsync(date, doctor.id, patientId).Result.Count != 0);
+            return GetDoctorsBySpecialty(specialty).FindAll(doctor => (HttpRequests.GetAvailableAppointments(new AvailableAppointmentsSearchDto(date, patientId, doctor.id))).Result.Count != 0); ;
         }
     }
 }

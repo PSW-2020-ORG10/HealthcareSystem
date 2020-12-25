@@ -30,6 +30,12 @@ namespace PatientWebApplication.Controllers
             this.doctorService = new DoctorService(context);
         }
 
+        [HttpGet("getAll")]
+        public IActionResult GetAll()
+        {
+            return Ok(regularAppointmentService.GetAll());
+        }
+
         /// <summary> This method is calling <c>RegularAppointmentService</c> to get list of all appointments of one patient. </summary>
         /// <returns> 200 Ok with list of patient's appointments. </returns>
         [HttpGet("{id}")]
@@ -37,7 +43,6 @@ namespace PatientWebApplication.Controllers
         {
             return Ok(new AppointmentAdapter().ConvertAppointmentListToAppointmentDtoList(this.regularAppointmentService.GetAppointmentsForPatient(id)));
         }
-
 
         /// <summary> This method is calling <c>RegularAppointmentService</c> to get list of all patient <c>DoctorAppointment</c> that matches search dto. </summary>
         /// <param name="dto"><c>dto</c> is Data Transfer Object that contains <c>DoctorNameAndSurname</c>, <c>Start</c>, <c>End</c>, <c>AppointmentType</c>, <c>PatientId</c> and will be used for filtering appointments. 
@@ -138,6 +143,12 @@ namespace PatientWebApplication.Controllers
                 return BadRequest();
             }
             return Ok(doctorAppointment);
+        }
+
+        [HttpGet("appointmentsForDoctor/{doctorId}")]
+        public IActionResult DoesDoctorHaveAnAppointmentAtSpecificTime(int doctorId)
+        {
+            return Ok(regularAppointmentService.GetAppointmentsForDoctor(doctorId));
         }
     }
 }
