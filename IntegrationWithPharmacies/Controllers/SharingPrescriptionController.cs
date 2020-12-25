@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Castle.Core.Internal;
 using HealthClinic.CL.DbContextModel;
 using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Pharmacy;
@@ -68,7 +69,7 @@ namespace IntegrationWithPharmacies.Controllers
         public IActionResult GetMedicineDescription(string medicine)
         {
             String medicineDescription = MedicineDescriptionService.GetMedicineDescriptionFromDatabase(medicine);
-            if (medicineDescription.Equals(""))return GetMedicineDescriptionFromIsaHttp(medicine);
+            if (medicineDescription.IsNullOrEmpty()) return GetMedicineDescriptionFromIsaHttp(medicine);
             return Ok(medicineDescription);
         }
 
@@ -84,7 +85,7 @@ namespace IntegrationWithPharmacies.Controllers
         public IActionResult GetMedicineDescriptionGrpc(string medicine)
         {
             String medicineDescription = MedicineDescriptionService.GetMedicineDescriptionFromDatabase(medicine);
-            if (medicineDescription.Equals(""))return GetMedicineDescriptionFromIsaGrpc(medicine);
+            if (medicineDescription.IsNullOrEmpty())return GetMedicineDescriptionFromIsaGrpc(medicine);
             return Ok(medicineDescription);
         }
 

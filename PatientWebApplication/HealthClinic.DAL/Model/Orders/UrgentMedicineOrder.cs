@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using HealthClinic.CL.Model.Patient;
 
 namespace HealthClinic.CL.Model.Orders

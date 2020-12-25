@@ -154,9 +154,7 @@ export default {
         font-size: 25px;
         margin: 4px 2px;
         cursor: pointer;
-        color: white;
         width: 300px;
-        border: 8px;
         border: 8px;
         border-radius: 10%;
     }
@@ -181,9 +179,9 @@ export default {
         color: #ffffff;
         border: 8px;
         border-radius: 10%;
+        font: bold;
         font-size: 22px;
         width: 250px;
-        font: bold;
         text-decoration: underline;
     }
 
