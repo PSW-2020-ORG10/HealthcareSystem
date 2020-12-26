@@ -6,9 +6,8 @@
         <h1>Our tenders</h1>
 
         <div>
-            <a href="/newTender" style="        background-color: #1D8288;
-        color: white;">Create new tender</a>
-            <button class="button" v-on:click="register">Create new tender</button>
+           
+            <button class="button" v-on:click="create">Create new tender</button>
             <button class="button">Active tenders</button>
             <button class="button">Past tenders</button>
 
@@ -27,7 +26,7 @@
             }
         },
         methods: {
-            register: function () {
+            create: function () {
                 window.location.href = "/newTender";
                
 

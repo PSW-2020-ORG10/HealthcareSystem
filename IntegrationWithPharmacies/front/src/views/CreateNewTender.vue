@@ -5,11 +5,31 @@
         height: 1000px">
         <h1>Add new tender</h1>
 
-        <button class="button2">Add medicine and quantity</button>
+        <button class="button2" v-on:click="create">Add medicine and quantity</button>
         
             
     </div>
 </template>
+<script>
+    export default {
+        data() {
+            return {
+
+
+            }
+        },
+        methods: {
+            create: function () {
+                window.location.href = "/formTender";
+
+
+            }
+
+        }
+
+    }
+</script>
+
 <style scoped>
     #mainbtn {
         color: #fff;
