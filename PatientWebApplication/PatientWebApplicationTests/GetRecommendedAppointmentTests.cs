@@ -1,4 +1,4 @@
-﻿using HealthClinic.CL.Dtos;
+﻿/*using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Doctor;
 using HealthClinic.CL.Model.Employee;
 using HealthClinic.CL.Model.Patient;
@@ -205,3 +205,4 @@ namespace PatientWebApplicationTests
         }
     }
 }
+*/

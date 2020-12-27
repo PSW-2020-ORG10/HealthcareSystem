@@ -1,4 +1,4 @@
-﻿using HealthClinic.CL.Model.Patient;
+﻿/*using HealthClinic.CL.Model.Patient;
 using HealthClinic.CL.Repository;
 using HealthClinic.CL.Service;
 using Moq;
@@ -50,4 +50,4 @@ namespace PatientWebApplicationTests
             return stubRepository.Object;
         }
     }
-}
+}*/

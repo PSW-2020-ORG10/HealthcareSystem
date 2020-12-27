@@ -24,6 +24,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Ocelot" Version="16.0.1" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.2.4" />
   </ItemGroup>
 
@@ -57,11 +58,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AppointmentMicroservice\AppointmentMicroservice.csproj" />
-    <ProjectReference Include="..\FeedbackMicroservice\FeedbackMicroservice.csproj" />
     <ProjectReference Include="..\HealthClinic.DAL\HealthClinic.CL.csproj" />
-    <ProjectReference Include="..\SearchMicroservice\SearchMicroservice.csproj" />
-    <ProjectReference Include="..\UserMicroservice\UserMicroservice.csproj" />
   </ItemGroup>
 
   <ItemGroup>

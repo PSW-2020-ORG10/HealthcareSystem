@@ -3,12 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using System.Net;
 using System.Net.Http;
 using HealthClinic.CL.Model.Employee;
 using HealthClinic.CL.Model.Patient;
-using HealthClinic.CL.Dtos;
 using Newtonsoft.Json;
+using HealthClinic.CL.Dtos;
 
 namespace HealthClinic.CL.Utility
 {

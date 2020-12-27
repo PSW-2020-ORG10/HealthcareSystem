@@ -1,4 +1,4 @@
-﻿using HealthClinic.CL.Model.Doctor;
+﻿/*using HealthClinic.CL.Model.Doctor;
 using HealthClinic.CL.Model.Patient;
 using HealthClinic.CL.Repository;
 using HealthClinic.CL.Service;
@@ -160,3 +160,4 @@ namespace PatientWebApplicationTests
         }
     }
 }
+*/
