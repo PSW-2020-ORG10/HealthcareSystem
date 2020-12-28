@@ -30,6 +30,13 @@ namespace IntegrationWithPharmacies.FileProtocol
             client.UploadString(new Uri(@"http://localhost:8082/order/urgent/http"), "POST", order);
             client.Dispose();
         }
+        public void SendTender(String tender)
+        {
+            WebClient client = new WebClient();
+            client.Credentials = CredentialCache.DefaultCredentials;
+            client.UploadString(new Uri(@"http://localhost:8082/order/tender"), "POST", tender);
+            client.Dispose();
+        }
         public static String FormMedicineAvailabilityRequest(string medicine)
         {
             HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create("http://localhost:8082/medicinePharmacy/" + medicine);
@@ -47,7 +54,7 @@ namespace IntegrationWithPharmacies.FileProtocol
         {
             var client = new RestSharp.RestClient("http://localhost:8082");
             var response = client.Get<List<MedicineName>>(new RestRequest("/medicineRequested"));
-            response.Data.ForEach(medicine => Console.WriteLine(medicine.ToString()));
+            //response.Data.ForEach(medicine => Console.WriteLine(medicine.ToString()));
             return response;
         }
     }

@@ -60,6 +60,10 @@ namespace HealthClinic.CL.DbContextModel
         public DbSet<MedicineDescription> MedicineDescriptions { get; set; }
         public DbSet<EPrescription> EPrescriptions { get; set; }
         public DbSet<UrgentMedicineOrder> UrgentMedicineOrder { get; set; }
+        public DbSet<Tender> Tender { get; set; }
+        public DbSet<MedicineForTendering> MedicineForTendering { get; set; }
+
+
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -268,7 +272,15 @@ namespace HealthClinic.CL.DbContextModel
             modelBuilder.Entity<UrgentMedicineOrder>().HasData(
              new UrgentMedicineOrder(1,"Andol",135,"api 1","12/12/2020")
 
-         );
+            );
+            modelBuilder.Entity<Tender>().HasData(
+          new Tender(1, new DateTime(), false)
+
+            );
+            modelBuilder.Entity<MedicineForTendering>().HasData(
+          new MedicineForTendering(1, "Andol", 135,1)
+
+            );
 
 
         }

@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace IntegrationWithPharmacies
 {
-    public class Tender
+    public class TenderOrder
     {
         public List<MedicineQuantity> MedicinesWithQuantity { get; set; }
         public String Date { get; set; }
-        public Tender() { }
+        public TenderOrder() { }
 
-        public Tender(List<MedicineQuantity> medicinesWithQuantity, String date)
+        public TenderOrder(List<MedicineQuantity> medicinesWithQuantity, String date)
         {
             MedicinesWithQuantity = medicinesWithQuantity;
             Date = date;

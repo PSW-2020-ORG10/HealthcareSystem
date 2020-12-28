@@ -4,9 +4,9 @@
         background-size: 175% 100%;
         height: 1000px">
 
-        <div class="container">
-            <div class="row justify-content-md-center">
-
+        <div class="container1">
+            <div class="row">
+                <div class="col-15"></div>
                 <div class="col">
                     <button class="button" v-on:click="showNewTenderDiv">Create new tender</button>
                 </div>
@@ -16,71 +16,81 @@
                 <div class="col">
                     <button class="button">Past tenders</button>
                 </div>
+                <div class="col-15"></div>
             </div>
         </div>
 
         <div v-if="showCreateNewTender" class="container">
-            <div class="row justify-content-md-center">
-                <div class="col-15">
-                    <label for="apiKey">Medication:</label>
+            <div class="col-80">
+                <div class="row justify-content-md-center">
+                    <div class="col-15">
+                        <label for="apiKey">Medication:</label>
+                    </div>
+                    <div class="col-45">
+                        <select v-model="medicine">
+                            <option v-for="med in medications" :key="med.id">
+                                {{med.name}}
+                            </option>
+                        </select>
+                    </div>
+
+
                 </div>
-                <div class="col-45">
-                    <select v-model="medicine">
-                        <option v-for="med in medications" :key="med.id">
-                            {{med.name}}
-                        </option>
-                    </select>
+                <div class="row justify-content-md-center">
+
+                    <div class="col-15">
+                        <label for="apiKey">Quantity:</label>
+                    </div>
+                    <div class="col-25">
+                        <input type="number" v-model="quantity" name="quantity" placeholder="Enter quantity..">
+                    </div>
+                    <div class="col-25">
+                        <button class="button1" v-on:click="addNewMedicine">+&nbsp;&nbsp;&nbsp;Add</button>
+                    </div>
                 </div>
 
-                <div class="col-15">
-                    <label for="apiKey">Quantity:</label>
+
+
+
+
+                <div class="row justify-content-md-center">
+                    <div class="col-15">
+                        <label for="name">Tender is opened until:</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="endDate" v-model="endDate" placeholder="01/01/2020" />
+                    </div>
                 </div>
-                <div class="col-25">
-                    <input type="number" v-model="quantity" name="quantity" placeholder="Enter quantity..">
+                <div class="row justify-content-md-center">
+                    <div class="col-15"></div>
+                    <div class="col-75">
+                        <button class="button2" v-on:click="publishTender">Publish</button>
+                    </div>
                 </div>
-                <div class="col-25">
-                    <button class="button" v-on:click="addNewMedicine">Add</button>
+                <div class="row">
+                    <label v-if="sent" style="color:lightgreen;font-size:25px;">Successfully published tender!</label>
+                    <label v-if="notSent" style="color:red;font-size:25px;">Error occurred!</label>
                 </div>
+
             </div>
-
-
-            <div class="row justify-content-md-center">
+            <div class="col-20">
                 <table id="tenderMedicine">
+                    <thead>
+                    <th>Medicine name</th>
+                    <th>Quantity</th>
+                    </thead>
                     <tr v-for="med in medicationQuantityList" :key="med.medicineName">
                         <td>{{med.medicineName}}</td>
                         <td>{{med.quantity}}</td>
                     </tr>
                 </table>
             </div>
+           
 
-            <div class="row justify-content-md-center">
-                <div class="col-25">
-                    <label for="name">Tender is open until:</label>
-                </div>
-                <div class="col-75">
-                    <input type="text" id="endDate" v-model="endDate" placeholder="01/01/2020" />
-                </div>
-            </div>
-            <div class="row justify-content-md-center">
-                <div class="col-25">
-                    <label for="name">Publish tender</label>
-                </div>
-                <div class="col-75">
-                    <button class="button" v-on:click="publishTender">Publish</button>
-                </div>
-            </div>
-            <div class="row">
-                <label v-if="sent" style="color:lightgreen;font-size:25px;">Successfully published tender!</label>
-                <label v-if="notSent" style="color:red;font-size:25px;">Error occurred!</label>
-            </div>
 
         </div>
-
-
-
-
-
-    </div>
+        </div>
+        
 </template>
 
 <script>
@@ -210,16 +220,26 @@
     .container {
         border-radius: 5px;
         background-color: #f2f2f2;
-        padding: 20px;
         font-size: 30px;
-        width: 70%;
-        margin: 0 auto;
+        width: 100%;
+        margin : auto
+    }
+    .container1 {
+        border-radius: 5px;
+        background-color: #1D8288;
+        font-size: 30px;
+        width: 100%;
+        margin: auto
     }
 
     .col-25 {
         float: left;
         width: 25%;
         margin-top: 6px;
+    }
+    .col {
+        float:left;
+        width: 22%;
     }
 
     .col-15 {
@@ -233,11 +253,27 @@
         width: 45%;
         margin-top: 6px;
     }
+    .col-45 {
+        width: 45%;
+    }
 
     .col-75 {
         float: left;
         width: 75%;
         margin-top: 6px;
+    }
+    .col-80 {
+        float: left;
+        width: 65%;
+        margin-top: 6px;
+        background-color: #f2f2f2;
+    }
+    .col-20 {
+        float: left;
+        width: 34%;
+        margin-top: 6px;
+        margin-left: 6px;
+        background-color: #f2f2f2;
     }
 
     /* Clear floats after the columns */
@@ -256,8 +292,7 @@
     }
 
     .button {
-        background-color: #1D8288;
-        border: double;
+        background-color: darkseagreen;
         color: white;
         padding: 15px 32px;
         text-align: center;
@@ -268,33 +303,49 @@
         margin: 4px 2px;
         cursor: pointer;
     }
-
-    .button2 {
-        background-color: lightgreen;
-        border: double;
+    .button1 {
+        background-color: darkseagreen;
         color: white;
         padding: 15px 32px;
         text-align: center;
         text-decoration: none;
         display: inline-block;
         font-size: 25px;
-        float: left;
+        width:200px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+    .button2 {
+        background-color: darkseagreen;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 25px;
+        width: 350px;
         margin: 4px 2px;
         cursor: pointer;
     }
 
-    .button3 {
-        background-color: lightgreen;
-        border: double;
-        color: white;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 25px;
-        float: initial;
-        margin: 4px 2px;
-        cursor: pointer;
+    table {
+        width: 100%;
+        border:2px;
+        border-color:azure;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #ddd;
+    }
+   
+    .row {
+        width: 100%;
+        margin-top: 3px;
     }
 </style>
 
