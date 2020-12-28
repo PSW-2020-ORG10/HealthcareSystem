@@ -5,7 +5,6 @@ using System.Text;
 using HealthClinic.CL.Model.Orders;
 using HealthClinic.CL.Repository;
 using HealthClinic.CL.Service;
-using IntegrationWithPharmacies.Controllers;
 using IntegrationWithPharmacies.FileProtocol;
 using Moq;
 using Xunit;

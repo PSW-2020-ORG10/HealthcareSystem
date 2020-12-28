@@ -3,11 +3,9 @@ using HealthClinic.CL.Model.Orders;
 using HealthClinic.CL.Model.Pharmacy;
 using HealthClinic.CL.Repository;
 using HealthClinic.CL.Service;
-using IntegrationWithPharmacies.Controllers;
 using Moq;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace IntegrationWithPharmaciesTest

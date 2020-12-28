@@ -1,0 +1,8 @@
+api4
+ Precription for medicine
+
+Patients name: Marko
+Patients surname: Markovic
+Patients medical ID number: 2112313
+Medication: Defrinol Quantity: 3
+Usage: 
