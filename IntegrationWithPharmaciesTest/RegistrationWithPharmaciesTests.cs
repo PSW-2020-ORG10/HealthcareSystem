@@ -43,7 +43,7 @@ namespace IntegrationWithPharmaciesTest
             foundRegistration.ShouldBeNull();
         }
         [Fact]
-        public void creates_registration()
+        public void Creates_registration()
         {
             RegistrationInPharmacyService service = new RegistrationInPharmacyService(Create_stub_repository());
 
@@ -52,7 +52,7 @@ namespace IntegrationWithPharmaciesTest
             registrationInPharmacy.ShouldNotBeNull();
         }
         [Fact]
-        public void creates_no_registration()
+        public void Creates_no_registration()
         {
             RegistrationInPharmacyService service = new RegistrationInPharmacyService(Create_stub_repository());
 

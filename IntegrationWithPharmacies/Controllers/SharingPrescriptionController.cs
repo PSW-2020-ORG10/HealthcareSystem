@@ -104,5 +104,7 @@ namespace IntegrationWithPharmacies.Controllers
             return Ok(pharmaciesWithMedicine);
         }
 
+
+
     }
 }

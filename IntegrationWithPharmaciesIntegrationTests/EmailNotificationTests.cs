@@ -1,8 +1,6 @@
 ﻿using Shouldly;
 using System;
-using System.Collections.Generic;
 using System.Net.Mail;
-using System.Text;
 using Xunit;
 
 namespace IntegrationWithPharmaciesTest
@@ -12,17 +10,15 @@ namespace IntegrationWithPharmaciesTest
         [Fact]
         public void Sends_notification_email()
         {
-            Boolean ok = sendNotigication();
-            ok.ShouldBe(true);
+            sendNotification().ShouldBe(true);
         }
         [Fact]
         public void Sends_no_notification_email()
         {
-            Boolean ok = sendNoNotigication();
-            ok.ShouldBe(false);
+            sendNoNotification().ShouldBe(false);
         }
 
-        private Boolean sendNotigication()
+        private Boolean sendNotification()
         {
             try
             {
@@ -36,7 +32,7 @@ namespace IntegrationWithPharmaciesTest
             catch { return false; }
 
         }
-        private Boolean sendNoNotigication()
+        private Boolean sendNoNotification()
         {
             try
             {
