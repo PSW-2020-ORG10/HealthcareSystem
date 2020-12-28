@@ -415,7 +415,7 @@
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
     },
     {
-      "DownstreamPathTemplate": "/api/employeeSchedule",
+      "DownstreamPathTemplate": "/api/employeesSchedule",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -423,7 +423,7 @@
           "Port": 53236
         }
       ],
-      "UpstreamPathTemplate": "/api/employeeSchedule",
+      "UpstreamPathTemplate": "/api/employeesSchedule",
       "UpstreamHttpMethod": [ "POST" ]
     },
     {

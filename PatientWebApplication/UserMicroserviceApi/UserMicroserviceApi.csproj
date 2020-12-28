@@ -23,5 +23,9 @@
     <ProjectReference Include="..\HealthClinic.DAL\HealthClinic.CL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
 
 </Project>

@@ -641,7 +641,7 @@ export const createRecommendAppointment = (appointment) => async (dispatch) => {
     console.log(appointment.start)
     try {
         debugger;
-        const response = await axios.post("http://localhost:54689/api/doctorappointment/createRecommended", appointment,
+        const response = await axios.post("http://localhost:54689/api/doctorappointment", appointment,
         {
             headers: { "Access-Control-Allow-Origin": "*" },
           });
