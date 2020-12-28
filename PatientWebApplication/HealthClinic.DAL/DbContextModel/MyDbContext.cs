@@ -159,7 +159,8 @@ namespace HealthClinic.CL.DbContextModel
                 new Schedule(18, 3, "22/12/2020", true, 1, "1"),
                 new Schedule(19, 4, "23/12/2020", true, 1, "1"),
                 new Schedule(20, 1, "12/01/2021", true, 4, "Ordination 1"),
-                new Schedule(21, 1, "25/12/2020", true, 4, "1")
+                new Schedule(21, 1, "25/12/2020", true, 4, "1"),
+                new Schedule(22, 1, "29/12/2020", true, 3, "1")
            );
 
             modelBuilder.Entity<ModelRoom>().HasData(

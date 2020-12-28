@@ -57,7 +57,10 @@ export const feedbackCreated = (feedback) => async (dispatch) => {
     console.log(feedback.message);
     try {
         debugger;
-        await axios.post("http://localhost:60198/api/feedback/", feedback);
+        await axios.post("http://localhost:54689/api/feedback", feedback,
+        {
+            headers: { "Access-Control-Allow-Origin": "*" },
+          });
         debugger;
         dispatch({
             type: FEEDBACK_CREATED,
@@ -73,7 +76,9 @@ export const feedbackCreated = (feedback) => async (dispatch) => {
 
 export const feedbackPublished = (id) => async (dispatch) => {
     try {
-        const response = await axios.put("http://localhost:60198/api/feedback/" + id);
+        const response = await axios.put("http://localhost:54689/api/feedback/" + id, {
+            headers: { "Access-Control-Allow-Origin": "*" }
+          });
         dispatch({
             type: FEEDBACK_PUBLISHED,
             payload: response.data,
@@ -89,7 +94,10 @@ export const feedbackPublished = (id) => async (dispatch) => {
 export const loadedPublishedFeedback = () => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.get("http://localhost:60198/api/feedback/published");        
+        const response = await axios.get("http://localhost:54689/api/feedback/published",
+        {
+            headers: { "Access-Control-Allow-Origin": "*" }
+          }); 
         debugger;
         dispatch({
             type: LOADED_PUBLISHED_FEEDBACK,
@@ -106,7 +114,10 @@ export const loadedPublishedFeedback = () => async (dispatch) => {
 export const loadedAllFeedback = () => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.get("http://localhost:60198/api/feedback");
+        const response = await axios.get("http://localhost:54689/api/feedback",
+        {
+            headers: { "Access-Control-Allow-Origin": "*" },
+          });
         debugger;
         dispatch({
             type: LOADED_ALL_FEEDBACK,
@@ -123,7 +134,10 @@ export const loadedAllFeedback = () => async (dispatch) => {
 export const loadedAllPrescriptions = () => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.get("http://localhost:60198/api/prescription");
+        const response = await axios.get("http://localhost:54689/api/prescription",
+        {
+            headers: { "Access-Control-Allow-Origin": "*" },
+          });
         debugger;
         dispatch({
             type: LOADED_ALL_PRESCRIPTIONS,
@@ -140,7 +154,10 @@ export const loadedAllPrescriptions = () => async (dispatch) => {
 export const loadedAllPatientPrescriptions = () => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.get("http://localhost:60198/api/prescription/patient");
+        const response = await axios.get("http://localhost:54689/api/prescription/patient",
+        {
+            headers: { "Access-Control-Allow-Origin": "*" },
+          });
         debugger;
         dispatch({
             type: LOADED_ALL_PATIENT_PRESCRIPTIONS,
@@ -158,7 +175,10 @@ export const loadedAllPatientPrescriptions = () => async (dispatch) => {
 export const patientRegistered = (patient) => async (dispatch) => {
     try {
         debugger;
-        await axios.post("http://localhost:60198/api/patientuser", patient);
+        await axios.post("http://localhost:54689/api/patientuser", patient,
+        {
+            headers: { "Access-Control-Allow-Origin": "*" },
+          });
         debugger;
         dispatch({
             type: PATIENT_REGISTERED,
@@ -176,7 +196,10 @@ export const simpleSearchPatientPrescriptions = (prescription) => async (dispatc
     console.log(prescription.medicines)
     try {
         debugger;
-        const response = await axios.post("http://localhost:60198/api/prescription/search", prescription);
+        const response = await axios.post("http://localhost:54689/api/prescription/search", prescription,
+        {
+            headers: { "Access-Control-Allow-Origin": "*" },
+          });
         debugger;
         dispatch({
             type: SIMPLE_SEARCH_PATIENT_PRESCRIPTIONS,
@@ -193,11 +216,14 @@ export const simpleSearchPatientPrescriptions = (prescription) => async (dispatc
 export const findOnePatient = (id) => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.get("http://localhost:60198/api/patientuser/getone", {
+        const response = await axios.get("http://localhost:54689/api/patientuser/getone", {
             params: {
                 id: id
             }
-        });
+        },
+        {
+            headers: { "Access-Control-Allow-Origin": "*" },
+          });
         debugger;
         dispatch({
             type: FIND_ONE_PATIENT,
@@ -215,7 +241,10 @@ export const advancedSearchPatientPrescriptions = (prescription) => async (dispa
     console.log(prescription.medicines)
     try {
         debugger;
-        const response = await axios.post("http://localhost:60198/api/prescription/advancedsearch", prescription);
+        const response = await axios.post("http://localhost:54689/api/prescription/advancedsearch", prescription,
+        {
+            headers: { "Access-Control-Allow-Origin": "*" },
+          });
         debugger;
         dispatch({
             type: ADVANCED_SEARCH_PATIENT_PRESCRIPTIONS,
@@ -230,8 +259,14 @@ export const advancedSearchPatientPrescriptions = (prescription) => async (dispa
 };
 export const loadedAllPatientReports = (patientId) => async (dispatch) => {
     try {
-        axios.all(  [axios.get('http://localhost:60198/api/doctorappointment/' + patientId),
-                     axios.get('http://localhost:60198/api/operation/' + patientId)])
+        axios.all(  [axios.get('http://localhost:54689/api/doctorappointment/' + patientId,
+        {
+            headers: { "Access-Control-Allow-Origin": "*" },
+          }),
+                     axios.get('http://localhost:54689/api/operation/' + patientId,
+                     {
+                         headers: { "Access-Control-Allow-Origin": "*" },
+                       })])
                         .then(axios.spread((firstResponse, secondResponse) => {
                             debugger;
                             var appointments = []
@@ -254,8 +289,14 @@ export const loadedAllPatientReports = (patientId) => async (dispatch) => {
 
 export const simpleSearchAppointments  = (searchDto) => async (dispatch) => {
     try {
-        axios.all([axios.post('http://localhost:60198/api/doctorappointment/search', searchDto),
-            axios.post('http://localhost:60198/api/operation/search',  searchDto)])
+        axios.all([axios.post('http://localhost:54689/api/doctorappointment/search', searchDto,
+        {
+            headers: { "Access-Control-Allow-Origin": "*" },
+          }),
+            axios.post('http://localhost:54689/api/operation/search',  searchDto,
+            {
+                headers: { "Access-Control-Allow-Origin": "*" },
+              })])
             .then(axios.spread((firstResponse, secondResponse) => {
                 debugger;
                 var appointments = []
@@ -279,7 +320,10 @@ export const simpleSearchAppointments  = (searchDto) => async (dispatch) => {
 export const loadedAppointmentSurvey = () => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.get("http://localhost:60198/api/survey");
+        const response = await axios.get("http://localhost:54689/api/survey",
+        {
+            headers: { "Access-Control-Allow-Origin": "*" },
+          });
         debugger;
         dispatch({
             type: LOADED_APPOINTMENTSURVEY,
@@ -296,7 +340,10 @@ export const loadedAppointmentSurvey = () => async (dispatch) => {
 export const surveyCreated = (survey) => async (dispatch) => {
     try {
         debugger;
-        await axios.post("http://localhost:60198/api/survey/", survey);
+        await axios.post("http://localhost:54689/api/survey/", survey,
+        {
+            headers: { "Access-Control-Allow-Origin": "*" },
+          });
         debugger;
         dispatch({
             type: SURVEY_CREATED,
@@ -313,7 +360,10 @@ export const surveyCreated = (survey) => async (dispatch) => {
 export const advancedSearchPatientAppointments = (appointment) => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.post("http://localhost:60198/api/doctorappointment/advancedsearch", appointment);
+        const response = await axios.post("http://localhost:54689/api/doctorappointment/advancedsearch", appointment,
+        {
+            headers: { "Access-Control-Allow-Origin": "*" },
+          });
         debugger;
         dispatch({
             type: ADVANCED_SEARCH_PATIENT_APPOINTMENTS,
@@ -330,7 +380,10 @@ export const advancedSearchPatientAppointments = (appointment) => async (dispatc
 export const loadedAllPatientAppointments = () => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.get("http://localhost:60198/api/doctorappointment/patient");
+        const response = await axios.get("http://localhost:54689/api/doctorappointment/patient",
+        {
+            headers: { "Access-Control-Allow-Origin": "*" },
+          });
         debugger;
         dispatch({
             type: LOADED_ALL_PATIENT_APPOINTMENTS,
@@ -347,7 +400,10 @@ export const loadedAllPatientAppointments = () => async (dispatch) => {
 export const loadedAllRates = () => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.get("http://localhost:60198/api/survey/getRates");
+        const response = await axios.get("http://localhost:54689/api/survey/getRates",
+        {
+            headers: { "Access-Control-Allow-Origin": "*" },
+          });
         debugger;
         dispatch({
             type: LOADED_ALL_RATES,
@@ -364,7 +420,10 @@ export const loadedAllRates = () => async (dispatch) => {
 export const loadedAllDoctorRates = () => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.get("http://localhost:60198/api/survey/getDoctorRates");
+        const response = await axios.get("http://localhost:54689/api/survey/getDoctorRates",
+        {
+            headers: { "Access-Control-Allow-Origin": "*" },
+          });
         debugger;
         dispatch({
             type: LOADED_ALL_DOCTOR_RATES,
@@ -381,7 +440,10 @@ export const loadedAllDoctorRates = () => async (dispatch) => {
 export const loadedAllAvailableDoctors = (specialty, date, patientId) => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.get("http://localhost:60198/api/doctor/available?specialty=" + specialty+ "&date=" + date + "&patientId=" + patientId);
+        const response = await axios.get("http://localhost:54689/api/doctor/available?specialty=" + specialty+ "&date=" + date + "&patientId=" + patientId,
+        {
+            headers: { "Access-Control-Allow-Origin": "*" },
+          });
         debugger;
         dispatch({
             type: LOADED_ALL_AVAILABLE_DOCTORS,
@@ -398,7 +460,10 @@ export const loadedAllAvailableDoctors = (specialty, date, patientId) => async (
 export const loadedAllPatientAppointmentsInTwoDays = () => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.get("http://localhost:60198/api/doctorappointment/patientInTwoDays");
+        const response = await axios.get("http://localhost:54689/api/doctorappointment/patientInTwoDays",
+        {
+            headers: { "Access-Control-Allow-Origin": "*" },
+          });
         debugger;
         dispatch({
             type: LOADED_ALL_PATIENT_APPOINTMENTS_INTWODAYS,
@@ -415,7 +480,10 @@ export const loadedAllPatientAppointmentsInTwoDays = () => async (dispatch) => {
 export const loadedAllAvailableAppointments = (dto) => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.post("http://localhost:60198/api/doctorappointment/availableappointments", dto);
+        const response = await axios.post("http://localhost:54689/api/doctorappointment/availableappointments", dto,
+        {
+            headers: { "Access-Control-Allow-Origin": "*" },
+          });
         debugger;
         dispatch({
             type: LOADED_ALL_AVAILABLE_APPOINTMENTS,
@@ -431,7 +499,10 @@ export const loadedAllAvailableAppointments = (dto) => async (dispatch) => {
 export const loadedAllPatientAppointmentsInFuture = () => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.get("http://localhost:60198/api/doctorappointment/patientInFuture");
+        const response = await axios.get("http://localhost:54689/api/doctorappointment/patientInFuture",
+        {
+            headers: { "Access-Control-Allow-Origin": "*" },
+          });
         debugger;
         dispatch({
             type: LOADED_ALL_PATIENT_APPOINTMENTS_INFUTURE,
@@ -448,7 +519,10 @@ export const loadedAllPatientAppointmentsInFuture = () => async (dispatch) => {
 export const appointmentScheduled = (appointment) => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.post("http://localhost:60198/api/doctorappointment", appointment);
+        const response = await axios.post("http://localhost:54689/api/doctorappointment", appointment,
+        {
+            headers: { "Access-Control-Allow-Origin": "*" },
+          });
         debugger;
         dispatch({
             type: APPOINTMENT_SCHEDULED,
@@ -465,7 +539,10 @@ export const appointmentScheduled = (appointment) => async (dispatch) => {
 export const cancelAppointment = (appointmentId) => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.put("http://localhost:60198/api/doctorappointment/" + appointmentId );
+        const response = await axios.put("http://localhost:54689/api/doctorappointment/" + appointmentId,
+        {
+            headers: { "Access-Control-Allow-Origin": "*" },
+          });
         debugger;
         dispatch({
             type: CANCEL_APPOINTMENT,
@@ -482,7 +559,10 @@ export const cancelAppointment = (appointmentId) => async (dispatch) => {
 export const loadedAllPatientAppointmentsWithSurvey = () => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.get("http://localhost:60198/api/survey/");
+        const response = await axios.get("http://localhost:54689/api/survey",
+        {
+            headers: { "Access-Control-Allow-Origin": "*" },
+          });
         debugger;
         dispatch({
             type: LOADED_ALL_PATIENT_APPOINTMENTS_WITH_SURVEYS,
@@ -499,7 +579,10 @@ export const loadedAllPatientAppointmentsWithSurvey = () => async (dispatch) => 
 export const loadedAllPatientAppointmentsWithoutSurvey = () => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.get("http://localhost:60198/api/survey/getWithSurveys");
+        const response = await axios.get("http://localhost:54689/api/survey/getWithSurveys",
+        {
+            headers: { "Access-Control-Allow-Origin": "*" },
+          });
         debugger;
         dispatch({
             type: LOADED_ALL_PATIENT_APPOINTMENTS_WITHOUT_SURVEYS,
@@ -516,7 +599,10 @@ export const loadedAllPatientAppointmentsWithoutSurvey = () => async (dispatch) 
 export const loadedAllDoctors = () => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.get("http://localhost:60198/api/doctor/");
+        const response = await axios.get("http://localhost:54689/api/doctor",
+        {
+            headers: { "Access-Control-Allow-Origin": "*" },
+          });
         debugger;
         dispatch({
             type: LOADED_ALL_DOCTORS,
@@ -534,7 +620,10 @@ export const recommendAppointment = (appointment) => async (dispatch) => {
     console.log(appointment.start)
     try {
         debugger;
-        const response = await axios.post("http://localhost:60198/api/doctorappointment/recommend", appointment);
+        const response = await axios.post("http://localhost:54689/api/doctorappointment/recommend", appointment,
+        {
+            headers: { "Access-Control-Allow-Origin": "*" },
+          });
         debugger;
         dispatch({
             type: RECOMMEND_APPOINTMENT,
@@ -552,7 +641,10 @@ export const createRecommendAppointment = (appointment) => async (dispatch) => {
     console.log(appointment.start)
     try {
         debugger;
-        const response = await axios.post("http://localhost:60198/api/doctorappointment/createRecommended", appointment);
+        const response = await axios.post("http://localhost:54689/api/doctorappointment/createRecommended", appointment,
+        {
+            headers: { "Access-Control-Allow-Origin": "*" },
+          });
         debugger;
         dispatch({
             type: CREATE_RECOMMEND_APPOINTMENT,
@@ -570,7 +662,10 @@ export const createRecommendAppointment = (appointment) => async (dispatch) => {
 export const loadedAllPatients = () => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.get("http://localhost:60198/api/patientuser");
+        const response = await axios.get("http://localhost:54689/api/patientuser",
+        {
+            headers: { "Access-Control-Allow-Origin": "*" },
+          });
         debugger;
         dispatch({
             type: LOADED_ALL_PATIENTS,
@@ -587,7 +682,10 @@ export const loadedAllPatients = () => async (dispatch) => {
 export const blockPatient = (patientId) => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.put("http://localhost:60198/api/patientuser/" + patientId);
+        const response = await axios.put("http://localhost:54689/api/patientuser/" + patientId,
+        {
+            headers: { "Access-Control-Allow-Origin": "*" },
+          });
         debugger;
         dispatch({
             type: BLOCK_PATIENT,
@@ -604,7 +702,10 @@ export const blockPatient = (patientId) => async (dispatch) => {
 export const loadedMaliciousPatients = () => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.get("http://localhost:60198/api/patientuser/malicious");
+        const response = await axios.get("http://localhost:54689/api/patientuser/malicious",
+        {
+            headers: { "Access-Control-Allow-Origin": "*" },
+          });
         debugger;
         dispatch({
             type: LOADED_MALICIOUS_PATIENTS,
