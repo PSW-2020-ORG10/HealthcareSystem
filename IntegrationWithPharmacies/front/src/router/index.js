@@ -9,8 +9,6 @@ import MedicineAvailability from '../views/MedicineAvailability.vue'
 import SharingPrescription from '../views/SharingPrescription.vue'
 import UrgentProcurement from '../views/UrgentOrder.vue'
 import Tender from '../views/Tender.vue'
-import CreateNewTender from '../views/CreateNewTender.vue'
-import AddMedicineForTender from '../views/AddMedicineForTender.vue'
 
 Vue.use(VueRouter)
 
@@ -61,16 +59,6 @@ const routes = [
         path: '/tender',
         name: 'Tender',
         component: Tender,
-    },
-    {
-        path: '/newTender',
-        name: 'NewTender',
-        component: CreateNewTender,
-    },
-    {
-        path: '/formTender',
-        name: 'FormTender',
-        component: AddMedicineForTender,
     }
 ]
 
