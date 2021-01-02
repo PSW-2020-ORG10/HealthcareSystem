@@ -9,5 +9,5 @@ https://www.youtube.com/watch?v=82amZI2ya3g&fbclid=IwAR3AR-sal5XnM42btBcCDpxLTXN
 | -------------------- | ----------------------- | -------------------- 
 | Maja Tomić           | Jana Novaković          | Tamara Govorčin
 | Tamara Veličković    | Stefan Santrač          | Luna Živković 	 
-| Nemenja Jevtić       | Aleksa Santrač          | Mladenka Kokanović
+| Nemanja Jevtić       | Aleksa Santrač          | Mladenka Kokanović
 | Dušan Trkulja        | Nemanja Dimitrijević    | Lidija Vuković   	 
