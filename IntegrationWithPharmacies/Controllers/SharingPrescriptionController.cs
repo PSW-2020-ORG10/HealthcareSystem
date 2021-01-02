@@ -18,19 +18,18 @@ namespace IntegrationWithPharmacies.Controllers
         private String Environment { get; }
         private MedicineService MedicineService { get; }
         private PatientService PatientService { get; set; }
-        private MedicineDescriptionService MedicineDescriptionService { get; }
         private PrescriptionFileService PrescriptionFileService { get; }
         private MedicineAvailabilityTable MedicineAvailabilityTable { get; }
-
+        private MedicineWithQuantityService MedicineWithQuantityService { get; }
 
         public SharingPrescriptionController(MyDbContext context)
         {
             MedicineService = new MedicineService(context);
             PatientService = new PatientService(context);
-            MedicineDescriptionService = new MedicineDescriptionService(context);
             PrescriptionFileService = new PrescriptionFileService(context);
             MedicineAvailabilityTable = new MedicineAvailabilityTable();
             Environment = Program.Environment;
+            MedicineWithQuantityService = new MedicineWithQuantityService(context);
         }
 
         [HttpGet("patients")]
@@ -68,7 +67,7 @@ namespace IntegrationWithPharmacies.Controllers
         [HttpGet("http/description/{medicine}")]
         public IActionResult GetMedicineDescription(string medicine)
         {
-            String medicineDescription = MedicineDescriptionService.GetMedicineDescriptionFromDatabase(medicine);
+            String medicineDescription = MedicineWithQuantityService.GetMedicineDescriptionFromDatabase(medicine);
             if (medicineDescription.IsNullOrEmpty()) return GetMedicineDescriptionFromIsaHttp(medicine);
             return Ok(medicineDescription);
         }
@@ -76,7 +75,7 @@ namespace IntegrationWithPharmacies.Controllers
         public IActionResult GetMedicineDescriptionFromIsaHttp(string medicine)
         {
             String description = HttpService.FormMedicineDescriptionRequest(medicine);
-            MedicineDescriptionService.Create(new MedicineDescriptionDto(medicine, description, 1));
+            MedicineWithQuantityService.CreateMedicineWithDescription(new MedicineWithQuantityDto(medicine, 0,description));
             if (description.Length != 0) return Ok(description);
             return BadRequest();
         }
@@ -84,7 +83,7 @@ namespace IntegrationWithPharmacies.Controllers
         [HttpGet("grpc/description/{medicine}")]
         public IActionResult GetMedicineDescriptionGrpc(string medicine)
         {
-            String medicineDescription = MedicineDescriptionService.GetMedicineDescriptionFromDatabase(medicine);
+            String medicineDescription = MedicineWithQuantityService.GetMedicineDescriptionFromDatabase(medicine);
             if (medicineDescription.IsNullOrEmpty())return GetMedicineDescriptionFromIsaGrpc(medicine);
             return Ok(medicineDescription);
         }
@@ -92,7 +91,7 @@ namespace IntegrationWithPharmacies.Controllers
         private IActionResult GetMedicineDescriptionFromIsaGrpc(string medicine)
         {
             string response = new ClientScheduledService().SendMessage(medicine).Result;
-            MedicineDescriptionService.Create(new MedicineDescriptionDto(medicine, response, 1));
+            MedicineWithQuantityService.CreateMedicineWithDescription(new MedicineWithQuantityDto(medicine, 0,response));
             return Ok(response);
         }
 
@@ -103,6 +102,5 @@ namespace IntegrationWithPharmacies.Controllers
             if (pharmaciesWithMedicine == null) return BadRequest();
             return Ok(pharmaciesWithMedicine);
         }
-
     }
 }

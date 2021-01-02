@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using HealthClinic.CL.Model.Patient;
 
 namespace HealthClinic.CL.Model.Orders
@@ -13,17 +11,17 @@ namespace HealthClinic.CL.Model.Orders
 
         public MedicineForTendering() : base() { }
 
-        public MedicineForTendering(int id, string name, int quantity, int tender) : base(id)
+        public MedicineForTendering(int id, string name, int quantity, int tenderId) : base(id)
         {
             Name = name;
             Quantity = quantity;
-            TenderId = tender;
+            TenderId = tenderId;
         }
-        public MedicineForTendering(string name, int quantity, int tender)
+        public MedicineForTendering(string name, int quantity, int tenderId)
         {
             Name = name;
             Quantity = quantity;
-            TenderId = tender;
+            TenderId = tenderId;
         }
     }
 }

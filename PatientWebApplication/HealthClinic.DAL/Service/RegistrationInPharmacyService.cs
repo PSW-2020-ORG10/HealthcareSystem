@@ -40,11 +40,7 @@ namespace HealthClinic.CL.Service
             }
             return true;
         }
-        public List<RegistrationInPharmacy> GetAllForStub()
-        {
-            return IRegistrationRepository.GetAll();
-        }
-
+  
         public RegistrationInPharmacy getPharmacyApiKey(String apiKey)
         {
             foreach (RegistrationInPharmacy registration in IRegistrationRepository.GetAll())

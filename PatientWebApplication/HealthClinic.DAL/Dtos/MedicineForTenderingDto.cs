@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HealthClinic.CL.Dtos
 {
@@ -12,11 +10,11 @@ namespace HealthClinic.CL.Dtos
 
         public MedicineForTenderingDto() { }
 
-        public MedicineForTenderingDto(string name, int quantity, int tender)
+        public MedicineForTenderingDto(string name, int quantity, int tenderId)
         {
             Name = name;
             Quantity = quantity;
-            TenderId = tender;
+            TenderId = tenderId;
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using HealthClinic.CL.Adapters;
 using HealthClinic.CL.DbContextModel;
 using HealthClinic.CL.Model.Orders;
+using HealthClinic.CL.Service;
 using IntegrationWithPharmacies.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,9 +15,13 @@ namespace IntegrationWithPharmacies.Controllers
     public class UrgentOrderController : Controller
     {
         private UrgentOrderService UrgentOrderService { get; }
+        private MedicineWithQuantityService MedicineWithQuantityService { get; }
+
         public UrgentOrderController(MyDbContext context)
         {
             UrgentOrderService = new UrgentOrderService(context);
+            MedicineWithQuantityService = new MedicineWithQuantityService(context);
+
         }
 
         [HttpGet("http/{medicine}")]
@@ -24,6 +29,7 @@ namespace IntegrationWithPharmacies.Controllers
         {
             List<MedicineName> pharmaciesWithMedicine = UrgentOrderService.CheckMedicineAvailability(medicine);
             if (pharmaciesWithMedicine == null) return BadRequest();
+            MedicineWithQuantityService.UpdateMedicineQuantityUrgentOrder(medicine);
             return ForwardUrgentUrderHttp(medicine, pharmaciesWithMedicine);
         }
 
@@ -32,6 +38,7 @@ namespace IntegrationWithPharmacies.Controllers
         {
             List<MedicineName> pharmaciesWithMedicine = UrgentOrderService.CheckMedicineAvailability(medicine);
             if (pharmaciesWithMedicine == null) return BadRequest();
+            MedicineWithQuantityService.UpdateMedicineQuantityUrgentOrder(medicine);
             return ForwardUrgentUrderGrpc(medicine, pharmaciesWithMedicine);
         }
         private IActionResult ForwardUrgentUrderHttp(string medicine, List<MedicineName> pharmaciesWithMedicine)

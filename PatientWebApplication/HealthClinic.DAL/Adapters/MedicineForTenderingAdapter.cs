@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using HealthClinic.CL.Dtos;
+﻿using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Orders;
 
 namespace HealthClinic.CL.Adapters
@@ -13,7 +10,7 @@ namespace HealthClinic.CL.Adapters
             return new MedicineForTendering(dto.Name,dto.Quantity,dto.TenderId);
         }
 
-        public MedicineForTenderingDto MedicineForebderingToMedicineForTenderingDto(MedicineForTendering medicine)
+        public static MedicineForTenderingDto MedicineForebderingToMedicineForTenderingDto(MedicineForTendering medicine)
         {
             return new MedicineForTenderingDto(medicine.Name, medicine.Quantity,medicine.TenderId);
         }

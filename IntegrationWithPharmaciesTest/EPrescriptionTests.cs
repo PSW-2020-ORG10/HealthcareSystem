@@ -3,11 +3,9 @@ using HealthClinic.CL.Model.Orders;
 using HealthClinic.CL.Model.Pharmacy;
 using HealthClinic.CL.Repository;
 using HealthClinic.CL.Service;
-using IntegrationWithPharmacies.Controllers;
 using Moq;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace IntegrationWithPharmaciesTest
@@ -34,16 +32,16 @@ namespace IntegrationWithPharmaciesTest
         [Fact]
         public void Finds_Medicine_Description()
         {
-            MedicineDescriptionService medicineDescriptionService = new MedicineDescriptionService(Create_stub_repository_medicines());
+            MedicineWithQuantityService medicineWithQuantityService = new MedicineWithQuantityService(Create_stub_repository_medicines());
 
-            String description = medicineDescriptionService.GetMedicineDescriptionFromStub("Paracetamol");
+            String description = medicineWithQuantityService.GetMedicineDescriptionFromStub("Paracetamol");
             Assert.NotEqual("", description);
         }
 
         [Fact]
         public void Finds_No_Medicine_Description()
         {
-            MedicineDescriptionService medicineDescriptionService = new MedicineDescriptionService(Create_stub_repository_medicines());
+            MedicineWithQuantityService medicineDescriptionService = new MedicineWithQuantityService(Create_stub_repository_medicines());
 
             String description = medicineDescriptionService.GetMedicineDescriptionFromStub("Clyndamicin");
             Assert.Equal("", description);
@@ -52,17 +50,17 @@ namespace IntegrationWithPharmaciesTest
         [Fact]
         public void Creates_Medicine_Description()
         {
-            MedicineDescriptionService medicineDescriptionService = new MedicineDescriptionService(Create_stub_repository_medicines());
+            MedicineWithQuantityService medicineWithQuantityService = new MedicineWithQuantityService(Create_stub_repository_medicines());
 
-            MedicineDescription description = medicineDescriptionService.createIMedicineDescription(new MedicineDescriptionDto("Andol", "Description", 1));
+            MedicineWithQuantity description = medicineWithQuantityService.createIMedicineDescription(new MedicineWithQuantityDto("Andol", 5,"Description"));
             Assert.NotNull(description);
         }
         [Fact]
         public void Creates_No_Medicine_Description()
         {
-            MedicineDescriptionService medicineDescriptionService = new MedicineDescriptionService(Create_stub_repository_medicines());
+            MedicineWithQuantityService medicineWithQuantityService = new MedicineWithQuantityService(Create_stub_repository_medicines());
 
-            MedicineDescription description = medicineDescriptionService.createIMedicineDescription(new MedicineDescriptionDto("Paracetamol", "Description", 1));
+            MedicineWithQuantity description = medicineWithQuantityService.createIMedicineDescription(new MedicineWithQuantityDto("Paracetamol", 10,"Description"));
             Assert.Null(description);
         }
         public static IEPrescriptionRepository Create_stub_repository()
@@ -78,15 +76,15 @@ namespace IntegrationWithPharmaciesTest
 
             return stubRepository.Object;
         }
-        public static IMedicineDescriptionRepository Create_stub_repository_medicines()
+        public static IMedicineWithQuantityRepository Create_stub_repository_medicines()
         {
-            var stubRepository = new Mock<IMedicineDescriptionRepository>();
-            MedicineDescription medicine1 = new MedicineDescription(1,"Paracetamol", "Paracetamol is a medication used to treat pain and fever.", 2);
-            MedicineDescription medicine2 = new MedicineDescription(2,"Ibuprofen","Ibuprofen is a medication used for treating pain, fever, and inflammation.", 2);
-            var orders = new List<MedicineDescription>();
-            orders.Add(medicine1);
-            orders.Add(medicine2);
-            stubRepository.Setup(m => m.GetAll()).Returns(orders);
+            var stubRepository = new Mock<IMedicineWithQuantityRepository>();
+            MedicineWithQuantity medicine1 = new MedicineWithQuantity(1,"Paracetamol", 2,"Paracetamol is a medication used to treat pain and fever.");
+            MedicineWithQuantity medicine2 = new MedicineWithQuantity(2,"Ibuprofen",5,"Ibuprofen is a medication used for treating pain, fever, and inflammation.");
+            var medicines = new List<MedicineWithQuantity>();
+            medicines.Add(medicine1);
+            medicines.Add(medicine2);
+            stubRepository.Setup(m => m.GetAll()).Returns(medicines);
             return stubRepository.Object;
         }
     }

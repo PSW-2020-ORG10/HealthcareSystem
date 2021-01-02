@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using HealthClinic.CL.Adapters;
 using HealthClinic.CL.DbContextModel;
-using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Orders;
 using HealthClinic.CL.Service;
-using IntegrationWithPharmacies.Services;
-using Microsoft.AspNetCore.Http;
+using IntegrationWithPharmacies.FileProtocol;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IntegrationWithPharmacies.Controllers
@@ -17,53 +12,69 @@ namespace IntegrationWithPharmacies.Controllers
     [ApiController]
     public class TenderController : ControllerBase
     {
-        private TenderingService TenderingService { get; }
         private TenderService TenderService { get; }
-        private TenderAdapter TenderAdapter { get; }
-        private MedicineForTenderingAdapter MedicineForTenderingAdapter { get; }
         private MedicineForTenderingService MedicineForTenderingService { get; }
+        private MedicineTenderOfferService MedicineTenderOfferService { get; }
+        private PharmacyTenderOfferService PharmacyTenderOfferService { get; }
+        private MedicineWithQuantityService MedicineWithQuantityService { get; }
+        private SmptServerService SmptServerService { get; }
         public TenderController(MyDbContext context)
         {
-            TenderingService = new TenderingService(context);
-            MedicineForTenderingAdapter = new MedicineForTenderingAdapter();
-            TenderAdapter = new TenderAdapter();
             MedicineForTenderingService = new MedicineForTenderingService(context);
             TenderService = new TenderService(context);
+            MedicineTenderOfferService = new MedicineTenderOfferService(context);
+            PharmacyTenderOfferService = new PharmacyTenderOfferService(context);
+            SmptServerService = new SmptServerService();
+            MedicineWithQuantityService = new MedicineWithQuantityService(context);
         }
 
         [HttpPost]
         public IActionResult Post(TenderOrder tender)
         {
-            TenderOrder tenderInstance = new TenderOrder(tender.MedicinesWithQuantity, tender.Date);
-            CreateTender(tender);
-            CreateMedicineForTendering(tender);
-            if (TenderingService.PublishTender(tenderInstance)) return Ok();
-            return BadRequest();
-        }
-        private void CreateMedicineForTendering(TenderOrder tender)
-        { 
-            foreach(MedicineQuantity medicineQuantity in tender.MedicinesWithQuantity)
-            {
-                Console.WriteLine(medicineQuantity.MedicineName + " " + medicineQuantity.Quantity);
-                MedicineForTenderingService.Create(MedicineForTenderingAdapter.MedicineForebderingToMedicineForTenderingDto(new MedicineForTendering(medicineQuantity.MedicineName,medicineQuantity.Quantity,getTenderId())));
-            }
-           
-        }
-        private void CreateTender(TenderOrder tender)
-        {
-                TenderService.Create(TenderAdapter.TenderToTenderDto(new Tender(new DateTime(2020,5,5),false)));
-            
-
+            TenderService.Create(TenderAdapter.TenderToTenderDto(new Tender(DateTime.Parse(tender.Date), false)));
+            MedicineForTenderingService.CreateAllMedicineForTendering(tender);
+            return Ok();
         }
 
-        private int getTenderId()
+        [HttpGet("active")]
+        public IActionResult GetActiveTenders()
         {
-            int max = 0;
-            foreach(Tender tender in TenderService.GetAll())
-            {
-                if (max < tender.id) max = tender.id;
-            }
-            return max;
+            return Ok(TenderService.GetAllActiveTenders());
         }
+
+        [HttpGet("{id}")]
+        public IActionResult GetTenderById(String id)
+        {
+            return Ok(TenderService.GetTenderById(Int32.Parse(id)));
+        }
+
+        [HttpPost("offer")]
+        public IActionResult RecieveTenderOffer(TenderOrder tenderOrder)
+        {
+            PharmacyTenderOfferService.CreateFromTenderOrder(tenderOrder);
+            MedicineTenderOfferService.CreateAllMedicineTenderOffers(tenderOrder.MedicinesWithQuantity);
+            return Ok();
+        }
+
+        [HttpGet("allPharmacyOffers/{id}")]
+        public IActionResult GetPharmacyOffers(int id)
+        {
+            return Ok(PharmacyTenderOfferService.GetAllPharmacyOffersForTender(id));
+        }
+
+        [HttpGet("pharmacyOffer/{offerId}/{tenderId}")]
+        public IActionResult GetConcretePharmacyOffer(int offerId, int tenderId)
+        {
+            return Ok(PharmacyTenderOfferService.GetPharmacyOffer(offerId,tenderId));
+        }
+
+        [HttpGet("acceptOffer/{offerId}/{tenderId}")]
+        public IActionResult AcceptPharmacyOffer(int offerId, int tenderId)
+        { TenderOrder tender = PharmacyTenderOfferService.GetPharmacyOffer(offerId, tenderId);
+            SmptServerService.SendEMailNotificationForTender(tender.MedicinesWithQuantity, tender.PharmacyApi);
+            TenderService.CloseTender(tender);
+            MedicineWithQuantityService.UpdateMedicineQuantity(tender.MedicinesWithQuantity);
+            return Ok();
+        }      
     }
 }

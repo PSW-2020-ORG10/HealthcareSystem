@@ -9,7 +9,7 @@ import MedicineAvailability from '../views/MedicineAvailability.vue'
 import SharingPrescription from '../views/SharingPrescription.vue'
 import UrgentProcurement from '../views/UrgentOrder.vue'
 import Tender from '../views/Tender.vue'
-
+import CreateTenderOffer from '../views/CreateTenderOffer.vue'
 Vue.use(VueRouter)
 
 
@@ -59,6 +59,11 @@ const routes = [
         path: '/tender',
         name: 'Tender',
         component: Tender,
+    },
+    {
+        path: '/tenderOffer',
+        name: 'TenderOffer',
+        component: CreateTenderOffer,
     }
 ]
 
