@@ -14,11 +14,11 @@ namespace IntegrationWithPharmacies.Controllers
         private String Environment { get; set; }
         private ReportService ReportService { get; }
 
-        public ReportController(MyDbContext context)
-        {
+      public ReportController(MyDbContext context)
+      {
             ReportService = new ReportService(context);
-            Environment = Program.Environment;
-        }
+            Environment = "Local";
+      }
 
         [HttpPost]
         public IActionResult Post(DateOfOrder date)

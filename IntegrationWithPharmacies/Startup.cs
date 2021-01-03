@@ -27,8 +27,19 @@ namespace IntegrationWithPharmacies
             Configuration = configuration;
             CurrentEnvironment = currentEnvironment;
         }
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        private string CreateConnectionStringFromEnvironment()
+        {
+            string server = Environment.GetEnvironmentVariable("DATABASE_HOST") ?? "mysql";
+            string port = Environment.GetEnvironmentVariable("DATABASE_PORT") ?? "3306";
+            string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA") ?? "MYSQLHealtcareDB";
+            string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "root";
+            string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "root";
+
+
+            return $"server={server};port={port};database={database};user={user};password={password}";
+        }
+      // This method gets called by the runtime. Use this method to add services to the container.
+      public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews().AddNewtonsoftJson(options =>
                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
@@ -42,19 +53,22 @@ namespace IntegrationWithPharmacies
             }
             else
             {
-                services.AddDbContext<MyDbContext>(options =>
-                options.UseMySql(ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString")).UseLazyLoadingProxies());
+               services.AddDbContext<MyDbContext>(options =>
+               options.UseMySql(CreateConnectionStringFromEnvironment(),
+                  builder => builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null)));
+
             }
 
-            services.AddSpaStaticFiles(options => options.RootPath = "front/dist");
+         services.AddSpaStaticFiles(options => options.RootPath = "front/dist");
             services.AddCors(options =>
                 options.AddPolicy("VueCorsPolicy", builder =>
                     builder.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:57942")));
         }
 
         private Server server;
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,MyDbContext dbContext)
         {
+            dbContext.Database.EnsureCreated();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

@@ -24,10 +24,10 @@ namespace PatientWebApplication.Controllers
         private DoctorService doctorService;
 
         /// <summary>This constructor initiates the DoctorAppointmentController's appointment service.</summary>
-        public DoctorAppointmentController(MyDbContext context)
+        public DoctorAppointmentController(MyDbContext dbContext)
         {
-            this.regularAppointmentService = new RegularAppointmentService(context);
-            this.doctorService = new DoctorService(context);
+            this.regularAppointmentService = new RegularAppointmentService(dbContext);
+            this.doctorService = new DoctorService(dbContext);
         }
 
         /// <summary> This method is calling <c>RegularAppointmentService</c> to get list of all appointments of one patient. </summary>

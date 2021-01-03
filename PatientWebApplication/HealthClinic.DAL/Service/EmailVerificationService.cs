@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HealthClinic.CL.DbContextModel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -9,7 +10,13 @@ namespace HealthClinic.CL.Service
 {
     public class EmailVerificationService : IEmailVerificationService
     {
-        public void SendVerificationMail(MailAddress recipientMail, int id)
+      private MyDbContext dbContext;
+
+      public EmailVerificationService(MyDbContext dbContext)
+      {
+         this.dbContext = dbContext;
+      }
+      public void SendVerificationMail(MailAddress recipientMail, int id)
         {
             MailAddress senderAddress = new MailAddress("healthclinicpsw@gmail.com");
             SmtpClient smtp = CreateClient(senderAddress);

@@ -4,13 +4,19 @@
  * Purpose: Definition of the Class Repository.RenovationRepository
  ***********************************************************************/
 
+using HealthClinic.CL.DbContextModel;
 using HealthClinic.CL.Model.Hospital;
 
 namespace HealthClinic.CL.Repository
 {
     public class RenovationRepository : GenericFileRepository<Renovation>
-   {
-        public RenovationRepository(string filePath) : base(filePath)  { }
+    {
+      private readonly MyDbContext dbContext;
+      public RenovationRepository(MyDbContext dbContext)
+      {
+         this.dbContext = dbContext;
+      }
+      public RenovationRepository(string filePath) : base(filePath)  { }
 
         public RenovationRepository() : base()   {  }
 

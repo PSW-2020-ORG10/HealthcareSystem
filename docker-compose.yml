@@ -1,0 +1,66 @@
+version: '3.1'
+services:
+
+  web:
+    image: webdockerfile:latest
+    container_name: web
+    restart: on-failure
+    networks:
+      - demo
+    environment:
+      DATABASE_USERNAME: demo
+      DATABASE_PASSWORD: demo
+      DATABASE_HOST: mysql
+      DATABASE_SCHEMA: MYSQLHealtcareDB
+    ports:
+      - 8080:80
+    depends_on:
+      - mysql
+    volumes:
+      - web:/app/sql
+
+  mysql:
+    image: mysql:8.0.19
+    container_name: mysql
+    restart: always
+    networks:
+      - demo
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: demo
+      MYSQL_USER: demo
+      MYSQL_DATABASE: MYSQLHealtcareDB
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  integrationwithpharmacies:
+    image: integrationdockerfile:latest
+    container_name: integrationwithpharmacies
+    restart: on-failure
+    networks:
+      - demo
+    environment:
+      DATABASE_USERNAME: demo
+      DATABASE_PASSWORD: demo
+      DATABASE_HOST: mysql
+      DATABASE_SCHEMA: MYSQLHealtcareDB
+      DATABASE_PORT: 3306
+      PORT: 8087
+    ports:
+      - 8087:8087
+    depends_on:
+      - mysql
+    volumes:
+      - integrationwithpharmacie:/app/sql
+
+volumes:
+  mysql-data:
+  web:
+  integrationwithpharmacie:
+
+networks:
+  demo:
+    name: demo
+    driver: bridge
