@@ -4,7 +4,7 @@
  * Purpose: Definition of the Class Repository.AppointmentRepository
  ***********************************************************************/
 
-using HealthClinic.CL.Model.Patient;
+using AppointmentMicroserviceApi.Patient;
 using System.Collections.Generic;
 
 namespace AppointmentMicroserviceApi.Repository

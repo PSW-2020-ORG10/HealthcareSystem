@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AppointmentMicroserviceApi.Adapters;
 using AppointmentMicroserviceApi.Repository;
 using AppointmentMicroserviceApi.Service;
-using HealthClinic.CL.Adapters;
 using HealthClinic.CL.Dtos;
 using Microsoft.AspNetCore.Mvc;
 

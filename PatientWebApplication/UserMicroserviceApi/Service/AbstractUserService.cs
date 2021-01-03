@@ -1,12 +1,9 @@
-﻿using HealthClinic.CL.Model.Doctor;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
-using HealthClinic.CL.Model.Patient;
-using HealthClinic.CL.Model.Manager;
-using HealthClinic.CL.Model.Secretary;
 using UserMicroserviceApi.Repository;
+using UserMicroserviceApi.Model;
 
 namespace UserMicroserviceApi.Service
 {

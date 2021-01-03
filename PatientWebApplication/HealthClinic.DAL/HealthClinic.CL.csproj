@@ -25,6 +25,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Model\ActionsAndBenefits\" />
+    <Folder Include="Model\Doctor\" />
+    <Folder Include="Model\Employee\" />
+    <Folder Include="Model\Manager\" />
+    <Folder Include="Model\Secretary\" />
     <Folder Include="Model\Spft\" />
   </ItemGroup>
 

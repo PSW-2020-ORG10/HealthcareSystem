@@ -3,23 +3,21 @@
  * Author:  Tamara
  * Purpose: Definition of the Class Service.RegularAppointmentService
  ***********************************************************************/
-using Castle.Core.Internal;
 using HealthClinic.CL.Dtos;
-using HealthClinic.CL.Model.Doctor;
-using HealthClinic.CL.Model.Employee;
-using HealthClinic.CL.Model.Patient;
 using System;
 using System.Collections.Generic;
 using HealthClinic.CL.Utility;
 using System.Linq;
 using HealthClinic.CL.DbContextModel;
 using System.Threading.Tasks;
-using HealthClinic.CL.Service;
 using AppointmentMicroserviceApi.Repository;
+using AppointmentMicroserviceApi.Patient;
+using AppointmentMicroserviceApi.Doctor;
+using AppointmentMicroserviceApi.Dtos;
 
 namespace AppointmentMicroserviceApi.Service
 {
-    public class RegularAppointmentService : BingPath, IStrategyAppointment
+    public class RegularAppointmentService : IStrategyAppointment
     {
         private IAppointmentRepository _appointmentRepository;
         private OperationService operationService;
@@ -127,11 +125,11 @@ namespace AppointmentMicroserviceApi.Service
         /// <returns> List of recommended appointments</returns>
         public List<DoctorAppointment> GetRecommendedAppointmentAsync(RecommendedAppointmentDto dto)
         {
-            DoctorUser doctor = HttpRequests.GetDoctorByIdAsync(dto.DoctorId).Result;
+            MicroserviceDoctorDto doctor = Utility.HttpRequests.GetDoctorByIdAsync(dto.DoctorId).Result;
             DateTime startDate = UtilityMethods.ParseDateInCorrectFormat(dto.Start);
             DateTime endDate = UtilityMethods.ParseDateInCorrectFormat(dto.End);
-            PatientUser patient = HttpRequests.GetOnePatient(2).Result; //still no login, change after login, id set to 1
-            List<DoctorAppointment> recomendedAppointments = GetAllAvailableAppointmentsForRecommendedDatesAsync(dto.DoctorId, startDate, endDate, patient.id).Result;
+            //int patientId = HttpRequests.GetOnePatient(2).Result.Id; //still no login, change after login, id set to 1
+            List<DoctorAppointment> recomendedAppointments = GetAllAvailableAppointmentsForRecommendedDatesAsync(dto.DoctorId, startDate, endDate, 2).Result;
 
             if (!recomendedAppointments.Any())
             {
@@ -139,26 +137,15 @@ namespace AppointmentMicroserviceApi.Service
                 {
                     endDate = (endDate - startDate).TotalDays > 20 ? endDate.AddDays(10) : (endDate - startDate).TotalDays > 10 ? endDate.AddDays(5) : endDate.AddDays(3);
 
-                    recomendedAppointments = GetAllAvailableAppointmentsForRecommendedDatesAsync(dto.DoctorId, startDate, endDate, patient.id).Result;
+                    recomendedAppointments = GetAllAvailableAppointmentsForRecommendedDatesAsync(dto.DoctorId, startDate, endDate, 2).Result;
                 }
                 else
                 {
-                    recomendedAppointments = RecommenedAnAppointmentDatePriorityAsync(startDate, endDate, patient, doctor.speciality).Result;
+                    recomendedAppointments = RecommenedAnAppointmentDatePriorityAsync(startDate, endDate, 2, doctor.Speciality).Result;
                 }
             }
 
             return recomendedAppointments;
-        }
-
-        public DoctorAppointment RecommendAnAppointment(DoctorUser doctor, DateTime startDate, DateTime endDate, PatientUser patient)
-        {
-            TimeSpan time1 = TimeSpan.FromMinutes(15);
-
-            for (var date = startDate; date <= endDate; date = date.AddDays(1))
-            {
-                if (GetAvailableTermAsync(doctor, date, time1, patient).Result != null) return GetAvailableTermAsync(doctor, date, time1, patient).Result;
-            }
-            return null;
         }
 
         /// <summary> This method is getting List of <c>DoctorAppointment</c> when doctor and patient are available </summary>
@@ -172,13 +159,13 @@ namespace AppointmentMicroserviceApi.Service
             List<DoctorAppointment> availableAppointments = new List<DoctorAppointment>();
             for (var date = startDate; date <= endDate; date = date.AddDays(1))
             {
-                Shift doctorShift = await HttpRequests.GetShiftForDoctorForSpecificDay(new DoctorShiftSearchDto(doctorId, MakeStringFromDate(date)));
+                MicroserviceShiftDto doctorShift = await Utility.HttpRequests.GetShiftForDoctorForSpecificDay(new DoctorShiftSearchDto(doctorId, MakeStringFromDate(date)));
                 if (doctorShift == null)
                 {
                     continue;
                 }
 
-                TimeSpan time = TimeSpan.Parse(doctorShift.startTime);
+                TimeSpan time = TimeSpan.Parse(doctorShift.StartTime);
 
                 availableAppointments = await GetAvailableForFreeTimeAsync(time, availableAppointments, doctorShift, doctorId, date, patientId);
             }
@@ -186,9 +173,9 @@ namespace AppointmentMicroserviceApi.Service
             return availableAppointments;
         }
 
-        private async Task<List<DoctorAppointment>> GetAvailableForFreeTimeAsync(TimeSpan time, List<DoctorAppointment> availableAppointments, Shift doctorShift, int doctorId, DateTime date, int patientId)
+        private async Task<List<DoctorAppointment>> GetAvailableForFreeTimeAsync(TimeSpan time, List<DoctorAppointment> availableAppointments, MicroserviceShiftDto doctorShift, int doctorId, DateTime date, int patientId)
         {
-            while (time != TimeSpan.Parse(doctorShift.endTime) && availableAppointments.Count < 5)
+            while (time != TimeSpan.Parse(doctorShift.EndTime) && availableAppointments.Count < 5)
             {
                 if (time < DateTime.Now.TimeOfDay && UtilityMethods.CheckIfDateIsToday(date))
                 {
@@ -207,7 +194,7 @@ namespace AppointmentMicroserviceApi.Service
             List<Operation> operations = operationService.CreateOperationtSetForDate(date, doctorId, patientId).ToList();
             if (!startTimesAppointments.Contains(time) && !operationService.IsOperationInTimePeriod(time, operations) || availableAppointments.Count >= 5)
             {
-                availableAppointments.Add(new DoctorAppointment(0, time, MakeStringFromDate(date), await HttpRequests.GetOnePatient(patientId), await HttpRequests.GetDoctorByIdAsync(doctorId), new List<Referral>(), HttpRequests.GetDoctorByIdAsync(doctorId).Result.ordination));
+                availableAppointments.Add(new DoctorAppointment(0, time, MakeStringFromDate(date), patientId, doctorId, new List<Referral>(), Utility.HttpRequests.GetDoctorByIdAsync(doctorId).Result.Ordination));
             }
 
             return availableAppointments;
@@ -227,16 +214,6 @@ namespace AppointmentMicroserviceApi.Service
             return GetAppointmentsForPatient(patientId).Where(appointment => date == UtilityMethods.ParseDateInCorrectFormat(appointment.Date) && !appointment.IsCanceled).ToList();
         }
 
-        private async Task<DoctorAppointment> GetAvailableTermAsync(DoctorUser doctor, DateTime date, TimeSpan time1, PatientUser patient)
-        {
-            Shift doctorShift = await HttpRequests.GetShiftForDoctorForSpecificDay(new DoctorShiftSearchDto(doctor.id, MakeStringFromDate(date)));
-
-            if (doctorShift != null && doctorShift.startTime != null && doctorShift.endTime != null)
-                return GetNewDoctorAppointment(doctor, date, time1, patient, doctorShift);
-
-            return null;
-        }
-
         /// <summary> This method is getting all available appointments of one doctor and one patient on given date. </summary>
         /// <param name="dateString">Date for which this method get's all available appointments</param>
         /// <param name="doctorId">Id of doctor for whom this method get's all available appointments</param>
@@ -244,7 +221,7 @@ namespace AppointmentMicroserviceApi.Service
         /// <returns> list of all available appointments on specific date for given doctor and patient. </returns>
         public async Task<List<DoctorAppointment>> GetAllAvailableAppointmentsForDateAsync(string dateString, int doctorId, int patientId)
         {
-            Shift doctorShift = await HttpRequests.GetShiftForDoctorForSpecificDay(new DoctorShiftSearchDto(doctorId, dateString));
+            MicroserviceShiftDto doctorShift = await Utility.HttpRequests.GetShiftForDoctorForSpecificDay(new DoctorShiftSearchDto(doctorId, dateString));
             if (doctorShift == null)
             {
                 return new List<DoctorAppointment>();
@@ -252,11 +229,11 @@ namespace AppointmentMicroserviceApi.Service
             return CreateListOfAvailableAppointments(doctorShift, dateString, doctorId, patientId);
         }
 
-        private List<DoctorAppointment> CreateListOfAvailableAppointments(Shift doctorShift, string dateString, int doctorId, int patientId)
+        private List<DoctorAppointment> CreateListOfAvailableAppointments(MicroserviceShiftDto doctorShift, string dateString, int doctorId, int patientId)
         {
             List<DoctorAppointment> availableAppointments = new List<DoctorAppointment>();
-            TimeSpan time = TimeSpan.Parse(doctorShift.startTime);
-            while (time != TimeSpan.Parse(doctorShift.endTime))
+            TimeSpan time = TimeSpan.Parse(doctorShift.StartTime);
+            while (time != TimeSpan.Parse(doctorShift.EndTime))
             {
                 if (time < DateTime.Now.TimeOfDay && UtilityMethods.CheckIfDateIsToday(dateString))
                 {
@@ -276,7 +253,7 @@ namespace AppointmentMicroserviceApi.Service
             List<Operation> operations = operationService.CreateOperationtSetForDate(date, doctorId, patientId).ToList();
             if (!startTimesAppointments.Contains(time) && !operationService.IsOperationInTimePeriod(time, operations))
             {
-                availableAppointments.Add(new DoctorAppointment(0, time, dateString, patientId, doctorId, new List<Referral>(), HttpRequests.GetDoctorByIdAsync(doctorId).Result.ordination));
+                availableAppointments.Add(new DoctorAppointment(0, time, dateString, patientId, doctorId, new List<Referral>(), Utility.HttpRequests.GetDoctorByIdAsync(doctorId).Result.Ordination));
             }
         }
 
@@ -305,52 +282,40 @@ namespace AppointmentMicroserviceApi.Service
             return startTimes;
         }
 
-        private DoctorAppointment GetNewDoctorAppointment(DoctorUser doctor, DateTime date, TimeSpan time1, PatientUser patient, Shift doctorShift)
-        {
-            for (var time = GetStartTimeSpan(doctorShift); time < GetEndTimeSpan(doctorShift); time = time.Add(time1))
-            {
-                if (!IsTermNotAvailableAsync(doctor, time, MakeStringFromDate(date), patient).Result)
-                {
-                    return new DoctorAppointment(0, time, MakeStringFromDate(date), patient, doctor, null, doctor.ordination);
-                }
-            }
-            return null;
-        }
-
         private string MakeStringFromDate(DateTime date)
         {
             return date.ToString("dd/MM/yyyy");
         }
 
-        private TimeSpan GetStartTimeSpan(Shift doctorShift)
+        private TimeSpan GetStartTimeSpan(MicroserviceShiftDto doctorShift)
         {
             return new TimeSpan(GetHourStart(doctorShift), GetMinutesStart(doctorShift), int.Parse("00"));
         }
 
-        private TimeSpan GetEndTimeSpan(Shift doctorShift)
+        private TimeSpan GetEndTimeSpan(MicroserviceShiftDto doctorShift)
         {
             return new TimeSpan(GetHourEnd(doctorShift), GetMinutesEnd(doctorShift), int.Parse("00"));
         }
-        private int GetHourStart(Shift doctorShift)
+        private int GetHourStart(MicroserviceShiftDto doctorShift)
         {
-            string[] partsBegin = doctorShift.startTime.Split(':');
+            string[] partsBegin = doctorShift.StartTime.Split(':');
             return int.Parse(partsBegin[0]);
         }
 
-        private int GetMinutesStart(Shift doctorShift)
+        private int GetMinutesStart(MicroserviceShiftDto doctorShift)
         {
-            string[] partsBegin = doctorShift.startTime.Split(':');
+            string[] partsBegin = doctorShift.StartTime.Split(':');
             return int.Parse(partsBegin[1]);
         }
-        private int GetHourEnd(Shift doctorShift)
+        private int GetHourEnd(MicroserviceShiftDto doctorShift)
         {
-            string[] partsEnd = doctorShift.endTime.Split(':');
+            string[] partsEnd = doctorShift.EndTime.Split(':');
             return int.Parse(partsEnd[0]);
         }
 
-        private int GetMinutesEnd(Shift doctorShift)
+        private int GetMinutesEnd(MicroserviceShiftDto doctorShift)
         {
-            string[] partsEnd = doctorShift.endTime.Split(':');
+            string[] partsEnd = doctorShift.EndTime.Split(':');
             return int.Parse(partsEnd[1]);
         }
 
@@ -360,23 +325,23 @@ namespace AppointmentMicroserviceApi.Service
         /// <param name="patient"><c>PatientUser</c> who is scheduling appointment</param>
         /// <param name="speciality">Speciality of doctor which patient wanted first to execute appointment</param>
         /// <returns>List of <c>DoctorAppointment</c></returns>
-        public async Task<List<DoctorAppointment>> RecommenedAnAppointmentDatePriorityAsync(DateTime startDate, DateTime endDate, PatientUser patient, string speciality)
+        public async Task<List<DoctorAppointment>> RecommenedAnAppointmentDatePriorityAsync(DateTime startDate, DateTime endDate, int patientId, string speciality)
         {
-            List<DoctorUser> doctorsList = await HttpRequests.GetAllAsync();
+            List<MicroserviceDoctorDto> doctorsList = await Utility.HttpRequests.GetAllAsync();
             List<DoctorAppointment> appointments = new List<DoctorAppointment>();
 
-            foreach (DoctorUser doctor in doctorsList)
+            foreach (MicroserviceDoctorDto doctor in doctorsList)
             {
-                if (doctor.speciality.Equals(speciality) && GetAllAvailableAppointmentsForRecommendedDatesAsync(doctor.id, startDate, endDate, patient.id).Result.Any())
-                    return GetAllAvailableAppointmentsForRecommendedDatesAsync(doctor.id, startDate, endDate, patient.id).Result;
+                if (doctor.Speciality.Equals(speciality) && GetAllAvailableAppointmentsForRecommendedDatesAsync(doctor.Id, startDate, endDate, patientId).Result.Any())
+                    return GetAllAvailableAppointmentsForRecommendedDatesAsync(doctor.Id, startDate, endDate, patientId).Result;
             }
             return appointments;
         }
 
-        public async Task<bool> IsTermNotAvailableAsync(DoctorUser doctor, TimeSpan time, string dateToString, PatientUser patient)
+        public async Task<bool> IsTermNotAvailableAsync(MicroserviceDoctorDto doctor, TimeSpan time, string dateToString)
         {
-            bool hasAppointmentDoctor = await HttpRequests.DoesDoctorHaveAnAppointmentAtSpecificTime(doctor.id, time, dateToString);
-            bool hasOperationDoctor = await HttpRequests.DoesDoctorHaveAnOperationAtSpecificTime(doctor.id, time, dateToString);
+            bool hasAppointmentDoctor = await HttpRequests.DoesDoctorHaveAnAppointmentAtSpecificTime(doctor.Id, time, dateToString);
+            bool hasOperationDoctor = await HttpRequests.DoesDoctorHaveAnOperationAtSpecificTime(doctor.Id, time, dateToString);
 
             if (hasAppointmentDoctor == true || hasOperationDoctor == true) return true;
 

@@ -1,5 +1,5 @@
-﻿using HealthClinic.CL.Model.Patient;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UserMicroserviceApi.Model;
 
 namespace UserMicroserviceApi.Repository
 {

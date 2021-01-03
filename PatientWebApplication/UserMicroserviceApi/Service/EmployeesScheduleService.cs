@@ -4,20 +4,17 @@
  * Purpose: Definition of the Class Service.EmployeesSchedule
  ***********************************************************************/
 
-using HealthClinic.CL.Model.Doctor;
-using HealthClinic.CL.Model.Employee;
-using HealthClinic.CL.Service;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using UserMicroserviceApi.Model;
 using UserMicroserviceApi.Repository;
 
 namespace UserMicroserviceApi.Service
 {
-    public class EmployeesScheduleService : BingPath, IService<Schedule>
+    public class EmployeesScheduleService : IService<Schedule>
     {
         public IEmployeesScheduleRepository _employeesScheduleRepository;
-        string path = bingPathToAppDir(@"JsonFiles\schedule.json");
 
 
         public EmployeesScheduleService(IEmployeesScheduleRepository employeesScheduleRepository)

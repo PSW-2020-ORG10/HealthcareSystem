@@ -3,14 +3,16 @@
  * Author:  Tamara
  * Purpose: Definition of the Class Contoller.OperationService2
  ***********************************************************************/
+using AppointmentMicroserviceApi.Doctor;
+using AppointmentMicroserviceApi.Patient;
 using AppointmentMicroserviceApi.Repository;
+using AppointmentMicroserviceApi.Utility;
 using HealthClinic.CL.Dtos;
-using HealthClinic.CL.Model.Doctor;
-using HealthClinic.CL.Model.Patient;
 using HealthClinic.CL.Service;
 using HealthClinic.CL.Utility;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AppointmentMicroserviceApi.Service
 {
@@ -100,10 +102,10 @@ namespace AppointmentMicroserviceApi.Service
         /// </param>
         /// <returns> List of filtered patient's operations. </returns>
         private List<Operation> SearchForDoctorNameAndSurname(List<Operation> operations, AppointmentReportSearchDto appointmentSearchDto)
-        {
+        {      
             if (!UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.DoctorNameAndSurname))
             {
-                operations = operations.FindAll(operation => operation.Doctor.firstName.Contains(appointmentSearchDto.DoctorNameAndSurname) || operation.Doctor.secondName.Contains(appointmentSearchDto.DoctorNameAndSurname));
+                operations = operations.FindAll(operation => Utility.HttpRequests.GetDoctorByIdAsync(operation.DoctorUserId).Result.Name.Contains(appointmentSearchDto.DoctorNameAndSurname) || Utility.HttpRequests.GetDoctorByIdAsync(operation.DoctorUserId).Result.Surname.Contains(appointmentSearchDto.DoctorNameAndSurname));
             }
             return operations;
         }
@@ -232,6 +234,11 @@ namespace AppointmentMicroserviceApi.Service
         public List<Operation> GetOperationsForDoctor(int doctorId)
         {
             return _operationRepository.GetOperationsForDoctor(doctorId);
+        }
+
+        public OperationReferral GetOperationalReferralById(int id)
+        {
+            return GetAll().SingleOrDefault(operation => operation.operationReferral.id == id).operationReferral;
         }
     }
 }

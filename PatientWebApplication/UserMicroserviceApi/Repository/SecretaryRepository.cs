@@ -4,8 +4,7 @@
  * Purpose: Definition of the Class Repository.SecretaryRepository
  ***********************************************************************/
 
-using HealthClinic.CL.Model.Secretary;
-using HealthClinic.CL.Repository;
+using UserMicroserviceApi.Model;
 
 namespace UserMicroserviceApi.Repository
 {

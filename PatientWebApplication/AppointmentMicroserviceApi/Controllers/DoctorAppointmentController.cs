@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
+using AppointmentMicroserviceApi.Adapters;
+using AppointmentMicroserviceApi.Patient;
 using AppointmentMicroserviceApi.Service;
-using HealthClinic.CL.Adapters;
 using HealthClinic.CL.DbContextModel;
 using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Patient;
@@ -26,7 +27,7 @@ namespace AppointmentMicroserviceApi.Controllers
         [HttpGet("getAll")]
         public IActionResult GetAll()
         {
-            return Ok(regularAppointmentService.GetAll());
+            return Ok(ViewAppointmentAdapter.AppointmentListToViewAppointmenDtoList(regularAppointmentService.GetAll()));
         }
 
         /// <summary> This method is calling <c>RegularAppointmentService</c> to get list of all appointments of one patient. </summary>
@@ -42,7 +43,7 @@ namespace AppointmentMicroserviceApi.Controllers
         [HttpGet("patient")]
         public IActionResult GetAppointmentsForPatient()
         {
-            return Ok(regularAppointmentService.GetAppointmentsForPatient(2));
+            return Ok(ViewAppointmentAdapter.AppointmentListToViewAppointmenDtoList(regularAppointmentService.GetAppointmentsForPatient(2)));
         }
 
         /// <summary> This method is calling <c>regularAppointmentService</c> to get list of all <c>DoctorAppointment</c> that is happening in two days. </summary>
@@ -50,7 +51,7 @@ namespace AppointmentMicroserviceApi.Controllers
         [HttpGet("patientInTwoDays")]
         public IActionResult GetAppointmentsForPatientInTwoDays()
         {
-            return Ok(regularAppointmentService.GetAppointmentsForPatientInTwoDays(2));
+            return Ok(ViewAppointmentAdapter.AppointmentListToViewAppointmenDtoList(regularAppointmentService.GetAppointmentsForPatientInTwoDays(2)));
         }
 
         /// <summary> This method is calling <c>regularAppointmentService</c> to get list of all <c>DoctorAppointment</c> that are going to happen. </summary>
@@ -58,7 +59,7 @@ namespace AppointmentMicroserviceApi.Controllers
         [HttpGet("patientInFuture")]
         public IActionResult GetAppointmentsForPatientInFuture()
         {
-            return Ok(regularAppointmentService.GetAppointmentsForPatientInFuture(2));
+            return Ok(ViewAppointmentAdapter.AppointmentListToViewAppointmenDtoList(regularAppointmentService.GetAppointmentsForPatientInFuture(2)));
         }
 
         /// <summary> This method provides <paramref name="appointmentId"/> and sends it to <c>RegularAppointmentService</c> there appointment.IsCanceled will be set to true. </summary>
@@ -70,7 +71,7 @@ namespace AppointmentMicroserviceApi.Controllers
         {
             DoctorAppointment appointment = regularAppointmentService.CancelAppointment(appointmentId);
             if (appointment == null) return BadRequest();
-            return Ok(appointment);
+            return Ok(ViewAppointmentAdapter.AppointmentToViewAppointmenDto(appointment));
         }
 
         /// <summary> This method is calling <c>regularAppointmentService</c> to get list of all recommended appointments. </summary>
@@ -80,7 +81,7 @@ namespace AppointmentMicroserviceApi.Controllers
         [HttpPost("recommend")]
         public IActionResult RecommendAppointmentSchedule(RecommendedAppointmentDto dto)
         {
-            return Ok(regularAppointmentService.GetRecommendedAppointmentAsync(dto));
+            return Ok(ViewAppointmentAdapter.AppointmentListToViewAppointmenDtoList(regularAppointmentService.GetRecommendedAppointmentAsync(dto)));
         }
 
         /// <summary> This method is calling <c>regularAppointmentService</c> to get all available appointments based on dto object. </summary>
@@ -90,7 +91,7 @@ namespace AppointmentMicroserviceApi.Controllers
         [HttpPost("availableappointments")]
         public async Task<IActionResult> GetAvailableAppointmentsAsync(AvailableAppointmentsSearchDto dto)
         {
-            return Ok(await regularAppointmentService.GetAllAvailableAppointmentsForDateAsync(dto.Date, dto.DoctorId, dto.PatientId));
+            return Ok(ViewAppointmentAdapter.AppointmentListToViewAppointmenDtoList(await regularAppointmentService.GetAllAvailableAppointmentsForDateAsync(dto.Date, dto.DoctorId, dto.PatientId)));
         }
 
         /// <summary> This method is calling <c>regularAppointmentService</c> to schedule regular appointment. </summary>
@@ -105,19 +106,19 @@ namespace AppointmentMicroserviceApi.Controllers
             {
                 return BadRequest();
             }
-            return Ok(doctorAppointment);
+            return Ok(ViewAppointmentAdapter.AppointmentToViewAppointmenDto(doctorAppointment));
         }
 
         [HttpGet("appointmentsForDoctor/{doctorId}")]
         public IActionResult DoesDoctorHaveAnAppointmentAtSpecificTime(int doctorId)
         {
-            return Ok(regularAppointmentService.GetAppointmentsForDoctor(doctorId));
+            return Ok(ViewAppointmentAdapter.AppointmentListToViewAppointmenDtoList(regularAppointmentService.GetAppointmentsForDoctor(doctorId)));
         }
 
         [HttpGet("appointmentsForPatient/{patientId}")]
         public IActionResult GetAppointmentsForPatient(int patientId)
         {
-            return Ok(regularAppointmentService.GetAppointmentsForPatient(patientId));
+            return Ok(ViewAppointmentAdapter.AppointmentListToViewAppointmenDtoList(regularAppointmentService.GetAppointmentsForPatient(patientId)));
         }
     }
 }

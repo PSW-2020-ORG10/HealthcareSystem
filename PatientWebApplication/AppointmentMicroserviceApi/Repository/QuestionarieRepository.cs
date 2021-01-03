@@ -4,8 +4,7 @@
  * Purpose: Definition of the Class Repository.QuestionarieRepository
  ***********************************************************************/
 
-using HealthClinic.CL.Model.Patient;
-using HealthClinic.CL.Repository;
+using AppointmentMicroserviceApi.Patient;
 
 namespace AppointmentMicroserviceApi.Repository
 {

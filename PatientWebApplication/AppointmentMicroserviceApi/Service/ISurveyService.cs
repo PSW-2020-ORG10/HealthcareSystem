@@ -1,8 +1,6 @@
-﻿using HealthClinic.CL.Dtos;
-using HealthClinic.CL.Model.Patient;
-using System;
+﻿using AppointmentMicroserviceApi.Patient;
+using HealthClinic.CL.Dtos;
 using System.Collections.Generic;
-using System.Text;
 
 namespace AppointmentMicroserviceApi.Service
 {
@@ -12,7 +10,7 @@ namespace AppointmentMicroserviceApi.Service
         List<Survey> GetAllSurveysForPatientId(int id);
         List<Survey> GetAll();
         SurveyAverageDto GetAllAverageRates();
-        List<SurveyDoctorAverageDto> GetAllDoctorAverageRates();
+        List<MicroserviceSurveyDoctorAverageDto> GetAllDoctorAverageRates();
 
     }
 }

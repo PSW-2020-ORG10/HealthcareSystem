@@ -3,9 +3,9 @@
  * Author:  Tamara
  * Purpose: Definition of the Class Contoller.OperationService2
  ***********************************************************************/
+using AppointmentMicroserviceApi.Doctor;
+using AppointmentMicroserviceApi.Patient;
 using HealthClinic.CL.Dtos;
-using HealthClinic.CL.Model.Doctor;
-using HealthClinic.CL.Model.Patient;
 using System;
 using System.Collections.Generic;
 
@@ -18,7 +18,6 @@ namespace AppointmentMicroserviceApi.Service
         Operation GetByid(int id);
         List<Operation> GetOperationsForPatient(int id);
         bool IsOperationInTimePeriod(TimeSpan time, List<Operation> operations);
-        bool isTermNotAvailable(DoctorUser doctor, TimeSpan start, TimeSpan end, string dateToString, PatientUser patient);
         void New(DoctorAppointment appointment, Operation operation);
         void Remove(int operationid);
         List<Operation> SimpleSearchOperations(AppointmentReportSearchDto appointmentReportSearchDto);

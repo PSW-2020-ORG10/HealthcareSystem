@@ -4,10 +4,9 @@
  * Purpose: Definition of the Class Service.SecretaryService
  ***********************************************************************/
 
-using HealthClinic.CL.Model.Employee;
-using HealthClinic.CL.Model.Secretary;
 using System;
 using System.Collections.Generic;
+using UserMicroserviceApi.Model;
 using UserMicroserviceApi.Repository;
 
 namespace UserMicroserviceApi.Service

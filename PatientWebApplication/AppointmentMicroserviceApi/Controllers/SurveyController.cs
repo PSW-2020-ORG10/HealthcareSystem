@@ -1,4 +1,5 @@
-﻿using AppointmentMicroserviceApi.Repository;
+﻿using AppointmentMicroserviceApi.Adapters;
+using AppointmentMicroserviceApi.Repository;
 using AppointmentMicroserviceApi.Service;
 using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Patient;
@@ -48,13 +49,13 @@ namespace AppointmentMicroservice.Controller
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(regularAppointmentService.FindAllValidAppointmentsWithoutSurvey(regularAppointmentService.GetAppointmentsForPatient(2), SurveyService.GetAllSurveysForPatientId(2)));
+            return Ok(ViewAppointmentAdapter.AppointmentListToViewAppointmenDtoList(regularAppointmentService.FindAllValidAppointmentsWithoutSurvey(regularAppointmentService.GetAppointmentsForPatient(2), SurveyService.GetAllSurveysForPatientId(2))));
         }
 
         [HttpGet("getWithSurveys")]
         public IActionResult GetWithSurveys()
         {
-            return Ok(regularAppointmentService.FindAllValidAppointmentsWithSurvey(regularAppointmentService.GetAppointmentsForPatient(2), SurveyService.GetAllSurveysForPatientId(2)));
+            return Ok(ViewAppointmentAdapter.AppointmentListToViewAppointmenDtoList(regularAppointmentService.FindAllValidAppointmentsWithSurvey(regularAppointmentService.GetAppointmentsForPatient(2), SurveyService.GetAllSurveysForPatientId(2))));
         }
         /// <summary> This method is calling <c>FeedbackService</c> to get rates for doctors, medical staff and hospital in general. </summary>
         /// <returns> If returned <c>SurveyAverageDto</c> is null returns 400 Bad Request; If returned <c>SurveyAverageDto</c> is not null, returns 200 OK with found dto</returns>
@@ -74,7 +75,7 @@ namespace AppointmentMicroservice.Controller
         [HttpGet("getDoctorRates")]
         public IActionResult GetDoctorRates()
         {
-            List<SurveyDoctorAverageDto> surveyDoctorAverage = SurveyService.GetAllDoctorAverageRates();
+            List<MicroserviceSurveyDoctorAverageDto> surveyDoctorAverage = SurveyService.GetAllDoctorAverageRates();
             if (surveyDoctorAverage == null)
             {
                 return BadRequest();

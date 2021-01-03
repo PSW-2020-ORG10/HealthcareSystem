@@ -1,12 +1,9 @@
-﻿using HealthClinic.CL.Adapters;
-using HealthClinic.CL.Dtos;
-using HealthClinic.CL.Model.Patient;
-using System;
+﻿using HealthClinic.CL.Dtos;
 using System.Collections.Generic;
 using System.Linq;
-using HealthClinic.CL.Utility;
-using System.Text;
 using AppointmentMicroserviceApi.Repository;
+using AppointmentMicroserviceApi.Patient;
+using AppointmentMicroserviceApi.Adapters;
 
 namespace AppointmentMicroserviceApi.Service
 {
@@ -46,9 +43,9 @@ namespace AppointmentMicroserviceApi.Service
 
         /// <summary> This method is calling <c>SurveyRepository</c> to get list of all <c>Survey</c> that were created by patient with id <paramref name="id"/>. </summary>
         /// <returns> List of all surveys for that patient. </returns>
-        public List<SurveyDoctorAverageDto> GetAllDoctorAverageRates()
+        public List<MicroserviceSurveyDoctorAverageDto> GetAllDoctorAverageRates()
         {
-            List<SurveyDoctorAverageDto> surveyDoctorAverage = new List<SurveyDoctorAverageDto>();
+            List<MicroserviceSurveyDoctorAverageDto> surveyDoctorAverage = new List<MicroserviceSurveyDoctorAverageDto>();
             foreach (int id in FindAllRatedDoctorsIds())
             {
                 surveyDoctorAverage.Add(CountForSprecificDoctorAverage(id));
@@ -136,7 +133,7 @@ namespace AppointmentMicroserviceApi.Service
             return doctorInfo;
         }
 
-        private SurveyDoctorAverageDto CountAverageSingleDoctor(SurveyDoctorAverageDto surveyDoctorAverage, int counter, double average, double average2, double average3, double average4, double average5, double average6, double average7)
+        private MicroserviceSurveyDoctorAverageDto CountAverageSingleDoctor(MicroserviceSurveyDoctorAverageDto surveyDoctorAverage, int counter, double average, double average2, double average3, double average4, double average5, double average6, double average7)
         {
             surveyDoctorAverage.DoctorAverage = average / (counter * 6);
             surveyDoctorAverage.DoctorsKnowledgeAverage = average2 / counter;
@@ -148,9 +145,9 @@ namespace AppointmentMicroserviceApi.Service
             return surveyDoctorAverage;
         }
 
-        private SurveyDoctorAverageDto CountForSprecificDoctorAverage(int id)
+        private MicroserviceSurveyDoctorAverageDto CountForSprecificDoctorAverage(int id)
         {
-            SurveyDoctorAverageDto surveyDoctorAverage = new SurveyDoctorAverageDto();
+            MicroserviceSurveyDoctorAverageDto surveyDoctorAverage = new MicroserviceSurveyDoctorAverageDto();
             double doctorAvg = 0, doctorsKnowledgeAvg = 0, doctorsPolitenessAvg = 0, doctorsProfessionalismAvg = 0, doctorsSkillAvg = 0, doctorsTechnicalityAvg = 0, doctorsWorkingPaceAvg = 0;
             int counter = 0;
             foreach (Survey s in GetAll())
@@ -158,7 +155,7 @@ namespace AppointmentMicroserviceApi.Service
                 if (s.appointment.DoctorUserId == id)
                 {
                     counter += 1;
-                    surveyDoctorAverage.Doctor = s.appointment.Doctor;
+                    surveyDoctorAverage.Doctor = Utility.HttpRequests.GetDoctorByIdAsync(s.appointment.DoctorUserId).Result;
                     doctorAvg += s.doctorsKnowledge + s.doctorsPoliteness + s.doctorsProfessionalism + s.doctorsSkill + s.doctorsTechnicality + s.doctorsWorkingPace;
                     doctorsKnowledgeAvg += s.doctorsKnowledge;
                     doctorsPolitenessAvg += s.doctorsPoliteness;

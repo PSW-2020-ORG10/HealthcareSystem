@@ -6,16 +6,12 @@
 
 using HealthClinic.CL.DbContextModel;
 using HealthClinic.CL.Dtos;
-using HealthClinic.CL.Model.Doctor;
-using HealthClinic.CL.Model.Employee;
-using HealthClinic.CL.Model.Hospital;
-using HealthClinic.CL.Model.Patient;
-using HealthClinic.CL.Service;
 using HealthClinic.CL.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UserMicroserviceApi.Model;
 using UserMicroserviceApi.Repository;
 
 namespace UserMicroserviceApi.Service
@@ -24,21 +20,11 @@ namespace UserMicroserviceApi.Service
     {
         private IDoctorRepository _doctorRepository;
         private IEmployeesScheduleRepository _employeesScheduleRepository;
-        private RoomService RoomService;
-
-
-        string path = bingPathToAppDir(@"JsonFiles\doctors.json");
-        string path2 = bingPathToAppDir(@"JsonFiles\patients.json");
-        string path3 = bingPathToAppDir(@"JsonFiles\operations.json");
-        string path4 = bingPathToAppDir(@"JsonFiles\appointments.json");
-        string path5 = bingPathToAppDir(@"JsonFiles\schedule.json");
-
 
         public DoctorService(IEmployeesScheduleRepository employeesScheduleRepository, IDoctorRepository doctorRepository)
         {
             _doctorRepository = doctorRepository;
             _employeesScheduleRepository = employeesScheduleRepository;
-            RoomService = new RoomService();
         }
 
         public DoctorService(MyDbContext context)
@@ -86,7 +72,6 @@ namespace UserMicroserviceApi.Service
         private List<Room> getRoomsForUse()
         {
             List<Room> listOfRooms = new List<Room>();
-            listOfRooms = RoomService.GetAll();
             return listOfRooms.Where(room => room.forUse).ToList();
         }
 

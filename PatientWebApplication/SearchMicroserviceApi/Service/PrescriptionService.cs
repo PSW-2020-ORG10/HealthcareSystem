@@ -1,13 +1,10 @@
-﻿using HealthClinic.CL.DbContextModel;
-using HealthClinic.CL.Dtos;
-using HealthClinic.CL.Model.Hospital;
-using HealthClinic.CL.Model.Patient;
-using HealthClinic.CL.Repository;
+﻿using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Utility;
+using SearchMicroserviceApi.Model;
+using SearchMicroserviceApi.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace SearchMicroserviceApi.Service
 {

@@ -1,11 +1,8 @@
 ﻿using HealthClinic.CL.DbContextModel;
-using HealthClinic.CL.Model.Patient;
-using HealthClinic.CL.Repository;
 using Microsoft.EntityFrameworkCore;
-using System;
+using SearchMicroserviceApi.Model;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace SearchMicroserviceApi.Repository
 {

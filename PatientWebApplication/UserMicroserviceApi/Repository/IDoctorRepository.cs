@@ -4,8 +4,8 @@
  * Purpose: Definition of the Class Repository.DoctorRepository
  ***********************************************************************/
 
-using HealthClinic.CL.Model.Doctor;
 using System.Collections.Generic;
+using UserMicroserviceApi.Model;
 
 namespace UserMicroserviceApi.Repository
 {

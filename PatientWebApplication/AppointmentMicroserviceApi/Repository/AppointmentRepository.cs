@@ -4,8 +4,8 @@
  * Purpose: Definition of the Class Repository.AppointmentRepository
  ***********************************************************************/
 
+using AppointmentMicroserviceApi.Patient;
 using HealthClinic.CL.DbContextModel;
-using HealthClinic.CL.Model.Patient;
 using HealthClinic.CL.Utility;
 using Microsoft.EntityFrameworkCore;
 using System;

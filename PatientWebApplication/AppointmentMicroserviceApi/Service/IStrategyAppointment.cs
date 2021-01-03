@@ -3,10 +3,8 @@
  * Author:  Luna
  * Purpose: Definition of the Interface Service.IStrategyAppointment
  ***********************************************************************/
-using HealthClinic.CL.Dtos;
-using HealthClinic.CL.Model.Doctor;
-using HealthClinic.CL.Model.Patient;
-using System.Collections.Generic;
+using AppointmentMicroserviceApi.Doctor;
+using AppointmentMicroserviceApi.Patient;
 
 namespace AppointmentMicroserviceApi.Service
 {

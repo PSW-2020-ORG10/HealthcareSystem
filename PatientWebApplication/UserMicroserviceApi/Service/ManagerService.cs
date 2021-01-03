@@ -4,9 +4,9 @@
  * Purpose: Definition of the Class Service.ManagerService
  ***********************************************************************/
 
-using HealthClinic.CL.Model.Manager;
 using System;
 using System.Collections.Generic;
+using UserMicroserviceApi.Model;
 using UserMicroserviceApi.Repository;
 
 namespace UserMicroserviceApi.Service

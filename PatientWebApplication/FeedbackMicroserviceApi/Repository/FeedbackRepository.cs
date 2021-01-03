@@ -1,5 +1,5 @@
-﻿using HealthClinic.CL.DbContextModel;
-using HealthClinic.CL.Model.Patient;
+﻿using FeedbackMicroserviceApi.Model;
+using HealthClinic.CL.DbContextModel;
 using HealthClinic.CL.Utility;
 using System.Collections.Generic;
 using System.Linq;

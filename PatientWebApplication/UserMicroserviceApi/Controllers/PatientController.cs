@@ -3,6 +3,7 @@ using HealthClinic.CL.Model.Patient;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using UserMicroserviceApi.Model;
 using UserMicroserviceApi.Repository;
 using UserMicroserviceApi.Service;
 

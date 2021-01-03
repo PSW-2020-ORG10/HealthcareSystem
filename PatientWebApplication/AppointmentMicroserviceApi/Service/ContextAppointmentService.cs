@@ -3,8 +3,8 @@
  * Author:  Luna
  * Purpose: Definition of the Class Service.ContextAppointmentService
  ***********************************************************************/
-using HealthClinic.CL.Model.Doctor;
-using HealthClinic.CL.Model.Patient;
+using AppointmentMicroserviceApi.Doctor;
+using AppointmentMicroserviceApi.Patient;
 
 namespace AppointmentMicroserviceApi.Service
 {

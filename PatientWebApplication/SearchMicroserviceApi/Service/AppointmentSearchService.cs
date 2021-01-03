@@ -1,10 +1,8 @@
 ﻿using HealthClinic.CL.Dtos;
-using HealthClinic.CL.Model.Patient;
 using HealthClinic.CL.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SearchMicroserviceApi.Service

@@ -4,8 +4,7 @@
  * Purpose: Definition of the Class Repository.ManagerRepository
  ***********************************************************************/
 
-using HealthClinic.CL.Model.Manager;
-using HealthClinic.CL.Repository;
+using UserMicroserviceApi.Model;
 
 namespace UserMicroserviceApi.Repository
 {

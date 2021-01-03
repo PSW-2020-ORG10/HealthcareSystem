@@ -1,11 +1,8 @@
-﻿using HealthClinic.CL.DbContextModel;
-using HealthClinic.CL.Dtos;
-using HealthClinic.CL.Model.Patient;
+﻿using AppointmentMicroserviceApi.Patient;
+using HealthClinic.CL.DbContextModel;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace AppointmentMicroserviceApi.Repository
 {

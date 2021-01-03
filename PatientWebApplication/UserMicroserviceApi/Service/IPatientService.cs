@@ -7,7 +7,7 @@
 using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Patient;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using UserMicroserviceApi.Model;
 
 namespace UserMicroserviceApi.Service
 {

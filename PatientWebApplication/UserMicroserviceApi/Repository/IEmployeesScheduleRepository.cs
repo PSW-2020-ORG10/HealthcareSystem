@@ -4,8 +4,8 @@
  * Purpose: Definition of the Class Repository.EmployeesScheduleRepository
  ***********************************************************************/
 
-using HealthClinic.CL.Model.Employee;
 using System.Collections.Generic;
+using UserMicroserviceApi.Model;
 
 namespace UserMicroserviceApi.Repository
 {

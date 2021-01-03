@@ -3,22 +3,18 @@
  * Author:  Tamara
  * Purpose: Definition of the Class Service.QuestionarieService
  ***********************************************************************/
+using AppointmentMicroserviceApi.Patient;
 using AppointmentMicroserviceApi.Repository;
-using HealthClinic.CL.Model.Patient;
-using HealthClinic.CL.Service;
-using System;
 using System.Collections.Generic;
 
 namespace AppointmentMicroserviceApi.Service
 {
-    public class QuestionarieService : BingPath, IService<Question>
+    public class QuestionarieService : IService<Question>
     {
         public QuestionarieRepository questionarieRepository;
-        string path = bingPathToAppDir(@"JsonFiles\questionary.json");
 
         public QuestionarieService()
         {
-            questionarieRepository = new QuestionarieRepository(path);
         }
 
         public List<Question> GetAll()

@@ -4,8 +4,8 @@
  * Purpose: Definition of the Class Repository.OperationRepository
  ***********************************************************************/
 
+using AppointmentMicroserviceApi.Doctor;
 using HealthClinic.CL.DbContextModel;
-using HealthClinic.CL.Model.Doctor;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;

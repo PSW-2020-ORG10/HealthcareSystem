@@ -22,5 +22,9 @@
     <ProjectReference Include="..\HealthClinic.DAL\HealthClinic.CL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Adapters\" />
+  </ItemGroup>
+
 
 </Project>
