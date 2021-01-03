@@ -4,17 +4,18 @@
  * Purpose: Definition of the Class Service.PatientService
  ***********************************************************************/
 
-using HealthClinic.CL.Adapters;
-using HealthClinic.CL.DbContextModel;
-using HealthClinic.CL.Dtos;
-using HealthClinic.CL.Model.Patient;
 using HealthClinic.CL.Utility;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Mail;
+using UserMicroserviceApi.Adapters;
+using UserMicroserviceApi.DbContextModel;
+using UserMicroserviceApi.Dtos;
 using UserMicroserviceApi.Model;
 using UserMicroserviceApi.Repository;
+using UserMicroserviceApi.Utility;
+using UtilityMethods = HealthClinic.CL.Utility.UtilityMethods;
 
 namespace UserMicroserviceApi.Service
 {
@@ -123,10 +124,11 @@ namespace UserMicroserviceApi.Service
             }
             return maliciousPatients;
         }
-        private Dictionary<int, int> GetCanceledAppointmentsInLastMonth(List<DoctorAppointment> appointments)
+
+        private Dictionary<int, int> GetCanceledAppointmentsInLastMonth(List<MicroserviceAppointmentDto> appointments)
         {
             Dictionary<int, int> dict = new Dictionary<int, int>();
-            foreach (DoctorAppointment appointment in appointments)
+            foreach (MicroserviceAppointmentDto appointment in appointments)
             {
                 if (appointment.IsCanceled == true && CheckIfAppointmentsAreInPastOneMonthFromToday(appointment) != null)
                 {
@@ -136,7 +138,7 @@ namespace UserMicroserviceApi.Service
             return dict;
         }
 
-        private static void GetPatients(Dictionary<int, int> dict, DoctorAppointment appointment)
+        private static void GetPatients(Dictionary<int, int> dict, MicroserviceAppointmentDto appointment)
         {
             if (dict.ContainsKey(appointment.PatientUserId))
                 dict[appointment.PatientUserId]++;
@@ -145,7 +147,7 @@ namespace UserMicroserviceApi.Service
         }
 
 
-        private DoctorAppointment CheckIfAppointmentsAreInPastOneMonthFromToday(DoctorAppointment appointment)
+        private MicroserviceAppointmentDto CheckIfAppointmentsAreInPastOneMonthFromToday(MicroserviceAppointmentDto appointment)
         {
             return UtilityMethods.ParseDateInCorrectFormat(appointment.CancelDateString) > DateTime.Now.AddDays(-32) ? appointment : null;
         }

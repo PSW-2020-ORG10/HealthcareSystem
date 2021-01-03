@@ -1,8 +1,8 @@
-﻿using HealthClinic.CL.Adapters;
-using HealthClinic.CL.DbContextModel;
-using HealthClinic.CL.Dtos;
-using HealthClinic.CL.Repository;
+﻿using HealthClinic.CL.Repository;
 using System.Collections.Generic;
+using UserMicroserviceApi.Adapters;
+using UserMicroserviceApi.DbContextModel;
+using UserMicroserviceApi.Dtos;
 using UserMicroserviceApi.Model;
 using UserMicroserviceApi.Repository;
 

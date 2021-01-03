@@ -1,6 +1,5 @@
-﻿using FeedbackMicroserviceApi.Model;
-using HealthClinic.CL.DbContextModel;
-using HealthClinic.CL.Utility;
+﻿using FeedbackMicroserviceApi.DbContextModel;
+using FeedbackMicroserviceApi.Model;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -27,7 +26,6 @@ namespace FeedbackMicroserviceApi.Repository
         {
             dbContext.Feedbacks.Add(feedback);
             dbContext.SaveChanges();
-            feedback.Patient = HttpRequests.GetOnePatient(feedback.PatientId).Result;
             return feedback;
         }
 

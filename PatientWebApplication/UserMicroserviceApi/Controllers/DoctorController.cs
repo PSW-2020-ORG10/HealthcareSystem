@@ -1,6 +1,4 @@
-﻿using System;
-using HealthClinic.CL.Adapters;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using UserMicroserviceApi.Adapters;
 using UserMicroserviceApi.Repository;
 using UserMicroserviceApi.Service;
@@ -36,18 +34,6 @@ namespace UserMicroserviceApi.Controllers
         public IActionResult GetById(int id)
         {
             return Ok(MicroserviceDoctorAdapter.DoctorToMicroserviceDoctorDto(doctorService.GetByid(id)));
-        }
-
-        [HttpGet("appointment/{doctorId}/{time}/{date}")]
-        public IActionResult DoesDoctorHaveAnAppointmentAtSpecificTime(int doctorId, TimeSpan time, string dateToString)
-        {
-            return Ok(doctorService.DoesDoctorHaveAnAppointmentAtSpecificTimeAsync(doctorService.GetByid(doctorId), time, dateToString));
-        }
-
-        [HttpGet("operation/{doctorId}/{time}/{date}")]
-        public IActionResult DoesDoctorHaveAnOperationAtSpecificTime(int doctorId, TimeSpan time, string dateToString)
-        {
-            return Ok(doctorService.DoesDoctorHaveAnOperationAtSpecificTimeAsync(doctorService.GetByid(doctorId), time, dateToString));
         }
     }
 }

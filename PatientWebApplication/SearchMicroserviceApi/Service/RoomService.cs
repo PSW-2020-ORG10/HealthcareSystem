@@ -4,8 +4,6 @@
  * Purpose: Definition of the Class Service.EquipmentService
  ***********************************************************************/
 
-using HealthClinic.CL.Repository;
-using HealthClinic.CL.Service;
 using SearchMicroserviceApi.Model;
 using SearchMicroserviceApi.Repository;
 using System;
@@ -13,21 +11,17 @@ using System.Collections.Generic;
 
 namespace SearchMicroserviceApi.Service
 {
-    public class RoomService : BingPath, IService<Room>
+    public class RoomService : IService<Room>
     {
-        string path = bingPathToAppDir(@"JsonFiles\room.json");
-        string path2 = bingPathToAppDir(@"JsonFiles\medicine.json");
-        string path3 = bingPathToAppDir(@"JsonFiles\equipment.json");
-
         public RoomRepository roomRepository;
         public MedicineRepository medicineRepository;
         public EquipmentRepository equipmentRepository;
 
         public RoomService()
         {
-            roomRepository = new RoomRepository(path);
-            medicineRepository = new MedicineRepository(path2);
-            equipmentRepository = new EquipmentRepository(path3);
+            roomRepository = new RoomRepository();
+            medicineRepository = new MedicineRepository();
+            equipmentRepository = new EquipmentRepository();
         }
 
 
@@ -146,17 +140,6 @@ namespace SearchMicroserviceApi.Service
                 removeRoomFromEquipment(equipment, room);
             }
         }
-
-
-
-        private bool isScheduleForRoom(Schedule schedule, Room room)
-        {
-            if (schedule.room.Equals(room.typeOfRoom)) return true;
-
-            return false;
-        }
-
-
 
         /* public void removeRoomFromAllSchedules(Room room)
          {

@@ -1,5 +1,5 @@
-﻿using HealthClinic.CL.Dtos;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UserMicroserviceApi.Dtos;
 using UserMicroserviceApi.Model;
 
 namespace UserMicroserviceApi.Service

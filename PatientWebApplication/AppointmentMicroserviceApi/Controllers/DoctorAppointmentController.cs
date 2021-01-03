@@ -1,12 +1,10 @@
 ﻿using System.Threading.Tasks;
 using AppointmentMicroserviceApi.Adapters;
 using AppointmentMicroserviceApi.Dtos;
-using AppointmentMicroserviceApi.Patient;
 using AppointmentMicroserviceApi.Service;
-using HealthClinic.CL.DbContextModel;
-using HealthClinic.CL.Dtos;
-using HealthClinic.CL.Model.Patient;
 using Microsoft.AspNetCore.Mvc;
+using DoctorAppointment = AppointmentMicroserviceApi.Patient.DoctorAppointment;
+using MyDbContext = AppointmentMicroserviceApi.DbContextModel.MyDbContext;
 
 namespace AppointmentMicroserviceApi.Controllers
 {
@@ -27,6 +25,12 @@ namespace AppointmentMicroserviceApi.Controllers
 
         [HttpGet("getAll")]
         public IActionResult GetAll()
+        {
+            return Ok(ViewAppointmentAdapter.AppointmentListToViewAppointmenDtoList(regularAppointmentService.GetAll()));
+        }
+
+        [HttpGet("getAllDto")]
+        public IActionResult GetAllDto()
         {
             return Ok(ViewAppointmentAdapter.AppointmentListToViewAppointmenDtoList(regularAppointmentService.GetAll()));
         }

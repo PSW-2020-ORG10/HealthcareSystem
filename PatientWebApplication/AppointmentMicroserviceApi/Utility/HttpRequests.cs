@@ -32,5 +32,16 @@ namespace AppointmentMicroserviceApi.Utility
             return await responseString.Content.ReadAsAsync<MicroserviceShiftDto>();
         }
 
+        public static async Task<Boolean> DoesDoctorHaveAnAppointmentAtSpecificTime(int doctorId, TimeSpan time, string date)
+        {
+            var responseString = await client.GetAsync("http://localhost:54689/api/doctor/appointment/" + doctorId + "/" + time + "/" + date);
+            return await responseString.Content.ReadAsAsync<Boolean>();
+        }
+
+        public static async Task<Boolean> DoesDoctorHaveAnOperationAtSpecificTime(int doctorId, TimeSpan time, string date)
+        {
+            var responseString = await client.GetAsync("http://localhost:54689/api/doctor/operation/" + doctorId + "/" + time + "/" + date);
+            return await responseString.Content.ReadAsAsync<Boolean>();
+        }
     }
 }

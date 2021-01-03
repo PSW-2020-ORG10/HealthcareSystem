@@ -1,6 +1,4 @@
-﻿using HealthClinic.CL.Model.Patient;
-
-namespace SearchMicroserviceApi.Model
+﻿namespace SearchMicroserviceApi.Model
 {
     public class ModelMedicine : StringData
     {

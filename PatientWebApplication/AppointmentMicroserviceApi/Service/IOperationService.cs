@@ -4,8 +4,8 @@
  * Purpose: Definition of the Class Contoller.OperationService2
  ***********************************************************************/
 using AppointmentMicroserviceApi.Doctor;
+using AppointmentMicroserviceApi.Dtos;
 using AppointmentMicroserviceApi.Patient;
-using HealthClinic.CL.Dtos;
 using System;
 using System.Collections.Generic;
 

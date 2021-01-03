@@ -1,5 +1,5 @@
-﻿using HealthClinic.CL.DbContextModel;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using SearchMicroserviceApi.DbContextModel;
 using SearchMicroserviceApi.Model;
 using System.Collections.Generic;
 using System.Linq;

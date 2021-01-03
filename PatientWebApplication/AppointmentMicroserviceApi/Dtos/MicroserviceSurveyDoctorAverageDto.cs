@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AppointmentMicroserviceApi.Dtos
+﻿namespace AppointmentMicroserviceApi.Dtos
 {
-    public class MicroserviceSurveyAverageDto
+    public class MicroserviceSurveyDoctorAverageDto
     {
         public MicroserviceDoctorDto Doctor { get; set; }
         public double DoctorAverage { get; set; }
@@ -15,11 +11,11 @@ namespace AppointmentMicroserviceApi.Dtos
         public double DoctorsKnowledgeAverage { get; set; }
         public double DoctorsWorkingPaceAverage { get; set; }
 
-        public MicroserviceSurveyAverageDto()
+        public MicroserviceSurveyDoctorAverageDto()
         {
         }
 
-        public MicroserviceSurveyAverageDto(MicroserviceDoctorDto doctor, double doctorAverage, double doctorsProfessionalismAverage, double doctorsPolitenessAverage, double doctorsTechnicalityAverage, double doctorsSkillAverage, double doctorsKnowledgeAverage, double doctorsWorkingPaceAverage)
+        public MicroserviceSurveyDoctorAverageDto(MicroserviceDoctorDto doctor, double doctorAverage, double doctorsProfessionalismAverage, double doctorsPolitenessAverage, double doctorsTechnicalityAverage, double doctorsSkillAverage, double doctorsKnowledgeAverage, double doctorsWorkingPaceAverage)
         {
             Doctor = doctor;
             DoctorAverage = doctorAverage;

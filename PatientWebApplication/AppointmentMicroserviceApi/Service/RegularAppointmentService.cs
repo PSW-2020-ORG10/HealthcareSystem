@@ -7,12 +7,12 @@ using System;
 using System.Collections.Generic;
 using HealthClinic.CL.Utility;
 using System.Linq;
-using HealthClinic.CL.DbContextModel;
 using System.Threading.Tasks;
 using AppointmentMicroserviceApi.Repository;
 using AppointmentMicroserviceApi.Patient;
 using AppointmentMicroserviceApi.Doctor;
 using AppointmentMicroserviceApi.Dtos;
+using MyDbContext = AppointmentMicroserviceApi.DbContextModel.MyDbContext;
 
 namespace AppointmentMicroserviceApi.Service
 {
@@ -335,16 +335,6 @@ namespace AppointmentMicroserviceApi.Service
                     return GetAllAvailableAppointmentsForRecommendedDatesAsync(doctor.Id, startDate, endDate, patientId).Result;
             }
             return appointments;
-        }
-
-        public async Task<bool> IsTermNotAvailableAsync(MicroserviceDoctorDto doctor, TimeSpan time, string dateToString)
-        {
-            bool hasAppointmentDoctor = await HttpRequests.DoesDoctorHaveAnAppointmentAtSpecificTime(doctor.Id, time, dateToString);
-            bool hasOperationDoctor = await HttpRequests.DoesDoctorHaveAnOperationAtSpecificTime(doctor.Id, time, dateToString);
-
-            if (hasAppointmentDoctor == true || hasOperationDoctor == true) return true;
-
-            return false;
         }
 
         /// <summary> This method is getting lists of <c>DoctorAppointment</c> and <c>Survey</c> and checks for all valid appointment. </summary>

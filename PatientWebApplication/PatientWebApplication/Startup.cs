@@ -1,5 +1,4 @@
 using FluentValidation.AspNetCore;
-using HealthClinic.CL.DbContextModel;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
@@ -9,7 +8,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
-using PatientWebApplication.Validators;
 
 namespace PatientWebApplication
 {

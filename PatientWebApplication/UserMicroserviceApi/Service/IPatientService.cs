@@ -4,9 +4,8 @@
  * Purpose: Definition of the Class Service.PatientService
  ***********************************************************************/
 
-using HealthClinic.CL.Dtos;
-using HealthClinic.CL.Model.Patient;
 using System.Collections.Generic;
+using UserMicroserviceApi.Dtos;
 using UserMicroserviceApi.Model;
 
 namespace UserMicroserviceApi.Service

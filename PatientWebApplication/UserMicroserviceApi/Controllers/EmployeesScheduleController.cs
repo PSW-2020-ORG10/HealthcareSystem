@@ -1,6 +1,6 @@
-﻿using HealthClinic.CL.Dtos;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using UserMicroserviceApi.Adapters;
+using UserMicroserviceApi.Dtos;
 using UserMicroserviceApi.Repository;
 using UserMicroserviceApi.Service;
 

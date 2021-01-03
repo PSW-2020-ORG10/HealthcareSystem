@@ -1,6 +1,4 @@
-﻿using HealthClinic.CL.Model.Patient;
-
-namespace UserMicroserviceApi.Model
+﻿namespace UserMicroserviceApi.Model
 {
     public class ManagerNotification : StringData
     {

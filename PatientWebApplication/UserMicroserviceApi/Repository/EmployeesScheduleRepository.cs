@@ -4,10 +4,10 @@
  * Purpose: Definition of the Class Repository.EmployeesScheduleRepository
  ***********************************************************************/
 
-using HealthClinic.CL.DbContextModel;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using UserMicroserviceApi.DbContextModel;
 using UserMicroserviceApi.Model;
 
 namespace UserMicroserviceApi.Repository

@@ -225,7 +225,7 @@ class PrescriptionsSearchAdvancedTable extends Component {
                                 </td>
                                 <td style={{ textAlign: "center" }} > {f.isUsed ? "Used" : "Not used"}</td >
                                 <td style={{ textAlign: "center" }}>{f.comment}</td >
-                                <td style={{ textAlign: "center" }}>{f.doctor.firstName + " " + f.doctor.secondName}</td >
+                                <td style={{ textAlign: "center" }}>{f.doctor.name + " " + f.doctor.surname}</td >
                             </tr>
                         </tbody>
                     ))}

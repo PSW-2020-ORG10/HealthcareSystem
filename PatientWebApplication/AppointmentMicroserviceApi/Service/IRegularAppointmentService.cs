@@ -6,6 +6,7 @@
 using AppointmentMicroserviceApi.Doctor;
 using AppointmentMicroserviceApi.Dtos;
 using AppointmentMicroserviceApi.Patient;
+using SearchMicroserviceApi.Dtos;
 using System;
 using System.Collections.Generic;
 

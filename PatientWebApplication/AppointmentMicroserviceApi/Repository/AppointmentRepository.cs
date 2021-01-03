@@ -5,12 +5,11 @@
  ***********************************************************************/
 
 using AppointmentMicroserviceApi.Patient;
-using HealthClinic.CL.DbContextModel;
-using HealthClinic.CL.Utility;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MyDbContext = AppointmentMicroserviceApi.DbContextModel.MyDbContext;
 
 namespace AppointmentMicroserviceApi.Repository
 {
@@ -31,7 +30,6 @@ namespace AppointmentMicroserviceApi.Repository
         {
             dbContext.DoctorAppointments.Add(appointment);
             dbContext.SaveChanges();
-            appointment.Doctor = HttpRequests.GetDoctorByIdAsync(appointment.DoctorUserId).Result;
             return appointment;
         }
 

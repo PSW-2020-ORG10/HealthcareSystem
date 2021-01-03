@@ -4,11 +4,9 @@
  * Purpose: Definition of the Class Contoller.OperationService2
  ***********************************************************************/
 using AppointmentMicroserviceApi.Doctor;
+using AppointmentMicroserviceApi.Dtos;
 using AppointmentMicroserviceApi.Patient;
 using AppointmentMicroserviceApi.Repository;
-using AppointmentMicroserviceApi.Utility;
-using HealthClinic.CL.Dtos;
-using HealthClinic.CL.Service;
 using HealthClinic.CL.Utility;
 using System;
 using System.Collections.Generic;
@@ -18,7 +16,7 @@ namespace AppointmentMicroserviceApi.Service
 {
     /// <summary>Class <c>OperationService</c> handles operation business logic.
     /// </summary>
-    public class OperationService : BingPath, IStrategyAppointment
+    public class OperationService : IStrategyAppointment
     {
         /// <value>Property <c>_operationRepository</c> represents the repository used for data access.</value>
         private IOperationRepository _operationRepository;

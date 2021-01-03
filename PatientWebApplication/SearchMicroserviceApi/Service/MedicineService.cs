@@ -4,10 +4,9 @@
  * Purpose: Definition of the Class Service.EquipmentService
  ***********************************************************************/
 
-using HealthClinic.CL.DbContextModel;
+using SearchMicroserviceApi.DbContextModel;
 using SearchMicroserviceApi.Model;
 using SearchMicroserviceApi.Repository;
-using System;
 using System.Collections.Generic;
 
 namespace SearchMicroserviceApi.Service

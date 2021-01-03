@@ -1,13 +1,9 @@
 ﻿using AppointmentMicroserviceApi.Adapters;
+using AppointmentMicroserviceApi.Dtos;
 using AppointmentMicroserviceApi.Repository;
 using AppointmentMicroserviceApi.Service;
-using HealthClinic.CL.Dtos;
-using HealthClinic.CL.Model.Patient;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AppointmentMicroservice.Controller
 {

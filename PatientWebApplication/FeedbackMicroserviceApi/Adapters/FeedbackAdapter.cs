@@ -1,6 +1,5 @@
 ﻿using FeedbackMicroserviceApi.Dtos;
 using FeedbackMicroserviceApi.Model;
-using HealthClinic.CL.Model.Patient;
 using System;
 using System.Collections.Generic;
 

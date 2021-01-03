@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using HealthClinic.CL.Adapters;
-using HealthClinic.CL.DbContextModel;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using SearchMicroserviceApi.DbContextModel;
 using SearchMicroserviceApi.Dtos;
 using SearchMicroserviceApi.Service;
 

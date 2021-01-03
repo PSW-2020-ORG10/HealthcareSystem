@@ -1,5 +1,5 @@
-﻿using AppointmentMicroserviceApi.Patient;
-using HealthClinic.CL.Dtos;
+﻿using AppointmentMicroserviceApi.Dtos;
+using AppointmentMicroserviceApi.Patient;
 using System.Collections.Generic;
 
 namespace AppointmentMicroserviceApi.Service

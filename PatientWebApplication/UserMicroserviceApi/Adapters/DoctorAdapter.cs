@@ -1,7 +1,5 @@
-﻿using HealthClinic.CL.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using UserMicroserviceApi.Dtos;
 using UserMicroserviceApi.Model;
 
 namespace UserMicroserviceApi.Adapters

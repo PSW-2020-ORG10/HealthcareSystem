@@ -6,7 +6,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using HealthClinic.CL.DbContextModel;
+using SearchMicroserviceApi.DbContextModel;
 using SearchMicroserviceApi.Model;
 
 namespace SearchMicroserviceApi.Repository

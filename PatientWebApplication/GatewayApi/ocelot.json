@@ -13,6 +13,18 @@
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
     },
     {
+      "DownstreamPathTemplate": "/api/doctorappointment/getAllDto",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 53212
+        }
+      ],
+      "UpstreamPathTemplate": "/api/doctorappointment/getAllDto",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+    },
+    {
       "DownstreamPathTemplate": "/api/doctorappointment/{id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [

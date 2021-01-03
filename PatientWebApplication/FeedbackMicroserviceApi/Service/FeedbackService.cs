@@ -1,9 +1,8 @@
 ﻿using FeedbackMicroserviceApi.Adapters;
+using FeedbackMicroserviceApi.DbContextModel;
 using FeedbackMicroserviceApi.Dtos;
 using FeedbackMicroserviceApi.Model;
 using FeedbackMicroserviceApi.Repository;
-using HealthClinic.CL.Adapters;
-using HealthClinic.CL.DbContextModel;
 using System.Collections.Generic;
 
 namespace FeedbackMicroserviceApi.Service

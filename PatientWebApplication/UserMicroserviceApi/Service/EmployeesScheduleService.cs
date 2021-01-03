@@ -12,7 +12,7 @@ using UserMicroserviceApi.Repository;
 
 namespace UserMicroserviceApi.Service
 {
-    public class EmployeesScheduleService : IService<Schedule>
+    public class EmployeesScheduleService
     {
         public IEmployeesScheduleRepository _employeesScheduleRepository;
 
