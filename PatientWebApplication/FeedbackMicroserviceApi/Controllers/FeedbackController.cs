@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using FeedbackMicroserviceApi.Adapters;
+using FeedbackMicroserviceApi.Dtos;
 using FeedbackMicroserviceApi.Model;
 using FeedbackMicroserviceApi.Service;
 using HealthClinic.CL.DbContextModel;
-using HealthClinic.CL.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FeedbackMicroserviceApi.Controllers
@@ -28,9 +29,7 @@ namespace FeedbackMicroserviceApi.Controllers
         [HttpGet]       // GET /api/feedback
         public IActionResult Get()
         {
-
-            List<Feedback> result = FeedbackService.GetAll();
-            return Ok(result);
+            return Ok(FeedbackAdapter.FeedbackListToMicroserviceFeedbackDtoList(FeedbackService.GetAll()));
         }
 
 
@@ -39,9 +38,7 @@ namespace FeedbackMicroserviceApi.Controllers
         [HttpGet("published")]       // GET /api/feedback/published
         public IActionResult GetPublished()
         {
-
-            List<Feedback> result = FeedbackService.GetPublished();
-            return Ok(result);
+            return Ok(FeedbackAdapter.FeedbackListToMicroserviceFeedbackDtoList(FeedbackService.GetPublished()));
         }
 
 
@@ -53,8 +50,6 @@ namespace FeedbackMicroserviceApi.Controllers
         [HttpPost]      // POST /api/feedback Request body: {"message": "Some message", "isPublic": true, "isAnonymous": false}
         public IActionResult Create(FeedbackDto dto)
         {
-            // validation in feedback validator, automatically called from startup
-
             Feedback feedback = FeedbackService.Create(dto);
 
             if (feedback == null)
@@ -63,7 +58,7 @@ namespace FeedbackMicroserviceApi.Controllers
             }
             else
             {
-                return Ok();
+                return Ok(FeedbackAdapter.FeedbackToMicroserviceFeedbackDto(feedback));
             }
 
         }
@@ -87,7 +82,7 @@ namespace FeedbackMicroserviceApi.Controllers
             {
                 return NotFound();
             }
-            return Ok(result);
+            return Ok(FeedbackAdapter.FeedbackToMicroserviceFeedbackDto(result));
         }
 
 

@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using AppointmentMicroserviceApi.Adapters;
+using AppointmentMicroserviceApi.Dtos;
 using AppointmentMicroserviceApi.Patient;
 using AppointmentMicroserviceApi.Service;
 using HealthClinic.CL.DbContextModel;
@@ -119,6 +120,18 @@ namespace AppointmentMicroserviceApi.Controllers
         public IActionResult GetAppointmentsForPatient(int patientId)
         {
             return Ok(ViewAppointmentAdapter.AppointmentListToViewAppointmenDtoList(regularAppointmentService.GetAppointmentsForPatient(patientId)));
+        }
+
+        [HttpGet("appointmentsForPatientDto/{patientId}")]
+        public IActionResult GetAppointmentsForPatientDto(int patientId)
+        {
+            return Ok(SearchAppointmentAdapter.AppointmentListToSearchAppointmenDtoList(regularAppointmentService.GetAppointmentsForPatient(patientId)));
+        }
+
+        [HttpGet("appointmentsForPatientDtoSimple/{patientId}")]
+        public IActionResult GetAppointmentsForPatientDtoSimple(int patientId)
+        {
+            return Ok( new AppointmentAdapter().ConvertAppointmentListToAppointmentDtoList(regularAppointmentService.GetAppointmentsForPatient(patientId)));
         }
     }
 }

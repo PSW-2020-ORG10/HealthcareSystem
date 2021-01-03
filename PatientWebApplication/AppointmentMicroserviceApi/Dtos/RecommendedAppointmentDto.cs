@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HealthClinic.CL.Dtos
+namespace AppointmentMicroserviceApi.Dtos
 {
     public class RecommendedAppointmentDto
     {

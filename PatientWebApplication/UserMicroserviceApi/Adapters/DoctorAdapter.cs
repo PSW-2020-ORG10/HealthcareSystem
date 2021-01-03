@@ -1,10 +1,10 @@
 ﻿using HealthClinic.CL.Dtos;
-using HealthClinic.CL.Model.Doctor;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using UserMicroserviceApi.Model;
 
-namespace HealthClinic.CL.Adapters
+namespace UserMicroserviceApi.Adapters
 {
     public class DoctorAdapter
     {

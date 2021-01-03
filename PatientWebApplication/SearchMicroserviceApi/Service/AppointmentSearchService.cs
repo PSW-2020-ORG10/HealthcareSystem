@@ -1,5 +1,5 @@
-﻿using HealthClinic.CL.Dtos;
-using HealthClinic.CL.Utility;
+﻿using HealthClinic.CL.Utility;
+using SearchMicroserviceApi.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +13,9 @@ namespace SearchMicroserviceApi.Service
         /// <param name="appointmentReportSearchDto"><c>appointmentReportSearchDto</c> is Data Transfer Object of a <c>Operation</c> that is being used to filter appointments.
         /// </param>
         /// <returns> List of filtered patient's appointments. </returns>
-        public async Task<List<DoctorAppointment>> SimpleSearchAppointmentsAsync(AppointmentReportSearchDto appointmentReportSearchDto)
+        public async Task<List<AppointmentDto>> SimpleSearchAppointmentsAsync(AppointmentReportSearchDto appointmentReportSearchDto)
         {
-            return SearchForAppointmentType(SearchForDoctorNameAndSurname(SearchForDate(await HttpRequests.GetAppointmentsForPatient(appointmentReportSearchDto.PatientId), appointmentReportSearchDto), appointmentReportSearchDto), appointmentReportSearchDto);
+            return SearchForAppointmentType(SearchForDoctorNameAndSurname(SearchForDate(await Utility.HttpRequests.GetAppointmentsForPatientDtoSimple(appointmentReportSearchDto.PatientId), appointmentReportSearchDto), appointmentReportSearchDto), appointmentReportSearchDto);
         }
 
         /// <summary> This method is getting list of filtered <c>DoctorAppointment</c> of one patient by doctor's name and surname. </summary>
@@ -24,11 +24,11 @@ namespace SearchMicroserviceApi.Service
         /// <param name="appointmentReportSearchDto"><c>appointmentReportSearchDto</c> is Data Transfer Object of a <c>Operation</c> that is being used to filter operations.
         /// </param>
         /// <returns> List of filtered patient's appointments. </returns>
-        private List<DoctorAppointment> SearchForDoctorNameAndSurname(List<DoctorAppointment> appointments, AppointmentReportSearchDto appointmentSearchDto)
+        private List<AppointmentDto> SearchForDoctorNameAndSurname(List<AppointmentDto> appointments, AppointmentReportSearchDto appointmentSearchDto)
         {
             if (!UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.DoctorNameAndSurname))
             {
-                appointments = appointments.FindAll(appointment => appointment.Doctor.firstName.Contains(appointmentSearchDto.DoctorNameAndSurname) || appointment.Doctor.secondName.Contains(appointmentSearchDto.DoctorNameAndSurname));
+                appointments = appointments.FindAll(appointment => appointment.DoctorNameAndSurname.Contains(appointmentSearchDto.DoctorNameAndSurname));
             }
             return appointments;
         }
@@ -39,7 +39,7 @@ namespace SearchMicroserviceApi.Service
         /// <param name="appointmentReportSearchDto"><c>appointmentReportSearchDto</c> is Data Transfer Object of a <c>Operation</c> that is being used to filter operations.
         /// </param>
         /// <returns> List of filtered patient's appointments. </returns>
-        private List<DoctorAppointment> SearchForDate(List<DoctorAppointment> appointments, AppointmentReportSearchDto appointmentSearchDto)
+        private List<AppointmentDto> SearchForDate(List<AppointmentDto> appointments, AppointmentReportSearchDto appointmentSearchDto)
         {
             if (!UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.Start) && !UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.End))
             {
@@ -65,7 +65,7 @@ namespace SearchMicroserviceApi.Service
         /// <param name="end"><c>end</c> is last date of search.
         /// </param>
         /// <returns> List of filtered patient's appointments. </returns>
-        private List<DoctorAppointment> GetAppointmentsBetweenDates(string start, string end, List<DoctorAppointment> appointments)
+        private List<AppointmentDto> GetAppointmentsBetweenDates(string start, string end, List<AppointmentDto> appointments)
         {
             DateTime startDate = UtilityMethods.ParseDateInCorrectFormat(start);
             DateTime endDate = UtilityMethods.ParseDateInCorrectFormat(end);
@@ -78,7 +78,7 @@ namespace SearchMicroserviceApi.Service
         /// <param name="date"><c>date</c> is last date of search.
         /// </param>
         /// <returns> List of filtered patient's appointments. </returns>
-        private List<DoctorAppointment> GetAppointmentsBeforeDate(string date, List<DoctorAppointment> appointments)
+        private List<AppointmentDto> GetAppointmentsBeforeDate(string date, List<AppointmentDto> appointments)
         {
             DateTime endDate = UtilityMethods.ParseDateInCorrectFormat(date);
             return appointments.FindAll(appointment => UtilityMethods.ParseDateInCorrectFormat(appointment.Date) <= endDate);
@@ -90,7 +90,7 @@ namespace SearchMicroserviceApi.Service
         /// <param name="date"><c>date</c> is first date of search.
         /// </param>
         /// <returns> List of filtered patient's appointments. </returns>
-        private List<DoctorAppointment> GetAppointmentsAfterDate(string date, List<DoctorAppointment> appointments)
+        private List<AppointmentDto> GetAppointmentsAfterDate(string date, List<AppointmentDto> appointments)
         {
             DateTime startDate = UtilityMethods.ParseDateInCorrectFormat(date);
             return appointments.FindAll(appointment => startDate <= UtilityMethods.ParseDateInCorrectFormat(appointment.Date));
@@ -102,13 +102,13 @@ namespace SearchMicroserviceApi.Service
         /// <param name="appointmentSearchDto"><c>appointmentSearchDto</c> is Data Transfer Object that is being used to filter operations.
         /// </param>
         /// <returns> List of filtered patient's appointments. </returns>
-        private List<DoctorAppointment> SearchForAppointmentType(List<DoctorAppointment> appointments, AppointmentReportSearchDto appointmentSearchDto)
+        private List<AppointmentDto> SearchForAppointmentType(List<AppointmentDto> appointments, AppointmentReportSearchDto appointmentSearchDto)
         {
             if (UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.AppointmentType) || CheckIfAppointment(appointmentSearchDto.AppointmentType))
             {
                 return appointments;
             }
-            return new List<DoctorAppointment>();
+            return new List<AppointmentDto>();
         }
 
         /// <summary> This method is checks if given string equals appointment. </summary>
@@ -124,10 +124,10 @@ namespace SearchMicroserviceApi.Service
         /// /// <param name="dto"><c>AppointmentAdvancedSearchDto</c> is Data Transfer Object of a <c>DoctorAppointment</c> that is be used to filter appointments.
         /// </param>
         /// <returns> List of filtered appointments. </returns>
-        public async Task<List<DoctorAppointment>> AdvancedSearchAppointmentsAsync(AppointmentAdvancedSearchDto dto)
+        public async Task<List<MicroserviceSearchAppointmentDto>> AdvancedSearchAppointmentsAsync(AppointmentAdvancedSearchDto dto)
         {
 
-            return SearchForOtherParameters(await HttpRequests.GetAppointmentsForPatient(2), dto, SearchForFirstParameter(await HttpRequests.GetAppointmentsForPatient(2), dto));
+            return SearchForOtherParameters(await Utility.HttpRequests.GetAppointmentsForPatientDto(2), dto, SearchForFirstParameter(await Utility.HttpRequests.GetAppointmentsForPatientDto(2), dto));
 
         }
 
@@ -139,7 +139,7 @@ namespace SearchMicroserviceApi.Service
         /// <param name="firstAppointments"> List of <c>DoctorAppointment</c> that contains appointments that matches first parameter.
         /// </param>
         /// <returns> List of filtered appointments. </returns>
-        private List<DoctorAppointment> SearchForOtherParameters(List<DoctorAppointment> appointments, AppointmentAdvancedSearchDto dto, List<DoctorAppointment> firstAppointments)
+        private List<MicroserviceSearchAppointmentDto> SearchForOtherParameters(List<MicroserviceSearchAppointmentDto> appointments, AppointmentAdvancedSearchDto dto, List<MicroserviceSearchAppointmentDto> firstAppointments)
         {
             for (int i = 0; i < dto.RestRoles.Length; i++)
             {
@@ -148,19 +148,19 @@ namespace SearchMicroserviceApi.Service
             return firstAppointments;
         }
 
-        private List<DoctorAppointment> SearchForLogicOperators(string logicOperator, List<DoctorAppointment> othersAppointments, List<DoctorAppointment> finalAppointments)
+        private List<MicroserviceSearchAppointmentDto> SearchForLogicOperators(string logicOperator, List<MicroserviceSearchAppointmentDto> othersAppointments, List<MicroserviceSearchAppointmentDto> finalAppointments)
         {
             return logicOperator.Equals("or") ? othersAppointments.Union(finalAppointments).ToList() : othersAppointments.Intersect(finalAppointments).ToList();
         }
 
-        private List<DoctorAppointment> SearchForOtherRoles(string otherParameter, string otherValue, List<DoctorAppointment> appointments)
+        private List<MicroserviceSearchAppointmentDto> SearchForOtherRoles(string otherParameter, string otherValue, List<MicroserviceSearchAppointmentDto> appointments)
         {
             return otherParameter.Equals("doctor") ? SearchForDoctorAdvanced(appointments, otherValue) :
                otherParameter.Equals("date") ? SearchForDateAdvanced(appointments, otherValue) :
                SearchForRoomAdvanced(appointments, otherValue);
         }
 
-        private List<DoctorAppointment> SearchForFirstParameter(List<DoctorAppointment> appointments, AppointmentAdvancedSearchDto dto)
+        private List<MicroserviceSearchAppointmentDto> SearchForFirstParameter(List<MicroserviceSearchAppointmentDto> appointments, AppointmentAdvancedSearchDto dto)
         {
             return dto.FirstRole.Equals("doctor") || UtilityMethods.CheckIfStringIsEmpty(dto.FirstRole) ? SearchForDoctorAdvanced(appointments, dto.First) :
                 dto.FirstRole.Equals("date") ? SearchForDateAdvanced(appointments, dto.First) : SearchForRoomAdvanced(appointments, dto.First);
@@ -170,11 +170,11 @@ namespace SearchMicroserviceApi.Service
         /// /// <param name="appointments"><c>appointments</c> is List of appointments that matches search fields.
         /// </param>
         /// <returns> List of filtered appointments. </returns>
-        private List<DoctorAppointment> SearchForDoctorAdvanced(List<DoctorAppointment> appointments, string searchField)
+        private List<MicroserviceSearchAppointmentDto> SearchForDoctorAdvanced(List<MicroserviceSearchAppointmentDto> appointments, string searchField)
         {
             if (!UtilityMethods.CheckIfStringIsEmpty(searchField))
             {
-                appointments = appointments.FindAll(appointment => appointment.Doctor.firstName.Contains(searchField) || appointment.Doctor.secondName.Contains(searchField) || appointment.Doctor.DoctorFullName().Contains(searchField));
+                appointments = appointments.FindAll(appointment => appointment.Doctor.Name.Contains(searchField) || appointment.Doctor.Surname.Contains(searchField) || appointment.Doctor.DoctorFullName().Contains(searchField));
             }
             return appointments;
         }
@@ -183,7 +183,7 @@ namespace SearchMicroserviceApi.Service
         /// /// <param name="appointments"><c>appointments</c> is List of appointments that matches search fields.
         /// </param>
         /// <returns> List of filtered appointments. </returns>
-        private List<DoctorAppointment> SearchForDateAdvanced(List<DoctorAppointment> appointments, string searchField)
+        private List<MicroserviceSearchAppointmentDto> SearchForDateAdvanced(List<MicroserviceSearchAppointmentDto> appointments, string searchField)
         {
             if (!UtilityMethods.CheckIfStringIsEmpty(searchField))
             {
@@ -196,7 +196,7 @@ namespace SearchMicroserviceApi.Service
         /// /// <param name="appointments"><c>appointments</c> is List of appointments that matches search fields.
         /// </param>
         /// <returns> List of filtered appointments. </returns>
-        private List<DoctorAppointment> SearchForRoomAdvanced(List<DoctorAppointment> appointments, string searchField)
+        private List<MicroserviceSearchAppointmentDto> SearchForRoomAdvanced(List<MicroserviceSearchAppointmentDto> appointments, string searchField)
         {
             if (!UtilityMethods.CheckIfStringIsEmpty(searchField))
             {

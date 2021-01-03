@@ -1,8 +1,9 @@
-﻿using FeedbackMicroserviceApi.Model;
+﻿using FeedbackMicroserviceApi.Adapters;
+using FeedbackMicroserviceApi.Dtos;
+using FeedbackMicroserviceApi.Model;
 using FeedbackMicroserviceApi.Repository;
 using HealthClinic.CL.Adapters;
 using HealthClinic.CL.DbContextModel;
-using HealthClinic.CL.Dtos;
 using System.Collections.Generic;
 
 namespace FeedbackMicroserviceApi.Service
@@ -27,12 +28,7 @@ namespace FeedbackMicroserviceApi.Service
         /// <returns>if patient exists returns successfully created feedback; otherwise, return <c>null</c></returns>
         public Feedback Create(FeedbackDto dto)
         {
-            PatientUser patient = FeedbackRepository.FindPatient();
-            if (patient == null)
-            {
-                return null;
-            }
-            Feedback feedback = FeedbackAdapter.FeedbackDtoToFeedback(dto, patient);
+            Feedback feedback = FeedbackAdapter.FeedbackDtoToFeedback(dto);
             // Feedback feedback = HttpRequests.CreateFeedback(dto).Result;
             return FeedbackRepository.Add(feedback);
         }

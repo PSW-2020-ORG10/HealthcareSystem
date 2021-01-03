@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HealthClinic.CL.DbContextModel;
-using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Patient;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SearchMicroserviceApi.Adapters;
+using SearchMicroserviceApi.Dtos;
 using SearchMicroserviceApi.Repository;
 using SearchMicroserviceApi.Service;
 
@@ -32,7 +33,7 @@ namespace SearchMicroserviceApi.Controllers
         [HttpGet]       // GET /api/prescription
         public IActionResult Get()
         {
-            return Ok(PrescriptionService.GetAll());
+            return Ok(MicroservicePrescriptionAdapter.PrescriptionListToMicroservicePrescriptionDtoList(PrescriptionService.GetAll()));
         }
 
         /// <summary> This method is calling <c>PrescriptionService</c> to get list of all patient <c>Prescription</c>. </summary>
@@ -40,7 +41,7 @@ namespace SearchMicroserviceApi.Controllers
         [HttpGet("patient")]       // GET /api/prescription/patient
         public IActionResult GetPrescriptionsForPatient()
         {
-            return Ok(PrescriptionService.GetPrescriptionsForPatient(1)); //idPatient set to 1 no login, change after
+            return Ok(MicroservicePrescriptionAdapter.PrescriptionListToMicroservicePrescriptionDtoList(PrescriptionService.GetPrescriptionsForPatient(1))); //idPatient set to 1 no login, change after
         }
 
         /// <summary> This method is calling <c>PrescriptionService</c> to get list of all patient <c>Prescription</c> that matches <c>Prescription dto</c>. </summary>
@@ -50,13 +51,13 @@ namespace SearchMicroserviceApi.Controllers
         [HttpPost("search")]
         public IActionResult SimpleSearchPrescriptions(PrescriptionSearchDto dto)
         {
-            return Ok(PrescriptionService.SimpleSearchPrescriptions(dto));
+            return Ok(MicroservicePrescriptionAdapter.PrescriptionListToMicroservicePrescriptionDtoList(PrescriptionService.SimpleSearchPrescriptions(dto)));
         }
 
         [HttpPost("advancedsearch")]
         public IActionResult AdvancedSearchPrescriptions(PrescriptionAdvancedSearchDto dto)
         {
-            return Ok(PrescriptionService.AdvancedSearchPrescriptions(dto));
+            return Ok(MicroservicePrescriptionAdapter.PrescriptionListToMicroservicePrescriptionDtoList(PrescriptionService.AdvancedSearchPrescriptions(dto)));
         }
     }
 }

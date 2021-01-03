@@ -14,15 +14,13 @@ namespace SearchMicroserviceApi.Model
     {
         public List<ModelRoom> room { get; set; }
         public int doctorId { get; set; }
-        public virtual DoctorUser doctor { get; set; }
         public string description { get; set; }
         public bool isConfirmed { get; set; }
         public int PrescriptionId { get; set; }
         public virtual Prescription Prescription { get; set; }
 
-        public Medicine(int id, string name, int quantity, string description, List<ModelRoom> room, DoctorUser doctor, bool isConfirmed) : base(id, name, quantity, room)
+        public Medicine(int id, string name, int quantity, string description, List<ModelRoom> room, bool isConfirmed) : base(id, name, quantity, room)
         {
-            this.doctor = doctor;
             this.description = description;
             this.room = room;
             this.isConfirmed = isConfirmed;
@@ -45,9 +43,8 @@ namespace SearchMicroserviceApi.Model
             PrescriptionId = prescriptionId;
         }
 
-        public Medicine(int id, string name, int quantity, string description, List<ModelRoom> room, DoctorUser doctor, bool isConfirmed, Prescription prescription) : base(id, name, quantity, room)
+        public Medicine(int id, string name, int quantity, string description, List<ModelRoom> room, bool isConfirmed, Prescription prescription) : base(id, name, quantity, room)
         {
-            this.doctor = doctor;
             this.description = description;
             this.room = room;
             this.isConfirmed = isConfirmed;

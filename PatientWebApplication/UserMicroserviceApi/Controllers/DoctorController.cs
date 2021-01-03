@@ -1,8 +1,10 @@
 ﻿using System;
 using HealthClinic.CL.Adapters;
 using Microsoft.AspNetCore.Mvc;
+using UserMicroserviceApi.Adapters;
 using UserMicroserviceApi.Repository;
 using UserMicroserviceApi.Service;
+using DoctorAdapter = UserMicroserviceApi.Adapters.DoctorAdapter;
 
 namespace UserMicroserviceApi.Controllers
 {
@@ -26,15 +28,14 @@ namespace UserMicroserviceApi.Controllers
 
         [HttpGet]       // GET /api/doctor
         public IActionResult Get()
-        {
-            
-            return Ok(doctorService.GetAll());
+        {   
+            return Ok(MicroserviceDoctorAdapter.DoctorListToMicroserviceDoctorDtoList(doctorService.GetAll()));
         }
 
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            return Ok(doctorService.GetByid(id));
+            return Ok(MicroserviceDoctorAdapter.DoctorToMicroserviceDoctorDto(doctorService.GetByid(id)));
         }
 
         [HttpGet("appointment/{doctorId}/{time}/{date}")]

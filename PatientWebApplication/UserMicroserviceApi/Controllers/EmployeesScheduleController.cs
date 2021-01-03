@@ -1,5 +1,6 @@
 ﻿using HealthClinic.CL.Dtos;
 using Microsoft.AspNetCore.Mvc;
+using UserMicroserviceApi.Adapters;
 using UserMicroserviceApi.Repository;
 using UserMicroserviceApi.Service;
 
@@ -22,7 +23,7 @@ namespace UserMicroserviceApi.Controllers
         [HttpPost]
         public IActionResult GetShiftForDoctorForSpecificDay(DoctorShiftSearchDto dto)
         {
-            return Ok(employeesScheduleService.getShiftForDoctorForSpecificDay(dto.Date, doctorService.GetByid(dto.DoctorId)));
+            return Ok(MicroserviceShiftAdapter.ShiftToMicroserviceShiftDto(employeesScheduleService.getShiftForDoctorForSpecificDay(dto.Date, doctorService.GetByid(dto.DoctorId))));
         }
     }
 }

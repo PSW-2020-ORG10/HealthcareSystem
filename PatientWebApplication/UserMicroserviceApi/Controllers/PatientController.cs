@@ -3,6 +3,7 @@ using HealthClinic.CL.Model.Patient;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using UserMicroserviceApi.Adapters;
 using UserMicroserviceApi.Model;
 using UserMicroserviceApi.Repository;
 using UserMicroserviceApi.Service;
@@ -105,6 +106,17 @@ namespace UserMicroserviceApi.Controllers
                 return BadRequest();
             }
             return Ok(patient);
+        }
+
+        [HttpGet("findDto/{id}")]
+        public IActionResult GetOnePatientDto(int id)
+        {
+            PatientUser patient = PatientService.GetOne(id);
+            if (id < 0 && patient == null)
+            {
+                return BadRequest();
+            }
+            return Ok(MicroservicePatientAdapter.PatientToMicroservicePatinentDto(patient));
         }
 
         /// <summary> This method is calling <c>PatientService</c> to get list of all patients. </summary>

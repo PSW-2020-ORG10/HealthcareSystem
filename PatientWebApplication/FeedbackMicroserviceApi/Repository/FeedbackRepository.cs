@@ -31,14 +31,6 @@ namespace FeedbackMicroserviceApi.Repository
             return feedback;
         }
 
-        /// <summary> Not finished. Need login. </summary>
-        /// <returns> Found patient if search was successful; otherwise, default Patient object. </returns>
-        public PatientUser FindPatient() // Needs login
-        {
-            PatientUser patient = new PatientUser();
-            patient = dbContext.Patients.SingleOrDefault(onePatient => onePatient.id == 1); // still no login, so patient set to created patient in database with id=1, this will be changed after
-            return patient;
-        }
         /// <summary> This is method gets all <c>Feedback</c>. </summary>
         /// <returns> List of all feedback from database. </returns>
         public List<Feedback> GetAll()

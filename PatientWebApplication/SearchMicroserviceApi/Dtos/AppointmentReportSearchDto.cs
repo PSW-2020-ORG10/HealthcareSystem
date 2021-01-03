@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HealthClinic.CL.Dtos
+namespace SearchMicroserviceApi.Dtos
 {
     public class AppointmentReportSearchDto
     {
-        public String DoctorNameAndSurname { get; set; }
-        public String Start { get; set; }
-        public String End { get; set; }
-        public String AppointmentType { get; set; }
+        public string DoctorNameAndSurname { get; set; }
+        public string Start { get; set; }
+        public string End { get; set; }
+        public string AppointmentType { get; set; }
         public int PatientId { get; set; }
         public AppointmentReportSearchDto() { }
 

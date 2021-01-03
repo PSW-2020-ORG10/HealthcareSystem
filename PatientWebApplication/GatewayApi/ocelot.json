@@ -139,6 +139,30 @@
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
     },
     {
+      "DownstreamPathTemplate": "/api/doctorappointment/appointmentsForPatientDto/{patientId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 53212
+        }
+      ],
+      "UpstreamPathTemplate": "/api/doctorappointment/appointmentsForPatientDto/{patientId}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/doctorappointment/appointmentsForPatientDtoSimple/{patientId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 53212
+        }
+      ],
+      "UpstreamPathTemplate": "/api/doctorappointment/appointmentsForPatientDtoSimple/{patientId}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+    },
+    {
       "DownstreamPathTemplate": "/api/operation/getAll",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -256,7 +280,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/feedback",
-      "UpstreamHttpMethod": [ "GET" , "POST", "PUT" ]
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ]
     },
     {
       "DownstreamPathTemplate": "/api/feedback/published",
@@ -484,6 +508,18 @@
         }
       ],
       "UpstreamPathTemplate": "/api/patientUser/find/{id}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/patientUser/findDto/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 53236
+        }
+      ],
+      "UpstreamPathTemplate": "/api/patientUser/findDto/{id}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
     },
     {

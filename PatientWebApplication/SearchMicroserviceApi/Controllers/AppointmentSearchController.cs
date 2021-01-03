@@ -4,8 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using HealthClinic.CL.Adapters;
 using HealthClinic.CL.DbContextModel;
-using HealthClinic.CL.Dtos;
 using Microsoft.AspNetCore.Mvc;
+using SearchMicroserviceApi.Dtos;
 using SearchMicroserviceApi.Service;
 
 namespace SearchMicroserviceApi.Controllers
@@ -27,7 +27,7 @@ namespace SearchMicroserviceApi.Controllers
         [HttpPost("search")]
         public async Task<IActionResult> SimpleSearchAppointmentsAsync(AppointmentReportSearchDto dto)
         {
-            return Ok(new AppointmentAdapter().ConvertAppointmentListToAppointmentDtoList(await appointmentSearchService.SimpleSearchAppointmentsAsync(dto)));
+            return Ok(await appointmentSearchService.SimpleSearchAppointmentsAsync(dto));
         }
 
         /// <summary> This method is calling <c>regularAppointmentService</c> to get list of all <c>DoctorAppointment</c> that matches <c>Appointment dto</c>. </summary>

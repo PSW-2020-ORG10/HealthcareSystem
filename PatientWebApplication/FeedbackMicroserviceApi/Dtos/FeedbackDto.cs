@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HealthClinic.CL.Dtos
+namespace FeedbackMicroserviceApi.Dtos
 {
     public class FeedbackDto
     {

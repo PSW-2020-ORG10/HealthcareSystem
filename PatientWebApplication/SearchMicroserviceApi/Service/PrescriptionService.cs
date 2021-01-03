@@ -1,5 +1,5 @@
-﻿using HealthClinic.CL.Dtos;
-using HealthClinic.CL.Utility;
+﻿using HealthClinic.CL.Utility;
+using SearchMicroserviceApi.Dtos;
 using SearchMicroserviceApi.Model;
 using SearchMicroserviceApi.Repository;
 using System;
@@ -128,7 +128,7 @@ namespace SearchMicroserviceApi.Service
         {
             if (!UtilityMethods.CheckIfStringIsEmpty(searchField))
             {
-                prescriptions = prescriptions.FindAll(prescription => prescription.Doctor.firstName.Contains(searchField) || prescription.Doctor.secondName.Contains(searchField) || prescription.Doctor.DoctorFullName().Contains(searchField));
+                prescriptions = prescriptions.FindAll(prescription => Utility.HttpRequests.GetDoctorByIdAsync(prescription.DoctorId).Result.Name.Contains(searchField) || Utility.HttpRequests.GetDoctorByIdAsync(prescription.DoctorId).Result.Surname.Contains(searchField) || Utility.HttpRequests.GetDoctorByIdAsync(prescription.DoctorId).Result.DoctorFullName().Contains(searchField));
             }
 
             return prescriptions;
@@ -192,7 +192,7 @@ namespace SearchMicroserviceApi.Service
         {
             if (!UtilityMethods.CheckIfStringIsEmpty(prescriptionSearchDto.Doctor))
             {
-                prescriptions = prescriptions.FindAll(prescription => prescription.Doctor.firstName.Contains(prescriptionSearchDto.Doctor) || prescription.Doctor.secondName.Contains(prescriptionSearchDto.Doctor) || prescription.Doctor.DoctorFullName().Contains(prescriptionSearchDto.Doctor));
+                prescriptions = prescriptions.FindAll(prescription => Utility.HttpRequests.GetDoctorByIdAsync(prescription.DoctorId).Result.Name.Contains(prescriptionSearchDto.Doctor) || Utility.HttpRequests.GetDoctorByIdAsync(prescription.DoctorId).Result.Surname.Contains(prescriptionSearchDto.Doctor) || Utility.HttpRequests.GetDoctorByIdAsync(prescription.DoctorId).Result.DoctorFullName().Contains(prescriptionSearchDto.Doctor));
             }
 
             return prescriptions;

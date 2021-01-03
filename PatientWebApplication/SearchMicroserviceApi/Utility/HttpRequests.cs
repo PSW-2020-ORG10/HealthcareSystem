@@ -4,10 +4,10 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using AppointmentMicroserviceApi.Dtos;
 using Newtonsoft.Json;
+using SearchMicroserviceApi.Dtos;
 
-namespace AppointmentMicroserviceApi.Utility
+namespace SearchMicroserviceApi.Utility
 {
     public class HttpRequests
     {
@@ -25,11 +25,17 @@ namespace AppointmentMicroserviceApi.Utility
             var responseString = await client.GetAsync("http://localhost:54689/api/doctor/");
             return await responseString.Content.ReadAsAsync<List<MicroserviceDoctorDto>>();
         }
-        public static async Task<MicroserviceShiftDto> GetShiftForDoctorForSpecificDay(DoctorShiftSearchDto dto)
+
+        public static async Task<List<MicroserviceSearchAppointmentDto>> GetAppointmentsForPatientDto(int patientId)
         {
-            var stringContent = new StringContent(JsonConvert.SerializeObject(dto), Encoding.UTF8, "application/json");
-            var responseString = await client.PostAsync("http://localhost:54689/api/employeesSchedule", stringContent);
-            return await responseString.Content.ReadAsAsync<MicroserviceShiftDto>();
+            var responseString = await client.GetAsync("http://localhost:54689/api/doctorAppointment/appointmentsForPatientDto/" + patientId);
+            return await responseString.Content.ReadAsAsync<List<MicroserviceSearchAppointmentDto>>();
+        }
+
+        public static async Task<List<AppointmentDto>> GetAppointmentsForPatientDtoSimple(int patientId)
+        {
+            var responseString = await client.GetAsync("http://localhost:54689/api/doctorAppointment/appointmentsForPatientDtoSimple/" + patientId);
+            return await responseString.Content.ReadAsAsync<List<AppointmentDto>>();
         }
 
     }

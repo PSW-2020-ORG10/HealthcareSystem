@@ -10,17 +10,15 @@ namespace FeedbackMicroserviceApi.Model
         public bool IsPublic { get; set; }
         public bool IsAnonymous { get; set; }
         public DateTime Date { get; set; }
-        public virtual PatientUser Patient { get; set; }
         public int PatientId { get; set; }
 
-        public Feedback(int id, string message, bool isPublished, bool isPublic, bool isAnonymous, DateTime date, int patientId, PatientUser patient) : base(id)
+        public Feedback(int id, string message, bool isPublished, bool isPublic, bool isAnonymous, DateTime date, int patientId) : base(id)
         {
             Message = message;
             IsPublished = isPublished;
             IsPublic = isPublic;
             IsAnonymous = isAnonymous;
             Date = date;
-            Patient = patient;
             PatientId = patientId;
         }
 
@@ -42,30 +40,16 @@ namespace FeedbackMicroserviceApi.Model
             IsPublic = false;
             IsAnonymous = false;
             Date = new DateTime();
-            Patient = new PatientUser();
             PatientId = 0;
         }
 
-        //This constructor is for creating feedback by patient without IsPublished
-        public Feedback(int id, string message, bool isPublic, bool isAnonymous, DateTime date, int patientId, PatientUser patient) : base(id)
+        public Feedback(string message, bool isPublic, bool isAnonymous, DateTime date, int patientId) : base()
         {
             Message = message;
             IsPublished = false;
             IsPublic = isPublic;
             IsAnonymous = isAnonymous;
             Date = date;
-            Patient = patient;
-            PatientId = patientId;
-        }
-
-        public Feedback(string message, bool isPublic, bool isAnonymous, DateTime date, int patientId, PatientUser patient) : base()
-        {
-            Message = message;
-            IsPublished = false;
-            IsPublic = isPublic;
-            IsAnonymous = isAnonymous;
-            Date = date;
-            Patient = patient;
             PatientId = patientId;
         }
 

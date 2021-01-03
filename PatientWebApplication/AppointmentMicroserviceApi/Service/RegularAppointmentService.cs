@@ -3,7 +3,6 @@
  * Author:  Tamara
  * Purpose: Definition of the Class Service.RegularAppointmentService
  ***********************************************************************/
-using HealthClinic.CL.Dtos;
 using System;
 using System.Collections.Generic;
 using HealthClinic.CL.Utility;

@@ -8,7 +8,6 @@ namespace SearchMicroserviceApi.Model
         public virtual List<Medicine> Medicines { get; set; }
         public bool isUsed { get; set; }
         public string comment { get; set; }
-        public virtual DoctorUser Doctor { get; set; }
         public int DoctorId { get; set; }
 
         public Prescription() : base() { }
@@ -27,16 +26,6 @@ namespace SearchMicroserviceApi.Model
             this.patientsid = patientsid;
             this.isUsed = isUsed;
             this.comment = comment;
-
-        }
-
-        public Prescription(int id, int patientsid, List<Medicine> medicines, bool isUsed, string comment, DoctorUser doctorUser) : base(id)
-        {
-            this.patientsid = patientsid;
-            Medicines = medicines;
-            this.isUsed = isUsed;
-            this.comment = comment;
-            Doctor = doctorUser;
 
         }
 
