@@ -25,7 +25,7 @@ namespace PatientWebApplication
 
         private string CreateConnectionStringFromEnvironment()
         {
-            string server = Environment.GetEnvironmentVariable("DATABASE_HOST") ?? "mysql";
+            string server = Environment.GetEnvironmentVariable("DATABASE_HOST") ?? "localhost";
             string port = Environment.GetEnvironmentVariable("DATABASE_PORT") ?? "3306";
             string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA") ?? "MYSQLHealtcareDB";
             string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "root";
@@ -58,7 +58,7 @@ namespace PatientWebApplication
             {
                services.AddDbContext<MyDbContext>(options =>
                options.UseMySql(CreateConnectionStringFromEnvironment(),
-                  builder => builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null)));
+                  builder => builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null)).UseLazyLoadingProxies());
 
             }
 

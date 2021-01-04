@@ -3,6 +3,7 @@ using HealthClinic.CL.DbContextModel;
 using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Orders;
 using HealthClinic.CL.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -38,7 +39,7 @@ namespace HealthClinic.CL.Service
         {
             return PharmacyTenderOfferRepository.Create(PharmacyTenderOfferAdapter.PharmacyTenderOrdedDtoToPharmacyTenderOffer(tenderOrder));
         }
-       
+
         public List<TenderOrder> GetAllPharmacyOffersForTender(int id)
         {
             List<TenderOrder> tenders = new List<TenderOrder>();

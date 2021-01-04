@@ -24,16 +24,16 @@ namespace HealthClinic.CL.Service
         {
             return MedicineForTenderingRepository.Create(MedicineForTenderingAdapter.MedicineForTenderingDtoToMedicineForTendering(dto));
         }
-        public MedicineForTenderingService(IMedicineForTenderingRepository tenderRepository)
+        public MedicineForTenderingService(IMedicineForTenderingRepository medicineForTenderingRepository)
         {
-            IMedicineForTenderingRepository = tenderRepository;
+            IMedicineForTenderingRepository = medicineForTenderingRepository;
         }
 
         public List<MedicineForTendering> GetAll()
         {
             return MedicineForTenderingRepository.GetAll();
         }
-        public MedicineForTendering createIMedicineForTendering(MedicineForTenderingDto dto)
+        public MedicineForTendering CreateIMedicineForTendering(MedicineForTenderingDto dto)
         {
             return MedicineForTenderingAdapter.MedicineForTenderingDtoToMedicineForTendering(dto);
         }

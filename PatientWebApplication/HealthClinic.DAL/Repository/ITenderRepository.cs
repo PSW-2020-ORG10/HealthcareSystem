@@ -7,7 +7,7 @@ namespace HealthClinic.CL.Repository
 {
     public interface ITenderRepository
     {
-        Tender Create(Tender order);
+        Tender Create(Tender tender);
         List<Tender> GetAll();
     }
 }

@@ -163,8 +163,6 @@
 
 <style scoped>
 
-    <style >
-
     * {
         box-sizing: content-box;
     }

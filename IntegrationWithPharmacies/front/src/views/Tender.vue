@@ -364,7 +364,6 @@
 </script>
 
 <style scoped>
-    <style >
 
     * {
         box-sizing: content-box;
@@ -490,10 +489,7 @@
         width: 45%;
         margin-top: 6px;
     }
-    .col-45 {
-        width: 45%;
-    }
-
+ 
     .col-75 {
         float: left;
         width: 75%;

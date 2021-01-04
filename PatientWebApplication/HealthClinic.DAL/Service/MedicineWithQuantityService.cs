@@ -13,12 +13,13 @@ namespace HealthClinic.CL.Service
     {
         public MedicineWithQuantityRepository MedicineWithQuantityRepository { get; }
         public IMedicineWithQuantityRepository IMedicineWithQuantityRepository { get; }
-
+        public MedicineTenderOfferService MedicineTenderOfferService { get; }
         public MedicineWithQuantityService() { }
 
         public MedicineWithQuantityService(MyDbContext context)
         {
             MedicineWithQuantityRepository = new MedicineWithQuantityRepository(context);
+            MedicineTenderOfferService = new MedicineTenderOfferService(context);
         }
         public MedicineWithQuantityService(IMedicineWithQuantityRepository mdicineWithQuantityRepository)
         {
@@ -36,9 +37,9 @@ namespace HealthClinic.CL.Service
             return MedicineWithQuantityRepository.Create(MedicineWithQuantityAdapter.MedicineWithQuantityDtoToMedicineWithQuantity(medicineWithQuantityDto));
         }
 
-        public void UpdateMedicineQuantity(List<MedicineTenderOffer> medicineTenderOffers)
+        public void UpdateMedicineQuantity(int offerId)
         {
-            foreach(MedicineTenderOffer medicineTenderOffer in medicineTenderOffers)
+            foreach (MedicineTenderOffer medicineTenderOffer in MedicineTenderOfferService.GetMedicineOffersByPharmacyOfferId(offerId))
             {
                 CheckMedicineInDB(GetAll(), medicineTenderOffer);
             }
@@ -89,12 +90,13 @@ namespace HealthClinic.CL.Service
         public string GetMedicineDescriptionFromDatabase(string medicine)
         {
             MedicineWithQuantity medicineWithQuantity = GetAll().SingleOrDefault(medicineName => medicineName.Name.Equals(medicine));
+            if (medicineWithQuantity == null || medicineWithQuantity.Description.Equals("")) return null;
             return medicineWithQuantity.Description;
         }
 
         private void CreateNewMedicineWithQuantity(MedicineTenderOffer medicineTenderOffer)
         {
-            MedicineWithQuantityRepository.Create(new MedicineWithQuantity(medicineTenderOffer.MedicineName, medicineTenderOffer.Quantity,""));
+            MedicineWithQuantityRepository.Create(new MedicineWithQuantity(medicineTenderOffer.MedicineName, medicineTenderOffer.AvailableQuantity,""));
         }
 
         public void CreateMedicineWithDescription(MedicineWithQuantityDto medicineWithQuantityDto)
@@ -106,7 +108,7 @@ namespace HealthClinic.CL.Service
 
         private void UpdateMedicine(MedicineTenderOffer medicineTenderOffer, MedicineWithQuantity medicine)
         {
-            MedicineWithQuantityRepository.UpdateQuantity(medicine, medicineTenderOffer.Quantity);
+            MedicineWithQuantityRepository.UpdateQuantity(medicine, medicineTenderOffer.AvailableQuantity);
         }
     }
 }

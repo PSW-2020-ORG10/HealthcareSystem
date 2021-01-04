@@ -5,7 +5,7 @@ namespace HealthClinic.CL.Repository
 {
     public interface IMedicineForTenderingRepository
     {
-        MedicineForTendering Create(MedicineForTendering order);
+        MedicineForTendering Create(MedicineForTendering medicine);
         List<MedicineForTendering> GetAll();
     }
 }

@@ -13,7 +13,7 @@ namespace IntegrationWithPharmacies
         public static List<Message> ListOfMessages = new List<Message>();
         public static void Main(string[] args)
         {
-            // CreateHostBuilderMessages(args).Build().Run();
+            //CreateHostBuilderMessages(args).Build().Run();
             CreateHostBuilder(args).Build().Run();
         }
 

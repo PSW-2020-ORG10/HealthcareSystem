@@ -73,7 +73,7 @@ namespace IntegrationWithPharmacies.Controllers
         { TenderOrder tender = PharmacyTenderOfferService.GetPharmacyOffer(offerId, tenderId);
             SmptServerService.SendEMailNotificationForTender(tender.MedicinesWithQuantity, tender.PharmacyApi);
             TenderService.CloseTender(tender);
-            MedicineWithQuantityService.UpdateMedicineQuantity(tender.MedicinesWithQuantity);
+            MedicineWithQuantityService.UpdateMedicineQuantity(offerId);
             return Ok();
         }      
     }

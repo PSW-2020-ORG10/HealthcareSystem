@@ -31,7 +31,7 @@ namespace IntegrationWithPharmaciesTest
         public void Creates_Medicines_For_Tender()
         {
             MedicineForTenderingService medicineForTenderingService = new MedicineForTenderingService(Create_stub_repository_Tenders_Medicine());
-            MedicineForTendering medicine = medicineForTenderingService.createIMedicineForTendering(new MedicineForTenderingDto("Andol", 5, 1));
+            MedicineForTendering medicine = medicineForTenderingService.CreateIMedicineForTendering(new MedicineForTenderingDto("Andol", 5, 1));
             Assert.NotNull(medicine);
         }
 

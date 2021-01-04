@@ -7,7 +7,7 @@ namespace HealthClinic.CL.Repository
 {
     public interface IPharmacyTenderOfferRepository
     {
-        PharmacyTenderOffer Create(PharmacyTenderOffer order);
+        PharmacyTenderOffer Create(PharmacyTenderOffer pharmacyTenderOffer);
         List<PharmacyTenderOffer> GetAll();
     }
 }

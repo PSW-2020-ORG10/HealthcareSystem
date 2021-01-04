@@ -4,6 +4,7 @@ using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Orders;
 using HealthClinic.CL.Repository;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace HealthClinic.CL.Service
 {
@@ -35,6 +36,10 @@ namespace HealthClinic.CL.Service
             {
                 Create(MedicineTenderOfferAdapter.MedicineTenderOfferToMedicineTenderOfferDto(new MedicineTenderOffer(medicineTenderOffer.MedicineName, medicineTenderOffer.Quantity, medicineTenderOffer.AvailableQuantity, medicineTenderOffer.Price, PharmacyTenderOfferRepository.getNextTenderPharmacyOfferId())));
             }
+        }
+        public List<MedicineTenderOffer> GetMedicineOffersByPharmacyOfferId(int pahrmacyTenderOfferId)
+        {
+            return GetAll().Where(offer => offer.PharmacyTenderOfferId == pahrmacyTenderOfferId).ToList();
         }
     }
 }
