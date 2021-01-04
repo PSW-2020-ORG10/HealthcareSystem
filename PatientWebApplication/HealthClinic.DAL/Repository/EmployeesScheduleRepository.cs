@@ -15,9 +15,9 @@ namespace HealthClinic.CL.Repository
     public class EmployeesScheduleRepository : IEmployeesScheduleRepository
     {
         private readonly MyDbContext dbContext;
-        public EmployeesScheduleRepository(MyDbContext context)
+        public EmployeesScheduleRepository(MyDbContext dbContext)
         {
-            this.dbContext = context;
+            this.dbContext = dbContext;
         }
 
         public EmployeesScheduleRepository()

@@ -16,9 +16,9 @@ namespace HealthClinic.CL.Repository
     public class AppointmentRepository : IAppointmentRepository
     {
         private readonly MyDbContext dbContext;
-        public AppointmentRepository(MyDbContext context)
+        public AppointmentRepository(MyDbContext dbContext)
         {
-            this.dbContext = context;
+            this.dbContext = dbContext;
         }
 
         public AppointmentRepository()

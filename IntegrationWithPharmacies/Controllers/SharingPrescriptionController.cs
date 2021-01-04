@@ -28,11 +28,11 @@ namespace IntegrationWithPharmacies.Controllers
             PatientService = new PatientService(context);
             PrescriptionFileService = new PrescriptionFileService(context);
             MedicineAvailabilityTable = new MedicineAvailabilityTable();
-            Environment = Program.Environment;
             MedicineWithQuantityService = new MedicineWithQuantityService(context);
+            Environment = "Local";
         }
 
-        [HttpGet("patients")]
+      [HttpGet("patients")]
         public IActionResult GetPatients()
         {
             return Ok(PatientService.GetAll());

@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\IntegrationWithPharmacies\IntegrationWithPharmacies.csproj" />
+    <ProjectReference Include="..\PatientWebApplication\HealthClinic.DAL\HealthClinic.CL.csproj" />
   </ItemGroup>
 
 </Project>
