@@ -15,9 +15,9 @@ namespace HealthClinic.CL.Repository
     public class DoctorRepository : IDoctorRepository
     {
         private readonly MyDbContext dbContext;
-        public DoctorRepository(MyDbContext context)
+        public DoctorRepository(MyDbContext dbContext)
         {
-            this.dbContext = context;
+            this.dbContext = dbContext;
         }
 
         public DoctorRepository()

@@ -20,16 +20,19 @@ namespace PatientWebApplication.Controllers
     {
         /// <value>Property <c>PrescriptionService</c> represents the service used for handling business logic.</value>
         private PrescriptionService PrescriptionService { get; set; }
+        private MyDbContext dbContext;
 
-        /// <summary>This constructor injects the PrescriptionController with matching PrescriptionService.</summary>
-         public PrescriptionController()
-        {
-            PrescriptionService = new PrescriptionService(new PrescriptionRepository());
-        }
 
-        /// <summary> This method is calling <c>PrescriptionService</c> to get list of all <c>Prescription</c>.  </summary>
-        /// <returns> 200 Ok with list of all prescriptions. </returns>
-        [HttpGet]       // GET /api/prescription
+      public PrescriptionController(MyDbContext dbContext)
+      {
+         this.dbContext = dbContext;
+         PrescriptionService = new PrescriptionService(new PrescriptionRepository(dbContext));
+      }
+
+
+      /// <summary> This method is calling <c>PrescriptionService</c> to get list of all <c>Prescription</c>.  </summary>
+      /// <returns> 200 Ok with list of all prescriptions. </returns>
+      [HttpGet]       // GET /api/prescription
         public IActionResult Get()
         {
             return Ok(PrescriptionService.GetAll());

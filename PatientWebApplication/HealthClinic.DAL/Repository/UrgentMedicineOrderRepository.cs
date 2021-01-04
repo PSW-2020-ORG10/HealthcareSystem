@@ -7,22 +7,22 @@ namespace HealthClinic.CL.Repository
 {
    public class UrgentMedicineOrderRepository : IUrgentMedicineOrderRepository
     {
-        private MyDbContext DbContext;
+        private MyDbContext dbContext;
         public UrgentMedicineOrderRepository(MyDbContext dbContext)
         {
-            DbContext = dbContext;
+            this.dbContext = dbContext;
         }
         public UrgentMedicineOrderRepository() { }
         public UrgentMedicineOrder Create(UrgentMedicineOrder order)
         {
-            DbContext.UrgentMedicineOrder.Add(order);
-            DbContext.SaveChanges();
+            this.dbContext.UrgentMedicineOrder.Add(order);
+            this.dbContext.SaveChanges();
             return order;
         }
 
         public List<UrgentMedicineOrder> GetAll()
         {
-            return DbContext.UrgentMedicineOrder.ToList();
+            return this.dbContext.UrgentMedicineOrder.ToList();
         }
     }
 }

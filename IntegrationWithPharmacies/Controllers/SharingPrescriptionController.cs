@@ -30,10 +30,10 @@ namespace IntegrationWithPharmacies.Controllers
             MedicineDescriptionService = new MedicineDescriptionService(context);
             PrescriptionFileService = new PrescriptionFileService(context);
             MedicineAvailabilityTable = new MedicineAvailabilityTable();
-            Environment = Program.Environment;
+            Environment = "Local";
         }
 
-        [HttpGet("patients")]
+      [HttpGet("patients")]
         public IActionResult GetPatients()
         {
             return Ok(PatientService.GetAll());

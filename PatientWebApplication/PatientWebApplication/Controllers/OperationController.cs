@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HealthClinic.CL.Adapters;
+using HealthClinic.CL.DbContextModel;
 using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Repository;
 using HealthClinic.CL.Service;
@@ -17,17 +18,18 @@ namespace PatientWebApplication.Controllers
     public class OperationController : Controller
     {
         /// <value>Property <c>OperationService</c> represents the service used for handling business logic.</value>
-        private OperationService operationService;
+       private OperationService operationService;
+       private MyDbContext dbContext;
 
-        /// <summary>This constructor initiates the OperationController's operation service.</summary>
-        public OperationController()
-        {
-            this.operationService = new OperationService(new OperationRepository());
-        }
+      public OperationController(MyDbContext dbContext)
+      {
+         this.dbContext = dbContext;
+         operationService = new OperationService(new OperationRepository(dbContext));
+      }
 
-        /// <summary> This method is calling <c>OperationService</c> to get list of all operations of one patient. </summary>
-        /// <returns> 200 Ok with list of patient's operations. </returns>
-        [HttpGet("{id}")]
+      /// <summary> This method is calling <c>OperationService</c> to get list of all operations of one patient. </summary>
+      /// <returns> 200 Ok with list of patient's operations. </returns>
+      [HttpGet("{id}")]
         public IActionResult GetOperations(int id)
         {
             return Ok(new OperationAdapter().ConvertOperationListToOperationDtoList(this.operationService.GetOperationsForPatient(id)));
