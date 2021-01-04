@@ -17,7 +17,21 @@ WORKDIR "/src/PatientWebApplication/"
 COPY PatientWebApplication/package.json ./
 COPY PatientWebApplication/package-lock.json ./
 
-RUN npm install
+RUN npm install react-toastify \
+    react-transition-group \
+    regenerator-runtime \
+    react-stepper-horizontal \
+    react-datepicker \
+    react-is \
+    prop-types \
+    object-assign \
+    loose-envify \
+    js-tokens \
+    follow-redirects \
+    dom-helpers \
+    csstype \
+    clsx \
+    axios
 
 RUN dotnet build "PatientWebApplication/PatientWebApplication.csproj" -c Release -o /app/build
 

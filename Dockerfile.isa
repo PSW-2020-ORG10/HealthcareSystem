@@ -23,7 +23,6 @@ COPY IntegrationWithPharmacies/front/package-lock.json ./
 RUN npm install -g @vue/cli@latest
 RUN npm install
 
-
 RUN dotnet build "IntegrationWithPharmacies.csproj" -c Release -o /app/build
 
 FROM build AS publish
