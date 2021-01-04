@@ -54,7 +54,7 @@
 
 	<ItemGroup>
 		<Protobuf Include="Protos\model.proto" GrpcServices="None" />
-		<Protobuf Include="Protos\springGrpcService.proto" GrpcServices="Client" />
+		<Protobuf Include="Protos\SpringGrpcService.proto" GrpcServices="Client" />
 	</ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.0.0-preview6.19307.2" />

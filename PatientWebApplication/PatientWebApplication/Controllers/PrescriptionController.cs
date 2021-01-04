@@ -22,11 +22,7 @@ namespace PatientWebApplication.Controllers
         private PrescriptionService PrescriptionService { get; set; }
         private MyDbContext dbContext;
 
-      /// <summary>This constructor injects the PrescriptionController with matching PrescriptionService.</summary>
-      /* public PrescriptionController()
-      {
-          PrescriptionService = new PrescriptionService(new PrescriptionRepository());
-      }*/
+
       public PrescriptionController(MyDbContext dbContext)
       {
          this.dbContext = dbContext;
