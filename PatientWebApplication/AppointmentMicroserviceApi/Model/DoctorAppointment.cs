@@ -6,7 +6,7 @@
 
 using AppointmentMicroserviceApi.Doctor;
 using AppointmentMicroserviceApi.Model;
-using HealthClinic.CL.Utility;
+using AppointmentMicroserviceApi.Utility;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;

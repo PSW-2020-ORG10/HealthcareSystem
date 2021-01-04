@@ -1,5 +1,5 @@
-﻿using HealthClinic.CL.Utility;
-using SearchMicroserviceApi.Dtos;
+﻿using SearchMicroserviceApi.Dtos;
+using SearchMicroserviceApi.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -187,7 +187,7 @@ namespace SearchMicroserviceApi.Service
         {
             if (!UtilityMethods.CheckIfStringIsEmpty(searchField))
             {
-                appointments = appointments.FindAll(appointment => appointment.Date.ToString().Equals(searchField));
+                appointments = appointments.FindAll(appointment => appointment.Date.Equals(searchField));
             }
             return appointments;
         }

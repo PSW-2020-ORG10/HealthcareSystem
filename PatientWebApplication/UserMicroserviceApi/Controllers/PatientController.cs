@@ -59,6 +59,18 @@ namespace UserMicroserviceApi.Controllers
 
         }
 
+        [HttpGet("getimage/{fileName}")]
+        public IActionResult GetImage(string fileName)
+        {
+            string path = _env.WebRootPath;
+            if (fileName == null)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+
+            return Ok(File(PatientService.GetImage(path, fileName), "image/jpeg"));
+        }
+
         /// <summary> This method is calling <c>PatientService</c> to validate patients account. </summary>
         /// <param name="id"><c>id</c> is id of patient who's account needs to be validated. 
         /// </param>
@@ -88,7 +100,7 @@ namespace UserMicroserviceApi.Controllers
         [HttpGet("getOne")]
         public IActionResult GetOne(int id)
         {
-            PatientUser patient = PatientService.GetOne(3);
+            PatientUser patient = PatientService.GetOne(7);
             if (id < 0 && patient == null)
             {
                 return BadRequest();

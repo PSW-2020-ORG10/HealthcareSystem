@@ -49,9 +49,12 @@
     LOADED_ALL_PATIENT_APPOINTMENTS_WITH_SURVEYS,
     LOADED_ALL_PATIENT_APPOINTMENTS_WITHOUT_SURVEYS,
     LOADED_MALICIOUS_PATIENTS,
-    OBSERVE_MALICIOUS_ERROR
+    OBSERVE_MALICIOUS_ERROR,
+    LOADED_IMAGE,
+    LOADED_IMAGE_ERROR
 } from "../types/types"
 import axios from "axios";
+import { func } from "prop-types";
 
 export const feedbackCreated = (feedback) => async (dispatch) => {
     console.log(feedback.message);
@@ -216,19 +219,30 @@ export const simpleSearchPatientPrescriptions = (prescription) => async (dispatc
 export const findOnePatient = (id) => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.get("http://localhost:54689/api/patientuser/getone", {
+        await axios.get("http://localhost:54689/api/patientuser/getone", {
             params: {
                 id: id
             }
         },
         {
             headers: { "Access-Control-Allow-Origin": "*" },
-          });
-        debugger;
-        dispatch({
-            type: FIND_ONE_PATIENT,
-            payload: response.data,
-        });
+          })
+        .then(function (response) {
+            dispatch({
+                type: FIND_ONE_PATIENT,
+                payload: response.data,
+            });
+            axios.get("http://localhost:53236/api/patientuser/getimage/" + response.data.file,
+            {
+                headers: { "Access-Control-Allow-Origin": "*" },
+              })
+            .then(function(response2){
+                dispatch({
+                    type: LOADED_IMAGE,
+                    payload: response2.data.fileContents,
+                });
+            })
+        })
     } catch (e) {
         dispatch({
             type: FIND_ONE_PATIENT_ERROR,
@@ -289,26 +303,7 @@ export const loadedAllPatientReports = (patientId) => async (dispatch) => {
 
 export const simpleSearchAppointments  = (searchDto) => async (dispatch) => {
     try {
-        axios.all([axios.post('http://localhost:54689/api/doctorappointment/search', searchDto,
-        {
-            headers: { "Access-Control-Allow-Origin": "*" },
-          }),
-            axios.post('http://localhost:54689/api/operation/search',  searchDto,
-            {
-                headers: { "Access-Control-Allow-Origin": "*" },
-              })])
-            .then(axios.spread((firstResponse, secondResponse) => {
-                debugger;
-                var appointments = []
-                firstResponse.data.forEach(element => appointments.push(element));
-                secondResponse.data.forEach(element => appointments.push(element));
-                console.log(appointments)
-                dispatch({
-                    type: LOADED_ALL_PATIENT_REPORTS,
-                    payload: appointments,
-                })
-            }))
-            .catch(error => console.log(error))
+         
     } catch (e) {
         dispatch({
             type: OBSERVE_PATIENT_REPORTS_ERROR,
@@ -340,7 +335,7 @@ export const loadedAppointmentSurvey = () => async (dispatch) => {
 export const surveyCreated = (survey) => async (dispatch) => {
     try {
         debugger;
-        await axios.post("http://localhost:54689/api/survey/", survey,
+        await axios.post("http://localhost:54689/api/survey", survey,
         {
             headers: { "Access-Control-Allow-Origin": "*" },
           });
@@ -360,7 +355,7 @@ export const surveyCreated = (survey) => async (dispatch) => {
 export const advancedSearchPatientAppointments = (appointment) => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.post("http://localhost:54689/api/doctorappointment/advancedsearch", appointment,
+        const response = await axios.post("http://localhost:54689/api/appointmentsearch/advancedsearch", appointment,
         {
             headers: { "Access-Control-Allow-Origin": "*" },
           });
@@ -714,6 +709,26 @@ export const loadedMaliciousPatients = () => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: OBSERVE_MALICIOUS_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const loadedImage = (fileName) => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.get("http://localhost:53236/api/patientuser/getimage/" + fileName,
+        {
+            headers: { "Access-Control-Allow-Origin": "*" },
+          });
+        debugger;
+        dispatch({
+            type: LOADED_IMAGE,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: LOADED_IMAGE_ERROR,
             payload: console.log(e),
         });
     }

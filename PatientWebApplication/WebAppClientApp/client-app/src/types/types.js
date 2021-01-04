@@ -51,3 +51,5 @@ export const LOADED_ALL_PATIENT_APPOINTMENTS_WITH_SURVEYS = "loadedAllPatientApp
 export const LOADED_ALL_PATIENT_APPOINTMENTS_WITHOUT_SURVEYS = "loadedAllPatientAppointmentsWithoutSurvey";
 export const LOADED_MALICIOUS_PATIENTS = "loadedMaliciousPatients";
 export const OBSERVE_MALICIOUS_ERROR = "observeMaliciousError";
+export const LOADED_IMAGE = "loadedImage";
+export const LOADED_IMAGE_ERROR = "loadedImageError";

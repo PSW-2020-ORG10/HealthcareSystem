@@ -7,7 +7,7 @@ using AppointmentMicroserviceApi.Doctor;
 using AppointmentMicroserviceApi.Dtos;
 using AppointmentMicroserviceApi.Patient;
 using AppointmentMicroserviceApi.Repository;
-using HealthClinic.CL.Utility;
+using AppointmentMicroserviceApi.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;

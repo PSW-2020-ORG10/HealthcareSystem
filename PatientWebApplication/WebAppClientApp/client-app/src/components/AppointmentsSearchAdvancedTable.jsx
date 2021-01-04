@@ -211,7 +211,7 @@ class AppointmentsSearchAdvancedTable extends Component {
                         <tbody key={f.id}>
                             <tr key={f.id}>
                                 <td style={{ textAlign: "left" }} >
-                                    {f.doctor.firstName + " " + f.doctor.secondName}
+                                    {f.doctor.name + " " + f.doctor.surname}
                                 </td>
                                 <td style={{ textAlign: "center" }} > {f.date}</td >
                                 <td style={{ textAlign: "center" }}>{f.roomId}</td >

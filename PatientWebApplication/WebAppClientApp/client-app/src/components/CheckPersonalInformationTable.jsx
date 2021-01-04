@@ -1,5 +1,5 @@
 ﻿import React, { Component } from "react"
-import { findOnePatient } from "../actions/actions"
+import { findOnePatient, loadedImage } from "../actions/actions"
 import { connect } from "react-redux"
 import { wrap } from "module";
 
@@ -10,12 +10,13 @@ class CheckPersonalInformationTable extends Component {
     }
     render() {
         debugger;
-        if (this.props.patientInformationList === undefined) {
+        if (this.props.patientInformationList.length === 0) {
 
             return null;
         }
 
         const patientInformationList = this.props.patientInformationList;
+        const image = this.props.image;
         return (
 
             <div>
@@ -24,7 +25,7 @@ class CheckPersonalInformationTable extends Component {
                         <tr>
                             <th style={{ textAlign: "center", width: "700px", marginTop: "100px" }}></th>
                             <td>
-                                <img src={'images/' + patientInformationList.file} width={200} height={150}  />
+                                <img src={'data:image/jpg;base64,' + image} width={200} height={150}  />
 
                             </td>
                         </tr>
@@ -105,6 +106,6 @@ class CheckPersonalInformationTable extends Component {
 
 const mapStateToProps = (state) =>
 
-    ({ patientInformationList: state.reducer.patientInformationList })
+    ({ patientInformationList: state.reducer.patientInformationList, image : state.reducer.loadedImage})
 
-export default connect(mapStateToProps, { findOnePatient })(CheckPersonalInformationTable);
+export default connect(mapStateToProps, { findOnePatient, loadedImage })(CheckPersonalInformationTable);

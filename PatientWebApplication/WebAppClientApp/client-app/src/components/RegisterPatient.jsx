@@ -77,12 +77,6 @@ class RegisterPatient extends Component {
                 .catch(function (response) {
                     
                     console.log(response);
-
-
-
-
-
-
                 });
             console.log(res);
         } catch (ex) {
@@ -390,6 +384,7 @@ class RegisterPatient extends Component {
     }
 
     createRegistration() {
+        debugger;
         if (this.state.patient.dateOfBirth !== "" && checkDateFormat(this.state.patient.dateOfBirth)) {
             showErrorToast()
             return;
@@ -399,24 +394,13 @@ class RegisterPatient extends Component {
         }
         else {
             toast.configure();
-
-
             toast.success("Registration successful!", {
                 position: toast.POSITION.TOP_RIGHT
             });
-
-
-
-
-
             console.log(this.state.patient);
-
             this.props.patientRegistered(this.state.patient)
-            
-
-
         }
-        window.location.href = "http://localhost:60198";
+        window.location.href = "http://localhost:3000";
     }
 
 }

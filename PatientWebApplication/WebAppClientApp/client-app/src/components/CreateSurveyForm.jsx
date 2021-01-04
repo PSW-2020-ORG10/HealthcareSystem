@@ -96,18 +96,10 @@ class CreateSurveyForm extends Component {
                         name={this.state.appointmentId}
                         hidden={true}
                     />
-                    <input
-                        className="field"
-                        type="text"
-                        defaultValue={this.state.patientId = this.props.appointment.patientUserId}
-                        name={this.state.patientId}
-                        hidden={true}
-                    />   
-                
                                 <h2 className="label"></h2>
                                 <h2 className="label">RATE DOCTORS: </h2>
                                 <div className="field-wrap">
-                                <label className="label">Doctor: {this.props.appointment.doctor.firstName + ' ' + this.props.appointment.doctor.secondName} </label>
+                                <label className="label">Doctor: {this.props.appointment.doctor.name + ' ' + this.props.appointment.doctor.surname} </label>
                                 
 
                                 </div>    
@@ -973,7 +965,7 @@ class CreateSurveyForm extends Component {
         this.setState({ modalShow: false });
         this.props.onShowChange();
         this.props.surveyCreated({ patientId: this.state.patientId, appointmentId: this.state.appointmentId, doctorsProfessionalism: this.state.doctorsProfessionalism, doctorsPoliteness: this.state.doctorsPoliteness, doctorsTechnicality: this.state.doctorsTechnicality, doctorsSkill: this.state.doctorsSkill, doctorsKnowledge: this.state.doctorsKnowledge, doctorsWorkingPace: this.state.doctorsWorkingPace, medicalStaffsProfessionalism: this.state.medicalStaffsProfessionalism, medicalStaffsPoliteness: this.state.medicalStaffsPoliteness, medicalStaffsTechnicality: this.state.medicalStaffsTechnicality, medicalStaffsSkill: this.state.medicalStaffsSkill, medicalStaffsKnowledge: this.state.medicalStaffsKnowledge, medicalStaffsWorkingPace: this.state.medicalStaffsWorkingPace, hospitalEnvironment: this.state.hospitalEnvironment, hospitalEquipment: this.state.hospitalEquipment, hospitalHygiene: this.state.hospitalHygiene, hospitalPrices: this.state.hospitalPrices, hospitalWaitingTime: this.state.hospitalWaitingTime })     
-        window.location.href = "http://localhost:60198/my-appointments";
+        window.location.href = "http://localhost:3000/my-appointments";
     }
 
 }

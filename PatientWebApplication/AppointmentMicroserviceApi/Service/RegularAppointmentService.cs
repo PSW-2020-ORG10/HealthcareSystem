@@ -5,7 +5,6 @@
  ***********************************************************************/
 using System;
 using System.Collections.Generic;
-using HealthClinic.CL.Utility;
 using System.Linq;
 using System.Threading.Tasks;
 using AppointmentMicroserviceApi.Repository;
@@ -13,6 +12,7 @@ using AppointmentMicroserviceApi.Patient;
 using AppointmentMicroserviceApi.Doctor;
 using AppointmentMicroserviceApi.Dtos;
 using MyDbContext = AppointmentMicroserviceApi.DbContextModel.MyDbContext;
+using AppointmentMicroserviceApi.Utility;
 
 namespace AppointmentMicroserviceApi.Service
 {
@@ -60,7 +60,7 @@ namespace AppointmentMicroserviceApi.Service
 
         public DoctorAppointment CreateRegular(DoctorAppointment appointment)
         {
-            var appointments = GetAllAvailableAppointmentsForDateAsync(appointment.Date, appointment.DoctorUserId, appointment.PatientUserId).Result;
+             var appointments = GetAllAvailableAppointmentsForDateAsync(appointment.Date, appointment.DoctorUserId, appointment.PatientUserId).Result;
             if (!appointments.Contains(appointment)) return null;
             return _appointmentRepository.New(appointment);
 

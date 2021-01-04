@@ -31,7 +31,7 @@ namespace UserMicroserviceApi.Service
 
         private MailMessage CreateMessage(MailAddress senderAddress, MailAddress recipientAddress, int id)
         {
-            string path = Directory.GetParent(Directory.GetCurrentDirectory()).FullName + "\\HealthClinic.DAL\\Html for mail\\verMail1.html";
+            string path = Directory.GetParent(Directory.GetCurrentDirectory()).FullName + "\\UserMicroserviceApi\\Html for mail\\verMail1.html";
             string body = File.ReadAllText(path);
             body = body.Replace("#PatientId#", id.ToString());
             return new MailMessage(senderAddress, recipientAddress)

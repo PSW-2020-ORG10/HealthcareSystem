@@ -12,6 +12,11 @@ namespace AppointmentMicroserviceApi.Dtos
         public string Speciality { get; set; }
         public string Ordination { get; set; }
 
+        public string DoctorFullName()
+        {
+            return Name + " " + Surname;
+        }
+
         public MicroserviceDoctorDto(int id, string name, string surname, string speciality, string ordination)
         {
             Id = id;

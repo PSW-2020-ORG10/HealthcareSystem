@@ -4,7 +4,6 @@
  * Purpose: Definition of the Class Service.PatientService
  ***********************************************************************/
 
-using HealthClinic.CL.Utility;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,7 +14,6 @@ using UserMicroserviceApi.Dtos;
 using UserMicroserviceApi.Model;
 using UserMicroserviceApi.Repository;
 using UserMicroserviceApi.Utility;
-using UtilityMethods = HealthClinic.CL.Utility.UtilityMethods;
 
 namespace UserMicroserviceApi.Service
 {
@@ -87,6 +85,12 @@ namespace UserMicroserviceApi.Service
                 return null;
 
             }
+        }
+
+        public byte[] GetImage(string path, string fileName)
+        {
+            path = path + "\\images\\" + fileName;
+            return File.ReadAllBytes(path);
         }
 
         /// <summary> This method is calling <c>PatientRepository</c> to find one patient using <paramref name="id"/>. </summary>

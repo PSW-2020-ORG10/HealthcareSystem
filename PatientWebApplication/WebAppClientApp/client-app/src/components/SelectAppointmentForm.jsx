@@ -27,6 +27,8 @@ class SelectAppointmentForm extends Component {
 
     handleChange = (f) => {
         debugger;
+        f.doctorUserId = this.props.doctorId;
+        f.patientUserId = 2; 
         console.log(f)
         this.setState({
             appointment: f,

@@ -1,8 +1,7 @@
-﻿using HealthClinic.CL.Utility;
-using SearchMicroserviceApi.Dtos;
+﻿using SearchMicroserviceApi.Dtos;
 using SearchMicroserviceApi.Model;
 using SearchMicroserviceApi.Repository;
-using System;
+using SearchMicroserviceApi.Utility;
 using System.Collections.Generic;
 using System.Linq;
 

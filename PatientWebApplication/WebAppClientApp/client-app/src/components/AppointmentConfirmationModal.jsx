@@ -40,6 +40,7 @@ class AppointmentConfirmationModal extends Component {
     }
 
     scheduleAppointment() {
+        debugger;
         this.props.appointmentScheduled(this.props.appointment)
         this.toggle()
     }

@@ -26,7 +26,7 @@ namespace FeedbackMicroserviceApi.Adapters
 
         public static MicroserviceFeedbackDto FeedbackToMicroserviceFeedbackDto(Feedback feedback)
         {
-            return new MicroserviceFeedbackDto(Utility.HttpRequests.GetOnePatient(feedback.PatientId).Result, feedback.Message, feedback.IsPublic, feedback.IsAnonymous, feedback.Date, feedback.PatientId);
+            return new MicroserviceFeedbackDto(feedback.id, feedback.IsPublished, Utility.HttpRequests.GetOnePatient(feedback.PatientId).Result, feedback.Message, feedback.IsPublic, feedback.IsAnonymous, feedback.Date, feedback.PatientId);
         }
 
         public static List<MicroserviceFeedbackDto> FeedbackListToMicroserviceFeedbackDtoList(List<Feedback> feedbacks)

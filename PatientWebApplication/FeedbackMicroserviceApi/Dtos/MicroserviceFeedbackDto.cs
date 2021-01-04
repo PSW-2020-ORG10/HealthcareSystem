@@ -10,7 +10,7 @@ namespace FeedbackMicroserviceApi.Dtos
     {
         public MicroservicePatientDto Patient { get; set; }
 
-        public MicroserviceFeedbackDto(MicroservicePatientDto patient, string message, bool isPublic, bool isAnonymous, DateTime date, int patientId) : base(message, isPublic, isAnonymous, date, patientId)
+        public MicroserviceFeedbackDto(int id, bool isPublished, MicroservicePatientDto patient, string message, bool isPublic, bool isAnonymous, DateTime date, int patientId) : base(id, message, isPublished, isPublic, isAnonymous, date, patientId)
         {
             Patient = patient;
         }

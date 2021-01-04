@@ -56,7 +56,7 @@ class RecommendedAppointmentScheduling extends Component {
                             name="doctorId">
                             <option value=""></option>
                             {doctorList.map(fbb =>
-                                <option key={fbb.id} value={fbb.id}>{fbb.firstName + ' ' + fbb.secondName + ', ' + fbb.speciality}</option>
+                                <option key={fbb.id} value={fbb.id}>{fbb.name + ' ' + fbb.surname + ', ' + fbb.speciality}</option>
                             )};
                                 </select>
                     </div>

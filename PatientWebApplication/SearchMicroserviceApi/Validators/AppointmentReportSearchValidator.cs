@@ -1,8 +1,8 @@
 ﻿using FluentValidation;
-using HealthClinic.CL.Utility;
 using SearchMicroserviceApi.Dtos;
+using SearchMicroserviceApi.Utility;
 
-namespace PatientWebApplication.Validators
+namespace SearchMicroserviceApi.Validators
 {
     public class AppointmentReportSearchValidator : AbstractValidator<AppointmentReportSearchDto>
     {
@@ -12,7 +12,8 @@ namespace PatientWebApplication.Validators
             {
                 RuleFor(f => UtilityMethods.TryParseDateInCorrectFormat(f.Start)).Equal(true);
             });
-            When(f => !UtilityMethods.CheckIfStringIsEmpty(f.End), () => {
+            When(f => !UtilityMethods.CheckIfStringIsEmpty(f.End), () =>
+            {
                 RuleFor(f => UtilityMethods.TryParseDateInCorrectFormat(f.End)).Equal(true);
             });
         }

@@ -8,6 +8,7 @@ class PublishButton extends Component {
 
    
     render() {
+        debugger;
         return (
             <React.Fragment>
                 <button className="btn btn-primary" disabled={this.props.feedback.isPublished || !this.props.feedback.isPublic} onClick={this.publishFeedback.bind(this)}>Publish</button>  
@@ -21,7 +22,7 @@ class PublishButton extends Component {
         toast.success("Feedback successfully published!", {
             position: toast.POSITION.TOP_RIGHT
         });
-
+        debugger;
         this.props.feedbackPublished(this.props.feedback.id)
     }
 }

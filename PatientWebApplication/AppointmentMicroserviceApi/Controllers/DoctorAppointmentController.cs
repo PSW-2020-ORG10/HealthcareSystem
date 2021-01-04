@@ -32,7 +32,7 @@ namespace AppointmentMicroserviceApi.Controllers
         [HttpGet("getAllDto")]
         public IActionResult GetAllDto()
         {
-            return Ok(ViewAppointmentAdapter.AppointmentListToViewAppointmenDtoList(regularAppointmentService.GetAll()));
+            return Ok(CancelAppointmentAdapter.ConvertAppointmentListToAppointmentDtoList(regularAppointmentService.GetAll()));
         }
 
         /// <summary> This method is calling <c>RegularAppointmentService</c> to get list of all appointments of one patient. </summary>

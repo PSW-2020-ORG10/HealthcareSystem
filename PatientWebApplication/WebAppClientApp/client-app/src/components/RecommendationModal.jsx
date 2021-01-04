@@ -62,7 +62,7 @@ class RecommendationModal extends Component {
                                     <tr style={this.state.appointment == f ? { backgroundColor: this.state.bgColor } : null} key={f.start} onClick={() => this.handleChange(f)}>
                                         <td style={{ textAlign: "left" }} >{f.start}</td>
                                         <td style={{ textAlign: "center" }} >{f.date}</td>
-                                        <td style={{ textAlign: "right" }} > {f.doctor != undefined ? f.doctor.firstName + " " + f.doctor.secondName : ""}</td >
+                                        <td style={{ textAlign: "right" }} > {f.doctor != undefined ? f.doctor.name + " " + f.doctor.surname : ""}</td >
                                         <td style={{ textAlign: "right" }} > {f.roomId}</td > 
                                     </tr>
                                 </tbody>
@@ -88,10 +88,9 @@ class RecommendationModal extends Component {
         toast.success("Appointment successfully created!", {
             position: toast.POSITION.TOP_RIGHT
         });
-
-        this.state.appointment.patientUserId = this.state.appointment.patient.id;
+        debugger;
+        this.state.appointment.patientUserId = 2;
         this.state.appointment.doctorUserId = this.state.appointment.doctor.id;
-        this.state.appointment.patient = null;
         this.state.appointment.doctor = null;
 
         console.log(this.state.appointment);

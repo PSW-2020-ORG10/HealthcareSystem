@@ -32,6 +32,8 @@
     LOADED_ALL_PATIENT_APPOINTMENTS_WITHOUT_SURVEYS,
     LOADED_MALICIOUS_PATIENTS,
     APPOINTMENT_SCHEDULED,
+    LOADED_IMAGE,
+    LOADED_IMAGE_ERROR
 } from "../types/types";
 import { parseStringToDate } from '../utilities/Utilities';
 
@@ -90,7 +92,8 @@ const initialState = {
     allPatientsBlockList: [],
     maliciousPatientsList: [],
     availableDoctors: [],
-    availableAppointments: []
+    availableAppointments: [],
+    loadedImage : ""
 };
 
 
@@ -288,6 +291,12 @@ function reducer(state = initialState, action) {
                     patientAppointmentsInFutureList: state.patientAppointmentsInFutureList.concat(action.payload)
                 };
             }
+        case LOADED_IMAGE:
+            debugger;
+        return {
+            ...state,
+            loadedImage: action.payload
+        };
         default:
             return state;
     }

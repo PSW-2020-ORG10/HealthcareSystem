@@ -232,19 +232,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/survey",
-      "UpstreamHttpMethod": [ "POST" ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/survey",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 53212
-        }
-      ],
-      "UpstreamPathTemplate": "/api/survey",
-      "UpstreamHttpMethod": [ "GET" ]
+      "UpstreamHttpMethod": [ "POST", "GET" ]
     },
     {
       "DownstreamPathTemplate": "/api/survey/getWithSurveys",
@@ -484,6 +472,18 @@
         }
       ],
       "UpstreamPathTemplate": "/api/patientUser/image",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/patientUser/getimage",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 53236
+        }
+      ],
+      "UpstreamPathTemplate": "/api/patientUser/getimage",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
     },
     {

@@ -65,7 +65,7 @@ class AllPatientsAppointmentsTable extends Component {
                     {patientAppointmentsWithSurveys.map((f) => (
                         <tbody key={f.id}>
                             <tr key={f.id}>
-                                <td style={{ textAlign: "left" }} >{f.doctor == null ? "" : f.doctor.firstName + ' ' + f.doctor.secondName}</td>
+                                <td style={{ textAlign: "left" }} >{f.doctor == null ? "" : f.doctor.name + ' ' + f.doctor.surname}</td>
                                 <td style={{ textAlign: "center" }} > {this.checkType(f)}</td >
                                 <td style={{ textAlign: "center" }}>{f.date}</td >
                                 <td style={{ textAlign: "center" }}>{f.start}</td >
@@ -77,7 +77,7 @@ class AllPatientsAppointmentsTable extends Component {
                     {patientAppointmentsWithoutSurveys.map((f) => (
                         <tbody key={f.id}>
                             <tr key={f.id}>
-                                <td style={{ textAlign: "left" }} >{f.doctor == null ? "" :f.doctor.firstName + ' ' + f.doctor.secondName}</td>
+                                <td style={{ textAlign: "left" }} >{f.doctor == null ? "" :f.doctor.name + ' ' + f.doctor.surname}</td>
                                 <td style={{ textAlign: "center" }} > {this.checkType(f)}</td >
                                 <td style={{ textAlign: "center" }}>{f.date}</td >
                                 <td style={{ textAlign: "center" }}>{f.start}</td >
@@ -89,7 +89,7 @@ class AllPatientsAppointmentsTable extends Component {
                     {patientAppointmentsInTwoDaysList.map((f) => (
                         <tbody key={f.id}>
                             <tr key={f.id}>                               
-                                <td style={{ textAlign: "left" }} >{f.doctor == null ? "" :f.doctor.firstName + ' ' + f.doctor.secondName}</td>
+                                <td style={{ textAlign: "left" }} >{f.doctor == null ? "" :f.doctor.name + ' ' + f.doctor.surname}</td>
                                 <td style={{ textAlign: "center" }} > {this.checkType(f)}</td >
                                 <td style={{ textAlign: "center" }}>{f.date}</td >
                                 <td style={{ textAlign: "center" }}>{f.start}</td >
@@ -101,7 +101,7 @@ class AllPatientsAppointmentsTable extends Component {
                     {patientAppointmentsInFutureList.map((f) => (
                         <tbody key={f.id}>
                             <tr key={f.id}>
-                                <td style={{ textAlign: "left" }} >{f.doctor == null ? "" :f.doctor.firstName + ' ' + f.doctor.secondName}</td>
+                                <td style={{ textAlign: "left" }} >{f.doctor == null ? "" :f.doctor.name + ' ' + f.doctor.surname}</td>
                                 <td style={{ textAlign: "center" }} > {this.checkType(f)}</td >
                                 <td style={{ textAlign: "center" }}>{f.date}</td >
                                 <td style={{ textAlign: "center" }}>{f.start}</td >
