@@ -69,10 +69,10 @@ namespace HealthClinic.CL.Service
             else { Create(MedicineWithQuantityAdapter.MedicineWithQuantityToMedicineWithQuantityDto(medicineWithQuantity)); }
         }
 
-        public MedicineWithQuantity createIMedicineDescription(MedicineWithQuantityDto dto)
+        public MedicineWithQuantity CreateIMedicineDescription(MedicineWithQuantityDto dto)
         {
-            MedicineWithQuantity MedicineWithQuantity = IMedicineWithQuantityRepository.GetAll().SingleOrDefault(medicine => CheckMedicineNameEquality(dto, medicine));
-            return (MedicineWithQuantity == null ? MedicineWithQuantityAdapter.MedicineWithQuantityDtoToMedicineWithQuantity(dto) : null);
+            MedicineWithQuantity medicineWithQuantity = IMedicineWithQuantityRepository.GetAll().SingleOrDefault(medicine => CheckMedicineNameEquality(dto, medicine));
+            return (medicineWithQuantity == null ? MedicineWithQuantityAdapter.MedicineWithQuantityDtoToMedicineWithQuantity(dto) : null);
         }
 
         private static bool CheckMedicineNameEquality(MedicineWithQuantityDto dto, MedicineWithQuantity MedicineWithQuantity)
@@ -90,8 +90,8 @@ namespace HealthClinic.CL.Service
         public string GetMedicineDescriptionFromDatabase(string medicine)
         {
             MedicineWithQuantity medicineWithQuantity = GetAll().SingleOrDefault(medicineName => medicineName.Name.Equals(medicine));
-            if (medicineWithQuantity == null || medicineWithQuantity.Description.Equals("")) return null;
-            return medicineWithQuantity.Description;
+            return medicineWithQuantity == null || medicineWithQuantity.Description.Equals("") ? null : medicineWithQuantity.Description;
+
         }
 
         private void CreateNewMedicineWithQuantity(MedicineTenderOffer medicineTenderOffer)

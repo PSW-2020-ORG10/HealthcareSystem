@@ -46,15 +46,14 @@ namespace IntegrationWithPharmacies.FileProtocol
 
             foreach (Tender tender in TenderService.GetAll())
             {
-                stringBuilder.Append(getText(date, tender));
+                getText(date, tender,stringBuilder);
                 totalQuatity += getQuantity(date, tender);
             }
             return stringBuilder.Append("\n\n   Total ordered quatity: " + totalQuatity + "\n").ToString();
         }
 
-        public String getText(DateOfOrder date, Tender tender)
+        public String getText(DateOfOrder date, Tender tender, StringBuilder stringBuilder)
         {
-            StringBuilder stringBuilder = new StringBuilder();
             foreach (MedicineForTendering medicine in MedicineForTenderingService.GetAll())
             {   
                 if (isOrderInRequiredPeriod(medicine, date, tender))

@@ -52,7 +52,7 @@ namespace IntegrationWithPharmaciesTest
         {
             MedicineWithQuantityService medicineWithQuantityService = new MedicineWithQuantityService(Create_stub_repository_medicines());
 
-            MedicineWithQuantity description = medicineWithQuantityService.createIMedicineDescription(new MedicineWithQuantityDto("Andol", 5,"Description"));
+            MedicineWithQuantity description = medicineWithQuantityService.CreateIMedicineDescription(new MedicineWithQuantityDto("Andol", 5,"Description"));
             Assert.NotNull(description);
         }
         [Fact]
@@ -60,7 +60,7 @@ namespace IntegrationWithPharmaciesTest
         {
             MedicineWithQuantityService medicineWithQuantityService = new MedicineWithQuantityService(Create_stub_repository_medicines());
 
-            MedicineWithQuantity description = medicineWithQuantityService.createIMedicineDescription(new MedicineWithQuantityDto("Paracetamol", 10,"Description"));
+            MedicineWithQuantity description = medicineWithQuantityService.CreateIMedicineDescription(new MedicineWithQuantityDto("Paracetamol", 10,"Description"));
             Assert.Null(description);
         }
         public static IEPrescriptionRepository Create_stub_repository()

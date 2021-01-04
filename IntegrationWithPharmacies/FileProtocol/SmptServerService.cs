@@ -43,10 +43,7 @@ namespace IntegrationWithPharmacies.FileProtocol
         private static StringBuilder BasicEmailTenderInformation(string pharmacyApi)
         {
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append("Winner of tender is pharmacy with api key : " + pharmacyApi);
-            stringBuilder.Append(Environment.NewLine);
-            stringBuilder.Append("Requested medicines:    Name  /  Quantity  /  Price");
-            stringBuilder.Append(Environment.NewLine);
+            stringBuilder.Append("Winner of tender is pharmacy with api key : " + pharmacyApi +"\n"+ "Requested medicines:    Name  /  Quantity  /  Price\n");
             return stringBuilder;
         }
 
@@ -54,8 +51,7 @@ namespace IntegrationWithPharmacies.FileProtocol
         {
             foreach (MedicineTenderOffer medicineTenderOffer in medicinesWithQuantity)
             {
-                stringBuilder.Append(medicineTenderOffer.MedicineName + "  /  " + medicineTenderOffer.AvailableQuantity + "  /  " + medicineTenderOffer.Price );
-                stringBuilder.Append(Environment.NewLine);
+                stringBuilder.Append(medicineTenderOffer.MedicineName + "  /  " + medicineTenderOffer.AvailableQuantity + "  /  " + medicineTenderOffer.Price + "\n");
             }
             return stringBuilder;
         }
