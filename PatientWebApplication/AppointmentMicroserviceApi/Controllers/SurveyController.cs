@@ -18,12 +18,13 @@ namespace AppointmentMicroservice.Controller
 
         /// <value>Property <c>RegularAppointmentService</c> represents the service used for handling business logic.</value>
         private RegularAppointmentService regularAppointmentService { get; set; }
+        private MyDbContext dbContext;
 
-        /// <summary>This constructor injects the SurveyController with matching SurveyService and RegularAppointmentService.</summary>
-        public SurveyController()
+        public SurveyController(MyDbContext dbContext)
         {
-            SurveyService = new SurveyService(new SurveyRepository());
-            regularAppointmentService = new RegularAppointmentService(new AppointmentRepository(), new OperationService(new OperationRepository()));
+            this.dbContext = dbContext;
+            SurveyService = new SurveyService(new SurveyRepository(dbContext));
+            regularAppointmentService = new RegularAppointmentService(new AppointmentRepository(dbContext), new OperationService(new OperationRepository(dbContext)));
         }
 
         /// <summary> This method determines if <c>SurveyDto</c> provided <paramref name="surveyDto"/> is valid for creating by calling <c>SurveyValidator</c>

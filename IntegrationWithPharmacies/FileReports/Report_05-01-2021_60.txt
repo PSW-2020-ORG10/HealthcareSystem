@@ -1,0 +1,9 @@
+api1;api2;api3;!    Report about consumption of medicine
+
+
+
+     Medicine name: Brufen
+     Ordered quantity: 13 (Date:  3/3/2021 12:00:00 AM)
+
+
+   Total ordered quatity: 13

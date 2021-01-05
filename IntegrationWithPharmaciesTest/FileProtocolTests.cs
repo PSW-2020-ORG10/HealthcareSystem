@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text;
 using HealthClinic.CL.Model.Orders;
 using HealthClinic.CL.Repository;
 using HealthClinic.CL.Service;
-using IntegrationWithPharmacies.Controllers;
 using IntegrationWithPharmacies.FileProtocol;
 using Moq;
 using Xunit;
@@ -15,108 +13,79 @@ namespace IntegrationWithPharmaciesTest
     public class FileProtocolTests
     {
         [Fact]
-        public static void Sends_file_using_file_protocol()
-        {
-            var mock = new Mock<ISftpService>();
-
-            var testFile = @"..\test.txt";
-            mock.Setup(verify => verify.UploadFile(testFile, @"\pub" + Path.GetFileName(testFile))).Returns(true);
-
-        }
-        [Fact]
-        public static void Sends_no_file_using_file_protocol()
-        {
-            var mock = new Mock<ISftpService>();
-
-            var testFile = @"..\wrong.txt";
-            mock.Setup(verify => verify.UploadFile(null, @"\pub" + Path.GetFileName(testFile))).Returns(false);
-
-        }
-
-        [Fact]
         public void Generates_file_report()
         {
-            DoctorOrderService doctorOrderService = new DoctorOrderService(Create_stub_repository_doctor_orders());
-            MedicineForOrderingService medicineForOrderingService = new MedicineForOrderingService(Create_stub_repository_medicine_orders());
-            DateOfOrder date = new DateOfOrder("10/09/2020", "25/10/2020");
-            string report = getReportText(date, doctorOrderService, medicineForOrderingService);
+            TenderService tenderService = new TenderService(Create_stub_repository_tenders());
+            MedicineForTenderingService medicineForTenderingService = new MedicineForTenderingService(Create_stub_repository_medicine_tender_orders());
+            DateOfOrder date = new DateOfOrder("01/01/2020", "05/10/2020");
+            string report = getReportText(date, tenderService, medicineForTenderingService);
             Assert.NotEqual("", report);
         }
 
         [Fact]
         public void Generates_no_file_report()
         {
-            DoctorOrderService doctorOrderService = new DoctorOrderService(Create_stub_repository_doctor_orders());
-            MedicineForOrderingService medicineForOrderingService = new MedicineForOrderingService(Create_stub_repository_medicine_orders());
-            DateOfOrder date = new DateOfOrder("10/09/2022", "25/10/2022");
-            string report = getReportText(date, doctorOrderService, medicineForOrderingService);
+            TenderService tenderService = new TenderService(Create_stub_repository_tenders());
+            MedicineForTenderingService medicineForTenderingService = new MedicineForTenderingService(Create_stub_repository_medicine_tender_orders());
+            DateOfOrder date = new DateOfOrder("10/09/2022", "25/10/2023");
+            string report = getReportText(date, tenderService, medicineForTenderingService);
             Assert.Equal("", report);
         }
 
-        public static IDoctorOrderRepositoy Create_stub_repository_doctor_orders()
+        public static ITenderRepository Create_stub_repository_tenders()
         {
-            var stubRepository = new Mock<IDoctorOrderRepositoy>();
-            DoctorsOrder order1 = new DoctorsOrder(2, false, new DateTime(2020, 3, 12), new DateTime(2020, 9, 9), true, true);
-            DoctorsOrder order2 = new DoctorsOrder(3, true, new DateTime(2020, 8, 12), new DateTime(2020, 10, 9), true, true);
+            var stubRepository = new Mock<ITenderRepository>();
+            Tender tender1 = new Tender(1, new DateTime(2020, 01, 04), true);
 
-            var orders = new List<DoctorsOrder>();
-            orders.Add(order1);
-            orders.Add(order2);
-            stubRepository.Setup(m => m.GetAll()).Returns(orders);
+            var tenders = new List<Tender>();
+            tenders.Add(tender1);
+            stubRepository.Setup(m => m.GetAll()).Returns(tenders);
             return stubRepository.Object;
         }
-        public static IMedicineForOrderingRepository Create_stub_repository_medicine_orders()
+        public static IMedicineForTenderingRepository Create_stub_repository_medicine_tender_orders()
         {
-            var stubRepository = new Mock<IMedicineForOrderingRepository>();
-            MedicineForOrdering medicine1 = new MedicineForOrdering(2, "Paracetamol", 100, "Paracetamol is a medication used to treat pain and fever.", 2);
-            MedicineForOrdering medicine2 = new MedicineForOrdering(3, "Ibuprofen", 80, "Ibuprofen is a medication used for treating pain, fever, and inflammation.", 2);
-            MedicineForOrdering medicine3 = new MedicineForOrdering(4, "Clindamycin", 30, "Clindamycin is an antibiotic used for the treatment of a number of bacterial infections.", 2);
-            MedicineForOrdering medicine4 = new MedicineForOrdering(5, "Palitrex", 100, ". Palitrex is indicated for the treatment of respiratory  infections.", 2);
-            MedicineForOrdering medicine5 = new MedicineForOrdering(6, "Ibuprofen", 80, "Ibuprofen is a medication used for treating pain, fever, and inflammation.", 3);
-            MedicineForOrdering medicine6 = new MedicineForOrdering(7, "Jomelop", 25, "Efficiently helps skin heal faster after sun-burns.", 3);
-            MedicineForOrdering medicine7 = new MedicineForOrdering(8, "Antiseptics", 200, "Antiseptics substances that are applied to living tissue/skin to reduce the possibility of infection", 3);
-            var orders = new List<MedicineForOrdering>();
-            orders.Add(medicine1);
-            orders.Add(medicine2);
-            orders.Add(medicine3);
-            orders.Add(medicine4);
-            orders.Add(medicine5);
-            orders.Add(medicine6);
-            orders.Add(medicine7);
-            stubRepository.Setup(m => m.GetAll()).Returns(orders);
+            var stubRepository = new Mock<IMedicineForTenderingRepository>();
+            MedicineForTendering medicineForTendering1 = new MedicineForTendering(1, "Brufen", 5, 1);
+            MedicineForTendering medicineForTendering2 = new MedicineForTendering(2, "Paracetamol", 5, 1);
+
+            var medicineForTenderings = new List<MedicineForTendering>();
+            medicineForTenderings.Add(medicineForTendering1);
+            medicineForTenderings.Add(medicineForTendering2);
+
+            stubRepository.Setup(m => m.GetAll()).Returns(medicineForTenderings);
             return stubRepository.Object;
         }
 
 
-        private string getReportText(DateOfOrder date, DoctorOrderService doctorOrderService, MedicineForOrderingService medicineForOrderingService)
+        private string getReportText(DateOfOrder date, TenderService tenderService, MedicineForTenderingService medicineForTenderingService)
         {
             StringBuilder stringBuilder = new StringBuilder();
             int totalQuatity = 0;
             int i = 1;
 
-            foreach (DoctorsOrder order in doctorOrderService.GetAllForStub())
+            foreach (Tender tender in tenderService.GetAllForStub())
             {
-                stringBuilder.Append(getText(date, order, stringBuilder, medicineForOrderingService));
+                stringBuilder.Append(getText(date, tender, stringBuilder, medicineForTenderingService));
                 totalQuatity += 5;
                 i++;
             }
             return stringBuilder.ToString();
         }
 
-        private String getText(DateOfOrder date, DoctorsOrder order, StringBuilder stringBuilder, MedicineForOrderingService medicineForOrderingService)
+        private String getText(DateOfOrder date, Tender tender, StringBuilder stringBuilder, MedicineForTenderingService medicineForTenderingService)
         {
-            foreach (MedicineForOrdering medicine in medicineForOrderingService.GetAllForStub())
+            foreach (MedicineForTendering medicine in medicineForTenderingService.GetAllForStub())
             {
-                if (isOrderInRequiredPeriod(medicine, date, order))
+                if (isOrderInRequiredPeriod(medicine, date, tender))
                 {
-                    stringBuilder.Append("\n     Medicine name: " + medicine.Name + "\n     Ordered quantity: " + medicine.Quantity + " (Date:  " + order.DateEnd.Date.ToString() + ")\n");
+                    stringBuilder.Append("\n     Medicine name: " + medicine.Name + "\n     Ordered quantity: " + medicine.Quantity + " (Date:  " + tender.ActiveUntil.ToString() + ")\n");
                 }
             }
             return stringBuilder.ToString();
         }
-        private bool isOrderInRequiredPeriod(MedicineForOrdering medicine, DateOfOrder date, DoctorsOrder order)
+        private bool isOrderInRequiredPeriod(MedicineForTendering medicine, DateOfOrder date, Tender tender)
         {
-            if (isIdEqual(medicine.OrderId, order.id) && compareDates(order.DateEnd, convertStringToDate(date.StartDate)) == 1 && compareDates(order.DateEnd, convertStringToDate(date.EndDate)) == -1 && order.IsFinished) return true;
+            if (isIdEqual(medicine.TenderId, tender.id) && compareDates(tender.ActiveUntil, convertStringToDate(date.StartDate)) == 1 && compareDates(tender.ActiveUntil, convertStringToDate(date.EndDate)) == -1 && tender.Closed) return true;
             return false;
         }
         private bool isIdEqual(int firstNumber, int secondNumber)
@@ -124,7 +93,7 @@ namespace IntegrationWithPharmaciesTest
             return (firstNumber == secondNumber);
         }
         private int compareDates(DateTime startDate, DateTime endDate)
-        {
+        {   
             return (DateTime.Compare(startDate, endDate));
         }
         private DateTime convertStringToDate(String date)
@@ -134,5 +103,5 @@ namespace IntegrationWithPharmaciesTest
 
 
     }
-
+    
 }

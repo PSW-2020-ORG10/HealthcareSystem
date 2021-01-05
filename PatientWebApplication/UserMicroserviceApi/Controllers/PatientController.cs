@@ -18,12 +18,13 @@ namespace UserMicroserviceApi.Controllers
         /// <value>Property <c>PatientService</c> represents the service used for handling business logic.</value>
         private PatientService PatientService { get; set; }
         private IWebHostEnvironment _env;
-        /// <summary>This constructor injects the PatientUserController with matching PatientService.</summary>
-        public PatientUserController(IWebHostEnvironment env)
+
+        public PatientUserController(IWebHostEnvironment env, MyDbContext dbContext)
         {
-            PatientService = new PatientService(new PatientsRepository(), new EmailVerificationService());
+            PatientService = new PatientService(new PatientsRepository(dbContext), new EmailVerificationService(dbContext));
             _env = env;
         }
+
         /// <summary> This method determines if <c>PatientDto</c> provided <paramref name="dto"/> is valid for creating by calling <c>PatientValidator</c>
         /// automatically and sends it to <c>PatientService</c>. </summary>  
         /// <returns> if fields from <paramref name="dto"/> are not valid 400 Bad Request also if created feedback is not null 200 Ok else 404 Bad Request.</returns>
@@ -34,10 +35,7 @@ namespace UserMicroserviceApi.Controllers
             {
                 return BadRequest();
             }
-
             return Ok();
-
-
         }
 
         /// <summary> This method calls <c>FeedbackService</c> to save image. </summary>

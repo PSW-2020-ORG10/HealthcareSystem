@@ -27,6 +27,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="3.1.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.9">
@@ -48,13 +49,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HCI_wireframe\HCI_wireframe.csproj" />
     <ProjectReference Include="..\PatientWebApplication\HealthClinic.DAL\HealthClinic.CL.csproj" />
   </ItemGroup>
 
 	<ItemGroup>
 		<Protobuf Include="Protos\model.proto" GrpcServices="None" />
-		<Protobuf Include="Protos\springGrpcService.proto" GrpcServices="Client" />
+		<Protobuf Include="Protos\SpringGrpcService.proto" GrpcServices="Client" />
 	</ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.0.0-preview6.19307.2" />
@@ -63,12 +63,16 @@
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="front\src\NewFolder\**" />
     <None Remove="$(SpaRoot)**" />
+    <None Remove="front\src\NewFolder\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="front\src\NewFolder\" />
+    <Compile Remove="front\src\NewFolder\**" />
+    <EmbeddedResource Remove="front\src\NewFolder\**" />
+    <TypeScriptCompile Remove="front\src\NewFolder\**" />
   </ItemGroup>
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->

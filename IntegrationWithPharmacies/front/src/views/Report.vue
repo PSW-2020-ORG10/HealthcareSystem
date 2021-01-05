@@ -48,7 +48,7 @@
             return {
                 startDate: "",
                 endDate: "",
-                pharmacy : "",
+                pharmacy: "",
                 sent: false,
                 notSent: false,
                 emptyStringError: false,

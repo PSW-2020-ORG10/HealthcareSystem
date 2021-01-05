@@ -2,6 +2,10 @@
 using AppointmentMicroserviceApi.Dtos;
 using AppointmentMicroserviceApi.Repository;
 using AppointmentMicroserviceApi.Service;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AppointmentMicroservice.Controller
@@ -14,11 +18,12 @@ namespace AppointmentMicroservice.Controller
     {
         /// <value>Property <c>OperationService</c> represents the service used for handling business logic.</value>
         private OperationService operationService;
+        private MyDbContext dbContext;
 
-        /// <summary>This constructor initiates the OperationController's operation service.</summary>
-        public OperationController()
+        public OperationController(MyDbContext dbContext)
         {
-            operationService = new OperationService(new OperationRepository());
+            this.dbContext = dbContext;
+            operationService = new OperationService(new OperationRepository(dbContext));
         }
 
         [HttpGet("getAll")]

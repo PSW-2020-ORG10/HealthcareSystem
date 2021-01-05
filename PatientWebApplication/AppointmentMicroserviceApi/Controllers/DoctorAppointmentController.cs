@@ -18,9 +18,9 @@ namespace AppointmentMicroserviceApi.Controllers
         private RegularAppointmentService regularAppointmentService;
 
         /// <summary>This constructor initiates the DoctorAppointmentController's appointment service.</summary>
-        public DoctorAppointmentController(MyDbContext context)
+        public DoctorAppointmentController(MyDbContext dbContext)
         {
-            regularAppointmentService = new RegularAppointmentService(context);
+            regularAppointmentService = new RegularAppointmentService(dbContext);
         }
 
         [HttpGet("getAll")]

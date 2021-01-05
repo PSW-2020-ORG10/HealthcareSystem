@@ -42,10 +42,7 @@ namespace HealthClinic.CL.DbContextModel
         public DbSet<ModelRoom> modelRooms { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<ManagerUser> ManagerUsers { get; set; }
-        public DbSet<DoctorsOrder> DoctorsOrders { get; set; }
-        public DbSet<FinishedOrder> FinishedOrders { get; set; }
-        public DbSet<ManagersOrder> ManagersOrders { get; set; }
-        public DbSet<PharmacyOffer> PharmacyOffers { get; set; }
+        public DbSet<PharmacyTenderOffer> PharmacyTenderOffers { get; set; }
         public DbSet<DoctorAppointment> DoctorAppointments { get; set; }
         public DbSet<PhoneNumber> PhoneNumbers { get; set; }
         public DbSet<Prescription> Prescriptions { get; set; }
@@ -53,13 +50,15 @@ namespace HealthClinic.CL.DbContextModel
         public DbSet<SecretaryUser> SecretaryUsers { get; set; }
         public DbSet<Medicine> Medicines { get; set; }
         public DbSet<RegistrationInPharmacy> Registrations { get; set; }
-        public DbSet<MedicineForOrdering> MedicinesForOrdering { get; set; }
-
         public DbSet<Survey> Surveys { get; set; }
         public DbSet<Message> Messages { get; set; }
-        public DbSet<MedicineDescription> MedicineDescriptions { get; set; }
         public DbSet<EPrescription> EPrescriptions { get; set; }
         public DbSet<UrgentMedicineOrder> UrgentMedicineOrder { get; set; }
+        public DbSet<Tender> Tender { get; set; }
+        public DbSet<MedicineForTendering> MedicineForTendering { get; set; }
+
+        public DbSet<MedicineTenderOffer> MedicineTenderOffers { get; set; }
+        public DbSet<MedicineWithQuantity> MedicineWithQuantities { get; set; }
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -183,26 +182,14 @@ namespace HealthClinic.CL.DbContextModel
                 200, new List <ManagerNotification>())
             );
 
-            modelBuilder.Entity<DoctorsOrder>().HasData(
-                new DoctorsOrder(1,false,new DateTime(), new DateTime(), true,true)
-            );
-
-            modelBuilder.Entity<FinishedOrder>().HasData(
-                new FinishedOrder(1, new List <Medicine>())
-            );
-
             modelBuilder.Entity<Message>().HasData(
 
                  new Message(1, "Message", "03/12/2020", new DateTime(), false, "Apoteka Jankovic", "02/02/2020")
 
               );
 
-            modelBuilder.Entity<ManagersOrder>().HasData(
-                new ManagersOrder(1, true, new List <DoctorsOrder>(), new DateTime(), true)
-            );
-
-            modelBuilder.Entity<PharmacyOffer>().HasData(
-                new PharmacyOffer(1, "pharmacyName", new List < Medicine >(), 100.0)
+            modelBuilder.Entity<PharmacyTenderOffer>().HasData(
+                new PharmacyTenderOffer(1, "pharmacyApi",false,1)
             );
 
             modelBuilder.Entity<DoctorAppointment>().HasData(
@@ -253,23 +240,30 @@ namespace HealthClinic.CL.DbContextModel
                 new RegistrationInPharmacy(1, 1, "api1","Jankovic 1","Novi Sad")
             );
 
-            modelBuilder.Entity<MedicineForOrdering>().HasData(
-                new MedicineForOrdering(1,"Medicine name",1, "Medicine description", 1)
-           );
-
             modelBuilder.Entity<Survey>().HasData(
                 new Survey(1, 1, 3, 4, 5, 4, 5, 4, 5, 4, 5, 5, 5, 5, 4, 3, 3, 2, 2, 5),
                 new Survey(2, 1, 4, 4, 5, 3, 1, 5, 5, 2, 2, 4, 2, 5, 3, 1, 3, 3, 3, 5)        
             );
-            modelBuilder.Entity<MedicineDescription>().HasData(
-               new MedicineDescription(1,"Analgin", "Analgin has anti - inflammatory, analgesic, antifebrile action.", 1)
-               
-           );
+         
             modelBuilder.Entity<UrgentMedicineOrder>().HasData(
              new UrgentMedicineOrder(1,"Andol",135,"api 1","12/12/2020")
 
-         );
+            );
+            modelBuilder.Entity<Tender>().HasData(
+          new Tender(1, new DateTime(), false)
 
+            );
+            modelBuilder.Entity<MedicineForTendering>().HasData(
+          new MedicineForTendering(1, "Andol", 135,1)
+
+            );
+            modelBuilder.Entity<MedicineTenderOffer>().HasData(
+                 new MedicineTenderOffer(1, "Andol", 1, 1, 1, 1)
+           ); 
+            modelBuilder.Entity<MedicineWithQuantity>().HasData(
+                new MedicineWithQuantity(1, "Andol", 1,"Description")
+
+            );
 
         }
 

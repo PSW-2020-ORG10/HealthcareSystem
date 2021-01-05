@@ -14,11 +14,12 @@ namespace SearchMicroserviceApi.Controllers
     {
         /// <value>Property <c>PrescriptionService</c> represents the service used for handling business logic.</value>
         private PrescriptionService PrescriptionService { get; set; }
+        private MyDbContext dbContext;
 
-        /// <summary>This constructor injects the PrescriptionController with matching PrescriptionService.</summary>
-        public PrescriptionController()
+        public PrescriptionController(MyDbContext dbContext)
         {
-            PrescriptionService = new PrescriptionService(new PrescriptionRepository());
+            this.dbContext = dbContext;
+            PrescriptionService = new PrescriptionService(new PrescriptionRepository(dbContext));
         }
 
         /// <summary> This method is calling <c>PrescriptionService</c> to get list of all <c>Prescription</c>.  </summary>

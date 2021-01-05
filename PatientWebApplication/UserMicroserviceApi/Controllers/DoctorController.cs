@@ -3,6 +3,11 @@ using UserMicroserviceApi.Adapters;
 using UserMicroserviceApi.Repository;
 using UserMicroserviceApi.Service;
 using DoctorAdapter = UserMicroserviceApi.Adapters.DoctorAdapter;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace UserMicroserviceApi.Controllers
 {
@@ -11,11 +16,12 @@ namespace UserMicroserviceApi.Controllers
     public class DoctorController : ControllerBase
     {
         private DoctorService doctorService;
+        private MyDbContext dbContext;
 
-        /// <summary>This constructor initiates the DoctorAppointmentController's appointment service.</summary>
-        public DoctorController()
+        public DoctorController(MyDbContext dbContext)
         {
-            doctorService = new DoctorService(new EmployeesScheduleRepository(), new DoctorRepository());
+            this.dbContext = dbContext;
+            this.doctorService = new DoctorService(new EmployeesScheduleRepository(dbContext), new DoctorRepository(dbContext));
         }
 
         [HttpGet("available")]
