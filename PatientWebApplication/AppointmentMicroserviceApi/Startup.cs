@@ -26,7 +26,7 @@ namespace AppointmentMicroserviceApi
             string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA") ?? "MYSQLHealtcareDB";
             string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "root";
             string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "root";
-
+            Console.WriteLine(server);
             return $"server={server};port={port};database={database};user={user};password={password}";
         }
 
