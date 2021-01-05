@@ -15,9 +15,9 @@ namespace AppointmentMicroserviceApi.Repository
     public class OperationRepository : IOperationRepository
     {
         private readonly MyDbContext dbContext;
-        public OperationRepository(MyDbContext context)
+        public OperationRepository(MyDbContext dbContext)
         {
-            dbContext = context;
+            this.dbContext = dbContext;
         }
 
         public OperationRepository()

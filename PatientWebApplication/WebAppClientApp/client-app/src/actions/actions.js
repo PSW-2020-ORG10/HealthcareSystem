@@ -303,7 +303,20 @@ export const loadedAllPatientReports = (patientId) => async (dispatch) => {
 
 export const simpleSearchAppointments  = (searchDto) => async (dispatch) => {
     try {
-         
+        axios.all([axios.post('http://localhost:54689/api/doctorappointment/search', searchDto),
+        axios.post('http://localhost:54689/api/operation/search',  searchDto)])
+        .then(axios.spread((firstResponse, secondResponse) => {
+            debugger;
+            var appointments = []
+            firstResponse.data.forEach(element => appointments.push(element));
+            secondResponse.data.forEach(element => appointments.push(element));
+            console.log(appointments)
+            dispatch({
+                type: LOADED_ALL_PATIENT_REPORTS,
+                payload: appointments,
+            })
+        }))
+        .catch(error => console.log(error))
     } catch (e) {
         dispatch({
             type: OBSERVE_PATIENT_REPORTS_ERROR,

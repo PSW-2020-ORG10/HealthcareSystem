@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SearchMicroserviceApi.Adapters;
+using SearchMicroserviceApi.DbContextModel;
 using SearchMicroserviceApi.Dtos;
 using SearchMicroserviceApi.Repository;
 using SearchMicroserviceApi.Service;

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using UserMicroserviceApi.Adapters;
+using UserMicroserviceApi.DbContextModel;
 using UserMicroserviceApi.Dtos;
 using UserMicroserviceApi.Repository;
 using UserMicroserviceApi.Service;
@@ -12,13 +13,16 @@ namespace UserMicroserviceApi.Controllers
     {
         private EmployeesScheduleService employeesScheduleService;
         private readonly DoctorService doctorService;
+        private MyDbContext dbContext;
 
         /// <summary>This constructor initiates the DoctorAppointmentController's appointment service.</summary>
-        public EmployeesScheduleController()
+        public EmployeesScheduleController(MyDbContext dbContext)
         {
-            employeesScheduleService = new EmployeesScheduleService(new EmployeesScheduleRepository());
-            doctorService = new DoctorService(new EmployeesScheduleRepository(), new DoctorRepository());
+            this.dbContext = dbContext;
+            employeesScheduleService = new EmployeesScheduleService(new EmployeesScheduleRepository(dbContext));
+            doctorService = new DoctorService(new EmployeesScheduleRepository(dbContext), new DoctorRepository(dbContext));
         }
+
 
         [HttpPost]
         public IActionResult GetShiftForDoctorForSpecificDay(DoctorShiftSearchDto dto)

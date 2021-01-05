@@ -1,11 +1,19 @@
 ﻿using System.IO;
 using System.Net;
 using System.Net.Mail;
+using UserMicroserviceApi.DbContextModel;
 
 namespace UserMicroserviceApi.Service
 {
     public class EmailVerificationService : IEmailVerificationService
     {
+        private MyDbContext dbContext;
+
+        public EmailVerificationService(MyDbContext dbContext)
+        {
+            this.dbContext = dbContext;
+        }
+
         public void SendVerificationMail(MailAddress recipientMail, int id)
         {
             MailAddress senderAddress = new MailAddress("healthclinicpsw@gmail.com");

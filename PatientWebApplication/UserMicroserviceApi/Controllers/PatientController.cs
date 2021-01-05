@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using UserMicroserviceApi.Adapters;
+using UserMicroserviceApi.DbContextModel;
 using UserMicroserviceApi.Dtos;
 using UserMicroserviceApi.Model;
 using UserMicroserviceApi.Repository;

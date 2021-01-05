@@ -1,4 +1,5 @@
 ﻿using AppointmentMicroserviceApi.Adapters;
+using AppointmentMicroserviceApi.DbContextModel;
 using AppointmentMicroserviceApi.Dtos;
 using AppointmentMicroserviceApi.Repository;
 using AppointmentMicroserviceApi.Service;

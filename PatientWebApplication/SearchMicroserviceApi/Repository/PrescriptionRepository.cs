@@ -20,6 +20,11 @@ namespace SearchMicroserviceApi.Repository
             dbContext = new MyDbContext(options);
         }
 
+        public PrescriptionRepository(MyDbContext dbContext)
+        {
+            this.dbContext = dbContext;
+        }
+
         /// <summary> This is method gets all <c>Prescription</c>. </summary>
         /// <returns> List of all prescriptions from database. </returns>
         public List<Prescription> GetAll()

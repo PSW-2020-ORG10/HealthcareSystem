@@ -17,16 +17,19 @@ namespace GatewayApi
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-    Host.CreateDefaultBuilder(args)
-        .ConfigureWebHostDefaults(webBuilder =>
-        {
-            webBuilder.UseStartup<Startup>();
-        })
-    .ConfigureAppConfiguration((hostingContext, config) =>
-    {
-        config
-        .SetBasePath(hostingContext.HostingEnvironment.ContentRootPath)
-        .AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
-    });
+             Host.CreateDefaultBuilder(args)
+                 .ConfigureWebHostDefaults(webBuilder =>
+                 {
+                     var port = Environment.GetEnvironmentVariable("PORT");
+
+                     webBuilder.UseStartup<Startup>()
+                    .UseUrls("http://*:" + port);
+                 })
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                {
+                    config
+                    .SetBasePath(hostingContext.HostingEnvironment.ContentRootPath)
+                    .AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
+                });
     }
 }

@@ -15,9 +15,9 @@ namespace UserMicroserviceApi.Repository
     public class EmployeesScheduleRepository : IEmployeesScheduleRepository
     {
         private readonly MyDbContext dbContext;
-        public EmployeesScheduleRepository(MyDbContext context)
+        public EmployeesScheduleRepository(MyDbContext dbContext)
         {
-            dbContext = context;
+            this.dbContext = dbContext;
         }
 
         public EmployeesScheduleRepository()

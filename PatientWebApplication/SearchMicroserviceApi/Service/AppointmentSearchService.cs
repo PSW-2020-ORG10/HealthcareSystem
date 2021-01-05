@@ -1,4 +1,5 @@
-﻿using SearchMicroserviceApi.Dtos;
+﻿using SearchMicroserviceApi.DbContextModel;
+using SearchMicroserviceApi.Dtos;
 using SearchMicroserviceApi.Utility;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,13 @@ namespace SearchMicroserviceApi.Service
 {
     public class AppointmentSearchService
     {
+        private readonly MyDbContext dbContext;
+
+        public AppointmentSearchService(MyDbContext dbContext)
+        {
+            this.dbContext = dbContext;
+        }
+
         /// <summary> This method is calling SearchForAppointmentType, SearchForDoctorNameAndSurname, SearchForDate to get list of filtered <c>DoctorAppointment</c> of one patient. </summary>
         /// <param name="appointmentReportSearchDto"><c>appointmentReportSearchDto</c> is Data Transfer Object of a <c>Operation</c> that is being used to filter appointments.
         /// </param>

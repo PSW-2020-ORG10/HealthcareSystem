@@ -11,9 +11,11 @@ namespace SearchMicroserviceApi.Controllers
     public class AppointmentSearchController : ControllerBase
     {
         private AppointmentSearchService appointmentSearchService;
-        public AppointmentSearchController(MyDbContext context)
+        private MyDbContext dbContext;
+        public AppointmentSearchController(MyDbContext dbContext)
         {
-            appointmentSearchService = new AppointmentSearchService();
+            this.dbContext = dbContext;
+            appointmentSearchService = new AppointmentSearchService(dbContext);
         }
 
         /// <summary> This method is calling <c>RegularAppointmentService</c> to get list of all patient <c>DoctorAppointment</c> that matches search dto. </summary>
