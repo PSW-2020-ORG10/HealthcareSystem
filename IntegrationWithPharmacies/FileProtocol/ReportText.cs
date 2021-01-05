@@ -13,16 +13,16 @@ namespace IntegrationWithPharmacies.FileProtocol
     {
         public MyDbContext DbContext;
         private RegistrationInPharmacyService RegistrationInPharmacyService { get; }
-        private DoctorOrderService DoctorOrderService { get; }
-        private MedicineForOrderingService MedicineService { get; }
         private HelperFunctions HelperFunctions { get; }
+        private TenderService TenderService { get; }
+        private MedicineForTenderingService MedicineForTenderingService { get; }
 
         public ReportText(MyDbContext context)
         {
             RegistrationInPharmacyService = new RegistrationInPharmacyService(context);
-            DoctorOrderService = new DoctorOrderService(context);
-            MedicineService = new MedicineForOrderingService(context);
             HelperFunctions = new HelperFunctions();
+            TenderService = new TenderService(context);
+            MedicineForTenderingService = new MedicineForTenderingService(context);
         }
         public ReportText()
         {
@@ -44,32 +44,32 @@ namespace IntegrationWithPharmacies.FileProtocol
             StringBuilder stringBuilder = new StringBuilder();
             int totalQuatity = 0;
 
-            foreach (DoctorsOrder order in DoctorOrderService.GetAll())
+            foreach (Tender tender in TenderService.GetAll())
             {
-                stringBuilder.Append(getText(date, order, stringBuilder));
-                totalQuatity += getQuantity(date, totalQuatity, order);
+                getText(date, tender,stringBuilder);
+                totalQuatity += getQuantity(date, tender);
             }
             return stringBuilder.Append("\n\n   Total ordered quatity: " + totalQuatity + "\n").ToString();
         }
 
-        public String getText(DateOfOrder date, DoctorsOrder order, StringBuilder stringBuilder)
+        public String getText(DateOfOrder date, Tender tender, StringBuilder stringBuilder)
         {
-            foreach (MedicineForOrdering medicine in MedicineService.GetAll())
-            {
-                if (isOrderInRequiredPeriod(medicine, date, order))
+            foreach (MedicineForTendering medicine in MedicineForTenderingService.GetAll())
+            {   
+                if (isOrderInRequiredPeriod(medicine, date, tender))
                 {
-                    stringBuilder.Append("\n     Medicine name: " + medicine.Name + "\n     Ordered quantity: " + medicine.Quantity + " (Date:  " + order.DateEnd.Date.ToString() + ")\n");
+                    stringBuilder.Append("\n     Medicine name: " + medicine.Name + "\n     Ordered quantity: " + medicine.Quantity + " (Date:  " + tender.ActiveUntil.ToString() + ")\n");
                 }
             }
             return stringBuilder.ToString();
         }
-        private int getQuantity(DateOfOrder date, int totalQuatity, DoctorsOrder order)
+        private int getQuantity(DateOfOrder date, Tender tender)
         {
-            return MedicineService.GetAll().Where(medicine => isOrderInRequiredPeriod(medicine, date, order)).Sum(medicine => medicine.Quantity);
+            return MedicineForTenderingService.GetAll().Where(medicine => isOrderInRequiredPeriod(medicine, date, tender)).Sum(medicine => medicine.Quantity);
         }
-        private bool isOrderInRequiredPeriod(MedicineForOrdering medicine, DateOfOrder date, DoctorsOrder order)
+        private bool isOrderInRequiredPeriod(MedicineForTendering medicine, DateOfOrder date, Tender tender)
         {
-            if (HelperFunctions.IsIdEqual(medicine.OrderId, order.id) && HelperFunctions.CompareDates(order.DateEnd, HelperFunctions.ConvertStringToDate(date.StartDate)) == 1 && HelperFunctions.CompareDates(order.DateEnd, HelperFunctions.ConvertStringToDate(date.EndDate)) == -1 && order.IsFinished) return true;
+            if (HelperFunctions.IsIdEqual(medicine.TenderId, tender.id) && HelperFunctions.CompareDates(tender.ActiveUntil, HelperFunctions.ConvertStringToDate(date.StartDate)) == 1 && HelperFunctions.CompareDates(tender.ActiveUntil, HelperFunctions.ConvertStringToDate(date.EndDate)) == -1 && tender.Closed) return true;
             return false;
         }
     }

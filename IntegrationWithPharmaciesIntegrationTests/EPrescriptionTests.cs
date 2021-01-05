@@ -1,4 +1,5 @@
 ﻿using HealthClinic.CL.DbContextModel;
+using HealthClinic.CL.Model.Orders;
 using HealthClinic.CL.Model.Patient;
 using IntegrationWithPharmacies;
 using Microsoft.AspNetCore.Hosting;
@@ -11,9 +12,9 @@ using System.Threading.Tasks;
 using Xunit;
 
 namespace IntegrationWithPharmaciesIntegrationTests
-{
+{/*
     public class EPrescriptionTests
-    {/*
+    {
         private readonly HttpClient _client;
         private readonly MyDbContext _context;
 
@@ -36,8 +37,10 @@ namespace IntegrationWithPharmaciesIntegrationTests
             medicines.ShouldNotBeEmpty();
         }
         [Fact]
-        public async Task Get_Medicines_Description()
+        public async Task Get_Medicine_Description()
         {
+            _context.MedicineWithQuantities.Add(new MedicineWithQuantity(6, "Brufen", 6, "Description"));
+            _context.SaveChanges();
             var response = await _client.GetAsync("http://localhost:57942/api/sharingPrescription/http/description/Brufen");
             response.StatusCode.ShouldBe(HttpStatusCode.OK);
         }
@@ -66,6 +69,6 @@ namespace IntegrationWithPharmaciesIntegrationTests
             var medicines = await response.Content.ReadAsAsync<List<PatientUser>>();
             medicines.ShouldNotBeEmpty();
         }
-        */
-    }
+        
+    }*/
 }
