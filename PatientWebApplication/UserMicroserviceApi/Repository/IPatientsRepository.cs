@@ -10,5 +10,6 @@ namespace UserMicroserviceApi.Repository
         PatientUser Validate(PatientUser patient);
         List<PatientUser> GetAll();
         PatientUser BlockPatient(PatientUser patient);
+        PatientUser GetByEmail(string email);
     }
 }

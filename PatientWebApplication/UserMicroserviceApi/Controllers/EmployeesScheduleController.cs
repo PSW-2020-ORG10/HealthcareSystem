@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using UserMicroserviceApi.Adapters;
 using UserMicroserviceApi.DbContextModel;
 using UserMicroserviceApi.Dtos;
@@ -25,6 +26,7 @@ namespace UserMicroserviceApi.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "patient")]
         public IActionResult GetShiftForDoctorForSpecificDay(DoctorShiftSearchDto dto)
         {
             return Ok(MicroserviceShiftAdapter.ShiftToMicroserviceShiftDto(employeesScheduleService.getShiftForDoctorForSpecificDay(dto.Date, doctorService.GetByid(dto.DoctorId))));

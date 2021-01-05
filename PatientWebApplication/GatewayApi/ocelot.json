@@ -10,7 +10,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/getAll",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/doctorappointment/getAllDto",
@@ -22,7 +26,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/getAllDto",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/doctorappointment/{id}",
@@ -34,7 +42,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/{id}",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/doctorappointment/patient",
@@ -46,10 +58,14 @@
         }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/patient",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
     {
-      "DownstreamPathTemplate": "/api/doctorappointment/patientInTwoDays",
+      "DownstreamPathTemplate": "/api/doctorappointment/patientInTwoDays/{id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -57,11 +73,15 @@
           "Port": 53212
         }
       ],
-      "UpstreamPathTemplate": "/api/doctorappointment/patientInTwoDays",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamPathTemplate": "/api/doctorappointment/patientInTwoDays/{id}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
     {
-      "DownstreamPathTemplate": "/api/doctorappointment/patientInFuture",
+      "DownstreamPathTemplate": "/api/doctorappointment/patientInFuture/{id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -69,8 +89,12 @@
           "Port": 53212
         }
       ],
-      "UpstreamPathTemplate": "/api/doctorappointment/patientInFuture",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamPathTemplate": "/api/doctorappointment/patientInFuture/{id}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
 
     {
@@ -83,7 +107,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/{appointmentId}",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
 
     {
@@ -96,7 +124,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/recommend",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
 
     {
@@ -109,7 +141,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/availableappointments",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
 
     {
@@ -122,7 +158,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/",
-      "UpstreamHttpMethod": [ "POST" ]
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
 
     {
@@ -135,7 +175,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/appointmentsForDoctor/{doctorId}",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
 
     {
@@ -148,7 +192,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/appointmentsForPatient/{patientId}",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/doctorappointment/appointmentsForPatientDto/{patientId}",
@@ -160,7 +208,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/appointmentsForPatientDto/{patientId}",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/doctorappointment/appointmentsForPatientDtoSimple/{patientId}",
@@ -172,7 +224,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/appointmentsForPatientDtoSimple/{patientId}",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/operation/getAll",
@@ -184,7 +240,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/operation/getAll",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/operation/{id}",
@@ -196,7 +256,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/operation/{id}",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/operation/search",
@@ -208,7 +272,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/operation/search",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/operation/operationsForDoctor/{doctorId}",
@@ -220,10 +288,14 @@
         }
       ],
       "UpstreamPathTemplate": "/api/operation/operationsForDoctor/{doctorId}",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
     {
-      "DownstreamPathTemplate": "/api/survey",
+      "DownstreamPathTemplate": "/api/survey/{id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -231,11 +303,15 @@
           "Port": 53212
         }
       ],
-      "UpstreamPathTemplate": "/api/survey",
-      "UpstreamHttpMethod": [ "POST", "GET" ]
+      "UpstreamPathTemplate": "/api/survey/{id}",
+      "UpstreamHttpMethod": [ "POST", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
     {
-      "DownstreamPathTemplate": "/api/survey/getWithSurveys",
+      "DownstreamPathTemplate": "/api/survey/getWithSurveys/{id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -243,8 +319,12 @@
           "Port": 53212
         }
       ],
-      "UpstreamPathTemplate": "/api/survey/getWithSurveys",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamPathTemplate": "/api/survey/getWithSurveys/{id}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/survey/getRates",
@@ -256,7 +336,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/survey/getRates",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/survey/getDoctorRates",
@@ -268,7 +352,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/survey/getDoctorRates",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/feedback",
@@ -280,7 +368,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/feedback",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ]
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/feedback/published",
@@ -292,7 +384,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/feedback/published",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/feedback/{id}",
@@ -304,7 +400,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/feedback/{id}",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/appointmentSearch/search",
@@ -316,7 +416,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/appointmentSearch/search",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/appointmentSearch/advancedsearch",
@@ -328,7 +432,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/appointmentSearch/advancedsearch",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/prescription",
@@ -340,10 +448,14 @@
         }
       ],
       "UpstreamPathTemplate": "/api/prescription",
-      "UpstreamHttpMethod": [ "GET" ]
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
     {
-      "DownstreamPathTemplate": "/api/prescription/patient",
+      "DownstreamPathTemplate": "/api/prescription/patient/{id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -351,8 +463,12 @@
           "Port": 53174
         }
       ],
-      "UpstreamPathTemplate": "/api/prescription/patient",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamPathTemplate": "/api/prescription/patient/{id}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/prescription/search",
@@ -364,7 +480,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/prescription/search",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/prescription/advancedsearch",
@@ -376,7 +496,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/prescription/advancedsearch",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/doctor",
@@ -388,7 +512,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/doctor",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/doctor/available",
@@ -400,7 +528,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/doctor/available",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/doctor/{id}",
@@ -412,7 +544,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/doctor/{id}",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/doctor/appointment/{doctorId}/{time}/{date}",
@@ -424,7 +560,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/doctor/appointment/{doctorId}/{time}/{date}",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/doctor/operation/{doctorId}/{time}/{date}",
@@ -436,7 +576,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/doctor/operation/{doctorId}/{time}/{date}",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/employeesSchedule",
@@ -448,7 +592,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/employeesSchedule",
-      "UpstreamHttpMethod": [ "POST" ]
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/patientUser",
@@ -460,7 +608,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/patientUser",
-      "UpstreamHttpMethod": [ "POST" ]
+      "UpstreamHttpMethod": [ "POST" ],
     },
     {
       "DownstreamPathTemplate": "/api/patientUser/image",
@@ -472,7 +620,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/patientUser/image",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
     },
     {
       "DownstreamPathTemplate": "/api/patientUser/getimage",
@@ -484,7 +632,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/patientUser/getimage",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/patientUser/{id}",
@@ -496,10 +648,10 @@
         }
       ],
       "UpstreamPathTemplate": "/api/patientUser/{id}",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
     },
     {
-      "DownstreamPathTemplate": "/api/patientUser/getOne",
+      "DownstreamPathTemplate": "/api/patientUser/getOne/{id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -507,8 +659,12 @@
           "Port": 53236
         }
       ],
-      "UpstreamPathTemplate": "/api/patientUser/getOne",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamPathTemplate": "/api/patientUser/getOne/{id}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/patientUser/find/{id}",
@@ -520,7 +676,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/patientUser/find/{id}",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/patientUser/findDto/{id}",
@@ -532,7 +692,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/patientUser/findDto/{id}",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/patientUser",
@@ -544,7 +708,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/patientUser",
-      "UpstreamHttpMethod": [ "GET" ]
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/patientUser/malicious",
@@ -556,7 +724,11 @@
         }
       ],
       "UpstreamPathTemplate": "/api/patientUser/malicious",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
     },
     {
       "DownstreamPathTemplate": "/api/patientUser/{patientId}",
@@ -568,7 +740,39 @@
         }
       ],
       "UpstreamPathTemplate": "/api/patientUser/{patientId}",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/login",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 53236
+        }
+      ],
+      "UpstreamPathTemplate": "/api/login",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/login",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 53236
+        }
+      ],
+      "UpstreamPathTemplate": "/api/login",
+      "UpstreamHttpMethod": [ "POST" ],
     }
   ]
 }

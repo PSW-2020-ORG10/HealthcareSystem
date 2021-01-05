@@ -19,6 +19,7 @@ namespace UserMicroserviceApi.DbContextModel
         public DbSet<PhoneNumber> PhoneNumbers { get; set; }
         public DbSet<SecretaryUser> SecretaryUsers { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Administrator> Administrators { get; set; }
 
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
@@ -51,10 +52,10 @@ namespace UserMicroserviceApi.DbContextModel
            );
 
             modelBuilder.Entity<PatientUser>().HasData(
-                new PatientUser(1, "Pera", "Peric", "Male", "1234", "02/02/1990", "123", "212313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null),
-                new PatientUser(2, "Marko", "Markovic", "Male", "123456789", "21/07/1989", "555333", "2112313", "Alergija", "Grad", false, "marko_markovic@gmail.com", "pass", false, "Grad2", "Roditelj", "images.jfif"),
-                new PatientUser(3, "Stefan", "Lelic", "Male", "1234", "2/2/2020", "123", "212313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", "download.jfif"),
-                new PatientUser(4, "Marko", "Lazarevic", "Female", "1234", "2/2/2020", "123", "2112313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null)
+                new PatientUser(1, "Pera", "Peric", "Male", "1234", "02/02/1990", "123", "212313", "Alergija", "Grad", false, "patient1@gmail.com", "12345", false, "Grad2", "Roditelj", null),
+                new PatientUser(2, "Marko", "Markovic", "Male", "123456789", "21/07/1989", "555333", "2112313", "Alergija", "Grad", false, "marko_markovic@gmail.com", "12345", false, "Grad2", "Roditelj", "images.jfif"),
+                new PatientUser(3, "Stefan", "Lelic", "Male", "1234", "2/2/2020", "123", "212313", "Alergija", "Grad", false, "patient2@gmail.com", "12345", false, "Grad2", "Roditelj", "download.jfif"),
+                new PatientUser(4, "Marko", "Lazarevic", "Female", "1234", "2/2/2020", "123", "2112313", "Alergija", "Grad", false, "patient2@gmail.com", "12345", false, "Grad2", "Roditelj", null)
             );
 
             modelBuilder.Entity<Shift>().HasData(
@@ -109,6 +110,10 @@ namespace UserMicroserviceApi.DbContextModel
                 133, "Room")
             );
 
+            modelBuilder.Entity<Administrator>().HasData(
+                new Administrator(5, "Pera", "Peric", "1234", "12/12/1985", "123", "admin1@gmail.com", "password", "Grad",133),
+                new Administrator(6, "Ana", "Stanic", "1234", "12/12/1985", "123", "admin2@gmail.com", "password", "Grad", 133)
+            );
         }
 
     }

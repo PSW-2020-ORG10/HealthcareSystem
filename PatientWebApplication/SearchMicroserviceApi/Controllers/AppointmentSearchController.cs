@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SearchMicroserviceApi.DbContextModel;
 using SearchMicroserviceApi.Dtos;
@@ -23,6 +24,7 @@ namespace SearchMicroserviceApi.Controllers
         /// </param>
         /// <returns> 200 Ok with list of filtered patient appointments. </returns>
         [HttpPost("search")]
+        [Authorize(Roles = "patient")]
         public async Task<IActionResult> SimpleSearchAppointmentsAsync(AppointmentReportSearchDto dto)
         {
             return Ok(await appointmentSearchService.SimpleSearchAppointmentsAsync(dto));
@@ -33,6 +35,7 @@ namespace SearchMicroserviceApi.Controllers
         /// </param>
         /// <returns> 200 Ok with list of filtered appointments. </returns>
         [HttpPost("advancedsearch")]
+        [Authorize(Roles = "patient")]
         public async Task<IActionResult> AdvancedSearchAppointmentsAsync(AppointmentAdvancedSearchDto dto)
         {
             return Ok(await appointmentSearchService.AdvancedSearchAppointmentsAsync(dto));

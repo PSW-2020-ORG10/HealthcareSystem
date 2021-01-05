@@ -3,6 +3,7 @@ using FeedbackMicroserviceApi.DbContextModel;
 using FeedbackMicroserviceApi.Dtos;
 using FeedbackMicroserviceApi.Model;
 using FeedbackMicroserviceApi.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FeedbackMicroserviceApi.Controllers
@@ -26,6 +27,7 @@ namespace FeedbackMicroserviceApi.Controllers
         /// <summary> This method is calling <c>FeedbackService</c> to get list of all <c>Feedback</c>.  </summary>
         /// <returns> 200 Ok with list of all feedback. </returns>
         [HttpGet]       // GET /api/feedback
+        [Authorize(Roles = "admin")]
         public IActionResult Get()
         {
             return Ok(FeedbackAdapter.FeedbackListToMicroserviceFeedbackDtoList(FeedbackService.GetAll()));
@@ -35,6 +37,7 @@ namespace FeedbackMicroserviceApi.Controllers
         /// <summary> This method is calling <c>FeedbackService</c> to get list of all published <c>Feedback</c>. </summary>
         /// <returns> 200 Ok with list of published feedback. </returns>
         [HttpGet("published")]       // GET /api/feedback/published
+        [Authorize(Roles = "patient")]
         public IActionResult GetPublished()
         {
             return Ok(FeedbackAdapter.FeedbackListToMicroserviceFeedbackDtoList(FeedbackService.GetPublished()));
@@ -47,6 +50,7 @@ namespace FeedbackMicroserviceApi.Controllers
         /// </param>
         /// <returns> if fields from <paramref name="dto"/> are not valid 400 Bad Request also if created feedback is not null 200 Ok else 404 Bad Request.</returns>
         [HttpPost]      // POST /api/feedback Request body: {"message": "Some message", "isPublic": true, "isAnonymous": false}
+        [Authorize(Roles = "patient")]
         public IActionResult Create(FeedbackDto dto)
         {
             Feedback feedback = FeedbackService.Create(dto);
@@ -68,6 +72,7 @@ namespace FeedbackMicroserviceApi.Controllers
         /// <returns> If <paramref name="id"/> is not valid returns 400 Bad Request; if business logic is not valid, returns 404 Not Found, if feedback is successfully published, returns 200 OK with published feedback</returns>
 
         [HttpPut("{id}")]       // PUT /api/feedback/{id}
+        [Authorize(Roles = "admin")]
         public IActionResult Put(int id)
         {
             if (id < 0)
