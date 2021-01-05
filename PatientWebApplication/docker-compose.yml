@@ -8,8 +8,8 @@ services:
     networks:
       - demo
     environment:
-      DATABASE_USERNAME: demo
-      DATABASE_PASSWORD: demo
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root
       DATABASE_HOST: mysql
       DATABASE_SCHEMA: MYSQLHealtcareDB
       DATABASE_PORT: 3306
@@ -29,19 +29,10 @@ services:
     restart: on-failure
     networks:
       - demo
-    environment:
-      DATABASE_USERNAME: demo
-      DATABASE_PASSWORD: demo
-      DATABASE_HOST: mysql
-      DATABASE_SCHEMA: MYSQLHealtcareDB
-      DATABASE_PORT: 3306
-      PORT: 54689
     ports:
       - 54689:54689
     depends_on:
-      - mysql
-    volumes:
-      - gatewayapi:/app/sql
+      - react
 
   searchmicroserviceapi:
     image: search:latest
@@ -50,8 +41,8 @@ services:
     networks:
       - demo
     environment:
-      DATABASE_USERNAME: demo
-      DATABASE_PASSWORD: demo
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root
       DATABASE_HOST: mysql
       DATABASE_SCHEMA: MYSQLHealtcareDB
       DATABASE_PORT: 3306
@@ -71,8 +62,8 @@ services:
     networks:
       - demo
     environment:
-      DATABASE_USERNAME: demo
-      DATABASE_PASSWORD: demo
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root
       DATABASE_HOST: mysql
       DATABASE_SCHEMA: MYSQLHealtcareDB
       DATABASE_PORT: 3306
@@ -93,8 +84,8 @@ services:
     networks:
       - demo
     environment:
-      DATABASE_USERNAME: demo
-      DATABASE_PASSWORD: demo
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root
       DATABASE_HOST: mysql
       DATABASE_SCHEMA: MYSQLHealtcareDB
       DATABASE_PORT: 3306
@@ -115,8 +106,8 @@ services:
       - demo
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_PASSWORD: demo
-      MYSQL_USER: demo
+      MYSQL_PASSWORD: root
+      MYSQL_USER: root
       MYSQL_DATABASE: MYSQLHealtcareDB
     ports:
       - 3306:3306
@@ -132,10 +123,8 @@ services:
     environment:
       - NODE_ENV=development
       - CHOKIDAR_USEPOLLING=true
-    depends_on:
-      - gatewayapi
     volumes:        
-      - WebAppClientApp:/react/src
+      - webAppClientapp:/react/src
       - '/react/node_modules'
 
 
@@ -146,7 +135,7 @@ volumes:
   searchmicroserviceapi:
   appointmentmicroserviceapi:
   mysql-data:
-  WebAppClientApp:
+  webAppClientapp:
 
 networks:
   demo:
