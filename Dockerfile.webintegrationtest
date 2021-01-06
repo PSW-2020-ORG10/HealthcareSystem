@@ -10,8 +10,10 @@ COPY ["PatientWebApplication/PatientWebApplication/PatientWebApplication.csproj"
 COPY ["PatientWebApplication/HealthClinic.DAL/HealthClinic.CL.csproj", "PatientWebApplication/HealthClinic.DAL/"]
 RUN dotnet restore "PatientWebApplication/PatientWebApplicationIntegrationTests/PatientWebApplicationIntegrationTests.csproj"
 COPY . .
-WORKDIR "/src/PatientWebApplicationIntegrationTests"
+WORKDIR "/src/PatientWebApplication/PatientWebApplicationIntegrationTests"
 RUN dotnet build "PatientWebApplicationIntegrationTests.csproj" -c Release -o /app/build
+
+RUN dotnet test "PatientWebApplicationIntegrationTests.csproj" -c Release -o /app/test
 
 FROM build AS publish
 RUN dotnet publish "PatientWebApplicationIntegrationTests.csproj" -c Release -o /app/publish

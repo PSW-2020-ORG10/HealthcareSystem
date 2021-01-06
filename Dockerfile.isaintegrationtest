@@ -13,6 +13,8 @@ COPY . .
 WORKDIR "/src/IntegrationWithPharmaciesIntegrationTests"
 RUN dotnet build "IntegrationWithPharmaciesIntegrationTests.csproj" -c Release -o /app/build
 
+RUN dotnet test "IntegrationWithPharmaciesIntegrationTests.csproj" -c Release -o /app/test
+
 FROM build AS publish
 RUN dotnet publish "IntegrationWithPharmaciesIntegrationTests.csproj" -c Release -o /app/publish
 
