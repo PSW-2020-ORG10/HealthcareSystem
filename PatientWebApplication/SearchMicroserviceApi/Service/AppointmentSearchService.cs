@@ -135,7 +135,7 @@ namespace SearchMicroserviceApi.Service
         public async Task<List<MicroserviceSearchAppointmentDto>> AdvancedSearchAppointmentsAsync(AppointmentAdvancedSearchDto dto)
         {
 
-            return SearchForOtherParameters(await Utility.HttpRequests.GetAppointmentsForPatientDto(2), dto, SearchForFirstParameter(await Utility.HttpRequests.GetAppointmentsForPatientDto(2), dto));
+            return SearchForOtherParameters(await Utility.HttpRequests.GetAppointmentsForPatientDto(dto.PatientId), dto, SearchForFirstParameter(await Utility.HttpRequests.GetAppointmentsForPatientDto(dto.PatientId), dto));
 
         }
 

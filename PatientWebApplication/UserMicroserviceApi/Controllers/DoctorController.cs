@@ -34,14 +34,14 @@ namespace UserMicroserviceApi.Controllers
         }
 
         [HttpGet]       // GET /api/doctor
-        [Authorize(Roles = "patient")]
+        [AllowAnonymous]
         public IActionResult Get()
         {   
             return Ok(MicroserviceDoctorAdapter.DoctorListToMicroserviceDoctorDtoList(doctorService.GetAll()));
         }
 
         [HttpGet("{id}")]
-        [Authorize(Roles = "patient")]
+        [AllowAnonymous]
         public IActionResult GetById(int id)
         {
             return Ok(MicroserviceDoctorAdapter.DoctorToMicroserviceDoctorDto(doctorService.GetByid(id)));

@@ -125,7 +125,6 @@ namespace UserMicroserviceApi.Controllers
         }
 
         [HttpGet("findDto/{id}")]
-        [Authorize(Roles = "patient")]
         public IActionResult GetOnePatientDto(int id)
         {
             PatientUser patient = PatientService.GetOne(id);

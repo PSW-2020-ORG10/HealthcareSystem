@@ -11,5 +11,6 @@ namespace UserMicroserviceApi.Repository
         List<PatientUser> GetAll();
         PatientUser BlockPatient(PatientUser patient);
         PatientUser GetByEmail(string email);
+        PatientUser GetByLoginInfo(UserModel login);
     }
 }

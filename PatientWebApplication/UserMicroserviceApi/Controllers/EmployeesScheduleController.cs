@@ -26,7 +26,7 @@ namespace UserMicroserviceApi.Controllers
 
 
         [HttpPost]
-        [Authorize(Roles = "patient")]
+        [AllowAnonymous]
         public IActionResult GetShiftForDoctorForSpecificDay(DoctorShiftSearchDto dto)
         {
             return Ok(MicroserviceShiftAdapter.ShiftToMicroserviceShiftDto(employeesScheduleService.getShiftForDoctorForSpecificDay(dto.Date, doctorService.GetByid(dto.DoctorId))));

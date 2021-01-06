@@ -49,9 +49,9 @@ namespace UserMicroserviceApi.Repository
             return dbContext.Administrators.SingleOrDefault(admin => admin.id == id);
         }
 
-        public Administrator GetByEmail(string email)
+        public Administrator GetByLoginInfo(UserModel login)
         {
-            return dbContext.Administrators.SingleOrDefault(admin => admin.email.Equals(email));
+            return dbContext.Administrators.SingleOrDefault(admin => admin.email.Equals(login.Email) && admin.password.Equals(login.Password));
         }
     }
 }

@@ -10,6 +10,7 @@ namespace UserMicroserviceApi.Repository
         Administrator GetByid(int id);
         void New(Administrator admin);
         void Update(Administrator admin);
-        Administrator GetByEmail(string email);
+        Administrator GetByLoginInfo(UserModel login);
+
     }
 }

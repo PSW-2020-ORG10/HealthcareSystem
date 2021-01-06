@@ -42,7 +42,7 @@ namespace SearchMicroserviceApi.Service
         /// <returns> List of filtered patient prescriptions. </returns>
         public List<Prescription> SimpleSearchPrescriptions(PrescriptionSearchDto prescriptionSearchDto)
         {
-            return SearchForDoctor(SearchForMedicines(SearchForUsed(SearchForComments(GetPrescriptionsForPatient(1), prescriptionSearchDto), prescriptionSearchDto), prescriptionSearchDto), prescriptionSearchDto);
+            return SearchForDoctor(SearchForMedicines(SearchForUsed(SearchForComments(GetPrescriptionsForPatient(prescriptionSearchDto.PatientId), prescriptionSearchDto), prescriptionSearchDto), prescriptionSearchDto), prescriptionSearchDto);
 
         }
 
@@ -52,7 +52,7 @@ namespace SearchMicroserviceApi.Service
         /// <returns> List of filtered patient prescriptions. </returns>
         public List<Prescription> AdvancedSearchPrescriptions(PrescriptionAdvancedSearchDto dto)
         {
-            return SearchForOtherParameters(GetPrescriptionsForPatient(1), dto, SearchForFirstParameter(GetPrescriptionsForPatient(1), dto));
+            return SearchForOtherParameters(GetPrescriptionsForPatient(dto.PatientId), dto, SearchForFirstParameter(GetPrescriptionsForPatient(dto.PatientId), dto));
         }
 
         /// <summary> This method is getting list of filtered <c>Prescription</c> that match list of parameters in <c>PrescriptionAdvnacedSearchDto</c></summary>

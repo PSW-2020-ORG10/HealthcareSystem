@@ -19,28 +19,30 @@ import ChooseAppointmentType from './ChooseAppointmentType';
 import AllPatientsAppointments from './AllPatientsAppointments';
 import MaliciousPatient from './MaliciousPatient';
 import ScheduleAppointment from './ScheduleAppointment';
+import { AuthRouteAdmin } from '../AuthRouteAdmin'
+import { AuthRoutePatient } from '../AuthRoutePatient'
 
 export default (props: { children: React.ReactNode }) => (
     <React.Fragment>
         <NavMenu/>
         <Container>
             <Route exact path='/' component={Home} />
-            <Route path='/patient-feedback' component={PatientFeedback} />
-            <Route path='/admin-feedback' component={AdminFeedback} />
-            <Route path='/create-feedback' component={CreateFeedback} />
-            <Route path='/prescriptions-simple' component={PrescriptionsSimple} />
-            <Route path='/reports-simple' component={AppointmentReportSimpleSearch} />
+            <AuthRoutePatient path='/patient-feedback' Component={PatientFeedback} />
+            <AuthRouteAdmin path='/admin-feedback' Component={AdminFeedback} />
+            <AuthRoutePatient path='/create-feedback' Component={CreateFeedback} />
+            <AuthRoutePatient path='/prescriptions-simple' Component={PrescriptionsSimple} />
+            <AuthRoutePatient path='/reports-simple' Component={AppointmentReportSimpleSearch} />
             <Route path='/register-patient' component={RegistrationOfPatient} />
-            <Route path='/prescriptions-advanced' component={PrescriptionsAdvanced} />
-            <Route path='/my-information' component={MyInformation} />
-            <Route path='/appointments-advanced' component={AppointmentsAdvanced} />
-            <Route path='/create-survey' component={CreateSurvey} />
-            <Route path='/rates-doctor' component={DoctorRates} />
-            <Route path='/rates-general' component={AllRates} />
-            <Route path='/choose-appointment-type' component={ChooseAppointmentType} />
-            <Route path='/my-appointments' component={AllPatientsAppointments} />
-            <Route path='/malicious-patient' component={MaliciousPatient} />
-            <Route path='/schedule-appointment' component={ScheduleAppointment} />
+            <AuthRoutePatient path='/prescriptions-advanced' Component={PrescriptionsAdvanced} />
+            <AuthRoutePatient path='/my-information' Component={MyInformation} />
+            <AuthRoutePatient path='/appointments-advanced' Component={AppointmentsAdvanced} />
+            <AuthRoutePatient path='/create-survey' Component={CreateSurvey} />
+            <AuthRouteAdmin path='/rates-doctor' Component={DoctorRates} />
+            <AuthRouteAdmin path='/rates-general' Component={AllRates} />
+            <AuthRoutePatient path='/choose-appointment-type' Component={ChooseAppointmentType} />
+            <AuthRoutePatient path='/my-appointments' Component={AllPatientsAppointments} />
+            <AuthRouteAdmin path='/malicious-patient' Component={MaliciousPatient} />
+            <AuthRoutePatient path='/schedule-appointment' Component={ScheduleAppointment} />
         </Container>
     </React.Fragment>
 );

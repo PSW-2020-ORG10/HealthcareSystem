@@ -33,7 +33,8 @@
     LOADED_MALICIOUS_PATIENTS,
     APPOINTMENT_SCHEDULED,
     LOADED_IMAGE,
-    LOADED_IMAGE_ERROR
+    LOADED_IMAGE_ERROR,
+    USER_LOGGEDIN
 } from "../types/types";
 import { parseStringToDate } from '../utilities/Utilities';
 
@@ -93,7 +94,9 @@ const initialState = {
     maliciousPatientsList: [],
     availableDoctors: [],
     availableAppointments: [],
-    loadedImage : ""
+    loadedImage : "",
+    userCookie : {},
+    userToken : ""      
 };
 
 
@@ -297,6 +300,15 @@ function reducer(state = initialState, action) {
             ...state,
             loadedImage: action.payload
         };
+        case USER_LOGGEDIN:
+            debugger;
+            var parts = action.payload.token.split('.'); // header, payload, signature
+            var user = JSON.parse(atob(parts[1]));
+            return {
+                ...state,
+                userToken: action.payload.token,
+                userCookie: user
+            };
         default:
             return state;
     }

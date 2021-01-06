@@ -32,7 +32,7 @@ namespace AppointmentMicroserviceApi.Controllers
         }
 
         [HttpGet("getAllDto")]
-        [Authorize(Roles = "patient")]
+        [AllowAnonymous]
         public IActionResult GetAllDto()
         {
             return Ok(CancelAppointmentAdapter.ConvertAppointmentListToAppointmentDtoList(regularAppointmentService.GetAll()));
@@ -131,14 +131,14 @@ namespace AppointmentMicroserviceApi.Controllers
         }
 
         [HttpGet("appointmentsForPatientDto/{patientId}")]
-        [Authorize(Roles = "patient")]
+        [AllowAnonymous]
         public IActionResult GetAppointmentsForPatientDto(int patientId)
         {
             return Ok(SearchAppointmentAdapter.AppointmentListToSearchAppointmenDtoList(regularAppointmentService.GetAppointmentsForPatient(patientId)));
         }
 
         [HttpGet("appointmentsForPatientDtoSimple/{patientId}")]
-        [Authorize(Roles = "patient")]
+        [AllowAnonymous]
         public IActionResult GetAppointmentsForPatientDtoSimple(int patientId)
         {
             return Ok( new AppointmentAdapter().ConvertAppointmentListToAppointmentDtoList(regularAppointmentService.GetAppointmentsForPatient(patientId)));

@@ -127,8 +127,7 @@ namespace AppointmentMicroserviceApi.Service
             MicroserviceDoctorDto doctor = Utility.HttpRequests.GetDoctorByIdAsync(dto.DoctorId).Result;
             DateTime startDate = UtilityMethods.ParseDateInCorrectFormat(dto.Start);
             DateTime endDate = UtilityMethods.ParseDateInCorrectFormat(dto.End);
-            //int patientId = HttpRequests.GetOnePatient(2).Result.Id; //still no login, change after login, id set to 1
-            List<DoctorAppointment> recomendedAppointments = GetAllAvailableAppointmentsForRecommendedDatesAsync(dto.DoctorId, startDate, endDate, 2).Result;
+            List<DoctorAppointment> recomendedAppointments = GetAllAvailableAppointmentsForRecommendedDatesAsync(dto.DoctorId, startDate, endDate, dto.PatientId).Result;
 
             if (!recomendedAppointments.Any())
             {
@@ -136,11 +135,11 @@ namespace AppointmentMicroserviceApi.Service
                 {
                     endDate = (endDate - startDate).TotalDays > 20 ? endDate.AddDays(10) : (endDate - startDate).TotalDays > 10 ? endDate.AddDays(5) : endDate.AddDays(3);
 
-                    recomendedAppointments = GetAllAvailableAppointmentsForRecommendedDatesAsync(dto.DoctorId, startDate, endDate, 2).Result;
+                    recomendedAppointments = GetAllAvailableAppointmentsForRecommendedDatesAsync(dto.DoctorId, startDate, endDate, dto.PatientId).Result;
                 }
                 else
                 {
-                    recomendedAppointments = RecommenedAnAppointmentDatePriorityAsync(startDate, endDate, 2, doctor.Speciality).Result;
+                    recomendedAppointments = RecommenedAnAppointmentDatePriorityAsync(startDate, endDate, dto.PatientId, doctor.Speciality).Result;
                 }
             }
 

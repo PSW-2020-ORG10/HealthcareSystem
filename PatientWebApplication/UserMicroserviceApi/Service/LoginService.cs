@@ -35,13 +35,13 @@ namespace UserMicroserviceApi.Service
 
         public UserModel AuthenticateUser(UserModel login)
         {
-            var admin = _administratorRepository.GetByEmail(login.Email);
+            var admin = _administratorRepository.GetByLoginInfo(login);
             if (admin != null) {
                 login.Role = "admin";
                 login.Id = admin.id;
                 return login;
             }
-            var patient = _patientRepository.GetByEmail(login.Email);
+            var patient = _patientRepository.GetByLoginInfo(login);
             if(patient != null)
             {
                 login.Role = "patient";
@@ -57,6 +57,7 @@ namespace UserMicroserviceApi.Service
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
             var claims = new[] {
                 new Claim("user_id", userInfo.Id.ToString()),
+                new Claim("role", userInfo.Role),
                 new Claim (ClaimTypes.Role, userInfo.Role)
             };
             var token = new JwtSecurityToken(_config["Jwt:Issuer"],

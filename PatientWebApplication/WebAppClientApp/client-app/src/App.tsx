@@ -18,12 +18,13 @@ import DoctorRates from './components/DoctorRates';
 import AllRates from './components/AllRates';
 import ChooseAppointmentType from './components/ChooseAppointmentType';
 import AllPatientsAppointments from './components/AllPatientsAppointments';
+import { AuthRouteAdmin } from './AuthRouteAdmin'
 
 export default () => (
     <Layout>
         <Route exact path='/' component={Home} />
         <Route path='/patient-feedback' component={PatientFeedback} />
-        <Route path='/admin-feedback' component={AdminFeedback} />
+        <AuthRouteAdmin path='/admin-feedback' Component={AdminFeedback} />
         <Route path='/create-feedback' component={CreateFeedback} />
         <Route path='/prescriptions-simple' component={PrescriptionsSimple} />
         <Route path='/reports-simple' component={AppointmentReportSimpleSearch} />
@@ -32,8 +33,8 @@ export default () => (
         <Route path='/my-information' component={MyInformation} />
         <Route path='/appointments-advanced' component={AppointmentsAdvanced} />
         <Route path='/create-survey' component={CreateSurvey} />
-        <Route path='/rates-doctor' component={DoctorRates} />
-        <Route path='/rates-general' component={AllRates} />
+        <AuthRouteAdmin path='/rates-doctor' Component={DoctorRates} />
+        <AuthRouteAdmin path='/rates-general' Component={AllRates} />
         <Route path='/choose-appointment-type' component={ChooseAppointmentType} />
         <Route path='/my-appointments' component={AllPatientsAppointments} />
     </Layout>

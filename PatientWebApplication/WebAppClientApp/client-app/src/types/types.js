@@ -53,3 +53,5 @@ export const LOADED_MALICIOUS_PATIENTS = "loadedMaliciousPatients";
 export const OBSERVE_MALICIOUS_ERROR = "observeMaliciousError";
 export const LOADED_IMAGE = "loadedImage";
 export const LOADED_IMAGE_ERROR = "loadedImageError";
+export const USER_LOGGEDIN = "userLoggedIn";
+export const USER_LOGGEDIN_ERROR = "userLoggedInError";

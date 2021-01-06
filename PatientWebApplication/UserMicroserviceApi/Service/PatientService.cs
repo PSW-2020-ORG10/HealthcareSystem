@@ -40,9 +40,13 @@ namespace UserMicroserviceApi.Service
         /// <returns>Returns successfully created patient; otherwise, return <c>null</c></returns>
         public PatientUser Create(PatientDto patientDto)
         {
-            PatientUser patient = PatientsRepository.Add(PatientAdapter.PatientDtoToPatient(patientDto));
-            EmailVerificationService.SendVerificationMail(new MailAddress(patient.email), patient.id);
-            return patient;
+            if(PatientsRepository.GetByEmail(patientDto.email) == null)
+            {
+                PatientUser patient = PatientsRepository.Add(PatientAdapter.PatientDtoToPatient(patientDto));
+                EmailVerificationService.SendVerificationMail(new MailAddress(patient.email), patient.id);
+                return patient;
+            }
+            return null;
         }
 
         /// <summary> This method is calling <c>PatientsRepository</c> to validate patients account. </summary>

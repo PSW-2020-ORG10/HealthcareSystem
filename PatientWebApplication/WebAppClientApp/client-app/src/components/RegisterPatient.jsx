@@ -4,7 +4,7 @@ import axios from "axios";
 import { connect } from "react-redux"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { showErrorToast, checkDateFormat, checkEmailFormat, showErrorToastEmail } from "../utilities/Utilities"
+import { showErrorToast, checkDateFormat, checkEmailFormat, showErrorToastEmail, showExistsToast } from "../utilities/Utilities"
 import "../css/app.css"
 
 class RegisterPatient extends Component {
@@ -48,8 +48,6 @@ class RegisterPatient extends Component {
     handleChange2 = async(event) => {
         this.setState({
             fileUrl: URL.createObjectURL(event.target.files[0]),
-            
-
         })
         const formData = new FormData();
         
@@ -165,8 +163,6 @@ class RegisterPatient extends Component {
         
         return (
             <div>
-                
-
                     <div className="field-wrap">
                         <label className="label" htmlFor="">
                             Name:
@@ -383,7 +379,7 @@ class RegisterPatient extends Component {
         )
     }
 
-    createRegistration() {
+    async createRegistration() {
         debugger;
         if (this.state.patient.dateOfBirth !== "" && checkDateFormat(this.state.patient.dateOfBirth)) {
             showErrorToast()
@@ -393,14 +389,23 @@ class RegisterPatient extends Component {
             return;
         }
         else {
-            toast.configure();
-            toast.success("Registration successful!", {
-                position: toast.POSITION.TOP_RIGHT
-            });
-            console.log(this.state.patient);
-            this.props.patientRegistered(this.state.patient)
+            var successful = false
+            successful = await this.props.patientRegistered(this.state.patient)
+            debugger;
+            if (successful === true){
+                toast.configure();
+                toast.success("Registration successful!", {
+                    position: toast.POSITION.TOP_RIGHT
+                });
+                window.location.href = "http://localhost:3000";
+                return;
+            }
+            else {
+                showExistsToast();
+                return;
+            }
         }
-        window.location.href = "http://localhost:3000";
+
     }
 
 }

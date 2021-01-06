@@ -89,7 +89,6 @@ class RecommendationModal extends Component {
             position: toast.POSITION.TOP_RIGHT
         });
         debugger;
-        this.state.appointment.patientUserId = 2;
         this.state.appointment.doctorUserId = this.state.appointment.doctor.id;
         this.state.appointment.doctor = null;
 

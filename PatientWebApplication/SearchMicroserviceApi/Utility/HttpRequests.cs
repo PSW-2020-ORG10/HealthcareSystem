@@ -28,13 +28,13 @@ namespace SearchMicroserviceApi.Utility
 
         public static async Task<List<MicroserviceSearchAppointmentDto>> GetAppointmentsForPatientDto(int patientId)
         {
-            var responseString = await client.GetAsync("http://localhost:54689/api/doctorAppointment/appointmentsForPatientDto/" + patientId);
+            var responseString = await client.GetAsync("http://localhost:53212/api/doctorAppointment/appointmentsForPatientDto/" + patientId);
             return await responseString.Content.ReadAsAsync<List<MicroserviceSearchAppointmentDto>>();
         }
 
         public static async Task<List<AppointmentDto>> GetAppointmentsForPatientDtoSimple(int patientId)
         {
-            var responseString = await client.GetAsync("http://localhost:54689/api/doctorAppointment/appointmentsForPatientDtoSimple/" + patientId);
+            var responseString = await client.GetAsync("http://localhost:53212/api/doctorAppointment/appointmentsForPatientDtoSimple/" + patientId);
             return await responseString.Content.ReadAsAsync<List<AppointmentDto>>();
         }
 
