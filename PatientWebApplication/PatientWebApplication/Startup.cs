@@ -17,10 +17,13 @@ namespace PatientWebApplication
         public IConfiguration Configuration { get; }
         public IWebHostEnvironment CurrentEnvironment { get; }
 
+        public static String Stage { get; set; }
+
         public Startup(IConfiguration configuration, IWebHostEnvironment currentEnvironment)
         {
             Configuration = configuration;
             CurrentEnvironment = currentEnvironment;
+            Stage = "Testing";
         }
 
         private string CreateConnectionStringFromEnvironment()
@@ -30,6 +33,8 @@ namespace PatientWebApplication
             string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA") ?? "MYSQLHealtcareDB";
             string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "root";
             string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "root";
+
+            Stage = Environment.GetEnvironmentVariable("STAGE") ?? "Testing";
 
             return $"server={server};port={port};database={database};user={user};password={password}";
         }
@@ -49,7 +54,7 @@ namespace PatientWebApplication
                options.RegisterValidatorsFromAssemblyContaining<Startup>();
            });
 
-            if (CurrentEnvironment.IsEnvironment("Testing"))
+            if (Stage.Equals("Testing") && CurrentEnvironment.IsEnvironment("Testing"))
             {
                 services.AddDbContext<MyDbContext>(options =>
                     options.UseInMemoryDatabase("TestingDB").UseLazyLoadingProxies());
