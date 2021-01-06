@@ -5,12 +5,12 @@ WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["../IntegrationWithPharmaciesIntegrationTests/IntegrationWithPharmaciesIntegrationTests.csproj", "../IntegrationWithPharmaciesIntegrationTests/"]
-COPY ["IntegrationWithPharmacies.csproj", ""]
-COPY ["../PatientWebApplication/HealthClinic.DAL/HealthClinic.CL.csproj", "../PatientWebApplication/HealthClinic.DAL/"]
-RUN dotnet restore "../IntegrationWithPharmaciesIntegrationTests/IntegrationWithPharmaciesIntegrationTests.csproj"
+COPY ["IntegrationWithPharmaciesIntegrationTests/IntegrationWithPharmaciesIntegrationTests.csproj", "IntegrationWithPharmaciesIntegrationTests/"]
+COPY ["IntegrationWithPharmacies/IntegrationWithPharmacies.csproj", "IntegrationWithPharmacies/"]
+COPY ["PatientWebApplication/HealthClinic.DAL/HealthClinic.CL.csproj", "PatientWebApplication/HealthClinic.DAL/"]
+RUN dotnet restore "IntegrationWithPharmaciesIntegrationTests/IntegrationWithPharmaciesIntegrationTests.csproj"
 COPY . .
-WORKDIR "/src/../IntegrationWithPharmaciesIntegrationTests"
+WORKDIR "/src/IntegrationWithPharmaciesIntegrationTests"
 RUN dotnet build "IntegrationWithPharmaciesIntegrationTests.csproj" -c Release -o /app/build
 
 FROM build AS publish
