@@ -16,22 +16,21 @@ namespace PatientWebAppSeleniumTests
 
         public CreateFeedbackTests()
         {
-            // options for launching Google Chrome
             ChromeOptions options = new ChromeOptions();
-            options.AddArguments("start-maximized");            // open Browser in maximized mode
-            options.AddArguments("disable-infobars");           // disabling infobars
-            options.AddArguments("--disable-extensions");       // disabling extensions
-            options.AddArguments("--disable-gpu");              // applicable to windows os only
-            options.AddArguments("--disable-dev-shm-usage");    // overcome limited resource problems
-            options.AddArguments("--no-sandbox");               // Bypass OS security model
-            options.AddArguments("--disable-notifications");    // disable notifications
+            options.AddArguments("start-maximized");            
+            options.AddArguments("disable-infobars");           
+            options.AddArguments("--disable-extensions");      
+            options.AddArguments("--disable-gpu");             
+            options.AddArguments("--disable-dev-shm-usage");   
+            options.AddArguments("--no-sandbox");               
+            options.AddArguments("--disable-notifications");   
 
             driver = new ChromeDriver(options);
 
-            feedbackPage = new Pages.FeedbackPage(driver);      // create ProductsPage
-            feedbackPage.Navigate();                            // navigate to url
-            feedbackPage.EnsurePageIsDisplayed();               // wait for table to populate
-            feedbackCount = feedbackPage.FeedbacksCount();       // get number of table rows - after create successful sheck if number increased
+            feedbackPage = new Pages.FeedbackPage(driver);     
+            feedbackPage.Navigate();                        
+            feedbackPage.EnsurePageIsDisplayed();              
+            feedbackCount = feedbackPage.FeedbacksCount();       
 
             createFeedbackPage = new Pages.CreateFeedbackPage(driver);
             createFeedbackPage.Navigate();
@@ -47,52 +46,52 @@ namespace PatientWebAppSeleniumTests
         [Fact]
         public void TestSuccessfulSubmit()
         {
-            createFeedbackPage.InsertMessage("I will be anonymous");                     // insert all values except price
+            createFeedbackPage.InsertMessage("I will be anonymous");                    
             createFeedbackPage.InsertIsAnonymous("true");
             createFeedbackPage.InsertIsPublic("true");
             createFeedbackPage.SubmitForm();
             createFeedbackPage.WaitForFormSubmit();
 
-            Pages.FeedbackPage newFeedbackPage = new Pages.FeedbackPage(driver);        // create ProductsPage                            // check if correct title
+            Pages.FeedbackPage newFeedbackPage = new Pages.FeedbackPage(driver);        
             newFeedbackPage.EnsurePageIsDisplayedSecond(feedbackCount);
 
-            Assert.Equal(feedbackCount + 1, newFeedbackPage.FeedbacksCount());           // check if number of rows increased       
-            Assert.Equal("Message", newFeedbackPage.GetLastRowMessage());                   // check if last product name valid                 // check if last product color valid
-            Assert.Equal("ANONYMOUS", newFeedbackPage.GetLastRowIsAnonymous());                   // check if last product price valid
+            Assert.Equal(feedbackCount + 1, newFeedbackPage.FeedbacksCount());                
+            Assert.Equal("I will be anonymous", newFeedbackPage.GetLastRowMessage());                   
+            Assert.Equal("ANONYMOUS", newFeedbackPage.GetLastRowIsAnonymous());                   
         }
 
         [Fact]
         public void TestSuccessfulSubmitNotAnonymous()
         {
-            createFeedbackPage.InsertMessage("Feedback not anonymous");                     // insert all values except price
+            createFeedbackPage.InsertMessage("Feedback not anonymous");                     
             createFeedbackPage.InsertIsAnonymous("false");
             createFeedbackPage.InsertIsPublic("true");
             createFeedbackPage.SubmitForm();
             createFeedbackPage.WaitForFormSubmit();
 
-            Pages.FeedbackPage newFeedbackPage = new Pages.FeedbackPage(driver);        // create ProductsPage                       // check if correct title
+            Pages.FeedbackPage newFeedbackPage = new Pages.FeedbackPage(driver);                              
             newFeedbackPage.EnsurePageIsDisplayedSecond(feedbackCount);
 
-            Assert.Equal(feedbackCount + 1, newFeedbackPage.FeedbacksCount());           // check if number of rows increased       
-            Assert.Equal("Message", newFeedbackPage.GetLastRowMessage());                   // check if last product name valid                 // check if last product color valid
-            Assert.NotEqual("ANONYMOUS", newFeedbackPage.GetLastRowIsAnonymous());                   // check if last product price valid
+            Assert.Equal(feedbackCount + 1, newFeedbackPage.FeedbacksCount());                  
+            Assert.Equal("Feedback not anonymous", newFeedbackPage.GetLastRowMessage());                   
+            Assert.NotEqual("ANONYMOUS", newFeedbackPage.GetLastRowIsAnonymous());                
         }
 
         [Fact]
         public void TestSuccessfulSubmitNotGoodMessage()
         {
-            createFeedbackPage.InsertMessage("Wrong message");                     // insert all values except price
+            createFeedbackPage.InsertMessage("Wrong message");                     
             createFeedbackPage.InsertIsAnonymous("false");
             createFeedbackPage.InsertIsPublic("true");
             createFeedbackPage.SubmitForm();
             createFeedbackPage.WaitForFormSubmit();
 
-            Pages.FeedbackPage newFeedbackPage = new Pages.FeedbackPage(driver);        // create ProductsPage                       // check if correct title
+            Pages.FeedbackPage newFeedbackPage = new Pages.FeedbackPage(driver);        
             newFeedbackPage.EnsurePageIsDisplayedSecond(feedbackCount);
 
-            Assert.Equal(feedbackCount + 1, newFeedbackPage.FeedbacksCount());           // check if number of rows increased       
-            Assert.NotEqual("Message", newFeedbackPage.GetLastRowMessage());                   // check if last product name valid                 // check if last product color valid
-            Assert.NotEqual("ANONYMOUS", newFeedbackPage.GetLastRowIsAnonymous());                   // check if last product price valid
+            Assert.Equal(feedbackCount + 1, newFeedbackPage.FeedbacksCount());             
+            Assert.NotEqual("Another message", newFeedbackPage.GetLastRowMessage());                   
+            Assert.NotEqual("ANONYMOUS", newFeedbackPage.GetLastRowIsAnonymous());                   
         }
     }
 }
