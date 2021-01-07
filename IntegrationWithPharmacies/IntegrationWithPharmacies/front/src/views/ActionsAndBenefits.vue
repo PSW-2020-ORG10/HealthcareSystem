@@ -1,5 +1,5 @@
 ﻿<template>
-    <div id="registration" style="background-image: url('images/wgMLUS.jpg');background-repeat: no-repeat;
+    <div id="registration" style="background-image: url('images/bg2.jpg');background-repeat: no-repeat;
   background-size: 175% 100%;  height: 1000px">
         <table id="customers" style="width:2000px;">
             <tr>

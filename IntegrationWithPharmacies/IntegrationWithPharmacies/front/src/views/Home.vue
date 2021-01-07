@@ -1,5 +1,5 @@
 ﻿<template>
-    <div id="home" style="background-image: url('images/wgMLUS.jpg');background-repeat: no-repeat;
+    <div id="home" style="background-image: url('images/bg2.jpg');background-repeat: no-repeat;
   background-size: 175% 100%;  height: 1000px">
         <div id="header">
             <div id="header-text">

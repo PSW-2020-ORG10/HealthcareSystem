@@ -1,5 +1,5 @@
 <template>
-    <div id="sharePrescription" style="        background-image: url('images/wgMLUS.jpg');
+    <div id="sharePrescription" style="        background-image: url('images/bg2.jpg');
         background-repeat: no-repeat;
         background-size: 175% 100%;
         height: 1000px">

@@ -5,15 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Adapter\" />
-    <Folder Include="Controllers\" />
-    <Folder Include="Dto\" />
-    <Folder Include="Model\" />
-    <Folder Include="Repository\" />
-    <Folder Include="Service\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.14.0" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.34.0" />
+    <PackageReference Include="Grpc.AspNetCore.Server" Version="2.34.0" />
+    <PackageReference Include="Grpc.Core" Version="2.34.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.34.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.9" />
@@ -35,8 +34,19 @@
     <PackageReference Include="SSH.NET" Version="2020.0.0" />
   </ItemGroup>
 
+ 
+	<ItemGroup>
+		<Protobuf Include="Protos\model.proto" GrpcServices="None" />
+		<Protobuf Include="Protos\SpringGrpcService.proto" GrpcServices="Client" />
+	</ItemGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\..\PatientWebApplication\HealthClinic.DAL\HealthClinic.CL.csproj" />
+    <None Update="Protos\model.proto">
+      <GrpcServices>None</GrpcServices>
+    </None>
+    <None Update="Protos\SpringGrpcService.proto">
+      <GrpcServices>Client</GrpcServices>
+    </None>
   </ItemGroup>
 
 
