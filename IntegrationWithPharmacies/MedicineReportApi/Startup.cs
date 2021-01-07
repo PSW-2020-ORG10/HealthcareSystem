@@ -1,4 +1,4 @@
-using HealthClinic.CL.DbContextModel;
+using MedicineReportApi.DbContextModel;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;

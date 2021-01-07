@@ -9,7 +9,6 @@ namespace HealthClinic.CL.Service
     public interface ITenderService
     {
         Tender Create(TenderDto dto);
-
         List<Tender> GetAll();
     }
 }
