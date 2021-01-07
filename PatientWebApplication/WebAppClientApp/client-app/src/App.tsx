@@ -18,6 +18,7 @@ import DoctorRates from './components/DoctorRates';
 import AllRates from './components/AllRates';
 import ChooseAppointmentType from './components/ChooseAppointmentType';
 import AllPatientsAppointments from './components/AllPatientsAppointments';
+import AllAds from './components/AllAds';
 
 export default () => (
     <Layout>
@@ -36,5 +37,6 @@ export default () => (
         <Route path='/rates-general' component={AllRates} />
         <Route path='/choose-appointment-type' component={ChooseAppointmentType} />
         <Route path='/my-appointments' component={AllPatientsAppointments} />
+        <Route path='/patient-homepage' component={Counter} />
     </Layout>
 );

@@ -53,3 +53,6 @@ export const LOADED_MALICIOUS_PATIENTS = "loadedMaliciousPatients";
 export const OBSERVE_MALICIOUS_ERROR = "observeMaliciousError";
 export const LOADED_IMAGE = "loadedImage";
 export const LOADED_IMAGE_ERROR = "loadedImageError";
+export const LOADED_ALL_MESSAGES = "loadedAllMessages";
+export const LOADED_SECOND_IMAGE = "loadedSecondImage";
+export const LOADED_THIRD_IMAGE = "loadedThirdImage";

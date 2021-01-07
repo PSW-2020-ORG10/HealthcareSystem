@@ -54,6 +54,7 @@
     height: 100px;
     width: 100px
 }
+
 /*--------------------------------------------------------------
 ## Reset
 --------------------------------------------------------------*/
@@ -83,6 +84,10 @@ input {
 /*--------------------------------------------------------------
 ## Main
 --------------------------------------------------------------*/
+div.a {
+    height: 270px;
+}
+
 body {
     background-color: #fff;
     font-family: 'Roboto', sans-serif;
@@ -520,3 +525,19 @@ input[type="radio"] {
     margin-left: 1px;
     padding: 1px
 }
+.each-slide > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    height: 350px;
+    width: 1110px;
+  }
+  
+  .each-slide span {
+    padding: 20px;
+    font-size: 20px;
+    background:#FCEDDA;
+    color: #EE4E34;
+    text-align: center;
+  }

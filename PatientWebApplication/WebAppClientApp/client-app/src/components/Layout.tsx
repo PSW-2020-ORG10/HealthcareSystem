@@ -19,6 +19,8 @@ import ChooseAppointmentType from './ChooseAppointmentType';
 import AllPatientsAppointments from './AllPatientsAppointments';
 import MaliciousPatient from './MaliciousPatient';
 import ScheduleAppointment from './ScheduleAppointment';
+import AllAds from './AllAds';
+import Counter from './Counter';
 
 export default (props: { children: React.ReactNode }) => (
     <React.Fragment>
@@ -41,6 +43,7 @@ export default (props: { children: React.ReactNode }) => (
             <Route path='/my-appointments' component={AllPatientsAppointments} />
             <Route path='/malicious-patient' component={MaliciousPatient} />
             <Route path='/schedule-appointment' component={ScheduleAppointment} />
+            <Route path='/patient-homepage' component={Counter} />
         </Container>
     </React.Fragment>
 );

@@ -569,6 +569,19 @@
       ],
       "UpstreamPathTemplate": "/api/patientUser/{patientId}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/message/",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 53236
+        }
+      ],
+      "UpstreamPathTemplate": "/api/message/",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
     }
   ]
 }

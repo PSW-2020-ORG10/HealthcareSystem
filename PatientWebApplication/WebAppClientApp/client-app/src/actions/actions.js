@@ -51,7 +51,10 @@
     LOADED_MALICIOUS_PATIENTS,
     OBSERVE_MALICIOUS_ERROR,
     LOADED_IMAGE,
-    LOADED_IMAGE_ERROR
+    LOADED_IMAGE_ERROR,
+    LOADED_ALL_MESSAGES,
+    LOADED_SECOND_IMAGE,
+    LOADED_THIRD_IMAGE
 } from "../types/types"
 import axios from "axios";
 import { func } from "prop-types";
@@ -739,6 +742,86 @@ export const loadedImage = (fileName) => async (dispatch) => {
             type: LOADED_IMAGE,
             payload: response.data,
         });
+    } catch (e) {
+        dispatch({
+            type: LOADED_IMAGE_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const loadedImageForAds = (fileName) => async (dispatch) => {
+    try {
+        const response = await axios.get("http://localhost:54689/api/patientuser/getimage/" + fileName,
+        {
+            headers: { "Access-Control-Allow-Origin": "*" },
+          })
+        .then(function(response){
+            dispatch({
+                type: LOADED_IMAGE,
+                payload: response.data.fileContents,
+            });
+        })
+    } catch (e) {
+        dispatch({
+            type: LOADED_IMAGE_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const loadedAllMessages = () => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.get("http://localhost:53236/api/message",
+        {
+            headers: { "Access-Control-Allow-Origin": "*" },
+          });
+        debugger;
+        dispatch({
+            type: LOADED_ALL_MESSAGES,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: LOADED_IMAGE_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const loadedImageForSecondAd = (fileName) => async (dispatch) => {
+    try {
+        const response = await axios.get("http://localhost:54689/api/patientuser/getimage/" + fileName,
+        {
+            headers: { "Access-Control-Allow-Origin": "*" },
+          })
+        .then(function(response){
+            dispatch({
+                type: LOADED_SECOND_IMAGE,
+                payload: response.data.fileContents,
+            });
+        })
+    } catch (e) {
+        dispatch({
+            type: LOADED_IMAGE_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const loadedImageForThirdAd = (fileName) => async (dispatch) => {
+    try {
+        const response = await axios.get("http://localhost:54689/api/patientuser/getimage/" + fileName,
+        {
+            headers: { "Access-Control-Allow-Origin": "*" },
+          })
+        .then(function(response){
+            dispatch({
+                type: LOADED_THIRD_IMAGE,
+                payload: response.data.fileContents,
+            });
+        })
     } catch (e) {
         dispatch({
             type: LOADED_IMAGE_ERROR,

@@ -96,7 +96,9 @@ namespace UserMicroserviceApi.DbContextModel
 
             modelBuilder.Entity<Message>().HasData(
 
-                 new Message(1, "Message", "03/12/2020", new DateTime(), false, "Apoteka Jankovic", "02/02/2020")
+                 new Message(1, "Introducing our new commercial for your old family friend: Defrinol Forte!", "03/12/2020", new DateTime(), false, "Apoteka Jankovic", "02/02/2020"),
+                 new Message(2, "The bag saves lives, if there is an Andol in it!", "03/12/2020", new DateTime(), false, "Apoteka Jankovic", "02/02/2020"),
+                 new Message(3, "Protects the heart, protects the brain, Aspirin!", "03/12/2020", new DateTime(), false, "Apoteka Jankovic", "02/02/2020")
 
               );
 

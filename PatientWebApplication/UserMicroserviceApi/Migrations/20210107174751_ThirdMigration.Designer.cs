@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UserMicroserviceApi.DbContextModel;
 
 namespace UserMicroserviceApi.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210107174751_ThirdMigration")]
+    partial class ThirdMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -143,7 +145,7 @@ namespace UserMicroserviceApi.Migrations
                             DateStamp = "03/12/2020",
                             IsRemoved = false,
                             PharmacyName = "Apoteka Jankovic",
-                            Text = "Introducing our new commercial for your old family friend: Defrinol Forte!",
+                            Text = "Predstavljamo Vam nasu novu reklamu za Vaseg starog porodicnog prijatelja: Defrinol Forte!",
                             TimeStamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
@@ -153,7 +155,7 @@ namespace UserMicroserviceApi.Migrations
                             DateStamp = "03/12/2020",
                             IsRemoved = false,
                             PharmacyName = "Apoteka Jankovic",
-                            Text = "The bag saves lives, if there is an Andol in it!",
+                            Text = "Torba glavu cuva, ako je u njoj Andol!",
                             TimeStamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
@@ -163,7 +165,7 @@ namespace UserMicroserviceApi.Migrations
                             DateStamp = "03/12/2020",
                             IsRemoved = false,
                             PharmacyName = "Apoteka Jankovic",
-                            Text = "Protects the heart, protects the brain, Aspirin!",
+                            Text = "Stiti srce, cuva mozak, Aspirin!",
                             TimeStamp = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });

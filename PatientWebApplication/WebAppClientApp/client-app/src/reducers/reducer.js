@@ -33,7 +33,10 @@
     LOADED_MALICIOUS_PATIENTS,
     APPOINTMENT_SCHEDULED,
     LOADED_IMAGE,
-    LOADED_IMAGE_ERROR
+    LOADED_IMAGE_ERROR,
+    LOADED_ALL_MESSAGES,
+    LOADED_SECOND_IMAGE,
+    LOADED_THIRD_IMAGE
 } from "../types/types";
 import { parseStringToDate } from '../utilities/Utilities';
 
@@ -93,7 +96,10 @@ const initialState = {
     maliciousPatientsList: [],
     availableDoctors: [],
     availableAppointments: [],
-    loadedImage : ""
+    loadedImage : "",
+    loadedSecondImage : "",
+    loadedThirdImage : "",
+    loadedAllMessagesList: []
 };
 
 
@@ -297,6 +303,23 @@ function reducer(state = initialState, action) {
             ...state,
             loadedImage: action.payload
         };
+        case LOADED_SECOND_IMAGE:
+            debugger;
+        return {
+            ...state,
+            loadedSecondImage: action.payload
+        };
+        case LOADED_THIRD_IMAGE:
+            debugger;
+        return {
+            ...state,
+            loadedThirdImage: action.payload
+        };
+        case LOADED_ALL_MESSAGES:
+            return {
+                ...state,
+                loadedAllMessagesList: action.payload
+            }; 
         default:
             return state;
     }
