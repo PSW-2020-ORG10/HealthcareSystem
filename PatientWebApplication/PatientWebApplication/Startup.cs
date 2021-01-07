@@ -17,13 +17,11 @@ namespace PatientWebApplication
         public IConfiguration Configuration { get; }
         public IWebHostEnvironment CurrentEnvironment { get; }
 
-        public static String Stage { get; set; }
-
         public Startup(IConfiguration configuration, IWebHostEnvironment currentEnvironment)
         {
             Configuration = configuration;
             CurrentEnvironment = currentEnvironment;
-            Stage = "Testing";
+            
         }
 
         private string CreateConnectionStringFromEnvironment()
@@ -34,11 +32,12 @@ namespace PatientWebApplication
             string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "root";
             string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "root";
 
-            Stage = Environment.GetEnvironmentVariable("STAGE") ?? "Testing";
-
             return $"server={server};port={port};database={database};user={user};password={password}";
         }
-
+        
+        public string GetCurrentStage(){
+               return Environment.GetEnvironmentVariable("STAGE") ?? "Testing";  
+        }
       // This method gets called by the runtime. Use this method to add services to the container.
       public void ConfigureServices(IServiceCollection services)
         {
@@ -53,19 +52,19 @@ namespace PatientWebApplication
            {
                options.RegisterValidatorsFromAssemblyContaining<Startup>();
            });
-
-            if (Stage.Equals("Testing") && CurrentEnvironment.IsEnvironment("Testing"))
+          
+            /*if (GetCurrentStage().Equals("Testing") && CurrentEnvironment.IsEnvironment("Testing"))
             {
                 services.AddDbContext<MyDbContext>(options =>
                     options.UseInMemoryDatabase("TestingDB").UseLazyLoadingProxies());
             }
             else
-            {
+            {*/
                services.AddDbContext<MyDbContext>(options =>
                options.UseMySql(CreateConnectionStringFromEnvironment(),
                   builder => builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null)).UseLazyLoadingProxies());
 
-            }
+            //}
 
          // In production, the React files will be served from this directory
          services.AddSpaStaticFiles(configuration =>
