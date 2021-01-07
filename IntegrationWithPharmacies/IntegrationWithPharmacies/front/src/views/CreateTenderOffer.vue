@@ -1,46 +1,44 @@
 ﻿<template>
-    <div id="home" style="        background-image: url('images/wgMLUS.jpg');
+    <div id="home" style="        background-image: url('images/bg2.jpg');
         background-repeat: no-repeat;
         background-size: 175% 100%;
         height: 1000px">
 
 
-        <div v-if="showWhenOpening" class="container">
-            <div class="col-10">
-                <table id="tenderMedicine">
-                    <thead>
-                    <th>Choose tender</th>
-                    </thead>
-                    <tr v-for="tender in activeTenders" :key="tender.id">
-                        <td><button v-on:click="showTender($event, tender.id)">Tender {{tender.id}}</button></td>
+        <div v-if="showWhenOpening" class="container" style="background-color:lightgray">
+            <div class="col-15" style="margin-right:7px;">
+                <table id="tenderMedicine" style="align-content:center;">
+
+                    <th style="color: #1D8288;width:300px;font-weight:bold">Choose tender:</th>
+
+                    <tr class="red" v-for="tender in activeTenders" :key="tender.id">
+                        <td><button class="button3" v-on:click="showTender($event, tender.id)">Tender {{tender.id}}</button></td>
                     </tr>
                 </table>
             </div>
             <div class="col-80"></div>
         </div>
 
-        <div v-if="showConcreteTender" class="container">
+        <div v-if="showConcreteTender" class="container" style="background-color:lightgray">
             <div class="col-10">
-                <table id="tenderMedicine">
-                    <thead>
-                    <th>Choose tender</th>
-                    </thead>
+                <table id="tenderMedicine" style="align-content:center">
+
+                    <th style="color: #1D8288;width:300px;font-weight:bold">Choose tender:</th>
+
                     <tr v-for="tender in activeTenders" :key="tender.id">
-                        <td><button v-on:click="showTender($event, tender.id)">Tender {{tender.id}}</button></td>
+                        <td><button class="button3" v-on:click="showTender($event, tender.id)">Tender {{tender.id}}</button></td>
                     </tr>
                 </table>
             </div>
-         
-            <div class="col-90">
-                <div class="row justify-content-md-center">
-                    <div class="col-15">
-                        <label for="apiKey">Tender  {{this.choosenTender.id}}</label>
-                    </div>
 
-                </div>
+            <div class="col-90">
+                <h1 for="apiKey" style="color: #1D8288;font-weight:bold;font-size:40px;text-align:center">Tender  {{this.choosenTender.id}}</h1>
+
+                <hr />
                 <div class="row justify-content-md-center">
                     <div class="col-18">
-                        <label for="apiKey">Requested medicines:</label>
+                        <label style="color: black;font-weight:bold;font-size:40px;align-content:center" for="apiKey">Requested medicines:</label>
+                        <hr />
                     </div>
                 </div>
                 <div class="row justify-content-md-center">
@@ -75,7 +73,7 @@
 
                 <div class="row justify-content-md-center">
                     <div class="col-50">
-                        <label for="name">Tender is opened until:          {{this.choosenTender.date}}</label>
+                        <label for="name" style="font-weight:bold;font-style:italic;margin-bottom:20px;margin-top:20px">Tender is opened until:          {{this.choosenTender.date}}</label>
                     </div>
                 </div>
                 <div class="row justify-content-md-center">
@@ -87,7 +85,7 @@
                     </div>
                 </div>
                 <div class="row justify-content-md-center">
-                    
+
                     <div class="col-75">
                         <button class="button2" v-on:click="sendOffer">Send offer</button>
                     </div>
@@ -99,7 +97,7 @@
 
             </div>
 
-            
+
 
 
 
@@ -108,7 +106,8 @@
 
 </template>
 
-<script>export default {
+<script>
+export default {
         data() {
             return {
                 sent: false,
@@ -162,6 +161,8 @@
     }</script>
 
 <style scoped>
+
+    <style >
 
     * {
         box-sizing: content-box;
@@ -245,6 +246,7 @@
         width: 25%;
         margin-top: 6px;
     }
+
     .col-10 {
         float: left;
         width: 15%;
@@ -252,6 +254,7 @@
         margin-right: 6px;
         background-color: #f2f2f2;
     }
+
     .col {
         float: left;
         width: 22%;
@@ -285,13 +288,14 @@
         margin-top: 6px;
         background-color: #f2f2f2;
     }
+
     .col-90 {
         float: left;
-        width: 80%;
+        width: 82%;
         margin-top: 6px;
-        margin-left: 10px;
         background-color: #f2f2f2;
     }
+
     .col-20 {
         float: left;
         width: 34%;
@@ -366,12 +370,25 @@
     }
 
     tr:nth-child(even) {
-        background-color: #ddd;
     }
 
     .row {
         width: 100%;
         margin-top: 3px;
+    }
+
+    .button3 {
+        background-color: none;
+        color: #1D8288;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: underline;
+        display: inline-block;
+        font-size: 25px;
+        float: left;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 250px;
     }
 </style>
 

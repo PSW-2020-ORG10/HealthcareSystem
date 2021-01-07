@@ -1,6 +1,8 @@
 ﻿<template>
-    <div id="registration" style="background-image: url('images/wgMLUS.jpg');background-repeat: no-repeat;
-  background-size: 175% 100%;  height: 1000px">
+    <div id="registration" style="        background-image: url('images/bg2.jpg');
+        background-repeat: no-repeat;
+        background-size: 175% 100%;
+        height: 1000px">
         <div style="        background-color: #1D8288">
             <h3 style="color:white;font-size: 35px;font-weight:bold">Register pharmacy in hospital system</h3>
         </div>
