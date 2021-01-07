@@ -9,7 +9,8 @@ namespace UserMicroserviceApi.Utility
 {
     public class HttpRequests
     {
-        private static readonly HttpClient client = new HttpClient();
+         private static readonly string appointmentServiceUrl = Startup.Configuration["AppointmentMicroServiceApi"];
+         private static readonly HttpClient client = new HttpClient();
         /* public static async Task<List<DoctorAppointment>> GetAvailableAppointments(AvailableAppointmentsSearchDto dto)
          {
              var stringContent = new StringContent(JsonConvert.SerializeObject(dto), Encoding.UTF8, "application/json");
@@ -19,7 +20,7 @@ namespace UserMicroserviceApi.Utility
 
         public static async Task<List<MicroserviceAppointmentDto>> GetAllAppointments()
         {
-            var responseString = await client.GetAsync("http://localhost:54689/api/doctorAppointment/getAllDto");
+            var responseString = await client.GetAsync($"{appointmentServiceUrl}api/doctorAppointment/getAllDto");
             return await responseString.Content.ReadAsAsync<List<MicroserviceAppointmentDto>>();
         }
     }

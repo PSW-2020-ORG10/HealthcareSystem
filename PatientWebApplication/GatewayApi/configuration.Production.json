@@ -5,19 +5,19 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "appointmentmicroserviceapi",
                "Port": 53212
             }
          ],
          "UpstreamPathTemplate": "/api/doctorappointment/getAll",
-         "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+         "UpstreamHttpMethod": [ "POST", "PUT", "GET", "OPTIONS" ]
       },
       {
          "DownstreamPathTemplate": "/api/doctorappointment/getAllDto",
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "appointmentmicroserviceapi",
                "Port": 53212
             }
          ],
@@ -29,7 +29,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "appointmentmicroserviceapi",
                "Port": 53212
             }
          ],
@@ -41,7 +41,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "appointmentmicroserviceapi",
                "Port": 53212
             }
          ],
@@ -53,7 +53,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "appointmentmicroserviceapi",
                "Port": 53212
             }
          ],
@@ -65,7 +65,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "appointmentmicroserviceapi",
                "Port": 53212
             }
          ],
@@ -78,7 +78,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "appointmentmicroserviceapi",
                "Port": 53212
             }
          ],
@@ -91,7 +91,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "appointmentmicroserviceapi",
                "Port": 53212
             }
          ],
@@ -104,7 +104,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "appointmentmicroserviceapi",
                "Port": 53212
             }
          ],
@@ -117,7 +117,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "appointmentmicroserviceapi",
                "Port": 53212
             }
          ],
@@ -130,7 +130,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "appointmentmicroserviceapi",
                "Port": 53212
             }
          ],
@@ -143,7 +143,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "appointmentmicroserviceapi",
                "Port": 53212
             }
          ],
@@ -155,7 +155,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "appointmentmicroserviceapi",
                "Port": 53212
             }
          ],
@@ -167,7 +167,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "appointmentmicroserviceapi",
                "Port": 53212
             }
          ],
@@ -179,19 +179,19 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "appointmentmicroserviceapi",
                "Port": 53212
             }
          ],
          "UpstreamPathTemplate": "/api/operation/getAll",
-         "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+         "UpstreamHttpMethod": [ "POST", "PUT", "GET", "OPTIONS" ]
       },
       {
          "DownstreamPathTemplate": "/api/operation/{id}",
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "appointmentmicroserviceapi",
                "Port": 53212
             }
          ],
@@ -203,7 +203,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "appointmentmicroserviceapi",
                "Port": 53212
             }
          ],
@@ -215,7 +215,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "appointmentmicroserviceapi",
                "Port": 53212
             }
          ],
@@ -227,7 +227,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "appointmentmicroserviceapi",
                "Port": 53212
             }
          ],
@@ -239,7 +239,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "appointmentmicroserviceapi",
                "Port": 53212
             }
          ],
@@ -251,7 +251,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "appointmentmicroserviceapi",
                "Port": 53212
             }
          ],
@@ -263,7 +263,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "appointmentmicroserviceapi",
                "Port": 53212
             }
          ],
@@ -275,7 +275,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "feedbackmicroserviceapi",
                "Port": 58636
             }
          ],
@@ -287,7 +287,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "feedbackmicroserviceapi",
                "Port": 58636
             }
          ],
@@ -299,7 +299,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "feedbackmicroserviceapi",
                "Port": 58636
             }
          ],
@@ -311,7 +311,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "searchmicroserviceapi",
                "Port": 53174
             }
          ],
@@ -323,7 +323,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "searchmicroserviceapi",
                "Port": 53174
             }
          ],
@@ -335,7 +335,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "searchmicroserviceapi",
                "Port": 53174
             }
          ],
@@ -347,7 +347,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "searchmicroserviceapi",
                "Port": 53174
             }
          ],
@@ -359,7 +359,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "searchmicroserviceapi",
                "Port": 53174
             }
          ],
@@ -371,7 +371,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "searchmicroserviceapi",
                "Port": 53174
             }
          ],
@@ -383,7 +383,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "usermicroserviceapi",
                "Port": 53236
             }
          ],
@@ -395,7 +395,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "usermicroserviceapi",
                "Port": 53236
             }
          ],
@@ -407,7 +407,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "usermicroserviceapi",
                "Port": 53236
             }
          ],
@@ -419,7 +419,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "usermicroserviceapi",
                "Port": 53236
             }
          ],
@@ -431,7 +431,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "usermicroserviceapi",
                "Port": 53236
             }
          ],
@@ -443,7 +443,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "usermicroserviceapi",
                "Port": 53236
             }
          ],
@@ -455,7 +455,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "usermicroserviceapi",
                "Port": 53236
             }
          ],
@@ -467,7 +467,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "usermicroserviceapi",
                "Port": 53236
             }
          ],
@@ -479,7 +479,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "usermicroserviceapi",
                "Port": 53236
             }
          ],
@@ -491,7 +491,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "usermicroserviceapi",
                "Port": 53236
             }
          ],
@@ -503,7 +503,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "usermicroserviceapi",
                "Port": 53236
             }
          ],
@@ -515,7 +515,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "usermicroserviceapi",
                "Port": 53236
             }
          ],
@@ -527,7 +527,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "usermicroserviceapi",
                "Port": 53236
             }
          ],
@@ -539,7 +539,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "usermicroserviceapi",
                "Port": 53236
             }
          ],
@@ -551,7 +551,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "usermicroserviceapi",
                "Port": 53236
             }
          ],
@@ -563,7 +563,7 @@
          "DownstreamScheme": "http",
          "DownstreamHostAndPorts": [
             {
-               "Host": "localhost",
+               "Host": "usermicroserviceapi",
                "Port": 53236
             }
          ],

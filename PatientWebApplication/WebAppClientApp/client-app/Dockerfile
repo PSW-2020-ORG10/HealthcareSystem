@@ -10,8 +10,24 @@ ENV PATH /app/node_modules/.bin:$PATH
 # install app dependencies
 COPY package.json ./
 COPY package-lock.json ./
+RUN npm install axios --save
 RUN npm install --silent
 RUN npm install react-scripts@3.4.1 -g --silent
+RUN npm install react-toastify \
+    react-transition-group \
+    regenerator-runtime \
+    react-stepper-horizontal \
+    react-datepicker \
+    react-is \
+    prop-types \
+    object-assign \
+    loose-envify \
+    js-tokens \
+    follow-redirects \
+    dom-helpers \
+    csstype \
+    clsx \
+    axios
 
 # add app
 COPY . ./
