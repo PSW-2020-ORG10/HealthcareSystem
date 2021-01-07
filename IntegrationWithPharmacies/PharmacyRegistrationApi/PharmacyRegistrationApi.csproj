@@ -5,12 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Adapter\" />
-    <Folder Include="Controllers\" />
-    <Folder Include="Dto\" />
-    <Folder Include="Model\" />
-    <Folder Include="Repository\" />
-    <Folder Include="Service\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
   <ItemGroup>

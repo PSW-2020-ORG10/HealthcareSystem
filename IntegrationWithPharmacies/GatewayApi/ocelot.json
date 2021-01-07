@@ -1,5 +1,17 @@
 {
   "Routes": [
-    
+    {
+      "DownstreamPathTemplate": "/api/registration",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 54679
+        }
+      ],
+      "UpstreamPathTemplate": "/api/registration",
+      "UpstreamHttpMethod": [ "POST", "GET" ]
+    }
+
   ]
 }
