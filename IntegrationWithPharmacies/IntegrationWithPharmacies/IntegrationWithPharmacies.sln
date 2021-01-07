@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PharmacyRegistrationApi", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UrgentMedicineOrderApi", "..\UrgentMedicineOrderApi\UrgentMedicineOrderApi.csproj", "{7D790184-6D54-418E-85E0-9699E6E6730D}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicineInformationApi", "..\MedicineInformationApi\MedicineInformationApi.csproj", "{C132E785-8FB3-49F4-AE67-8E4E1D608A42}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{7D790184-6D54-418E-85E0-9699E6E6730D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D790184-6D54-418E-85E0-9699E6E6730D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D790184-6D54-418E-85E0-9699E6E6730D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C132E785-8FB3-49F4-AE67-8E4E1D608A42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C132E785-8FB3-49F4-AE67-8E4E1D608A42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C132E785-8FB3-49F4-AE67-8E4E1D608A42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C132E785-8FB3-49F4-AE67-8E4E1D608A42}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

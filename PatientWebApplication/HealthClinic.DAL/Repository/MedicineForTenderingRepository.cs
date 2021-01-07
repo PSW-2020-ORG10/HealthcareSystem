@@ -14,14 +14,15 @@ namespace HealthClinic.CL.Repository
         }
         public MedicineForTendering Create(MedicineForTendering medicine)
         {
-            DbContext.MedicineForTendering.Add(medicine);
+            //DbContext.MedicineForTendering.Add(medicine);
             DbContext.SaveChanges();
             return medicine;
         }
 
         public List<MedicineForTendering> GetAll()
         {
-            return DbContext.MedicineForTendering.ToList();
+            return null;
+           // return DbContext.MedicineForTendering.ToList();
         }
     }
 }

@@ -16,23 +16,24 @@ namespace HealthClinic.CL.Repository
         }
         public RegistrationInPharmacy Create(RegistrationInPharmacy registration)
         {
-            DbContext.Registrations.Add(registration);
+           // DbContext.Registrations.Add(registration);
             DbContext.SaveChanges();
             return registration;
         }
         public List<RegistrationInPharmacy> GetAll()
-        {
-            return DbContext.Registrations.ToList();
+        {return null;
+            //return DbContext.Registrations.ToList();
         }
        
         public RegistrationInPharmacy getPharmacyApiKey(String apiKey)
         {
-            return DbContext.Registrations.ToList().SingleOrDefault(registration => registration.ApiKey == apiKey);
+            return null;
+           // return DbContext.Registrations.ToList().SingleOrDefault(registration => registration.ApiKey == apiKey);
         }
         public Boolean Remove(String apiKey)
         {
             try {
-                DbContext.Registrations.Remove(DbContext.Registrations.ToList().SingleOrDefault(registration => registration.ApiKey == apiKey));
+                //DbContext.Registrations.Remove(DbContext.Registrations.ToList().SingleOrDefault(registration => registration.ApiKey == apiKey));
                 return true;
             }
             catch {return false; }

@@ -14,14 +14,15 @@ namespace HealthClinic.CL.Repository
         }
         public Tender Create(Tender tender)
         {
-            DbContext.Tender.Add(tender);
+           // DbContext.Tender.Add(tender);
             DbContext.SaveChanges();
             return tender;
         }
 
         public List<Tender> GetAll()
         {
-            return DbContext.Tender.ToList();
+            return null;
+            //return DbContext.Tender.ToList();
         }
 
         public void CloseTender(Tender tenderForChange)

@@ -6,11 +6,35 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 54679
+          "Port": 59278
         }
       ],
       "UpstreamPathTemplate": "/api/registration",
       "UpstreamHttpMethod": [ "POST", "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/report",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 59304
+        }
+      ],
+      "UpstreamPathTemplate": "/api/report",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/report/http",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 59304
+        }
+      ],
+      "UpstreamPathTemplate": "/api/report/http",
+      "UpstreamHttpMethod": [ "POST" ]
     }
 
   ]

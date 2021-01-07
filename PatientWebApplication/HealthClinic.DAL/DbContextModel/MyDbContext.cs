@@ -49,13 +49,10 @@ namespace HealthClinic.CL.DbContextModel
         public DbSet<Question> Questions { get; set; }
         public DbSet<SecretaryUser> SecretaryUsers { get; set; }
         public DbSet<Medicine> Medicines { get; set; }
-        public DbSet<RegistrationInPharmacy> Registrations { get; set; }
         public DbSet<Survey> Surveys { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<EPrescription> EPrescriptions { get; set; }
         public DbSet<UrgentMedicineOrder> UrgentMedicineOrder { get; set; }
-        public DbSet<Tender> Tender { get; set; }
-        public DbSet<MedicineForTendering> MedicineForTendering { get; set; }
 
         public DbSet<MedicineTenderOffer> MedicineTenderOffers { get; set; }
         public DbSet<MedicineWithQuantity> MedicineWithQuantities { get; set; }
@@ -236,9 +233,6 @@ namespace HealthClinic.CL.DbContextModel
                 133, "Room")
             );
 
-            modelBuilder.Entity<RegistrationInPharmacy>().HasData(
-                new RegistrationInPharmacy(1, 1, "api1","Jankovic 1","Novi Sad")
-            );
 
             modelBuilder.Entity<Survey>().HasData(
                 new Survey(1, 1, 3, 4, 5, 4, 5, 4, 5, 4, 5, 5, 5, 5, 4, 3, 3, 2, 2, 5),
@@ -249,14 +243,7 @@ namespace HealthClinic.CL.DbContextModel
              new UrgentMedicineOrder(1,"Andol",135,"api 1","12/12/2020")
 
             );
-            modelBuilder.Entity<Tender>().HasData(
-          new Tender(1, new DateTime(), false)
 
-            );
-            modelBuilder.Entity<MedicineForTendering>().HasData(
-          new MedicineForTendering(1, "Andol", 135,1)
-
-            );
             modelBuilder.Entity<MedicineTenderOffer>().HasData(
                  new MedicineTenderOffer(1, "Andol", 1, 1, 1, 1)
            ); 

@@ -1,7 +1,9 @@
 ﻿using MedicineReportApi.DbContextModel;
 using MedicineReportApi.Model;
 using MedicineReportApi.Utility;
+using RestSharp;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -10,14 +12,12 @@ namespace MedicineReportApi.Service
     public class ReportText
     {
         public MyDbContext DbContext;
-        private RegistrationInPharmacyService RegistrationInPharmacyService { get; }
         private HelperFunctions HelperFunctions { get; }
         private TenderService TenderService { get; }
         private MedicineForTenderingService MedicineForTenderingService { get; }
 
         public ReportText(MyDbContext context)
         {
-            RegistrationInPharmacyService = new RegistrationInPharmacyService(context);
             HelperFunctions = new HelperFunctions();
             TenderService = new TenderService(context);
             MedicineForTenderingService = new MedicineForTenderingService(context);
@@ -26,7 +26,9 @@ namespace MedicineReportApi.Service
         public String GetRegistredPharmacies()
         {
             StringBuilder stringBuilder = new StringBuilder();
-            foreach (RegistrationInPharmacy registration in RegistrationInPharmacyService.GetAll())
+            var client = new RestSharp.RestClient("http://localhost:54679");
+            var registrations = client.Get<List<RegistrationInPharmacy>>(new RestRequest("/api/registration"));
+            foreach (RegistrationInPharmacy registration in registrations.Data)
             {
                 stringBuilder.Append(registration.ApiKey + ";");
             }
