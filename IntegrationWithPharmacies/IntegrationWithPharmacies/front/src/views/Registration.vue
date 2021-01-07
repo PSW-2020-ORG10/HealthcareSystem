@@ -69,7 +69,7 @@
                     name: this.name,
                     town : this.town
                 };
-                this.axios.post('api/registration/', pharmacy)
+                this.axios.post('http://localhost:54679/api/registration/', pharmacy)
                     .then(res => {
                         this.unique = true;
                         this.notUnique = false;
