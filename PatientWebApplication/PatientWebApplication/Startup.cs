@@ -31,7 +31,7 @@ namespace PatientWebApplication
             string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA") ?? "MYSQLHealtcareDB";
             string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "root";
             string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "root";
-
+            
             return $"server={server};port={port};database={database};user={user};password={password}";
         }
         
@@ -52,19 +52,18 @@ namespace PatientWebApplication
            {
                options.RegisterValidatorsFromAssemblyContaining<Startup>();
            });
-          
-            /*if (GetCurrentStage().Equals("Testing") && CurrentEnvironment.IsEnvironment("Testing"))
+              
+            if (GetCurrentStage().Equals("Testing") && CurrentEnvironment.IsEnvironment("Testing"))
             {
                 services.AddDbContext<MyDbContext>(options =>
                     options.UseInMemoryDatabase("TestingDB").UseLazyLoadingProxies());
             }
             else
-            {*/
+            {
                services.AddDbContext<MyDbContext>(options =>
                options.UseMySql(CreateConnectionStringFromEnvironment(),
                   builder => builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null)).UseLazyLoadingProxies());
-
-            //}
+            }
 
          // In production, the React files will be served from this directory
          services.AddSpaStaticFiles(configuration =>
