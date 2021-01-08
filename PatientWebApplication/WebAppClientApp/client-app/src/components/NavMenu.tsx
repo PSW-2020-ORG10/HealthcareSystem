@@ -27,6 +27,10 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean }
                                     {localStorage.getItem("role") === "patient" ? (<NavLink tag={Link} className="text-dark" to="/patient-homepage">Homepage</NavLink>) : null                                          
                                     }                                    
                                 </NavItem>
+                                <NavItem>
+                                    {localStorage.getItem("role") === "admin" ? (<NavLink tag={Link} className="text-dark" to="/admin-feedback">Homepage</NavLink>) : null                                          
+                                    }                                                                 
+                                </NavItem>
                                 {/*<NavItem>
                                     <NavLink tag={Link} className="text-dark" to="/patient-feedback">Feedback</NavLink>
                                 </NavItem>
@@ -67,6 +71,14 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean }
                                     <NavLink tag={Link} className="text-dark" to="/appointments-advanced">Advanced Appointments Search</NavLink>
                                 </NavItem>*/}
                                 <NavItem>
+                                    {localStorage.getItem("role") === "admin" ? (<NavLink tag={Link} className="text-dark" to="/rates-doctor">Doctors Rating</NavLink>) : null                                          
+                                    }                                                                 
+                                </NavItem>
+                                <NavItem>
+                                    {localStorage.getItem("role") === "admin" ? (<NavLink tag={Link} className="text-dark" to="/rates-general">Hospital Rating</NavLink>) : null                                          
+                                    }                                                                 
+                                </NavItem>
+                                <NavItem>
                                     {localStorage.getItem("role") === "patient" ? (<NavLink tag={Link} className="text-dark" to="/my-appointments">My Appointments</NavLink>) : null                                          
                                     }                                                                   
                                 </NavItem>
@@ -74,6 +86,10 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean }
                                     {localStorage.getItem("role") === "patient" ? (<NavLink tag={Link} className="text-dark" to="/create-feedback">My Feedback</NavLink>) : null                                          
                                     }
                                 </NavItem>
+                                <NavItem>
+                                    {localStorage.getItem("role") === "admin" ? (<NavLink tag={Link} className="text-dark" to="/malicious-patient">Malicious patient</NavLink>) : null                                          
+                                    }
+                                </NavItem>                     
                                 {/*<NavItem>
                                     <NavLink tag={Link} className="text-dark" to="/malicious-patient">Malicious patient</NavLink>
                                 </NavItem>
