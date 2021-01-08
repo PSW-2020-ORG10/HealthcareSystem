@@ -1,5 +1,6 @@
 using AppointmentMicroserviceApi.DbContextModel;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using AppointmentMicroserviceApi.Utility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +15,7 @@ namespace AppointmentMicroserviceApi
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; }
+        public static IConfiguration Configuration { get; private set; }
         public IWebHostEnvironment CurrentEnvironment { get; }
         public Startup(IConfiguration configuration, IWebHostEnvironment currentEnvironment)
         {
@@ -29,7 +30,6 @@ namespace AppointmentMicroserviceApi
             string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA") ?? "MYSQLHealtcareDB";
             string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "root";
             string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "root";
-
             return $"server={server};port={port};database={database};user={user};password={password}";
         }
 
@@ -72,6 +72,7 @@ namespace AppointmentMicroserviceApi
                        .AllowAnyMethod()
                        .AllowAnyHeader();
             }));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

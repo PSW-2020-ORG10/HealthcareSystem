@@ -14,7 +14,7 @@ namespace SearchMicroserviceApi
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; }
+        public static IConfiguration Configuration { get; private set; }
         public IWebHostEnvironment CurrentEnvironment { get; }
         public Startup(IConfiguration configuration, IWebHostEnvironment currentEnvironment)
         {

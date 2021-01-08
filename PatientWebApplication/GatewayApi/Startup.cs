@@ -43,7 +43,7 @@ namespace GatewayApi
             });
 
             services.AddAuthorization();
-            services.AddOcelot();
+            services.AddOcelot(Configuration);
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
                 builder.AllowAnyOrigin()
@@ -68,6 +68,7 @@ namespace GatewayApi
             {
                 endpoints.MapControllers();
             });
+
             app.UseOcelot().Wait();
         }
     }
