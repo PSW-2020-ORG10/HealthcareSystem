@@ -141,19 +141,6 @@ namespace SearchMicroserviceApi.Service
             }
         }
 
-        /* public void removeRoomFromAllSchedules(Room room)
-         {
-             EmployeesScheduleController employeesScheduleController = new EmployeesScheduleController();
-             List<Schedule> listOfSchedules = new List<Schedule>();
-             listOfSchedules = employeesScheduleController.GetAll();
-
-             foreach (Schedule schedule in listOfSchedules)
-             {
-                 if (isScheduleForRoom(schedule, room)) employeesScheduleController.Remove(schedule);
-
-             }
-         }*/
-
         public List<Room> GetAll()
         {
             return roomRepository.GetAll();

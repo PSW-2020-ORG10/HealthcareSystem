@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SearchMicroserviceApi.Adapters;
 using SearchMicroserviceApi.DbContextModel;
 using SearchMicroserviceApi.Dtos;
@@ -26,6 +27,7 @@ namespace SearchMicroserviceApi.Controllers
         /// <summary> This method is calling <c>PrescriptionService</c> to get list of all <c>Prescription</c>.  </summary>
         /// <returns> 200 Ok with list of all prescriptions. </returns>
         [HttpGet]       // GET /api/prescription
+        [Authorize(Roles = "admin")]
         public IActionResult Get()
         {
             return Ok(MicroservicePrescriptionAdapter.PrescriptionListToMicroservicePrescriptionDtoList(PrescriptionService.GetAll()));
@@ -33,10 +35,11 @@ namespace SearchMicroserviceApi.Controllers
 
         /// <summary> This method is calling <c>PrescriptionService</c> to get list of all patient <c>Prescription</c>. </summary>
         /// <returns> 200 Ok with list of all patient prescriptions. </returns>
-        [HttpGet("patient")]       // GET /api/prescription/patient
-        public IActionResult GetPrescriptionsForPatient()
+        [HttpGet("patient/{id}")]       // GET /api/prescription/patient
+        [Authorize(Roles = "patient")]
+        public IActionResult GetPrescriptionsForPatient(int id)
         {
-            return Ok(MicroservicePrescriptionAdapter.PrescriptionListToMicroservicePrescriptionDtoList(PrescriptionService.GetPrescriptionsForPatient(1))); //idPatient set to 1 no login, change after
+            return Ok(MicroservicePrescriptionAdapter.PrescriptionListToMicroservicePrescriptionDtoList(PrescriptionService.GetPrescriptionsForPatient(id))); 
         }
 
         /// <summary> This method is calling <c>PrescriptionService</c> to get list of all patient <c>Prescription</c> that matches <c>Prescription dto</c>. </summary>
@@ -44,12 +47,14 @@ namespace SearchMicroserviceApi.Controllers
         /// </param>
         /// <returns> 200 Ok with list of filtered patient prescriptions. </returns>
         [HttpPost("search")]
+        [Authorize(Roles = "patient")]
         public IActionResult SimpleSearchPrescriptions(PrescriptionSearchDto dto)
         {
             return Ok(MicroservicePrescriptionAdapter.PrescriptionListToMicroservicePrescriptionDtoList(PrescriptionService.SimpleSearchPrescriptions(dto)));
         }
 
         [HttpPost("advancedsearch")]
+        [Authorize(Roles = "patient")]
         public IActionResult AdvancedSearchPrescriptions(PrescriptionAdvancedSearchDto dto)
         {
             return Ok(MicroservicePrescriptionAdapter.PrescriptionListToMicroservicePrescriptionDtoList(PrescriptionService.AdvancedSearchPrescriptions(dto)));

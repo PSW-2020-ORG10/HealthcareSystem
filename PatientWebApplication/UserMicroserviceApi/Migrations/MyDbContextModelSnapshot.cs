@@ -273,7 +273,7 @@ namespace UserMicroserviceApi.Migrations
                             bornIn = "Grad2",
                             city = "Grad",
                             dateOfBirth = "02/02/1990",
-                            email = "email",
+                            email = "patient1@gmail.com",
                             exLastname = "",
                             firstName = "Pera",
                             gender = "Male",
@@ -284,7 +284,7 @@ namespace UserMicroserviceApi.Migrations
                             isVerified = false,
                             medicalIdNumber = "212313",
                             parentName = "Roditelj",
-                            password = "pass",
+                            password = "12345",
                             phoneNumber = "123",
                             secondName = "Peric",
                             uniqueCitizensidentityNumber = "1234"
@@ -308,7 +308,7 @@ namespace UserMicroserviceApi.Migrations
                             isVerified = false,
                             medicalIdNumber = "2112313",
                             parentName = "Roditelj",
-                            password = "pass",
+                            password = "12345",
                             phoneNumber = "555333",
                             secondName = "Markovic",
                             uniqueCitizensidentityNumber = "123456789"
@@ -320,7 +320,7 @@ namespace UserMicroserviceApi.Migrations
                             bornIn = "Grad2",
                             city = "Grad",
                             dateOfBirth = "2/2/2020",
-                            email = "email",
+                            email = "patient2@gmail.com",
                             exLastname = "",
                             file = "download.jfif",
                             firstName = "Stefan",
@@ -332,7 +332,7 @@ namespace UserMicroserviceApi.Migrations
                             isVerified = false,
                             medicalIdNumber = "212313",
                             parentName = "Roditelj",
-                            password = "pass",
+                            password = "12345",
                             phoneNumber = "123",
                             secondName = "Lelic",
                             uniqueCitizensidentityNumber = "1234"
@@ -344,7 +344,7 @@ namespace UserMicroserviceApi.Migrations
                             bornIn = "Grad2",
                             city = "Grad",
                             dateOfBirth = "2/2/2020",
-                            email = "email",
+                            email = "patient2@gmail.com",
                             exLastname = "",
                             firstName = "Marko",
                             gender = "Female",
@@ -355,7 +355,7 @@ namespace UserMicroserviceApi.Migrations
                             isVerified = false,
                             medicalIdNumber = "2112313",
                             parentName = "Roditelj",
-                            password = "pass",
+                            password = "12345",
                             phoneNumber = "123",
                             secondName = "Lazarevic",
                             uniqueCitizensidentityNumber = "1234"
@@ -657,6 +657,41 @@ namespace UserMicroserviceApi.Migrations
                             id = 4,
                             endTime = "23:00",
                             startTime = "08:00"
+                        });
+                });
+
+            modelBuilder.Entity("UserMicroserviceApi.Model.Administrator", b =>
+                {
+                    b.HasBaseType("UserMicroserviceApi.Model.EmployeeUser");
+
+                    b.HasDiscriminator().HasValue("Administrator");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 5,
+                            city = "Grad",
+                            dateOfBirth = "12/12/1985",
+                            email = "admin1@gmail.com",
+                            firstName = "Pera",
+                            password = "password",
+                            phoneNumber = "123",
+                            salary = 133.0,
+                            secondName = "Peric",
+                            uniqueCitizensidentityNumber = "1234"
+                        },
+                        new
+                        {
+                            id = 6,
+                            city = "Grad",
+                            dateOfBirth = "12/12/1985",
+                            email = "admin2@gmail.com",
+                            firstName = "Ana",
+                            password = "password",
+                            phoneNumber = "123",
+                            salary = 133.0,
+                            secondName = "Stanic",
+                            uniqueCitizensidentityNumber = "1234"
                         });
                 });
 

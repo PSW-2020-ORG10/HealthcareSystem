@@ -56,3 +56,5 @@ export const LOADED_IMAGE_ERROR = "loadedImageError";
 export const LOADED_ALL_MESSAGES = "loadedAllMessages";
 export const LOADED_SECOND_IMAGE = "loadedSecondImage";
 export const LOADED_THIRD_IMAGE = "loadedThirdImage";
+export const USER_LOGGEDIN = "userLoggedIn";
+export const USER_LOGGEDIN_ERROR = "userLoggedInError";

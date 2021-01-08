@@ -1,7 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using AppointmentMicroserviceApi.Adapters;
 using AppointmentMicroserviceApi.Dtos;
 using AppointmentMicroserviceApi.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using DoctorAppointment = AppointmentMicroserviceApi.Patient.DoctorAppointment;
 using MyDbContext = AppointmentMicroserviceApi.DbContextModel.MyDbContext;
@@ -24,12 +26,14 @@ namespace AppointmentMicroserviceApi.Controllers
         }
 
         [HttpGet("getAll")]
+        [Authorize(Roles = "patient")]
         public IActionResult GetAll()
         {
             return Ok(ViewAppointmentAdapter.AppointmentListToViewAppointmenDtoList(regularAppointmentService.GetAll()));
         }
 
         [HttpGet("getAllDto")]
+        [AllowAnonymous]
         public IActionResult GetAllDto()
         {
             return Ok(CancelAppointmentAdapter.ConvertAppointmentListToAppointmentDtoList(regularAppointmentService.GetAll()));
@@ -38,33 +42,28 @@ namespace AppointmentMicroserviceApi.Controllers
         /// <summary> This method is calling <c>RegularAppointmentService</c> to get list of all appointments of one patient. </summary>
         /// <returns> 200 Ok with list of patient's appointments. </returns>
         [HttpGet("{id}")]
+        [Authorize(Roles = "patient")]
         public IActionResult Get(int id)
         {
             return Ok(new AppointmentAdapter().ConvertAppointmentListToAppointmentDtoList(regularAppointmentService.GetAppointmentsForPatient(id)));
         }
 
-        /// <summary> This method is calling <c>regularAppointmentService</c> to get list of all <c>DoctorAppointment</c> that already happened. </summary>
-        /// <returns> 200 Ok with list of all patient's appointments that already happened. </returns>
-        [HttpGet("patient")]
-        public IActionResult GetAppointmentsForPatient()
-        {
-            return Ok(ViewAppointmentAdapter.AppointmentListToViewAppointmenDtoList(regularAppointmentService.GetAppointmentsForPatient(2)));
-        }
-
         /// <summary> This method is calling <c>regularAppointmentService</c> to get list of all <c>DoctorAppointment</c> that is happening in two days. </summary>
         /// <returns> 200 Ok with list of all patient's appointments that's going to happen in two days. </returns>
-        [HttpGet("patientInTwoDays")]
-        public IActionResult GetAppointmentsForPatientInTwoDays()
+        [HttpGet("patientInTwoDays/{id}")]
+        [Authorize(Roles = "patient")]
+        public IActionResult GetAppointmentsForPatientInTwoDays(int id)
         {
-            return Ok(ViewAppointmentAdapter.AppointmentListToViewAppointmenDtoList(regularAppointmentService.GetAppointmentsForPatientInTwoDays(2)));
+            return Ok(ViewAppointmentAdapter.AppointmentListToViewAppointmenDtoList(regularAppointmentService.GetAppointmentsForPatientInTwoDays(id)));
         }
 
         /// <summary> This method is calling <c>regularAppointmentService</c> to get list of all <c>DoctorAppointment</c> that are going to happen. </summary>
         /// <returns> 200 Ok with list of all patient's appointments that's going to happen in future. </returns>
-        [HttpGet("patientInFuture")]
-        public IActionResult GetAppointmentsForPatientInFuture()
+        [HttpGet("patientInFuture/{id}")]
+        [Authorize(Roles = "patient")]
+        public IActionResult GetAppointmentsForPatientInFuture(int id)
         {
-            return Ok(ViewAppointmentAdapter.AppointmentListToViewAppointmenDtoList(regularAppointmentService.GetAppointmentsForPatientInFuture(2)));
+            return Ok(ViewAppointmentAdapter.AppointmentListToViewAppointmenDtoList(regularAppointmentService.GetAppointmentsForPatientInFuture(id)));
         }
 
         /// <summary> This method provides <paramref name="appointmentId"/> and sends it to <c>RegularAppointmentService</c> there appointment.IsCanceled will be set to true. </summary>
@@ -72,6 +71,7 @@ namespace AppointmentMicroserviceApi.Controllers
         /// </param>
         /// <returns>200 Ok with canceled appointment.</returns>
         [HttpPut("{appointmentId}")]
+        [Authorize(Roles = "patient")]
         public IActionResult CancelAppointment(int appointmentId)
         {
             DoctorAppointment appointment = regularAppointmentService.CancelAppointment(appointmentId);
@@ -84,6 +84,7 @@ namespace AppointmentMicroserviceApi.Controllers
         /// </param>
         /// <returns> 200 Ok with list of all recommended appointments. </returns>
         [HttpPost("recommend")]
+        [Authorize(Roles = "patient")]
         public IActionResult RecommendAppointmentSchedule(RecommendedAppointmentDto dto)
         {
             return Ok(ViewAppointmentAdapter.AppointmentListToViewAppointmenDtoList(regularAppointmentService.GetRecommendedAppointmentAsync(dto)));
@@ -94,6 +95,7 @@ namespace AppointmentMicroserviceApi.Controllers
         /// </param>
         /// <returns> 200 Ok with list of all available appointments. </returns>
         [HttpPost("availableappointments")]
+        [Authorize(Roles = "patient")]
         public async Task<IActionResult> GetAvailableAppointmentsAsync(AvailableAppointmentsSearchDto dto)
         {
             return Ok(ViewAppointmentAdapter.AppointmentListToViewAppointmenDtoList(await regularAppointmentService.GetAllAvailableAppointmentsForDateAsync(dto.Date, dto.DoctorId, dto.PatientId)));
@@ -104,6 +106,7 @@ namespace AppointmentMicroserviceApi.Controllers
         /// </param>
         /// <returns> if <paramref name="appointment"/> is invalid send 400 Bad Request; otherwise 200 Ok with scheduled regular appointment </returns>
         [HttpPost]
+        [Authorize(Roles = "patient")]
         public IActionResult Post(DoctorAppointment appointment)
         {
             DoctorAppointment doctorAppointment = regularAppointmentService.CreateRegular(appointment);
@@ -115,24 +118,28 @@ namespace AppointmentMicroserviceApi.Controllers
         }
 
         [HttpGet("appointmentsForDoctor/{doctorId}")]
+        [Authorize(Roles = "patient")]
         public IActionResult DoesDoctorHaveAnAppointmentAtSpecificTime(int doctorId)
         {
             return Ok(ViewAppointmentAdapter.AppointmentListToViewAppointmenDtoList(regularAppointmentService.GetAppointmentsForDoctor(doctorId)));
         }
 
         [HttpGet("appointmentsForPatient/{patientId}")]
+        [Authorize(Roles = "patient")]
         public IActionResult GetAppointmentsForPatient(int patientId)
         {
             return Ok(ViewAppointmentAdapter.AppointmentListToViewAppointmenDtoList(regularAppointmentService.GetAppointmentsForPatient(patientId)));
         }
 
         [HttpGet("appointmentsForPatientDto/{patientId}")]
+        [AllowAnonymous]
         public IActionResult GetAppointmentsForPatientDto(int patientId)
         {
             return Ok(SearchAppointmentAdapter.AppointmentListToSearchAppointmenDtoList(regularAppointmentService.GetAppointmentsForPatient(patientId)));
         }
 
         [HttpGet("appointmentsForPatientDtoSimple/{patientId}")]
+        [AllowAnonymous]
         public IActionResult GetAppointmentsForPatientDtoSimple(int patientId)
         {
             return Ok( new AppointmentAdapter().ConvertAppointmentListToAppointmentDtoList(regularAppointmentService.GetAppointmentsForPatient(patientId)));

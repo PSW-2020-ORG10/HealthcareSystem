@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using UserMicroserviceApi.DbContextModel;
+using Microsoft.AspNetCore.Authorization;
 
 namespace UserMicroserviceApi.Controllers
 {
@@ -26,18 +27,21 @@ namespace UserMicroserviceApi.Controllers
         }
 
         [HttpGet("available")]
+        [Authorize(Roles = "patient")]
         public IActionResult GetAvailableDoctors(string specialty, string date, int patientId)
         {
             return Ok(new DoctorAdapter().ConvertDoctorListToDoctorDtoList(doctorService.GetDoctorsBySpecialty(specialty)));
         }
 
         [HttpGet]       // GET /api/doctor
+        [AllowAnonymous]
         public IActionResult Get()
         {   
             return Ok(MicroserviceDoctorAdapter.DoctorListToMicroserviceDoctorDtoList(doctorService.GetAll()));
         }
 
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public IActionResult GetById(int id)
         {
             return Ok(MicroserviceDoctorAdapter.DoctorToMicroserviceDoctorDto(doctorService.GetByid(id)));

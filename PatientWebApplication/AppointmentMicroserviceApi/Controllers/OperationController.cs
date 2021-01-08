@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AppointmentMicroserviceApi.DbContextModel;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AppointmentMicroservice.Controller
 {
@@ -28,6 +29,7 @@ namespace AppointmentMicroservice.Controller
         }
 
         [HttpGet("getAll")]
+        [Authorize(Roles = "patient")]
         public IActionResult GetAll()
         {
             return Ok(operationService.GetAll());
@@ -36,6 +38,7 @@ namespace AppointmentMicroservice.Controller
         /// <summary> This method is calling <c>OperationService</c> to get list of all operations of one patient. </summary>
         /// <returns> 200 Ok with list of patient's operations. </returns>
         [HttpGet("{id}")]
+        [Authorize(Roles = "patient")]
         public IActionResult GetOperations(int id)
         {
             return Ok(new OperationAdapter().ConvertOperationListToOperationDtoList(operationService.GetOperationsForPatient(id)));
@@ -46,12 +49,14 @@ namespace AppointmentMicroservice.Controller
         /// </param>
         /// <returns> 200 Ok with list of filtered patient operations. </returns>
         [HttpPost("search")]
+        [Authorize(Roles = "patient")]
         public IActionResult SimpleSearchOperations(AppointmentReportSearchDto dto)
         {
             return Ok(new OperationAdapter().ConvertOperationListToOperationDtoList(operationService.SimpleSearchOperations(dto)));
         }
 
         [HttpGet("operationsForDoctor/{doctorId}")]
+        [Authorize(Roles = "patient")]
         public IActionResult DoesDoctorHaveAnAppointmentAtSpecificTime(int doctorId)
         {
             return Ok(operationService.GetOperationsForDoctor(doctorId));

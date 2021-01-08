@@ -53,6 +53,16 @@ namespace UserMicroserviceApi.Repository
             dbContext.SaveChanges();
             return patient;
         }
+
+        public PatientUser GetByLoginInfo(UserModel login)
+        {
+            return dbContext.Patients.SingleOrDefault(patient => patient.email.Equals(login.Email) && patient.password.Equals(login.Password) && patient.isBlocked == false && patient.isVerified == true);
+        }
+
+        public PatientUser GetByEmail(string email)
+        {
+            return dbContext.Patients.SingleOrDefault(patient => patient.email.Equals(email));
+        }
     }
 
 }

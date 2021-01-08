@@ -34,6 +34,22 @@ export function showErrorToast() {
     });
 }
 
+export function showUnsuccessfulLoginToast() {
+    toast.configure();
+
+    toast.error("Wrong login information!", {
+        position: toast.POSITION.TOP_RIGHT
+    });
+}
+
+export function showExistsToast() {
+    toast.configure();
+
+    toast.error("Account with same Email already exists!", {
+        position: toast.POSITION.TOP_RIGHT
+    });
+}
+
 export function showErrorToastEmail() {
     toast.configure();
 

@@ -11,15 +11,17 @@ namespace AppointmentMicroserviceApi.Dtos
         public string Start { get; set; }
         public string End { get; set; }
         public string Priority { get; set; }
+        public int PatientId { get; set; }
 
         public RecommendedAppointmentDto() { }
 
-        public RecommendedAppointmentDto(int doctorId, string start, string end, string priority)
+        public RecommendedAppointmentDto(int doctorId, string start, string end, string priority, int id)
         {
             DoctorId = doctorId;
             Start = start;
             End = end;
             Priority = priority;
+            PatientId = id;
         }
     }
 }

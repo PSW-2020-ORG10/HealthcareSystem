@@ -1,17 +1,21 @@
 using AppointmentMicroserviceApi.DbContextModel;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using AppointmentMicroserviceApi.Utility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using System;
+using System.Text;
 
 namespace AppointmentMicroserviceApi
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; }
+        public static IConfiguration Configuration { get; private set; }
         public IWebHostEnvironment CurrentEnvironment { get; }
         public Startup(IConfiguration configuration, IWebHostEnvironment currentEnvironment)
         {
@@ -26,15 +30,30 @@ namespace AppointmentMicroserviceApi
             string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA") ?? "MYSQLHealtcareDB";
             string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "root";
             string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "root";
-
             return $"server={server};port={port};database={database};user={user};password={password}";
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = Configuration["Jwt:Issuer"],
+                    ValidAudience = Configuration["Jwt:Issuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                };
+            });
+
             services.AddControllersWithViews()
              .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            services.AddAuthorization();
 
             if (CurrentEnvironment.IsEnvironment("Testing"))
             {
@@ -53,6 +72,7 @@ namespace AppointmentMicroserviceApi
                        .AllowAnyMethod()
                        .AllowAnyHeader();
             }));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -73,6 +93,8 @@ namespace AppointmentMicroserviceApi
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

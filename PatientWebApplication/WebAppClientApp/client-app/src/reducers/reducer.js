@@ -36,7 +36,8 @@
     LOADED_IMAGE_ERROR,
     LOADED_ALL_MESSAGES,
     LOADED_SECOND_IMAGE,
-    LOADED_THIRD_IMAGE
+    LOADED_THIRD_IMAGE,
+    USER_LOGGEDIN
 } from "../types/types";
 import { parseStringToDate } from '../utilities/Utilities';
 
@@ -99,7 +100,9 @@ const initialState = {
     loadedImage : "",
     loadedSecondImage : "",
     loadedThirdImage : "",
-    loadedAllMessagesList: []
+    loadedAllMessagesList: [],
+    userCookie : {},
+    userToken : ""      
 };
 
 
@@ -320,6 +323,15 @@ function reducer(state = initialState, action) {
                 ...state,
                 loadedAllMessagesList: action.payload
             }; 
+        case USER_LOGGEDIN:
+            debugger;
+            var parts = action.payload.token.split('.'); // header, payload, signature
+            var user = JSON.parse(atob(parts[1]));
+            return {
+                ...state,
+                userToken: action.payload.token,
+                userCookie: user
+            };
         default:
             return state;
     }

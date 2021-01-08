@@ -11,16 +11,18 @@ namespace SearchMicroserviceApi.Dtos
         public string[] RestRoles { get; set; }
         public string[] Rest { get; set; }
         public string[] LogicOperators { get; set; }
+        public int PatientId { get; set; }
 
         public AppointmentAdvancedSearchDto() { }
 
-        public AppointmentAdvancedSearchDto(string firstRole, string first, string[] restRoles, string[] rest, string[] logicOperators)
+        public AppointmentAdvancedSearchDto(string firstRole, string first, string[] restRoles, string[] rest, string[] logicOperators, int id)
         {
             FirstRole = firstRole;
             First = first;
             RestRoles = restRoles;
             Rest = rest;
             LogicOperators = logicOperators;
+            PatientId = id;
         }
 
     }

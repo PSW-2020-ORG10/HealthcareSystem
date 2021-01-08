@@ -23,7 +23,7 @@ class PublishedFeedbackTable extends Component {
                         <div key={f.Id} className="check-flag">
                             <span className="small-text-label">Name and Surname</span>
                             <span className="small-text-label hours">{ formatDate(f.date) }</span>
-                            <span className="check-flag-label">{f.isAnonymous ? "ANONYMOUS" : [f.patient.firstName, ' ', f.patient.secondName].join('')}</span>
+                            <span className="check-flag-label">{f.isAnonymous ? "ANONYMOUS" : [f.patient.name, ' ', f.patient.surname].join('')}</span>
                             <textarea className="check-flag-textarea" disabled rows={3} value={f.message}></textarea>
                         </div>
                     </div>
