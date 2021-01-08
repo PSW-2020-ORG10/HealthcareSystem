@@ -379,22 +379,6 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api/feedback",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "feedbackmicroserviceapi",
-          "Port": 58636
-        }
-      ],
-      "UpstreamPathTemplate": "/api/feedback",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "TestKey",
-        "AllowedScopes": []
-      }
-    },
-    {
       "DownstreamPathTemplate": "/api/feedback/published",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
