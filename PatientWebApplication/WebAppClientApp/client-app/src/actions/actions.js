@@ -812,7 +812,8 @@ export const loadedImageForAds = (fileName) => async (dispatch) => {
     try {
         const response = await axios.get("http://localhost:54689/api/patientuser/getimage/" + fileName,
         {
-            headers: { "Access-Control-Allow-Origin": "*" },
+            headers: { "Access-Control-Allow-Origin": "*",
+                       "Authorization" :  "Bearer " + localStorage.getItem("token")}
           })
         .then(function(response){
             dispatch({
@@ -833,7 +834,8 @@ export const loadedAllMessages = () => async (dispatch) => {
         debugger;
         const response = await axios.get("http://localhost:53236/api/message",
         {
-            headers: { "Access-Control-Allow-Origin": "*" },
+            headers: { "Access-Control-Allow-Origin": "*",
+                       "Authorization" :  "Bearer " + localStorage.getItem("token")}
           });
         debugger;
         dispatch({
@@ -852,7 +854,8 @@ export const loadedImageForSecondAd = (fileName) => async (dispatch) => {
     try {
         const response = await axios.get("http://localhost:54689/api/patientuser/getimage/" + fileName,
         {
-            headers: { "Access-Control-Allow-Origin": "*" },
+            headers: { "Access-Control-Allow-Origin": "*",
+            "Authorization" :  "Bearer " + localStorage.getItem("token")}
           })
         .then(function(response){
             dispatch({
@@ -872,7 +875,8 @@ export const loadedImageForThirdAd = (fileName) => async (dispatch) => {
     try {
         const response = await axios.get("http://localhost:54689/api/patientuser/getimage/" + fileName,
         {
-            headers: { "Access-Control-Allow-Origin": "*" },
+            headers: { "Access-Control-Allow-Origin": "*",
+                       "Authorization" :  "Bearer " + localStorage.getItem("token")}
           })
         .then(function(response){
             dispatch({

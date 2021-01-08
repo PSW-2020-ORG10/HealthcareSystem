@@ -30,6 +30,8 @@ class Login extends Component {
         if(successful === true){
             if(localStorage.getItem("role") === 'admin'){
                 window.location.href = "http://localhost:3000/admin-feedback";
+            }else if(localStorage.getItem("role") === 'patient') {
+                window.location.href = "http://localhost:3000/patient-homepage";
             }
             return;
         }

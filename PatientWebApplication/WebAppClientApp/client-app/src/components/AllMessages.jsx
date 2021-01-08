@@ -29,16 +29,19 @@ class AllMessages extends Component {
         const image2 = this.props.image2;
         const image3 = this.props.image3;
         const images = [image, image2, image3];
+        var i = 0;
         debugger;
         return (
             <div>
                  <Slide easing="ease">
-                    {loadedAllMessagesList.map((f) => (
+                    {loadedAllMessagesList.map((f,i) => (
+                        i>3 ? null : 
                       <div className="each-slide">
-                      <div className = "a" style={{'backgroundImage': `url(${'data:image/jpg;base64,' + images[f.id-1]})`}}>
+                      <div className = "a" style={{'backgroundImage': `url(${'data:image/jpg;base64,' + images[i]})`}}>
                         <span>{f.text}</span>
                       </div>
                     </div>
+                    
                     ))}
                 </Slide>
             </div>

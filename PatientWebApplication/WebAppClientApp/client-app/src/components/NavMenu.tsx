@@ -24,7 +24,8 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean }
                         <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={this.state.isOpen} navbar>
                             <ul className="navbar-nav flex-grow">
                                 <NavItem>
-                                    <NavLink tag={Link} className="text-dark" to="/patient-homepage">Homepage</NavLink>
+                                    {localStorage.getItem("role") === "patient" ? (<NavLink tag={Link} className="text-dark" to="/patient-homepage">Homepage</NavLink>) : null                                          
+                                    }                                    
                                 </NavItem>
                                 {/*<NavItem>
                                     <NavLink tag={Link} className="text-dark" to="/patient-feedback">Feedback</NavLink>
@@ -36,16 +37,19 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean }
                                     <NavLink tag={Link} className="text-dark" to="/create-feedback">Create feedback</NavLink>
                                 </NavItem>*/}
                                 <NavItem>
-                                    <NavLink tag={Link} className="text-dark" to="/prescriptions-simple">Prescriptions Search</NavLink>
+                                    {localStorage.getItem("role") === "patient" ? (<NavLink tag={Link} className="text-dark" to="/prescriptions-simple">Prescriptions Search</NavLink>) : null                                          
+                                    }                                    
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink tag={Link} className="text-dark" to="/reports-simple">Appointment Reports Search</NavLink>
+                                    {localStorage.getItem("role") === "patient" ? (<NavLink tag={Link} className="text-dark" to="/reports-simple">Appointment Reports Search</NavLink>) : null                                          
+                                    }                                   
                                 </NavItem>
                                 {/*<NavItem>
                                     <NavLink tag={Link} className="text-dark" to="/register-patient">Patient Registration</NavLink>
                                 </NavItem>*/}
                                 <NavItem>
-                                    <NavLink tag={Link} className="text-dark" to="/my-information">My Information</NavLink>
+                                    {localStorage.getItem("role") === "patient" ? (<NavLink tag={Link} className="text-dark" to="/my-information">My Information</NavLink>) : null                                          
+                                    }                                                                 
                                 </NavItem>
                                 {/*<NavItem>
                                     <NavLink tag={Link} className="text-dark" to="/create-survey">Create Survey</NavLink>
@@ -63,10 +67,12 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean }
                                     <NavLink tag={Link} className="text-dark" to="/appointments-advanced">Advanced Appointments Search</NavLink>
                                 </NavItem>*/}
                                 <NavItem>
-                                    <NavLink tag={Link} className="text-dark" to="/my-appointments">My Appointments</NavLink>
+                                    {localStorage.getItem("role") === "patient" ? (<NavLink tag={Link} className="text-dark" to="/my-appointments">My Appointments</NavLink>) : null                                          
+                                    }                                                                   
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink tag={Link} className="text-dark" to="/create-feedback">My Feedback</NavLink>
+                                    {localStorage.getItem("role") === "patient" ? (<NavLink tag={Link} className="text-dark" to="/create-feedback">My Feedback</NavLink>) : null                                          
+                                    }
                                 </NavItem>
                                 {/*<NavItem>
                                     <NavLink tag={Link} className="text-dark" to="/malicious-patient">Malicious patient</NavLink>

@@ -203,6 +203,15 @@ namespace UserMicroserviceApi.Migrations
 
             migrationBuilder.InsertData(
                 table: "EmployeeUser",
+                columns: new[] { "id", "Discriminator", "city", "dateOfBirth", "email", "firstName", "password", "phoneNumber", "salary", "secondName", "uniqueCitizensidentityNumber" },
+                values: new object[,]
+                {
+                    { 5, "Administrator", "Grad", "12/12/1985", "admin1@gmail.com", "Pera", "password", "123", 133.0, "Peric", "1234" },
+                    { 6, "Administrator", "Grad", "12/12/1985", "admin2@gmail.com", "Ana", "password", "123", 133.0, "Stanic", "1234" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "EmployeeUser",
                 columns: new[] { "id", "Discriminator", "city", "dateOfBirth", "email", "firstName", "password", "phoneNumber", "salary", "secondName", "uniqueCitizensidentityNumber", "isSpecialist", "ordination", "speciality" },
                 values: new object[,]
                 {
@@ -225,17 +234,22 @@ namespace UserMicroserviceApi.Migrations
             migrationBuilder.InsertData(
                 table: "Messages",
                 columns: new[] { "id", "DateAction", "DateStamp", "IsRemoved", "PharmacyName", "Text", "TimeStamp" },
-                values: new object[] { 1, "02/02/2020", "03/12/2020", false, "Apoteka Jankovic", "Message", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                values: new object[,]
+                {
+                    { 3, "02/02/2020", "03/12/2020", false, "Apoteka Jankovic", "Protects the heart, protects the brain, Aspirin!", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 1, "02/02/2020", "03/12/2020", false, "Apoteka Jankovic", "Introducing our new commercial for your old family friend: Defrinol Forte!", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, "02/02/2020", "03/12/2020", false, "Apoteka Jankovic", "The bag saves lives, if there is an Andol in it!", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                });
 
             migrationBuilder.InsertData(
                 table: "Patients",
                 columns: new[] { "id", "allergie", "bornIn", "city", "dateOfBirth", "email", "exLastname", "file", "firstName", "gender", "guest", "isBlocked", "isMarried", "isRegisteredBySecretary", "isVerified", "medicalIdNumber", "parentName", "password", "phoneNumber", "secondName", "uniqueCitizensidentityNumber" },
                 values: new object[,]
                 {
-                    { 1, "Alergija", "Grad2", "Grad", "02/02/1990", "email", "", null, "Pera", "Male", false, false, false, false, false, "212313", "Roditelj", "pass", "123", "Peric", "1234" },
-                    { 2, "Alergija", "Grad2", "Grad", "21/07/1989", "marko_markovic@gmail.com", "", "images.jfif", "Marko", "Male", false, false, false, false, false, "2112313", "Roditelj", "pass", "555333", "Markovic", "123456789" },
-                    { 3, "Alergija", "Grad2", "Grad", "2/2/2020", "email", "", "download.jfif", "Stefan", "Male", false, false, false, false, false, "212313", "Roditelj", "pass", "123", "Lelic", "1234" },
-                    { 4, "Alergija", "Grad2", "Grad", "2/2/2020", "email", "", null, "Marko", "Female", false, false, false, false, false, "2112313", "Roditelj", "pass", "123", "Lazarevic", "1234" }
+                    { 1, "Alergija", "Grad2", "Grad", "02/02/1990", "patient1@gmail.com", "", null, "Pera", "Male", false, false, false, false, false, "212313", "Roditelj", "12345", "123", "Peric", "1234" },
+                    { 2, "Alergija", "Grad2", "Grad", "21/07/1989", "marko_markovic@gmail.com", "", "images.jfif", "Marko", "Male", false, false, false, false, false, "2112313", "Roditelj", "12345", "555333", "Markovic", "123456789" },
+                    { 3, "Alergija", "Grad2", "Grad", "2/2/2020", "patient2@gmail.com", "", "download.jfif", "Stefan", "Male", false, false, false, false, false, "212313", "Roditelj", "12345", "123", "Lelic", "1234" },
+                    { 4, "Alergija", "Grad2", "Grad", "2/2/2020", "patient2@gmail.com", "", null, "Marko", "Female", false, false, false, false, false, "2112313", "Roditelj", "12345", "123", "Lazarevic", "1234" }
                 });
 
             migrationBuilder.InsertData(
@@ -248,9 +262,9 @@ namespace UserMicroserviceApi.Migrations
                 columns: new[] { "id", "endTime", "startTime" },
                 values: new object[,]
                 {
+                    { 3, "19:00", "08:00" },
                     { 1, "16:00", "14:00" },
                     { 2, "12:30", "12:00" },
-                    { 3, "19:00", "08:00" },
                     { 4, "23:00", "08:00" }
                 });
 
