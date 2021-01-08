@@ -1,8 +1,11 @@
-﻿using HealthClinic.CL.Dtos;
-using HealthClinic.CL.Model.Orders;
+﻿
 using HealthClinic.CL.Model.Pharmacy;
 using HealthClinic.CL.Repository;
 using HealthClinic.CL.Service;
+using MedicineInformationApi.Dto;
+using MedicineInformationApi.Model;
+using MedicineInformationApi.Repository;
+using MedicineInformationApi.Service;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -11,7 +14,7 @@ using Xunit;
 namespace IntegrationWithPharmaciesTest
 {
     public class EPrescriptionTests
-    {/*
+    {
         [Fact]
         public void Generates_EPrescription()
         {
@@ -86,6 +89,6 @@ namespace IntegrationWithPharmaciesTest
             medicines.Add(medicine2);
             stubRepository.Setup(m => m.GetAll()).Returns(medicines);
             return stubRepository.Object;
-        }*/
+        }
     }
 }

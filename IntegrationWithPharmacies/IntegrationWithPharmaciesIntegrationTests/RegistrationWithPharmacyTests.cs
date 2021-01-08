@@ -1,15 +1,16 @@
-using HealthClinic.CL.DbContextModel;
-using HealthClinic.CL.Dtos;
-using HealthClinic.CL.Model.Pharmacy;
-using HealthClinic.CL.Service;
+
 using IntegrationWithPharmacies;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
+using PharmacyRegistrationApi.DbContextModel;
+using PharmacyRegistrationApi.Dtos;
+using PharmacyRegistrationApi.Model;
+using PharmacyRegistrationApi.Service;
 using Shouldly;
 using Xunit;
 
 namespace IntegrationWithPharmaciesIntegrationTests
-{/*
+{
     public class RegistrationWithPharmacyTests
     {
         private readonly MyDbContext _context;
@@ -40,5 +41,5 @@ namespace IntegrationWithPharmaciesIntegrationTests
             registrationInPharmacy.ShouldBeNull();
         }
       
-    }*/
+    }
 }

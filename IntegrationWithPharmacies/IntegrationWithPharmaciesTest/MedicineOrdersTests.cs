@@ -1,16 +1,20 @@
-﻿using HealthClinic.CL.Dtos;
-using HealthClinic.CL.Model.Orders;
-using HealthClinic.CL.Repository;
-using HealthClinic.CL.Service;
-using Moq;
+﻿using Moq;
 using System;
 using System.Collections.Generic;
+using TenderApi.Dto;
+using TenderApi.Model;
+using TenderApi.Repository;
+using TenderApi.Service;
+using UrgentMedicineOrderApi.Dto;
+using UrgentMedicineOrderApi.Model;
+using UrgentMedicineOrderApi.Repository;
+using UrgentMedicineOrderApi.Service;
 using Xunit;
 
 namespace IntegrationWithPharmaciesTest
 {
    public class MedicineOrdersTests
-    {/*
+    {
         [Fact]
         public void Creates_Urgent_Order()
         {
@@ -62,6 +66,6 @@ namespace IntegrationWithPharmaciesTest
             medicinesForTendering.Add(medicineForTendering);
             stubRepository.Setup(m => m.GetAll()).Returns(medicinesForTendering);
             return stubRepository.Object;
-        }*/
+        }
     }
 }

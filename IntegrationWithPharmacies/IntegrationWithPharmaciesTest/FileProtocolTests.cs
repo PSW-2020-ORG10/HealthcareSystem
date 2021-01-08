@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using HealthClinic.CL.Model.Orders;
-using HealthClinic.CL.Repository;
-using HealthClinic.CL.Service;
+
 using IntegrationWithPharmacies.FileProtocol;
 using Moq;
+using TenderApi.Model;
+using TenderApi.Repository;
+using TenderApi.Service;
 using Xunit;
 
 namespace IntegrationWithPharmaciesTest
 {
     public class FileProtocolTests
-    {/*
+    {
         [Fact]
         public void Generates_file_report()
         {
@@ -24,7 +25,7 @@ namespace IntegrationWithPharmaciesTest
 
         [Fact]
         public void Generates_no_file_report()
-        {
+        {   
             TenderService tenderService = new TenderService(Create_stub_repository_tenders());
             MedicineForTenderingService medicineForTenderingService = new MedicineForTenderingService(Create_stub_repository_medicine_tender_orders());
             DateOfOrder date = new DateOfOrder("10/09/2022", "25/10/2023");
@@ -85,7 +86,7 @@ namespace IntegrationWithPharmaciesTest
         }
         private bool isOrderInRequiredPeriod(MedicineForTendering medicine, DateOfOrder date, Tender tender)
         {
-            if (isIdEqual(medicine.TenderId, tender.id) && compareDates(tender.ActiveUntil, convertStringToDate(date.StartDate)) == 1 && compareDates(tender.ActiveUntil, convertStringToDate(date.EndDate)) == -1 && tender.Closed) return true;
+            if (isIdEqual(medicine.TenderId, tender.Id) && compareDates(tender.ActiveUntil, convertStringToDate(date.StartDate)) == 1 && compareDates(tender.ActiveUntil, convertStringToDate(date.EndDate)) == -1 && tender.Closed) return true;
             return false;
         }
         private bool isIdEqual(int firstNumber, int secondNumber)
@@ -100,7 +101,7 @@ namespace IntegrationWithPharmaciesTest
         {
             return new DateTime(int.Parse(date.Split("/")[2]), int.Parse(date.Split("/")[1]), int.Parse(date.Split("/")[0]));
         }
-        */
+        
 
     }
     

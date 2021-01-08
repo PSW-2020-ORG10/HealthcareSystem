@@ -1,16 +1,16 @@
 using System.Collections.Generic;
-using HealthClinic.CL.Dtos;
-using HealthClinic.CL.Model.Pharmacy;
-using HealthClinic.CL.Repository;
-using HealthClinic.CL.Service;
 using Moq;
+using PharmacyRegistrationApi.Dtos;
+using PharmacyRegistrationApi.Model;
+using PharmacyRegistrationApi.Repository;
+using PharmacyRegistrationApi.Service;
 using Shouldly;
 using Xunit;
 
 namespace IntegrationWithPharmaciesTest
 {
     public class RegistrationWithPharmaciesTests
-    {/*
+    {
         [Fact]
         public static IRegistrationInPharmacyRepository Create_stub_repository()
         {
@@ -59,6 +59,6 @@ namespace IntegrationWithPharmaciesTest
             RegistrationInPharmacy registrationInPharmacy = service.createIRegistration(new RegistrationInPharmacyDto(33, "apisa12345","Jankovic","NS"));
 
             registrationInPharmacy.ShouldBeNull();
-        }*/
+        }
     }
 }

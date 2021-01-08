@@ -51,14 +51,20 @@ namespace TenderApi
                 services.AddDbContext<MyDbContext>(options =>
                 options.UseMySql(CreateConnectionStringFromEnvironment(),
                 builder => builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null)).UseLazyLoadingProxies());
-            }
+            }/*
             services.AddCors(options =>
             {
                 options.AddPolicy("MyPolicy",
                     builder => builder.WithOrigins("http://localhost:57942")
                     .AllowAnyMethod()
                     .AllowAnyHeader());
-            });
+            });*/
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
