@@ -35,7 +35,7 @@ namespace PatientWebApplication
             return $"server={server};port={port};database={database};user={user};password={password}";
         }
         
-        public string GetCurrentStage(){
+        private string GetCurrentStage(){
                return Environment.GetEnvironmentVariable("STAGE") ?? "Testing";  
         }
       // This method gets called by the runtime. Use this method to add services to the container.
