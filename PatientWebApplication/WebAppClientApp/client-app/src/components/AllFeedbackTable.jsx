@@ -22,7 +22,7 @@ class AllFeedbackTable extends Component {
         return (
 
             <div>             
-                <table className='table allFeedback' >
+                <table id="feedbackTable" className='table allFeedback' >
                     <thead>
                         <tr>
                             <th style={{ textAlign: "left" , width: '35%' }}> Message</th>

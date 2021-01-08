@@ -47,6 +47,7 @@ class Login extends Component {
                         Email:
                     </label>
                     <input
+                        id="email"
                         className="field-center"
                         type="text"
                         value={this.state.email}
@@ -60,6 +61,7 @@ class Login extends Component {
                         Password:
                     </label>
                     <input
+                        id="password"
                         className="field-center2"
                         type="password"
                         value={this.state.password}
@@ -69,7 +71,7 @@ class Login extends Component {
                 </div>
 
                 <div className="field-wrap row d-flex justify-content-center">
-                    <Button className="btn btn-lg btn-primary btn-block button-wrap" disabled={this.state.email === '' || this.state.password === ''} onClick={this.login.bind(this)}>Login</Button>
+                    <Button id="submit" className="btn btn-lg btn-primary btn-block button-wrap" disabled={this.state.email === '' || this.state.password === ''} onClick={this.login.bind(this)}>Login</Button>
                 </div>
 
                 <div className="field-wrap row d-flex justify-content-center mt-5">
