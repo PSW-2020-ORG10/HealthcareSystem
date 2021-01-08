@@ -11,7 +11,7 @@ using Xunit;
 namespace IntegrationWithPharmaciesTest
 {
     public class EPrescriptionTests
-    {
+    {/*
         [Fact]
         public void Generates_EPrescription()
         {
@@ -86,6 +86,6 @@ namespace IntegrationWithPharmaciesTest
             medicines.Add(medicine2);
             stubRepository.Setup(m => m.GetAll()).Returns(medicines);
             return stubRepository.Object;
-        }
+        }*/
     }
 }

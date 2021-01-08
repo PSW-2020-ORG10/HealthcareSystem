@@ -313,7 +313,7 @@
                     date: this.endDate,
                 };
 
-                this.axios.post('api/tender', tender)
+                this.axios.post('http://localhost:54679/api/tender', tender)
                     .then(res => {
                         this.sent = true;
                         this.notSent = false;
@@ -331,14 +331,14 @@
                 this.showActiveTender = false;
                 this.showConcreteOffer = false;
 
-                this.axios.get('api/tender/' + tenderId)
+                this.axios.get('http://localhost:54679/api/tender/' + tenderId)
                     .then(res => {
                         this.choosenTender = res.data;
                     })
                     .catch(res => {
                         console.log(res);
                     });
-                this.axios.get('api/tender/allPharmacyOffers/' + tenderId)
+                this.axios.get('http://localhost:54679/api/tender/allPharmacyOffers/' + tenderId)
                     .then(response => {
                         this.pharmacyOffers = response.data;
                     });
@@ -347,7 +347,7 @@
             showPharmacyOffer: function (event, offerId) {
                 this.showConcreteOffer = true;
 
-                this.axios.get('api/tender/pharmacyOffer/' + offerId + '/' + this.choosenTender.id)
+                this.axios.get('http://localhost:54679/api/tender/pharmacyOffer/' + offerId + '/' + this.choosenTender.id)
                     .then(response => {
                         this.choosenOffer = response.data;
                     });
@@ -355,7 +355,7 @@
             },
             acceptPharmacyOffer: function (event, offerId) {
 
-                this.axios.get('api/tender/acceptOffer/' + offerId + '/' + this.choosenTender.id)
+                this.axios.get('http://localhost:54679/api/tender/acceptOffer/' + offerId + '/' + this.choosenTender.id)
                     .then(response => {
                         this.choosenOffer = response.data;
                         this.acceptOffer = true;
@@ -375,7 +375,7 @@
                 .catch(res => {
                     console.log(res);
                 });
-            this.axios.get('api/tender/active')
+            this.axios.get('http://localhost:54679/api/tender/active')
                 .then(response => {
                     this.activeTenders = response.data;
                 });

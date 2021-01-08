@@ -3,7 +3,9 @@ using HealthClinic.CL.Model.Orders;
 using HealthClinic.CL.Model.Pharmacy;
 using HealthClinic.CL.Service;
 using Microsoft.EntityFrameworkCore;
+using RestSharp;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
@@ -12,17 +14,11 @@ namespace IntegrationWithPharmacies.FileProtocol
     public class ReportText
     {
         public MyDbContext DbContext;
-        private RegistrationInPharmacyService RegistrationInPharmacyService { get; }
         private HelperFunctions HelperFunctions { get; }
-        private TenderService TenderService { get; }
-        private MedicineForTenderingService MedicineForTenderingService { get; }
 
         public ReportText(MyDbContext context)
         {
-            RegistrationInPharmacyService = new RegistrationInPharmacyService(context);
             HelperFunctions = new HelperFunctions();
-            TenderService = new TenderService(context);
-            MedicineForTenderingService = new MedicineForTenderingService(context);
         }
         public ReportText()
         {
@@ -32,11 +28,19 @@ namespace IntegrationWithPharmacies.FileProtocol
         public String GetRegistredPharmacies()
         {
             StringBuilder stringBuilder = new StringBuilder();
-            foreach (RegistrationInPharmacy registration in RegistrationInPharmacyService.GetAll())
+           
+            foreach (RegistrationInPharmacy registration in GetAllRegistrationInPharmacy())
             {
                 stringBuilder.Append(registration.ApiKey + ";");
             }
             return stringBuilder.ToString();
+        }
+
+        private List<RegistrationInPharmacy>  GetAllRegistrationInPharmacy()
+        {
+            var client = new RestSharp.RestClient("http://localhost:54679");
+            var registrations = client.Get<List<RegistrationInPharmacy>>(new RestRequest("/api/registration"));
+            return registrations.Data;
         }
 
         public String getReportText(DateOfOrder date)
@@ -44,17 +48,29 @@ namespace IntegrationWithPharmacies.FileProtocol
             StringBuilder stringBuilder = new StringBuilder();
             int totalQuatity = 0;
 
-            foreach (Tender tender in TenderService.GetAll())
+            foreach (Tender tender in GetAllTenders())
             {
                 getText(date, tender,stringBuilder);
                 totalQuatity += getQuantity(date, tender);
             }
             return stringBuilder.Append("\n\n   Total ordered quatity: " + totalQuatity + "\n").ToString();
         }
+        private List<Tender> GetAllTenders()
+        {
+            var client = new RestSharp.RestClient("http://localhost:54679");
+            var tenders = client.Get<List<Tender>>(new RestRequest("/api/tender"));
+            return tenders.Data;
+        }
+        private List<MedicineForTendering> GetAllMedicinesForTenders()
+        {
+            var client = new RestSharp.RestClient("http://localhost:54679");
+            var medicines = client.Get<List<MedicineForTendering>>(new RestRequest("/api/tender/medicineForTender"));
+            return medicines.Data;
+        }
 
         public String getText(DateOfOrder date, Tender tender, StringBuilder stringBuilder)
         {
-            foreach (MedicineForTendering medicine in MedicineForTenderingService.GetAll())
+            foreach (MedicineForTendering medicine in GetAllMedicinesForTenders())
             {   
                 if (isOrderInRequiredPeriod(medicine, date, tender))
                 {
@@ -65,7 +81,7 @@ namespace IntegrationWithPharmacies.FileProtocol
         }
         private int getQuantity(DateOfOrder date, Tender tender)
         {
-            return MedicineForTenderingService.GetAll().Where(medicine => isOrderInRequiredPeriod(medicine, date, tender)).Sum(medicine => medicine.Quantity);
+            return GetAllMedicinesForTenders().Where(medicine => isOrderInRequiredPeriod(medicine, date, tender)).Sum(medicine => medicine.Quantity);
         }
         private bool isOrderInRequiredPeriod(MedicineForTendering medicine, DateOfOrder date, Tender tender)
         {

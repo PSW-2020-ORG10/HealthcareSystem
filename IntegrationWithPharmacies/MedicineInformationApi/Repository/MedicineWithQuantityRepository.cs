@@ -26,9 +26,10 @@ namespace MedicineInformationApi.Repository
             return DbContext.MedicineWithQuantity.ToList();
         }
 
-        public void UpdateQuantity(MedicineWithQuantity medicine, int quantity)
+        public void UpdateQuantity(int medicineId, int quantity)
         {
-            medicine.Quantity += quantity;
+            MedicineWithQuantity medicineWithQuantity = GetAll().SingleOrDefault(medicine => medicine.Id == medicineId);
+            medicineWithQuantity.Quantity += quantity;
             DbContext.SaveChanges();
         }
         public void UpdateDescription(MedicineWithQuantity medicine, String description)

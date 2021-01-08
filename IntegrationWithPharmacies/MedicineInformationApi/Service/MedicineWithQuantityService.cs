@@ -55,7 +55,7 @@ namespace MedicineInformationApi.Service
         private void UpdateOneMedicineQuantity(MedicineWithQuantity medicineWithQuantity)
         {
             MedicineWithQuantity medicine = GetAll().SingleOrDefault(medicineName => medicineName.Name == medicineWithQuantity.Name);
-            if (medicine != null) MedicineWithQuantityRepository.UpdateQuantity(medicine, medicineWithQuantity.Quantity);
+            if (medicine != null) MedicineWithQuantityRepository.UpdateQuantity(medicine.Id, medicineWithQuantity.Quantity);
             else { Create(MedicineWithQuantityAdapter.MedicineWithQuantityToMedicineWithQuantityDto(medicineWithQuantity)); }
         }
 
@@ -74,8 +74,8 @@ namespace MedicineInformationApi.Service
         public string GetMedicineDescriptionFromDatabase(string medicine)
         {
             MedicineWithQuantity medicineWithQuantity = GetAll().SingleOrDefault(medicineName => medicineName.Name.Equals(medicine));
+            Console.WriteLine("ajkfhbkjsadnvjksdnvjkfnvjknfd kljv                " + medicineWithQuantity);
             return medicineWithQuantity == null || medicineWithQuantity.Description.Equals("") ? null : medicineWithQuantity.Description;
-
         }
 
         public void CreateMedicineWithDescription(MedicineWithQuantityDto medicineWithQuantityDto)
@@ -84,5 +84,11 @@ namespace MedicineInformationApi.Service
             if (medicineWithQuantity != null) MedicineWithQuantityRepository.UpdateDescription(medicineWithQuantity, medicineWithQuantityDto.Description);
             else Create(medicineWithQuantityDto);
         }
+        public void UpdateQuantity(int medicineId, int quantity)
+        {
+            MedicineWithQuantityRepository.UpdateQuantity(medicineId, quantity);
+        }
+
+
     }
 }

@@ -53,7 +53,7 @@ export default {
         },
         methods: {
             sendHttp: function () {
-                this.axios.get('api/urgentOrder/http/' + this.medicine + "_" + this.quantity)
+                this.axios.get('http://localhost:54679/api/urgentOrder/http/' + this.medicine + "_" + this.quantity)
                     .then(res => {
                         this.pharmacy = res.data;
                         this.sent = true;
@@ -67,7 +67,7 @@ export default {
                     });              
             },
             sendGRpc: function () {
-                this.axios.get('api/urgentOrder/grpc/' + this.medicine + "_" + this.quantity)
+                this.axios.get('http://localhost:54679/api/urgentOrder/grpc/' + this.medicine + "_" + this.quantity)
                     .then(res => {
                         this.pharmacy = res.data;
                         this.sent = true;

@@ -1,7 +1,7 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace PharmacyRegistrationApi.Model
 {
@@ -15,14 +15,14 @@ namespace PharmacyRegistrationApi.Model
 
         public RegistrationInPharmacy() : base() { }
 
-        public RegistrationInPharmacy(int id, int idPharmacy, String apiKeyPharmacy,String pharmacyName, String pharmacyTown) : base(id)
+        public RegistrationInPharmacy(int id, int idPharmacy, String apiKeyPharmacy, String pharmacyName, String pharmacyTown) : base(id)
         {
             PharmacyId = idPharmacy;
             ApiKey = apiKeyPharmacy;
             Name = pharmacyName;
             Town = pharmacyTown;
         }
-          public RegistrationInPharmacy(int idPharmacy, String apiKeyPharmacy,String pharmacyName, String pharmacyTown) 
+        public RegistrationInPharmacy(int idPharmacy, String apiKeyPharmacy, String pharmacyName, String pharmacyTown)
         {
             PharmacyId = idPharmacy;
             ApiKey = apiKeyPharmacy;

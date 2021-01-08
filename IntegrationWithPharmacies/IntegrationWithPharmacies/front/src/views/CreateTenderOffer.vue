@@ -127,7 +127,7 @@ export default {
             showTender: function (event, tenderId) {
                 this.showWhenOpening = false;
                 this.showConcreteTender = true;
-                this.axios.get('api/tender/' + tenderId)
+                this.axios.get('http://localhost:54679/api/tender/' + tenderId)
                     .then(res => {
                         this.choosenTender = res.data;
                     })
@@ -136,7 +136,7 @@ export default {
                     })
             },
             sendOffer: function () {
-                this.axios.post('api/tender/offer', this.choosenTender)
+                this.axios.post('http://localhost:54679/api/tender/offer', this.choosenTender)
                     .then(res => {
                         this.sent = true;
                         this.notSent = false;
@@ -151,7 +151,7 @@ export default {
             },
         },
         mounted() {
-            this.axios.get('api/tender/active')
+            this.axios.get('http://localhost:54679/api/tender/active')
                 .then(response => {
                     this.activeTenders = response.data;
                 });

@@ -10,7 +10,7 @@ using Xunit;
 namespace IntegrationWithPharmaciesTest
 {
     public class RegistrationWithPharmaciesTests
-    {
+    {/*
         [Fact]
         public static IRegistrationInPharmacyRepository Create_stub_repository()
         {
@@ -59,6 +59,6 @@ namespace IntegrationWithPharmaciesTest
             RegistrationInPharmacy registrationInPharmacy = service.createIRegistration(new RegistrationInPharmacyDto(33, "apisa12345","Jankovic","NS"));
 
             registrationInPharmacy.ShouldBeNull();
-        }
+        }*/
     }
 }

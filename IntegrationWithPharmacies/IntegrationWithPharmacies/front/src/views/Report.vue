@@ -63,7 +63,7 @@
                     startDate: this.startDate,
                     endDate: this.endDate
                 };
-                this.axios.post('http://localhost:54679/api/report', date)
+                this.axios.post('/api/report', date)
                     .then(res => {
                         this.sent = true;
                         this.notSent = false;
@@ -82,7 +82,7 @@
                     startDate: this.startDate,
                     endDate: this.endDate
                 };
-                this.axios.post('http://localhost:54679/api/report/http', date)
+                this.axios.post('/api/report/http', date)
                     .then(res => {
                         this.sent = true;
                         this.notSent = false;

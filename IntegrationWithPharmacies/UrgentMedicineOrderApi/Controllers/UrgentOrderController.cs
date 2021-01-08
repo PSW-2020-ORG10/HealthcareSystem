@@ -5,6 +5,7 @@ using UrgentMedicineOrderApi.DbContextModel;
 using UrgentMedicineOrderApi.Model;
 using UrgentMedicineOrderApi.Adapter;
 using Microsoft.AspNetCore.Mvc;
+using RestSharp;
 
 namespace UrgentMedicineOrderApi.Controllers
 {
@@ -14,13 +15,10 @@ namespace UrgentMedicineOrderApi.Controllers
     public class UrgentOrderController : Controller
     {
         private UrgentOrderService UrgentOrderService { get; }
-        private MedicineWithQuantityService MedicineWithQuantityService { get; }
 
         public UrgentOrderController(MyDbContext context)
         {
             UrgentOrderService = new UrgentOrderService(context);
-            MedicineWithQuantityService = new MedicineWithQuantityService(context);
-
         }
 
         [HttpGet("http/{medicine}")]
@@ -28,7 +26,7 @@ namespace UrgentMedicineOrderApi.Controllers
         {
             List<MedicineName> pharmaciesWithMedicine = UrgentOrderService.CheckMedicineAvailability(medicine);
             if (pharmaciesWithMedicine == null) return BadRequest();
-            MedicineWithQuantityService.UpdateMedicineQuantityUrgentOrder(medicine);
+            UpdateMedicineQuantity(medicine);
             return ForwardUrgentUrderHttp(medicine, pharmaciesWithMedicine);
         }
 
@@ -37,9 +35,16 @@ namespace UrgentMedicineOrderApi.Controllers
         {
             List<MedicineName> pharmaciesWithMedicine = UrgentOrderService.CheckMedicineAvailability(medicine);
             if (pharmaciesWithMedicine == null) return BadRequest();
-            MedicineWithQuantityService.UpdateMedicineQuantityUrgentOrder(medicine);
+            UpdateMedicineQuantity(medicine);
             return ForwardUrgentUrderGrpc(medicine, pharmaciesWithMedicine);
         }
+
+        private void UpdateMedicineQuantity(string medicine)
+        {
+            var client = new RestSharp.RestClient("http://localhost:54679");
+            var medicineUpdate = client.Put(new RestRequest("/api/medicineWithQuantity/"+medicine));
+        }
+
         private IActionResult ForwardUrgentUrderHttp(string medicine, List<MedicineName> pharmaciesWithMedicine)
         {
             UrgentMedicineOrder urgentMedicineOrder = UrgentOrderService.CreateUrgentOrder(medicine, pharmaciesWithMedicine);

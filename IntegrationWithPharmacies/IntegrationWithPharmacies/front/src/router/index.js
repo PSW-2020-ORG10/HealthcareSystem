@@ -4,8 +4,6 @@ import Home from '../views/Home.vue'
 import Registration from '../views/Registration.vue'
 import Report from '../views/Report.vue'
 import ActionsAndBenefits from '../views/ActionsAndBenefits.vue'
-import MedicineSpecification from '../views/MedicineSpecification.vue'
-import MedicineAvailability from '../views/MedicineAvailability.vue'
 import SharingPrescription from '../views/SharingPrescription.vue'
 import UrgentProcurement from '../views/UrgentOrder.vue'
 import Tender from '../views/Tender.vue'
@@ -34,16 +32,6 @@ const routes = [
         path: '/actionsAndBenefits',
         name: 'ActionsAndBenefits',
         component: ActionsAndBenefits,
-    },
-    {
-        path: '/specification',
-        name: 'MedicineSpecification',
-        component: MedicineSpecification,
-    },
-    {
-        path: '/availability',
-        name: 'MedicineAvailability',
-        component: MedicineAvailability,
     },
     {
         path: '/sharingPrescription',

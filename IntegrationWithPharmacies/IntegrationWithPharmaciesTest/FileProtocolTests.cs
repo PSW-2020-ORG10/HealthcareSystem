@@ -11,7 +11,7 @@ using Xunit;
 namespace IntegrationWithPharmaciesTest
 {
     public class FileProtocolTests
-    {
+    {/*
         [Fact]
         public void Generates_file_report()
         {
@@ -100,7 +100,7 @@ namespace IntegrationWithPharmaciesTest
         {
             return new DateTime(int.Parse(date.Split("/")[2]), int.Parse(date.Split("/")[1]), int.Parse(date.Split("/")[0]));
         }
-
+        */
 
     }
     
