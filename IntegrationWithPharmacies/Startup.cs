@@ -51,7 +51,7 @@ namespace IntegrationWithPharmacies
 
             services.AddControllers();
             
-            if (GetCurrentStage.Equals("Testing") && CurrentEnvironment.IsEnvironment("Testing"))
+            if (GetCurrentStage().Equals("Testing") && CurrentEnvironment.IsEnvironment("Testing"))
             {
                 services.AddDbContext<MyDbContext>(options =>
                     options.UseInMemoryDatabase("TestingDB").UseLazyLoadingProxies());
