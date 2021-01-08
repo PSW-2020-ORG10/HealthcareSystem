@@ -16,7 +16,7 @@ class Counter extends React.PureComponent<CounterProps> {
     public render() {
         return (
             <React.Fragment>
-                                <AllMessages />
+                <AllMessages />
                 <Header title="Welcome" description="Schedule your examination, look at your treatment history, rate our hospital or do many more things on your favourite hospital website!" />             
             </React.Fragment>
         );

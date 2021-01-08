@@ -17,7 +17,7 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean }
                         <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={this.state.isOpen} navbar>
                             <ul className="navbar-nav flex-grow">
                                 <NavItem>
-                                    <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
+                                    <NavLink tag={Link} className="text-dark" to="/patient-homepage">Homepage</NavLink>
                                 </NavItem>
                                 {/*<NavItem>
                                     <NavLink tag={Link} className="text-dark" to="/patient-feedback">Feedback</NavLink>
@@ -58,6 +58,9 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean }
                                 <NavItem>
                                     <NavLink tag={Link} className="text-dark" to="/my-appointments">My Appointments</NavLink>
                                 </NavItem>
+                                <NavItem>
+                                    <NavLink tag={Link} className="text-dark" to="/create-feedback">My Feedback</NavLink>
+                                </NavItem>
                                 {/*<NavItem>
                                     <NavLink tag={Link} className="text-dark" to="/malicious-patient">Malicious patient</NavLink>
                                 </NavItem>
@@ -67,9 +70,7 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean }
                                 <NavItem>
                                     <NavLink tag={Link} className="text-dark" to="/choose-appointment-type">Schedule Appointment</NavLink>
                                 </NavItem>*/}
-                                <NavItem>
-                                    <NavLink tag={Link} className="text-dark" to="/patient-homepage">Homepage</NavLink>
-                                </NavItem>
+                                
                             </ul>
                         </Collapse>
                     </Container>
