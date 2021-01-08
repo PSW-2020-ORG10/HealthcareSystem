@@ -26,6 +26,12 @@ namespace UserMicroserviceApi.Service
             _config = config;
         }
 
+        public LoginService(IPatientsRepository patientRepository, IAdministratorRepository administratorRepository)
+        {
+            _patientRepository = patientRepository;
+            _administratorRepository = administratorRepository;
+        }
+
         public LoginService(MyDbContext context, IConfiguration config)
         {
             _patientRepository = new PatientsRepository(context);
