@@ -18,14 +18,13 @@ namespace GatewayApi
                  {
                      var port = Environment.GetEnvironmentVariable("PORT");
 
-                     webBuilder.UseStartup<Startup>()
-                    .UseUrls("http://*:" + port);
+                     webBuilder.UseStartup<Startup>().UseUrls("http://*:" + port);
                  })
                 .ConfigureAppConfiguration((hostingContext, config) =>
                 {
                     config
-                    .SetBasePath(hostingContext.HostingEnvironment.ContentRootPath)
-                    .AddJsonFile("ocelot.json", optional: false, reloadOnChange: true);
+                   .SetBasePath(hostingContext.HostingEnvironment.ContentRootPath)
+                   .AddJsonFile($"configuration.{hostingContext.HostingEnvironment.EnvironmentName}.json");
                 });
     }
 }

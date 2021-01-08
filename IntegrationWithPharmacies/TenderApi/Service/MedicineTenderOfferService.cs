@@ -20,6 +20,8 @@ namespace TenderApi.Service
         public PharmacyTenderOfferRepository PharmacyTenderOfferRepository { get; }
         public MedicineTenderOfferService() { }
 
+        private static readonly string medicineInformationUrl = Startup.Configuration["MedicineInformationApi"];
+
         public MedicineTenderOfferService(MyDbContext context)
         {
             MedicineTenderOfferRepository = new MedicineTenderOfferRepository(context);
@@ -55,10 +57,15 @@ namespace TenderApi.Service
             }
         }
 
-        private List<MedicineWithQuantity> GetAllMedicinesWithQuantity()
+        public static List<MedicineWithQuantity> GetAllMedicinesWithQuantity()
         {
-            var client = new RestSharp.RestClient("http://localhost:54679");
+            //var responseString = await client.GetAsync($"{medicineInformationUrl}api/medicineWithQuantity");
+            //return await responseString.Content.ReadAsAsync<List<MedicineWithQuantity>>();
+
+            //var medicines = await client.GetAsync($"{medicineInformationUrl}api/medicineWithQuantity");
+            var client = new RestSharp.RestClient(medicineInformationUrl);
             var medicines = client.Get<List<MedicineWithQuantity>>(new RestRequest("/api/medicineWithQuantity"));
+
             return medicines.Data;
         }
 
@@ -76,11 +83,11 @@ namespace TenderApi.Service
             };
             var content = new StringContent(JsonConvert.SerializeObject(values, Formatting.Indented), Encoding.UTF8, "application/json");
             using HttpClient client = new HttpClient();
-            await client.PostAsync("http://localhost:54679/api/medicineWithQuantity", content);
+            await client.PostAsync($"{medicineInformationUrl}api/medicineWithQuantity", content);
         }
         private void UpdateMedicine(MedicineTenderOffer medicineTenderOffer, MedicineWithQuantity medicine)
         {
-            var client = new RestSharp.RestClient("http://localhost:54679");
+            var client = new RestSharp.RestClient(medicineInformationUrl);
             client.Get<List<MedicineWithQuantity>>(new RestRequest("/api/medicineWithQuantity/"+medicine.Id+"/"+ medicineTenderOffer.AvailableQuantity));
         }
     }
