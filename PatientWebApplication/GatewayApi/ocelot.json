@@ -299,6 +299,22 @@
       }
     },
     {
+      "DownstreamPathTemplate": "/api/survey",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 53212
+        }
+      ],
+      "UpstreamPathTemplate": "/api/survey",
+      "UpstreamHttpMethod": [ "POST", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
       "DownstreamPathTemplate": "/api/survey/getWithSurveys/{id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [

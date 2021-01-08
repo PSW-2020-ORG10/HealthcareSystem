@@ -75,7 +75,9 @@ export default class NavMenu extends React.PureComponent<{}, { isOpen: boolean }
                                     <NavLink tag={Link} className="text-dark" to="/choose-appointment-type">Schedule Appointment</NavLink>
                                 </NavItem>*/}
                                 <NavItem>
-                                    <Button className="btn btn-lg btn-primary" onClick={this.logout.bind(this)}>Logout</Button>
+                                    {localStorage.getItem("token") === "" ? null : 
+                                        (<Button className="btn btn-lg btn-primary" onClick={this.logout.bind(this)}>Logout</Button>)
+                                    }
                                 </NavItem>
                             </ul>
                         </Collapse>

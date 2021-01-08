@@ -374,6 +374,7 @@ export const loadedAppointmentSurvey = () => async (dispatch) => {
 };
 
 export const surveyCreated = (survey) => async (dispatch) => {
+    survey.patientId = localStorage.getItem("patientId");
     try {
         debugger;
         await axios.post("http://localhost:54689/api/survey", survey,

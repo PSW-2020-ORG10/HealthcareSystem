@@ -69,6 +69,13 @@ class Login extends Component {
                 <div className="field-wrap row d-flex justify-content-center">
                     <Button className="btn btn-lg btn-primary btn-block button-wrap" disabled={this.state.email === '' || this.state.password === ''} onClick={this.login.bind(this)}>Login</Button>
                 </div>
+
+                <div className="field-wrap row d-flex justify-content-center mt-5">
+                    <label className="label mr-2 pl-5">
+                        Not a member?
+                    </label>
+                    <a href = "http://localhost:3000/register-patient" className="pl-2">Sign up now.</a>
+                </div>
             </div>
         );
     }

@@ -10,14 +10,14 @@ interface Props {
 
 export const AuthRoutePatient = ({ Component, path, exact = false }: Props): JSX.Element => {
 	const isAuthed = !!localStorage.getItem("token");
-    const isAdmin = localStorage.getItem('role') === 'patient'
+    const isPatient = localStorage.getItem('role') === 'patient'
 	const message = 'Please log in to view this page'
 	return (
 		<Route
 			exact={exact}
 			path={path}
 			render={(props: RouteComponentProps) =>
-				isAuthed && isAdmin ? (
+				isAuthed && isPatient ? (
 					<Component {...props} />
 				) : (
 					localStorage.getItem('role') === 'admin' ? <Redirect
