@@ -12,6 +12,9 @@ services:
       DATABASE_PASSWORD: demo
       DATABASE_HOST: mysql
       DATABASE_SCHEMA: MYSQLHealtcareDB
+      DATABASE_PORT: 3306
+      STAGE: Testing
+      PORT: 8080
     ports:
       - 8080:80
     depends_on:
@@ -47,6 +50,7 @@ services:
       DATABASE_HOST: mysql
       DATABASE_SCHEMA: MYSQLHealtcareDB
       DATABASE_PORT: 3306
+      STAGE: Testing
       PORT: 8087
     ports:
       - 8087:8087
