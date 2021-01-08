@@ -21,14 +21,12 @@ namespace IntegrationWithPharmacies
     {
         public IConfiguration Configuration { get; }
         public IWebHostEnvironment CurrentEnvironment { get; }
-	public static String Stage { get; set; }
 
 
         public Startup(IConfiguration configuration, IWebHostEnvironment currentEnvironment)
         {
             Configuration = configuration;
             CurrentEnvironment = currentEnvironment;
-	    Stage = "Testing";
         }
         private string CreateConnectionStringFromEnvironment()
         {
@@ -37,11 +35,14 @@ namespace IntegrationWithPharmacies
             string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA") ?? "MYSQLHealtcareDB";
             string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "root";
             string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "root";
-
-	    Stage = Environment.GetEnvironmentVariable("STAGE") ?? "Testing";	
 		
             return $"server={server};port={port};database={database};user={user};password={password}";
         }
+	    
+      private string GetCurrentStage(){
+	      return Environment.GetEnvironmentVariable("STAGE") ?? "Testing";
+      }
+	    
       // This method gets called by the runtime. Use this method to add services to the container.
       public void ConfigureServices(IServiceCollection services)
         {
@@ -50,7 +51,7 @@ namespace IntegrationWithPharmacies
 
             services.AddControllers();
             
-            if (Stage.Equals("Testing") && CurrentEnvironment.IsEnvironment("Testing"))
+            if (GetCurrentStage.Equals("Testing") && CurrentEnvironment.IsEnvironment("Testing"))
             {
                 services.AddDbContext<MyDbContext>(options =>
                     options.UseInMemoryDatabase("TestingDB").UseLazyLoadingProxies());
@@ -69,7 +70,7 @@ namespace IntegrationWithPharmacies
                     builder.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:57942")));
         }
 
-        private Server server;
+        
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env,MyDbContext dbContext)
         {
             dbContext.Database.EnsureCreated();
@@ -101,7 +102,7 @@ namespace IntegrationWithPharmacies
             app.UseCors("VueCorsPolicy");
         }
 
-
+	private Server server;
         private void OnShutdown()
         {
             if (server != null)
