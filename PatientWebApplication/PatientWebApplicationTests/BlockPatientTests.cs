@@ -1,12 +1,10 @@
-﻿/*using HealthClinic.CL.Model.Patient;
-using HealthClinic.CL.Repository;
-using HealthClinic.CL.Service;
-using Moq;
+﻿using Moq;
 using Shouldly;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using UserMicroserviceApi.Model;
+using UserMicroserviceApi.Repository;
+using UserMicroserviceApi.Service;
 using Xunit;
 
 namespace PatientWebApplicationTests
@@ -50,4 +48,4 @@ namespace PatientWebApplicationTests
             return stubRepository.Object;
         }
     }
-}*/
+}

@@ -1,13 +1,13 @@
-﻿/*using HealthClinic.CL.Dtos;
-using HealthClinic.CL.Model.Doctor;
-using HealthClinic.CL.Model.Patient;
-using HealthClinic.CL.Repository;
-using HealthClinic.CL.Service;
+﻿using AppointmentMicroserviceApi.Doctor;
+using AppointmentMicroserviceApi.Dtos;
+using AppointmentMicroserviceApi.Patient;
+using AppointmentMicroserviceApi.Repository;
+using AppointmentMicroserviceApi.Service;
 using Moq;
 using Shouldly;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using UserMicroserviceApi.Model;
 using Xunit;
 
 namespace PatientWebApplicationTests
@@ -20,14 +20,6 @@ namespace PatientWebApplicationTests
             SurveyService service = new SurveyService(CreateStubRepository());
             SurveyAverageDto foundSurvey = service.GetAllAverageRates();
             foundSurvey.ShouldNotBeNull();
-        }
-
-        [Fact]
-        public void Get_Doctors_Rates_Successfuly()
-        {
-            SurveyService service = new SurveyService(CreateStubRepository());
-            List<SurveyDoctorAverageDto> foundSurveys = service.GetAllDoctorAverageRates();           
-            foundSurveys.ShouldNotBeNull();
         }
 
         private static ISurveyRepository CreateStubRepository()
@@ -44,8 +36,8 @@ namespace PatientWebApplicationTests
             PatientUser patient1 = new PatientUser(1, "Pera2", "Peric", "Male", "1234", "2/2/2020", "123", "212313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null);
             PatientUser patient2 = new PatientUser(2, "Pera3", "Peric", "Female", "1234", "2/2/2020", "123", "2112313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null);
 
-            DoctorAppointment appointment1 = new DoctorAppointment(4, new TimeSpan(), "04/02/2019", patient1, doctor1, new List<Referral>(), "1");
-            DoctorAppointment appointment2 = new DoctorAppointment(5, new TimeSpan(), "11/01/2016", patient1, doctor2, new List<Referral>(), "1");
+            DoctorAppointment appointment1 = new DoctorAppointment(4, new TimeSpan(), "04/02/2019", 1, 1, new List<Referral>(), "1");
+            DoctorAppointment appointment2 = new DoctorAppointment(5, new TimeSpan(), "11/01/2016", 1, 2, new List<Referral>(), "1");
 
 
             Survey survey1 = new Survey(1, 1, 4, appointment1, 4, 5, 4, 5, 4, 5, 4, 5, 5, 5, 5, 4, 3, 3, 2, 2, 5);
@@ -61,4 +53,3 @@ namespace PatientWebApplicationTests
         }
     }
 }
-*/

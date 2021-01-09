@@ -1,13 +1,20 @@
-﻿namespace PatientWebApplicationTests
+﻿using Moq;
+using Shouldly;
+using UserMicroserviceApi.Model;
+using UserMicroserviceApi.Repository;
+using UserMicroserviceApi.Service;
+using Xunit;
+
+namespace PatientWebApplicationTests
 {
     public class ObservePersonalInformation
     {
-/*
+
         [Fact]
         public void Find_Patient()
         {
             var mockVerify = new Mock<IEmailVerificationService>();
-            PatientService service = new PatientService(CreateStubRepository(), mockVerify.Object, new RegularAppointmentService(new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorService(new OperationRepository(), new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorRepository()), new PatientsRepository(), new OperationService(new OperationRepository())));
+            PatientService service = new PatientService(CreateStubRepository(), mockVerify.Object);
 
             PatientUser foundPatient = service.GetOne(1);
 
@@ -18,7 +25,7 @@
         public void Find_Not_Patient()
         {
             var mockVerify = new Mock<IEmailVerificationService>();
-            PatientService service = new PatientService(CreateStubRepository(), mockVerify.Object, new RegularAppointmentService(new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorService(new OperationRepository(), new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorRepository()), new PatientsRepository(), new OperationService(new OperationRepository())));
+            PatientService service = new PatientService(CreateStubRepository(), mockVerify.Object);
 
             PatientUser foundPatient = service.GetOne(2);
 
@@ -33,6 +40,6 @@
             stubRepository.Setup(m => m.FindOne(1)).Returns(patient);
 
             return stubRepository.Object;
-        }*/
+        }
     }
 }

@@ -1,12 +1,10 @@
-﻿/*using HealthClinic.CL.Dtos;
-using HealthClinic.CL.Model.Patient;
-using HealthClinic.CL.Repository;
-using HealthClinic.CL.Service;
+﻿using AppointmentMicroserviceApi.Dtos;
+using AppointmentMicroserviceApi.Patient;
+using AppointmentMicroserviceApi.Repository;
+using AppointmentMicroserviceApi.Service;
 using Moq;
 using Shouldly;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace PatientWebApplicationTests
@@ -37,4 +35,3 @@ namespace PatientWebApplicationTests
         }
     }
 }
-*/

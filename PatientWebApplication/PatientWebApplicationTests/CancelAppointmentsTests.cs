@@ -1,15 +1,13 @@
-﻿/*using HealthClinic.CL.Model.Doctor;
-using HealthClinic.CL.Model.Patient;
-using HealthClinic.CL.Repository;
-using HealthClinic.CL.Service;
-using HealthClinic.CL.Utility;
+﻿using AppointmentMicroserviceApi.Doctor;
+using AppointmentMicroserviceApi.Patient;
+using AppointmentMicroserviceApi.Repository;
+using AppointmentMicroserviceApi.Service;
 using Moq;
 using Shouldly;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Text;
+using UserMicroserviceApi.Model;
 using Xunit;
 
 namespace PatientWebApplicationTests
@@ -27,7 +25,7 @@ namespace PatientWebApplicationTests
         [Fact]
         public void Cancel_Appointment_In_Past()
         {
-            RegularAppointmentService service = new RegularAppointmentService(CreateStubRepository(), new OperationService(new Mock<IOperationRepository>().Object));
+            RegularAppointmentService service = new RegularAppointmentService(CreateStubRepositoryInPast(), new OperationService(new Mock<IOperationRepository>().Object));
             DoctorAppointment appointment = service.CancelAppointment(4);
             appointment.ShouldBeNull();
         }
@@ -47,8 +45,8 @@ namespace PatientWebApplicationTests
             PatientUser patient1 = new PatientUser(1, "Pera2", "Peric", "Male", "1234", "2/2/2020", "123", "212313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null);
             PatientUser patient2 = new PatientUser(2, "Pera3", "Peric", "Female", "1234", "2/2/2020", "123", "2112313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null);
 
-            DoctorAppointment appointment1 = new DoctorAppointment(4, new TimeSpan(), date, patient1, doctor1, new List<Referral>(), "1");
-            DoctorAppointment appointment2 = new DoctorAppointment(5, new TimeSpan(), date, patient1, doctor2, new List<Referral>(), "1");
+            DoctorAppointment appointment1 = new DoctorAppointment(4, new TimeSpan(), date, 1, 1, new List<Referral>(), "1");
+            DoctorAppointment appointment2 = new DoctorAppointment(5, new TimeSpan(), date, 2, 2, new List<Referral>(), "1");
 
 
 
@@ -83,15 +81,11 @@ namespace PatientWebApplicationTests
             PatientUser patient1 = new PatientUser(1, "Pera2", "Peric", "Male", "1234", "2/2/2020", "123", "212313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null);
             PatientUser patient2 = new PatientUser(2, "Pera3", "Peric", "Female", "1234", "2/2/2020", "123", "2112313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null);
 
-            DoctorAppointment appointment1 = new DoctorAppointment(4, new TimeSpan(), "17/05/2020", patient1, doctor1, new List<Referral>(), "1");
-            DoctorAppointment appointment2 = new DoctorAppointment(5, new TimeSpan(), "17/04/2020", patient1, doctor2, new List<Referral>(), "1");
-
-
+            DoctorAppointment appointment1 = new DoctorAppointment(4, new TimeSpan(), "17/05/2020", 1, 1, new List<Referral>(), "1");
+            DoctorAppointment appointment2 = new DoctorAppointment(5, new TimeSpan(), "17/04/2020", 2, 2, new List<Referral>(), "1");
 
             appointments.Add(appointment1);
             appointments.Add(appointment2);
-
-
 
             stubRepository.Setup(m => m.GetByid(4)).Returns(appointments.SingleOrDefault(app => app.id == 4));
             stubRepository.Setup(m => m.CancelAppointment(appointment1)).Returns(appointments.SingleOrDefault(app => app.id == 4));
@@ -101,4 +95,3 @@ namespace PatientWebApplicationTests
         }
     }
 }
-*/
