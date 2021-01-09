@@ -16,6 +16,7 @@ namespace PatientWebAppSeleniumTests
         private Pages.CreateFeedbackPage createFeedbackPage;
         private Pages.LoginPage loginPage;
         private Pages.FeedbackPage feedbackPage;
+        private int feedbackCount = 0;
 
         public PublishFeedbackTests()
         {
@@ -44,7 +45,7 @@ namespace PatientWebAppSeleniumTests
         [Fact]
         public void TestSuccessfulPublish()
         {
-            loginPage.InsertEmail("patient1@gmail.com");
+            loginPage.InsertEmail("marko_markovic@gmail.com");
             loginPage.InsertPassword("12345");
             loginPage.SubmitForm();
             loginPage.WaitForFormSubmit();
@@ -69,14 +70,14 @@ namespace PatientWebAppSeleniumTests
             loginPage.SubmitForm();
             loginPage.WaitForFormSubmitAdmin();
 
-            feedbackPage = new FeedbackPage(driver);
-            feedbackPage.Navigate();
-            driver.Navigate().Refresh();
+            Pages.FeedbackPage newFeedbackPage = new Pages.FeedbackPage(driver);
+            newFeedbackPage.EnsurePageIsDisplayedSecond(feedbackCount);
+            feedbackCount = newFeedbackPage.FeedbacksCount();
 
-            Assert.Equal("Successful publish", feedbackPage.GetLastRowMessage());
-            Assert.Equal("ANONYMOUS", feedbackPage.GetLastRowIsAnonymous());
-            Assert.True(feedbackPage.LastPublishButtonDisplayed());
-            Assert.True(feedbackPage.LastPublishButtonEnabled());
+            Assert.Equal("Successful publish", newFeedbackPage.GetLastRowMessage());
+            Assert.Equal("ANONYMOUS", newFeedbackPage.GetLastRowIsAnonymous());
+            Assert.True(newFeedbackPage.LastPublishButtonDisplayed());
+            Assert.True(newFeedbackPage.LastPublishButtonEnabled());
         }
 
         [Fact]
@@ -109,7 +110,8 @@ namespace PatientWebAppSeleniumTests
             loginPage.WaitForFormSubmitAdmin();
 
             Pages.FeedbackPage newFeedbackPage = new Pages.FeedbackPage(driver);
-            newFeedbackPage.EnsurePageIsDisplayed();
+            newFeedbackPage.EnsurePageIsDisplayedSecond(feedbackCount);
+            feedbackCount = newFeedbackPage.FeedbacksCount();
 
             Assert.Equal("Unsuccessful", newFeedbackPage.GetLastRowMessage());
             Assert.Equal("ANONYMOUS", newFeedbackPage.GetLastRowIsAnonymous());
