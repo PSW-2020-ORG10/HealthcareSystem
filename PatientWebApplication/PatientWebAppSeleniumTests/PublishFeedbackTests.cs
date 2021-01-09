@@ -70,7 +70,8 @@ namespace PatientWebAppSeleniumTests
             loginPage.WaitForFormSubmitAdmin();
 
             feedbackPage = new FeedbackPage(driver);
-            feedbackPage.EnsurePageIsDisplayed();
+            feedbackPage.Navigate();
+            driver.Navigate().Refresh();
 
             Assert.Equal("Successful publish", feedbackPage.GetLastRowMessage());
             Assert.Equal("ANONYMOUS", feedbackPage.GetLastRowIsAnonymous());
