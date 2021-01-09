@@ -53,7 +53,7 @@ namespace PatientWebAppSeleniumTests
             createFeedbackPage.Navigate();
             Assert.Equal(driver.Url, CreateFeedbackPage.URI);
 
-            createFeedbackPage.InsertMessage("I will be anonymous");
+            createFeedbackPage.InsertMessage("Successful publish");
             createFeedbackPage.InsertIsAnonymous("true");
             createFeedbackPage.InsertIsPublic("true");
             createFeedbackPage.SubmitForm();
@@ -72,7 +72,7 @@ namespace PatientWebAppSeleniumTests
             feedbackPage = new FeedbackPage(driver);
             feedbackPage.EnsurePageIsDisplayed();
 
-            Assert.Equal("I will be anonymous", feedbackPage.GetLastRowMessage());
+            Assert.Equal("Successful publish", feedbackPage.GetLastRowMessage());
             Assert.Equal("ANONYMOUS", feedbackPage.GetLastRowIsAnonymous());
             Assert.True(feedbackPage.LastPublishButtonDisplayed());
             Assert.True(feedbackPage.LastPublishButtonEnabled());
