@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatientWebApplicationTests"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatientWebApplicationIntegrationTests", "PatientWebApplicationIntegrationTests\PatientWebApplicationIntegrationTests.csproj", "{3BD842B8-0651-4F8E-A2C3-40A35DD239E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatientWebAppSeleniumTests", "PatientWebAppSeleniumTests\PatientWebAppSeleniumTests.csproj", "{F467C283-B273-49FC-A25F-9AED928ACE6B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatientWebAppSeleniumTests", "PatientWebAppSeleniumTests\PatientWebAppSeleniumTests.csproj", "{F467C283-B273-49FC-A25F-9AED928ACE6B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventStore", "..\EventStore\EventStore\EventStore.csproj", "{C6C4C1B2-6D9B-4645-ADA3-BBC6C4548A00}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{F467C283-B273-49FC-A25F-9AED928ACE6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F467C283-B273-49FC-A25F-9AED928ACE6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F467C283-B273-49FC-A25F-9AED928ACE6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6C4C1B2-6D9B-4645-ADA3-BBC6C4548A00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6C4C1B2-6D9B-4645-ADA3-BBC6C4548A00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6C4C1B2-6D9B-4645-ADA3-BBC6C4548A00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6C4C1B2-6D9B-4645-ADA3-BBC6C4548A00}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

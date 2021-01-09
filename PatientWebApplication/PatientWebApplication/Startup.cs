@@ -1,3 +1,4 @@
+using EventStore.EventDBContext;
 using FluentValidation.AspNetCore;
 using HealthClinic.CL.DbContextModel;
 using Microsoft.AspNetCore.Builder;
@@ -52,7 +53,7 @@ namespace PatientWebApplication
            {
                options.RegisterValidatorsFromAssemblyContaining<Startup>();
            });
-              
+
             if (GetCurrentStage().Equals("Testing") && CurrentEnvironment.IsEnvironment("Testing"))
             {
                 services.AddDbContext<MyDbContext>(options =>
@@ -60,13 +61,17 @@ namespace PatientWebApplication
             }
             else
             {
-               services.AddDbContext<MyDbContext>(options =>
-               options.UseMySql(CreateConnectionStringFromEnvironment(),
-                  builder => builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null)).UseLazyLoadingProxies());
+                services.AddDbContext<MyDbContext>(options =>
+                options.UseMySql(CreateConnectionStringFromEnvironment(),
+                   builder => builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null)).UseLazyLoadingProxies());
+
+                services.AddDbContext<EventDbContext>(options =>
+                options.UseMySql(CreateConnectionStringFromEnvironment(),
+                   builder => builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null)).UseLazyLoadingProxies());
             }
 
-         // In production, the React files will be served from this directory
-         services.AddSpaStaticFiles(configuration =>
+            // In production, the React files will be served from this directory
+            services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/build";
             });

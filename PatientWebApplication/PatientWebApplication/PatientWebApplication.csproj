@@ -57,6 +57,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\EventStore\EventStore\EventStore.csproj" />
     <ProjectReference Include="..\HealthClinic.DAL\HealthClinic.CL.csproj" />
   </ItemGroup>
 

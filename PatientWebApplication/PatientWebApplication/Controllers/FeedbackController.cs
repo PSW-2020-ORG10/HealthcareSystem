@@ -1,4 +1,8 @@
 ﻿using System.Collections.Generic;
+using EventStore.EventDBContext;
+using EventStore.Events;
+using EventStore.Repository;
+using EventStore.Service;
 using HealthClinic.CL.DbContextModel;
 using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Patient;
@@ -15,12 +19,14 @@ namespace PatientWebApplication.Controllers
     {
         /// <value>Property <c>FeedbackService</c> represents the service used for handling business logic.</value>
         private FeedbackService FeedbackService { get; set; }
+        private FeedbackSubmittedEventService FeedbackSubmittedEventService { get; set; }
 
         /// <summary>This constructor injects the FeedbackController with matching FeedbackService.</summary>
         /// <param name="context"><c>context</c> is type of <c>DbContext</c>, and it's used for accessing MYSQL database.</param>
-        public FeedbackController(MyDbContext context)
+        public FeedbackController(MyDbContext context, EventDbContext eventDbContext)
         {
             FeedbackService = new FeedbackService(context);
+            FeedbackSubmittedEventService = new FeedbackSubmittedEventService(new FeedbackSubmittedEventRepository(eventDbContext));
         }
 
         /// <summary> This method is calling <c>FeedbackService</c> to get list of all <c>Feedback</c>.  </summary>
@@ -56,12 +62,13 @@ namespace PatientWebApplication.Controllers
             // validation in feedback validator, automatically called from startup
 
             Feedback feedback = FeedbackService.Create(dto);
-
+            
             if (feedback == null)
             {
                 return BadRequest();
             } else
             {
+                FeedbackSubmittedEventService.Create(new FeedbackSubmittedEvent(feedback.id, feedback.Message, feedback.PatientId));
                 return Ok();
             }
 
