@@ -7,7 +7,7 @@ namespace EventStore.Repository
 {
     public interface IDomainEventRepository
     {
-        DomainEvent Save(DomainEvent domainEvent);
-        IEnumerable<DomainEvent> GetAll(String eventType);
+        DomainEvent Create(DomainEvent domainEvent);
+        IEnumerable<DomainEvent> GetAll();
     }
 }

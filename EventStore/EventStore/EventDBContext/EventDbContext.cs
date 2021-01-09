@@ -1,18 +1,18 @@
 ﻿using EventStore.Events;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EventStore
+namespace EventStore.EventDBContext
 {
-    public class EventDbContext : DbContext
+    public class EventDbContext: DbContext
     {
         public DbSet<FeedbackSubmittedEvent> FeedbackSubmittedEvents { get; set; }
 
-        public EventDbContext() { }
-        public EventDbContext(DbContextOptions<EventDbContext> options) : base(options) { }
+        public EventDbContext()
+        {
+        }
 
         private string CreateConnectionStringFromEnvironment()
         {
@@ -23,17 +23,26 @@ namespace EventStore
             string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "root";
 
             return $"server={server};port={port};database={database};user={user};password={password}";
-           
+
         }
 
-        public EventDbContext CreateDbContext()
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var builder = new DbContextOptionsBuilder<EventDbContext>();
-            return new EventDbContext(builder.UseMySql(CreateConnectionStringFromEnvironment()).Options);
+            optionsBuilder.UseMySQL(CreateConnectionStringFromEnvironment());
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<FeedbackSubmittedEvent>(entity =>
+            {
+                entity.HasKey(e => e.ID);
+                entity.Property(e => e.TimeStamp).IsRequired();
+                entity.Property(e => e.FeedbackID).IsRequired();
+                entity.Property(e => e.Message).IsRequired();
+                entity.Property(e => e.PatientID).IsRequired();
+            });
         }
     }
 }
