@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GatewayApi", "GatewayApi\Ga
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FeedbackMicroserviceApi", "FeedbackMicroserviceApi\FeedbackMicroserviceApi.csproj", "{82EE6DEA-7271-4AE4-9B43-7D402BF20D56}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatientWebAppSeleniumTests", "..\..\..\Users\Nemanja\Desktop\PatientWebAppSeleniumTests\PatientWebAppSeleniumTests.csproj", "{84A968C9-C547-4EA4-8BB5-5E82036A4FD2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{82EE6DEA-7271-4AE4-9B43-7D402BF20D56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82EE6DEA-7271-4AE4-9B43-7D402BF20D56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{82EE6DEA-7271-4AE4-9B43-7D402BF20D56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84A968C9-C547-4EA4-8BB5-5E82036A4FD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84A968C9-C547-4EA4-8BB5-5E82036A4FD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84A968C9-C547-4EA4-8BB5-5E82036A4FD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84A968C9-C547-4EA4-8BB5-5E82036A4FD2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

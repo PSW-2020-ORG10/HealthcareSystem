@@ -31,6 +31,7 @@ class CreateForm extends Component {
                             Title:
                         </label>
                         <input
+                            id="message"
                             className="field"
                             type="text"
                             value={this.state.message}
@@ -43,6 +44,7 @@ class CreateForm extends Component {
                     <div className="field-wrap">
                         <label className="label">
                             <input
+                                id="isAnonymous"
                                 type="checkbox"
                                 name="isAnonymous"
                                 checked={this.state.isAnonymous}
@@ -54,6 +56,7 @@ class CreateForm extends Component {
                     <div className="field-wrap">
                         <label className="label">
                             <input
+                                id="isPublic"
                                 type="checkbox"
                                 name="isPublic"
                                 checked={this.state.isPublic}
@@ -63,7 +66,7 @@ class CreateForm extends Component {
                      </div>
 
                     <div className="btn-wrap align-right">
-                        <button disabled={!this.state.message || this.state.message.length > 140} className="btn btn-block btn-lg btn-primary" onClick={this.createFeedback.bind(this)}>Create</button>
+                        <button id="submit" disabled={!this.state.message || this.state.message.length > 140} className="btn btn-block btn-lg btn-primary" onClick={this.createFeedback.bind(this)}>Create</button>
                     </div>
             </div>
         )
@@ -82,6 +85,8 @@ class CreateForm extends Component {
             isAnonymous: false,
             isPublic: false
         })
+
+        window.location.href = "http://localhost:3000/patient-homepage";
     }
 
 }

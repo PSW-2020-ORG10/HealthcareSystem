@@ -17,7 +17,7 @@ class PublishedFeedbackTable extends Component {
         const feedbackList = this.props.publishedFeedbackList;       
         return (
 
-            <div className="wrap">
+            <div className="wrap" id='publishedFeedbackTable'>
                 {feedbackList.map((f) => (
                     <div key={f.Id} className="item-row">
                         <div key={f.Id} className="check-flag">

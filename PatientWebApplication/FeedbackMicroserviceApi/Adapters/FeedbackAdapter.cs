@@ -13,7 +13,7 @@ namespace FeedbackMicroserviceApi.Adapters
         /// <returns> created <c>Feedback</c> </returns>
         public static Feedback FeedbackDtoToFeedback(FeedbackDto dto)
         {
-            return new Feedback(dto.Message, dto.IsPublic, dto.IsAnonymous, DateTime.Now, 2);
+            return new Feedback(dto.Message, dto.IsPublic, dto.IsAnonymous, DateTime.Now, dto.PatientId);
         }
 
         /// <summary>This method creates <c>FeedbackDto</c> from provided <paramref name="feedback"/>.</summary>
