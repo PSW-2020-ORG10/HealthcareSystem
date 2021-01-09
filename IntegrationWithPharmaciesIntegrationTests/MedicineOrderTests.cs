@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 using Xunit;
 
 namespace IntegrationWithPharmaciesIntegrationTests
-{/*
+{
     public  class MedicineOrderTests
     {
         private readonly HttpClient _client;
@@ -111,5 +111,5 @@ namespace IntegrationWithPharmaciesIntegrationTests
             offers.ShouldNotBeNull();
         }
 
-    }*/
+    }
 }

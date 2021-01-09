@@ -21,8 +21,8 @@ class AllFeedbackTable extends Component {
         const feedbackList = this.props.feedbackList;
         return (
 
-            <div>             
-                <table className='table allFeedback' >
+            <div>
+                <table id="feedbackTable" className='table allFeedback' >
                     <thead>
                         <tr>
                             <th style={{ textAlign: "left" , width: '35%' }}> Message</th>

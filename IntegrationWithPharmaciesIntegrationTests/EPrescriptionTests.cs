@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using Xunit;
 
 namespace IntegrationWithPharmaciesIntegrationTests
-{/*
+{
     public class EPrescriptionTests
     {
         private readonly HttpClient _client;
@@ -70,5 +70,5 @@ namespace IntegrationWithPharmaciesIntegrationTests
             medicines.ShouldNotBeEmpty();
         }
         
-    }*/
+    }
 }

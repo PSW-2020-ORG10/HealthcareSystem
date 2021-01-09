@@ -2,7 +2,7 @@ namespace PatientWebApplicationIntegrationTests
 {
     public class ScheduleRegularAppointmentsTests
     {
-        /*private readonly HttpClient _client;
+        private readonly HttpClient _client;
         private readonly MyDbContext _context;
         public ScheduleRegularAppointmentsTests()
         {
@@ -53,6 +53,6 @@ namespace PatientWebApplicationIntegrationTests
             var stringContent = new StringContent(JsonConvert.SerializeObject(new DoctorAppointment(0, new TimeSpan(15, 30, 0), "23/12/2020", 2, 2, new List<Referral>(), "Ordination 1")), Encoding.UTF8, "application/json");
             var response = await _client.PostAsync("http://localhost:60198/api/doctorappointment", stringContent);
             response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
-        }*/
+        }
     }
 }

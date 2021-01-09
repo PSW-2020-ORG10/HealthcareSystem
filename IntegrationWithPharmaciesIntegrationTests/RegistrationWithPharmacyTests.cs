@@ -9,7 +9,7 @@ using Shouldly;
 using Xunit;
 
 namespace IntegrationWithPharmaciesIntegrationTests
-{/*
+{
     public class RegistrationWithPharmacyTests
     {
         private readonly MyDbContext _context;
@@ -40,5 +40,5 @@ namespace IntegrationWithPharmaciesIntegrationTests
             registrationInPharmacy.ShouldBeNull();
         }
       
-    }*/
+    }
 }
