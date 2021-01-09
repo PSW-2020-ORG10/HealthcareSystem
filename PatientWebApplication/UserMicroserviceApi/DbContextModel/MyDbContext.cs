@@ -51,11 +51,18 @@ namespace UserMicroserviceApi.DbContextModel
                 200.0, false, "Pulmonology", new List<DoctorNotification>(), "Ordination 4")
            );
 
+            PatientUser patient1 = new PatientUser(1, "Pera", "Peric", "Male", "1234", "02/02/1990", "123", "212313", "Alergija", "Grad", false, "patient1@gmail.com", "12345", false, "Grad2", "Roditelj", "download.jfif");
+            PatientUser patient2 = new PatientUser(2, "Marko", "Markovic", "Male", "123456789", "21/07/1989", "555333", "2112313", "Alergija", "Grad", false, "marko_markovic@gmail.com", "12345", false, "Grad2", "Roditelj", "images.jfif");
+            PatientUser patient3 = new PatientUser(3, "Stefan", "Lelic", "Male", "1234", "2/2/2020", "123", "212313", "Alergija", "Grad", false, "patient2@gmail.com", "12345", false, "Grad2", "Roditelj", "download.jfif");
+            PatientUser patient4 = new PatientUser(4, "Marko", "Lazarevic", "Female", "1234", "2/2/2020", "123", "2112313", "Alergija", "Grad", false, "patient2@gmail.com", "12345", false, "Grad2", "Roditelj", "download.jfif");
+            patient1.isVerified = true;
+            patient2.isVerified = true;
+
             modelBuilder.Entity<PatientUser>().HasData(
-                new PatientUser(1, "Pera", "Peric", "Male", "1234", "02/02/1990", "123", "212313", "Alergija", "Grad", false, "patient1@gmail.com", "12345", false, "Grad2", "Roditelj", null),
-                new PatientUser(2, "Marko", "Markovic", "Male", "123456789", "21/07/1989", "555333", "2112313", "Alergija", "Grad", false, "marko_markovic@gmail.com", "12345", false, "Grad2", "Roditelj", "images.jfif"),
-                new PatientUser(3, "Stefan", "Lelic", "Male", "1234", "2/2/2020", "123", "212313", "Alergija", "Grad", false, "patient2@gmail.com", "12345", false, "Grad2", "Roditelj", "download.jfif"),
-                new PatientUser(4, "Marko", "Lazarevic", "Female", "1234", "2/2/2020", "123", "2112313", "Alergija", "Grad", false, "patient2@gmail.com", "12345", false, "Grad2", "Roditelj", null)
+                patient1,
+                patient2,
+                patient3,
+                patient4
             );
 
             modelBuilder.Entity<Shift>().HasData(

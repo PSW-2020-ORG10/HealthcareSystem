@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using Xunit;
 
+[assembly: CollectionBehavior(DisableTestParallelization = true)]
 namespace PatientWebAppSeleniumTests
 {
     public class PublishFeedbackTests : IDisposable
@@ -61,7 +62,6 @@ namespace PatientWebAppSeleniumTests
             createFeedbackPage.Logout();
 
             loginPage = new Pages.LoginPage(driver);
-            loginPage.Navigate();
             Assert.Equal(driver.Url, Pages.LoginPage.URI);
 
             loginPage.InsertEmail("admin1@gmail.com");
@@ -70,6 +70,7 @@ namespace PatientWebAppSeleniumTests
             loginPage.WaitForFormSubmitAdmin();
 
             feedbackPage = new FeedbackPage(driver);
+            feedbackPage.EnsurePageIsDisplayed();
 
             Assert.Equal("I will be anonymous", feedbackPage.GetLastRowMessage());
             Assert.Equal("ANONYMOUS", feedbackPage.GetLastRowIsAnonymous());

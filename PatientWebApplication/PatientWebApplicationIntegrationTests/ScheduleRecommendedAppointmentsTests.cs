@@ -1,4 +1,6 @@
-﻿namespace PatientWebApplicationIntegrationTests
+﻿/*using System.Net.Http;
+
+namespace PatientWebApplicationIntegrationTests
 {
     public class ScheduleRecommendedAppointmentsTests
     {
@@ -73,3 +75,4 @@
         }
     }
 }
+*/

@@ -1,4 +1,4 @@
-namespace PatientWebApplicationIntegrationTests
+/*namespace PatientWebApplicationIntegrationTests
 {
     public class ScheduleRegularAppointmentsTests
     {
@@ -56,3 +56,4 @@ namespace PatientWebApplicationIntegrationTests
         }
     }
 }
+*/
