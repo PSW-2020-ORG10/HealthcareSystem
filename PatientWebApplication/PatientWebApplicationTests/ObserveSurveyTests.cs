@@ -22,14 +22,6 @@ namespace PatientWebApplicationTests
             foundSurvey.ShouldNotBeNull();
         }
 
-        [Fact]
-        public void Get_Doctors_Rates_Successfuly()
-        {
-            SurveyService service = new SurveyService(CreateStubRepository());
-            List<MicroserviceSurveyDoctorAverageDto> foundSurveys = service.GetAllDoctorAverageRates();           
-            foundSurveys.ShouldNotBeNull();
-        }
-
         private static ISurveyRepository CreateStubRepository()
         {
             var stubRepository = new Mock<ISurveyRepository>();
