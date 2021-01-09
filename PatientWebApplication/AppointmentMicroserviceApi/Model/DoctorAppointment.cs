@@ -34,6 +34,13 @@ namespace AppointmentMicroserviceApi.Patient
             CancelDateString = null;
         }
 
+        public DoctorAppointment(int id, TimeSpan time, string date, int patientId, int doctorId, List<Referral> referrals, string roomid, bool isCanceled, string cancelDateString) : base(id, time, date, patientId, doctorId, roomid)
+        {
+            referral = referrals;
+            IsCanceled = isCanceled;
+            CancelDateString = cancelDateString;
+        }
+
         public DoctorAppointment() : base() { }
 
         public override bool Equals(Object obj)

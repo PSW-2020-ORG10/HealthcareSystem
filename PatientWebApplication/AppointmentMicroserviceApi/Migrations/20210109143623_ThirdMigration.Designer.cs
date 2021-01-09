@@ -3,14 +3,16 @@ using System;
 using AppointmentMicroserviceApi.DbContextModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AppointmentMicroserviceApi.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210109143623_ThirdMigration")]
+    partial class ThirdMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -330,7 +332,6 @@ namespace AppointmentMicroserviceApi.Migrations
                         new
                         {
                             id = 3,
-                            CancelDateString = "09/01/2021",
                             Date = "23/12/2020",
                             DoctorUserId = 2,
                             IsCanceled = true,
@@ -341,7 +342,6 @@ namespace AppointmentMicroserviceApi.Migrations
                         new
                         {
                             id = 4,
-                            CancelDateString = "09/01/2021",
                             Date = "23/12/2020",
                             DoctorUserId = 2,
                             IsCanceled = true,
@@ -352,7 +352,6 @@ namespace AppointmentMicroserviceApi.Migrations
                         new
                         {
                             id = 5,
-                            CancelDateString = "09/01/2021",
                             Date = "22/12/2020",
                             DoctorUserId = 1,
                             IsCanceled = true,

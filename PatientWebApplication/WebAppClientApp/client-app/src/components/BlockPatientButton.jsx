@@ -10,7 +10,7 @@ class BlockPatientButton extends Component {
     render() {
         return (
             <React.Fragment>
-                <button className="btn btn-danger" disabled={this.props.patient.isBlocked} onClick={this.blockApp.bind(this)}>Block</button>
+                <button className="btn btn-danger" name="blockButton" disabled={this.props.patient.isBlocked} onClick={this.blockApp.bind(this)}>Block</button>
             </React.Fragment>
         )
     }

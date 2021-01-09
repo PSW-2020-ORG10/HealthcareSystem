@@ -3,14 +3,16 @@ using System;
 using AppointmentMicroserviceApi.DbContextModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AppointmentMicroserviceApi.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210109163538_FourthMigration")]
+    partial class FourthMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -330,10 +332,9 @@ namespace AppointmentMicroserviceApi.Migrations
                         new
                         {
                             id = 3,
-                            CancelDateString = "09/01/2021",
                             Date = "23/12/2020",
                             DoctorUserId = 2,
-                            IsCanceled = true,
+                            IsCanceled = false,
                             PatientUserId = 1,
                             RoomId = "1",
                             Start = new TimeSpan(0, 15, 0, 0, 0)
@@ -341,10 +342,9 @@ namespace AppointmentMicroserviceApi.Migrations
                         new
                         {
                             id = 4,
-                            CancelDateString = "09/01/2021",
                             Date = "23/12/2020",
                             DoctorUserId = 2,
-                            IsCanceled = true,
+                            IsCanceled = false,
                             PatientUserId = 1,
                             RoomId = "1",
                             Start = new TimeSpan(0, 15, 45, 0, 0)
@@ -352,10 +352,9 @@ namespace AppointmentMicroserviceApi.Migrations
                         new
                         {
                             id = 5,
-                            CancelDateString = "09/01/2021",
                             Date = "22/12/2020",
                             DoctorUserId = 1,
-                            IsCanceled = true,
+                            IsCanceled = false,
                             PatientUserId = 1,
                             RoomId = "1",
                             Start = new TimeSpan(0, 12, 0, 0, 0)

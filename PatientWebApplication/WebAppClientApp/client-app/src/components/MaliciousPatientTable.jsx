@@ -25,7 +25,7 @@ class MaliciousPatientTable extends Component {
         debugger;
         return (
             <div>
-                <table className='table allPatients' >
+                <table id="maliciousPatientTable" className='table allPatients' >
                     <thead>
                         <tr>
                             <th style={{ textAlign: "center" }}>Patient</th>

@@ -1,7 +1,5 @@
-﻿using BAMCIS.Util.Concurrent;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using SeleniumExtras.WaitHelpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,33 +8,40 @@ using System.Threading;
 
 namespace PatientWebAppSeleniumTests.Pages
 {
-    class AppointmentsPage
+    class MaliciousPatientPage
     {
         private readonly IWebDriver driver;
-        public const string URI = "http://localhost:3000/my-appointments";
-        private IWebElement Table => driver.FindElement(By.Id("appointmentTable"));
-        private ReadOnlyCollection<IWebElement> Rows => driver.FindElements(By.XPath("//table[@id='appointmentTable']/tbody/tr"));
-        private IWebElement elementOldPage => driver.FindElements(By.Name("cancelButton"))[1];
-        private IWebElement SubmitButtonElement => driver.FindElements(By.Name("cancelButton"))[0];
+        public const string URI = "http://localhost:3000/malicious-patient";
+        private IWebElement Table => driver.FindElement(By.Id("maliciousPatientTable"));
+        private ReadOnlyCollection<IWebElement> Rows => driver.FindElements(By.XPath("//table[@id='maliciousPatientTable']/tbody/tr"));
+        private IWebElement elementOldPage => driver.FindElements(By.Name("blockButton"))[1];
+       // private IWebElement SubmitButtonElement => driver.FindElements(By.Name("blockButton"))[0];
+        private IWebElement SubmitButtonElement => driver.FindElement(By.XPath("(//table[@id='maliciousPatientTable']/tbody/tr)[last()]/td[4]/button"));
         public string Title => driver.Title;
 
-        public AppointmentsPage(IWebDriver driver)
+        public MaliciousPatientPage(IWebDriver driver)
         {
             this.driver = driver;
         }
 
-        public int AppointmentCount()
-        {
-            return Rows.Count;
-        }
-
         public void SubmitForm()
         {
+            Thread.Sleep(3000);
             SubmitButtonElement.Click();
         }
+
         public void WaitForFormSubmit()
         {
             Thread.Sleep(1000);
+        }
+
+        public bool SubmitButtonElementDisplayed()
+        {
+            return SubmitButtonElement.Displayed;
+        }
+        public bool SubmitButtonElementEnabled()
+        {
+            return SubmitButtonElement.Enabled;
         }
 
         public void EnsurePageIsDisplayed()
