@@ -57,6 +57,7 @@ namespace UserMicroserviceApi.DbContextModel
             PatientUser patient4 = new PatientUser(4, "Marko", "Lazarevic", "Female", "1234", "2/2/2020", "123", "2112313", "Alergija", "Grad", false, "patient2@gmail.com", "12345", false, "Grad2", "Roditelj", "download.jfif");
             patient1.isVerified = true;
             patient2.isVerified = true;
+            patient3.isVerified = true;
 
             modelBuilder.Entity<PatientUser>().HasData(
                 patient1,

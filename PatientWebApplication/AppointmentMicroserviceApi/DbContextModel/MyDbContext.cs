@@ -49,16 +49,19 @@ namespace AppointmentMicroserviceApi.DbContextModel
             modelBuilder.Entity<DoctorAppointment>().HasData(
                 new DoctorAppointment(1, new TimeSpan(0, 14, 15, 0, 0), "23/12/2020", 2, 1, new List<Referral>(), "1"),
                 new DoctorAppointment(2, new TimeSpan(0, 14, 30, 0, 0), "23/12/2020", 2, 2, new List<Referral>(), "1"),
-                new DoctorAppointment(3, new TimeSpan(0, 15, 0, 0, 0), "23/12/2020", 1, 2, new List<Referral>(), "1", true, "09/01/2021"),
-                new DoctorAppointment(4, new TimeSpan(0, 15, 45, 0, 0), "23/12/2020", 1, 2, new List<Referral>(), "1", true, "09/01/2021"),
-                new DoctorAppointment(5, new TimeSpan(0, 12, 0, 0, 0), "22/12/2020", 1, 1, new List<Referral>(), "1", true, "09/01/2021"),
+                new DoctorAppointment(3, new TimeSpan(0, 15, 0, 0, 0), "23/12/2020", 1, 2, new List<Referral>(), "1"),
+                new DoctorAppointment(4, new TimeSpan(0, 15, 45, 0, 0), "23/12/2020", 1, 2, new List<Referral>(), "1"),
+                new DoctorAppointment(5, new TimeSpan(0, 12, 0, 0, 0), "22/12/2020", 1, 1, new List<Referral>(), "1"),
                 new DoctorAppointment(6, new TimeSpan(0, 12, 15, 0, 0), "22/12/2020", 2, 3, new List<Referral>(), "1"),
                 new DoctorAppointment(7, new TimeSpan(), "07/02/2031", 1, 3, new List<Referral>(), "1"),
                 new DoctorAppointment(8, new TimeSpan(), "07/12/2020", 1, 2, new List<Referral>(), "1"),
                 new DoctorAppointment(9, new TimeSpan(), "05/12/2030", 1, 1, new List<Referral>(), "1"),
                 new DoctorAppointment(10, new TimeSpan(), "11/11/2030", 1, 2, new List<Referral>(), "1"),
                 new DoctorAppointment(11, new TimeSpan(), "14/03/2016", 2, 1, new List<Referral>(), "A2"),
-                new DoctorAppointment(12, new TimeSpan(), "11/11/2010", 2, 2, new List<Referral>(), "B3")
+                new DoctorAppointment(12, new TimeSpan(), "11/11/2010", 2, 2, new List<Referral>(), "B3"),
+                new DoctorAppointment(13, new TimeSpan(0, 15, 0, 0, 0), "23/12/2020", 3, 2, new List<Referral>(), "1", true, "09/01/2021"),
+                new DoctorAppointment(14, new TimeSpan(0, 15, 45, 0, 0), "23/12/2020", 3, 2, new List<Referral>(), "1", true, "09/01/2021"),
+                new DoctorAppointment(15, new TimeSpan(0, 12, 0, 0, 0), "22/12/2020", 3, 1, new List<Referral>(), "1", true, "09/01/2021")
             );
 
             modelBuilder.Entity<Question>().HasData(

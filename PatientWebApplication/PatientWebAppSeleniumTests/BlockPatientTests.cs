@@ -13,7 +13,6 @@ namespace PatientWebAppSeleniumTests
         private Pages.MaliciousPatientPage maliciousPatientPage;
         private Pages.LoginPage loginPage;
         private Pages.FeedbackPage feedbackPage;
-        private int maliciousPatientCount = 0;
 
         public BlockPatientTests()
         {
@@ -31,8 +30,6 @@ namespace PatientWebAppSeleniumTests
             loginPage = new Pages.LoginPage(driver);
             loginPage.Navigate();
             Assert.Equal(driver.Url, Pages.LoginPage.URI);
-
-
         }
 
         public void Dispose()
@@ -52,8 +49,6 @@ namespace PatientWebAppSeleniumTests
             maliciousPatientPage = new Pages.MaliciousPatientPage(driver);
             maliciousPatientPage.Navigate();
             Assert.Equal(driver.Url, Pages.MaliciousPatientPage.URI);
-
-            // maliciousPatientCount = maliciousPatientPage.MaliciousPatientCount();
 
             maliciousPatientPage.SubmitForm();
             maliciousPatientPage.WaitForFormSubmit();

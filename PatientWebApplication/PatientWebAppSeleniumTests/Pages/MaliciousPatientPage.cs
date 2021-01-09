@@ -15,7 +15,6 @@ namespace PatientWebAppSeleniumTests.Pages
         private IWebElement Table => driver.FindElement(By.Id("maliciousPatientTable"));
         private ReadOnlyCollection<IWebElement> Rows => driver.FindElements(By.XPath("//table[@id='maliciousPatientTable']/tbody/tr"));
         private IWebElement elementOldPage => driver.FindElements(By.Name("blockButton"))[1];
-       // private IWebElement SubmitButtonElement => driver.FindElements(By.Name("blockButton"))[0];
         private IWebElement SubmitButtonElement => driver.FindElement(By.XPath("(//table[@id='maliciousPatientTable']/tbody/tr)[last()]/td[4]/button"));
         public string Title => driver.Title;
 
