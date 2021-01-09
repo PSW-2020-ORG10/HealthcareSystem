@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
-[assembly: CollectionBehavior(DisableTestParallelization = true)]
+
 namespace PatientWebAppSeleniumTests
 {
     public class CreateFeedbackTests : IDisposable
