@@ -10,7 +10,7 @@ class CancelAppointmentButton extends Component {
     render() {
         return (
             <React.Fragment>
-                <button className="btn btn-primary" disabled={this.props.appointment.isCanceled} onClick={this.cancelApp.bind(this)}>Cancel</button>
+                <button className="btn btn-primary" name="cancelButton" disabled={this.props.appointment.isCanceled} onClick={this.cancelApp.bind(this)}>Cancel</button>
             </React.Fragment>
         )
     }

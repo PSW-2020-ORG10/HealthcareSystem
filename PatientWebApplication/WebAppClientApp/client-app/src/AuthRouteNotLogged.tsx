@@ -14,8 +14,12 @@ export const AuthRouteNotLogged = ({
   exact = false,
 }: Props): JSX.Element => {
   console.log("Usao u AuthRouteNotLoggedIn ");
-  const isAuthed = localStorage.getItem("token") === "";
-  const isNotLogged = localStorage.getItem("role") === "";
+  const isAuthed =
+    localStorage.getItem("token") === "" ||
+    localStorage.getItem("token") === null;
+  const isNotLogged =
+    localStorage.getItem("role") === "" ||
+    localStorage.getItem("role") === null;
   const message = "";
   return (
     <Route

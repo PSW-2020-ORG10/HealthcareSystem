@@ -51,7 +51,7 @@ class AllPatientsAppointmentsTable extends Component {
             <div>
                 {this.state.modalShow ? <ReferralModal show={this.state.modalShow} referral={this.state.Referral} date={this.state.Date} onShowChange={this.displayModal.bind(this)} /> : null}
                 {this.state.modalSurveyShow ? <CreateSurveyForm show={this.state.modalSurveyShow} appointment={this.state.appointmentToSend}  onShowChange={this.fillSurvey.bind(this)} /> : null}
-                <table className='table allAppointments' >
+                <table id="appointmentTable" className='table allAppointments' >
                     <thead>
                         <tr>
                             <th style={{ textAlign: "left" }}>Doctor</th>
@@ -105,8 +105,8 @@ class AllPatientsAppointmentsTable extends Component {
                                 <td style={{ textAlign: "center" }} > {this.checkType(f)}</td >
                                 <td style={{ textAlign: "center" }}>{f.date}</td >
                                 <td style={{ textAlign: "center" }}>{f.start}</td >
-                                <td style={{ textAlign: "right" }}><CancelAppointmentButton appointment={f}> </CancelAppointmentButton></td >
-                                <td style={{ textAlign: "right" }}><button disabled={true} className="btn btn-primary">Fill Survey</button></td >
+                                <td style={{ textAlign: "right" }}><CancelAppointmentButton  appointment={f}> </CancelAppointmentButton></td >
+                                <td style={{ textAlign: "right" }}><button  disabled={true} className="btn btn-primary">Fill Survey</button></td >
                             </tr>
                         </tbody>
                     ))}
