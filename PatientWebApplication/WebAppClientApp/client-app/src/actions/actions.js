@@ -65,6 +65,7 @@ export const feedbackCreated = (feedback) => async (dispatch) => {
     console.log(feedback.message);
     try {
         debugger;
+        feedback.patientId = localStorage.getItem('patientId');
         await axios.post("http://localhost:54689/api/feedback", feedback,
         {
             headers: { "Access-Control-Allow-Origin": "*",

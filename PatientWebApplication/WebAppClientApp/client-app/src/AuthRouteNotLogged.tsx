@@ -8,20 +8,25 @@ interface Props {
   exact?: boolean;
 }
 
-export const AuthRouteAdmin = ({
+export const AuthRouteNotLogged = ({
   Component,
   path,
   exact = false,
 }: Props): JSX.Element => {
-  const isAuthed = !!localStorage.getItem("token");
-  const isAdmin = localStorage.getItem("role") === "admin";
-  const message = "Please log in to view this page";
+  console.log("Usao u AuthRouteNotLoggedIn ");
+  const isAuthed =
+    localStorage.getItem("token") === "" ||
+    localStorage.getItem("token") === null;
+  const isNotLogged =
+    localStorage.getItem("role") === "" ||
+    localStorage.getItem("role") === null;
+  const message = "";
   return (
     <Route
       exact={exact}
       path={path}
       render={(props: RouteComponentProps) =>
-        isAuthed && isAdmin ? (
+        isAuthed && isNotLogged ? (
           <Component {...props} />
         ) : localStorage.getItem("role") === "patient" ? (
           <Redirect
@@ -36,7 +41,7 @@ export const AuthRouteAdmin = ({
         ) : (
           <Redirect
             to={{
-              pathname: "",
+              pathname: "/admin-feedback",
               state: {
                 message,
                 requestedPath: path,

@@ -1,9 +1,12 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading;
 
 namespace PatientWebAppSeleniumTests.Pages
 {
@@ -16,8 +19,10 @@ namespace PatientWebAppSeleniumTests.Pages
         private IWebElement LastRowMessage => driver.FindElement(By.XPath("(//table[@id='feedbackTable']/tbody/tr)[last()]/td[1]"));
         private IWebElement LastRowDate => driver.FindElement(By.XPath("(//table[@id='feedbackTable']/tbody/tr)[last()]/td[2]"));
         private IWebElement LastRowIsAnonymous => driver.FindElement(By.XPath("(//table[@id='feedbackTable']/tbody/tr)[last()]/td[3]"));
-
+        private IWebElement LastRowButton => driver.FindElement(By.XPath("(//table[@id='feedbackTable']/tbody/tr)[last()]/td[4]/button"));
+        private IWebElement LogoutButtonElement => driver.FindElement(By.Id("logout"));
         public string Title => driver.Title;
+
         public void EnsurePageIsDisplayed()
         {
             var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 20));
@@ -70,6 +75,8 @@ namespace PatientWebAppSeleniumTests.Pages
 
         public string GetLastRowMessage()
         {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("(//table[@id='feedbackTable']/tbody/tr)[last()]/td[1]")));
             return LastRowMessage.Text;
         }
 
@@ -81,6 +88,37 @@ namespace PatientWebAppSeleniumTests.Pages
         public string GetLastRowIsAnonymous()
         {
             return LastRowIsAnonymous.Text;
+        }
+
+        public bool LastPublishButtonDisplayed()
+        {
+            return LastRowButton.Displayed;
+        }
+
+        public bool LastPublishButtonEnabled()
+        {
+            return LastRowButton.Enabled;
+        }
+
+        public void LastPublishButtonClick()
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementToBeClickable(LastRowButton));
+            LastRowButton.Click();
+        }
+
+        public void Logout()
+        {
+            Thread.Sleep(1000);
+            var toastButton = driver.FindElement(By.CssSelector("div[class='Toastify__toast-container Toastify__toast-container--top-right']"));
+            toastButton.Click();
+            Thread.Sleep(1000);
+            LogoutButtonElement.Click();
+        }
+
+        public void LogoutWithoutToast()
+        {
+            LogoutButtonElement.Click();
         }
 
         public void Navigate() => driver.Navigate().GoToUrl(URI);

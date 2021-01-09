@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
+[assembly: CollectionBehavior(DisableTestParallelization = true)]
 namespace PatientWebAppSeleniumTests
 {
     public class CreateFeedbackTests : IDisposable
@@ -56,8 +57,8 @@ namespace PatientWebAppSeleniumTests
             createFeedbackPage.SubmitForm();
             createFeedbackPage.WaitForFormSubmit();
 
+            createFeedbackPage.Logout();
             loginPage = new Pages.LoginPage(driver);
-            loginPage.Navigate();
             Assert.Equal(driver.Url, Pages.LoginPage.URI);
 
             loginPage.InsertEmail("admin1@gmail.com");
@@ -92,8 +93,8 @@ namespace PatientWebAppSeleniumTests
             createFeedbackPage.SubmitForm();
             createFeedbackPage.WaitForFormSubmit();
 
+            createFeedbackPage.Logout();
             loginPage = new Pages.LoginPage(driver);
-            loginPage.Navigate();
             Assert.Equal(driver.Url, Pages.LoginPage.URI);
 
             loginPage.InsertEmail("admin1@gmail.com");
@@ -128,8 +129,8 @@ namespace PatientWebAppSeleniumTests
             createFeedbackPage.SubmitForm();
             createFeedbackPage.WaitForFormSubmit();
 
+            createFeedbackPage.Logout();
             loginPage = new Pages.LoginPage(driver);
-            loginPage.Navigate();
             Assert.Equal(driver.Url, Pages.LoginPage.URI);
 
             loginPage.InsertEmail("admin1@gmail.com");
