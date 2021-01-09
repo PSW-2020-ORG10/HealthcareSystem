@@ -1,13 +1,26 @@
-﻿namespace PatientWebApplicationTests
+﻿using AppointmentMicroserviceApi.Doctor;
+using AppointmentMicroserviceApi.Patient;
+using AppointmentMicroserviceApi.Repository;
+using AppointmentMicroserviceApi.Service;
+using Moq;
+using Shouldly;
+using System;
+using System.Collections.Generic;
+using UserMicroserviceApi.Model;
+using UserMicroserviceApi.Repository;
+using UserMicroserviceApi.Service;
+using Xunit;
+
+namespace PatientWebApplicationTests
 {
     public class ScheduleRegularAppointmentTests
     {
-       /* [Fact]
-        public void Find_Available_Appointments()
+        [Fact]
+        public void Find_Available_AppointmentsAsync()
         {
-            RegularAppointmentService service = new RegularAppointmentService(CreateAppointmentStubRepository(), CreateScheduleStubRepository(), new DoctorService(CreateOperationStubRepository(), CreateAppointmentStubRepository(), CreateScheduleStubRepository(), CreateDoctorStubRepository()), CreatePatientStubRepository(), new OperationService(CreateOperationStubRepository()));
+            RegularAppointmentService service = new RegularAppointmentService(CreateAppointmentStubRepository(), new OperationService(CreateOperationStubRepository()));
 
-            List<DoctorAppointment> appointments = service.GetAllAvailableAppointmentsForDateAsync("03/03/2020", 2, 2);
+            List<DoctorAppointment> appointments = service.GetAllAvailableAppointmentsForDateAsync("03/03/2020", 2, 2).Result;
 
             appointments.ShouldNotBeEmpty();
         }
@@ -15,24 +28,24 @@
         [Fact]
         public void Find_No_Available_Appointments()
         {
-            RegularAppointmentService service = new RegularAppointmentService(CreateAppointmentStubRepository(), CreateScheduleStubRepository(), new DoctorService(CreateOperationStubRepository(), CreateAppointmentStubRepository(), CreateScheduleStubRepository(), CreateDoctorStubRepository()), CreatePatientStubRepository(), new OperationService(CreateOperationStubRepository()));
+            RegularAppointmentService service = new RegularAppointmentService(CreateAppointmentStubRepository(), new OperationService(CreateOperationStubRepository()));
 
-            List<DoctorAppointment> appointments = service.GetAllAvailableAppointmentsForDateAsync("02/02/2020", 1, 2);
+            List<DoctorAppointment> appointments = service.GetAllAvailableAppointmentsForDateAsync("02/02/2020", 1, 2).Result;
 
             appointments.ShouldBeEmpty();
         }
 
-        [Fact]
+        /*[Fact]
         public void Find_Available_Doctors()
         {
-            DoctorService service = new DoctorService(CreateOperationStubRepository(), CreateAppointmentStubRepository(), CreateScheduleStubRepository(), CreateDoctorStubRepository());
+            DoctorService service = new DoctorService(CreateScheduleStubRepository(), CreateDoctorStubRepository());
 
             List<DoctorUser> appointments = service.GetAvailableDoctors("Cardiology", "02/02/2020", 2);
 
             appointments.ShouldNotBeEmpty();
-        }
+        }*/
 
-        [Fact]
+        /*[Fact]
         public void Find_No_Available_Doctors()
         {
             DoctorService service = new DoctorService(CreateOperationStubRepository(), CreateAppointmentStubRepository(), CreateScheduleStubRepository(), CreateDoctorStubRepository());
@@ -40,7 +53,7 @@
             List<DoctorUser> appointments = service.GetAvailableDoctors("Pulmonology", "02/02/2020", 2);
 
             appointments.ShouldBeEmpty();
-        }
+        }*/
 
         private static IAppointmentRepository CreateAppointmentStubRepository()
         {
@@ -57,18 +70,12 @@
             referrals.Add(referral1);
             referrals.Add(referral1);
 
-            DoctorAppointment appointment1 = new DoctorAppointment(1, new TimeSpan(0, 14, 15, 0, 0), "03/03/2020", new PatientUser(), new DoctorUser(1, "TestDoctorName1", "TestDoctorNameSurname1", "1234", "02/02/2020", "123", "email", "pass", "Grad",
-             200.0, false, "Cardiology", new List<DoctorNotification>(), "Ordination 2"), new List<Referral>(), "1");
-            DoctorAppointment appointment2 = new DoctorAppointment(2, new TimeSpan(0, 14, 30, 0, 0), "03/03/2020", new PatientUser(), new DoctorUser(2, "TestDoctorName2", "TestDoctorNameSurname2", "1234", "02/02/2020", "123", "email", "pass", "Grad",
-             200.0, false, "Cardiology", new List<DoctorNotification>(), "Ordination 2"), new List<Referral>(), "1");
-            DoctorAppointment appointment3 = new DoctorAppointment(3, new TimeSpan(0, 15, 0, 0, 0), "03/03/2020", new PatientUser(), new DoctorUser(2, "TestDoctorName2", "TestDoctorNameSurname2", "1234", "02/02/2020", "123", "email", "pass", "Grad",
-             200.0, false, "Cardiology", new List<DoctorNotification>(), "Ordination 2"), new List<Referral>(), "1");
-            DoctorAppointment appointment4 = new DoctorAppointment(4, new TimeSpan(0, 15, 45, 0, 0), "03/03/2020", new PatientUser(), new DoctorUser(2, "TestDoctorName2", "TestDoctorNameSurname2", "1234", "02/02/2020", "123", "email", "pass", "Grad",
-             200.0, false, "Cardiology", new List<DoctorNotification>(), "Ordination 2"), new List<Referral>(), "1");
-            DoctorAppointment appointment5 = new DoctorAppointment(5, new TimeSpan(0, 12, 0, 0, 0), "02/02/2020", new PatientUser(), new DoctorUser(1, "TestDoctorName1", "TestDoctorNameSurname1", "1234", "02/02/2020", "123", "email", "pass", "Grad",
-             200.0, false, "Cardiology", new List<DoctorNotification>(), "Ordination 2"), new List<Referral>(), "1");
-            DoctorAppointment appointment6 = new DoctorAppointment(6, new TimeSpan(0, 12, 15, 0, 0), "02/02/2020", new PatientUser(), new DoctorUser(3, "TestDoctorName3", "TestDoctorNameSurname3", "1234", "02/02/2020", "123", "email", "pass", "Grad",
-             200.0, false, "Cardiology", new List<DoctorNotification>(), "Ordination 2"), new List<Referral>(), "1");
+            DoctorAppointment appointment1 = new DoctorAppointment(1, new TimeSpan(0, 14, 15, 0, 0), "03/03/2020", 1, 1, new List<Referral>(), "1");
+            DoctorAppointment appointment2 = new DoctorAppointment(2, new TimeSpan(0, 14, 30, 0, 0), "03/03/2020", 1, 2, new List<Referral>(), "1");
+            DoctorAppointment appointment3 = new DoctorAppointment(3, new TimeSpan(0, 15, 0, 0, 0), "03/03/2020", 1, 2, new List<Referral>(), "1");
+            DoctorAppointment appointment4 = new DoctorAppointment(4, new TimeSpan(0, 15, 45, 0, 0), "03/03/2020", 1, 2, new List<Referral>(), "1");
+            DoctorAppointment appointment5 = new DoctorAppointment(5, new TimeSpan(0, 12, 0, 0, 0), "02/02/2020", 1, 1, new List<Referral>(), "1");
+            DoctorAppointment appointment6 = new DoctorAppointment(6, new TimeSpan(0, 12, 15, 0, 0), "02/02/2020", 1, 3, new List<Referral>(), "1");
 
             patientAppointments.Add(appointment1);
             doctorAppointments1.Add(appointment1);
@@ -158,9 +165,9 @@
             List<PatientUser> patients = new List<PatientUser>();
             PatientUser patient = new PatientUser(2, "PatientName2", "PatientSurname2", "Female", "1234", "2/2/2020", "123", "2112313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null);
 
-            stubRepository.Setup(m => m.Find(patient.id)).Returns(patient);
+            stubRepository.Setup(m => m.FindOne(patient.id)).Returns(patient);
 
             return stubRepository.Object;
-        }*/
+        }
     }
 }

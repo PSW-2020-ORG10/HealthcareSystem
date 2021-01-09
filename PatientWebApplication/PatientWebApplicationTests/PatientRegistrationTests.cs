@@ -1,14 +1,21 @@
-﻿namespace PatientWebApplicationTests
+﻿using Moq;
+using Shouldly;
+using System.Collections.Generic;
+using UserMicroserviceApi.Dtos;
+using UserMicroserviceApi.Model;
+using UserMicroserviceApi.Repository;
+using UserMicroserviceApi.Service;
+using Xunit;
+
+namespace PatientWebApplicationTests
 {
     public class PatientRegistrationTests 
     {
-        /*[Fact]
+        [Fact]
         public void Create_Registration_Successfuly()
         {
             var mockVerify = new Mock<IEmailVerificationService>();
-            PatientService service = new PatientService(CreateStubRepository(), mockVerify.Object, new RegularAppointmentService(new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorService(new OperationRepository(), new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorRepository()), new PatientsRepository(), new OperationService(new OperationRepository())));
-
-            
+            PatientService service = new PatientService(CreateStubRepository(), mockVerify.Object);
 
             PatientUser patient =  service.Create(new PatientDto("Pera2", "Peric", "Male", "1234", "11/11/2000", "1231412", "21312312", "Alergija", "Grad", "email@gmail.com", "pass", false, "Grad2", "Roditelj", "", ""));
             patient.ShouldNotBeNull();
@@ -27,6 +34,6 @@
 
             return stubRepository.Object;
 
-        }*/
+        }
     }
 }

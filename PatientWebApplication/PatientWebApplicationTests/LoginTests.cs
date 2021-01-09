@@ -17,7 +17,7 @@ namespace PatientWebApplicationTests
         [Fact]
         public void Successful_Login()
         {
-            LoginService loginService = new LoginService(CreatePatientStubRepository("markomarkovic@gmail.com"), CreateAdminStubRepository("markomarkovic@gmail.com"));
+            LoginService loginService = new LoginService(CreatePatientStubRepository("markomarkovic@gmail.com", "password"), CreateAdminStubRepository("markomarkovic@gmail.com"));
             UserModel patient = loginService.AuthenticateUser(new UserModel(1, "markomarkovic@gmail.com", "password", ""));
             patient.ShouldNotBeNull();
         }
@@ -25,7 +25,7 @@ namespace PatientWebApplicationTests
         [Fact]
         public void Unsuccessful_Login_Not_Verified()
         {
-            LoginService loginService = new LoginService(CreatePatientStubRepository("kristinapetrovic@gmail.com"), CreateAdminStubRepository("kristinapetrovic@gmail.com"));
+            LoginService loginService = new LoginService(CreatePatientStubRepository("kristinapetrovic@gmail.com", "password"), CreateAdminStubRepository("kristinapetrovic@gmail.com"));
             UserModel patient = loginService.AuthenticateUser(new UserModel(1, "kristinapetrovic@gmail.com", "password", ""));
             patient.ShouldBeNull();
         }
@@ -33,7 +33,7 @@ namespace PatientWebApplicationTests
         [Fact]
         public void Unsuccessful_Login_Blocked()
         {
-            LoginService loginService = new LoginService(CreatePatientStubRepository("petarstanic@gmail.com"), CreateAdminStubRepository("petarstanic@gmail.com"));
+            LoginService loginService = new LoginService(CreatePatientStubRepository("petarstanic@gmail.com", "password"), CreateAdminStubRepository("petarstanic@gmail.com"));
             UserModel patient = loginService.AuthenticateUser(new UserModel(1, "petarstanic@gmail.com", "password", ""));
             patient.ShouldBeNull();
         }
@@ -41,7 +41,7 @@ namespace PatientWebApplicationTests
         [Fact]
         public void Unsuccessful_Login_Wrong_Values()
         {
-            LoginService loginService = new LoginService(CreatePatientStubRepository("wrongmail@gmail.com"), CreateAdminStubRepository("wrongmail@gmail.com"));
+            LoginService loginService = new LoginService(CreatePatientStubRepository("wrongmail@gmail.com", "wrongpassword"), CreateAdminStubRepository("wrongmail@gmail.com"));
             UserModel patient = loginService.AuthenticateUser(new UserModel(1, "wrongmail@gmail.com", "wrongpassword", ""));
             patient.ShouldBeNull();
         }
@@ -49,12 +49,12 @@ namespace PatientWebApplicationTests
         [Fact]
         public void Successful_Login_Administrator()
         {
-            LoginService loginService = new LoginService(CreatePatientStubRepository("admin@gmail.com"), CreateAdminStubRepository("admin@gmail.com"));
+            LoginService loginService = new LoginService(CreatePatientStubRepository("admin@gmail.com", "password"), CreateAdminStubRepository("admin@gmail.com"));
             UserModel admin = loginService.AuthenticateUser(new UserModel(1, "admin@gmail.com", "password", ""));
             admin.ShouldNotBeNull();
         }
 
-        private static IPatientsRepository CreatePatientStubRepository(string mail)
+        private static IPatientsRepository CreatePatientStubRepository(string mail, string password)
         {
             var stubRepository = new Mock<IPatientsRepository>();
 
@@ -72,14 +72,12 @@ namespace PatientWebApplicationTests
 
             stubRepository.Setup(m => m.GetAll()).Returns(patients);
 
-            PatientUser patientUser = new PatientUser();
-
             stubRepository.Setup(m => m.GetByLoginInfo(It.IsAny<UserModel>())).Callback((UserModel model) =>
             {
-                patientUser = patients.SingleOrDefault(app => app.email.Equals(mail) && app.isVerified == true && app.isBlocked == false);
-                UserModel modelPatient = new UserModel(patientUser.id, patientUser.email, patientUser.password, "patient");
+                
             }
-            ).Returns(patientUser);
+            ).Returns(patients.SingleOrDefault(app => app.email.Equals(mail) && app.password.Equals(password) && app.isVerified == true && app.isBlocked == false));
+
 
             return stubRepository.Object;
         }
@@ -98,10 +96,9 @@ namespace PatientWebApplicationTests
 
             stubRepository.Setup(m => m.GetByLoginInfo(It.IsAny<UserModel>())).Callback((UserModel model) =>
             {
-                Administrator administrator = admins.SingleOrDefault(app => app.email.Equals(mail));
-                UserModel modelAdministrator = new UserModel(administrator.id, administrator.email, administrator.password, "admin");
+               
             }
-            ).Returns(admin);
+            ).Returns(admins.SingleOrDefault(app => app.email.Equals(mail)));
 
             return stubRepository.Object;
         }

@@ -1,13 +1,9 @@
-﻿/*using HealthClinic.CL.Dtos;
-using HealthClinic.CL.Model.Patient;
-using HealthClinic.CL.Repository;
-using HealthClinic.CL.Service;
-using Moq;
-using Shouldly;
-using System;
-using System.Collections.Generic;
+﻿using Moq;
 using System.Net.Mail;
-using System.Text;
+using UserMicroserviceApi.Dtos;
+using UserMicroserviceApi.Model;
+using UserMicroserviceApi.Repository;
+using UserMicroserviceApi.Service;
 using Xunit;
 
 namespace PatientWebApplicationTests
@@ -51,4 +47,3 @@ namespace PatientWebApplicationTests
 
     }
 }
-*/
