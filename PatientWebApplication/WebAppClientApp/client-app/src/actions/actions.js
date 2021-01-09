@@ -65,7 +65,7 @@ export const feedbackCreated = (feedback) => async (dispatch) => {
     console.log(feedback.message);
     try {
         debugger;
-        await axios.post("http://localhost:54689/api/feedback", feedback,
+        await axios.post("https://gatewayapi-org10.herokuapp.com/api/feedback", feedback,
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
