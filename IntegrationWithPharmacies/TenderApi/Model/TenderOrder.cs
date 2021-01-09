@@ -9,7 +9,6 @@ namespace TenderApi.Model
         public String Date { get; set; }
         public int Id { get; set; }
         public int PharmacyTenderOfferId { get; set; }
-
         public String PharmacyApi { get; set; }
         public TenderOrder() { }
 

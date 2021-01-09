@@ -17,7 +17,7 @@ using Xunit;
 namespace IntegrationWithPharmaciesIntegrationTests
 {
     public  class MedicineOrderTests
-    {
+    {/*
         private readonly HttpClient _client;
         private  MyDbContext _context;
 
@@ -111,6 +111,6 @@ namespace IntegrationWithPharmaciesIntegrationTests
             var offers = await response.Content.ReadAsAsync<List<TenderOrder>>();
             offers.ShouldNotBeNull();
         }
-
+        */
     }
 }

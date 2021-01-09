@@ -1,15 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using TenderApi.DbContextModel;
 
 namespace TenderApi
@@ -51,14 +46,7 @@ namespace TenderApi
                 services.AddDbContext<MyDbContext>(options =>
                 options.UseMySql(CreateConnectionStringFromEnvironment(),
                 builder => builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null)).UseLazyLoadingProxies());
-            }/*
-            services.AddCors(options =>
-            {
-                options.AddPolicy("MyPolicy",
-                    builder => builder.WithOrigins("http://localhost:57942")
-                    .AllowAnyMethod()
-                    .AllowAnyHeader());
-            });*/
+            }
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
                 builder.AllowAnyOrigin()

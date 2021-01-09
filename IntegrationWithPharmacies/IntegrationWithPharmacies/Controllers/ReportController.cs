@@ -1,8 +1,6 @@
-﻿
-using HealthClinic.CL.DbContextModel;
+﻿using HealthClinic.CL.DbContextModel;
 using IntegrationWithPharmacies.FileProtocol;
 using Microsoft.AspNetCore.Mvc;
-
 using System;
 
 namespace IntegrationWithPharmacies.Controllers
@@ -14,11 +12,11 @@ namespace IntegrationWithPharmacies.Controllers
         private String Environment { get; set; }
         private ReportService ReportService { get; }
 
-      public ReportController(MyDbContext context)
-      {
+        public ReportController(MyDbContext context)
+        {
             ReportService = new ReportService(context);
             Environment = "Local";
-      }
+        }
 
         [HttpPost]
         public IActionResult Post(DateOfOrder date)
@@ -35,5 +33,4 @@ namespace IntegrationWithPharmacies.Controllers
             return BadRequest();
         }
     }
-
 }

@@ -3,23 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29911.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationWithPharmacies", "IntegrationWithPharmacies.csproj", "{3605780F-B4A1-448B-8C35-F0BCA07922A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationWithPharmacies", "IntegrationWithPharmacies\IntegrationWithPharmacies.csproj", "{3605780F-B4A1-448B-8C35-F0BCA07922A2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationWithPharmaciesIntegrationTests", "..\IntegrationWithPharmaciesIntegrationTests\IntegrationWithPharmaciesIntegrationTests.csproj", "{FE42EA42-EC9F-42FC-9D41-6225C8D5DBC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationWithPharmaciesIntegrationTests", "IntegrationWithPharmaciesIntegrationTests\IntegrationWithPharmaciesIntegrationTests.csproj", "{FE42EA42-EC9F-42FC-9D41-6225C8D5DBC6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationWithPharmaciesTest", "..\IntegrationWithPharmaciesTest\IntegrationWithPharmaciesTest.csproj", "{6AE46F13-1748-41BA-BB52-924F535A80A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationWithPharmaciesTest", "IntegrationWithPharmaciesTest\IntegrationWithPharmaciesTest.csproj", "{6AE46F13-1748-41BA-BB52-924F535A80A3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthClinic.CL", "..\..\PatientWebApplication\HealthClinic.DAL\HealthClinic.CL.csproj", "{69CD066D-41BF-43DE-8A3F-369C1589E56F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthClinic.CL", "..\PatientWebApplication\HealthClinic.DAL\HealthClinic.CL.csproj", "{69CD066D-41BF-43DE-8A3F-369C1589E56F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GatewayApi", "..\GatewayApi\GatewayApi.csproj", "{E4BDD736-EE83-431D-86DE-E7C76DECBBAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GatewayApi", "GatewayApi\GatewayApi.csproj", "{E4BDD736-EE83-431D-86DE-E7C76DECBBAA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PharmacyRegistrationApi", "..\PharmacyRegistrationApi\PharmacyRegistrationApi.csproj", "{066EB57C-A49D-45B8-B887-FD9977A0A539}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PharmacyRegistrationApi", "PharmacyRegistrationApi\PharmacyRegistrationApi.csproj", "{066EB57C-A49D-45B8-B887-FD9977A0A539}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UrgentMedicineOrderApi", "..\UrgentMedicineOrderApi\UrgentMedicineOrderApi.csproj", "{7D790184-6D54-418E-85E0-9699E6E6730D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UrgentMedicineOrderApi", "UrgentMedicineOrderApi\UrgentMedicineOrderApi.csproj", "{7D790184-6D54-418E-85E0-9699E6E6730D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicineInformationApi", "..\MedicineInformationApi\MedicineInformationApi.csproj", "{C132E785-8FB3-49F4-AE67-8E4E1D608A42}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicineInformationApi", "MedicineInformationApi\MedicineInformationApi.csproj", "{C132E785-8FB3-49F4-AE67-8E4E1D608A42}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TenderApi", "..\TenderApi\TenderApi.csproj", "{E9681C5E-24DB-4376-842A-98DDA3052A61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TenderApi", "TenderApi\TenderApi.csproj", "{E9681C5E-24DB-4376-842A-98DDA3052A61}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

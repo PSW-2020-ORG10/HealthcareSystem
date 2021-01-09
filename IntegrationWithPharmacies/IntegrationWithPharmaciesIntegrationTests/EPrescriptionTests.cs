@@ -14,7 +14,7 @@ using Xunit;
 namespace IntegrationWithPharmaciesIntegrationTests
 {
     public class EPrescriptionTests
-    {
+    {/*
         private readonly HttpClient _client;
         private readonly MyDbContext _context;
 
@@ -58,7 +58,7 @@ namespace IntegrationWithPharmaciesIntegrationTests
         {
             var response = await _client.GetAsync("http://localhost:57942/api/sharingPrescription/http/medicineAvailability/Brufen_100");
             response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
-        }/*
+        }
         [Fact]
         public async Task Get_Patients()
         {

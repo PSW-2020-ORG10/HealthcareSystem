@@ -1,7 +1,7 @@
 ﻿using HealthClinic.CL.DbContextModel;
 using HealthClinic.CL.Model.ActionsAndBenefits;
+using HealthClinic.CL.Model.Pharmacy;
 using HealthClinic.CL.Service;
-using IntegrationWithPharmacies.Model;
 using Microsoft.AspNetCore.Mvc;
 using RestSharp;
 using System;
@@ -40,9 +40,7 @@ namespace IntegrationWithPharmacies.Controllers
 
         private static List<RegistrationInPharmacy> GetPharmacyRegistrations()
         {
-            var client = new RestSharp.RestClient("http://localhost:54679");
-            var registrations = client.Get<List<RegistrationInPharmacy>>(new RestRequest("/api/registration"));
-            return registrations.Data;
+            return new RestClient("http://localhost:54679").Get<List<RegistrationInPharmacy>>(new RestRequest("/api/registration")).Data;
         }
 
 

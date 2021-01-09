@@ -17,7 +17,7 @@ namespace MedicineInformationApi.Controllers
             MedicineWithQuantityService = new MedicineWithQuantityService(context);
         }
 
-        [HttpPut("{medicine}")]       
+        [HttpPut("{medicine}")]
         public IActionResult UpdateMedicineQuantity(String medicine)
         {
             MedicineWithQuantityService.UpdateMedicineQuantityUrgentOrder(medicine);

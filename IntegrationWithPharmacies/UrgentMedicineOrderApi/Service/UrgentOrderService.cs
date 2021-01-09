@@ -11,13 +11,13 @@ namespace UrgentMedicineOrderApi.Service
 {
     public class UrgentOrderService
     {
-        private HttpService HttpService { get; }
+        private HttpRequests HttpService { get; }
         private MedicineAvailabilityTable MedicineAvailabilityTable { get; }
         public UrgentMedicineOrderRepository UrgentMedicineOrderRepository { get; }
         public IUrgentMedicineOrderRepository IUrgentMedicineOrderRepository { get; }
         public UrgentOrderService(MyDbContext context)
         {
-            HttpService = new HttpService();
+            HttpService = new HttpRequests();
             MedicineAvailabilityTable = new MedicineAvailabilityTable();
             UrgentMedicineOrderRepository = new UrgentMedicineOrderRepository(context);
         }
@@ -76,7 +76,7 @@ namespace UrgentMedicineOrderApi.Service
 
         public List<MedicineName> CheckMedicineAvailability(string medicine)
         {
-            return MedicineAvailabilityTable.FormMedicineAvailability(HttpService.FormMedicineAvailabilityRequest(medicine));
+            return MedicineAvailabilityTable.FormMedicineAvailability(HttpRequests.FormMedicineAvailabilityRequest(medicine));
         }
     }
 }

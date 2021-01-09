@@ -1,11 +1,5 @@
-﻿using Newtonsoft.Json;
-using RestSharp;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using TenderApi.Adapter;
 using TenderApi.DbContextModel;
 using TenderApi.Dto;
@@ -18,14 +12,15 @@ namespace TenderApi.Service
     {
         public MedicineTenderOfferRepository MedicineTenderOfferRepository { get; }
         public PharmacyTenderOfferRepository PharmacyTenderOfferRepository { get; }
-        public MedicineTenderOfferService() { }
+        public HttpRequests HttpRequests { get; }
 
-        private static readonly string medicineInformationUrl = Startup.Configuration["MedicineInformationApi"];
+        public MedicineTenderOfferService() { }
 
         public MedicineTenderOfferService(MyDbContext context)
         {
             MedicineTenderOfferRepository = new MedicineTenderOfferRepository(context);
             PharmacyTenderOfferRepository = new PharmacyTenderOfferRepository(context);
+            HttpRequests = new HttpRequests();
         }
 
         public List<MedicineTenderOffer> GetAll()
@@ -53,42 +48,16 @@ namespace TenderApi.Service
         {
             foreach (MedicineTenderOffer medicineTenderOffer in GetMedicineOffersByPharmacyOfferId(offerId))
             {
-                CheckMedicineInDB(GetAllMedicinesWithQuantity(), medicineTenderOffer);
+                CheckMedicineInDB(HttpRequests.GetAllMedicinesWithQuantity(), medicineTenderOffer);
             }
-        }
-
-        public static List<MedicineWithQuantity> GetAllMedicinesWithQuantity()
-        {
-            //var responseString = await client.GetAsync($"{medicineInformationUrl}api/medicineWithQuantity");
-            //return await responseString.Content.ReadAsAsync<List<MedicineWithQuantity>>();
-
-            //var medicines = await client.GetAsync($"{medicineInformationUrl}api/medicineWithQuantity");
-            var client = new RestSharp.RestClient(medicineInformationUrl);
-            var medicines = client.Get<List<MedicineWithQuantity>>(new RestRequest("/api/medicineWithQuantity"));
-
-            return medicines.Data;
         }
 
         private void CheckMedicineInDB(List<MedicineWithQuantity> medicineWithQuantities, MedicineTenderOffer medicineTenderOffer)
         {
             MedicineWithQuantity medicine = medicineWithQuantities.SingleOrDefault(medicineName => medicineName.Name == medicineTenderOffer.MedicineName);
-            if (medicine != null) UpdateMedicine(medicineTenderOffer, medicine);
-            else { _ = CreateNewMedicineWithQuantityAsync(medicineTenderOffer); }
+            if (medicine != null) HttpRequests.UpdateMedicine(medicineTenderOffer, medicine);
+            else { _ = HttpRequests.CreateNewMedicineWithQuantityAsync(medicineTenderOffer); }
         }
-        private async Task CreateNewMedicineWithQuantityAsync(MedicineTenderOffer medicineTenderOffer)
-        {
-            var values = new Dictionary<string, object>
-            {
-                {"name", medicineTenderOffer.MedicineName }, {"quantity",  medicineTenderOffer.AvailableQuantity }, {"description", ""}
-            };
-            var content = new StringContent(JsonConvert.SerializeObject(values, Formatting.Indented), Encoding.UTF8, "application/json");
-            using HttpClient client = new HttpClient();
-            await client.PostAsync($"{medicineInformationUrl}api/medicineWithQuantity", content);
-        }
-        private void UpdateMedicine(MedicineTenderOffer medicineTenderOffer, MedicineWithQuantity medicine)
-        {
-            var client = new RestSharp.RestClient(medicineInformationUrl);
-            client.Get<List<MedicineWithQuantity>>(new RestRequest("/api/medicineWithQuantity/"+medicine.Id+"/"+ medicineTenderOffer.AvailableQuantity));
-        }
+       
     }
 }

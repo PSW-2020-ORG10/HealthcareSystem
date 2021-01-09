@@ -9,10 +9,5 @@ namespace PharmacyRegistrationApi.Adapters
         {
             return new RegistrationInPharmacy(dto.PharmacyId, dto.ApiKey, dto.Name, dto.Town);
         }
-
-        public static RegistrationInPharmacyDto RegistrationToRegistrationDto(RegistrationInPharmacy registration)
-        {
-           return new RegistrationInPharmacyDto(registration.PharmacyId, registration.ApiKey,registration.Name,registration.Town);
-        }
     }
 }

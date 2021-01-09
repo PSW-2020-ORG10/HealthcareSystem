@@ -1,8 +1,12 @@
-﻿using RestSharp;
+﻿using Newtonsoft.Json;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace IntegrationWithPharmacies.FileProtocol
 {
@@ -23,13 +27,6 @@ namespace IntegrationWithPharmacies.FileProtocol
             client.UploadFile(new Uri(@"http://localhost:8082/download/prescription/http"), "POST", complete);
             client.Dispose();
         }
-        public void SendUrgentOrder(String order)
-        {
-            WebClient client = new WebClient();
-            client.Credentials = CredentialCache.DefaultCredentials;
-            client.UploadString(new Uri(@"http://localhost:8082/order/urgent/http"), "POST", order);
-            client.Dispose();
-        }
        
         public static String FormMedicineAvailabilityRequest(string medicine)
         {
@@ -46,9 +43,24 @@ namespace IntegrationWithPharmacies.FileProtocol
         }
         public static IRestResponse<List<MedicineName>> FormMedicineFromIsaRequest()
         {
-            var client = new RestSharp.RestClient("http://localhost:8082");
-            var response = client.Get<List<MedicineName>>(new RestRequest("/medicineRequested"));
-            return response;
+            return new RestClient("http://localhost:8082").Get<List<MedicineName>>(new RestRequest("/medicineRequested"));
+        }
+        public String GetMedicineDescriptionFromApi(String medicine)
+        {
+            return new RestClient("http://localhost:54679").Get<String>(new RestRequest("/api/medicineWithQuantity/description/" + medicine)).Data;
+        }
+        public async Task CreateNewMedicineWithQuantityAsync(String medicine, String description)
+        {
+            var content = new StringContent(JsonConvert.SerializeObject(CretaeMedicineWithQuantityObject(medicine, description), Formatting.Indented), Encoding.UTF8, "application/json");
+            await new HttpClient().PostAsync("http://localhost:54679/api/medicineWithQuantity", content);
+        }
+
+        private static Dictionary<string, object> CretaeMedicineWithQuantityObject(string medicine, string description)
+        {
+            return new Dictionary<string, object>
+            {
+                { "name", medicine }, { "quantity",  0}, { "description", description}
+            };
         }
     }
 }

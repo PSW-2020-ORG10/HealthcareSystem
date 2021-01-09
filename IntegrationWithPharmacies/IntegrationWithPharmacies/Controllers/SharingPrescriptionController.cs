@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using Castle.Core.Internal;
 using HealthClinic.CL.DbContextModel;
-using HealthClinic.CL.Dtos;
 using HealthClinic.CL.Model.Pharmacy;
 using HealthClinic.CL.Service;
 using IntegrationWithPharmacies.FileProtocol;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using RestSharp;
+
 
 namespace IntegrationWithPharmacies.Controllers
 {
@@ -23,13 +18,15 @@ namespace IntegrationWithPharmacies.Controllers
         private String Environment { get; }
         private PatientService PatientService { get; set; }
         private PrescriptionFileService PrescriptionFileService { get; }
-        private MedicineAvailabilityTable MedicineAvailabilityTable { get; }
+        private MedicineAvailabilityTable MedicineAvailabilityTable { get; } 
+        private HttpService HttpService { get; }
 
         public SharingPrescriptionController(MyDbContext context)
         {
             PatientService = new PatientService(context);
             PrescriptionFileService = new PrescriptionFileService(context);
             MedicineAvailabilityTable = new MedicineAvailabilityTable();
+            HttpService = new HttpService();
             Environment = "Local";
         }
 
@@ -62,39 +59,23 @@ namespace IntegrationWithPharmacies.Controllers
         [HttpGet("http/description/{medicine}")]
         public IActionResult GetMedicineDescription(String medicine)
         {
-            String medicineDescription = GetMedicineDescriptionFromApi(medicine);
+            String medicineDescription = HttpService.GetMedicineDescriptionFromApi(medicine);
             if (medicineDescription.IsNullOrEmpty()) return GetMedicineDescriptionFromIsaHttpAsync(medicine);
             return Ok(medicineDescription);
-        }
-
-        private static String GetMedicineDescriptionFromApi(String medicine)
-        {
-            var client = new RestSharp.RestClient("http://localhost:54679");
-            var description = client.Get<String>(new RestRequest("/api/medicineWithQuantity/description/"+medicine));
-            return description.Data;
         }
 
         public IActionResult GetMedicineDescriptionFromIsaHttpAsync(string medicine)
         {
             String description = HttpService.FormMedicineDescriptionRequest(medicine);
-            _ = CreateNewMedicineWithQuantityAsync(medicine, description);
+            _ = HttpService.CreateNewMedicineWithQuantityAsync(medicine, description);
             if (description.Length != 0) return Ok(description);
             return BadRequest();
         }
-        private async Task CreateNewMedicineWithQuantityAsync(String medicine, String description)
-        {
-            var values = new Dictionary<string, object>
-            {
-                { "name", medicine }, { "quantity",  0}, { "description", description}
-            };
-            var content = new StringContent(JsonConvert.SerializeObject(values, Formatting.Indented), Encoding.UTF8, "application/json");
-            using HttpClient client = new HttpClient();
-            await client.PostAsync("http://localhost:54679/api/medicineWithQuantity", content);
-        }
+       
         [HttpGet("grpc/description/{medicine}")]
         public IActionResult GetMedicineDescriptionGrpc(string medicine)
         {
-            String medicineDescription = GetMedicineDescriptionFromApi(medicine);
+            String medicineDescription = HttpService.GetMedicineDescriptionFromApi(medicine);
             if (medicineDescription.IsNullOrEmpty())return GetMedicineDescriptionFromIsaGrpc(medicine);
             return Ok(medicineDescription);
         }
@@ -102,7 +83,7 @@ namespace IntegrationWithPharmacies.Controllers
         private IActionResult GetMedicineDescriptionFromIsaGrpc(string medicine)
         {
             string response = new ClientScheduledService().SendMessage(medicine).Result;
-            _ = CreateNewMedicineWithQuantityAsync(medicine, response);
+            _ = HttpService.CreateNewMedicineWithQuantityAsync(medicine, response);
             return Ok(response);
         }
 

@@ -12,7 +12,7 @@ using Xunit;
 namespace IntegrationWithPharmaciesIntegrationTests
 {
     public class RegistrationWithPharmacyTests
-    {
+    {/*
         private readonly MyDbContext _context;
 
         public RegistrationWithPharmacyTests()
@@ -40,6 +40,6 @@ namespace IntegrationWithPharmaciesIntegrationTests
             RegistrationInPharmacy registrationInPharmacy = registrationInPharmacyService.Create(new RegistrationInPharmacyDto(5, "apisa12345", "Jankovic 2", "Novi Sad"));
             registrationInPharmacy.ShouldBeNull();
         }
-      
+      */
     }
 }

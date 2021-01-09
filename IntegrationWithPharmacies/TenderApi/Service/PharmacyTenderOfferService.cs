@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using TenderApi.Adapter;
 using TenderApi.DbContextModel;
 using TenderApi.Dto;

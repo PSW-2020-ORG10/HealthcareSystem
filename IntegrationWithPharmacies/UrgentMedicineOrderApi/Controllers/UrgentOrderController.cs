@@ -6,18 +6,15 @@ using UrgentMedicineOrderApi.Model;
 using UrgentMedicineOrderApi.Adapter;
 using Microsoft.AspNetCore.Mvc;
 using RestSharp;
-using System.Net.Http;
 
 namespace UrgentMedicineOrderApi.Controllers
 {
-
     [Route("api/[controller]")]
     [ApiController]
     public class UrgentOrderController : Controller
     {
         private UrgentOrderService UrgentOrderService { get; }
         private static readonly string medicineInformationUrl = Startup.Configuration["MedicineInformationApi"];
-        private static readonly HttpClient client = new HttpClient();
 
         public UrgentOrderController(MyDbContext context)
         {
@@ -42,13 +39,9 @@ namespace UrgentMedicineOrderApi.Controllers
             return ForwardUrgentUrderGrpc(medicine, pharmaciesWithMedicine);
         }
 
-        public static async void  UpdateMedicineQuantity(string medicine)
+        public static  void  UpdateMedicineQuantity(string medicine)
         {
-            //Console.WriteLine($"{medicineInformationUrl}api/medicineWithQuantity/" + medicine);
-            //_ = await client.PutAsync($"{medicineInformationUrl}api/medicineWithQuantity/" + medicine);
-
-            //var client = new RestSharp.RestClient($"{medicineInformationUrl}");
-            //var medicineUpdate = client.Put(new RestRequest("api/medicineWithQuantity/"+medicine));
+           new RestClient($"{medicineInformationUrl}").Put(new RestRequest("api/medicineWithQuantity/"+medicine));
         }
 
         private IActionResult ForwardUrgentUrderHttp(string medicine, List<MedicineName> pharmaciesWithMedicine)
