@@ -1,9 +1,6 @@
-﻿using HealthClinic.CL.Model.Orders;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Net.Mail;
 using System.Net.Mime;
-using System.Text;
 
 namespace EPrescriptionApi.Service
 {

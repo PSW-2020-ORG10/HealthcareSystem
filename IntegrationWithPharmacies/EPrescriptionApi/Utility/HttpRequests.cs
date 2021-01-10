@@ -14,6 +14,8 @@ namespace EPrescriptionApi.Utility
     public class HttpRequests
     {
         private static readonly string medicineInformationUrl = Startup.Configuration["MedicineInformationApi"];
+        private static readonly string usersServiceUrl = Startup.Configuration["UserMicroServiceApi"];
+        private static readonly string pharmacyRegistrationUrl = Startup.Configuration["PharmacyRegistrationApi"];
 
         public HttpRequests() { }
         public void UploadReportFile(String complete)
@@ -64,6 +66,15 @@ namespace EPrescriptionApi.Utility
             {
                 { "name", medicine }, { "quantity",  0}, { "description", description}
             };
+        }
+
+        public static List<Message> GetAllMessages()
+        {
+            return new RestClient(usersServiceUrl).Get<List<Message>>(new RestRequest("/api/message")).Data;
+        }
+        public static List<RegistrationInPharmacy> GetPharmacyRegistrations()
+        {
+            return new RestClient(pharmacyRegistrationUrl).Get<List<RegistrationInPharmacy>>(new RestRequest("/api/registration")).Data;
         }
     }
 }

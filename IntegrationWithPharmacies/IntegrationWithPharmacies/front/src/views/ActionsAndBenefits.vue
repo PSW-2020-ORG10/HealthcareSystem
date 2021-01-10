@@ -40,7 +40,7 @@
 
         },
         mounted() {
-            this.axios.get('api/actionsAndBenefits')
+            this.axios.get('http://localhost:54679/api/actionsAndBenefits')
                 .then(res => {
                     this.actionsAndBenefits = res.data;
                     console.log(this.actionsAndBenefits);

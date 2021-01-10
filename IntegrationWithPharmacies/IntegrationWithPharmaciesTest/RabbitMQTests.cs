@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using HealthClinic.CL.Dtos;
-using HealthClinic.CL.Model.ActionsAndBenefits;
-using HealthClinic.CL.Repository;
-using HealthClinic.CL.Service;
 using Moq;
 using Shouldly;
+using UserMicroserviceApi.Dtos;
+using UserMicroserviceApi.Service;
+using UserMicroserviceApi.Model;
+using UserMicroserviceApi.Repository;
+
+
 using Xunit;
 
 namespace IntegrationWithPharmaciesTest

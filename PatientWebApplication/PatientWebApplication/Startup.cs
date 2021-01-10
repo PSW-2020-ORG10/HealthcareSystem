@@ -1,5 +1,4 @@
 using FluentValidation.AspNetCore;
-using HealthClinic.CL.DbContextModel;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
@@ -21,6 +20,7 @@ namespace PatientWebApplication
         {
             Configuration = configuration;
             CurrentEnvironment = currentEnvironment;
+            
         }
 
         private string CreateConnectionStringFromEnvironment()
@@ -30,10 +30,13 @@ namespace PatientWebApplication
             string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA") ?? "MYSQLHealtcareDB";
             string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "root";
             string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "root";
-
+            
             return $"server={server};port={port};database={database};user={user};password={password}";
         }
-
+        
+        private string GetCurrentStage(){
+               return Environment.GetEnvironmentVariable("STAGE") ?? "Testing";  
+        }
       // This method gets called by the runtime. Use this method to add services to the container.
       public void ConfigureServices(IServiceCollection services)
         {
@@ -48,8 +51,8 @@ namespace PatientWebApplication
            {
                options.RegisterValidatorsFromAssemblyContaining<Startup>();
            });
-
-            if (CurrentEnvironment.IsEnvironment("Testing"))
+              
+            if (GetCurrentStage().Equals("Testing") && CurrentEnvironment.IsEnvironment("Testing"))
             {
                 services.AddDbContext<MyDbContext>(options =>
                     options.UseInMemoryDatabase("TestingDB").UseLazyLoadingProxies());
@@ -59,7 +62,6 @@ namespace PatientWebApplication
                services.AddDbContext<MyDbContext>(options =>
                options.UseMySql(CreateConnectionStringFromEnvironment(),
                   builder => builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null)).UseLazyLoadingProxies());
-
             }
 
          // In production, the React files will be served from this directory
@@ -67,6 +69,8 @@ namespace PatientWebApplication
             {
                 configuration.RootPath = "ClientApp/build";
             });
+
+            services.AddOcelot();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -87,13 +91,7 @@ namespace PatientWebApplication
             //app.UseSpaStaticFiles();
 
             app.UseRouting();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}");
-            });
+            app.UseOcelot().Wait();
 
             app.UseSpa(spa =>
             {
@@ -104,6 +102,13 @@ namespace PatientWebApplication
                     spa.UseReactDevelopmentServer(npmScript: "start");
                 }
             });
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+
+            app.UseOcelot().Wait();
         }
     }
 }

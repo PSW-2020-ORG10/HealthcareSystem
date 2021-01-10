@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationWithPharmaciesIn
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationWithPharmaciesTest", "IntegrationWithPharmaciesTest\IntegrationWithPharmaciesTest.csproj", "{6AE46F13-1748-41BA-BB52-924F535A80A3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthClinic.CL", "..\PatientWebApplication\HealthClinic.DAL\HealthClinic.CL.csproj", "{69CD066D-41BF-43DE-8A3F-369C1589E56F}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GatewayApi", "GatewayApi\GatewayApi.csproj", "{E4BDD736-EE83-431D-86DE-E7C76DECBBAA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PharmacyRegistrationApi", "PharmacyRegistrationApi\PharmacyRegistrationApi.csproj", "{066EB57C-A49D-45B8-B887-FD9977A0A539}"
@@ -22,6 +20,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TenderApi", "TenderApi\TenderApi.csproj", "{E9681C5E-24DB-4376-842A-98DDA3052A61}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EPrescriptionApi", "EPrescriptionApi\EPrescriptionApi.csproj", "{B1162B54-7E1E-4B3D-9B2A-15D3E79A24EA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserMicroserviceApi", "..\PatientWebApplication\UserMicroserviceApi\UserMicroserviceApi.csproj", "{D229C456-5AC3-4C84-8E37-81CD23DBCDCF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +41,6 @@ Global
 		{6AE46F13-1748-41BA-BB52-924F535A80A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AE46F13-1748-41BA-BB52-924F535A80A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AE46F13-1748-41BA-BB52-924F535A80A3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{69CD066D-41BF-43DE-8A3F-369C1589E56F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{69CD066D-41BF-43DE-8A3F-369C1589E56F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{69CD066D-41BF-43DE-8A3F-369C1589E56F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{69CD066D-41BF-43DE-8A3F-369C1589E56F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E4BDD736-EE83-431D-86DE-E7C76DECBBAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E4BDD736-EE83-431D-86DE-E7C76DECBBAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4BDD736-EE83-431D-86DE-E7C76DECBBAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -69,6 +65,10 @@ Global
 		{B1162B54-7E1E-4B3D-9B2A-15D3E79A24EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1162B54-7E1E-4B3D-9B2A-15D3E79A24EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1162B54-7E1E-4B3D-9B2A-15D3E79A24EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D229C456-5AC3-4C84-8E37-81CD23DBCDCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D229C456-5AC3-4C84-8E37-81CD23DBCDCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D229C456-5AC3-4C84-8E37-81CD23DBCDCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D229C456-5AC3-4C84-8E37-81CD23DBCDCF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

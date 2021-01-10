@@ -231,7 +231,7 @@
                 .catch(res => {
                     console.log(res);
                 });
-            this.axios.get('http://localhost:54679/api/sharingPrescription/patients')
+            this.axios.get('http://localhost:54679/api/patientUser/all')
                 .then(res => {
                     this.patients = res.data;
                 })

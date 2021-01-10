@@ -46,10 +46,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\PatientWebApplication\HealthClinic.DAL\HealthClinic.CL.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Protobuf Include="Protos\model.proto" GrpcServices="None" />
     <Protobuf Include="Protos\SpringGrpcService.proto" GrpcServices="Client" />
   </ItemGroup>

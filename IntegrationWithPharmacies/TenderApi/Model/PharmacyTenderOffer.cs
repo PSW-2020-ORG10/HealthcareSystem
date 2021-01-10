@@ -4,26 +4,26 @@ namespace TenderApi.Model
 {
     public class PharmacyTenderOffer : Entity
     {
-        public String PharmacyApi { get; set; }
+        public String PharmacyName { get; set; }
         public Boolean IsWinner { get; set; }
         public int TenderId { get; set; }
         public PharmacyTenderOffer() { }
 
-        public PharmacyTenderOffer(int id, String pharmacyApi) : base(id)
+        public PharmacyTenderOffer(int id, String pharmacyName) : base(id)
         {
-            PharmacyApi = pharmacyApi;
+            PharmacyName = pharmacyName;
             IsWinner = false;
             TenderId = 0;
         }
-        public PharmacyTenderOffer(int id, String pharmacyApi, Boolean isWinner, int tenderId) : base(id)
+        public PharmacyTenderOffer(int id, String pharmacyName, Boolean isWinner, int tenderId) : base(id)
         {
-            PharmacyApi = pharmacyApi;
+            PharmacyName = pharmacyName;
             IsWinner = isWinner;
             TenderId = tenderId;
         }
-        public PharmacyTenderOffer(String pharmacyApi, Boolean isWinner, int tenderId)
+        public PharmacyTenderOffer(String pharmacyName, Boolean isWinner, int tenderId)
         {
-            PharmacyApi = pharmacyApi;
+            PharmacyName = pharmacyName;
             IsWinner = isWinner;
             TenderId = tenderId;
         }

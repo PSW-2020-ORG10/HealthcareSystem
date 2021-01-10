@@ -92,7 +92,7 @@ namespace TenderApi.Migrations
                     b.Property<bool>("IsWinner")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<string>("PharmacyApi")
+                    b.Property<string>("PharmacyName")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<int>("TenderId")
@@ -107,7 +107,7 @@ namespace TenderApi.Migrations
                         {
                             Id = 1,
                             IsWinner = false,
-                            PharmacyApi = "pharmacyApi",
+                            PharmacyName = "pharmacy Jankovic",
                             TenderId = 1
                         });
                 });

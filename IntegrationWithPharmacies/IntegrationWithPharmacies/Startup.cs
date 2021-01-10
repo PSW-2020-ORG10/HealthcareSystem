@@ -1,6 +1,5 @@
 using System;
 using Grpc.Core;
-using HealthClinic.CL.DbContextModel;
 using IntegrationWithPharmacies.Controllers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -13,7 +12,7 @@ namespace IntegrationWithPharmacies
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; }
+        public static IConfiguration Configuration { get; private set; }
         public IWebHostEnvironment CurrentEnvironment { get; }
 
         public Startup(IConfiguration configuration, IWebHostEnvironment currentEnvironment)
@@ -40,19 +39,7 @@ namespace IntegrationWithPharmacies
 
             services.AddControllers();
             
-            if (CurrentEnvironment.IsEnvironment("Testing"))
-            {
-                services.AddDbContext<MyDbContext>(options =>
-                    options.UseInMemoryDatabase("TestingDB").UseLazyLoadingProxies());
-            }
-            else
-            {
-               services.AddDbContext<MyDbContext>(options =>
-               options.UseMySql(CreateConnectionStringFromEnvironment(),
-                  builder => builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null)).UseLazyLoadingProxies());
-
-            }
-
+            
          services.AddSpaStaticFiles(options => options.RootPath = "front/dist");
             services.AddCors(options =>
                 options.AddPolicy("VueCorsPolicy", builder =>
@@ -60,9 +47,8 @@ namespace IntegrationWithPharmacies
         }
 
         private Server server;
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,MyDbContext dbContext)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            dbContext.Database.EnsureCreated();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -102,3 +88,4 @@ namespace IntegrationWithPharmacies
         }
     }
 }
+

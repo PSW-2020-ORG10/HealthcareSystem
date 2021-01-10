@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\PatientWebApplication\HealthClinic.DAL\HealthClinic.CL.csproj" />
+    <ProjectReference Include="..\..\PatientWebApplication\UserMicroserviceApi\UserMicroserviceApi.csproj" />
     <ProjectReference Include="..\IntegrationWithPharmacies\IntegrationWithPharmacies.csproj" />
     <ProjectReference Include="..\MedicineInformationApi\MedicineInformationApi.csproj" />
     <ProjectReference Include="..\PharmacyRegistrationApi\PharmacyRegistrationApi.csproj" />

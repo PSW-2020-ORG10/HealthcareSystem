@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using HealthClinic.CL.Model.ActionsAndBenefits;
 using System;
+using IntegrationWithPharmacies.HelperClasses;
 
 namespace IntegrationWithPharmacies
 {

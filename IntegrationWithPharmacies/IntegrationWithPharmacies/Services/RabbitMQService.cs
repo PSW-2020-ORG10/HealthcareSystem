@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using HealthClinic.CL.Dtos;
-using HealthClinic.CL.Model.ActionsAndBenefits;
-using HealthClinic.CL.Service;
+using IntegrationWithPharmacies.HelperClasses;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
@@ -14,6 +14,8 @@ namespace IntegrationWithPharmacies
 {
     public class RabbitMQService : BackgroundService
     {
+        //private static readonly string usersServiceUrl = Startup.Configuration["UserMicroServiceApi"];
+
         IConnection connection;
         IModel channel;
         public override Task StartAsync(CancellationToken cancellationToken)
@@ -39,14 +41,25 @@ namespace IntegrationWithPharmacies
                 string dates = message.TimeStamp.ToString();
                 string[] listOfDates = dates.Split(' ');
 
-                MessageService messageService = new MessageService();
-                messageService.Create(new MessageDto(message.Text, listOfDates[0], message.TimeStamp, "Apoteka Jankovic", message.DateAction));
+                _ = CreateNewMedicineWithQuantityAsync(new MessageDto(message.Text, listOfDates[0], message.TimeStamp, "Apoteka Jankovic", message.DateAction));
 
             };
             channel.BasicConsume(queue: "hello", autoAck: true, consumer: consumer);
             return base.StartAsync(cancellationToken);
         }
+        public async Task CreateNewMedicineWithQuantityAsync(MessageDto messageDto)
+        {
+            var content = new StringContent(JsonConvert.SerializeObject(CreateActionAndBenefit(messageDto), Formatting.Indented), Encoding.UTF8, "application/json");
+            await new HttpClient().PostAsync($"http://localhost:54679/api/message", content);
+        }
 
+        private static Dictionary<string, object> CreateActionAndBenefit(MessageDto messageDto)
+        {            
+            return new Dictionary<string, object>
+            {
+                {"text", messageDto.Text }, {"DateStamp", messageDto.DateStamp},{"timeStamp",  messageDto.TimeStamp },{"pharmacyName", messageDto.PharmacyName},{"dateAction", messageDto.DateAction}
+            };
+        }
         public override Task StopAsync(CancellationToken cancellationToken)
         {
             channel.Close();

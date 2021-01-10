@@ -15,7 +15,7 @@ namespace TenderApi.DbContextModel
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<PharmacyTenderOffer>().HasData(
-                  new PharmacyTenderOffer(1, "pharmacyApi", false, 1)
+                  new PharmacyTenderOffer(1, "pharmacy Jankovic", false, 1)
             );
             modelBuilder.Entity<Tender>().HasData(
                   new Tender(1, new DateTime(), false)

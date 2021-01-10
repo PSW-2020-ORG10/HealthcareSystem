@@ -4,7 +4,6 @@ using Castle.Core.Internal;
 using EPrescriptionApi.Model;
 using EPrescriptionApi.Service;
 using EPrescriptionApi.Utility;
-using HealthClinic.CL.Service;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -15,31 +14,20 @@ namespace EPrescriptionApi.Controllers
     [ApiController]
     public class SharingPrescriptionController : Controller
     {
-      //  private PatientService PatientService { get; set; }
         private PrescriptionFileService PrescriptionFileService { get; }
         private MedicineAvailabilityTable MedicineAvailabilityTable { get; } 
         private HttpRequests HttpRequests { get; }
 
         public SharingPrescriptionController()
         {
-            //PatientService = new PatientService(context);
             PrescriptionFileService = new PrescriptionFileService();
             MedicineAvailabilityTable = new MedicineAvailabilityTable();
             HttpRequests = new HttpRequests();
         }
 
-        [HttpGet("patients")]
-        public IActionResult GetPatients()
-        {
-            Console.WriteLine("tuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
-            return Ok();
-        }
-
         [HttpGet("medicinesIsa")]
         public IActionResult GetMedicinesFromIsa()
         {
-            Console.WriteLine("ddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
-
             return Ok(HttpRequests.FormMedicineFromIsaRequest().Data);
         }
 

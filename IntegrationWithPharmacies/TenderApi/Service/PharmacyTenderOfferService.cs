@@ -52,7 +52,7 @@ namespace TenderApi.Service
         private void GetOnePharmyOfferForTender(List<TenderOrder> tenders, PharmacyTenderOffer pharmacyTenderOffer)
         {
             List<MedicineTenderOffer> medicineTenderOffers = MedicineTenderOfferService.GetAll().Where(offer => offer.PharmacyTenderOfferId == pharmacyTenderOffer.Id).ToList();
-            tenders.Add(new TenderOrder(medicineTenderOffers, pharmacyTenderOffer.TenderId, pharmacyTenderOffer.Id, pharmacyTenderOffer.PharmacyApi));
+            tenders.Add(new TenderOrder(medicineTenderOffers, pharmacyTenderOffer.TenderId, pharmacyTenderOffer.Id, pharmacyTenderOffer.PharmacyName));
         }
 
         public TenderOrder GetPharmacyOffer(int offerId, int tenderId)

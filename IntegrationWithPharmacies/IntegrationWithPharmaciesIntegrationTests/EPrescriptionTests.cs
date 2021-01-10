@@ -70,5 +70,6 @@ namespace IntegrationWithPharmaciesIntegrationTests
             medicines.ShouldNotBeEmpty();
         }
         */
+
     }
 }

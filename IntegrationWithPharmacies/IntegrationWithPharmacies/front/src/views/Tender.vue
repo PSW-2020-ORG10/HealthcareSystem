@@ -165,7 +165,7 @@
 
                         </thead>
                         <tr v-for="offer in pharmacyOffers" :key="offer.id">
-                            <td><button class="button4" v-on:click="showPharmacyOffer($event, offer.pharmacyTenderOfferId)">Offer from &nbsp;{{offer.pharmacyApi}}</button></td>
+                            <td><button class="button4" v-on:click="showPharmacyOffer($event, offer.pharmacyTenderOfferId)">Offer from &nbsp;{{offer.pharmacyName}}</button></td>
                             
                         </tr>
                     </table>
@@ -184,7 +184,7 @@
             <div class="modal-content">
                 <div class="modal-header" style="align-content:center">
                     <span v-on:click="closeModal" class="close">&times;</span>
-                    <h1>Offer from  &nbsp;   {{this.choosenOffer.pharmacyApi}}</h1>
+                    <h1>Offer from  &nbsp;   {{this.choosenOffer.pharmacyName}}</h1>
                 </div>
                 <div class="modal-body">
                     <div class="row justify-content-md-center">
@@ -273,14 +273,14 @@
                     id: "",
                     date: "",
                     medicinesWithQuantity: [],
-                    pharmacyApi: "",
+                    pharmacyName: "",
                     PharmacyTenderOfferId:0,
                 },
                 choosenOffer: {
                     medicinesWithQuantity: [],
                     id: 0,
                     pharmacyTenderOfferId:0,
-                    pharmacyApi: ""
+                    pharmacyName: ""
                 }
             }
         },

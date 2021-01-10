@@ -78,10 +78,10 @@
                 </div>
                 <div class="row justify-content-md-center">
                     <div class="col-25">
-                        <label for="name">Pharmacy api: </label>
+                        <label for="name">Pharmacy name: </label>
                     </div>
                     <div class="col-25">
-                        <input type="text" v-model="choosenTender.pharmacyApi">
+                        <input type="text" v-model="choosenTender.pharmacyName">
                     </div>
                 </div>
                 <div class="row justify-content-md-center">
@@ -119,7 +119,7 @@ export default {
                     id: "",
                     date: "",
                     medicinesWithQuantity: [],
-                    pharmacyApi: ""
+                    pharmacyName: ""
                 }
             }
         },

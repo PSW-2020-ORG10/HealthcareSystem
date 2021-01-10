@@ -1,13 +1,10 @@
-﻿using HealthClinic.CL.Dtos;
-using HealthClinic.CL.Model.Hospital;
-using HealthClinic.CL.Model.Patient;
-using HealthClinic.CL.Repository;
-using HealthClinic.CL.Service;
-using Moq;
+﻿using Moq;
+using SearchMicroserviceApi.Dtos;
+using SearchMicroserviceApi.Model;
+using SearchMicroserviceApi.Repository;
+using SearchMicroserviceApi.Service;
 using Shouldly;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace PatientWebApplicationTests
@@ -20,7 +17,7 @@ namespace PatientWebApplicationTests
             
             PrescriptionService service = new PrescriptionService(CreateStubRepository());
 
-            List<Prescription> foundPrescriptions = service.SimpleSearchPrescriptions(new PrescriptionSearchDto("Medicine Name", "", "Comment", ""));
+            List<Prescription> foundPrescriptions = service.SimpleSearchPrescriptions(new PrescriptionSearchDto("Medicine Name", "", "Comment", "", 1));
 
             foundPrescriptions.ShouldHaveSingleItem();
         }
@@ -31,7 +28,7 @@ namespace PatientWebApplicationTests
 
             PrescriptionService service = new PrescriptionService(CreateStubRepository());
 
-            List<Prescription> foundPrescriptions = service.SimpleSearchPrescriptions(new PrescriptionSearchDto("", "False", "", ""));
+            List<Prescription> foundPrescriptions = service.SimpleSearchPrescriptions(new PrescriptionSearchDto("", "False", "", "", 1));
 
             foundPrescriptions.ShouldBeEmpty();
         }
@@ -41,7 +38,7 @@ namespace PatientWebApplicationTests
         {
             PrescriptionService service = new PrescriptionService(CreateStubRepository());
 
-            List<Prescription> foundPrescriptions = service.SimpleSearchPrescriptions(new PrescriptionSearchDto("", "", "", ""));
+            List<Prescription> foundPrescriptions = service.SimpleSearchPrescriptions(new PrescriptionSearchDto("", "", "", "", 1));
 
             foundPrescriptions.ShouldNotBeEmpty();
         }

@@ -74,7 +74,7 @@ namespace TenderApi.Controllers
         public IActionResult AcceptPharmacyOffer(int offerId, int tenderId)
         {
             TenderOrder tender = PharmacyTenderOfferService.GetPharmacyOffer(offerId, tenderId);
-            SmptServerService.SendEMailNotificationForTender(tender.MedicinesWithQuantity, tender.PharmacyApi);
+            SmptServerService.SendEMailNotificationForTender(tender.MedicinesWithQuantity, tender.PharmacyName);
             TenderService.CloseTender(tender);
             MedicineTenderOfferService.UpdateMedicineQuantity(offerId);
             return Ok();

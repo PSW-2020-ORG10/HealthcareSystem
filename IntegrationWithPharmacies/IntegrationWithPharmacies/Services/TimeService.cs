@@ -3,7 +3,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
-using HealthClinic.CL.Model.ActionsAndBenefits;
+using IntegrationWithPharmacies.HelperClasses;
 using Microsoft.Extensions.Hosting;
 
 namespace IntegrationWithPharmacies
@@ -55,12 +55,12 @@ namespace IntegrationWithPharmacies
 
         private static void CreateFile(string Message, string filepath)
         {
-            using (StreamWriter sw = File.CreateText(filepath)) sw.WriteLine(Message);
+            using (StreamWriter streamWriter = File.CreateText(filepath)) streamWriter.WriteLine(Message);
         }
 
         private static void AppendInFile(string Message, string filepath)
         {
-            try { using (StreamWriter sw = File.AppendText(filepath)) sw.WriteLine(Message); }
+            try { using (StreamWriter streamWriter = File.AppendText(filepath)) streamWriter.WriteLine(Message); }
             catch (IOException e)  { Console.WriteLine(e.ToString()); }
         }
     }

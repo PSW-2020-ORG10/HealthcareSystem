@@ -289,7 +289,7 @@
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
-      "DownstreamPathTemplate": "/api/sharingPrescription/patients",
+      "DownstreamPathTemplate": "/api/actionsAndBenefits",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -297,8 +297,32 @@
           "Port": 63327
         }
       ],
-      "UpstreamPathTemplate": "/api/sharingPrescription/patients",
+      "UpstreamPathTemplate": "/api/actionsAndBenefits",
       "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/patientUser/all",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "usermicroserviceapi",
+          "Port": 53236
+        }
+      ],
+      "UpstreamPathTemplate": "/api/patientUser/all",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/message",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "usermicroserviceapi",
+          "Port": 53236
+        }
+      ],
+      "UpstreamPathTemplate": "/api/message",
+      "UpstreamHttpMethod": [ "GET", "POST" ]
     }
   ]
 }

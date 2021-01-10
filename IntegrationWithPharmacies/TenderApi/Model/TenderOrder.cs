@@ -9,7 +9,7 @@ namespace TenderApi.Model
         public String Date { get; set; }
         public int Id { get; set; }
         public int PharmacyTenderOfferId { get; set; }
-        public String PharmacyApi { get; set; }
+        public String PharmacyName { get; set; }
         public TenderOrder() { }
 
         public TenderOrder(List<MedicineTenderOffer> medicinesWithQuantity, String date)
@@ -18,22 +18,22 @@ namespace TenderApi.Model
             Date = date;
             Id = 0;
             PharmacyTenderOfferId = 0;
-            PharmacyApi = "";
+            PharmacyName = "";
         }
-        public TenderOrder(List<MedicineTenderOffer> medicinesWithQuantity, String date, int id, int pharmacyTenderOfferId, String pharmacyApi)
+        public TenderOrder(List<MedicineTenderOffer> medicinesWithQuantity, String date, int id, int pharmacyTenderOfferId, String pharmacyName)
         {
             MedicinesWithQuantity = medicinesWithQuantity;
             Date = date;
             Id = id;
             PharmacyTenderOfferId = pharmacyTenderOfferId;
-            PharmacyApi = pharmacyApi;
+            PharmacyName = pharmacyName;
         }
-        public TenderOrder(List<MedicineTenderOffer> medicinesWithQuantity, int id, int pharmacyTenderOfferId, String pharmacyApi)
+        public TenderOrder(List<MedicineTenderOffer> medicinesWithQuantity, int id, int pharmacyTenderOfferId, String pharmacyName)
         {
             MedicinesWithQuantity = medicinesWithQuantity;
             Id = id;
             PharmacyTenderOfferId = pharmacyTenderOfferId;
-            PharmacyApi = pharmacyApi;
+            PharmacyName = pharmacyName;
         }
     }
 }

@@ -4,20 +4,20 @@ namespace TenderApi.Dto
 {
     public class PharmacyTenderOfferDto
     {
-        public String PharmacyApi { get; set; }
+        public String PharmacyName { get; set; }
         public Boolean IsWinner { get; set; }
         public int TenderId { get; set; }
         public PharmacyTenderOfferDto() { }
 
-        public PharmacyTenderOfferDto(String pharmacyApi)
+        public PharmacyTenderOfferDto(String pharmacyName)
         {
-            PharmacyApi = pharmacyApi;
+            PharmacyName = pharmacyName;
             IsWinner = false;
             TenderId = 0;
         }
-        public PharmacyTenderOfferDto(String pharmacyApi, Boolean isWinner, int tenderId)
+        public PharmacyTenderOfferDto(String pharmacyName, Boolean isWinner, int tenderId)
         {
-            PharmacyApi = pharmacyApi;
+            PharmacyName = pharmacyName;
             IsWinner = isWinner;
             TenderId = tenderId;
         }

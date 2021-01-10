@@ -17,9 +17,9 @@ namespace TenderApi.Service
             catch (SmtpException exception) { Console.WriteLine(exception.Message); }
         }
 
-        public void SendEMailNotificationForTender(List<MedicineTenderOffer> medicinesWithQuantity, string pharmacyApi)
+        public void SendEMailNotificationForTender(List<MedicineTenderOffer> medicinesWithQuantity, string pharmacyName)
         {
-            try { SendMailForTender(getEmailText(medicinesWithQuantity, pharmacyApi)); }
+            try { SendMailForTender(getEmailText(medicinesWithQuantity, pharmacyName)); }
             catch (SmtpException exception) { Console.WriteLine(exception.Message); }
         }
 
@@ -35,15 +35,15 @@ namespace TenderApi.Service
             return new MailMessage("ourhospital9@gmail.com", "pharmacyisa@gmail.com", "Notification about tender", emailInformation);
         }
 
-        private String getEmailText(List<MedicineTenderOffer> medicinesWithQuantity, string pharmacyApi)
+        private String getEmailText(List<MedicineTenderOffer> medicinesWithQuantity, string pharmacyName)
         {
-            return InformationAboutEveryMedicineInTender(medicinesWithQuantity, BasicEmailTenderInformation(pharmacyApi)).ToString();
+            return InformationAboutEveryMedicineInTender(medicinesWithQuantity, BasicEmailTenderInformation(pharmacyName)).ToString();
         }
 
-        private static StringBuilder BasicEmailTenderInformation(string pharmacyApi)
+        private static StringBuilder BasicEmailTenderInformation(string pharmacyName)
         {
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append("Winner of tender is pharmacy with api key : " + pharmacyApi + "\n" + "Requested medicines:    Name  /  Quantity  /  Price\n");
+            stringBuilder.Append("Winner of tender is pharmacy  : " + pharmacyName + "\n" + "Requested medicines:    Name  /  Quantity  /  Price\n");
             return stringBuilder;
         }
 
