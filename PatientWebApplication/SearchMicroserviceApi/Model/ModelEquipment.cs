@@ -16,14 +16,8 @@
             RoomId = roomId;
         }
 
-        public ModelEquipment(string data) : base(data)
-        {
+        public ModelEquipment(string data) : base(data) { }
 
-        }
-
-        public ModelEquipment() : base()
-        {
-
-        }
+        public ModelEquipment() : base() { }
     }
 }

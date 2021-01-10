@@ -32,73 +32,61 @@ namespace SearchMicroserviceApi.Service
             medicineRepository.Update(medicine);
         }
 
-        private void deleteIfMedicinesAreEqual(Medicine firstMedicine, Medicine secondMedicine)
+        private void DeleteIfMedicinesAreEqual(Medicine firstMedicine, Medicine secondMedicine)
         {
-            if (firstMedicine.id == secondMedicine.id)
+            if (firstMedicine.Id == secondMedicine.Id)
             {
-                medicineRepository.Delete(firstMedicine.id);
+                medicineRepository.Delete(firstMedicine.Id);
 
             }
         }
 
         public void Remove(Medicine medicine)
         {
-            List<Medicine> listOfMedicines = medicineRepository.GetAll();
-
-            foreach (Medicine medicineObject in listOfMedicines)
+            foreach (Medicine medicineObject in medicineRepository.GetAll())
             {
-                deleteIfMedicinesAreEqual(medicineObject, medicine);
+                DeleteIfMedicinesAreEqual(medicineObject, medicine);
             }
-
-            removeMedicineFromAllRoom(medicine);
-
+            RemoveMedicineFromAllRoom(medicine);
         }
-        private void removeMedicineFromSpecificRoom(Room room, Medicine medicine, RoomService roomService)
+        private void RemoveMedicineFromSpecificRoom(Room room, Medicine medicine, RoomService roomService)
         {
-            foreach (ModelMedicine modelMedicine in room.medicine)
+            foreach (ModelMedicine modelMedicine in room.Medicine)
             {
-                if (modelMedicine.Data.Equals(medicine.name))
+                if (modelMedicine.Data.Equals(medicine.Name))
                 {
-                    room.medicine.Remove(modelMedicine);
+                    room.Medicine.Remove(modelMedicine);
                     roomService.Update(room);
                 }
             }
 
         }
-        public void removeMedicineFromAllRoom(Medicine medicine)
+        public void RemoveMedicineFromAllRoom(Medicine medicine)
         {
             RoomService roomService = new RoomService();
-            List<Room> listOfRooms = new List<Room>();
-            listOfRooms = roomService.GetAll();
-
-            foreach (Room room in listOfRooms)
+            foreach (Room room in roomService.GetAll())
             {
-                removeMedicineFromSpecificRoom(room, medicine, roomService);
+                RemoveMedicineFromSpecificRoom(room, medicine, roomService);
             }
 
         }
 
-        private bool isNamesOfMedicineEqual(Medicine medicine, string nameOfSecondMedicine)
+        private bool IsNamesOfMedicineEqual(Medicine medicine, string nameOfSecondMedicine)
         {
-            if (medicine.name.ToLower().Equals(nameOfSecondMedicine.ToLower())) return true;
-            return false;
+            return (medicine.Name.ToLower().Equals(nameOfSecondMedicine.ToLower())) ? true : false;
         }
 
-        public bool isNameValid(string name)
+        public bool IsNameValid(string name)
         {
-            List<Medicine> listOfMedicines = GetAll();
-
-            foreach (Medicine medicine in listOfMedicines)
+            foreach (Medicine medicine in GetAll())
             {
-                if (isNamesOfMedicineEqual(medicine, name))
+                if (IsNamesOfMedicineEqual(medicine, name))
                 {
                     return false;
                 }
             }
-
             return true;
         }
-
 
         public List<Medicine> GetAll()
         {

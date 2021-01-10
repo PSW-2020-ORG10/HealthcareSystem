@@ -27,9 +27,7 @@ namespace FeedbackMicroserviceApi.Service
         /// <returns>if patient exists returns successfully created feedback; otherwise, return <c>null</c></returns>
         public Feedback Create(FeedbackDto dto)
         {
-            Feedback feedback = FeedbackAdapter.FeedbackDtoToFeedback(dto);
-            // Feedback feedback = HttpRequests.CreateFeedback(dto).Result;
-            return FeedbackRepository.Add(feedback);
+            return FeedbackRepository.Add(FeedbackAdapter.FeedbackDtoToFeedback(dto));
         }
 
 
@@ -54,12 +52,7 @@ namespace FeedbackMicroserviceApi.Service
         public Feedback Publish(int id)
         {
             Feedback feedbackToPublish = CheckForPublishing(id);
-            if (feedbackToPublish == null)
-            {
-                return null;
-            }
-
-            return FeedbackRepository.PublishFeedback(feedbackToPublish);
+            return (feedbackToPublish == null) ? null : FeedbackRepository.PublishFeedback(feedbackToPublish);       
         }
 
         /// <summary> This method determines if feedback with id property that matches provided <paramref name="id"/> is valid for publishing. </summary>
@@ -69,24 +62,7 @@ namespace FeedbackMicroserviceApi.Service
         private Feedback CheckForPublishing(int id)
         {
             Feedback feedback = FeedbackRepository.Find(id);
-            if (feedback == null)
-            {
-                return null;
-            }
-            else if (feedback.IsPublic == false)
-            {
-                return null;
-            }
-            else if (feedback.IsPublished == true)
-            {
-                return null;
-            }
-            else
-            {
-                return feedback;
-            }
+            return (feedback == null || !feedback.IsPublic || feedback.IsPublished) ? null : feedback;
         }
-
-
     }
 }

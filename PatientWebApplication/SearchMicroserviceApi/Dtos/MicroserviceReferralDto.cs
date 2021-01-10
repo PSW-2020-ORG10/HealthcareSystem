@@ -8,33 +8,32 @@ namespace SearchMicroserviceApi.Dtos
 {
     public class MicroserviceReferralDto : Entity
     {
-        public string medicine { get; set; }
-        public string takeMedicineUntil { get; set; }
-        public int quantityPerDay { get; set; }
-        public string classify { get; set; }
-        public string comment { get; set; }
+        public string Medicine { get; set; }
+        public string TakeMedicineUntil { get; set; }
+        public int QuantityPerDay { get; set; }
+        public string Classify { get; set; }
+        public string Comment { get; set; }
         public int AppointmentId { get; set; }
 
         public MicroserviceReferralDto() : base() { }
         public MicroserviceReferralDto(int id, string medicine, string takeMedicineUntil, int quantityPerDay, string classify, string comment) : base(id)
 
         {
-            this.medicine = medicine;
-            this.takeMedicineUntil = takeMedicineUntil;
-            this.quantityPerDay = quantityPerDay;
-            this.classify = classify;
-            this.comment = comment;
-
+            Medicine = medicine;
+            TakeMedicineUntil = takeMedicineUntil;
+            QuantityPerDay = quantityPerDay;
+            Classify = classify;
+            Comment = comment;
         }
 
         public MicroserviceReferralDto(int id, string medicine, string takeMedicineUntil, int quantityPerDay, string classify, string comment, int appointmentId) : base(id)
 
         {
-            this.medicine = medicine;
-            this.takeMedicineUntil = takeMedicineUntil;
-            this.quantityPerDay = quantityPerDay;
-            this.classify = classify;
-            this.comment = comment;
+            Medicine = medicine;
+            TakeMedicineUntil = takeMedicineUntil;
+            QuantityPerDay = quantityPerDay;
+            Classify = classify;
+            Comment = comment;
             AppointmentId = appointmentId;
         }
     }

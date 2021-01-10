@@ -10,35 +10,25 @@ namespace SearchMicroserviceApi.Model
 {
     public class Room : Entity
     {
-        public string typeOfRoom { get; set; }
-
-        public virtual List<ModelEquipment> equipment { get; set; }
-        public virtual List<ModelMedicine> medicine { get; set; }
-        public bool forUse { get; set; }
-
+        public string TypeOfRoom { get; set; }
+        public virtual List<ModelEquipment> Equipment { get; set; }
+        public virtual List<ModelMedicine> Medicine { get; set; }
+        public bool ForUse { get; set; }
 
         public Room(int id, string typeOfRoom, bool forUse) : base(id)
         {
-
-            this.typeOfRoom = typeOfRoom;
-            this.forUse = forUse;
-
+            TypeOfRoom = typeOfRoom;
+            ForUse = forUse;
         }
-
 
         public Room(int id, string typeOfRoom, List<ModelEquipment> equipment, List<ModelMedicine> medicine, bool forUse) : base(id)
         {
-            this.typeOfRoom = typeOfRoom;
-            this.equipment = equipment;
-            this.medicine = medicine;
-            this.forUse = forUse;
+            TypeOfRoom = typeOfRoom;
+            Equipment = equipment;
+            Medicine = medicine;
+            ForUse = forUse;
         }
 
-
-        public Room() : base()
-        {
-
-        }
-
+        public Room() : base() { }
     }
 }

@@ -24,6 +24,5 @@ namespace SearchMicroserviceApi.Dtos
             LogicOperators = logicOperators;
             PatientId = id;
         }
-
     }
 }

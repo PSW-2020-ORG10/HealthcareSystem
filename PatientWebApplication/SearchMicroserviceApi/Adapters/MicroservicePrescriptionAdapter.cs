@@ -11,7 +11,7 @@ namespace SearchMicroserviceApi.Adapters
     {
         public static MicroservicePrescriptionDto PrescriptionToMicroservicePrescriptionDto(Prescription prescription)
         {
-            return new MicroservicePrescriptionDto(Utility.HttpRequests.GetDoctorByIdAsync(prescription.DoctorId).Result, prescription.id, prescription.patientsid, prescription.Medicines, prescription.isUsed, prescription.comment, prescription.DoctorId);
+            return new MicroservicePrescriptionDto(Utility.HttpRequests.GetDoctorByIdAsync(prescription.DoctorId).Result, prescription.Id, prescription.Patientsid, prescription.Medicines, prescription.IsUsed, prescription.Comment, prescription.DoctorId);
         }
 
         public static List<MicroservicePrescriptionDto> PrescriptionListToMicroservicePrescriptionDtoList(List<Prescription> prescriptions)

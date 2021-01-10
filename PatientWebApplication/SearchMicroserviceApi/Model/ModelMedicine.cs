@@ -16,14 +16,8 @@
             RoomId = roomId;
         }
 
-        public ModelMedicine(string data) : base(data)
-        {
+        public ModelMedicine(string data) : base(data) { }
 
-        }
-
-        public ModelMedicine() : base()
-        {
-
-        }
+        public ModelMedicine() : base() { }
     }
 }

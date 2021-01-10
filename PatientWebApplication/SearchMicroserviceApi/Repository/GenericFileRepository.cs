@@ -30,9 +30,7 @@ namespace SearchMicroserviceApi.Repository
             {
                 using (var reader = new StreamReader(Path))
                 {
-                    string json = reader.ReadToEnd();
-                    items = JsonConvert.DeserializeObject<List<T>>(json);
-
+                    items = JsonConvert.DeserializeObject<List<T>>(reader.ReadToEnd());
                 }
             }
             catch (Exception ex)
@@ -43,16 +41,14 @@ namespace SearchMicroserviceApi.Repository
 
         public void New(T newEntity)
         {
-            newEntity.id = generateid(newEntity);
+            newEntity.Id = generateid(newEntity);
             List<T> list = GetAll();
             list.Add(newEntity);
             try
             {
-                string JsonResult = JsonConvert.SerializeObject(list, Formatting.Indented);
-                string path = Path;
-                using (var writer = new StreamWriter(path))
+                using (var writer = new StreamWriter(Path))
                 {
-                    writer.Write(JsonResult);
+                    writer.Write(JsonConvert.SerializeObject(list, Formatting.Indented));
                 }
             }
             catch (IOException e)
@@ -63,10 +59,9 @@ namespace SearchMicroserviceApi.Repository
 
         public T GetByid(int id)
         {
-            List<T> items = GetAll();
-            foreach (T oneItem in items)
+            foreach (T oneItem in GetAll())
             {
-                if (oneItem.id == id)
+                if (oneItem.Id == id)
                 {
                     return oneItem;
                 }
@@ -81,12 +76,9 @@ namespace SearchMicroserviceApi.Repository
         {
             try
             {
-                string JsonResult = JsonConvert.SerializeObject(data, Formatting.Indented);
-                string path = Path;
-
-                using (var writer = new StreamWriter(path))
+                using (var writer = new StreamWriter(Path))
                 {
-                    writer.Write(JsonResult);
+                    writer.Write(JsonConvert.SerializeObject(data, Formatting.Indented));
                 }
             }
             catch (IOException e)
@@ -100,7 +92,7 @@ namespace SearchMicroserviceApi.Repository
             List<T> items = GetAll();
             foreach (T it in items)
             {
-                if (it.id == updateEntity.id)
+                if (it.Id == updateEntity.Id)
                 {
                     items.Remove(it);
                     items.Add(updateEntity);
@@ -115,7 +107,7 @@ namespace SearchMicroserviceApi.Repository
             List<T> items = GetAll();
             foreach (T it in items)
             {
-                if (it.id == id)
+                if (it.Id == id)
                 {
                     items.Remove(it);
                     NewWithList(items);
@@ -130,9 +122,9 @@ namespace SearchMicroserviceApi.Repository
             List<T> items = GetAll();
             foreach (T oneItem in items)
             {
-                if (oneItem.id > number)
+                if (oneItem.Id > number)
                 {
-                    number = oneItem.id;
+                    number = oneItem.Id;
                 }
             }
             number += 1;

@@ -12,48 +12,46 @@ namespace SearchMicroserviceApi.Model
 {
     public class Medicine : Equipment
     {
-        public List<ModelRoom> room { get; set; }
-        public int doctorId { get; set; }
-        public string description { get; set; }
-        public bool isConfirmed { get; set; }
+        public List<ModelRoom> Room { get; set; }
+        public int DoctorId { get; set; }
+        public string Description { get; set; }
+        public bool IsConfirmed { get; set; }
         public int PrescriptionId { get; set; }
         public virtual Prescription Prescription { get; set; }
 
         public Medicine(int id, string name, int quantity, string description, List<ModelRoom> room, bool isConfirmed) : base(id, name, quantity, room)
         {
-            this.description = description;
-            this.room = room;
-            this.isConfirmed = isConfirmed;
+            Description = description;
+            Room = room;
+            IsConfirmed = isConfirmed;
         }
 
         public Medicine(int id, string name, int quantity, string description, List<ModelRoom> room, int doctorId, bool isConfirmed) : base(id, name, quantity, room)
         {
-            this.doctorId = doctorId;
-            this.description = description;
-            this.room = room;
-            this.isConfirmed = isConfirmed;
+            DoctorId = doctorId;
+            Description = description;
+            Room = room;
+            IsConfirmed = isConfirmed;
         }
 
         public Medicine(int id, string name, int quantity, string description, List<ModelRoom> room, int doctorId, bool isConfirmed, int prescriptionId) : base(id, name, quantity, room)
         {
-            this.doctorId = doctorId;
-            this.description = description;
-            this.room = room;
-            this.isConfirmed = isConfirmed;
+            DoctorId = doctorId;
+            Description = description;
+            Room = room;
+            IsConfirmed = isConfirmed;
             PrescriptionId = prescriptionId;
         }
 
         public Medicine(int id, string name, int quantity, string description, List<ModelRoom> room, bool isConfirmed, Prescription prescription) : base(id, name, quantity, room)
         {
-            this.description = description;
-            this.room = room;
-            this.isConfirmed = isConfirmed;
+            Description = description;
+            Room = room;
+            IsConfirmed = isConfirmed;
             Prescription = prescription;
-            PrescriptionId = prescription.id;
+            PrescriptionId = prescription.Id;
         }
 
-        public Medicine() : base()
-        {
-        }
+        public Medicine() : base() { }
     }
 }
