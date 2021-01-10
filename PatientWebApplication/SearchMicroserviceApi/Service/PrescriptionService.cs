@@ -67,11 +67,8 @@ namespace SearchMicroserviceApi.Service
         {
             for (int i = 0; i < dto.RestRoles.Length; i++)
             {
-                List<Prescription> othersPrescriptions = SearchForOtherParametersValues(dto.RestRoles[i], dto.Rest[i], prescriptions);
-
-                firstPrescriptions = SearchForLogicOperators(dto.LogicOperators[i], othersPrescriptions, firstPrescriptions);
+                firstPrescriptions = SearchForLogicOperators(dto.LogicOperators[i], SearchForOtherParametersValues(dto.RestRoles[i], dto.Rest[i], prescriptions), firstPrescriptions);
             }
-
             return firstPrescriptions;
         }
 
@@ -143,7 +140,7 @@ namespace SearchMicroserviceApi.Service
         {
             if (!UtilityMethods.CheckIfStringIsEmpty(searchField))
             {
-                prescriptions = prescriptions.FindAll(prescription => prescription.isUsed.ToString().Contains(searchField));
+                prescriptions = prescriptions.FindAll(prescription => prescription.IsUsed.ToString().Contains(searchField));
             }
 
             return prescriptions;
@@ -159,7 +156,7 @@ namespace SearchMicroserviceApi.Service
         {
             if (!UtilityMethods.CheckIfStringIsEmpty(searchField))
             {
-                prescriptions = prescriptions.FindAll(prescription => prescription.comment.Contains(searchField));
+                prescriptions = prescriptions.FindAll(prescription => prescription.Comment.Contains(searchField));
             }
 
             return prescriptions;
@@ -175,7 +172,7 @@ namespace SearchMicroserviceApi.Service
         {
             if (!UtilityMethods.CheckIfStringIsEmpty(searchField))
             {
-                prescriptions = prescriptions.Where(prescription => prescription.Medicines.Any(medicine => medicine.name.Contains(searchField))).ToList();
+                prescriptions = prescriptions.Where(prescription => prescription.Medicines.Any(medicine => medicine.Name.Contains(searchField))).ToList();
             }
 
             return prescriptions;
@@ -207,7 +204,7 @@ namespace SearchMicroserviceApi.Service
         {
             if (!UtilityMethods.CheckIfStringIsEmpty(prescriptionSearchDto.IsUsed))
             {
-                prescriptions = prescriptions.FindAll(prescription => prescription.isUsed.ToString().Contains(prescriptionSearchDto.IsUsed));
+                prescriptions = prescriptions.FindAll(prescription => prescription.IsUsed.ToString().Contains(prescriptionSearchDto.IsUsed));
             }
 
             return prescriptions;
@@ -223,7 +220,7 @@ namespace SearchMicroserviceApi.Service
         {
             if (!UtilityMethods.CheckIfStringIsEmpty(prescriptionSearchDto.Comment))
             {
-                prescriptions = prescriptions.FindAll(prescription => prescription.comment.Contains(prescriptionSearchDto.Comment));
+                prescriptions = prescriptions.FindAll(prescription => prescription.Comment.Contains(prescriptionSearchDto.Comment));
             }
 
             return prescriptions;
@@ -239,7 +236,7 @@ namespace SearchMicroserviceApi.Service
         {
             if (!UtilityMethods.CheckIfStringIsEmpty(prescriptionSearchDto.Medicines))
             {
-                prescriptions = prescriptions.Where(prescription => prescription.Medicines.Any(medicine => medicine.name.Contains(prescriptionSearchDto.Medicines))).ToList();
+                prescriptions = prescriptions.Where(prescription => prescription.Medicines.Any(medicine => medicine.Name.Contains(prescriptionSearchDto.Medicines))).ToList();
             }
 
             return prescriptions;

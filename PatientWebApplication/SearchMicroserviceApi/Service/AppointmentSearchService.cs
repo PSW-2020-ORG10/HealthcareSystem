@@ -75,9 +75,7 @@ namespace SearchMicroserviceApi.Service
         /// <returns> List of filtered patient's appointments. </returns>
         private List<AppointmentDto> GetAppointmentsBetweenDates(string start, string end, List<AppointmentDto> appointments)
         {
-            DateTime startDate = UtilityMethods.ParseDateInCorrectFormat(start);
-            DateTime endDate = UtilityMethods.ParseDateInCorrectFormat(end);
-            return appointments.FindAll(appointment => startDate <= UtilityMethods.ParseDateInCorrectFormat(appointment.Date) && UtilityMethods.ParseDateInCorrectFormat(appointment.Date) <= endDate);
+            return appointments.FindAll(appointment => UtilityMethods.ParseDateInCorrectFormat(start) <= UtilityMethods.ParseDateInCorrectFormat(appointment.Date) && UtilityMethods.ParseDateInCorrectFormat(appointment.Date) <= UtilityMethods.ParseDateInCorrectFormat(end));
         }
 
         /// <summary> This method is getting list of filtered <c>DoctorAppointment</c> of one patient that are before given date. </summary>
@@ -88,8 +86,7 @@ namespace SearchMicroserviceApi.Service
         /// <returns> List of filtered patient's appointments. </returns>
         private List<AppointmentDto> GetAppointmentsBeforeDate(string date, List<AppointmentDto> appointments)
         {
-            DateTime endDate = UtilityMethods.ParseDateInCorrectFormat(date);
-            return appointments.FindAll(appointment => UtilityMethods.ParseDateInCorrectFormat(appointment.Date) <= endDate);
+            return appointments.FindAll(appointment => UtilityMethods.ParseDateInCorrectFormat(appointment.Date) <= UtilityMethods.ParseDateInCorrectFormat(date));
         }
 
         /// <summary> This method is getting list of filtered <c>DoctorAppointment</c> of one patient that are after given date. </summary>
@@ -100,8 +97,7 @@ namespace SearchMicroserviceApi.Service
         /// <returns> List of filtered patient's appointments. </returns>
         private List<AppointmentDto> GetAppointmentsAfterDate(string date, List<AppointmentDto> appointments)
         {
-            DateTime startDate = UtilityMethods.ParseDateInCorrectFormat(date);
-            return appointments.FindAll(appointment => startDate <= UtilityMethods.ParseDateInCorrectFormat(appointment.Date));
+            return appointments.FindAll(appointment => UtilityMethods.ParseDateInCorrectFormat(date) <= UtilityMethods.ParseDateInCorrectFormat(appointment.Date));
         }
 
         /// <summary> This method is getting list of filtered <c>DoctorAppointment</c> of one patient by appointment type. </summary>
@@ -112,11 +108,7 @@ namespace SearchMicroserviceApi.Service
         /// <returns> List of filtered patient's appointments. </returns>
         private List<AppointmentDto> SearchForAppointmentType(List<AppointmentDto> appointments, AppointmentReportSearchDto appointmentSearchDto)
         {
-            if (UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.AppointmentType) || CheckIfAppointment(appointmentSearchDto.AppointmentType))
-            {
-                return appointments;
-            }
-            return new List<AppointmentDto>();
+            return (UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.AppointmentType) || CheckIfAppointment(appointmentSearchDto.AppointmentType)) ? appointments : new List<AppointmentDto>();
         }
 
         /// <summary> This method is checks if given string equals appointment. </summary>

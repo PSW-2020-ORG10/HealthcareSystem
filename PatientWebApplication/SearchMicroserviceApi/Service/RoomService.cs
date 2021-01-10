@@ -27,11 +27,9 @@ namespace SearchMicroserviceApi.Service
 
         public bool isNameValid(string name)
         {
-            List<Room> listOfRooms = GetAll();
-
-            foreach (Room room in listOfRooms)
+            foreach (Room room in GetAll())
             {
-                if (room.typeOfRoom.ToLower().Equals(name.ToLower())) return false;
+                if (room.TypeOfRoom.ToLower().Equals(name.ToLower())) return false;
             }
             return true;
         }
@@ -52,17 +50,15 @@ namespace SearchMicroserviceApi.Service
 
             removeRoomFromAllEquipments(room);
 
-            /*removeRoomFromAllSchedules(room);*/
-
-            roomRepository.Delete(room.id);
+            roomRepository.Delete(room.Id);
         }
 
 
         private bool isMedicineInRoom(Medicine medicine, Room room)
         {
-            foreach (ModelRoom modelRoom in medicine.room)
+            foreach (ModelRoom modelRoom in medicine.Room)
             {
-                if (modelRoom.Data.Equals(room.typeOfRoom))
+                if (modelRoom.Data.Equals(room.TypeOfRoom))
                 {
                     return true;
                 }
@@ -74,26 +70,20 @@ namespace SearchMicroserviceApi.Service
 
         private void removeRoomFromMedicine(Medicine medicine, Room room)
         {
-            if (isMedicineInRoom(medicine, room))
+            foreach (ModelRoom modelRoom in medicine.Room)
             {
-                foreach (ModelRoom modelRoom in medicine.room)
+                if (modelRoom.Data.Equals(room.TypeOfRoom) && isMedicineInRoom(medicine, room))
                 {
-                    if (modelRoom.Data.Equals(room.typeOfRoom))
-                    {
-                        medicine.room.Remove(modelRoom);
-                        medicineRepository.Update(medicine);
-                    }
+                    medicine.Room.Remove(modelRoom);
+                    medicineRepository.Update(medicine);
                 }
             }
         }
 
-
         public void removeRoomFromAllMedicines(Room room)
         {
             List<Medicine> listOfMedicines = new List<Medicine>();
-            listOfMedicines = medicineRepository.GetAll();
-
-            foreach (Medicine medicine in listOfMedicines)
+            foreach (Medicine medicine in medicineRepository.GetAll())
             {
                 removeRoomFromMedicine(medicine, room);
             }
@@ -103,9 +93,9 @@ namespace SearchMicroserviceApi.Service
 
         private bool isEquipmentInRoom(Equipment equipment, Room room)
         {
-            foreach (ModelRoom modelRoom in equipment.room)
+            foreach (ModelRoom modelRoom in equipment.Room)
             {
-                if (modelRoom.Data.Equals(room.typeOfRoom))
+                if (modelRoom.Data.Equals(room.TypeOfRoom))
                 {
                     return true;
                 }
@@ -116,26 +106,19 @@ namespace SearchMicroserviceApi.Service
 
         private void removeRoomFromEquipment(Equipment equipment, Room room)
         {
-            if (isEquipmentInRoom(equipment, room))
+            foreach (ModelRoom modelRoom in equipment.Room)
             {
-                foreach (ModelRoom modelRoom in equipment.room)
+                if (modelRoom.Data.Equals(room.TypeOfRoom) && isEquipmentInRoom(equipment, room))
                 {
-                    if (modelRoom.Data.Equals(room.typeOfRoom))
-                    {
-                        equipment.room.Remove(modelRoom);
-                        equipmentRepository.Update(equipment);
-                    }
+                    equipment.Room.Remove(modelRoom);
+                    equipmentRepository.Update(equipment);
                 }
-
             }
         }
 
         public void removeRoomFromAllEquipments(Room room)
         {
-            List<Equipment> listOfEquipments = new List<Equipment>();
-            listOfEquipments = equipmentRepository.GetAll();
-
-            foreach (Equipment equipment in listOfEquipments)
+            foreach (Equipment equipment in equipmentRepository.GetAll())
             {
                 removeRoomFromEquipment(equipment, room);
             }

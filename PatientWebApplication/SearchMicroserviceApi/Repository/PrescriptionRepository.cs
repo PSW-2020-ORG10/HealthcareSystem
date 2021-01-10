@@ -38,7 +38,7 @@ namespace SearchMicroserviceApi.Repository
         /// <returns> List of all patient prescription from database.</returns>
         public List<Prescription> GetPrescriptionsForPatient(int idPatient)
         {
-            return dbContext.Prescriptions.ToList().FindAll(prescription => prescription.patientsid == idPatient);
+            return dbContext.Prescriptions.ToList().FindAll(prescription => prescription.Patientsid == idPatient);
         }
     }
 }

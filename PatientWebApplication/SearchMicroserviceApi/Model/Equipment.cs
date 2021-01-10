@@ -10,31 +10,29 @@ namespace SearchMicroserviceApi.Model
 {
     public class Equipment : Entity
     {
-        public virtual List<ModelRoom> room { get; set; }
-        public string name { get; set; }
-        public int quantity { get; set; }
+        public virtual List<ModelRoom> Room { get; set; }
+        public string Name { get; set; }
+        public int Quantity { get; set; }
         public Equipment()
         {
         }
         public Equipment(int id, string name, int quantity) : base(id)
         {
 
-            this.name = name;
-            this.quantity = quantity;
+            Name = name;
+            Quantity = quantity;
         }
         public Equipment(int id, string name, int quantity, List<ModelRoom> room) : base(id)
         {
 
-            this.name = name;
-            this.quantity = quantity;
-            this.room = room;
+            Name = name;
+            Quantity = quantity;
+            Room = room;
         }
         public Equipment(string name, int quantity) : base()
         {
-            this.name = name;
-            this.quantity = quantity;
+            Name = name;
+            Quantity = quantity;
         }
-
-
     }
 }

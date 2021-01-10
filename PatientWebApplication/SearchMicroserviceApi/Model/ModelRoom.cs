@@ -16,14 +16,8 @@
             EquipmentId = equipmentId;
         }
 
-        public ModelRoom(string data) : base(data)
-        {
+        public ModelRoom(string data) : base(data) { }
 
-        }
-
-        public ModelRoom() : base()
-        {
-
-        }
+        public ModelRoom() : base() { }
     }
 }

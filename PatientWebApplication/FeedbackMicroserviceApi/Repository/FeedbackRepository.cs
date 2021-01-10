@@ -50,7 +50,7 @@ namespace FeedbackMicroserviceApi.Repository
         /// <returns> Found feedback if search was successful; otherwise, default Feedback object. </returns>
         public Feedback Find(int id)
         {
-            return dbContext.Feedbacks.SingleOrDefault(feedback => feedback.id == id);
+            return dbContext.Feedbacks.SingleOrDefault(feedback => feedback.Id == id);
         }
 
         /// <summary> This method changes property <c>IsPublished</c> of given <paramref name="feedback"/> and saves it into database. </summary>
