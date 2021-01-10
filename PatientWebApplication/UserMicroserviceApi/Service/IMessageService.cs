@@ -7,7 +7,6 @@ namespace UserMicroserviceApi.Service
     interface IMessageService
     {
         Message Create(MessageDto dto);
-
         List<Message> GetAll();
     }
 }

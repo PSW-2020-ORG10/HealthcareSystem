@@ -8,26 +8,22 @@ namespace UserMicroserviceApi.Model
 {
     public class Shift : Entity
     {
-        public string startTime { get; set; }
-        public string endTime { get; set; }
-        public Shift()
-        {
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
 
-        }
-        public Shift(string start, string end)
-        {
-            startTime = start;
-            endTime = end;
-        }
+        public Shift() {}
 
-        public Shift(int id, string start, string end) : base(id)
+        public Shift(string startTime, string endTime)
         {
-            startTime = start;
-            endTime = end;
+            StartTime = startTime;
+            EndTime = endTime;
         }
 
-
-
+        public Shift(int id, string startTime, string endTime) : base(id)
+        {
+            StartTime = startTime;
+            EndTime = endTime;
+        }
 
     }
 }

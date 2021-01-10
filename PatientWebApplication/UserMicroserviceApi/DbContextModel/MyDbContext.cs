@@ -27,11 +27,9 @@ namespace UserMicroserviceApi.DbContextModel
         {
             List<ModelNotification> patientNotifications = new List<ModelNotification>();
             patientNotifications.Add(new ModelNotification(3, "3. string", 1));
+
             modelBuilder.Entity<ModelNotification>().HasData(
-
                 patientNotifications
-
-
            );
 
             List<DoctorNotification> doctorNotifications = new List<DoctorNotification>();
@@ -52,12 +50,12 @@ namespace UserMicroserviceApi.DbContextModel
            );
 
             PatientUser patient1 = new PatientUser(1, "Pera", "Peric", "Male", "1234", "02/02/1990", "123", "212313", "Alergija", "Grad", false, "patient1@gmail.com", "12345", false, "Grad2", "Roditelj", "download.jfif");
-            PatientUser patient2 = new PatientUser(2, "Marko", "Markovic", "Male", "123456789", "21/07/1989", "555333", "2112313", "Alergija", "Grad", false, "marko_markovic@gmail.com", "12345", false, "Grad2", "Roditelj", "images.jfif");
+            PatientUser patient2 = new PatientUser(2, "Marko", "Markovic", "Male", "123456789", "21/07/1989", "555333", "2112313", "Alergija", "Grad", false, "marko_markovic@gmail.com", "12345", false, "Grad2", "Roditelj", "man.jfif");
             PatientUser patient3 = new PatientUser(3, "Stefan", "Lelic", "Male", "1234", "2/2/2020", "123", "212313", "Alergija", "Grad", false, "patient2@gmail.com", "12345", false, "Grad2", "Roditelj", "download.jfif");
-            PatientUser patient4 = new PatientUser(4, "Marko", "Lazarevic", "Female", "1234", "2/2/2020", "123", "2112313", "Alergija", "Grad", false, "patient2@gmail.com", "12345", false, "Grad2", "Roditelj", "download.jfif");
-            patient1.isVerified = true;
-            patient2.isVerified = true;
-            patient3.isVerified = true;
+            PatientUser patient4 = new PatientUser(4, "Marko", "Lazarevic", "Female", "1234", "2/2/2020", "123", "2112313", "Alergija", "Grad", false, "patient2@gmail.com", "12345", false, "Grad2", "Roditelj", "man.jfif");
+            patient1.IsVerified = true;
+            patient2.IsVerified = true;
+            patient3.IsVerified = true;
 
             modelBuilder.Entity<PatientUser>().HasData(
                 patient1,

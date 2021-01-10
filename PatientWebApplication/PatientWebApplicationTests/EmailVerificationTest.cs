@@ -18,7 +18,7 @@ namespace PatientWebApplicationTests
 
             PatientUser patient1 = patientService.Create(new PatientDto("Pera2", "Peric", "Male", "1234", "11/11/2000", "1231412", "21312312", "Alergija", "Grad", "email@gmail.com", "pass", false, "Grad2", "Roditelj", "", ""));
 
-            mockVerify.Verify(v => v.SendVerificationMail(new MailAddress(patient1.email), patient1.id), Times.Once);
+            mockVerify.Verify(v => v.SendVerificationMail(new MailAddress(patient1.Email), patient1.Id), Times.Once);
         }
 
         [Fact]
@@ -29,7 +29,7 @@ namespace PatientWebApplicationTests
 
             PatientUser patient = patientService.Validate(1);
 
-            Assert.True(patient.isVerified);
+            Assert.True(patient.IsVerified);
         }
 
         private static IPatientsRepository CreateStubRepository()

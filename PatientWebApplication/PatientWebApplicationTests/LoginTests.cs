@@ -61,10 +61,10 @@ namespace PatientWebApplicationTests
             var patients = new List<PatientUser>();
 
             PatientUser patient1 = new PatientUser(1, "Marko", "Markovic", "Male", "1234", "02/02/1980", "123", "2112313", "Alergija", "Sutjetska 8, Novi Sad", false, "markomarkovic@gmail.com", "password", false, "Novi Sad", "Roditelj", null);
-            patient1.isVerified = true;
+            patient1.IsVerified = true;
             PatientUser patient2 = new PatientUser(2, "Kristina", "Petrovic", "Female", "1234", "11/11/1972", "123", "2112313", "Alergija", "Sutjetska 8, Novi Sad", false, "kristinapetrovic@gmail.com", "password", false, "Novi Sad", "Roditelj", null);
             PatientUser patient3 = new PatientUser(3, "Petar", "Stanic", "Male", "1234", "11/11/1972", "123", "2112313", "Alergija", "Sutjetska 8, Novi Sad", false, "petarstanic@gmail.com", "password", false, "Novi Sad", "Roditelj", null);
-            patient3.isBlocked = true;
+            patient3.IsBlocked = true;
 
             patients.Add(patient1);
             patients.Add(patient2);
@@ -76,7 +76,7 @@ namespace PatientWebApplicationTests
             {
                 
             }
-            ).Returns(patients.SingleOrDefault(app => app.email.Equals(mail) && app.password.Equals(password) && app.isVerified == true && app.isBlocked == false));
+            ).Returns(patients.SingleOrDefault(app => app.Email.Equals(mail) && app.Password.Equals(password) && app.IsVerified == true && app.IsBlocked == false));
 
 
             return stubRepository.Object;
@@ -98,7 +98,7 @@ namespace PatientWebApplicationTests
             {
                
             }
-            ).Returns(admins.SingleOrDefault(app => app.email.Equals(mail)));
+            ).Returns(admins.SingleOrDefault(app => app.Email.Equals(mail)));
 
             return stubRepository.Object;
         }

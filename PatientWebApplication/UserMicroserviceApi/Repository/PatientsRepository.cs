@@ -28,7 +28,7 @@ namespace UserMicroserviceApi.Repository
 
         public PatientUser Validate(PatientUser patient)
         {
-            patient.isVerified = true;
+            patient.IsVerified = true;
             dbContext.SaveChanges();
             return patient;
         }
@@ -44,24 +44,24 @@ namespace UserMicroserviceApi.Repository
         /// <returns> Found patient if search was successful; otherwise, default PatientUser object.</returns>
         public PatientUser FindOne(int id)
         {
-            return dbContext.Patients.SingleOrDefault(patient => patient.id == id);
+            return dbContext.Patients.SingleOrDefault(patient => patient.Id == id);
         }
 
         public PatientUser BlockPatient(PatientUser patient)
         {
-            patient.isBlocked = true;
+            patient.IsBlocked = true;
             dbContext.SaveChanges();
             return patient;
         }
 
         public PatientUser GetByLoginInfo(UserModel login)
         {
-            return dbContext.Patients.SingleOrDefault(patient => patient.email.Equals(login.Email) && patient.password.Equals(login.Password) && patient.isBlocked == false && patient.isVerified == true);
+            return dbContext.Patients.SingleOrDefault(patient => patient.Email.Equals(login.Email) && patient.Password.Equals(login.Password) && patient.IsBlocked == false && patient.IsVerified == true);
         }
 
         public PatientUser GetByEmail(string email)
         {
-            return dbContext.Patients.SingleOrDefault(patient => patient.email.Equals(email));
+            return dbContext.Patients.SingleOrDefault(patient => patient.Email.Equals(email));
         }
     }
 

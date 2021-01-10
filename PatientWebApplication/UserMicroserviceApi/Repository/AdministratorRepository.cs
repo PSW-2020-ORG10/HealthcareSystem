@@ -46,12 +46,12 @@ namespace UserMicroserviceApi.Repository
 
         public Administrator GetByid(int id)
         {
-            return dbContext.Administrators.SingleOrDefault(admin => admin.id == id);
+            return dbContext.Administrators.SingleOrDefault(admin => admin.Id == id);
         }
 
         public Administrator GetByLoginInfo(UserModel login)
         {
-            return dbContext.Administrators.SingleOrDefault(admin => admin.email.Equals(login.Email) && admin.password.Equals(login.Password));
+            return dbContext.Administrators.SingleOrDefault(admin => admin.Email.Equals(login.Email) && admin.Password.Equals(login.Password));
         }
     }
 }

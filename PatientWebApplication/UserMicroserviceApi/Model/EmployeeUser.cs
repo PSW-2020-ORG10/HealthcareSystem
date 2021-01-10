@@ -2,34 +2,26 @@
 {
     public class EmployeeUser : User
     {
-        public double salary { get; set; }
+        public double Salary { get; set; }
+        public string City { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
 
-        public string city { get; set; }
-
-        public string email { get; set; }
-        public string password { get; set; }
         public EmployeeUser() : base() { }
-
 
         public EmployeeUser(int id, string name, string secondname, string ucin, string date, string phone, string email, string password, string city,
             double salary) : base(id, name, secondname, ucin, date, phone)
         {
-            this.email = email;
-            this.password = password;
-            this.city = city;
-
-            this.salary = salary;
+            Email = email;
+            Password = password;
+            City = city;
+            Salary = salary;
         }
 
-        public EmployeeUser(int id, string name, string secondname, string ucin, string date, string phone, string email, string pasword) : base(id, name, secondname, ucin, date, phone)
+        public EmployeeUser(int id, string name, string secondname, string ucin, string date, string phone, string email, string password) : base(id, name, secondname, ucin, date, phone)
         {
-            this.email = email;
-            password = pasword;
-
-
+            Email = email;
+            Password = password;
         }
-
-
-
     }
 }

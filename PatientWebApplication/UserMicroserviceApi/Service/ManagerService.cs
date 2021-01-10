@@ -14,9 +14,7 @@ namespace UserMicroserviceApi.Service
     public class ManagerService : AbstractUserService<ManagerUser>
     {
         public ManagerRepository managerRepository;
-
-
-        string path = bingPathToAppDir(@"JsonFiles\manager.json");
+        string path = BingPathToAppDir(@"JsonFiles\manager.json");
 
         public ManagerService()
         {
@@ -28,9 +26,9 @@ namespace UserMicroserviceApi.Service
             return managerRepository.GetAll();
         }
 
-        private bool createManagerIfDateIsValid(ManagerUser manager)
+        private bool CreateManagerIfDateIsValid(ManagerUser manager)
         {
-            if (isDataValid(manager.email, manager.uniqueCitizensidentityNumber, manager) && isCityValid(manager.city))
+            if (IsDataValid(manager.Email, manager.UniqueCitizensidentityNumber, manager) && IsCityValid(manager.City))
             {
                 managerRepository.New(manager);
                 return true;
@@ -41,12 +39,12 @@ namespace UserMicroserviceApi.Service
 
         public override bool New(ManagerUser manager)
         {
-            return createManagerIfDateIsValid(manager);
+            return CreateManagerIfDateIsValid(manager);
         }
 
-        private bool updateManagerIfDataIsValid(ManagerUser manager)
+        private bool UpdateManagerIfDataIsValid(ManagerUser manager)
         {
-            if (isDataValid(manager.email, manager.uniqueCitizensidentityNumber, manager) && isCityValid(manager.city))
+            if (IsDataValid(manager.Email, manager.UniqueCitizensidentityNumber, manager) && IsCityValid(manager.City))
             {
                 managerRepository.Update(manager);
                 return true;
@@ -56,7 +54,7 @@ namespace UserMicroserviceApi.Service
 
         public override bool Update(ManagerUser manager)
         {
-            return updateManagerIfDataIsValid(manager);
+            return UpdateManagerIfDataIsValid(manager);
         }
 
         public override ManagerUser GetByid(int id)
@@ -66,7 +64,7 @@ namespace UserMicroserviceApi.Service
 
         public override void Remove(ManagerUser manager)
         {
-            managerRepository.Delete(manager.id);
+            managerRepository.Delete(manager.Id);
         }
     }
 }

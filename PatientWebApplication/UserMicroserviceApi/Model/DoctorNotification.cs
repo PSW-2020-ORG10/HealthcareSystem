@@ -8,7 +8,7 @@
         public DoctorNotification(int id, string data, DoctorUser doctor) : base(id, data)
         {
             Data = data;
-            DoctorUserId = doctor.id;
+            DoctorUserId = doctor.Id;
             DoctorUser = doctor;
         }
 
@@ -23,14 +23,8 @@
             Data = data;
         }
 
-        public DoctorNotification(string data) : base(data)
-        {
+        public DoctorNotification(string data) : base(data) {}
 
-        }
-
-        public DoctorNotification() : base()
-        {
-
-        }
+        public DoctorNotification() : base() {}
     }
 }

@@ -41,17 +41,29 @@ namespace UserMicroserviceApi.Service
 
         public UserModel AuthenticateUser(UserModel login)
         {
+            var admin = FindAdmin(login);
+            return admin == null ? FindPatient(login) : admin;
+        }
+
+        private UserModel FindAdmin(UserModel login)
+        {
             var admin = _administratorRepository.GetByLoginInfo(login);
-            if (admin != null) {
+            if (admin != null)
+            {
                 login.Role = "admin";
-                login.Id = admin.id;
+                login.Id = admin.Id;
                 return login;
             }
+            return null;
+        }
+
+        private UserModel FindPatient(UserModel login)
+        {
             var patient = _patientRepository.GetByLoginInfo(login);
-            if(patient != null)
+            if (patient != null)
             {
                 login.Role = "patient";
-                login.Id = patient.id;
+                login.Id = patient.Id;
                 return login;
             }
             return null;

@@ -50,7 +50,7 @@ namespace UserMicroserviceApi.Repository
 
         public Schedule GetByid(int id)
         {
-            return dbContext.Schedules.SingleOrDefault(schedule => schedule.id == id);
+            return dbContext.Schedules.SingleOrDefault(schedule => schedule.Id == id);
         }
 
         public List<Schedule> GetScheduleForDoctor(string id)

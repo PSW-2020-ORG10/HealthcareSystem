@@ -11,7 +11,7 @@ namespace UserMicroserviceApi.Adapters
     {
         public static MicroserviceShiftDto ShiftToMicroserviceShiftDto(Shift shift)
         {
-            return new MicroserviceShiftDto(shift.id, shift.startTime, shift.endTime);
+            return new MicroserviceShiftDto(shift.Id, shift.StartTime, shift.EndTime);
         }
 
         public static List<MicroserviceShiftDto> ShiftListToMicroserviceShiftDtoList(List<Shift> shifts)

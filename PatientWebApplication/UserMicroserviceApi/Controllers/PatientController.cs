@@ -49,8 +49,7 @@ namespace UserMicroserviceApi.Controllers
         [AllowAnonymous]
         public IActionResult SaveImg([FromForm] FileModel file)
         {
-            string path = _env.WebRootPath;
-            string fileName = PatientService.ImageToSave(path, file);
+            string fileName = PatientService.ImageToSave(_env.WebRootPath, file);
             if (fileName == null)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
@@ -65,13 +64,12 @@ namespace UserMicroserviceApi.Controllers
         [Authorize(Roles = "patient")]
         public IActionResult GetImage(string fileName)
         {
-            string path = _env.WebRootPath;
             if (fileName == null)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
-            return Ok(File(PatientService.GetImage(path, fileName), "image/jpeg"));
+            return Ok(File(PatientService.GetImage(_env.WebRootPath, fileName), "image/jpeg"));
         }
 
         /// <summary> This method is calling <c>PatientService</c> to validate patients account. </summary>

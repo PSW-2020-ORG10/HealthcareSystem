@@ -14,7 +14,6 @@ namespace PatientWebAppSeleniumTests.Pages
         public const string URI = "http://localhost:3000/malicious-patient";
         private IWebElement Table => driver.FindElement(By.Id("maliciousPatientTable"));
         private ReadOnlyCollection<IWebElement> Rows => driver.FindElements(By.XPath("//table[@id='maliciousPatientTable']/tbody/tr"));
-        private IWebElement elementOldPage => driver.FindElements(By.Name("blockButton"))[1];
         private IWebElement SubmitButtonElement => driver.FindElement(By.XPath("(//table[@id='maliciousPatientTable']/tbody/tr)[last()]/td[4]/button"));
         public string Title => driver.Title;
 

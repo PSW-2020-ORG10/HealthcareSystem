@@ -11,7 +11,7 @@ namespace UserMicroserviceApi.Adapters
     {
         public static MicroservicePatientDto PatientToMicroservicePatinentDto(PatientUser patient)
         {
-            return new MicroservicePatientDto(patient.id, patient.firstName, patient.secondName);
+            return new MicroservicePatientDto(patient.Id, patient.FirstName, patient.SecondName);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace UserMicroserviceApi.Controllers
     [ApiController]
     public class MessageController : ControllerBase
     {
-        private MessageService messageService { get; set; }
+        private MessageService messageService;
         private MyDbContext dbContext;
 
         public MessageController(MyDbContext dbContext)

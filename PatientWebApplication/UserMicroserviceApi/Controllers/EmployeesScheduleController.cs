@@ -29,7 +29,7 @@ namespace UserMicroserviceApi.Controllers
         [AllowAnonymous]
         public IActionResult GetShiftForDoctorForSpecificDay(DoctorShiftSearchDto dto)
         {
-            return Ok(MicroserviceShiftAdapter.ShiftToMicroserviceShiftDto(employeesScheduleService.getShiftForDoctorForSpecificDay(dto.Date, doctorService.GetByid(dto.DoctorId))));
+            return Ok(MicroserviceShiftAdapter.ShiftToMicroserviceShiftDto(employeesScheduleService.GetShiftForDoctorForSpecificDay(dto.Date, doctorService.GetByid(dto.DoctorId))));
         }
     }
 }

@@ -8,7 +8,7 @@
         public ModelNotification(int id, string data, PatientUser patient) : base(id, data)
         {
             Data = data;
-            PatientUserId = patient.id;
+            PatientUserId = patient.Id;
             PatientUser = patient;
         }
 
@@ -23,14 +23,8 @@
             Data = data;
         }
 
-        public ModelNotification(string data) : base(data)
-        {
+        public ModelNotification(string data) : base(data) {}
 
-        }
-
-        public ModelNotification() : base()
-        {
-
-        }
+        public ModelNotification() : base() {}
     }
 }
