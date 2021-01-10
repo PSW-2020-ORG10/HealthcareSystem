@@ -11,16 +11,31 @@ namespace SearchMicroserviceApi.Utility
 {
     public class HttpRequests
     {
-        private static readonly string usersServiceUrl = Startup.Configuration["UserMicroServiceApi"];
-        private static readonly string appointmentServiceUrl = Startup.Configuration["AppointmentMicroServiceApi"];
-        if(Startup.IsNotProduction){
-        usersServiceUrl = "http://localhost:53236/";
-        appointmentServiceUrl = "http://localhost:53212/";
-        }
-         
+      private static readonly string usersServiceUrl = GetUrlUser();
+      private static readonly string appointmentServiceUrl = GetUrlAppointment();
+
          private static readonly HttpClient client = new HttpClient();
 
-        public static async Task<MicroserviceDoctorDto> GetDoctorByIdAsync(int id)
+         public static string GetUrlUser()
+         {
+            if (Startup.IsNotProduction)
+            {
+               return "http://localhost:53236/";
+            }
+            return Startup.Configuration["UserMicroServiceApi"];
+         }
+
+         public static string GetUrlAppointment()
+         {
+            if (Startup.IsNotProduction)
+            {
+            return "http://localhost:53212/";
+            }
+            return Startup.Configuration["AppointmentMicroServiceApi"];
+         }
+
+
+      public static async Task<MicroserviceDoctorDto> GetDoctorByIdAsync(int id)
         {
             var responseString = await client.GetAsync($"{usersServiceUrl}api/doctor/" + id);
             MicroserviceDoctorDto doc = await responseString.Content.ReadAsAsync<MicroserviceDoctorDto>();
