@@ -32,7 +32,7 @@ namespace SearchMicroserviceApi.Service
             medicineRepository.Update(medicine);
         }
 
-        private void deleteIfMedicinesAreEqual(Medicine firstMedicine, Medicine secondMedicine)
+        private void DeleteIfMedicinesAreEqual(Medicine firstMedicine, Medicine secondMedicine)
         {
             if (firstMedicine.Id == secondMedicine.Id)
             {
@@ -45,11 +45,11 @@ namespace SearchMicroserviceApi.Service
         {
             foreach (Medicine medicineObject in medicineRepository.GetAll())
             {
-                deleteIfMedicinesAreEqual(medicineObject, medicine);
+                DeleteIfMedicinesAreEqual(medicineObject, medicine);
             }
-            removeMedicineFromAllRoom(medicine);
+            RemoveMedicineFromAllRoom(medicine);
         }
-        private void removeMedicineFromSpecificRoom(Room room, Medicine medicine, RoomService roomService)
+        private void RemoveMedicineFromSpecificRoom(Room room, Medicine medicine, RoomService roomService)
         {
             foreach (ModelMedicine modelMedicine in room.Medicine)
             {
@@ -61,26 +61,26 @@ namespace SearchMicroserviceApi.Service
             }
 
         }
-        public void removeMedicineFromAllRoom(Medicine medicine)
+        public void RemoveMedicineFromAllRoom(Medicine medicine)
         {
             RoomService roomService = new RoomService();
             foreach (Room room in roomService.GetAll())
             {
-                removeMedicineFromSpecificRoom(room, medicine, roomService);
+                RemoveMedicineFromSpecificRoom(room, medicine, roomService);
             }
 
         }
 
-        private bool isNamesOfMedicineEqual(Medicine medicine, string nameOfSecondMedicine)
+        private bool IsNamesOfMedicineEqual(Medicine medicine, string nameOfSecondMedicine)
         {
             return (medicine.Name.ToLower().Equals(nameOfSecondMedicine.ToLower())) ? true : false;
         }
 
-        public bool isNameValid(string name)
+        public bool IsNameValid(string name)
         {
             foreach (Medicine medicine in GetAll())
             {
-                if (isNamesOfMedicineEqual(medicine, name))
+                if (IsNamesOfMedicineEqual(medicine, name))
                 {
                     return false;
                 }

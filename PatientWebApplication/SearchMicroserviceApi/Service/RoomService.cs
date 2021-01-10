@@ -25,7 +25,7 @@ namespace SearchMicroserviceApi.Service
         }
 
 
-        public bool isNameValid(string name)
+        public bool IsNameValid(string name)
         {
             foreach (Room room in GetAll())
             {
@@ -46,15 +46,15 @@ namespace SearchMicroserviceApi.Service
 
         public void Remove(Room room)
         {
-            removeRoomFromAllMedicines(room);
+            RemoveRoomFromAllMedicines(room);
 
-            removeRoomFromAllEquipments(room);
+            RemoveRoomFromAllEquipments(room);
 
             roomRepository.Delete(room.Id);
         }
 
 
-        private bool isMedicineInRoom(Medicine medicine, Room room)
+        private bool IsMedicineInRoom(Medicine medicine, Room room)
         {
             foreach (ModelRoom modelRoom in medicine.Room)
             {
@@ -68,11 +68,11 @@ namespace SearchMicroserviceApi.Service
 
         }
 
-        private void removeRoomFromMedicine(Medicine medicine, Room room)
+        private void RemoveRoomFromMedicine(Medicine medicine, Room room)
         {
             foreach (ModelRoom modelRoom in medicine.Room)
             {
-                if (modelRoom.Data.Equals(room.TypeOfRoom) && isMedicineInRoom(medicine, room))
+                if (modelRoom.Data.Equals(room.TypeOfRoom) && IsMedicineInRoom(medicine, room))
                 {
                     medicine.Room.Remove(modelRoom);
                     medicineRepository.Update(medicine);
@@ -80,18 +80,18 @@ namespace SearchMicroserviceApi.Service
             }
         }
 
-        public void removeRoomFromAllMedicines(Room room)
+        public void RemoveRoomFromAllMedicines(Room room)
         {
             List<Medicine> listOfMedicines = new List<Medicine>();
             foreach (Medicine medicine in medicineRepository.GetAll())
             {
-                removeRoomFromMedicine(medicine, room);
+                RemoveRoomFromMedicine(medicine, room);
             }
         }
 
 
 
-        private bool isEquipmentInRoom(Equipment equipment, Room room)
+        private bool IsEquipmentInRoom(Equipment equipment, Room room)
         {
             foreach (ModelRoom modelRoom in equipment.Room)
             {
@@ -104,11 +104,11 @@ namespace SearchMicroserviceApi.Service
             return false;
         }
 
-        private void removeRoomFromEquipment(Equipment equipment, Room room)
+        private void RemoveRoomFromEquipment(Equipment equipment, Room room)
         {
             foreach (ModelRoom modelRoom in equipment.Room)
             {
-                if (modelRoom.Data.Equals(room.TypeOfRoom) && isEquipmentInRoom(equipment, room))
+                if (modelRoom.Data.Equals(room.TypeOfRoom) && IsEquipmentInRoom(equipment, room))
                 {
                     equipment.Room.Remove(modelRoom);
                     equipmentRepository.Update(equipment);
@@ -116,11 +116,11 @@ namespace SearchMicroserviceApi.Service
             }
         }
 
-        public void removeRoomFromAllEquipments(Room room)
+        public void RemoveRoomFromAllEquipments(Room room)
         {
             foreach (Equipment equipment in equipmentRepository.GetAll())
             {
-                removeRoomFromEquipment(equipment, room);
+                RemoveRoomFromEquipment(equipment, room);
             }
         }
 
