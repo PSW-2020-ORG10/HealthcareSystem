@@ -11,6 +11,9 @@ namespace UserMicroserviceApi.Utility
     {
         private static readonly string appointmentServiceUrl = Startup.Configuration["AppointmentMicroServiceApi"];
         private static readonly HttpClient client = new HttpClient();
+        if(Startup.IsNotProduction){
+        appointmentServiceUrl = "http://localhost:53212/";
+        }
 
         public static async Task<List<MicroserviceAppointmentDto>> GetAllAppointments()
         {

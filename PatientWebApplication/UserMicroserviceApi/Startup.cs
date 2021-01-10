@@ -18,6 +18,7 @@ namespace UserMicroserviceApi
     {
         public static IConfiguration Configuration { get; private set; }
         public IWebHostEnvironment CurrentEnvironment { get; }
+        public Boolean IsNotProduction = true;
         public Startup(IConfiguration configuration, IWebHostEnvironment currentEnvironment)
         {
             Configuration = configuration;
@@ -31,7 +32,10 @@ namespace UserMicroserviceApi
             string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA") ?? "MYSQLHealtcareDB";
             string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "root";
             string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "root";
-
+            string isProduction = Environment.GetEnvironmentVariable("IS_PRODUCTION") ?? "false";
+            if(isProduction.equals("true")){
+                IsNotProduction = false;
+            }
             return $"server={server};port={port};database={database};user={user};password={password}";
         }
 

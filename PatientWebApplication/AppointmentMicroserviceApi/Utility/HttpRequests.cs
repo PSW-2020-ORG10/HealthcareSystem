@@ -12,6 +12,9 @@ namespace AppointmentMicroserviceApi.Utility
     public class HttpRequests
     {
         private static readonly string usersServiceUrl = Startup.Configuration["UserMicroServiceApi"];
+        if(Startup.IsNotProduction){
+            usersServiceUrl = "http://localhost:53236/";
+        }
         private static readonly HttpClient client = new HttpClient();
 
         public static async Task<MicroserviceDoctorDto> GetDoctorByIdAsync(int id)
