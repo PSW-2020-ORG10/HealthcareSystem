@@ -85,5 +85,11 @@ namespace TenderApi.Controllers
             return Ok(MedicineForTenderingService.GetAll());
         }
 
+        [HttpGet("medicinesIsa")]
+        public IActionResult GetMedicinesFromIsa()
+        {
+            return Ok(HttpRequests.FormMedicineFromIsaRequest().Data);
+        }
+
     }
 }

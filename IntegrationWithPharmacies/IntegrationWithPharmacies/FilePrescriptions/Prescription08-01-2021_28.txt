@@ -1,8 +1,0 @@
-api2
- Precription for medicine
-
-Patients name: Stefan
-Patients surname: Lelic
-Patients medical ID number: 212313
-Medication: Paracetamol Quantity: 5
-Usage: once a day

@@ -368,7 +368,7 @@
 
         },
         mounted() {
-            this.axios.get('api/sharingPrescription/medicinesIsa')
+            this.axios.get('http://localhost:54679/api/tender/medicinesIsa')
                 .then(res => {
                     this.medications = res.data;
                 })

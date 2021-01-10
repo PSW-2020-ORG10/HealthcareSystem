@@ -140,7 +140,7 @@
           
             specification: function () {
                 this.showSpecification = true;
-                this.axios.get('api/sharingPrescription/http/description/' + this.selected)
+                this.axios.get('http://localhost:54679/api/sharingPrescription/http/description/' + this.selected)
                     .then(res => {
                         this.medSpecification = res.data;
                     })
@@ -151,7 +151,7 @@
 
             specificationGrpc: function () {
                 this.showSpecification = true;
-                this.axios.get('api/sharingPrescription/grpc/description/' + this.selected)
+                this.axios.get('http://localhost:54679/api/sharingPrescription/grpc/description/' + this.selected)
                     .then(res => {
                         this.medSpecification = res.data;
                     })
@@ -163,7 +163,7 @@
             showAvailability: function () {
                 this.showTable = true;
           
-                this.axios.get('api/sharingPrescription/http/medicineAvailability/'+this.selected + "_"+this.quantity)
+                this.axios.get('http://localhost:54679/api/sharingPrescription/http/medicineAvailability/'+this.selected + "_"+this.quantity)
                     .then(res => {
                         this.pharmacies = res.data;
                         this.showTableAvailability = false;
@@ -186,7 +186,7 @@
                     quantity: this.quantity,
                     usage: this.explanation
                 };
-                this.axios.post('api/sharingPrescription/http', data)
+                this.axios.post('http://localhost:54679/api/sharingPrescription/http', data)
                     .then(res => {
                         this.sent = true;
                         this.notSent = false;
@@ -208,7 +208,7 @@
                     quantity: this.quantity,
                     usage: this.explanation
                 };
-                this.axios.post('api/sharingPrescription', data)
+                this.axios.post('http://localhost:54679/api/sharingPrescription', data)
                     .then(res => {
                         this.sent = true;
                         this.notSent = false;
@@ -224,20 +224,18 @@
 
         },
         mounted() {
-            this.axios.get('api/sharingPrescription/medicinesIsa')
+            this.axios.get('http://localhost:54679/api/sharingPrescription/medicinesIsa')
                 .then(res => {
                     this.medications = res.data;
                 })
                 .catch(res => {
                     console.log(res);
                 });
-            this.axios.get('api/sharingPrescription/patients')
+            this.axios.get('http://localhost:54679/api/sharingPrescription/patients')
                 .then(res => {
                     this.patients = res.data;
-                    alert("OK");
                 })
                 .catch(res => {
-                    alert("NOT OK");
                     console.log(res);
                 })
         }
@@ -245,8 +243,7 @@
 </script>
 
 <style scoped>
-    <style >
-
+  
     * {
         box-sizing: content-box;
     }

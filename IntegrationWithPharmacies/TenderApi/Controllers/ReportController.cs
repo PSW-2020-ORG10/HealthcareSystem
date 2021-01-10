@@ -1,21 +1,24 @@
-﻿using HealthClinic.CL.DbContextModel;
-using IntegrationWithPharmacies.FileProtocol;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
+using TenderApi.DbContextModel;
+using TenderApi.Model;
+using TenderApi.Service;
 
-namespace IntegrationWithPharmacies.Controllers
+namespace TenderApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class ReportController : ControllerBase
     {
-        private String Environment { get; set; }
         private ReportService ReportService { get; }
 
         public ReportController(MyDbContext context)
         {
             ReportService = new ReportService(context);
-            Environment = "Local";
         }
 
         [HttpPost]

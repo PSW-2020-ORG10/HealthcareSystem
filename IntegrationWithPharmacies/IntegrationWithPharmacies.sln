@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MedicineInformationApi", "M
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TenderApi", "TenderApi\TenderApi.csproj", "{E9681C5E-24DB-4376-842A-98DDA3052A61}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EPrescriptionApi", "EPrescriptionApi\EPrescriptionApi.csproj", "{B1162B54-7E1E-4B3D-9B2A-15D3E79A24EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{E9681C5E-24DB-4376-842A-98DDA3052A61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9681C5E-24DB-4376-842A-98DDA3052A61}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9681C5E-24DB-4376-842A-98DDA3052A61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1162B54-7E1E-4B3D-9B2A-15D3E79A24EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1162B54-7E1E-4B3D-9B2A-15D3E79A24EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1162B54-7E1E-4B3D-9B2A-15D3E79A24EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1162B54-7E1E-4B3D-9B2A-15D3E79A24EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

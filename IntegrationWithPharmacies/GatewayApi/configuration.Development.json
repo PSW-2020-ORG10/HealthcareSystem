@@ -179,6 +179,126 @@
       ],
       "UpstreamPathTemplate": "/api/tender/medicineForTender",
       "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/tender/medicinesIsa",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 50921
+        }
+      ],
+      "UpstreamPathTemplate": "/api/tender/medicinesIsa",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/report",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 50921
+        }
+      ],
+      "UpstreamPathTemplate": "/api/report",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/report/http",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 50921
+        }
+      ],
+      "UpstreamPathTemplate": "/api/report/http",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/sharingPrescription/http/description/{medicine}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 63327
+        }
+      ],
+      "UpstreamPathTemplate": "/api/sharingPrescription/http/description/{medicine}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/sharingPrescription/grpc/description/{medicine}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 63327
+        }
+      ],
+      "UpstreamPathTemplate": "/api/sharingPrescription/grpc/description/{medicine}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/sharingPrescription/http/medicineAvailability/{medicine}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 63327
+        }
+      ],
+      "UpstreamPathTemplate": "/api/sharingPrescription/http/medicineAvailability/{medicine}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/sharingPrescription/http",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 63327
+        }
+      ],
+      "UpstreamPathTemplate": "/api/sharingPrescription/http",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/sharingPrescription",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 63327
+        }
+      ],
+      "UpstreamPathTemplate": "/api/sharingPrescription",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/sharingPrescription/medicinesIsa",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 63327
+        }
+      ],
+      "UpstreamPathTemplate": "/api/sharingPrescription/medicinesIsa",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/sharingPrescription/patients",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 63327
+        }
+      ],
+      "UpstreamPathTemplate": "/api/sharingPrescription/patients",
+      "UpstreamHttpMethod": [ "GET" ]
     }
 
   ]

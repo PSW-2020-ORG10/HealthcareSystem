@@ -1,14 +1,15 @@
-﻿using HealthClinic.CL.DbContextModel;
-using Microsoft.Extensions.Logging.Abstractions;
-using System;
+﻿using System;
+using TenderApi.DbContextModel;
+using TenderApi.Model;
+using TenderApi.Utility;
 
-namespace IntegrationWithPharmacies.FileProtocol
+namespace TenderApi.Service
 {
     public class ReportService
-    {   
+    {
         private HelperFunctions HelperFunctions { get; }
         private SftpService SftpService { get; }
-        private HttpService HttpService { get; }
+        private HttpRequests HttpRequests { get; }
         private ReportText ReportText { get; }
         private SmptServerService SmptServerService { get; }
 
@@ -16,7 +17,7 @@ namespace IntegrationWithPharmacies.FileProtocol
         {
             SftpService = new SftpService();
             HelperFunctions = new HelperFunctions();
-            HttpService = new HttpService();
+            HttpRequests = new HttpRequests();
             ReportText = new ReportText(context);
             SmptServerService = new SmptServerService();
         }
@@ -25,9 +26,9 @@ namespace IntegrationWithPharmacies.FileProtocol
             try
             {
                 String report = CreateReport(date);
-                String []reportParts = report.Split('\\');
+                String[] reportParts = report.Split('\\');
                 SftpService.UploadFile(report, @"\pub\" + reportParts[1]);
-                SmptServerService.SendEMailNotification(report,"report");
+                SmptServerService.SendEMailNotification(report, "report");
 
                 return true;
             }
@@ -38,7 +39,7 @@ namespace IntegrationWithPharmacies.FileProtocol
             String report = CreateReport(date);
             try
             {
-                HttpService.UploadReportFile(report);
+                HttpRequests.UploadReportFile(report);
                 SmptServerService.SendEMailNotification(report, "report");
                 return true;
             }
@@ -51,6 +52,5 @@ namespace IntegrationWithPharmacies.FileProtocol
             System.IO.File.WriteAllText(complete, ReportText.GetRegistredPharmacies() + "!    Report about consumption of medicine\n\n\n" + ReportText.getReportText(date));
             return complete;
         }
-
     }
 }

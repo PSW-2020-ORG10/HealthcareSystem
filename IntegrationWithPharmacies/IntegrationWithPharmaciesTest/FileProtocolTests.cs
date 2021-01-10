@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 
-using IntegrationWithPharmacies.FileProtocol;
 using Moq;
 using TenderApi.Model;
 using TenderApi.Repository;

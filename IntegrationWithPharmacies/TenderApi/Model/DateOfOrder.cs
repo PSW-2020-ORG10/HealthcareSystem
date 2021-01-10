@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace IntegrationWithPharmacies.FileProtocol
+namespace TenderApi.Model
 {
     public class DateOfOrder
     {

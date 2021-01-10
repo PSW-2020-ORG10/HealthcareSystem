@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PharmacyRegistrationApi.Model
+namespace TenderApi.Model
 {
     public class RegistrationInPharmacy : Entity
     {
