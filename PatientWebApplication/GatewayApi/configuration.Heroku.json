@@ -5,7 +5,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "appointmentapi-org10.herokuapp.com"
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/getAll",
@@ -20,7 +21,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "appointmentapi-org10.herokuapp.com"
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/getAllDto",
@@ -31,7 +33,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "appointmentapi-org10.herokuapp.com"
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/{id}",
@@ -46,7 +49,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "appointmentapi-org10.herokuapp.com"
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/patient",
@@ -61,7 +65,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "appointmentapi-org10.herokuapp.com"
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/patientInTwoDays/{id}",
@@ -76,7 +81,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "appointmentapi-org10.herokuapp.com"
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/patientInFuture/{id}",
@@ -92,7 +98,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "appointmentapi-org10.herokuapp.com"
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/{appointmentId}",
@@ -108,7 +115,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "appointmentapi-org10.herokuapp.com"
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/recommend",
@@ -124,7 +132,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "appointmentapi-org10.herokuapp.com"
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/availableappointments",
@@ -140,7 +149,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "appointmentapi-org10.herokuapp.com"
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/",
@@ -156,7 +166,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "appointmentapi-org10.herokuapp.com"
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/appointmentsForDoctor/{doctorId}",
@@ -172,7 +183,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "appointmentapi-org10.herokuapp.com"
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/appointmentsForPatient/{patientId}",
@@ -187,7 +199,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "appointmentapi-org10.herokuapp.com"
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/appointmentsForPatientDto/{patientId}",
@@ -198,7 +211,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "appointmentapi-org10.herokuapp.com"
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/appointmentsForPatientDtoSimple/{patientId}",
@@ -209,7 +223,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "appointmentapi-org10.herokuapp.com"
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/operation/getAll",
@@ -224,7 +239,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "appointmentapi-org10.herokuapp.com"
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/operation/{id}",
@@ -239,7 +255,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "appointmentapi-org10.herokuapp.com"
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/operation/search",
@@ -254,7 +271,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "appointmentapi-org10.herokuapp.com"
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/operation/operationsForDoctor/{doctorId}",
@@ -269,7 +287,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "appointmentapi-org10.herokuapp.com"
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/survey/{id}",
@@ -284,7 +303,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "appointmentapi-org10.herokuapp.com"
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/survey",
@@ -299,7 +319,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "appointmentapi-org10.herokuapp.com"
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/survey/getWithSurveys/{id}",
@@ -314,7 +335,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "appointmentapi-org10.herokuapp.com"
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/survey/getRates",
@@ -329,7 +351,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "appointmentapi-org10.herokuapp.com"
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/survey/getDoctorRates",
@@ -479,7 +502,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "userapi-org10.herokuapp.com"
+            "Host": "userapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/doctor",
@@ -490,7 +514,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "userapi-org10.herokuapp.com"
+            "Host": "userapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/doctor/available",
@@ -505,7 +530,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "userapi-org10.herokuapp.com"
+            "Host": "userapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/doctor/{id}",
@@ -516,7 +542,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "userapi-org10.herokuapp.com"
+            "Host": "userapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/doctor/appointment/{doctorId}/{time}/{date}",
@@ -531,7 +558,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "userapi-org10.herokuapp.com"
+            "Host": "userapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/doctor/operation/{doctorId}/{time}/{date}",
@@ -546,7 +574,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "userapi-org10.herokuapp.com"
+            "Host": "userapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/employeesSchedule",
@@ -557,7 +586,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "userapi-org10.herokuapp.com"
+            "Host": "userapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/patientUser",
@@ -568,7 +598,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "userapi-org10.herokuapp.com"
+            "Host": "userapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/patientUser/image",
@@ -579,7 +610,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "userapi-org10.herokuapp.com"
+            "Host": "userapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/patientUser/getimage",
@@ -594,7 +626,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "userapi-org10.herokuapp.com"
+            "Host": "userapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/patientUser/{id}",
@@ -605,7 +638,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "userapi-org10.herokuapp.com"
+            "Host": "userapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/patientUser/getOne/{id}",
@@ -620,7 +654,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "userapi-org10.herokuapp.com"
+            "Host": "userapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/patientUser/find/{id}",
@@ -635,7 +670,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "userapi-org10.herokuapp.com"
+            "Host": "userapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/patientUser/findDto/{id}",
@@ -646,7 +682,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "userapi-org10.herokuapp.com"
+            "Host": "userapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/patientUser",
@@ -661,7 +698,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "userapi-org10.herokuapp.com"
+            "Host": "userapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/patientUser/malicious",
@@ -676,7 +714,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "userapi-org10.herokuapp.com"
+            "Host": "userapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/patientUser/{patientId}",
@@ -691,7 +730,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "userapi-org10.herokuapp.com"
+            "Host": "userapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/login",
@@ -706,7 +746,8 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
          {
-            "Host": "userapi-org10.herokuapp.com"
+            "Host": "userapi-org10.herokuapp.com",
+            "Port": 443
          }
       ],
       "UpstreamPathTemplate": "/api/login",
