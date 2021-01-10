@@ -55,10 +55,10 @@ namespace PatientWebApplicationTests
 
             
 
-            stubRepository.Setup(m => m.GetByid(4)).Returns(appointments.SingleOrDefault(app => app.id == 4));
+            stubRepository.Setup(m => m.GetByid(4)).Returns(appointments.SingleOrDefault(app => app.Id == 4));
             stubRepository.Setup(m => m.CancelAppointment(It.IsAny<DoctorAppointment>())).Callback((DoctorAppointment appointment) =>
             {
-                DoctorAppointment app = (appointments.SingleOrDefault(app => app.id == 4));
+                DoctorAppointment app = (appointments.SingleOrDefault(app => app.Id == 4));
                 app.IsCanceled = true;
             }
             ).Returns(appointment1); 
@@ -87,8 +87,8 @@ namespace PatientWebApplicationTests
             appointments.Add(appointment1);
             appointments.Add(appointment2);
 
-            stubRepository.Setup(m => m.GetByid(4)).Returns(appointments.SingleOrDefault(app => app.id == 4));
-            stubRepository.Setup(m => m.CancelAppointment(appointment1)).Returns(appointments.SingleOrDefault(app => app.id == 4));
+            stubRepository.Setup(m => m.GetByid(4)).Returns(appointments.SingleOrDefault(app => app.Id == 4));
+            stubRepository.Setup(m => m.CancelAppointment(appointment1)).Returns(appointments.SingleOrDefault(app => app.Id == 4));
 
 
             return stubRepository.Object;

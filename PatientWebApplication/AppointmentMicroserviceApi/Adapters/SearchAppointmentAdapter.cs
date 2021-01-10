@@ -11,7 +11,7 @@ namespace AppointmentMicroserviceApi.Adapters
     {
         public static MicroserviceSearchAppointmentDto AppointmentToSearchAppointmenDto(DoctorAppointment appointment)
         {
-            return new MicroserviceSearchAppointmentDto(appointment.id, Utility.HttpRequests.GetDoctorByIdAsync(appointment.DoctorUserId).Result, appointment.Date, appointment.RoomId);
+            return new MicroserviceSearchAppointmentDto(appointment.Id, Utility.HttpRequests.GetDoctorByIdAsync(appointment.DoctorUserId).Result, appointment.Date, appointment.RoomId);
         }
 
         public static List<MicroserviceSearchAppointmentDto> AppointmentListToSearchAppointmenDtoList(List<DoctorAppointment> appointments)

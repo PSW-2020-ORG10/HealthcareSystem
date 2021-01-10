@@ -43,16 +43,15 @@ namespace AppointmentMicroserviceApi.Repository
 
         public void New(T newEntity)
         {
-            newEntity.id = generateid(newEntity);
+            newEntity.Id = generateid(newEntity);
             List<T> list = GetAll();
             list.Add(newEntity);
             try
             {
-                string JsonResult = JsonConvert.SerializeObject(list, Formatting.Indented);
                 string path = Path;
                 using (var writer = new StreamWriter(path))
                 {
-                    writer.Write(JsonResult);
+                    writer.Write(JsonConvert.SerializeObject(list, Formatting.Indented));
                 }
             }
             catch (IOException e)
@@ -63,15 +62,13 @@ namespace AppointmentMicroserviceApi.Repository
 
         public T GetByid(int id)
         {
-            List<T> items = GetAll();
-            foreach (T oneItem in items)
+            foreach (T oneItem in GetAll())
             {
-                if (oneItem.id == id)
+                if (oneItem.Id == id)
                 {
                     return oneItem;
                 }
             }
-
             return null;
         }
 
@@ -81,12 +78,9 @@ namespace AppointmentMicroserviceApi.Repository
         {
             try
             {
-                string JsonResult = JsonConvert.SerializeObject(data, Formatting.Indented);
-                string path = Path;
-
-                using (var writer = new StreamWriter(path))
+                using (var writer = new StreamWriter(Path))
                 {
-                    writer.Write(JsonResult);
+                    writer.Write(JsonConvert.SerializeObject(data, Formatting.Indented));
                 }
             }
             catch (IOException e)
@@ -100,7 +94,7 @@ namespace AppointmentMicroserviceApi.Repository
             List<T> items = GetAll();
             foreach (T it in items)
             {
-                if (it.id == updateEntity.id)
+                if (it.Id == updateEntity.Id)
                 {
                     items.Remove(it);
                     items.Add(updateEntity);
@@ -115,7 +109,7 @@ namespace AppointmentMicroserviceApi.Repository
             List<T> items = GetAll();
             foreach (T it in items)
             {
-                if (it.id == id)
+                if (it.Id == id)
                 {
                     items.Remove(it);
                     NewWithList(items);
@@ -130,9 +124,9 @@ namespace AppointmentMicroserviceApi.Repository
             List<T> items = GetAll();
             foreach (T oneItem in items)
             {
-                if (oneItem.id > number)
+                if (oneItem.Id > number)
                 {
-                    number = oneItem.id;
+                    number = oneItem.Id;
                 }
             }
             number += 1;

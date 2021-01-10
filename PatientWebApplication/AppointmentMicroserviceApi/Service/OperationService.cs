@@ -65,16 +65,6 @@ namespace AppointmentMicroserviceApi.Service
         {
             _operationRepository.Delete(operationid);
         }
-        /*public Boolean isTermNotAvailable(DoctorUser doctor, TimeSpan start, TimeSpan end, String dateToString, PatientUser patient)
-        {
-            PatientController patientController = new PatientController();
-            DoctorController doctorController = new DoctorController();
-            Boolean hasAppointmentDoctor = doctorController.doesDoctorHaveAnAppointmentAtSpecificPeriod(doctor, start, end, dateToString);
-            Boolean hasOperationDoctor = doctorController.doesDoctorHaveAnOperationAtSpecificPerod(doctor, start, end, dateToString);
-            
-            if (hasAppointmentDoctor || hasOperationDoctor ) return true;
-            return false;
-        }*/
 
         /// <summary> This method is calling <c>OperationRepository</c> to get all operation's of one patient. </summary>
         /// <param name="id"><c>id</c> is id of patient who's operations we need.</param>
@@ -116,20 +106,12 @@ namespace AppointmentMicroserviceApi.Service
         /// <returns> List of filtered patient's operations. </returns>
         private List<Operation> SearchForDate(List<Operation> operations, AppointmentReportSearchDto appointmentSearchDto)
         {
-            if (!UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.Start) && !UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.End))
-            {
-                operations = GetOperationsBetweenDates(appointmentSearchDto.Start, appointmentSearchDto.End, operations);
-            }
-            else if (UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.Start) && !UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.End))
-            {
-                operations = GetOperationsBeforeDate(appointmentSearchDto.End, operations);
-            }
-            else if (!UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.Start) && UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.End))
-            {
-                operations = GetOperationsAfterDate(appointmentSearchDto.Start, operations);
-            }
+            operations = (!UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.Start) && !UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.End)) ? GetOperationsBetweenDates(appointmentSearchDto.Start, appointmentSearchDto.End, operations) : 
+                (UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.Start) && !UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.End)) ? GetOperationsBeforeDate(appointmentSearchDto.End, operations) : 
+                (!UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.Start) && UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.End)) ? operations = GetOperationsAfterDate(appointmentSearchDto.Start, operations) : operations;
             return operations;
 
+            
         }
 
         /// <summary> This method is getting list of filtered <c>Operation</c> of one patient that are between two dates. </summary>
@@ -142,9 +124,7 @@ namespace AppointmentMicroserviceApi.Service
         /// <returns> List of filtered patient's operations. </returns>
         private List<Operation> GetOperationsBetweenDates(string start, string end, List<Operation> operations)
         {
-            DateTime startDate = UtilityMethods.ParseDateInCorrectFormat(start);
-            DateTime endDate = UtilityMethods.ParseDateInCorrectFormat(end);
-            return operations.FindAll(operation => startDate <= UtilityMethods.ParseDateInCorrectFormat(operation.Date) && UtilityMethods.ParseDateInCorrectFormat(operation.Date) <= endDate);
+            return operations.FindAll(operation => UtilityMethods.ParseDateInCorrectFormat(start) <= UtilityMethods.ParseDateInCorrectFormat(operation.Date) && UtilityMethods.ParseDateInCorrectFormat(operation.Date) <= UtilityMethods.ParseDateInCorrectFormat(end));
         }
 
         /// <summary> This method is getting list of filtered <c>Operation</c> of one patient that are before given date. </summary>
@@ -155,8 +135,7 @@ namespace AppointmentMicroserviceApi.Service
         /// <returns> List of filtered patient's operations. </returns>
         private List<Operation> GetOperationsBeforeDate(string date, List<Operation> operations)
         {
-            DateTime endDate = UtilityMethods.ParseDateInCorrectFormat(date);
-            return operations.FindAll(operation => UtilityMethods.ParseDateInCorrectFormat(operation.Date) <= endDate);
+            return operations.FindAll(operation => UtilityMethods.ParseDateInCorrectFormat(operation.Date) <= UtilityMethods.ParseDateInCorrectFormat(date));
         }
 
         /// <summary> This method is getting list of filtered <c>Operation</c> of one patient that are after given date. </summary>
@@ -167,8 +146,7 @@ namespace AppointmentMicroserviceApi.Service
         /// <returns> List of filtered patient's operations. </returns>
         private List<Operation> GetOperationsAfterDate(string date, List<Operation> operations)
         {
-            DateTime startDate = UtilityMethods.ParseDateInCorrectFormat(date);
-            return operations.FindAll(operation => startDate <= UtilityMethods.ParseDateInCorrectFormat(operation.Date));
+            return operations.FindAll(operation => UtilityMethods.ParseDateInCorrectFormat(date) <= UtilityMethods.ParseDateInCorrectFormat(operation.Date));
         }
 
         /// <summary> This method is getting list of filtered <c>Operation</c> of one patient by appointment type. </summary>
@@ -179,11 +157,7 @@ namespace AppointmentMicroserviceApi.Service
         /// <returns> List of filtered patient's operations. </returns>
         private List<Operation> SearchForAppointmentType(List<Operation> operations, AppointmentReportSearchDto appointmentSearchDto)
         {
-            if (UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.AppointmentType) || CheckIfOperation(appointmentSearchDto.AppointmentType))
-            {
-                return operations;
-            }
-            return new List<Operation>();
+            return (UtilityMethods.CheckIfStringIsEmpty(appointmentSearchDto.AppointmentType) || CheckIfOperation(appointmentSearchDto.AppointmentType)) ? operations : new List<Operation>();
         }
 
         /// <summary> This method is checks if given string equals operation. </summary>
@@ -224,7 +198,7 @@ namespace AppointmentMicroserviceApi.Service
         {
             foreach (Operation operation in operations)
             {
-                if (time >= operation.Start && time < operation.end) return true;
+                if (time >= operation.Start && time < operation.End) return true;
             }
             return false;
         }
@@ -236,7 +210,7 @@ namespace AppointmentMicroserviceApi.Service
 
         public OperationReferral GetOperationalReferralById(int id)
         {
-            return GetAll().SingleOrDefault(operation => operation.operationReferral.id == id).operationReferral;
+            return GetAll().SingleOrDefault(operation => operation.OperationReferral.Id == id).OperationReferral;
         }
     }
 }

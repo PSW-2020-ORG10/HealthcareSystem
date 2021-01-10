@@ -50,7 +50,7 @@ namespace AppointmentMicroserviceApi.Repository
 
         public Operation GetByid(int id)
         {
-            return dbContext.Operations.SingleOrDefault(operation => operation.id == id);
+            return dbContext.Operations.SingleOrDefault(operation => operation.Id == id);
         }
 
         public List<Operation> GetOperationsForPatient(int idPatient)

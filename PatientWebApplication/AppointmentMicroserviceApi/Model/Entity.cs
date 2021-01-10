@@ -11,8 +11,8 @@ namespace AppointmentMicroserviceApi.Model
         public Entity() { }
         public Entity(int id)
         {
-            this.id = id;
+            Id = id;
         }
-        public int id { get; set; }
+        public int Id { get; set; }
     }
 }

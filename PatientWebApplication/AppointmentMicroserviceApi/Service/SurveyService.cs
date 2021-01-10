@@ -66,13 +66,13 @@ namespace AppointmentMicroserviceApi.Service
             double doctorAvg = 0, doctorsKnowledgeAvg = 0, doctorsPolitenessAvg = 0, doctorsProfessionalismAvg = 0, doctorsSkillAvg = 0, doctorsTechnicalityAvg = 0, doctorsWorkingPaceAvg = 0;
             foreach (Survey s in GetAll())
             {
-                doctorAvg += s.doctorsKnowledge + s.doctorsPoliteness + s.doctorsProfessionalism + s.doctorsSkill + s.doctorsTechnicality + s.doctorsWorkingPace;
-                doctorsKnowledgeAvg += s.doctorsKnowledge;
-                doctorsPolitenessAvg += s.doctorsPoliteness;
-                doctorsProfessionalismAvg += s.doctorsProfessionalism;
-                doctorsSkillAvg += s.doctorsSkill;
-                doctorsTechnicalityAvg += s.doctorsTechnicality;
-                doctorsWorkingPaceAvg += s.doctorsWorkingPace;
+                doctorAvg += s.DoctorsKnowledge + s.DoctorsPoliteness + s.DoctorsProfessionalism + s.DoctorsSkill + s.DoctorsTechnicality + s.DoctorsWorkingPace;
+                doctorsKnowledgeAvg += s.DoctorsKnowledge;
+                doctorsPolitenessAvg += s.DoctorsPoliteness;
+                doctorsProfessionalismAvg += s.DoctorsProfessionalism;
+                doctorsSkillAvg += s.DoctorsSkill;
+                doctorsTechnicalityAvg += s.DoctorsTechnicality;
+                doctorsWorkingPaceAvg += s.DoctorsWorkingPace;
             }
             return CountAverage(doctorAvg, doctorsKnowledgeAvg, doctorsPolitenessAvg, doctorsProfessionalismAvg, doctorsSkillAvg, doctorsTechnicalityAvg, doctorsWorkingPaceAvg);
         }
@@ -82,13 +82,13 @@ namespace AppointmentMicroserviceApi.Service
             double medicalStaffAvg = 0, medicalStaffKnowledgeAvg = 0, medicalStaffPolitenessAvg = 0, medicalStaffProfessionalismAvg = 0, medicalStaffSkillAvg = 0, medicalStaffTechnicalityAvg = 0, medicalStaffWorkingPaceAvg = 0;
             foreach (Survey s in GetAll())
             {
-                medicalStaffAvg += s.medicalStaffsKnowledge + s.medicalStaffsPoliteness + s.medicalStaffsProfessionalism + s.medicalStaffsSkill + s.medicalStaffsTechnicality + s.medicalStaffsWorkingPace;
-                medicalStaffKnowledgeAvg += s.medicalStaffsKnowledge;
-                medicalStaffPolitenessAvg += s.medicalStaffsPoliteness;
-                medicalStaffProfessionalismAvg += s.medicalStaffsProfessionalism;
-                medicalStaffSkillAvg += s.medicalStaffsSkill;
-                medicalStaffTechnicalityAvg += s.medicalStaffsTechnicality;
-                medicalStaffWorkingPaceAvg += s.medicalStaffsWorkingPace;
+                medicalStaffAvg += s.MedicalStaffsKnowledge + s.MedicalStaffsPoliteness + s.MedicalStaffsProfessionalism + s.MedicalStaffsSkill + s.MedicalStaffsTechnicality + s.MedicalStaffsWorkingPace;
+                medicalStaffKnowledgeAvg += s.MedicalStaffsKnowledge;
+                medicalStaffPolitenessAvg += s.MedicalStaffsPoliteness;
+                medicalStaffProfessionalismAvg += s.MedicalStaffsProfessionalism;
+                medicalStaffSkillAvg += s.MedicalStaffsSkill;
+                medicalStaffTechnicalityAvg += s.MedicalStaffsTechnicality;
+                medicalStaffWorkingPaceAvg += s.MedicalStaffsWorkingPace;
             }
             return CountAverage(medicalStaffAvg, medicalStaffKnowledgeAvg, medicalStaffPolitenessAvg, medicalStaffProfessionalismAvg, medicalStaffSkillAvg, medicalStaffTechnicalityAvg, medicalStaffWorkingPaceAvg);
         }
@@ -98,12 +98,12 @@ namespace AppointmentMicroserviceApi.Service
             double hospitalAvg = 0, hospitalEnvironmentAvg = 0, hospitalEquipmentAvg = 0, hospitalHygieneAvg = 0, hospitalPricesAvg = 0, hospitalWaitingTimeAvg = 0;
             foreach (Survey s in GetAll())
             {
-                hospitalAvg += s.hospitalEnvironment + s.hospitalEquipment + s.hospitalHygiene + s.hospitalPrices + s.hospitalWaitingTime;
-                hospitalEnvironmentAvg += s.hospitalEnvironment;
-                hospitalEquipmentAvg += s.hospitalEquipment;
-                hospitalHygieneAvg += s.hospitalHygiene;
-                hospitalPricesAvg += s.hospitalPrices;
-                hospitalWaitingTimeAvg += s.hospitalWaitingTime;
+                hospitalAvg += s.HospitalEnvironment + s.HospitalEquipment + s.HospitalHygiene + s.HospitalPrices + s.HospitalWaitingTime;
+                hospitalEnvironmentAvg += s.HospitalEnvironment;
+                hospitalEquipmentAvg += s.HospitalEquipment;
+                hospitalHygieneAvg += s.HospitalHygiene;
+                hospitalPricesAvg += s.HospitalPrices;
+                hospitalWaitingTimeAvg += s.HospitalWaitingTime;
             }
             return CountAverageHospital(hospitalAvg, hospitalEnvironmentAvg, hospitalEquipmentAvg, hospitalHygieneAvg, hospitalPricesAvg, hospitalWaitingTimeAvg);
         }
@@ -152,17 +152,17 @@ namespace AppointmentMicroserviceApi.Service
             int counter = 0;
             foreach (Survey s in GetAll())
             {
-                if (s.appointment.DoctorUserId == id)
+                if (s.Appointment.DoctorUserId == id)
                 {
                     counter += 1;
-                    surveyDoctorAverage.Doctor = Utility.HttpRequests.GetDoctorByIdAsync(s.appointment.DoctorUserId).Result;
-                    doctorAvg += s.doctorsKnowledge + s.doctorsPoliteness + s.doctorsProfessionalism + s.doctorsSkill + s.doctorsTechnicality + s.doctorsWorkingPace;
-                    doctorsKnowledgeAvg += s.doctorsKnowledge;
-                    doctorsPolitenessAvg += s.doctorsPoliteness;
-                    doctorsProfessionalismAvg += s.doctorsProfessionalism;
-                    doctorsSkillAvg += s.doctorsSkill;
-                    doctorsTechnicalityAvg += s.doctorsTechnicality;
-                    doctorsWorkingPaceAvg += s.doctorsWorkingPace;
+                    surveyDoctorAverage.Doctor = Utility.HttpRequests.GetDoctorByIdAsync(s.Appointment.DoctorUserId).Result;
+                    doctorAvg += s.DoctorsKnowledge + s.DoctorsPoliteness + s.DoctorsProfessionalism + s.DoctorsSkill + s.DoctorsTechnicality + s.DoctorsWorkingPace;
+                    doctorsKnowledgeAvg += s.DoctorsKnowledge;
+                    doctorsPolitenessAvg += s.DoctorsPoliteness;
+                    doctorsProfessionalismAvg += s.DoctorsProfessionalism;
+                    doctorsSkillAvg += s.DoctorsSkill;
+                    doctorsTechnicalityAvg += s.DoctorsTechnicality;
+                    doctorsWorkingPaceAvg += s.DoctorsWorkingPace;
                 }
             }
             return CountAverageSingleDoctor(surveyDoctorAverage, counter, doctorAvg, doctorsKnowledgeAvg, doctorsPolitenessAvg, doctorsProfessionalismAvg, doctorsSkillAvg, doctorsTechnicalityAvg, doctorsWorkingPaceAvg);
@@ -173,7 +173,7 @@ namespace AppointmentMicroserviceApi.Service
             List<int> doctors = new List<int>();
             foreach (Survey s in GetAll())
             {
-                doctors.Add(s.appointment.DoctorUserId);
+                doctors.Add(s.Appointment.DoctorUserId);
             }
             return doctors.Distinct().ToList();
         }

@@ -60,9 +60,7 @@ namespace AppointmentMicroserviceApi.Service
 
         public DoctorAppointment CreateRegular(DoctorAppointment appointment)
         {
-             var appointments = GetAllAvailableAppointmentsForDateAsync(appointment.Date, appointment.DoctorUserId, appointment.PatientUserId).Result;
-            if (!appointments.Contains(appointment)) return null;
-            return _appointmentRepository.New(appointment);
+            return !GetAllAvailableAppointmentsForDateAsync(appointment.Date, appointment.DoctorUserId, appointment.PatientUserId).Result.Contains(appointment) ? null : _appointmentRepository.New(appointment);
 
         }
 
@@ -220,11 +218,7 @@ namespace AppointmentMicroserviceApi.Service
         public async Task<List<DoctorAppointment>> GetAllAvailableAppointmentsForDateAsync(string dateString, int doctorId, int patientId)
         {
             MicroserviceShiftDto doctorShift = await Utility.HttpRequests.GetShiftForDoctorForSpecificDay(new DoctorShiftSearchDto(doctorId, dateString));
-            if (doctorShift == null)
-            {
-                return new List<DoctorAppointment>();
-            }
-            return CreateListOfAvailableAppointments(doctorShift, dateString, doctorId, patientId);
+            return doctorShift == null ? new List<DoctorAppointment>() : CreateListOfAvailableAppointments(doctorShift, dateString, doctorId, patientId);     
         }
 
         private List<DoctorAppointment> CreateListOfAvailableAppointments(MicroserviceShiftDto doctorShift, string dateString, int doctorId, int patientId)
@@ -325,15 +319,12 @@ namespace AppointmentMicroserviceApi.Service
         /// <returns>List of <c>DoctorAppointment</c></returns>
         public async Task<List<DoctorAppointment>> RecommenedAnAppointmentDatePriorityAsync(DateTime startDate, DateTime endDate, int patientId, string speciality)
         {
-            List<MicroserviceDoctorDto> doctorsList = await Utility.HttpRequests.GetAllAsync();
-            List<DoctorAppointment> appointments = new List<DoctorAppointment>();
-
-            foreach (MicroserviceDoctorDto doctor in doctorsList)
+            foreach (MicroserviceDoctorDto doctor in await Utility.HttpRequests.GetAllAsync())
             {
                 if (doctor.Speciality.Equals(speciality) && GetAllAvailableAppointmentsForRecommendedDatesAsync(doctor.Id, startDate, endDate, patientId).Result.Any())
                     return GetAllAvailableAppointmentsForRecommendedDatesAsync(doctor.Id, startDate, endDate, patientId).Result;
             }
-            return appointments;
+            return new List<DoctorAppointment>();
         }
 
         /// <summary> This method is getting lists of <c>DoctorAppointment</c> and <c>Survey</c> and checks for all valid appointment. </summary>
@@ -342,12 +333,12 @@ namespace AppointmentMicroserviceApi.Service
         /// <returns> List of valid appointments. </returns>
         public List<DoctorAppointment> FindAllValidAppointmentsWithoutSurvey(List<DoctorAppointment> allValidAppointments, List<Survey> surveys)
         {
-            return CheckIfAppointmentsHappened(allValidAppointments.Where(validAppointment => !FindAllUnvalidAppointments(surveys).Any(unvalidAppointment => unvalidAppointment == validAppointment.id)).ToList());
+            return CheckIfAppointmentsHappened(allValidAppointments.Where(validAppointment => !FindAllUnvalidAppointments(surveys).Any(unvalidAppointment => unvalidAppointment == validAppointment.Id)).ToList());
         }
 
         public List<DoctorAppointment> FindAllValidAppointmentsWithSurvey(List<DoctorAppointment> allValidAppointments, List<Survey> surveys)
         {
-            return CheckIfAppointmentsHappened(allValidAppointments.Where(validAppointment => FindAllUnvalidAppointments(surveys).Any(unvalidAppointment => unvalidAppointment == validAppointment.id)).ToList());
+            return CheckIfAppointmentsHappened(allValidAppointments.Where(validAppointment => FindAllUnvalidAppointments(surveys).Any(unvalidAppointment => unvalidAppointment == validAppointment.Id)).ToList());
         }
 
         /// <summary> This method provides <c>DoctorAppointment</c> <paramref name="appointment"/> and sends it to <c>AppointmentRepository</c> there appointment.IsCanceled will be set to true. </summary>
@@ -365,7 +356,7 @@ namespace AppointmentMicroserviceApi.Service
             List<int> allUnvalidAppointments = new List<int>();
             foreach (Survey survey in allSurveys)
             {
-                allUnvalidAppointments.Add(survey.appointmentId);
+                allUnvalidAppointments.Add(survey.AppointmentId);
             }
             return allUnvalidAppointments;
         }

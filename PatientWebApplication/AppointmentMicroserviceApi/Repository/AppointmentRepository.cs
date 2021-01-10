@@ -59,7 +59,7 @@ namespace AppointmentMicroserviceApi.Repository
 
         public DoctorAppointment GetByid(int id)
         {
-            return dbContext.DoctorAppointments.SingleOrDefault(appointment => appointment.id == id);
+            return dbContext.DoctorAppointments.SingleOrDefault(appointment => appointment.Id == id);
         }
 
         public List<DoctorAppointment> GetAppointmentsForPatient(int idPatient)

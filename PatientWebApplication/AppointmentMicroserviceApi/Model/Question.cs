@@ -9,12 +9,12 @@ namespace AppointmentMicroserviceApi.Patient
 {
     public class Question : Entity
     {
-        public String name { get; set; }
-        public String answer { get; set; }
+        public String Name { get; set; }
+        public String Answer { get; set; }
         public Question(int id, String name, String answer) : base(id)
         {
-            this.name = name;
-            this.answer = answer;
+            Name = name;
+            Answer = answer;
         }
         public Question() : base() { }
     }

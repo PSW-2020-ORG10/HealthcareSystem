@@ -12,7 +12,7 @@ namespace AppointmentMicroserviceApi.Adapters
         public OperationDto OperationToOperationDto(Operation operation)
         {
             MicroserviceDoctorDto doctor = Utility.HttpRequests.GetDoctorByIdAsync(operation.DoctorUserId).Result;
-            return new OperationDto(doctor.Name + " " + doctor.Surname, operation.operationReferral, operation.Date);
+            return new OperationDto(doctor.Name + " " + doctor.Surname, operation.OperationReferral, operation.Date);
         }
 
         /// <summary>This method creates List of <c>OperationDto</c> from provided <paramref name="operations"/>.</summary>
@@ -21,10 +21,9 @@ namespace AppointmentMicroserviceApi.Adapters
         public List<OperationDto> ConvertOperationListToOperationDtoList(List<Operation> operations)
         {
             List<OperationDto> operationsDto = new List<OperationDto>();
-            OperationAdapter adapter = new OperationAdapter();
             foreach (Operation operation in operations)
             {
-                operationsDto.Add(adapter.OperationToOperationDto(operation));
+                operationsDto.Add(OperationToOperationDto(operation));
             }
             return operationsDto;
         }

@@ -33,7 +33,7 @@ namespace AppointmentMicroserviceApi.Repository
 
         public List<Survey> GetAllSurveysForPatientId(int id)
         {
-            return dbContext.Surveys.ToList().FindAll(survey => survey.patientId == id);
+            return dbContext.Surveys.ToList().FindAll(survey => survey.PatientId == id);
         }
     }
 }

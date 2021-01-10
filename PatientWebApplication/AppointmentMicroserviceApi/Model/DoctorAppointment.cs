@@ -16,27 +16,27 @@ namespace AppointmentMicroserviceApi.Patient
     public class DoctorAppointment : Appointment
     {
         [ForeignKey("AppointmentId")]
-        public virtual List<Referral> referral { get; set; }
+        public virtual List<Referral> Referral { get; set; }
         public bool IsCanceled { get; set; }
         public String CancelDateString { get; set; }
 
         public DoctorAppointment(int id, TimeSpan time, string date, List<Referral> referrals, string roomid) : base(id, time, date, roomid)
         {
-            referral = referrals;
+            Referral = referrals;
             IsCanceled = false;
             CancelDateString = null;
         }
      
         public DoctorAppointment(int id, TimeSpan time, string date, int patientId, int doctorId, List<Referral> referrals, string roomid) : base(id, time, date, patientId, doctorId, roomid)
         {
-            referral = referrals;
+            Referral = referrals;
             IsCanceled = false;
             CancelDateString = null;
         }
 
         public DoctorAppointment(int id, TimeSpan time, string date, int patientId, int doctorId, List<Referral> referrals, string roomid, bool isCanceled, string cancelDateString) : base(id, time, date, patientId, doctorId, roomid)
         {
-            referral = referrals;
+            Referral = referrals;
             IsCanceled = isCanceled;
             CancelDateString = cancelDateString;
         }
@@ -45,7 +45,7 @@ namespace AppointmentMicroserviceApi.Patient
 
         public override bool Equals(Object obj)
         {
-            var item = obj as DoctorAppointment;
+            DoctorAppointment item = obj as DoctorAppointment;
             if (item == null)
             {
                 return false;

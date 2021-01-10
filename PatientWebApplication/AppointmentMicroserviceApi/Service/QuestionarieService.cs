@@ -35,7 +35,7 @@ namespace AppointmentMicroserviceApi.Service
 
         public void Remove(Question entity)
         {
-            questionarieRepository.Delete(entity.id);
+            questionarieRepository.Delete(entity.Id);
         }
 
         public void Update(Question entity)

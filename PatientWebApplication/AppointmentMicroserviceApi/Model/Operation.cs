@@ -11,23 +11,23 @@ namespace AppointmentMicroserviceApi.Doctor
 {
     public class Operation : Appointment
     {
-        public TimeSpan end { get; set; }
-        public virtual OperationReferral operationReferral { get; set; }
+        public TimeSpan End { get; set; }
+        public virtual OperationReferral OperationReferral { get; set; }
         public Operation() : base() { }
         public Operation(int id, string date, TimeSpan start, TimeSpan end, string roomId, OperationReferral operationReferral) : base(id, start, date, roomId)
         {
-            this.end = end;
-            this.operationReferral = operationReferral;
+            End = end;
+            OperationReferral = operationReferral;
         }
 
         public Operation(int id, int patientId, string date, TimeSpan start, TimeSpan end, int isResponiableId, string roomId, int operationReferralId) : base(id, start, date, patientId, isResponiableId, roomId)
         {
-            this.end = end;
+            End = end;
         }
 
         public Operation(int id, int patientId, string date, TimeSpan start, TimeSpan end, int isResponiableId, string roomId) : base(id, start, date, patientId, isResponiableId, roomId)
         {
-            this.end = end;
+            End = end;
         }
     }
 }
