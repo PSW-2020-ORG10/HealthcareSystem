@@ -4,9 +4,9 @@
       "DownstreamPathTemplate": "/api/doctorappointment/getAll",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "appointmentapi-org10"
-        }
+         {
+            "Host": "appointmentapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/getAll",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET", "OPTIONS" ],
@@ -19,9 +19,9 @@
       "DownstreamPathTemplate": "/api/doctorappointment/getAllDto",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "appointmentapi-org10."
-        }
+         {
+            "Host": "appointmentapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/getAllDto",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
@@ -30,9 +30,9 @@
       "DownstreamPathTemplate": "/api/doctorappointment/{id}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "appointmentapi-org10"
-        }
+         {
+            "Host": "appointmentapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/{id}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
@@ -45,9 +45,9 @@
       "DownstreamPathTemplate": "/api/doctorappointment/patient",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "appointmentapi-org10"
-        }
+         {
+            "Host": "appointmentapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/patient",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
@@ -60,9 +60,9 @@
       "DownstreamPathTemplate": "/api/doctorappointment/patientInTwoDays/{id}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "appointmentapi-org10"
-        }
+         {
+            "Host": "appointmentapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/patientInTwoDays/{id}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
@@ -75,9 +75,9 @@
       "DownstreamPathTemplate": "/api/doctorappointment/patientInFuture/{id}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "appointmentapi-org10"
-        }
+         {
+            "Host": "appointmentapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/patientInFuture/{id}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
@@ -91,9 +91,9 @@
       "DownstreamPathTemplate": "/api/doctorappointment/{appointmentId}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "appointmentapi-org10"
-        }
+         {
+            "Host": "appointmentapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/{appointmentId}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
@@ -107,9 +107,9 @@
       "DownstreamPathTemplate": "/api/doctorappointment/recommend",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "appointmentapi-org10"
-        }
+         {
+            "Host": "appointmentapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/recommend",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
@@ -123,9 +123,9 @@
       "DownstreamPathTemplate": "/api/doctorappointment/availableappointments",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "appointmentapi-org10"
-        }
+         {
+            "Host": "appointmentapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/availableappointments",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
@@ -139,9 +139,9 @@
       "DownstreamPathTemplate": "/api/doctorappointment/",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "appointmentapi-org10"
-        }
+         {
+            "Host": "appointmentapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/",
       "UpstreamHttpMethod": [ "POST" ],
@@ -155,9 +155,9 @@
       "DownstreamPathTemplate": "/api/doctorappointment/appointmentsForDoctor/{doctorId}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "appointmentapi-org10"
-        }
+         {
+            "Host": "appointmentapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/appointmentsForDoctor/{doctorId}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
@@ -171,9 +171,9 @@
       "DownstreamPathTemplate": "/api/doctorappointment/appointmentsForPatient/{patientId}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "appointmentapi-org10"
-        }
+         {
+            "Host": "appointmentapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/appointmentsForPatient/{patientId}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
@@ -186,9 +186,9 @@
       "DownstreamPathTemplate": "/api/doctorappointment/appointmentsForPatientDto/{patientId}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "appointmentapi-org10"
-        }
+         {
+            "Host": "appointmentapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/appointmentsForPatientDto/{patientId}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
@@ -197,9 +197,9 @@
       "DownstreamPathTemplate": "/api/doctorappointment/appointmentsForPatientDtoSimple/{patientId}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "appointmentapi-org10"
-        }
+         {
+            "Host": "appointmentapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/appointmentsForPatientDtoSimple/{patientId}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
@@ -208,9 +208,9 @@
       "DownstreamPathTemplate": "/api/operation/getAll",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "appointmentapi-org10"
-        }
+         {
+            "Host": "appointmentapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/operation/getAll",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET", "OPTIONS" ],
@@ -223,9 +223,9 @@
       "DownstreamPathTemplate": "/api/operation/{id}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "appointmentapi-org10"
-        }
+         {
+            "Host": "appointmentapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/operation/{id}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
@@ -238,9 +238,9 @@
       "DownstreamPathTemplate": "/api/operation/search",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "appointmentapi-org10"
-        }
+         {
+            "Host": "appointmentapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/operation/search",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
@@ -253,9 +253,9 @@
       "DownstreamPathTemplate": "/api/operation/operationsForDoctor/{doctorId}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "appointmentapi-org10"
-        }
+         {
+            "Host": "appointmentapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/operation/operationsForDoctor/{doctorId}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
@@ -268,9 +268,9 @@
       "DownstreamPathTemplate": "/api/survey/{id}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "appointmentapi-org10"
-        }
+         {
+            "Host": "appointmentapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/survey/{id}",
       "UpstreamHttpMethod": [ "POST", "GET" ],
@@ -283,9 +283,9 @@
       "DownstreamPathTemplate": "/api/survey",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "appointmentapi-org10"
-        }
+         {
+            "Host": "appointmentapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/survey",
       "UpstreamHttpMethod": [ "POST", "GET" ],
@@ -298,9 +298,9 @@
       "DownstreamPathTemplate": "/api/survey/getWithSurveys/{id}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "appointmentapi-org10"
-        }
+         {
+            "Host": "appointmentapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/survey/getWithSurveys/{id}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
@@ -313,9 +313,9 @@
       "DownstreamPathTemplate": "/api/survey/getRates",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "appointmentapi-org10"
-        }
+         {
+            "Host": "appointmentapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/survey/getRates",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
@@ -328,9 +328,9 @@
       "DownstreamPathTemplate": "/api/survey/getDoctorRates",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "appointmentapi-org10"
-        }
+         {
+            "Host": "appointmentapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/survey/getDoctorRates",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
@@ -478,9 +478,9 @@
       "DownstreamPathTemplate": "/api/doctor",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "userapi-org10"
-        }
+         {
+            "Host": "userapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/doctor",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
@@ -489,9 +489,9 @@
       "DownstreamPathTemplate": "/api/doctor/available",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "userapi-org10"
-        }
+         {
+            "Host": "userapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/doctor/available",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
@@ -504,9 +504,9 @@
       "DownstreamPathTemplate": "/api/doctor/{id}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "userapi-org10"
-        }
+         {
+            "Host": "userapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/doctor/{id}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
@@ -515,9 +515,9 @@
       "DownstreamPathTemplate": "/api/doctor/appointment/{doctorId}/{time}/{date}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "userapi-org10"
-        }
+         {
+            "Host": "userapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/doctor/appointment/{doctorId}/{time}/{date}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
@@ -530,9 +530,9 @@
       "DownstreamPathTemplate": "/api/doctor/operation/{doctorId}/{time}/{date}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "userapi-org10"
-        }
+         {
+            "Host": "userapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/doctor/operation/{doctorId}/{time}/{date}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
@@ -545,9 +545,9 @@
       "DownstreamPathTemplate": "/api/employeesSchedule",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "userapi-org10"
-        }
+         {
+            "Host": "userapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/employeesSchedule",
       "UpstreamHttpMethod": [ "POST" ]
@@ -556,9 +556,9 @@
       "DownstreamPathTemplate": "/api/patientUser",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "userapi-org10"
-        }
+         {
+            "Host": "userapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/patientUser",
       "UpstreamHttpMethod": [ "POST" ]
@@ -567,9 +567,9 @@
       "DownstreamPathTemplate": "/api/patientUser/image",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "userapi-org10"
-        }
+         {
+            "Host": "userapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/patientUser/image",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
@@ -578,9 +578,9 @@
       "DownstreamPathTemplate": "/api/patientUser/getimage",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "userapi-org10"
-        }
+         {
+            "Host": "userapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/patientUser/getimage",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
@@ -593,9 +593,9 @@
       "DownstreamPathTemplate": "/api/patientUser/{id}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "userapi-org10"
-        }
+         {
+            "Host": "userapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/patientUser/{id}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
@@ -604,9 +604,9 @@
       "DownstreamPathTemplate": "/api/patientUser/getOne/{id}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "userapi-org10"
-        }
+         {
+            "Host": "userapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/patientUser/getOne/{id}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
@@ -619,9 +619,9 @@
       "DownstreamPathTemplate": "/api/patientUser/find/{id}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "userapi-org10"
-        }
+         {
+            "Host": "userapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/patientUser/find/{id}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
@@ -634,9 +634,9 @@
       "DownstreamPathTemplate": "/api/patientUser/findDto/{id}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "userapi-org10"
-        }
+         {
+            "Host": "userapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/patientUser/findDto/{id}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
@@ -645,9 +645,9 @@
       "DownstreamPathTemplate": "/api/patientUser",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "userapi-org10"
-        }
+         {
+            "Host": "userapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/patientUser",
       "UpstreamHttpMethod": [ "GET" ],
@@ -660,9 +660,9 @@
       "DownstreamPathTemplate": "/api/patientUser/malicious",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "userapi-org10"
-        }
+         {
+            "Host": "userapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/patientUser/malicious",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
@@ -675,9 +675,9 @@
       "DownstreamPathTemplate": "/api/patientUser/{patientId}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "userapi-org10"
-        }
+         {
+            "Host": "userapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/patientUser/{patientId}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
@@ -690,9 +690,9 @@
       "DownstreamPathTemplate": "/api/login",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "userapi-org10"
-        }
+         {
+            "Host": "userapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/login",
       "UpstreamHttpMethod": [ "GET" ],
@@ -705,9 +705,9 @@
       "DownstreamPathTemplate": "/api/login",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "userapi-org10"
-        }
+         {
+            "Host": "userapi-org10.herokuapp.com"
+         }
       ],
       "UpstreamPathTemplate": "/api/login",
       "UpstreamHttpMethod": [ "POST" ]
