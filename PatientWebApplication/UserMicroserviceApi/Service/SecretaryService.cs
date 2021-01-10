@@ -15,14 +15,13 @@ namespace UserMicroserviceApi.Service
     {
         public EmployeesScheduleRepository employeesScheduleRepository;
         public SecretaryRepository secretaryRepository;
-        string path = bingPathToAppDir(@"JsonFiles\secretary.json");
-        string path2 = bingPathToAppDir(@"JsonFiles\schedule.json");
 
         public SecretaryService()
         {
-            secretaryRepository = new SecretaryRepository(path);
+            secretaryRepository = new SecretaryRepository();
             employeesScheduleRepository = new EmployeesScheduleRepository();
         }
+
         public override List<SecretaryUser> GetAll()
         {
             return secretaryRepository.GetAll();
@@ -30,7 +29,7 @@ namespace UserMicroserviceApi.Service
 
         public override bool New(SecretaryUser secretary)
         {
-            if (isDataValid(secretary.email, secretary.uniqueCitizensidentityNumber, secretary) && isCityValid(secretary.city))
+            if (IsDataValid(secretary.Email, secretary.UniqueCitizensidentityNumber, secretary) && IsCityValid(secretary.City))
             {
                 secretaryRepository.New(secretary);
                 return true;
@@ -40,7 +39,7 @@ namespace UserMicroserviceApi.Service
 
         public override bool Update(SecretaryUser secretary)
         {
-            if (isDataValid(secretary.email, secretary.uniqueCitizensidentityNumber, secretary) && isCityValid(secretary.city))
+            if (IsDataValid(secretary.Email, secretary.UniqueCitizensidentityNumber, secretary) && IsCityValid(secretary.City))
             {
                 secretaryRepository.Update(secretary);
                 return true;
@@ -55,47 +54,38 @@ namespace UserMicroserviceApi.Service
 
         public override void Remove(SecretaryUser secretary)
         {
-            removeSecretaryFromSchedule(secretary);
-            secretaryRepository.Delete(secretary.id);
+            RemoveSecretaryFromSchedule(secretary);
+            secretaryRepository.Delete(secretary.Id);
         }
 
 
-        private bool isScheduleForSecretary(Schedule schedule, SecretaryUser secretaryUser)
+        private bool IsScheduleForSecretary(Schedule schedule, SecretaryUser secretaryUser)
         {
-            if (schedule.Employee.firstName.Equals(secretaryUser.firstName)) return true;
-
-            return false;
+            return schedule.Employee.FirstName.Equals(secretaryUser.FirstName);
         }
 
-        private void findAndDeleteScheduleForSecretary(SecretaryUser secretaryUser)
+        private void FindAndDeleteScheduleForSecretary(SecretaryUser secretaryUser)
         {
             List<Schedule> listOfSchedule = new List<Schedule>();
             listOfSchedule = employeesScheduleRepository.GetAll();
 
             foreach (Schedule schedule in listOfSchedule)
             {
-                if (isScheduleForSecretary(schedule, secretaryUser)) employeesScheduleRepository.Delete(schedule.id);
+                if (IsScheduleForSecretary(schedule, secretaryUser)) employeesScheduleRepository.Delete(schedule.Id);
             }
         }
 
-        private bool areSecreatariesEqualByid(SecretaryUser firstSecretary, SecretaryUser secondSecretary)
+        private bool AreSecreatariesEqualByid(SecretaryUser firstSecretary, SecretaryUser secondSecretary)
         {
-            if (firstSecretary.id.ToString().Equals(secondSecretary.id.ToString())) return true;
-
-            return false;
+            return firstSecretary.Id.ToString().Equals(secondSecretary.Id.ToString());
         }
 
-        public void removeSecretaryFromSchedule(SecretaryUser secretary)
+        public void RemoveSecretaryFromSchedule(SecretaryUser secretary)
         {
-            List<SecretaryUser> listOfSecretaries = secretaryRepository.GetAll();
-
-            foreach (SecretaryUser secretaryUser in listOfSecretaries)
+            foreach (SecretaryUser secretaryUser in secretaryRepository.GetAll())
             {
-                if (areSecreatariesEqualByid(secretaryUser, secretary)) findAndDeleteScheduleForSecretary(secretaryUser);
-
+                if (AreSecreatariesEqualByid(secretaryUser, secretary)) FindAndDeleteScheduleForSecretary(secretaryUser);
             }
         }
-
-
     }
 }

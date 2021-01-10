@@ -10,21 +10,16 @@ namespace UserMicroserviceApi.Model
 {
     public class SecretaryUser : EmployeeUser
     {
-        public string room { get; set; }
+        public string Room { get; set; }
 
         public SecretaryUser(int id, string name, string secondname, string ucin, string date, string phone, string email, string pasword, string city,
             double salary, string room) :
             base(id, name, secondname, ucin, date, phone, email, pasword, city, salary)
         {
-
-            this.room = room;
+            Room = room;
         }
 
-        public SecretaryUser() :
-            base()
-        {
-
-        }
+        public SecretaryUser() : base() {}
 
     }
 }

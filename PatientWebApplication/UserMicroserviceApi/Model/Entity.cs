@@ -8,11 +8,13 @@ namespace UserMicroserviceApi.Model
 {
     public class Entity
     {
+        public int Id { get; set; }
+
         public Entity() { }
+        
         public Entity(int id)
         {
-            this.id = id;
+            this.Id = id;
         }
-        public int id { get; set; }
     }
 }

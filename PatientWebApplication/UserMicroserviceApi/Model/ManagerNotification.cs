@@ -16,14 +16,8 @@
             ManagerUserId = managerUserId;
         }
 
-        public ManagerNotification(string data) : base(data)
-        {
+        public ManagerNotification(string data) : base(data) {}
 
-        }
-
-        public ManagerNotification() : base()
-        {
-
-        }
+        public ManagerNotification() : base() {}
     }
 }

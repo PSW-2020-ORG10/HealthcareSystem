@@ -16,7 +16,7 @@ namespace PatientWebApplicationTests
         {
             PatientService service = new PatientService(CreateStubRepository(), new Mock<IEmailVerificationService>().Object);
             PatientUser patient = service.BlockPatient(1);
-            patient.isBlocked.ShouldBe(true);
+            patient.IsBlocked.ShouldBe(true);
         }
 
         [Fact]
@@ -37,11 +37,11 @@ namespace PatientWebApplicationTests
           
             patients.Add(blockedPatient);
 
-            stubRepository.Setup(m => m.FindOne(1)).Returns(patients.SingleOrDefault(patientUser => patientUser.id == 1));
+            stubRepository.Setup(m => m.FindOne(1)).Returns(patients.SingleOrDefault(patientUser => patientUser.Id == 1));
             stubRepository.Setup(m => m.BlockPatient(It.IsAny<PatientUser>())).Callback((PatientUser patient) =>
             {
-                PatientUser patientUser = (patients.SingleOrDefault(patientUser => patientUser.id == 1));
-                patientUser.isBlocked = true;
+                PatientUser patientUser = (patients.SingleOrDefault(patientUser => patientUser.Id == 1));
+                patientUser.IsBlocked = true;
             }
             ).Returns(blockedPatient);
 

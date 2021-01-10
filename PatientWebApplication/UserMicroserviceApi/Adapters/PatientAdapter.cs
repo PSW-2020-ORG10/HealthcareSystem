@@ -8,7 +8,7 @@ namespace UserMicroserviceApi.Adapters
     {
         public static PatientUser PatientDtoToPatient(PatientDto dto)
         {
-            return new PatientUser(dto.id, dto.firstName, dto.secondName, dto.gender, dto.uniqueCitizensidentityNumber, dto.dateOfBirth, dto.phoneNumber, dto.medicalIdNumber, dto.allergie, dto.city, dto.guest, dto.email, dto.password, false, new List<ModelNotification>(), dto.isMarried, dto.bornIn, dto.parentName, dto.exLastname, dto.file);
+            return new PatientUser(dto.Id, dto.FirstName, dto.SecondName, dto.Gender, dto.UniqueCitizensidentityNumber, dto.DateOfBirth, dto.PhoneNumber, dto.MedicalIdNumber, dto.Allergie, dto.City, dto.Guest, dto.Email, dto.Password, false, new List<ModelNotification>(), dto.IsMarried, dto.BornIn, dto.ParentName, dto.ExLastname, dto.File);
         }
     }
 }

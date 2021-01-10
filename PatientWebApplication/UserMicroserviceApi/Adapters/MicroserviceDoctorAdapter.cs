@@ -11,7 +11,7 @@ namespace UserMicroserviceApi.Adapters
     {
         public static MicroserviceDoctorDto DoctorToMicroserviceDoctorDto(DoctorUser doctor)
         {
-            return new MicroserviceDoctorDto(doctor.id, doctor.firstName, doctor.secondName, doctor.speciality, doctor.ordination);
+            return new MicroserviceDoctorDto(doctor.Id, doctor.FirstName, doctor.SecondName, doctor.Speciality, doctor.Ordination);
         }
 
         public static List<MicroserviceDoctorDto> DoctorListToMicroserviceDoctorDtoList(List<DoctorUser> doctors)

@@ -50,7 +50,7 @@ namespace UserMicroserviceApi.Repository
 
         public DoctorUser GetByid(int id)
         {
-            return dbContext.Doctors.SingleOrDefault(doctor => doctor.id == id);
+            return dbContext.Doctors.SingleOrDefault(doctor => doctor.Id == id);
         }
 
     }

@@ -10,12 +10,12 @@ namespace UserMicroserviceApi.Model
 {
     public class PhoneNumber : Entity
     {
-        public int number { get; set; }
-        public string name { get; set; }
+        public int Number { get; set; }
+        public string Name { get; set; }
         public PhoneNumber(int id, int number, string name) : base(id)
         {
-            this.number = number;
-            this.name = name;
+            Number = number;
+            Name = name;
         }
         public PhoneNumber() { }
     }

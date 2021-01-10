@@ -8,7 +8,7 @@ namespace UserMicroserviceApi.Adapters
     {
         public DoctorDto DoctorToDoctorDto(DoctorUser doctor)
         {
-            return new DoctorDto(doctor.id, doctor.firstName + " " + doctor.secondName, doctor.speciality);
+            return new DoctorDto(doctor.Id, doctor.FirstName + " " + doctor.SecondName, doctor.Speciality);
         }
 
         public List<DoctorDto> ConvertDoctorListToDoctorDtoList(List<DoctorUser> doctors)

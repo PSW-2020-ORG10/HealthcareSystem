@@ -35,28 +35,25 @@ namespace UserMicroserviceApi.Service
 
         public void Remove(Schedule schedule)
         {
-            _employeesScheduleRepository.Delete(schedule.id);
+            _employeesScheduleRepository.Delete(schedule.Id);
         }
 
         public List<Schedule> GetAll()
         {
             return _employeesScheduleRepository.GetAll();
-
         }
 
-        private bool isScheduleForDoctor(Schedule schedule, DoctorUser doctor)
+        private bool IsScheduleForDoctor(Schedule schedule, DoctorUser doctor)
         {
-            if (schedule.EmployeeId == doctor.id) return true;
-            return false;
+            return schedule.EmployeeId == doctor.Id;
         }
 
-        private Shift getScheduleShiftForDoctor(DoctorUser doctor, string date, Schedule schedule)
+        private Shift GetScheduleShiftForDoctor(DoctorUser doctor, string date, Schedule schedule)
         {
-            if (isScheduleForDoctor(schedule, doctor) && schedule.date.Equals(date)) return schedule.shift;
-            return null;
+            return IsScheduleForDoctor(schedule, doctor) && schedule.Date.Equals(date) ? schedule.Shift : null;
         }
 
-        public Shift getShiftForDoctorForSpecificDay(string date, DoctorUser doctor)
+        public Shift GetShiftForDoctorForSpecificDay(string date, DoctorUser doctor)
         {
             if (doctor == null)
             {
@@ -64,12 +61,12 @@ namespace UserMicroserviceApi.Service
             }
             foreach (Schedule schedule in _employeesScheduleRepository.GetAll())
             {
-                if (getScheduleShiftForDoctor(doctor, date, schedule) != null) return getScheduleShiftForDoctor(doctor, date, schedule);
+                if(GetScheduleShiftForDoctor(doctor, date, schedule) != null) return GetScheduleShiftForDoctor(doctor, date, schedule);
             }
             return null;
         }
 
-        public bool isTimeInGoodFormat(string start, string end)
+        public bool IsTimeInGoodFormat(string start, string end)
         {
             if (!Regex.Match(start, "^[0-9]{2}:[0-9]{2}$").Success || !Regex.Match(end, "^[0-9]{2}:[0-9]{2}$").Success) return false;
 
@@ -81,25 +78,25 @@ namespace UserMicroserviceApi.Service
             return true;
         }
 
-        public bool isDoctorWorkingAtSpecifiedTime(string date, DoctorUser doctor, TimeSpan time)
+        public bool IsDoctorWorkingAtSpecifiedTime(string date, DoctorUser doctor, TimeSpan time)
         {
-            Shift shift = getShiftForDoctorForSpecificDay(date, doctor);
+            Shift shift = GetShiftForDoctorForSpecificDay(date, doctor);
 
-            int areSelectedTimeAndStartTimeOfShiftEqual = TimeSpan.Compare(time, getStartTime(shift.startTime));
-            int areSelectedTimeAndEndTimeOfShiftEqual = TimeSpan.Compare(time, getEndTime(shift.endTime));
+            int areSelectedTimeAndStartTimeOfShiftEqual = TimeSpan.Compare(time, GetStartTime(shift.StartTime));
+            int areSelectedTimeAndEndTimeOfShiftEqual = TimeSpan.Compare(time, GetEndTime(shift.EndTime));
 
             if (areSelectedTimeAndStartTimeOfShiftEqual == 1 && areSelectedTimeAndEndTimeOfShiftEqual == -1 || areSelectedTimeAndStartTimeOfShiftEqual == 0) return true;
 
             return false;
         }
 
-        private TimeSpan getEndTime(string endTime)
+        private TimeSpan GetEndTime(string endTime)
         {
             string[] endParts = endTime.Split(':');
             return new TimeSpan(int.Parse(endParts[0]), int.Parse(endParts[1]), int.Parse("00"));
         }
 
-        private TimeSpan getStartTime(string startTime)
+        private TimeSpan GetStartTime(string startTime)
         {
             string[] startParst = startTime.Split(':');
             return new TimeSpan(int.Parse(startParst[0]), int.Parse(startParst[1]), int.Parse("00"));

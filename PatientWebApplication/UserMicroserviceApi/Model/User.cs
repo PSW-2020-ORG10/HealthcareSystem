@@ -8,36 +8,33 @@ namespace UserMicroserviceApi.Model
 {
     public class User : Entity
     {
-        public string firstName { get; set; }
-        public string secondName { get; set; }
-        public string uniqueCitizensidentityNumber { get; set; }
-        public string dateOfBirth { get; set; }
-        public string phoneNumber { get; set; }
+        public string FirstName { get; set; }
+        public string SecondName { get; set; }
+        public string UniqueCitizensidentityNumber { get; set; }
+        public string DateOfBirth { get; set; }
+        public string PhoneNumber { get; set; }
 
 
         public User(int id, string firstName, string secondName, string uniqueCitizensidentityNumber, string dateOfBirth, string phoneNumber) : base(id)
         {
-            this.firstName = firstName;
-            this.secondName = secondName;
-            this.uniqueCitizensidentityNumber = uniqueCitizensidentityNumber;
-            this.dateOfBirth = dateOfBirth;
-            this.phoneNumber = phoneNumber;
+            FirstName = firstName;
+            SecondName = secondName;
+            UniqueCitizensidentityNumber = uniqueCitizensidentityNumber;
+            DateOfBirth = dateOfBirth;
+            PhoneNumber = phoneNumber;
         }
 
         public User(string firstName, string secondName, string uniqueCitizensidentityNumber, string dateOfBirth, string phoneNumber) : base()
         {
-            this.firstName = firstName;
-            this.secondName = secondName;
-            this.uniqueCitizensidentityNumber = uniqueCitizensidentityNumber;
-            this.dateOfBirth = dateOfBirth;
-            this.phoneNumber = phoneNumber;
+            FirstName = firstName;
+            SecondName = secondName;
+            UniqueCitizensidentityNumber = uniqueCitizensidentityNumber;
+            DateOfBirth = dateOfBirth;
+            PhoneNumber = phoneNumber;
         }
 
 
-        public User() : base()
-        {
-
-        }
+        public User() : base() {}
 
     }
 }

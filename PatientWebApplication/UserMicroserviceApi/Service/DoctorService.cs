@@ -37,7 +37,7 @@ namespace UserMicroserviceApi.Service
 
         public override bool New(DoctorUser doctor)
         {
-            if (isDataValid(doctor.email, doctor.uniqueCitizensidentityNumber, doctor) && isCityValid(doctor.city))
+            if (IsDataValid(doctor.Email, doctor.UniqueCitizensidentityNumber, doctor) && IsCityValid(doctor.City))
             {
                 _doctorRepository.New(doctor);
                 return true;
@@ -47,7 +47,7 @@ namespace UserMicroserviceApi.Service
 
         public override bool Update(DoctorUser doctor)
         {
-            if (isDataValid(doctor.email, doctor.uniqueCitizensidentityNumber, doctor) && isCityValid(doctor.city))
+            if (IsDataValid(doctor.Email, doctor.UniqueCitizensidentityNumber, doctor) && IsCityValid(doctor.City))
             {
                 _doctorRepository.Update(doctor);
                 return true;
@@ -62,25 +62,22 @@ namespace UserMicroserviceApi.Service
 
         public override void Remove(DoctorUser doctor)
         {
-            _doctorRepository.Delete(doctor.id);
+            _doctorRepository.Delete(doctor.Id);
         }
 
-        private bool isListOfDoctorsEmpty(List<DoctorUser> listOfObjects)
+        private bool IsListOfDoctorsEmpty(List<DoctorUser> listOfObjects)
         {
-            if (listOfObjects.Count == 0) return true;
-            return false;
+            return listOfObjects.Count == 0;
         }
 
-        private bool isDoctorsEquals(DoctorUser firstDoctor, DoctorUser secondDoctor)
+        private bool IsDoctorsEquals(DoctorUser firstDoctor, DoctorUser secondDoctor)
         {
-            if (firstDoctor.id.ToString().Equals(secondDoctor.id.ToString())) return true;
-            return false;
+            return firstDoctor.Id.ToString().Equals(secondDoctor.Id.ToString());
         }
 
-        public bool areDatesEqual(string firstDate, string secondDate)
+        public bool AreDatesEqual(string firstDate, string secondDate)
         {
-            if (firstDate.Equals(secondDate)) return true;
-            return false;
+            return firstDate.Equals(secondDate);
         }
 
         /// <summary> This method is getting all doctors that have same specialty given as parameter. </summary>

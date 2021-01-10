@@ -40,10 +40,10 @@ namespace UserMicroserviceApi.Service
         /// <returns>Returns successfully created patient; otherwise, return <c>null</c></returns>
         public PatientUser Create(PatientDto patientDto)
         {
-            if(PatientsRepository.GetByEmail(patientDto.email) == null)
+            if(PatientsRepository.GetByEmail(patientDto.Email) == null)
             {
                 PatientUser patient = PatientsRepository.Add(PatientAdapter.PatientDtoToPatient(patientDto));
-                EmailVerificationService.SendVerificationMail(new MailAddress(patient.email), patient.id);
+                EmailVerificationService.SendVerificationMail(new MailAddress(patient.Email), patient.Id);
                 return patient;
             }
             return null;
@@ -56,11 +56,7 @@ namespace UserMicroserviceApi.Service
         public PatientUser Validate(int id)
         {
             PatientUser patient = PatientsRepository.FindOne(id);
-            if (patient != null)
-            {
-                return PatientsRepository.Validate(patient);
-            }
-            return null;
+            return patient != null ? PatientsRepository.Validate(patient) : null;
         }
 
         /// <summary> This method is calling <c>PatientsRepository</c> to get list of all<c>PatientUser</c>. </summary>
@@ -87,7 +83,6 @@ namespace UserMicroserviceApi.Service
             catch (Exception)
             {
                 return null;
-
             }
         }
 

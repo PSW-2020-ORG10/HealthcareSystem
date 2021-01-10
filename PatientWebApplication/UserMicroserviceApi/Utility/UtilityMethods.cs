@@ -49,7 +49,7 @@ namespace UserMicroserviceApi.Utility
 
         public static Boolean CheckForSpecialty(DoctorUser doctor, string specialty)
         {
-            return doctor.speciality.Equals(specialty);
+            return doctor.Speciality.Equals(specialty);
         }
     }
 }
