@@ -1,20 +1,4 @@
-﻿using HealthClinic.CL.DbContextModel;
-using HealthClinic.CL.Dtos;
-using HealthClinic.CL.Model.Doctor;
-using HealthClinic.CL.Model.Employee;
-using HealthClinic.CL.Model.Patient;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.TestHost;
-using Newtonsoft.Json;
-using PatientWebApplication;
-using Shouldly;
-using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
+﻿/*using System.Net.Http;
 
 namespace PatientWebApplicationIntegrationTests
 {
@@ -91,3 +75,4 @@ namespace PatientWebApplicationIntegrationTests
         }
     }
 }
+*/
