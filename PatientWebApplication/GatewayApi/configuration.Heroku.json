@@ -366,9 +366,11 @@
       "DownstreamPathTemplate": "/api/feedback",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "feedbackapi-org10.herokuapp.com"
-        }
+         {
+            "Host": "feedbackapi-org10.herokuapp.com",
+            "Port": 443
+
+         }
       ],
       "UpstreamPathTemplate": "/api/feedback",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
@@ -381,9 +383,11 @@
       "DownstreamPathTemplate": "/api/feedback/published",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "feedbackapi-org10.herokuapp.com"
-        }
+         {
+            "Host": "feedbackapi-org10.herokuapp.com",
+            "Port": 443
+
+         }
       ],
       "UpstreamPathTemplate": "/api/feedback/published",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
@@ -396,9 +400,11 @@
       "DownstreamPathTemplate": "/api/feedback/{id}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "feedbackapi-org10.herokuapp.com"
-        }
+         {
+            "Host": "feedbackapi-org10.herokuapp.com",
+            "Port": 443
+
+         }
       ],
       "UpstreamPathTemplate": "/api/feedback/{id}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
@@ -411,9 +417,11 @@
       "DownstreamPathTemplate": "/api/appointmentSearch/search",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "searchapi-org10.herokuapp.com"
-        }
+         {
+            "Host": "searchapi-org10.herokuapp.com",
+            "Port": 443
+
+         }
       ],
       "UpstreamPathTemplate": "/api/appointmentSearch/search",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
@@ -426,9 +434,11 @@
       "DownstreamPathTemplate": "/api/appointmentSearch/advancedsearch",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "searchapi-org10.herokuapp.com"
-        }
+         {
+            "Host": "searchapi-org10.herokuapp.com",
+            "Port": 443
+
+         }
       ],
       "UpstreamPathTemplate": "/api/appointmentSearch/advancedsearch",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
@@ -441,9 +451,11 @@
       "DownstreamPathTemplate": "/api/prescription",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "searchapi-org10.herokuapp.com"
-        }
+         {
+            "Host": "searchapi-org10.herokuapp.com",
+            "Port": 443
+
+         }
       ],
       "UpstreamPathTemplate": "/api/prescription",
       "UpstreamHttpMethod": [ "GET" ],
@@ -456,9 +468,11 @@
       "DownstreamPathTemplate": "/api/prescription/patient/{id}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "searchapi-org10.herokuapp.com"
-        }
+         {
+            "Host": "searchapi-org10.herokuapp.com",
+            "Port": 443
+
+         }
       ],
       "UpstreamPathTemplate": "/api/prescription/patient/{id}",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
@@ -471,9 +485,11 @@
       "DownstreamPathTemplate": "/api/prescription/search",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "searchapi-org10.herokuapp.com"
-        }
+         {
+            "Host": "searchapi-org10.herokuapp.com",
+            "Port": 443
+
+         }
       ],
       "UpstreamPathTemplate": "/api/prescription/search",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
@@ -486,9 +502,10 @@
       "DownstreamPathTemplate": "/api/prescription/advancedsearch",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
-        {
-            "Host": "searchapi-org10"
-        }
+         {
+            "Host": "searchapi-org10.herokuapp.com",
+            "Port": 443
+         }
       ],
       "UpstreamPathTemplate": "/api/prescription/advancedsearch",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
