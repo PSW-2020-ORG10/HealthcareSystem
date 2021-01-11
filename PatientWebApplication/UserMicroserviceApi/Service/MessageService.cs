@@ -1,5 +1,4 @@
-﻿using HealthClinic.CL.Repository;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UserMicroserviceApi.Adapters;
 using UserMicroserviceApi.DbContextModel;
 using UserMicroserviceApi.Dtos;

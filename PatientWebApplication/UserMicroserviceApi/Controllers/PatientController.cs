@@ -163,5 +163,11 @@ namespace UserMicroserviceApi.Controllers
             if (patient == null) return BadRequest();
             return Ok(patient);
         }
+
+        [HttpGet("all")]       // GET /api/patient/all
+        public IActionResult GetWithoutAuthorization()
+        {
+            return Ok(PatientService.GetAll());
+        }
     }
 }

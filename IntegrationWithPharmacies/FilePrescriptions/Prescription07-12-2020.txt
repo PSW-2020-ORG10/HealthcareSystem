@@ -1,7 +1,0 @@
-          Precription for medicine
-
-Patients name: Mladenka
-Patients surname: Kokanovic 
-Patients medical ID number: tt2331
-Medication: Defrinol     Quantity: 5
-Usage: Twice a day, consume 2 weeks.

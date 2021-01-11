@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <style>
+
+        .navbar {
+            padding: 0px;
+            margin : 0px;
+        }
+
+
+        ul {
+            list-style-type: none;
+            font-size: 28px;
+            list-style-type: none;
+            padding: 25px;
+            overflow: hidden;
+            background-color: #1D8288;
+            position: -webkit-sticky; /* Safari */
+            position: sticky;
+        }
+
+        li {
+            float: left;
+            text-decoration: underline;
+        }
+
+            li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+                li a:hover {
+                    background-color: #18A1AA;
+                }
+
+        .active {
+            background-color: #28DAE5;
+        }
+
+        #logo {
+            font-size: 40px;
+            color: antiquewhite;
+            margin-right: 50px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+    </style>
+</head>
+<body>
+    <noscript>
+        <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <nav id="navbar">
+
+        <ul>
+            <li id="logo" style="text-decoration:none">Health clinic system</li>
+            <li>
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <a href="/registration">Pharmacy registration</a>
+            </li>
+            <li><a href="/actionsAndBenefits">Actions and benefits</a></li>
+            <li><a href="/report">Report</a></li>
+            <li><a href="/sharingPrescription">Share prescription</a></li>
+            <li><a href="/urgentOrder">Urgent procurement</a></li>
+            <li><a href="/tender">Tender</a></li>
+            <li><a href="/tenderOffer">Create tender offer</a></li>
+        </ul>
+    </nav>
+    <div id="app" style="        background-image: url('images/bg2.jpg');
+        background-repeat: no-repeat;
+        background-size: 175% 100%;
+        height: 1000px"></div>
+    <!-- built files will be auto injected -->
+</body>
+</html>
+

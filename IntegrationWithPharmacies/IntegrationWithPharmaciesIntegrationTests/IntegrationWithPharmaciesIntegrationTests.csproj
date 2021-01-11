@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+
+    <DockerfileContext>..\IntegrationWithPharmacies</DockerfileContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.7" />
+    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="3.1.9" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
+    <PackageReference Include="Shouldly" Version="4.0.3" />
+    <PackageReference Include="xunit" Version="2.4.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
+    <PackageReference Include="coverlet.collector" Version="1.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\PatientWebApplication\UserMicroserviceApi\UserMicroserviceApi.csproj" />
+    <ProjectReference Include="..\EPrescriptionApi\EPrescriptionApi.csproj" />
+    <ProjectReference Include="..\GatewayApi\GatewayApi.csproj" />
+    <ProjectReference Include="..\IntegrationWithPharmacies\IntegrationWithPharmacies.csproj" />
+    <ProjectReference Include="..\MedicineInformationApi\MedicineInformationApi.csproj" />
+    <ProjectReference Include="..\PharmacyRegistrationApi\PharmacyRegistrationApi.csproj" />
+    <ProjectReference Include="..\TenderApi\TenderApi.csproj" />
+    <ProjectReference Include="..\UrgentMedicineOrderApi\UrgentMedicineOrderApi.csproj" />
+  </ItemGroup>
+
+</Project>
