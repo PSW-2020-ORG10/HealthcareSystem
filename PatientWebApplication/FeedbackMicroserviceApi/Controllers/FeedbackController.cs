@@ -25,16 +25,10 @@ namespace FeedbackMicroserviceApi.Controllers
 
         /// <summary>This constructor injects the FeedbackController with matching FeedbackService.</summary>
         /// <param name="context"><c>context</c> is type of <c>DbContext</c>, and it's used for accessing MYSQL database.</param>
-        public FeedbackController(MyDbContext context, EventDbContext eventDbContext)
+        public FeedbackController(MyDbContext context, EventDbContext eventDbContext = null)
         {
             FeedbackService = new FeedbackService(context);
-            FeedbackSubmittedEventService = new FeedbackSubmittedEventService(new FeedbackSubmittedEventRepository(eventDbContext));
-        }
-
-        public FeedbackController(MyDbContext context)
-        {
-            FeedbackService = new FeedbackService(context);
-            FeedbackSubmittedEventService = null;
+            FeedbackSubmittedEventService = eventDbContext != null ? new FeedbackSubmittedEventService(new FeedbackSubmittedEventRepository(eventDbContext)) : null;
         }
 
         /// <summary> This method is calling <c>FeedbackService</c> to get list of all <c>Feedback</c>.  </summary>
