@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using FeedbackMicroserviceApi.Adapters;
+using FeedbackMicroserviceApi.DbContextModel;
+using FeedbackMicroserviceApi.Dtos;
+using FeedbackMicroserviceApi.Model;
+using FeedbackMicroserviceApi.Service;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using EventStore.EventDBContext;
 using EventStore.Events;
 using EventStore.Repository;
 using EventStore.Service;
-using HealthClinic.CL.DbContextModel;
-using HealthClinic.CL.Dtos;
-using HealthClinic.CL.Model.Patient;
-using HealthClinic.CL.Services;
-using Microsoft.AspNetCore.Mvc;
+
 
 namespace FeedbackMicroserviceApi.Controllers
 {
@@ -27,6 +29,12 @@ namespace FeedbackMicroserviceApi.Controllers
         {
             FeedbackService = new FeedbackService(context);
             FeedbackSubmittedEventService = new FeedbackSubmittedEventService(new FeedbackSubmittedEventRepository(eventDbContext));
+        }
+
+        public FeedbackController(MyDbContext context)
+        {
+            FeedbackService = new FeedbackService(context);
+            FeedbackSubmittedEventService = null;
         }
 
         /// <summary> This method is calling <c>FeedbackService</c> to get list of all <c>Feedback</c>.  </summary>
@@ -60,16 +68,26 @@ namespace FeedbackMicroserviceApi.Controllers
         {
             Feedback feedback = FeedbackService.Create(dto);
             
+            
             if (feedback == null)
             {
                 return BadRequest();
             }
             else
             {
-                FeedbackSubmittedEventService.Create(new FeedbackSubmittedEvent(feedback.id, feedback.Message, feedback.PatientId));
+
+                CreateFeedbackSubmittedEvent(feedback);
                 return Ok();
             }
 
+        }
+
+        private void CreateFeedbackSubmittedEvent(Feedback feedback)
+        {
+            if(FeedbackSubmittedEventService != null)
+            {
+                FeedbackSubmittedEventService.Create(new FeedbackSubmittedEvent(feedback.Id, feedback.Message, feedback.PatientId));
+            }
         }
 
         /// <summary> This method determines if provided <paramref name="id"/> of feedback is valid, if <c>True</c> it sends it to <c>FeedbackService</c> to check out further business logic. </summary>
