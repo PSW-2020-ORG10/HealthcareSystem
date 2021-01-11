@@ -5,16 +5,18 @@ services:
     image: velickotam/healthcaresystem:appointmentapi_latest
     container_name: appointmentmicroserviceapi
     restart: on-failure
-    hostname: appointmentmicroserviceapi
     networks:
       - demo
     environment:
+      ASPNETCORE_ENVIRONMENT: Production
       DATABASE_USERNAME: root
       DATABASE_PASSWORD: root
       DATABASE_HOST: mysql
       DATABASE_SCHEMA: MYSQLHealtcareDB
       DATABASE_PORT: 3306
       PORT: 53212
+    ports:
+      - 53212:53212
     depends_on:
       - mysql
     volumes:
@@ -49,12 +51,15 @@ services:
     networks:
       - demo
     environment:
+      ASPNETCORE_ENVIRONMENT: Production
       DATABASE_USERNAME: root
       DATABASE_PASSWORD: root
       DATABASE_HOST: mysql
       DATABASE_SCHEMA: MYSQLHealtcareDB
       DATABASE_PORT: 3306
-      PORT: 53174      
+      PORT: 53174
+    ports:
+      - 53174:53174
     depends_on:
       - mysql
     volumes:
@@ -67,12 +72,15 @@ services:
     networks:
       - demo
     environment:
+      ASPNETCORE_ENVIRONMENT: Production
       DATABASE_USERNAME: root
       DATABASE_PASSWORD: root
       DATABASE_HOST: mysql
       DATABASE_SCHEMA: MYSQLHealtcareDB
       DATABASE_PORT: 3306
       PORT: 58636
+    ports:
+      - 58636:58636
     depends_on:
       - mysql
     volumes:
@@ -86,12 +94,15 @@ services:
     networks:
       - demo
     environment:
+      ASPNETCORE_ENVIRONMENT: Production
       DATABASE_USERNAME: root
       DATABASE_PASSWORD: root
       DATABASE_HOST: mysql
       DATABASE_SCHEMA: MYSQLHealtcareDB
       DATABASE_PORT: 3306
       PORT: 53236
+    ports:
+      - 53236:53236
     depends_on:
       - mysql
     volumes:
@@ -121,6 +132,7 @@ services:
     ports:
       - '3000:3000'
     environment:
+      - ASPNETCORE_ENVIRONMENT=Production
       - PORT=3000
 volumes:
   gatewayapi:

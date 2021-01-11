@@ -16,14 +16,13 @@ namespace AppointmentMicroserviceApi.Utility
 
         public static async Task<MicroserviceDoctorDto> GetDoctorByIdAsync(int id)
         {
-            var responseString = await client.GetAsync($"{usersServiceUrl}api/doctor/{id}");
+         var responseString = await client.GetAsync($"{usersServiceUrl}api/doctor/{id}");
             MicroserviceDoctorDto doc = await responseString.Content.ReadAsAsync<MicroserviceDoctorDto>();
             return doc;
         }
 
         public static async Task<List<MicroserviceDoctorDto>> GetAllAsync()
-      {
-         Console.WriteLine(usersServiceUrl);
+        {
          var responseString = await client.GetAsync($"{usersServiceUrl}api/doctor/");
             return await responseString.Content.ReadAsAsync<List<MicroserviceDoctorDto>>();
         }
