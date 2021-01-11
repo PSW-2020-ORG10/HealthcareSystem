@@ -13,12 +13,11 @@ RUN curl -sL https://deb.nodesource.com/setup_12.x |  bash -
 RUN apt-get install -y nodejs
 WORKDIR /src
 COPY ["IntegrationWithPharmacies.csproj", ""]
-COPY ["PatientWebApplication/HealthClinic.DAL/HealthClinic.CL.csproj", "PatientWebApplication/HealthClinic.DAL/"]
-RUN dotnet restore "IntegrationWithPharmacies/IntegrationWithPharmacies.csproj"
+RUN dotnet restore "IntegrationWithPharmacies.csproj"
 COPY . .
-WORKDIR "/src/IntegrationWithPharmacies/"
-COPY package.json ./
-COPY package-lock.json ./
+WORKDIR "/src"
+COPY front/package.json ./
+COPY front/package-lock.json ./
 
 RUN dotnet build "IntegrationWithPharmacies.csproj" -c Release -o /app/build
 
