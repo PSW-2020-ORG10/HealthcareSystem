@@ -1,0 +1,149 @@
+version: '3.4'
+
+services:
+  urgentmedicineorderapi:
+    image: urgentmedicineorder
+    container_name: urgentmedicineorderapi
+    restart: on-failure
+    hostname: urgentmedicineorder
+    networks:
+      - demo
+    environment:
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root
+      DATABASE_HOST: mysql
+      DATABASE_SCHEMA: MYSQLHealtcareDB
+      DATABASE_PORT: 3306
+      PORT: 59328
+    depends_on:
+      - mysql
+    volumes:
+      - urgentmedicineorderapi:/app/sql
+
+  gateway:
+    image: gateway
+    container_name: gatewayapi
+    restart: on-failure
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - PORT=80
+    networks:
+      - demo
+    ports:
+      - 54679:80
+    links:
+      - pharmacyregistrationapi
+      - urgentmedicineorderapi
+      - medicineinformationapi
+      - tenderapi
+    depends_on:
+      - pharmacyregistrationapi
+      - urgentmedicineorderapi
+      - medicineinformationapi
+      - tenderapi
+
+  medicineinformationapi:
+    image:  medicineinformation
+    container_name: medicineinformationapi
+    restart: on-failure
+    networks:
+      - demo
+    environment:
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root
+      DATABASE_HOST: mysql
+      DATABASE_SCHEMA: MYSQLHealtcareDB
+      DATABASE_PORT: 3306
+      PORT: 50482
+    depends_on:
+      - mysql
+    volumes:
+      - medicineinformationapi:/app/sql
+
+  tenderapi:
+    image: tender
+    container_name: tenderapi
+    restart: on-failure
+    networks:
+      - demo
+    environment:
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root
+      DATABASE_HOST: mysql
+      DATABASE_SCHEMA: MYSQLHealtcareDB
+      DATABASE_PORT: 3306
+      PORT: 50921
+    depends_on:
+      - mysql
+    volumes:
+      - tenderapi:/app/sql
+
+
+  pharmacyregistrationapi:
+    image: pharmacyregistration
+    container_name: pharmacyregistrationapi
+    restart: on-failure
+    networks:
+      - demo
+    environment:
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root
+      DATABASE_HOST: mysql
+      DATABASE_SCHEMA: MYSQLHealtcareDB
+      DATABASE_PORT: 3306
+      PORT: 59278
+    depends_on:
+      - mysql
+    volumes:
+      - pharmacyregistrationapi:/app/sql
+
+  mysql:
+    image: mysql:8.0.19
+    container_name: mysql
+    restart: always
+    networks:
+      - demo
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: root
+      MYSQL_USER: root
+      MYSQL_DATABASE: MYSQLHealtcareDB
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  vue:
+    image: vue
+    container_name: vue
+    stdin_open: true
+    restart: on-failure
+    networks:
+      - demo
+    environment:
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root
+      DATABASE_HOST: mysql
+      DATABASE_SCHEMA: MYSQLHealtcareDB
+      DATABASE_PORT: 3306
+      PORT: 57942
+    depends_on:
+      - mysql
+    volumes:
+      - vue:/app/sql
+    ports:
+      - '57942:57942'
+
+volumes:
+  gatewayapi:
+  pharmacyregistrationapi:
+  tenderapi:
+  medicineinformationapi:
+  urgentmedicineorderapi:
+  mysql-data:
+  vue:
+
+networks:
+  demo:
+    name: demo
+    driver: bridge

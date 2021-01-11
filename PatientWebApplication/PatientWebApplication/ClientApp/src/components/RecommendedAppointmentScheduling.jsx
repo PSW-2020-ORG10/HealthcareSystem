@@ -30,7 +30,7 @@ class RecommendedAppointmentScheduling extends Component {
     componentDidMount() {
         debugger;
         this.props.loadedAllDoctors();
-        this.props.recommendAppointment({ doctorId: this.state.doctorId, start: this.state.start, end: this.state.end, priority: this.state.priority })
+        //this.props.recommendAppointment({ doctorId: this.state.doctorId, start: this.state.start, end: this.state.end, priority: this.state.priority })
     }
 
     render() {

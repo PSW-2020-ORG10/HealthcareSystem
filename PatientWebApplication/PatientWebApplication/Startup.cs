@@ -1,6 +1,5 @@
 using EventStore.EventDBContext;
 using FluentValidation.AspNetCore;
-using HealthClinic.CL.DbContextModel;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
@@ -89,6 +88,8 @@ namespace PatientWebApplication
             {
                 configuration.RootPath = "ClientApp/build";
             });
+
+            services.AddOcelot();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -109,13 +110,7 @@ namespace PatientWebApplication
             //app.UseSpaStaticFiles();
 
             app.UseRouting();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}");
-            });
+            app.UseOcelot().Wait();
 
             app.UseSpa(spa =>
             {
@@ -126,6 +121,13 @@ namespace PatientWebApplication
                     spa.UseReactDevelopmentServer(npmScript: "start");
                 }
             });
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+
+            app.UseOcelot().Wait();
         }
     }
 }
