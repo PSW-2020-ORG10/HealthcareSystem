@@ -14,8 +14,6 @@ namespace IntegrationWithPharmacies
 {
     public class RabbitMQService : BackgroundService
     {
-        //private static readonly string usersServiceUrl = Startup.Configuration["UserMicroServiceApi"];
-
         IConnection connection;
         IModel channel;
         public override Task StartAsync(CancellationToken cancellationToken)

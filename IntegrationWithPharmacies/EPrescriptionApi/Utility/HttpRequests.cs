@@ -13,9 +13,9 @@ namespace EPrescriptionApi.Utility
 {
     public class HttpRequests
     {
-        private static readonly string medicineInformationUrl = Startup.Configuration["MedicineInformationApi"];
-        private static readonly string usersServiceUrl = Startup.Configuration["UserMicroServiceApi"];
-        private static readonly string pharmacyRegistrationUrl = Startup.Configuration["PharmacyRegistrationApi"];
+        private static readonly string MedicineInformationUrl = Startup.Configuration["MedicineInformationApi"];
+        private static readonly string UsersServiceUrl = Startup.Configuration["UserMicroServiceApi"];
+        private static readonly string PharmacyRegistrationUrl = Startup.Configuration["PharmacyRegistrationApi"];
 
         public HttpRequests() { }
         public void UploadReportFile(String complete)
@@ -52,12 +52,12 @@ namespace EPrescriptionApi.Utility
         }
         public String GetMedicineDescriptionFromApi(String medicine)
         {
-            return new RestClient(medicineInformationUrl).Get<String>(new RestRequest("/api/medicineWithQuantity/description/" + medicine)).Data;
+            return new RestClient(MedicineInformationUrl).Get<String>(new RestRequest("/api/medicineWithQuantity/description/" + medicine)).Data;
         }
         public async Task CreateNewMedicineWithQuantityAsync(String medicine, String description)
         {
             var content = new StringContent(JsonConvert.SerializeObject(CretaeMedicineWithQuantityObject(medicine, description), Formatting.Indented), Encoding.UTF8, "application/json");
-            await new HttpClient().PostAsync(medicineInformationUrl+"/api/medicineWithQuantity", content);
+            await new HttpClient().PostAsync(MedicineInformationUrl+"/api/medicineWithQuantity", content);
         }
 
         private static Dictionary<string, object> CretaeMedicineWithQuantityObject(string medicine, string description)
@@ -70,11 +70,11 @@ namespace EPrescriptionApi.Utility
 
         public static List<Message> GetAllMessages()
         {
-            return new RestClient(usersServiceUrl).Get<List<Message>>(new RestRequest("/api/message")).Data;
+            return new RestClient(UsersServiceUrl).Get<List<Message>>(new RestRequest("/api/message")).Data;
         }
         public static List<RegistrationInPharmacy> GetPharmacyRegistrations()
         {
-            return new RestClient(pharmacyRegistrationUrl).Get<List<RegistrationInPharmacy>>(new RestRequest("/api/registration")).Data;
+            return new RestClient(PharmacyRegistrationUrl).Get<List<RegistrationInPharmacy>>(new RestRequest("/api/registration")).Data;
         }
     }
 }

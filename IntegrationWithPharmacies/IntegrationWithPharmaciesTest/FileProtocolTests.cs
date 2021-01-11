@@ -78,14 +78,14 @@ namespace IntegrationWithPharmaciesTest
             {
                 if (isOrderInRequiredPeriod(medicine, date, tender))
                 {
-                    stringBuilder.Append("\n     Medicine name: " + medicine.Name + "\n     Ordered quantity: " + medicine.Quantity + " (Date:  " + tender.ActiveUntil.ToString() + ")\n");
+                    stringBuilder.Append("\n     Medicine name: " + medicine.Name + "\n     Ordered quantity: " + medicine.Quantity + " (Date:  " + tender.ExpirationDate.ToString() + ")\n");
                 }
             }
             return stringBuilder.ToString();
         }
         private bool isOrderInRequiredPeriod(MedicineForTendering medicine, DateOfOrder date, Tender tender)
         {
-            if (isIdEqual(medicine.TenderId, tender.Id) && compareDates(tender.ActiveUntil, convertStringToDate(date.StartDate)) == 1 && compareDates(tender.ActiveUntil, convertStringToDate(date.EndDate)) == -1 && tender.Closed) return true;
+            if (isIdEqual(medicine.TenderId, tender.Id) && compareDates(tender.ExpirationDate, convertStringToDate(date.StartDate)) == 1 && compareDates(tender.ExpirationDate, convertStringToDate(date.EndDate)) == -1 && tender.Closed) return true;
             return false;
         }
         private bool isIdEqual(int firstNumber, int secondNumber)

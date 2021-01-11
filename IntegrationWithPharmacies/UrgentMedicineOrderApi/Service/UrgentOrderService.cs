@@ -57,7 +57,7 @@ namespace UrgentMedicineOrderApi.Service
         {
             try
             {
-                string response = new ClientScheduledService().SendMessage(CreateOrder(order)).Result;
+                _= new ClientScheduledService().SendMessage(CreateOrder(order)).Result;
                 return true;
             }
             catch (Exception e) { return false; }

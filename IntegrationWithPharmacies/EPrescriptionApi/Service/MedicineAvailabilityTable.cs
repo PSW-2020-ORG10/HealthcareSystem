@@ -10,8 +10,7 @@ namespace EPrescriptionApi.Service
         public MedicineAvailabilityTable() { }
         public List<MedicineName> FormMedicineAvailability(string availability)
         {
-            if (availability.Length > 5) return GetMedicineAvailabilityTable(availability);
-            return null;
+            return availability.Length > 5 ? GetMedicineAvailabilityTable(availability) : null;
         }
         public List<MedicineName> GetMedicineAvailabilityTable(string availability)
         {

@@ -55,7 +55,7 @@ namespace TenderApi.Utility
             {
                 if (isOrderInRequiredPeriod(medicine, date, tender))
                 {
-                    stringBuilder.Append("\n     Medicine name: " + medicine.Name + "\n     Ordered quantity: " + medicine.Quantity + " (Date:  " + tender.ActiveUntil.ToString() + ")\n");
+                    stringBuilder.Append("\n     Medicine name: " + medicine.Name + "\n     Ordered quantity: " + medicine.Quantity + " (Date:  " + tender.ExpirationDate.ToString() + ")\n");
                 }
             }
             return stringBuilder.ToString();
@@ -66,7 +66,7 @@ namespace TenderApi.Utility
         }
         private bool isOrderInRequiredPeriod(MedicineForTendering medicine, DateOfOrder date, Tender tender)
         {
-            if (HelperFunctions.IsIdEqual(medicine.TenderId, tender.Id) && HelperFunctions.CompareDates(tender.ActiveUntil, HelperFunctions.ConvertStringToDate(date.StartDate)) == 1 && HelperFunctions.CompareDates(tender.ActiveUntil, HelperFunctions.ConvertStringToDate(date.EndDate)) == -1 && tender.Closed) return true;
+            if (HelperFunctions.IsIdEqual(medicine.TenderId, tender.Id) && HelperFunctions.CompareDates(tender.ExpirationDate, HelperFunctions.ConvertStringToDate(date.StartDate)) == 1 && HelperFunctions.CompareDates(tender.ExpirationDate, HelperFunctions.ConvertStringToDate(date.EndDate)) == -1 && tender.Closed) return true;
             return false;
         }
         

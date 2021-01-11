@@ -12,19 +12,19 @@ namespace TenderApi.Model
 
         public RegistrationInPharmacy() : base() { }
 
-        public RegistrationInPharmacy(int id, int idPharmacy, String apiKeyPharmacy, String pharmacyName, String pharmacyTown) : base(id)
+        public RegistrationInPharmacy(int id, int pharmacyId, String apiKey, String name, String town) : base(id)
         {
-            PharmacyId = idPharmacy;
-            ApiKey = apiKeyPharmacy;
-            Name = pharmacyName;
-            Town = pharmacyTown;
+            PharmacyId = pharmacyId;
+            ApiKey = apiKey;
+            Name = name;
+            Town = town;
         }
-        public RegistrationInPharmacy(int idPharmacy, String apiKeyPharmacy, String pharmacyName, String pharmacyTown)
+        public RegistrationInPharmacy(int pharmacyId, String apiKey, String name, String town)
         {
-            PharmacyId = idPharmacy;
-            ApiKey = apiKeyPharmacy;
-            Name = pharmacyName;
-            Town = pharmacyTown;
+            PharmacyId = pharmacyId;
+            ApiKey = apiKey;
+            Name = name;
+            Town = town;
         }
     }
 }

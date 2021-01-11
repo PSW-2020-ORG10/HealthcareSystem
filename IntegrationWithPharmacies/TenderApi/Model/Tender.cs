@@ -4,19 +4,19 @@ namespace TenderApi.Model
 {
     public class Tender : Entity
     {
-        public DateTime ActiveUntil { get; set; }
+        public DateTime ExpirationDate { get; set; }
         public bool Closed { get; set; }
 
         public Tender() : base() { }
 
-        public Tender(int id, DateTime date, bool closed) : base(id)
+        public Tender(int id, DateTime expirationDate, bool closed) : base(id)
         {
-            ActiveUntil = date;
+            ExpirationDate = expirationDate;
             Closed = closed;
         }
-        public Tender(DateTime date, bool closed)
+        public Tender(DateTime expirationDate, bool closed)
         {
-            ActiveUntil = date;
+            ExpirationDate = expirationDate;
             Closed = closed;
         }
     }

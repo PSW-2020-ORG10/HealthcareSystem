@@ -15,16 +15,16 @@ namespace EPrescriptionApi.Service
         }
         private static void SendMail(String filePath)
         {
-            SmtpClient SmptServer = FormSmptServerInformation();
-            SmptServer.Send(CreateMailMessage(filePath));
+            SmtpClient smptServer = FormSmptServerInformation();
+            smptServer.Send(CreateMailMessage(filePath));
         }
    
         private static SmtpClient FormSmptServerInformation()
         {
-            SmtpClient SmptServer = new SmtpClient("smtp.gmail.com", 587);
-            SmptServer.Credentials = new System.Net.NetworkCredential("ourhospital9@gmail.com", "hospital.9");
-            SmptServer.EnableSsl = true;
-            return SmptServer;
+            SmtpClient smptServer = new SmtpClient("smtp.gmail.com", 587);
+            smptServer.Credentials = new System.Net.NetworkCredential("ourhospital9@gmail.com", "hospital.9");
+            smptServer.EnableSsl = true;
+            return smptServer;
         }
 
         private static MailMessage CreateMailMessage(String filePath)

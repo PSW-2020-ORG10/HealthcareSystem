@@ -73,7 +73,7 @@ namespace TenderApi.Service
             List<TenderOrder> tenderOrders = new List<TenderOrder>();
             foreach (Tender tender in GetAll().Where(tender => tender.Closed == false).ToList())
             {
-                tenderOrders.Add(new TenderOrder(new List<MedicineTenderOffer>(), tender.ActiveUntil.ToString("dd/MM/yyyy"), tender.Id, 0, ""));
+                tenderOrders.Add(new TenderOrder(new List<MedicineTenderOffer>(), tender.ExpirationDate.ToString("dd/MM/yyyy"), tender.Id, 0, ""));
             }
             return tenderOrders;
         }
