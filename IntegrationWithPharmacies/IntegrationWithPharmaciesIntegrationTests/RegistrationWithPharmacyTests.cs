@@ -1,18 +1,17 @@
-
-using IntegrationWithPharmacies;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using PharmacyRegistrationApi.DbContextModel;
 using PharmacyRegistrationApi.Dtos;
 using PharmacyRegistrationApi.Model;
 using PharmacyRegistrationApi.Service;
+using PharmacyRegistrationApi;
 using Shouldly;
 using Xunit;
 
 namespace IntegrationWithPharmaciesIntegrationTests
 {
     public class RegistrationWithPharmacyTests
-    {/*
+    {
         private readonly MyDbContext _context;
 
         public RegistrationWithPharmacyTests()
@@ -40,6 +39,6 @@ namespace IntegrationWithPharmaciesIntegrationTests
             RegistrationInPharmacy registrationInPharmacy = registrationInPharmacyService.Create(new RegistrationInPharmacyDto(5, "apisa12345", "Jankovic 2", "Novi Sad"));
             registrationInPharmacy.ShouldBeNull();
         }
-      */
+      
     }
 }

@@ -1,6 +1,4 @@
-﻿
-using IntegrationWithPharmacies;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Newtonsoft.Json;
 using Shouldly;
@@ -10,19 +8,20 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using TenderApi.Model;
+using TenderApi;
 using TenderApi.DbContextModel;
+using TenderApi.Model;
 using Xunit;
 
 namespace IntegrationWithPharmaciesIntegrationTests
 {
-    public  class MedicineOrderTests
-    {/*
+   public class TenderTests
+    {
         private readonly HttpClient _client;
-        private  MyDbContext _context;
+        private MyDbContext _context;
 
 
-        public MedicineOrderTests()
+        public TenderTests()
         {
             var builder = new WebHostBuilder()
                .UseEnvironment("Testing")
@@ -35,18 +34,6 @@ namespace IntegrationWithPharmaciesIntegrationTests
         }
 
         [Fact]
-        public async Task Creates_Urgent_Order()
-        {
-            var response = await _client.GetAsync("http://localhost:59328/api/urgentOrder/http/Brufen_3");
-            response.StatusCode.ShouldBe(HttpStatusCode.OK);
-        }
-        [Fact]
-        public async Task Creates_No_Urgent_Order()
-        {
-            var response = await _client.GetAsync("http://localhost:59328/api/urgentOrder/http/Brufen_100");
-            response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
-        }
-        [Fact]
         public async Task Creates_Tender()
         {
             List<MedicineTenderOffer> medicineQuantityList = new List<MedicineTenderOffer>();
@@ -54,12 +41,12 @@ namespace IntegrationWithPharmaciesIntegrationTests
             MedicineTenderOffer medicineQuantity2 = new MedicineTenderOffer("Pancef", 50);
             medicineQuantityList.Add(medicineQuantity1);
             medicineQuantityList.Add(medicineQuantity2);
-            TenderOrder tender = new TenderOrder(medicineQuantityList,"12/01/2020");
+            TenderOrder tender = new TenderOrder(medicineQuantityList, "12/01/2020");
             var stringContent = new StringContent(JsonConvert.SerializeObject(tender), Encoding.UTF8, "application/json");
             var response = await _client.PostAsync("http://localhost:50921/api/tender", stringContent);
             response.StatusCode.ShouldBe(HttpStatusCode.OK);
         }
-        
+
         [Fact]
         public async Task Gets_Active_Tenders()
         {
@@ -72,7 +59,7 @@ namespace IntegrationWithPharmaciesIntegrationTests
             var tenders = await response.Content.ReadAsAsync<List<TenderOrder>>();
             tenders.ShouldNotBeEmpty();
         }
-     
+
         [Fact]
         public async Task Gets_Tender_By_Id()
         {
@@ -95,11 +82,11 @@ namespace IntegrationWithPharmaciesIntegrationTests
         public async Task Creates_Pharmacy_Tender_Offer()
         {
             List<MedicineTenderOffer> medicineQuantityList = new List<MedicineTenderOffer>();
-            MedicineTenderOffer medicineQuantity1 = new MedicineTenderOffer("Brufen", 10,8,5,0);
-            MedicineTenderOffer medicineQuantity2 = new MedicineTenderOffer("Pancef", 50,40,3,0);
+            MedicineTenderOffer medicineQuantity1 = new MedicineTenderOffer("Brufen", 10, 8, 5, 0);
+            MedicineTenderOffer medicineQuantity2 = new MedicineTenderOffer("Pancef", 50, 40, 3, 0);
             medicineQuantityList.Add(medicineQuantity1);
             medicineQuantityList.Add(medicineQuantity2);
-            TenderOrder tender = new TenderOrder(medicineQuantityList, "12/01/2020",10,0,"apiKye");
+            TenderOrder tender = new TenderOrder(medicineQuantityList, "12/01/2020", 10, 0, "apiKye");
             var stringContent = new StringContent(JsonConvert.SerializeObject(tender), Encoding.UTF8, "application/json");
             var response = await _client.PostAsync("http://localhost:50921/api/tender", stringContent);
             response.StatusCode.ShouldBe(HttpStatusCode.OK);
@@ -111,6 +98,5 @@ namespace IntegrationWithPharmaciesIntegrationTests
             var offers = await response.Content.ReadAsAsync<List<TenderOrder>>();
             offers.ShouldNotBeNull();
         }
-        */
     }
 }

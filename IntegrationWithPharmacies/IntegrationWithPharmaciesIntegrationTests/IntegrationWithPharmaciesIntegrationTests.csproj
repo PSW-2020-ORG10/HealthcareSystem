@@ -24,6 +24,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\PatientWebApplication\UserMicroserviceApi\UserMicroserviceApi.csproj" />
+    <ProjectReference Include="..\EPrescriptionApi\EPrescriptionApi.csproj" />
+    <ProjectReference Include="..\GatewayApi\GatewayApi.csproj" />
     <ProjectReference Include="..\IntegrationWithPharmacies\IntegrationWithPharmacies.csproj" />
     <ProjectReference Include="..\MedicineInformationApi\MedicineInformationApi.csproj" />
     <ProjectReference Include="..\PharmacyRegistrationApi\PharmacyRegistrationApi.csproj" />

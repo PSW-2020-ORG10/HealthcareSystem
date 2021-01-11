@@ -1,5 +1,5 @@
-﻿
-using IntegrationWithPharmacies;
+﻿using EPrescriptionApi.Model;
+using EPrescriptionApi;
 using MedicineInformationApi.DbContextModel;
 using MedicineInformationApi.Model;
 using Microsoft.AspNetCore.Hosting;
@@ -36,14 +36,7 @@ namespace IntegrationWithPharmaciesIntegrationTests
             var medicines =  await response.Content.ReadAsAsync<List<MedicineName>>();
             medicines.ShouldNotBeEmpty();
         }
-        [Fact]
-        public async Task Get_Medicine_Description()
-        {
-            _context.MedicineWithQuantity.Add(new MedicineWithQuantity(6, "Brufen", 6, "Description"));
-            _context.SaveChanges();
-            var response = await _client.GetAsync("http://localhost:57942/api/sharingPrescription/http/description/Brufen");
-            response.StatusCode.ShouldBe(HttpStatusCode.OK);
-        }
+       
 
         [Fact]
         public async Task Get_Medicines_Availability()
@@ -59,17 +52,7 @@ namespace IntegrationWithPharmaciesIntegrationTests
             var response = await _client.GetAsync("http://localhost:57942/api/sharingPrescription/http/medicineAvailability/Brufen_100");
             response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
         }
-        [Fact]
-        public async Task Get_Patients()
-        {
-            _context.Patients.Add(new PatientUser(1, "PatientName1", "PatientSurname1", "Female", "1234", "2/2/2020", "123", "2112313", "Alergija", "Grad", false, "email", "pass", false, "Grad2", "Roditelj", null));
-            _context.SaveChanges();
-            var response = await _client.GetAsync("http://localhost:57942/api/sharingPrescription/patients");
-            response.StatusCode.ShouldBe(HttpStatusCode.OK);
-            var medicines = await response.Content.ReadAsAsync<List<PatientUser>>();
-            medicines.ShouldNotBeEmpty();
-        }
+        
         */
-
     }
 }
