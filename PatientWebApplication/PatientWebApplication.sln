@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FeedbackMicroserviceApi", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PatientWebAppSeleniumTests", "PatientWebAppSeleniumTests\PatientWebAppSeleniumTests.csproj", "{FF152C16-3399-46EA-BECB-A9633A36BA3A}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventStore", "..\EventStore\EventStore\EventStore.csproj", "{F8CB1FB4-19E6-47BE-BB64-A5FC3FB8F319}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,10 +59,10 @@ Global
 		{FF152C16-3399-46EA-BECB-A9633A36BA3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF152C16-3399-46EA-BECB-A9633A36BA3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF152C16-3399-46EA-BECB-A9633A36BA3A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F467C283-B273-49FC-A25F-9AED928ACE6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F467C283-B273-49FC-A25F-9AED928ACE6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F467C283-B273-49FC-A25F-9AED928ACE6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F467C283-B273-49FC-A25F-9AED928ACE6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8CB1FB4-19E6-47BE-BB64-A5FC3FB8F319}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8CB1FB4-19E6-47BE-BB64-A5FC3FB8F319}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8CB1FB4-19E6-47BE-BB64-A5FC3FB8F319}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8CB1FB4-19E6-47BE-BB64-A5FC3FB8F319}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

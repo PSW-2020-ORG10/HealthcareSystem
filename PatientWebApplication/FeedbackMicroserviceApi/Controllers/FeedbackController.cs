@@ -5,6 +5,11 @@ using FeedbackMicroserviceApi.Model;
 using FeedbackMicroserviceApi.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using EventStore.EventDBContext;
+using EventStore.Events;
+using EventStore.Repository;
+using EventStore.Service;
+
 
 namespace FeedbackMicroserviceApi.Controllers
 {
@@ -16,12 +21,14 @@ namespace FeedbackMicroserviceApi.Controllers
     {
         /// <value>Property <c>FeedbackService</c> represents the service used for handling business logic.</value>
         private FeedbackService FeedbackService { get; set; }
+        private FeedbackSubmittedEventService FeedbackSubmittedEventService { get; set; }
 
         /// <summary>This constructor injects the FeedbackController with matching FeedbackService.</summary>
         /// <param name="context"><c>context</c> is type of <c>DbContext</c>, and it's used for accessing MYSQL database.</param>
-        public FeedbackController(MyDbContext context)
+        public FeedbackController(MyDbContext context, EventDbContext eventDbContext = null)
         {
             FeedbackService = new FeedbackService(context);
+            FeedbackSubmittedEventService = eventDbContext != null ? new FeedbackSubmittedEventService(new FeedbackSubmittedEventRepository(eventDbContext)) : null;
         }
 
         /// <summary> This method is calling <c>FeedbackService</c> to get list of all <c>Feedback</c>.  </summary>
@@ -54,16 +61,27 @@ namespace FeedbackMicroserviceApi.Controllers
         public IActionResult Create(FeedbackDto dto)
         {
             Feedback feedback = FeedbackService.Create(dto);
-
+            
+            
             if (feedback == null)
             {
                 return BadRequest();
             }
             else
             {
-                return Ok(FeedbackAdapter.FeedbackToMicroserviceFeedbackDto(feedback));
+
+                CreateFeedbackSubmittedEvent(feedback);
+                return Ok();
             }
 
+        }
+
+        private void CreateFeedbackSubmittedEvent(Feedback feedback)
+        {
+            if(FeedbackSubmittedEventService != null)
+            {
+                FeedbackSubmittedEventService.Create(new FeedbackSubmittedEvent(feedback.Id, feedback.Message, feedback.PatientId));
+            }
         }
 
         /// <summary> This method determines if provided <paramref name="id"/> of feedback is valid, if <c>True</c> it sends it to <c>FeedbackService</c> to check out further business logic. </summary>
