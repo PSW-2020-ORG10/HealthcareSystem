@@ -78,7 +78,7 @@ services:
       DATABASE_USERNAME: root
       DATABASE_PASSWORD: root
       DATABASE_HOST: mysql
-      DATABASE_HOST_EVENT: mysqlevent
+      DATABASE_HOST_EVENT: mysql
       DATABASE_SCHEMA: MYSQLHealtcareDB
       DATABASE_SCHEMA_EVENT: EventsDB
       DATABASE_PORT: 3306
@@ -88,7 +88,6 @@ services:
       - 58636:58636
     depends_on:
       - mysql
-      - mysqlevent
     volumes:
       - feedbackmicroserviceapi:/app/sql
 
@@ -126,26 +125,12 @@ services:
       MYSQL_PASSWORD: root
       MYSQL_USER: root
       MYSQL_DATABASE: MYSQLHealtcareDB
+      MYSQL_DATABASE_EVENT: EventsDB
     ports:
       - 3306:3306
     volumes:
       - mysql-data:/var/lib/mysql
 
-  mysqlevent:
-    image: mysql:8.0.19
-    container_name: mysqlevent
-    restart: always
-    networks:
-      - demo
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_PASSWORD: root
-      MYSQL_USER: root
-      MYSQL_DATABASE: EventsDB
-    ports:
-      - 3306:3306
-    volumes:
-      - mysql-data-event:/var/lib/mysql
 
   react:
     image: velickotam/healthcaresystem:react_latest
@@ -164,7 +149,6 @@ volumes:
   searchmicroserviceapi:
   appointmentmicroserviceapi:
   mysql-data:
-  mysql-data-event:
 
 networks:
   demo:

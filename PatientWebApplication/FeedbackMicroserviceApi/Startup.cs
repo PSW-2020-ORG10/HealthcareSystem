@@ -97,10 +97,10 @@ namespace FeedbackMicroserviceApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, MyDbContext dbContext)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, MyDbContext dbContext,EventDbContext eventDbContext)
         {
             dbContext.Database.EnsureCreated();
-
+            eventDbContext.Database.EnsureCreated();
             app.UseCors("MyPolicy");
             if (env.IsDevelopment())
             {
