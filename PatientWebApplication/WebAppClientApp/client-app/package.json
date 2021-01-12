@@ -45,12 +45,12 @@
       "typescript": "3.6.4"
    },
    "scripts": {
-      "dev": "react-scripts start",
-      "start": "serve -s build",
+      "start": "react-scripts start",
+      "build": "react-scripts build",
       "test": "cross-env CI=true react-scripts test --env=jsdom",
       "eject": "react-scripts eject",
       "lint": "eslint ./src/**/*.ts ./src/**/*.tsx",
-      "heroku-postbuild": "npm run build"   
+      "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build && mv -v build/ .. && cd .. && mv build public"
    },
    "proxy": "https://healthcare-system-org10.herokuapp.com/api",
    "eslintConfig": {
