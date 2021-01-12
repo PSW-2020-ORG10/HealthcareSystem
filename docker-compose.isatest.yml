@@ -2,10 +2,9 @@ version: '3.4'
 
 services:
   urgentmedicineorderapi:
-    image: urgentmedicineorder
+    image: velickotam/healthcaresystem:urgentmedicinoerder_latest
     container_name: urgentmedicineorderapi
     restart: on-failure
-    hostname: urgentmedicineorder
     networks:
       - demo
     environment:
@@ -15,14 +14,34 @@ services:
       DATABASE_SCHEMA: MYSQLHealtcareDB
       DATABASE_PORT: 3306
       PORT: 59328
+      STAGE: Testing
     depends_on:
       - mysql
     volumes:
       - urgentmedicineorderapi:/app/sql
 
-  gateway:
-    image: gateway
-    container_name: gatewayapi
+  eprescritionapi:
+    image: velickotam/healthcaresystem:eprescrition_latest
+    container_name: eprescritionapi
+    restart: on-failure
+    networks:
+      - demo
+    environment:
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root
+      DATABASE_HOST: mysql
+      DATABASE_SCHEMA: MYSQLHealtcareDB
+      DATABASE_PORT: 3306
+      PORT: 63327
+      STAGE: Testing
+    depends_on:
+      - mysql
+    volumes:
+      - eprescritionapi:/app/sql
+
+  gatewayintegration:
+    image: velickotam/healthcaresystem:gatewayintegration_latest
+    container_name: gatewayintegration
     restart: on-failure
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
@@ -36,14 +55,16 @@ services:
       - urgentmedicineorderapi
       - medicineinformationapi
       - tenderapi
+      - eprescritionapi
     depends_on:
       - pharmacyregistrationapi
       - urgentmedicineorderapi
       - medicineinformationapi
       - tenderapi
+      - eprescritionapi
 
   medicineinformationapi:
-    image:  medicineinformation
+    image:  velickotam/healthcaresystem:medicineinformation_latest
     container_name: medicineinformationapi
     restart: on-failure
     networks:
@@ -55,13 +76,14 @@ services:
       DATABASE_SCHEMA: MYSQLHealtcareDB
       DATABASE_PORT: 3306
       PORT: 50482
+      STAGE: Testing
     depends_on:
       - mysql
     volumes:
       - medicineinformationapi:/app/sql
 
   tenderapi:
-    image: tender
+    image: velickotam/healthcaresystem:tender_latest
     container_name: tenderapi
     restart: on-failure
     networks:
@@ -73,6 +95,7 @@ services:
       DATABASE_SCHEMA: MYSQLHealtcareDB
       DATABASE_PORT: 3306
       PORT: 50921
+      STAGE: Testing
     depends_on:
       - mysql
     volumes:
@@ -80,7 +103,7 @@ services:
 
 
   pharmacyregistrationapi:
-    image: pharmacyregistration
+    image: velickotam/healthcaresystem:pharmacyregistration_latest
     container_name: pharmacyregistrationapi
     restart: on-failure
     networks:
@@ -92,6 +115,7 @@ services:
       DATABASE_SCHEMA: MYSQLHealtcareDB
       DATABASE_PORT: 3306
       PORT: 59278
+      STAGE: Testing
     depends_on:
       - mysql
     volumes:
@@ -114,7 +138,7 @@ services:
       - mysql-data:/var/lib/mysql
 
   vue:
-    image: vue
+    image: velickotam/healthcaresystem:vue_latest
     container_name: vue
     stdin_open: true
     restart: on-failure
@@ -135,11 +159,12 @@ services:
       - '57942:57942'
 
 volumes:
-  gatewayapi:
+  gatewayintegration:
   pharmacyregistrationapi:
   tenderapi:
   medicineinformationapi:
   urgentmedicineorderapi:
+  eprescritionapi:
   mysql-data:
   vue:
 

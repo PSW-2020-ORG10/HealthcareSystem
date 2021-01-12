@@ -33,8 +33,13 @@ namespace AppointmentMicroserviceApi
             return $"server={server};port={port};database={database};user={user};password={password}";
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        private string GetCurrentStage()
+        {
+            return Environment.GetEnvironmentVariable("STAGE") ?? "Testing";
+        }
+
+      // This method gets called by the runtime. Use this method to add services to the container.
+      public void ConfigureServices(IServiceCollection services)
         {
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
@@ -55,7 +60,7 @@ namespace AppointmentMicroserviceApi
              .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddAuthorization();
 
-            if (CurrentEnvironment.IsEnvironment("Testing"))
+            if (GetCurrentStage().Equals("Testing") && CurrentEnvironment.IsEnvironment("Testing"))
             {
                 services.AddDbContext<MyDbContext>(options =>
                     options.UseInMemoryDatabase("TestingDB").UseLazyLoadingProxies());

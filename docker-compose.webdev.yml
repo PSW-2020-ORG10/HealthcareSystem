@@ -1,0 +1,172 @@
+version: '3.4'
+
+services:
+  appointmentmicroserviceapi:
+    image: velickotam/healthcaresystem:appointmentapi_latest
+    container_name: appointmentmicroserviceapi
+    restart: on-failure
+    networks:
+      - demo
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root
+      DATABASE_HOST: mysql
+      DATABASE_SCHEMA: MYSQLHealtcareDB
+      DATABASE_PORT: 3306
+      PORT: 53212
+      STAGE: Development
+    ports:
+      - 53212:53212
+    depends_on:
+      - mysql
+    volumes:
+      - appointmentmicroserviceapi:/app/sql
+
+  gatewayapi:
+    image: velickotam/healthcaresystem:gatewayapi_latest
+    container_name: gatewayapi
+    restart: on-failure
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - PORT=80
+    networks:
+      - demo
+    ports:
+      - 54689:80
+    links:
+      - appointmentmicroserviceapi
+      - searchmicroserviceapi
+      - feedbackmicroserviceapi
+      - usermicroserviceapi
+    depends_on:
+      - appointmentmicroserviceapi
+      - searchmicroserviceapi
+      - feedbackmicroserviceapi
+      - usermicroserviceapi
+
+  searchmicroserviceapi:
+    image:  velickotam/healthcaresystem:searchapi_latest
+    container_name: searchmicroserviceapi
+    restart: on-failure
+    networks:
+      - demo
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root
+      DATABASE_HOST: mysql
+      DATABASE_SCHEMA: MYSQLHealtcareDB
+      DATABASE_PORT: 3306
+      PORT: 53174
+      STAGE: Development
+    ports:
+      - 53174:53174
+    depends_on:
+      - mysql
+    volumes:
+      - searchmicroserviceapi:/app/sql
+
+  feedbackmicroserviceapi:
+    image: velickotam/healthcaresystem:feedbackapi_latest
+    container_name: feedbackmicroserviceapi
+    restart: on-failure
+    networks:
+      - demo
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root
+      DATABASE_HOST: mysql
+      DATABASE_HOST_EVENT: mysqlevent
+      DATABASE_SCHEMA: MYSQLHealtcareDB
+      DATABASE_SCHEMA_EVENT: EventsDB
+      DATABASE_PORT: 3306
+      PORT: 58636
+      STAGE: Development
+    ports:
+      - 58636:58636
+    depends_on:
+      - mysql
+      - mysqlevent
+    volumes:
+      - feedbackmicroserviceapi:/app/sql
+
+
+  usermicroserviceapi:
+    image: velickotam/healthcaresystem:userapi_latest
+    container_name: usermicroserviceapi
+    restart: on-failure
+    networks:
+      - demo
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      DATABASE_USERNAME: root
+      DATABASE_PASSWORD: root
+      DATABASE_HOST: mysql
+      DATABASE_SCHEMA: MYSQLHealtcareDB
+      DATABASE_PORT: 3306
+      PORT: 53236
+      STAGE: Development
+    ports:
+      - 53236:53236
+    depends_on:
+      - mysql
+    volumes:
+      - usermicroserviceapi:/app/sql
+
+  mysql:
+    image: mysql:8.0.19
+    container_name: mysql
+    restart: always
+    networks:
+      - demo
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: root
+      MYSQL_USER: root
+      MYSQL_DATABASE: MYSQLHealtcareDB
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  mysqlevent:
+    image: mysql:8.0.19
+    container_name: mysqlevent
+    restart: always
+    networks:
+      - demo
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: root
+      MYSQL_USER: root
+      MYSQL_DATABASE: EventsDB
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql-data-event:/var/lib/mysql
+
+  react:
+    image: velickotam/healthcaresystem:react_latest
+    container_name: react
+    stdin_open: true
+    restart: on-failure
+    ports:
+      - '3000:3000'
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - PORT=3000
+volumes:
+  gatewayapi:
+  usermicroserviceapi:
+  feedbackmicroserviceapi:
+  searchmicroserviceapi:
+  appointmentmicroserviceapi:
+  mysql-data:
+  mysql-data-event:
+
+networks:
+  demo:
+    name: demo
+    driver: bridge
