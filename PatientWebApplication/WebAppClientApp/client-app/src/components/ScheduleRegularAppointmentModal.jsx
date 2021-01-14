@@ -2,7 +2,9 @@
 import React, { Component } from "react"
 import { wrap } from "module";
 import axios from "axios";
+import { connect } from "react-redux"
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { storeEvent } from "../actions/actions"
 import Stepper from 'react-stepper-horizontal';
 import SelectSpecialtyForm from './SelectSpecialtyForm'
 import SelectDoctorForm from './SelectDoctorForm'
@@ -64,6 +66,7 @@ class ScheduleRegularAppointmentModal extends Component {
     next() {
         debugger;
         this.setState({ step: ++this.state.step })
+        this.props.storeEvent({step: this.state.step, action: "next", endpoint: ""});
         this.showNextButton()
         this.showPrevButton()
     }
@@ -71,13 +74,16 @@ class ScheduleRegularAppointmentModal extends Component {
     prev() {
         debugger;
         this.setState({ nextDisabled: false })
-        this.setState({ step: --this.state.step })
+        this.props.storeEvent({step: this.state.step + 1, action: "prevoius", endpoint: ""});
+        this.setState({ step: --this.state.step })       
         this.showNextButton()
         this.showPrevButton()
     }
 
     toggle() {
+        debugger;
         this.setState({ modalShow: false });
+        this.props.storeEvent({step: this.state.step, action: "cancel", endpoint: "end"});
         this.props.onShowChange();
     }
 
@@ -147,4 +153,8 @@ class ScheduleRegularAppointmentModal extends Component {
     }
 }
 
-export default (ScheduleRegularAppointmentModal);
+const mapStateToProps = (state) => ({
+
+});
+
+export default connect(mapStateToProps, { storeEvent })(ScheduleRegularAppointmentModal);

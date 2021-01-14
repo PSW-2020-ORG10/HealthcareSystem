@@ -37,7 +37,10 @@
     LOADED_ALL_MESSAGES,
     LOADED_SECOND_IMAGE,
     LOADED_THIRD_IMAGE,
-    USER_LOGGEDIN
+    USER_LOGGEDIN,
+    STORE_EVENT,
+    MIN_STEPS,
+    MAX_STEPS
 } from "../types/types";
 import { parseStringToDate } from '../utilities/Utilities';
 
@@ -102,7 +105,10 @@ const initialState = {
     loadedThirdImage : "",
     loadedAllMessagesList: [],
     userCookie : {},
-    userToken : ""      
+    userToken : "",
+    appointmentEvent : {},
+    minStepEvent : [],
+    maxStepEvent : []       
 };
 
 
@@ -331,6 +337,21 @@ function reducer(state = initialState, action) {
                 ...state,
                 userToken: action.payload.token,
                 userCookie: user
+            };
+        case STORE_EVENT:
+                return {
+                    ...state,
+                    appointmentEvent: action.payload
+                };
+        case MIN_STEPS:
+            return {
+                ...state,
+                minStepEvent: action.payload
+            };
+        case MAX_STEPS:
+            return {
+                ...state,
+                maxStepEvent: action.payload
             };
         default:
             return state;

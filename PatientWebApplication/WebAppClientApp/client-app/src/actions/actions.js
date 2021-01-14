@@ -56,7 +56,13 @@
     LOADED_SECOND_IMAGE,
     LOADED_THIRD_IMAGE,
     USER_LOGGEDIN,
-    USER_LOGGEDIN_ERROR
+    USER_LOGGEDIN_ERROR,
+    STORE_EVENT,
+    STORE_EVENT_ERROR,
+    MIN_STEPS,
+    MIN_STEPS_ERROR,
+    MAX_STEPS,
+    MAX_STEPS_ERROR
 } from "../types/types"
 import axios from "axios";
 import { func } from "prop-types";
@@ -909,5 +915,69 @@ export const userLoggedIn = (user) => async (dispatch) => {
         return true;
     } catch (e) {
         console.log(e);
+    }
+};
+
+export const storeEvent = (appointmentEvent) => async (dispatch) => {
+    try {
+        debugger;
+        appointmentEvent.patientId = localStorage.getItem("patientId")
+        const response = await axios.post("http://localhost:54689/api/doctorappointment/storeEvent", appointmentEvent,
+        {
+            headers: { "Access-Control-Allow-Origin": "*",
+                       "Authorization" :  "Bearer " + localStorage.getItem("token")}
+          });
+        debugger;
+        dispatch({
+            type: STORE_EVENT,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: STORE_EVENT_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const minSteps = () => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.get("http://localhost:54689/api/doctorappointment/getStatisticsMinSteps",
+        {
+            headers: { "Access-Control-Allow-Origin": "*",
+                       "Authorization" :  "Bearer " + localStorage.getItem("token")}
+          });
+        debugger;
+        dispatch({
+            type: MIN_STEPS,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: MIN_STEPS_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const maxSteps = () => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.get("http://localhost:54689/api/doctorAppointment/getStatisticsMaxSteps",
+        {
+            headers: { "Access-Control-Allow-Origin": "*",
+                       "Authorization" :  "Bearer " + localStorage.getItem("token")}
+          });
+        debugger;
+        dispatch({
+            type: MAX_STEPS,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: MAX_STEPS_ERROR,
+            payload: console.log(e),
+        });
     }
 };

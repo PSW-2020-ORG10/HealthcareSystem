@@ -1,6 +1,7 @@
 ﻿import React, { Component } from "react"
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { appointmentScheduled } from "../actions/actions";
+import { storeEvent } from "../actions/actions"
 import { connect } from "react-redux"
 
 class AppointmentConfirmationModal extends Component {
@@ -41,6 +42,7 @@ class AppointmentConfirmationModal extends Component {
 
     scheduleAppointment() {
         debugger;
+        this.props.storeEvent({step: 5, action: "create", endpoint: "end"});
         this.props.appointmentScheduled(this.props.appointment)
         this.toggle()
     }
@@ -48,4 +50,4 @@ class AppointmentConfirmationModal extends Component {
 
 const mapStateToProps = (state) => ({  })
 
-export default connect(mapStateToProps, { appointmentScheduled })(AppointmentConfirmationModal);
+export default connect(mapStateToProps, { appointmentScheduled, storeEvent })(AppointmentConfirmationModal);
