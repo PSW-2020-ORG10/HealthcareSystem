@@ -40,10 +40,38 @@ namespace EventStore.Repository
 
         public CountStepsEventDto GetStatisticsMinSteps()
         {
-            var minEvent = MyDbContext.AppointmentSchedulingEvents.GroupBy(appointmentEvent => appointmentEvent.Attempt)
+            /*var minEvent = MyDbContext.AppointmentSchedulingEvents.GroupBy(appointmentEvent => appointmentEvent.Attempt)
                    .Select(grp => new {
                        Attempt = grp.Key,
-                       Count = grp.Count()
+                       Count = grp.Count()-2
+                   }) 
+                   .ToList().Aggregate(
+                (eventWithMinCount, currentEvent) =>
+                    currentEvent.Count <= eventWithMinCount.Count ? currentEvent : eventWithMinCount);
+
+            return new CountStepsEventDto(GetEventByAttempt(minEvent.Attempt), minEvent.Count);*/
+            List<long> successfulAppointmentsAttempts = new List<long>();
+            /*        successifulAppointments = MyDbContext.AppointmentSchedulingEvents.Where(appointmentEvent => appointmentEvent.Action == "create")
+                .GroupBy(appointmentEvent => appointmentEvent.Attempt)
+                   .Select(grp => new
+                   {
+                       Attempt = unchecked((int)grp.Key)                  
+                   })
+                   .ToList();*/
+
+            foreach (AppointmentSchedulingEvent appointmentSchedulingEvent in MyDbContext.AppointmentSchedulingEvents.ToList())
+            {
+                if (appointmentSchedulingEvent.Action.Equals("create"))
+                {
+                    successfulAppointmentsAttempts.Add(appointmentSchedulingEvent.Attempt);
+                }
+            }
+
+            var minEvent = MyDbContext.AppointmentSchedulingEvents.Where(appointmentEvent => successfulAppointmentsAttempts.Contains(appointmentEvent.Attempt)).ToList()
+                .GroupBy(appointmentEvent => appointmentEvent.Attempt)
+                   .Select(grp => new {
+                       Attempt = grp.Key,
+                       Count = grp.Count() - 2
                    })
                    .ToList().Aggregate(
                 (eventWithMinCount, currentEvent) =>
@@ -54,10 +82,28 @@ namespace EventStore.Repository
 
         public CountStepsEventDto GetStatisticsMaxSteps()
         {
-            var maxEvent = MyDbContext.AppointmentSchedulingEvents.GroupBy(appointmentEvent => appointmentEvent.Attempt)
+            List<long> successfulAppointmentsAttempts = new List<long>();
+            /*        successifulAppointments = MyDbContext.AppointmentSchedulingEvents.Where(appointmentEvent => appointmentEvent.Action == "create")
+                .GroupBy(appointmentEvent => appointmentEvent.Attempt)
+                   .Select(grp => new
+                   {
+                       Attempt = unchecked((int)grp.Key)                  
+                   })
+                   .ToList();*/
+
+            foreach(AppointmentSchedulingEvent appointmentSchedulingEvent in MyDbContext.AppointmentSchedulingEvents.ToList())
+            {
+                if(appointmentSchedulingEvent.Action.Equals("create"))
+                {
+                    successfulAppointmentsAttempts.Add(appointmentSchedulingEvent.Attempt);
+                }
+            }
+
+            var maxEvent = MyDbContext.AppointmentSchedulingEvents.Where(appointmentEvent =>  successfulAppointmentsAttempts.Contains(appointmentEvent.Attempt)).ToList()
+                .GroupBy(appointmentEvent => appointmentEvent.Attempt)
                    .Select(grp => new {
                        Attempt = grp.Key,
-                       Count = grp.Count()
+                       Count = grp.Count()-2
                    })
                    .ToList().Aggregate(
                 (eventWithMaxCount, currentEvent) =>

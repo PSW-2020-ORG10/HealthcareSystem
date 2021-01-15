@@ -15,7 +15,7 @@ class EventStatistics extends React.PureComponent<CounterProps> {
     public render() {
         return (
             <React.Fragment>
-                <Header title="Fill survey" description="Please rate us." />
+                <Header title="Statistics" description="Event statistics." />
                 <EventStatisticsTable />
             </React.Fragment>
         );

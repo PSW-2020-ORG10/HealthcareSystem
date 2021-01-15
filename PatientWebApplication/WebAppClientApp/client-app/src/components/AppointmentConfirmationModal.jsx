@@ -42,7 +42,7 @@ class AppointmentConfirmationModal extends Component {
 
     scheduleAppointment() {
         debugger;
-        this.props.storeEvent({step: 5, action: "create", endpoint: "end"});
+        this.props.storeEvent({step: 4, action: "create", endpoint: "end"});
         this.props.appointmentScheduled(this.props.appointment)
         this.toggle()
     }
