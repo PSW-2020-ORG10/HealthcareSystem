@@ -83,7 +83,7 @@ class ScheduleRegularAppointmentModal extends Component {
     toggle() {
         debugger;
         this.setState({ modalShow: false });
-        this.props.storeEvent({step: this.state.step, action: "cancel", endpoint: "end"});
+        this.props.storeEvent({step: this.state.step + 1, action: "cancel", endpoint: "end"});
         this.props.onShowChange();
     }
 
