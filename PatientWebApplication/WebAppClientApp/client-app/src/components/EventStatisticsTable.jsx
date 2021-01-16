@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { minSteps, maxSteps, succesRatio, mostCanceledStep } from "../actions/actions"
+import { minSteps, maxSteps, succesRatio, mostCanceledStep,minStepsCancel, maxStepsCancel} from "../actions/actions"
 import { connect } from "react-redux"
 import { wrap } from "module";
 import { formatDate } from "../utilities/Utilities"
@@ -13,7 +13,8 @@ class EventStatisticsTable extends Component {
         this.props.maxSteps();
         this.props.succesRatio();
         this.props.mostCanceledStep();
-        
+        this.props.minStepsCancel();
+        this.props.maxStepsCancel();
     }
     render() {
         debugger;
@@ -32,11 +33,20 @@ class EventStatisticsTable extends Component {
         if (this.props.mostCanceledStepActual === undefined || this.props.mostCanceledStepActual.length === 0) {
             return null;
         }
+        if (this.props.minStepCancelEvent === undefined || this.props.minStepCancelEvent.length === 0){
+            return null;
+        }
+        
+        if (this.props.maxStepCancelEvent === undefined || this.props.maxStepCancelEvent.length === 0) {
+            return null;
+        }
 
         const minStepEvent = this.props.minStepEvent
         const maxStepEvent = this.props.maxStepEvent
         const succesRatioPercentage = this.props.succesRatioPercentage
         const mostCanceledStepActual = this.props.mostCanceledStepActual
+        const minStepCancelEvent = this.props.minStepCancelEvent
+        const maxStepCancelEvent = this.props.maxStepCancelEvent
         debugger;
         return (
             <div>
@@ -62,6 +72,22 @@ class EventStatisticsTable extends Component {
                             </td>
                             <td style={{ textAlign: "center" }}>
                                 {maxStepEvent.countSteps} steps
+                            </td>
+                        </tr>
+                        <tr>
+                        <td style={{ flexWrap: "wrap", wordWrap: "break-word", wordBreak: "break-word", width: '45%' }}>
+                               Cancelling with least number of steps was done by: {minStepEvent.appointmentEventWithPatientDto.patient.name + " " + minStepEvent.appointmentEventWithPatientDto.patient.surname}
+                            </td>
+                            <td style={{ textAlign: "center" }}>
+                                {minStepCancelEvent.countSteps} steps
+                            </td>                        
+                        </tr>
+                        <tr>
+                            <td style={{ flexWrap: "wrap", wordWrap: "break-word", wordBreak: "break-word", width: '45%' }}>
+                            Cancelling with most number of steps was done by: {maxStepEvent.appointmentEventWithPatientDto.patient.name + " " + maxStepEvent.appointmentEventWithPatientDto.patient.surname}
+                            </td>
+                            <td style={{ textAlign: "center" }}>
+                                {maxStepCancelEvent.countSteps} steps
                             </td>
                         </tr>
                         <tr>
@@ -91,6 +117,6 @@ class EventStatisticsTable extends Component {
 
 const mapStateToProps = (state) =>
 
-    ({ minStepEvent: state.reducer.minStepEvent, maxStepEvent: state.reducer.maxStepEvent, succesRatioPercentage: state.reducer.succesRatioPercentage, mostCanceledStepActual: state.reducer.mostCanceledStepActual })
+    ({ minStepEvent: state.reducer.minStepEvent, maxStepEvent: state.reducer.maxStepEvent, succesRatioPercentage: state.reducer.succesRatioPercentage, mostCanceledStepActual: state.reducer.mostCanceledStepActual, minStepCancelEvent: state.reducer.minStepCancelEvent, maxStepCancelEvent: state.reducer.maxStepCancelEvent })
 
-export default connect(mapStateToProps, { minSteps, maxSteps, succesRatio, mostCanceledStep })(EventStatisticsTable);
+export default connect(mapStateToProps, { minSteps, maxSteps, succesRatio, mostCanceledStep, minStepsCancel, maxStepsCancel })(EventStatisticsTable);

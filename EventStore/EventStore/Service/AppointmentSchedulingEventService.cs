@@ -51,5 +51,25 @@ namespace EventStore.Service
         {
             return _appointmentSchedulingEventRepository.GetMostCanceledStep();
         }
+
+        public double GetAverageStepsForSuccessfulAttempt()
+        {
+            return _appointmentSchedulingEventRepository.GetAverageStepsForSuccessfulAttempt();
+        }
+
+        public double GetAverageStepsForUnsuccessfulAttempt()
+        {
+            return _appointmentSchedulingEventRepository.GetAverageStepsForUnsuccessfulAttempt();
+        }
+
+        public CountStepsEventDto GetStatisticsMinStepsForCancelling()
+        {
+            return _appointmentSchedulingEventRepository.GetStatisticsMinStepsForCancelling();
+        }
+
+        public CountStepsEventDto GetStatisticsMaxStepsForCancelling()
+        {
+            return _appointmentSchedulingEventRepository.GetStatisticsMaxStepsForCancelling();
+        }
     }
 }

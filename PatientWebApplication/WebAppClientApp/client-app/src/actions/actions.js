@@ -66,7 +66,12 @@
     SUCCES_RATIO,
     SUCCES_RATIO_ERROR,
     MOST_CANCELED_STEP,
-    MOST_CANCELED_STEP_ERROR
+    MOST_CANCELED_STEP_ERROR,
+    MIN_STEPS_UNSUCCESSFUL,
+    MIN_STEPS_UNSUCCESSFUL_ERROR,
+    MAX_STEPS_UNSUCCESSFUL,
+    MAX_STEPS_UNSUCCESSFUL_ERROR,
+
 } from "../types/types"
 import axios from "axios";
 import { func } from "prop-types";
@@ -1023,6 +1028,48 @@ export const mostCanceledStep = () => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: MOST_CANCELED_STEP_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const minStepsCancel = () => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.get("http://localhost:54689/api/doctorappointment/getStatisticsMinStepsForCancelling",
+        {
+            headers: { "Access-Control-Allow-Origin": "*",
+                       "Authorization" :  "Bearer " + localStorage.getItem("token")}
+          });
+        debugger;
+        dispatch({
+            type: MIN_STEPS_UNSUCCESSFUL,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: MIN_STEPS_UNSUCCESSFUL_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const maxStepsCancel = () => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.get("http://localhost:54689/api/doctorAppointment/GetStatisticsMaxStepsForCancelling",
+        {
+            headers: { "Access-Control-Allow-Origin": "*",
+                       "Authorization" :  "Bearer " + localStorage.getItem("token")}
+          });
+        debugger;
+        dispatch({
+            type: MAX_STEPS_UNSUCCESSFUL,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: MAX_STEPS_UNSUCCESSFUL_ERROR,
             payload: console.log(e),
         });
     }
