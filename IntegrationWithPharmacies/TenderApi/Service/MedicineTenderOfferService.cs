@@ -37,7 +37,7 @@ namespace TenderApi.Service
         {
             foreach (MedicineTenderOffer medicineTenderOffer in medicineTenderOffers)
             {
-                Create(MedicineTenderOfferAdapter.MedicineTenderOfferToMedicineTenderOfferDto(new MedicineTenderOffer(medicineTenderOffer.MedicineName, medicineTenderOffer.Quantity, medicineTenderOffer.AvailableQuantity, medicineTenderOffer.Price, PharmacyTenderOfferRepository.getNextTenderPharmacyOfferId())));
+                Create(MedicineTenderOfferAdapter.MedicineTenderOfferToMedicineTenderOfferDto(new MedicineTenderOffer(medicineTenderOffer.MedicineName, medicineTenderOffer.RequiredQuantity, medicineTenderOffer.AvailableQuantity, medicineTenderOffer.Price, PharmacyTenderOfferRepository.getNextTenderPharmacyOfferId())));
             }
         }
         public List<MedicineTenderOffer> GetMedicineOffersByPharmacyOfferId(int pahrmacyTenderOfferId)
@@ -52,9 +52,9 @@ namespace TenderApi.Service
             }
         }
 
-        private void CheckMedicineInDB(List<MedicineWithQuantity> medicineWithQuantities, MedicineTenderOffer medicineTenderOffer)
+        private void CheckMedicineInDB(List<MedicineInformation> medicineInformations, MedicineTenderOffer medicineTenderOffer)
         {
-            MedicineWithQuantity medicine = medicineWithQuantities.SingleOrDefault(medicineName => medicineName.Name == medicineTenderOffer.MedicineName);
+            MedicineInformation medicine = medicineInformations.SingleOrDefault(medicineName => medicineName.MedicineDescription.Name.Equals(medicineTenderOffer.MedicineName));
             if (medicine != null) HttpRequests.UpdateMedicine(medicineTenderOffer, medicine);
             else { _ = HttpRequests.CreateNewMedicineWithQuantityAsync(medicineTenderOffer); }
         }

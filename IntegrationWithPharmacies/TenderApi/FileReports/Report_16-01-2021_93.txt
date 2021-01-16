@@ -1,0 +1,6 @@
+api1;api2;api3;!    Report about consumption of medicine
+
+
+
+
+   Total ordered quatity: 0

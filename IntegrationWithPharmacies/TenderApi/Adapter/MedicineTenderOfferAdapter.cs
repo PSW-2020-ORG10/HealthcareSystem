@@ -12,7 +12,7 @@ namespace TenderApi.Adapter
 
         public static MedicineTenderOfferDto MedicineTenderOfferToMedicineTenderOfferDto(MedicineTenderOffer medicine)
         {
-            return new MedicineTenderOfferDto(medicine.MedicineName, medicine.Quantity, medicine.AvailableQuantity, medicine.Price, medicine.PharmacyTenderOfferId);
+            return new MedicineTenderOfferDto(medicine.MedicineName, medicine.RequiredQuantity, medicine.AvailableQuantity, medicine.Price, medicine.PharmacyTenderOfferId);
         }
     }
 }

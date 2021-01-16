@@ -26,18 +26,18 @@ namespace TenderApi.Service
         {
             return new Dictionary<string, object>
             {
-                {"name", medicineTenderOffer.MedicineName }, {"quantity",  medicineTenderOffer.AvailableQuantity }, {"description", ""}
+                {"medicineDescription", new MedicineDescription(medicineTenderOffer.MedicineName, "")}, {"quantity",  medicineTenderOffer.AvailableQuantity }
             };
         }
 
-        public static List<MedicineWithQuantity> GetAllMedicinesWithQuantity()
+        public static List<MedicineInformation> GetAllMedicinesWithQuantity()
         {
-            return new RestClient(medicineInformationUrl).Get<List<MedicineWithQuantity>>(new RestRequest("api/medicineWithQuantity")).Data;
+            return new RestClient(medicineInformationUrl).Get<List<MedicineInformation>>(new RestRequest("api/medicineWithQuantity")).Data;
         }
 
-        public void UpdateMedicine(MedicineTenderOffer medicineTenderOffer, MedicineWithQuantity medicine)
+        public void UpdateMedicine(MedicineTenderOffer medicineTenderOffer, MedicineInformation medicine)
         {
-            new RestClient(medicineInformationUrl).Get<List<MedicineWithQuantity>>(new RestRequest("api/medicineWithQuantity/" + medicine.Id + "/" + medicineTenderOffer.AvailableQuantity));
+            new RestClient(medicineInformationUrl).Get<List<MedicineInformation>>(new RestRequest("api/medicineWithQuantity/" + medicine.Id + "/" + medicineTenderOffer.AvailableQuantity));
         }
         public void UploadReportFile(String complete)
         {

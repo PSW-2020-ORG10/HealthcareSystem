@@ -31,7 +31,7 @@ namespace TenderApi.Utility
             StringBuilder stringBuilder = new StringBuilder();
             foreach (RegistrationInPharmacy registration in HttpRequests.GetRegistrationsInPharmaciesAll())
             {
-                stringBuilder.Append(registration.ApiKey + ";");
+                stringBuilder.Append(registration.PharmacyConnectionInfo.ApiKey + ";");
             }
             return stringBuilder.ToString();
         }

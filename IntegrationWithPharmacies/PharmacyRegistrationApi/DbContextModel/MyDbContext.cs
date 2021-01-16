@@ -1,7 +1,6 @@
 ﻿using PharmacyRegistrationApi.Model;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
+
 
 namespace PharmacyRegistrationApi.DbContextModel
 {
@@ -9,21 +8,26 @@ namespace PharmacyRegistrationApi.DbContextModel
     /// </summary>
     public class MyDbContext : DbContext
     {
-        
+
         public DbSet<RegistrationInPharmacy> Registrations { get; set; }
-        
+        public DbSet<PharmacyConnectionInfo> RegistrationsInfo { get; set; }
+
+        public DbSet<PharmacyNameInfo> PharmacyNameInfos { get; set; }
+
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            modelBuilder.Entity<PharmacyConnectionInfo>().HasData(
+                new PharmacyConnectionInfo("api1", "jankovic1@gmail.com", 1)
+            );
+            modelBuilder.Entity<PharmacyNameInfo>().HasData(
+               new PharmacyNameInfo("Jankovic 1", 1)
+           );
             modelBuilder.Entity<RegistrationInPharmacy>().HasData(
-                new RegistrationInPharmacy(1, 1, "api1","Jankovic 1","Novi Sad")
+                new RegistrationInPharmacy(1, 1, "Novi Sad")
             );
 
-            
-
         }
-
     }
 }

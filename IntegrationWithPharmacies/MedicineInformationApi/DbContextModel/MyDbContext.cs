@@ -5,13 +5,19 @@ namespace MedicineInformationApi.DbContextModel
 {
     public class MyDbContext : DbContext
     {
-        public DbSet<MedicineWithQuantity> MedicineWithQuantity { get; set; }
+        public DbSet<MedicineInformation> MedicineInformations { get; set; }
+        public DbSet<MedicineDescription> MedicineDescriptions { get; set; }
+
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<MedicineWithQuantity>().HasData(
-                new MedicineWithQuantity(1, "Andol", 150, "Against pain")
+            modelBuilder.Entity<MedicineDescription>().HasData(
+                new MedicineDescription("Andol", "Against pain",1)
+            );
+
+            modelBuilder.Entity<MedicineInformation>().HasData(
+                new MedicineInformation(1, 150)
             );
         }
     }
