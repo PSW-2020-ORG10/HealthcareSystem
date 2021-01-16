@@ -68,3 +68,7 @@ export const SUCCES_RATIO = "succesRatio";
 export const SUCCES_RATIO_ERROR = "succesRatioError";
 export const MOST_CANCELED_STEP = "mostCanceledStep";
 export const MOST_CANCELED_STEP_ERROR = "mostCanceledStepError";
+export const MIN_STEPS_UNSUCCESSFUL = "minStepsCancel";
+export const MIN_STEPS_UNSUCCESSFUL_ERROR = "minStepsError";
+export const MAX_STEPS_UNSUCCESSFUL = "maxStepsCancel";
+export const MAX_STEPS_UNSUCCESSFUL_ERROR = "maxStepsError";

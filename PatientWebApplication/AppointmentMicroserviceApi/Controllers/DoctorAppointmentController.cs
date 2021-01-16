@@ -216,5 +216,32 @@ namespace AppointmentMicroserviceApi.Controllers
             return Ok(appointmentSchedulingEventService.GetMostCanceledStep());
         }
 
+        [HttpGet("getAverageStepsForSuccessfulAttempt")]
+        [Authorize(Roles = "admin")]
+        public IActionResult GetAverageStepsForSuccessfulAttempt()
+        {
+            return Ok(appointmentSchedulingEventService.GetAverageStepsForSuccessfulAttempt());
+        }
+
+        [HttpGet("getAverageStepsForUnsuccessfulAttempt")]
+        [Authorize(Roles = "admin")]
+        public IActionResult GetAverageStepsForUnsuccessfulAttempt()
+        {
+            return Ok(appointmentSchedulingEventService.GetAverageStepsForUnsuccessfulAttempt());
+        }
+
+        [HttpGet("getStatisticsMinStepsForCancelling")]
+        [Authorize(Roles = "admin")]
+        public IActionResult GetStatisticsMinStepsForCancelling()
+        {
+            return Ok(appointmentSchedulingEventService.GetStatisticsMinStepsForCancelling());
+        }
+
+        [HttpGet("GetStatisticsMaxStepsForCancelling")]
+        [Authorize(Roles = "admin")]
+        public IActionResult GetStatisticsMaxStepsForCancelling()
+        {
+            return Ok(appointmentSchedulingEventService.GetStatisticsMaxStepsForCancelling());
+        }
     }
 }

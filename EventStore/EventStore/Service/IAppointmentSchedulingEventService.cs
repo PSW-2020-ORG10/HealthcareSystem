@@ -13,5 +13,9 @@ namespace EventStore.Service
         public CountStepsEventDto GetStatisticsMaxSteps();
         public double GetSuccessfulAttemptsRatio();
         public int GetMostCanceledStep();
+        public double GetAverageStepsForSuccessfulAttempt();
+        public double GetAverageStepsForUnsuccessfulAttempt();
+        public CountStepsEventDto GetStatisticsMinStepsForCancelling();
+        public CountStepsEventDto GetStatisticsMaxStepsForCancelling();
     }
 }

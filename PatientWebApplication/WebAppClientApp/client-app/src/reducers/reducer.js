@@ -42,7 +42,9 @@
     MIN_STEPS,
     MAX_STEPS,
     SUCCES_RATIO,
-    MOST_CANCELED_STEP
+    MOST_CANCELED_STEP,
+    MIN_STEPS_UNSUCCESSFUL,
+    MAX_STEPS_UNSUCCESSFUL
 } from "../types/types";
 import { parseStringToDate } from '../utilities/Utilities';
 
@@ -113,6 +115,8 @@ const initialState = {
     maxStepEvent : [],
     succesRatioPercentage : [],
     mostCanceledStepActual : [],
+    minStepCancelEvent : [],
+    maxStepCancelEvent : [],
 };
 
 
@@ -366,6 +370,16 @@ function reducer(state = initialState, action) {
             return {
                 ...state,
                 mostCanceledStepActual: action.payload
+            };
+        case MIN_STEPS_UNSUCCESSFUL:
+            return {
+                ...state,
+                minStepCancelEvent: action.payload
+            };
+        case MAX_STEPS_UNSUCCESSFUL:
+            return {
+                ...state,
+                maxStepCancelEvent: action.payload
             };
         default:
             return state;
