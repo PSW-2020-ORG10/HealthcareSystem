@@ -20,5 +20,14 @@ namespace SearchMicroserviceApi.Model
             HowToUse = howToUse;
             PrescriptionId = prescriptionId;
         }
+
+        public PrescribedMedicine(int id, int medicineId, Medicine medicine, int quantity, string howToUse, int prescriptionId) : base(id)
+        {
+            MedicineId = medicineId;
+            Medicine = medicine;
+            Quantity = quantity;
+            HowToUse = howToUse;
+            PrescriptionId = prescriptionId;
+        }
     }
 }

@@ -49,7 +49,7 @@ class PrescriptionModal extends Component {
                         </div>
                     </div>
                     <div className="mr-2">
-                        <label className="label">Procedure: </label>
+                        <label className="label">Comment: </label>
                         <textarea className="ml-2 modal-textarea-diagnosis" disabled>{this.props.prescription.comment}</textarea>
                     </div></div>}
                 </ModalBody>

@@ -15,7 +15,7 @@ class ReferralModal extends Component {
                 <ModalHeader className="btn-primary"> {this.state.date} </ModalHeader>
                 <ModalBody>
                     <div className="mr-2 mb-3">
-                        <label className="label">Diagnosis: </label>
+                        <label className="label">{this.props.isOperation === false ? "Anamnesis:" : "Diagnosis:"} </label>
                         <textarea className="ml-2 modal-textarea-diagnosis" disabled>{this.props.referral.diagnosis}</textarea>
                     </div>
                     <div className="mr-2">

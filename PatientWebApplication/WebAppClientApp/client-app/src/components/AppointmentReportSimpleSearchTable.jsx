@@ -20,7 +20,8 @@ class AppointmentReportSimpleSearchTable extends Component {
         Date: "",
         modalShow: false,
         modalPrescriptionShow: false,
-        appointmentId: ""
+        appointmentId: "",
+        isOperation: false
     };
 
     componentDidMount() {
@@ -44,7 +45,7 @@ class AppointmentReportSimpleSearchTable extends Component {
         debugger;
         return (
             <div>
-                {this.state.modalShow ? <ReferralModal show={this.state.modalShow} referral={this.state.Referral} date={this.state.Date}  onShowChange={this.displayModal.bind(this)} /> : null}
+                {this.state.modalShow ? <ReferralModal show={this.state.modalShow} referral={this.state.Referral} date={this.state.Date} isOperation={this.state.isOperation} onShowChange={this.displayModal.bind(this)} /> : null}
                 {this.state.modalPrescriptionShow ? <PrescriptionModal show={this.state.modalPrescriptionShow} date={this.state.Date} appointmentId={this.state.appointmentId} onShowChange={this.displayModalPrescription.bind(this)} /> : null}
                 <div className="field-wrap">
                     <label className="label" htmlFor="">
@@ -156,10 +157,10 @@ class AppointmentReportSimpleSearchTable extends Component {
             return;
         }
         else if (typeof f.referral !== 'undefined') {
-            this.setState({ Referral: f.referral[0], Date: f.date })
+            this.setState({ Referral: f.referral[0], Date: f.date, isOperation: false })
         }
         else if (typeof f.operationReferral !== 'undefined') {
-            this.setState({ Referral: f.operationReferral, Date: f.date })
+            this.setState({ Referral: f.operationReferral, Date: f.date, isOperation: true })
         }
     }
 

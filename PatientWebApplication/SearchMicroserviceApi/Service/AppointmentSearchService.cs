@@ -126,9 +126,7 @@ namespace SearchMicroserviceApi.Service
         /// <returns> List of filtered appointments. </returns>
         public async Task<List<MicroserviceSearchAppointmentDto>> AdvancedSearchAppointmentsAsync(AppointmentAdvancedSearchDto dto)
         {
-
             return SearchForOtherParameters(await Utility.HttpRequests.GetAppointmentsForPatientDto(dto.PatientId), dto, SearchForFirstParameter(await Utility.HttpRequests.GetAppointmentsForPatientDto(dto.PatientId), dto));
-
         }
 
         /// <summary> This method is getting list of filtered <c>DoctorAppointment</c> that match list of parameters in <c>AppointmentAdvnacedSearchDto</c></summary>
