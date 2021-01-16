@@ -15,7 +15,7 @@ namespace IntegrationWithPharmaciesTest
         [Fact]
         public void Finds_Medicine_Description()
         {
-            MedicineWithQuantityService medicineWithQuantityService = new MedicineWithQuantityService(Create_stub_repository_medicines());
+            MedicineInformationService medicineWithQuantityService = new MedicineInformationService(Create_stub_repository_medicines());
 
             String description = medicineWithQuantityService.GetMedicineDescriptionFromStub("Paracetamol");
             Assert.NotEqual("", description);
@@ -24,7 +24,7 @@ namespace IntegrationWithPharmaciesTest
         [Fact]
         public void Finds_No_Medicine_Description()
         {
-            MedicineWithQuantityService medicineDescriptionService = new MedicineWithQuantityService(Create_stub_repository_medicines());
+            MedicineInformationService medicineDescriptionService = new MedicineInformationService(Create_stub_repository_medicines());
 
             String description = medicineDescriptionService.GetMedicineDescriptionFromStub("Clyndamicin");
             Assert.Equal("", description);
@@ -33,26 +33,26 @@ namespace IntegrationWithPharmaciesTest
         [Fact]
         public void Creates_Medicine_Description()
         {
-            MedicineWithQuantityService medicineWithQuantityService = new MedicineWithQuantityService(Create_stub_repository_medicines());
+            MedicineInformationService medicineWithQuantityService = new MedicineInformationService(Create_stub_repository_medicines());
 
-            MedicineWithQuantity description = medicineWithQuantityService.CreateIMedicineDescription(new MedicineWithQuantityDto("Andol", 5,"Description"));
+            MedicineInformation description = medicineWithQuantityService.CreateIMedicineDescription(new MedicineInformationDto(new MedicineDescription("Andol","Description"),5));
             Assert.NotNull(description);
         }
         [Fact]
         public void Creates_No_Medicine_Description()
         {
-            MedicineWithQuantityService medicineWithQuantityService = new MedicineWithQuantityService(Create_stub_repository_medicines());
+            MedicineInformationService medicineWithQuantityService = new MedicineInformationService(Create_stub_repository_medicines());
 
-            MedicineWithQuantity description = medicineWithQuantityService.CreateIMedicineDescription(new MedicineWithQuantityDto("Paracetamol", 10,"Description"));
+            MedicineInformation description = medicineWithQuantityService.CreateIMedicineDescription(new MedicineInformationDto(new MedicineDescription("Paracetamol","Description"),10));
             Assert.Null(description);
         }
       
-        public static IMedicineWithQuantityRepository Create_stub_repository_medicines()
+        public static IMedicineInformationRepository Create_stub_repository_medicines()
         {
-            var stubRepository = new Mock<IMedicineWithQuantityRepository>();
-            MedicineWithQuantity medicine1 = new MedicineWithQuantity(1,"Paracetamol", 2,"Paracetamol is a medication used to treat pain and fever.");
-            MedicineWithQuantity medicine2 = new MedicineWithQuantity(2,"Ibuprofen",5,"Ibuprofen is a medication used for treating pain, fever, and inflammation.");
-            var medicines = new List<MedicineWithQuantity>();
+            var stubRepository = new Mock<IMedicineInformationRepository>();
+            MedicineInformation medicine1 = new MedicineInformation(1, new MedicineDescription("Paracetamol", "Paracetamol is a medication used to treat pain and fever."),2);
+            MedicineInformation medicine2 = new MedicineInformation(2, new MedicineDescription("Ibuprofen","Ibuprofen is a medication used for treating pain, fever, and inflammation."),5);
+            var medicines = new List<MedicineInformation>();
             medicines.Add(medicine1);
             medicines.Add(medicine2);
             stubRepository.Setup(m => m.GetAll()).Returns(medicines);

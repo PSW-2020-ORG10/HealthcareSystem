@@ -118,11 +118,11 @@ namespace TenderApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("ActiveUntil")
-                        .HasColumnType("datetime(6)");
-
                     b.Property<bool>("Closed")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime>("ExpirationDate")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -132,8 +132,8 @@ namespace TenderApi.Migrations
                         new
                         {
                             Id = 1,
-                            ActiveUntil = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Closed = false
+                            Closed = false,
+                            ExpirationDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 #pragma warning restore 612, 618

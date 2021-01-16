@@ -7,7 +7,7 @@ namespace PharmacyRegistrationApi.Adapters
     {
         public static RegistrationInPharmacy RegistrationDtoToRegistration(RegistrationInPharmacyDto dto)
         {
-            return new RegistrationInPharmacy(dto.PharmacyId, dto.ApiKey, dto.Name, dto.Town);
+            return new RegistrationInPharmacy(dto.PharmacyId, dto.Town, dto.PharmacyConnectionInfo, dto.PharmacyNameInfo);
         }
     }
 }

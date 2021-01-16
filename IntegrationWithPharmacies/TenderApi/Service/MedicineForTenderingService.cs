@@ -47,7 +47,7 @@ namespace TenderApi.Service
         {
             foreach (MedicineTenderOffer medicineQuantity in tender.MedicinesWithQuantity)
             {
-                Create(MedicineForTenderingAdapter.MedicineForebderingToMedicineForTenderingDto(new MedicineForTendering(medicineQuantity.MedicineName, medicineQuantity.Quantity, TenderService.getNextTenderId())));
+                Create(MedicineForTenderingAdapter.MedicineForebderingToMedicineForTenderingDto(new MedicineForTendering(medicineQuantity.MedicineName, medicineQuantity.RequiredQuantity, TenderService.getNextTenderId())));
             }
         }
     }

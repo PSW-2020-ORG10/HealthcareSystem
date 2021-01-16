@@ -61,7 +61,7 @@ namespace TenderApi.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ActiveUntil = table.Column<DateTime>(nullable: false),
+                    ExpirationDate = table.Column<DateTime>(nullable: false),
                     Closed = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
@@ -86,8 +86,8 @@ namespace TenderApi.Migrations
 
             migrationBuilder.InsertData(
                 table: "Tender",
-                columns: new[] { "Id", "ActiveUntil", "Closed" },
-                values: new object[] { 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false });
+                columns: new[] { "Id", "Closed", "ExpirationDate" },
+                values: new object[] { 1, false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

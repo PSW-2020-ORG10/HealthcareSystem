@@ -23,7 +23,7 @@ namespace EPrescriptionApi.Controllers
         }
         public RegistrationInPharmacy GetRegistrationByPharmacyName(String name)
         {
-            return HttpRequests.GetPharmacyRegistrations().SingleOrDefault(pharmacy => pharmacy.Name.Equals(name));
+            return HttpRequests.GetPharmacyRegistrations().SingleOrDefault(pharmacy => pharmacy.PharmacyNameInfo.Name.Equals(name));
         }
     
         private static String GetName(Message message)

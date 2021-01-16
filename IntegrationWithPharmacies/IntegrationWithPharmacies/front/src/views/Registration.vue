@@ -34,6 +34,15 @@
 
             </div>
             <div class="row">
+                <div class="col-25">
+                    <label for="apiKey">Pharmacy email:</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" v-model="pharmacyEmail" name="pharmacyEmail" placeholder="Enter pharmacy email..">
+                </div>
+
+            </div>
+            <div class="row">
                 <label v-if="unique" style="color:lightgreen;font-size:25px;">Successfully saved api key!</label>
                 <label v-if="notUnique" style="color:red;font-size:25px;">This api key already exists!</label>
             </div>
@@ -59,17 +68,26 @@
                 notUnique: false,
                 emptyStringError: false,
                 town: "",
-                name : ""
+                name: "",
+                pharmacyEmail : ""
                
             }
         },
         methods: {
-               register: function () {
-                const pharmacy = {
+            register: function () {
+                const pharmacyInfo = {
                     apiKey: this.pharmacyApiKey,
-                    pharmacyId: 1253,
+                    email: this.pharmacyEmail
+                }
+
+                const pharmacyName = {
                     name: this.name,
-                    town : this.town
+                }
+                const pharmacy = {
+                    pharmacyId: 1253,
+                    town: this.town,
+                    pharmacyConnectionInfo: pharmacyInfo,
+                    pharmacyNameInfo: pharmacyName
                 };
                 this.axios.post('http://localhost:54679/api/registration', pharmacy)
                     .then(res => {
