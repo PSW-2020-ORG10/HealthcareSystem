@@ -11,5 +11,7 @@ namespace EventStore.Repository
         IEnumerable<DomainEvent> GetAll();
         public CountStepsEventDto GetStatisticsMinSteps();
         public CountStepsEventDto GetStatisticsMaxSteps();
+        public double GetSuccessfulAttemptsRatio();
+        public int GetMostCanceledStep();
     }
 }
