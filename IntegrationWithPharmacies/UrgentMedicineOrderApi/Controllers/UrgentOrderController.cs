@@ -14,11 +14,13 @@ namespace UrgentMedicineOrderApi.Controllers
     public class UrgentOrderController : Controller
     {
         private UrgentOrderService UrgentOrderService { get; }
+        private SmptServerService SmptServerService { get; }
         private static readonly string medicineInformationUrl = Startup.Configuration["MedicineInformationApi"];
 
         public UrgentOrderController(MyDbContext context)
         {
             UrgentOrderService = new UrgentOrderService(context);
+            SmptServerService = new SmptServerService();
         }
 
         [HttpGet("http/{medicine}")]
@@ -60,6 +62,7 @@ namespace UrgentMedicineOrderApi.Controllers
         private IActionResult CretaeUrgentOrder(List<MedicineName> pharmaciesWithMedicine, UrgentMedicineOrder urgentMedicineOrder)
         {
             UrgentOrderService.Create(UrgentMedicineOrderAdapter.UrgentMedicineOrderToUrgentMedicineOrderDto(urgentMedicineOrder));
+            SmptServerService.SendEMailNotificationForUrgentOrdee(urgentMedicineOrder, pharmaciesWithMedicine[0].Name);
             return Ok(pharmaciesWithMedicine[0].Name);
         }
     }
