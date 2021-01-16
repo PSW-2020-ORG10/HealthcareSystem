@@ -37,7 +37,8 @@
     LOADED_ALL_MESSAGES,
     LOADED_SECOND_IMAGE,
     LOADED_THIRD_IMAGE,
-    USER_LOGGEDIN
+    USER_LOGGEDIN,
+    PRESCRIPTION_LOADED
 } from "../types/types";
 import { parseStringToDate } from '../utilities/Utilities';
 
@@ -102,7 +103,8 @@ const initialState = {
     loadedThirdImage : "",
     loadedAllMessagesList: [],
     userCookie : {},
-    userToken : ""      
+    userToken : "",
+    appointmentPrescription : {}      
 };
 
 
@@ -332,6 +334,12 @@ function reducer(state = initialState, action) {
                 userToken: action.payload.token,
                 userCookie: user
             };
+        case PRESCRIPTION_LOADED:
+            debugger;
+            return {
+                ...state,
+                appointmentPrescription: action.payload
+            }; 
         default:
             return state;
     }

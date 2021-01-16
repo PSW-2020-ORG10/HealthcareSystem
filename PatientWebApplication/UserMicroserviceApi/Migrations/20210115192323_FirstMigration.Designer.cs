@@ -9,7 +9,7 @@ using UserMicroserviceApi.DbContextModel;
 namespace UserMicroserviceApi.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20210110154509_FirstMigration")]
+    [Migration("20210115192323_FirstMigration")]
     partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -614,6 +614,15 @@ namespace UserMicroserviceApi.Migrations
                         {
                             Id = 22,
                             Date = "29/12/2020",
+                            EmployeeId = 1,
+                            IsOnDuty = true,
+                            Room = "1",
+                            ShiftId = 3
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Date = "31/01/2020",
                             EmployeeId = 1,
                             IsOnDuty = true,
                             Room = "1",

@@ -7,6 +7,7 @@ import ReferralModal from "./ReferralModal"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
 import { showErrorToast, checkDateFormat } from "../utilities/Utilities"
+import PrescriptionModal from "./PrescriptionModal";
 
 class AppointmentReportSimpleSearchTable extends Component {
     state = {
@@ -17,12 +18,14 @@ class AppointmentReportSimpleSearchTable extends Component {
         PatientId: 2,
         Referral: null,
         Date: "",
-        modalShow: false
+        modalShow: false,
+        modalPrescriptionShow: false,
+        appointmentId: ""
     };
 
     componentDidMount() {
         debugger;
-        this.props.loadedAllPatientReports(2);
+        this.props.loadedAllPatientReports();
     }
 
     handleChange = (event) => {
@@ -41,7 +44,8 @@ class AppointmentReportSimpleSearchTable extends Component {
         debugger;
         return (
             <div>
-                {this.state.modalShow ? <ReferralModal show={this.state.modalShow} referral={this.state.Referral} date={this.state.Date} onShowChange={this.displayModal.bind(this)} /> : null}
+                {this.state.modalShow ? <ReferralModal show={this.state.modalShow} referral={this.state.Referral} date={this.state.Date}  onShowChange={this.displayModal.bind(this)} /> : null}
+                {this.state.modalPrescriptionShow ? <PrescriptionModal show={this.state.modalPrescriptionShow} date={this.state.Date} appointmentId={this.state.appointmentId} onShowChange={this.displayModalPrescription.bind(this)} /> : null}
                 <div className="field-wrap">
                     <label className="label" htmlFor="">
                         Doctor name and surname:
@@ -108,6 +112,7 @@ class AppointmentReportSimpleSearchTable extends Component {
                             <th style={{ textAlign: "center" }}>Type</th>
                             <th style={{ textAlign: "center" }}>Date</th>
                             <th style={{ textAlign: "center" }}></th>
+                            <th style={{ textAlign: "center" }}></th>
                         </tr>
                     </thead>
                     {patientAppointments.map((f) => (
@@ -116,7 +121,8 @@ class AppointmentReportSimpleSearchTable extends Component {
                                 <td style={{ textAlign: "left" }} >{f.doctorNameAndSurname}</td>
                                 <td style={{ textAlign: "center" }} > {this.checkType(f)}</td >
                                 <td style={{ textAlign: "center" }}>{f.date}</td >
-                                <td style={{ textAlign: "right" }}><button onClick={() => { this.displayModal(f) }} className="btn btn-primary">Details</button></td >
+                                <td style={{ textAlign: "right" }}><button onClick={() => { this.displayModal(f) }} className="btn btn-primary">Report</button></td >
+                                <td style={{ textAlign: "right" }}><button onClick={() => { this.displayModalPrescription(f) }} className="btn btn-primary">Prescription</button></td >
                             </tr>
                         </tbody>
                     ))}
@@ -126,6 +132,19 @@ class AppointmentReportSimpleSearchTable extends Component {
 
 
         );
+        
+    }
+
+    displayModalPrescription(f) {
+        debugger;
+        this.setState({ modalPrescriptionShow: !this.state.modalPrescriptionShow });
+        if (f === undefined) {
+            return;
+        }
+        else{
+            debugger;
+            this.setState({ appointmentId : f.id,  Date: f.date })
+        }
         
     }
 
@@ -145,7 +164,6 @@ class AppointmentReportSimpleSearchTable extends Component {
     }
 
     checkType(f) {
-        debugger;
         console.log(typeof f.operationReferral); 
         let type = typeof f.operationReferral
         console.log(type !== 'undefined');

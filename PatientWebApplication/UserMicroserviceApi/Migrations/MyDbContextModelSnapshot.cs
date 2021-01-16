@@ -616,6 +616,15 @@ namespace UserMicroserviceApi.Migrations
                             IsOnDuty = true,
                             Room = "1",
                             ShiftId = 3
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Date = "31/01/2020",
+                            EmployeeId = 1,
+                            IsOnDuty = true,
+                            Room = "1",
+                            ShiftId = 3
                         });
                 });
 

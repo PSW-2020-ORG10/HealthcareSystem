@@ -10,33 +10,23 @@ namespace AppointmentMicroserviceApi.Doctor
 
     public class Referral : Entity
     {
-        public string Medicine { get; set; }
-        public string TakeMedicineUntil { get; set; }
-        public int QuantityPerDay { get; set; }
-        public string Classify { get; set; }
-        public string Comment { get; set; }
+        public string Diagnosis { get; set; }
+        public string Procedure { get; set; }
         public int AppointmentId { get; set; }
 
         public Referral() : base() { }
-        public Referral(int id, string medicine, string takeMedicineUntil, int quantityPerDay, string classify, string comment) : base(id)
+        public Referral(int id, string diagnosis, string procedure) : base(id)
 
         {
-            Medicine = medicine;
-            TakeMedicineUntil = takeMedicineUntil;
-            QuantityPerDay = quantityPerDay;
-            Classify = classify;
-            Comment = comment;
-
+            Diagnosis = diagnosis;
+            Procedure = procedure;
         }
 
-        public Referral(int id, string medicine, string takeMedicineUntil, int quantityPerDay, string classify, string comment, int appointmentId) : base(id)
+        public Referral(int id, string diagnosis, string procedure, int appointmentId) : base(id)
 
         {
-            Medicine = medicine;
-            TakeMedicineUntil = takeMedicineUntil;
-            QuantityPerDay = quantityPerDay;
-            Classify = classify;
-            Comment = comment;
+            Diagnosis = diagnosis;
+            Procedure = procedure;
             AppointmentId = appointmentId;
         }
     }

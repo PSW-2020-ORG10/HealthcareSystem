@@ -44,8 +44,8 @@ namespace PatientWebApplicationTests
             var patientOperations = new List<Operation>();
             var doctorOperations = new List<Operation>();
 
-            OperationReferral referral1 = new OperationReferral(1, "Medicine", "Take medicine until", 3, "classify", "comment", 1);
-            OperationReferral referral2 = new OperationReferral(2, "Medicine2", "Take medicine until", 3, "Appointment", "comment", 1);
+            OperationReferral referral1 = new OperationReferral(1, "diagnosis", "procedure", 1);
+            OperationReferral referral2 = new OperationReferral(2, "diagnosis", "procedure", 1); ;
             var referrals = new List<OperationReferral>();
             referrals.Add(referral1);
             referrals.Add(referral1);

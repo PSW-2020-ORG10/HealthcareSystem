@@ -58,3 +58,5 @@ export const LOADED_SECOND_IMAGE = "loadedSecondImage";
 export const LOADED_THIRD_IMAGE = "loadedThirdImage";
 export const USER_LOGGEDIN = "userLoggedIn";
 export const USER_LOGGEDIN_ERROR = "userLoggedInError";
+export const PRESCRIPTION_LOADED = "prescriptionLoaded";
+export const PRESCRIPTION_LOADED_ERROR = "prescriptionLoadedError";

@@ -459,6 +459,22 @@
       }
     },
     {
+      "DownstreamPathTemplate": "/api/prescription/appointment/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "searchmicroserviceapi",
+          "Port": 53174
+        }
+      ],
+      "UpstreamPathTemplate": "/api/prescription/appointment/{id}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
       "DownstreamPathTemplate": "/api/prescription/patient/{id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [

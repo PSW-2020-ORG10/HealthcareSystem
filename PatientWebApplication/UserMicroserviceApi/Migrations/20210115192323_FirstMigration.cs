@@ -284,6 +284,7 @@ namespace UserMicroserviceApi.Migrations
                 values: new object[,]
                 {
                     { 12, "19/12/2020", 1, true, "Ordination 1", 4 },
+                    { 23, "31/01/2020", 1, true, "1", 3 },
                     { 22, "29/12/2020", 1, true, "1", 3 },
                     { 15, "23/12/2020", 1, true, "Ordination 1", 3 },
                     { 14, "21/12/2020", 1, true, "Ordination 1", 3 },

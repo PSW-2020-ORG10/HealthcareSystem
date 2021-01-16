@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace UserMicroserviceApi.Migrations
+namespace SearchMicroserviceApi.Migrations
 {
-    public partial class FourthMigration : Migration
+    public partial class SixthMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

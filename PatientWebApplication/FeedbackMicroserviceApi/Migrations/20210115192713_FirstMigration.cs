@@ -12,7 +12,7 @@ namespace FeedbackMicroserviceApi.Migrations
                 name: "Feedbacks",
                 columns: table => new
                 {
-                    id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Message = table.Column<string>(nullable: true),
                     IsPublished = table.Column<bool>(nullable: false),
@@ -23,12 +23,12 @@ namespace FeedbackMicroserviceApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Feedbacks", x => x.id);
+                    table.PrimaryKey("PK_Feedbacks", x => x.Id);
                 });
 
             migrationBuilder.InsertData(
                 table: "Feedbacks",
-                columns: new[] { "id", "Date", "IsAnonymous", "IsPublic", "IsPublished", "Message", "PatientId" },
+                columns: new[] { "Id", "Date", "IsAnonymous", "IsPublic", "IsPublished", "Message", "PatientId" },
                 values: new object[,]
                 {
                     { 1, new DateTime(2020, 11, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), true, true, false, "First message", 1 },

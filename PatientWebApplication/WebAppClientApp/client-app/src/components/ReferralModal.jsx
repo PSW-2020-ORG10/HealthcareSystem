@@ -11,24 +11,16 @@ class ReferralModal extends Component {
     render() {
         debugger;
         return (
-            <Modal isOpen={this.state.modalShow} centered={true}>
-                <ModalHeader> {this.state.date} </ModalHeader>
+            <Modal isOpen={this.state.modalShow} centered={true} style={{ maxWidth: '750px', width: '749px' }}>
+                <ModalHeader className="btn-primary"> {this.state.date} </ModalHeader>
                 <ModalBody>
-                    <div className="h-100 d-flex justify-content-center align-items-center">
-                            <label className="label">Medicine: </label>
-                            <label className="label-data ml-2">{this.props.referral.medicine}</label>
+                    <div className="mr-2 mb-3">
+                        <label className="label">Diagnosis: </label>
+                        <textarea className="ml-2 modal-textarea-diagnosis" disabled>{this.props.referral.diagnosis}</textarea>
                     </div>
-                    <div className="h-100 d-flex justify-content-center align-items-center">
-                        <label className="label">Take medicine until: </label>
-                        <label className="label-data ml-2">{this.props.referral.takeMedicineUntil}</label>
-                    </div>
-                    <div className="h-100 d-flex justify-content-center align-items-center">
-                        <label className="label">Quantity per day: </label>
-                        <label className="label-data ml-2">{this.props.referral.quantityPerDay}</label>
-                    </div>
-                    <div className="h-100 d-flex justify-content-center align-items-center">
-                        <label className="label">Comment: </label>
-                        <label className="label-data ml-2">{this.props.referral.comment}</label>
+                    <div className="mr-2">
+                        <label className="label">Procedure: </label>
+                        <textarea className="ml-2 modal-textarea-procedure" disabled>{this.props.referral.procedure}</textarea>
                     </div>
         </ModalBody>
                 <ModalFooter>

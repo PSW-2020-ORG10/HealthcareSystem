@@ -50,12 +50,11 @@ namespace PatientWebApplicationTests
 
             var prescriptions = new List<Prescription>();
 
-            List<Medicine> medicines = new List<Medicine>();
-            Medicine medicine = new Medicine(1, "Medicine Name", 1, "Description", new List<ModelRoom>(), 1, true, 1);
-            medicines.Add(medicine);
+            List<PrescribedMedicine> medicines = new List<PrescribedMedicine>();
+            medicines.Add(new PrescribedMedicine(1, 1, 1, "How to use", 1));
 
-            Prescription prescription1 = new Prescription(1, 1, medicines, true, "Comment", 1);
-            Prescription prescription2 = new Prescription(2, 1, new List<Medicine>(), true, "Some text", 1);
+            Prescription prescription1 = new Prescription(1, 1, medicines, true, "Comment", 1, 1);
+            Prescription prescription2 = new Prescription(2, 1, new List<PrescribedMedicine>(), true, "Some text", 1, 1);
 
             prescriptions.Add(prescription1);
             prescriptions.Add(prescription2);
