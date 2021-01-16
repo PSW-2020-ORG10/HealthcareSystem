@@ -114,22 +114,34 @@ namespace EventStore.Repository
             int successfulAttemptsCount = successfulAppointmentsAttempts.Count();
   
             int allAttemptsCount = MyDbContext.AppointmentSchedulingEvents.ToList().GroupBy(appointmentEvent => appointmentEvent.Attempt).ToList().Count();
-
-            return (double)successfulAttemptsCount / (double)allAttemptsCount;
+            
+            return Math.Round(((double)successfulAttemptsCount / (double)allAttemptsCount),2);
         }
 
         public int GetMostCanceledStep()
         {
-            List<int> successfulAppointmentsAttempts = new List<int>();
+            List<long> successfulAppointmentsAttempts2 = new List<long>();
             foreach (AppointmentSchedulingEvent appointmentSchedulingEvent in MyDbContext.AppointmentSchedulingEvents.ToList())
             {
-                if (appointmentSchedulingEvent.Action.Equals("cancel"))
+                if (appointmentSchedulingEvent.Action.Equals("create"))
                 {
-                    successfulAppointmentsAttempts.Add(appointmentSchedulingEvent.Step);
+                    successfulAppointmentsAttempts2.Add(appointmentSchedulingEvent.Attempt);
+                }
+            }
+            List<int> unsuccessfulAppointmentsAttempts = new List<int>();
+            foreach (AppointmentSchedulingEvent appointmentSchedulingEvent in MyDbContext.AppointmentSchedulingEvents.ToList())
+            {
+                /* if (!appointmentSchedulingEvent.Action.Equals("create"))
+                 {
+                     successfulAppointmentsAttempts.Add(appointmentSchedulingEvent.Step);
+                 }*/
+                if (appointmentSchedulingEvent.Action.Equals("cancel") && !successfulAppointmentsAttempts2.Contains(appointmentSchedulingEvent.Attempt))
+                {
+                    unsuccessfulAppointmentsAttempts.Add(appointmentSchedulingEvent.Step);
                 }
             }
 
-            return successfulAppointmentsAttempts.Count > 0 ? successfulAppointmentsAttempts.GroupBy(i => i).OrderByDescending(grp => grp.Count()).Select(grp => grp.Key).First() : 0;
+            return unsuccessfulAppointmentsAttempts.Count > 0 ? unsuccessfulAppointmentsAttempts.GroupBy(i => i).OrderByDescending(grp => grp.Count()).Select(grp => grp.Key).First() : 0;
         }
     }
 }
