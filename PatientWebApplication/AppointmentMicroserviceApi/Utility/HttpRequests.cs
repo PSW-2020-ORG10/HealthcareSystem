@@ -45,5 +45,12 @@ namespace AppointmentMicroserviceApi.Utility
             var responseString = await client.GetAsync($"{usersServiceUrl}api/doctor/operation/{doctorId}/{time}/{date}");
             return await responseString.Content.ReadAsAsync<Boolean>();
         }
+
+        public static async Task<MicroservicePatientUserDto> GetPatientByIdAsync(int id)
+        {
+            var responseString = await client.GetAsync($"{usersServiceUrl}api/patientUser/getOneEventDto/{id}");
+            MicroservicePatientUserDto patient = await responseString.Content.ReadAsAsync<MicroservicePatientUserDto>();
+            return patient;
+        }
     }
 }

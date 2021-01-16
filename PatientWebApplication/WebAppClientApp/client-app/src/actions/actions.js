@@ -62,7 +62,11 @@
     MIN_STEPS,
     MIN_STEPS_ERROR,
     MAX_STEPS,
-    MAX_STEPS_ERROR
+    MAX_STEPS_ERROR,
+    SUCCES_RATIO,
+    SUCCES_RATIO_ERROR,
+    MOST_CANCELED_STEP,
+    MOST_CANCELED_STEP_ERROR
 } from "../types/types"
 import axios from "axios";
 import { func } from "prop-types";
@@ -977,6 +981,48 @@ export const maxSteps = () => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: MAX_STEPS_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const succesRatio = () => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.get("http://localhost:54689/api/doctorAppointment/getSuccessfulAttemptsRatio",
+        {
+            headers: { "Access-Control-Allow-Origin": "*",
+                       "Authorization" :  "Bearer " + localStorage.getItem("token")}
+          });
+        debugger;
+        dispatch({
+            type: SUCCES_RATIO,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: SUCCES_RATIO_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const mostCanceledStep = () => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.get("http://localhost:54689/api/doctorAppointment/getMostCanceledStep",
+        {
+            headers: { "Access-Control-Allow-Origin": "*",
+                       "Authorization" :  "Bearer " + localStorage.getItem("token")}
+          });
+        debugger;
+        dispatch({
+            type: MOST_CANCELED_STEP,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: MOST_CANCELED_STEP_ERROR,
             payload: console.log(e),
         });
     }

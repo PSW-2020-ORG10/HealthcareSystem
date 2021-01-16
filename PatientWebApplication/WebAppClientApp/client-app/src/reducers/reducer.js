@@ -40,7 +40,9 @@
     USER_LOGGEDIN,
     STORE_EVENT,
     MIN_STEPS,
-    MAX_STEPS
+    MAX_STEPS,
+    SUCCES_RATIO,
+    MOST_CANCELED_STEP
 } from "../types/types";
 import { parseStringToDate } from '../utilities/Utilities';
 
@@ -108,7 +110,9 @@ const initialState = {
     userToken : "",
     appointmentEvent : {},
     minStepEvent : [],
-    maxStepEvent : []       
+    maxStepEvent : [],
+    succesRatioPercentage : [],
+    mostCanceledStepActual : [],
 };
 
 
@@ -352,6 +356,16 @@ function reducer(state = initialState, action) {
             return {
                 ...state,
                 maxStepEvent: action.payload
+            };
+        case SUCCES_RATIO:
+            return {
+                ...state,
+                succesRatioPercentage: action.payload
+            };
+        case MOST_CANCELED_STEP:
+            return {
+                ...state,
+                mostCanceledStepActual: action.payload
             };
         default:
             return state;

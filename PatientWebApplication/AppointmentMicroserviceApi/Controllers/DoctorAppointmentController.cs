@@ -178,14 +178,42 @@ namespace AppointmentMicroserviceApi.Controllers
         [Authorize(Roles = "admin")]
         public IActionResult GetStatisticsEventsMinSteps()
         {  
-            return Ok(appointmentSchedulingEventService.GetStatisticsMinSteps());
+            return Ok(CountStepsEventWithPatientAdapter.CountStepsEventDtoToCountStepsEventWithPatientDto(appointmentSchedulingEventService.GetStatisticsMinSteps()));
         }
 
         [HttpGet("getStatisticsMaxSteps")]
         [Authorize(Roles = "admin")]
         public IActionResult GetStatisticsEventsMaxSteps()
         {
-            return Ok(appointmentSchedulingEventService.GetStatisticsMaxSteps());
+            return Ok(CountStepsEventWithPatientAdapter.CountStepsEventDtoToCountStepsEventWithPatientDto(appointmentSchedulingEventService.GetStatisticsMaxSteps()));
+        }
+
+        [HttpGet("getStatisticsOldPersonAverage")]
+        [Authorize(Roles = "admin")]
+        public IActionResult GetStatisticsEventsOldPerson()
+        {
+            return Ok(CountStepsEventWithPatientAdapter.CountStepsEventDtoToCountStepsEventWithPatientDto(appointmentSchedulingEventService.GetStatisticsMaxSteps()));
+        }
+
+        [HttpGet("getStatisticsYoungPersonAverage")]
+        [Authorize(Roles = "admin")]
+        public IActionResult GetStatisticsEventsYoungPerson()
+        {
+            return Ok(CountStepsEventWithPatientAdapter.CountStepsEventDtoToCountStepsEventWithPatientDto(appointmentSchedulingEventService.GetStatisticsMaxSteps()));
+        }
+
+        [HttpGet("getSuccessfulAttemptsRatio")]
+        [Authorize(Roles = "admin")]
+        public IActionResult GetSuccessfulAttemptsRatio()
+        {
+            return Ok(appointmentSchedulingEventService.GetSuccessfulAttemptsRatio());
+        }
+
+        [HttpGet("getMostCanceledStep")]
+        [Authorize(Roles = "admin")]
+        public IActionResult GetMostCanceledStep()
+        {
+            return Ok(appointmentSchedulingEventService.GetMostCanceledStep());
         }
 
     }
