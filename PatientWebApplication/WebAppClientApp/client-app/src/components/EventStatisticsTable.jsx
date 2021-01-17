@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { minSteps, maxSteps, succesRatio, mostCanceledStep,minStepsCancel, maxStepsCancel, averageCreate, averageCancel} from "../actions/actions"
+import {getStatistics} from "../actions/actions"
 import { connect } from "react-redux"
 import { wrap } from "module";
 import { formatDate } from "../utilities/Utilities"
@@ -9,56 +9,15 @@ import { formatDate } from "../utilities/Utilities"
 class EventStatisticsTable extends Component {
     componentDidMount() {
         debugger;
-        this.props.minSteps();
-        this.props.maxSteps();
-        this.props.succesRatio();
-        this.props.mostCanceledStep();
-        this.props.minStepsCancel();
-        this.props.maxStepsCancel();
-        this.props.averageCreate();
-        this.props.averageCancel();
+        this.props.getStatistics();
     }
     render() {
         debugger;
-        if (this.props.minStepEvent === undefined || this.props.minStepEvent.length === 0){
+        if (this.props.statistics === undefined || this.props.statistics.length === 0){
             return null;
         }
         
-        if (this.props.maxStepEvent === undefined || this.props.maxStepEvent.length === 0) {
-            return null;
-        }
-
-        if (this.props.succesRatioPercentage === undefined || this.props.succesRatioPercentage.length === 0) {
-            return null;
-        }
-
-        if (this.props.mostCanceledStepActual === undefined || this.props.mostCanceledStepActual.length === 0) {
-            return null;
-        }
-        if (this.props.minStepCancelEvent === undefined || this.props.minStepCancelEvent.length === 0){
-            return null;
-        }
-        
-        if (this.props.maxStepCancelEvent === undefined || this.props.maxStepCancelEvent.length === 0) {
-            return null;
-        }
-
-        if (this.props.averageCreateEvent === undefined || this.props.averageCreateEvent.length === 0){
-            return null;
-        }
-        
-        if (this.props.averageCancelEvent === undefined || this.props.averageCancelEvent.length === 0) {
-            return null;
-        }
-
-        const minStepEvent = this.props.minStepEvent
-        const maxStepEvent = this.props.maxStepEvent
-        const succesRatioPercentage = this.props.succesRatioPercentage
-        const mostCanceledStepActual = this.props.mostCanceledStepActual
-        const minStepCancelEvent = this.props.minStepCancelEvent
-        const maxStepCancelEvent = this.props.maxStepCancelEvent
-        const averageCreateEvent = this.props.averageCreateEvent
-        const averageCancelEvent = this.props.averageCancelEvent
+        const statistics = this.props.statistics
         debugger;
         return (
             <div>
@@ -72,18 +31,18 @@ class EventStatisticsTable extends Component {
                     <tbody>
                         <tr>
                             <td style={{ flexWrap: "wrap", wordWrap: "break-word", wordBreak: "break-word", width: '45%' }}>
-                               Scheduling with least number of steps was done by: {minStepEvent.appointmentEventWithPatientDto.patient.name + " " + minStepEvent.appointmentEventWithPatientDto.patient.surname}
+                               Scheduling with least number of steps was done by: {statistics.minSteps.appointmentEventWithPatientDto.patient.name + " " + statistics.minSteps.appointmentEventWithPatientDto.patient.surname}
                             </td>
                             <td style={{ textAlign: "center" }}>
-                                {minStepEvent.countSteps} steps
+                                {statistics.minSteps.countSteps} steps
                             </td>                        
                         </tr>
                         <tr>
                             <td style={{ flexWrap: "wrap", wordWrap: "break-word", wordBreak: "break-word", width: '45%' }}>
-                                Scheduling with most number of steps was done by: {maxStepEvent.appointmentEventWithPatientDto.patient.name + " " + maxStepEvent.appointmentEventWithPatientDto.patient.surname}
+                                Scheduling with most number of steps was done by: {statistics.maxSteps.appointmentEventWithPatientDto.patient.name + " " + statistics.maxSteps.appointmentEventWithPatientDto.patient.surname}
                             </td>
                             <td style={{ textAlign: "center" }}>
-                                {maxStepEvent.countSteps} steps
+                                {statistics.maxSteps.countSteps} steps
                             </td>
                         </tr>
                         <tr>
@@ -91,23 +50,23 @@ class EventStatisticsTable extends Component {
                                 Average number of steps needed for scheduling: 
                             </td>
                             <td style={{ textAlign: "center" }}>
-                                {parseFloat(averageCreateEvent).toFixed(0)} steps
+                                {parseFloat(statistics.averageStepsForSuccessfulAttempt).toFixed(1)} steps
                             </td>
                         </tr>
                         <tr>
                         <td style={{ flexWrap: "wrap", wordWrap: "break-word", wordBreak: "break-word", width: '45%' }}>
-                               Cancelling with least number of steps was done by: {minStepEvent.appointmentEventWithPatientDto.patient.name + " " + minStepEvent.appointmentEventWithPatientDto.patient.surname}
+                               Cancelling with least number of steps was done by: {statistics.minStepsForCancelling.appointmentEventWithPatientDto.patient.name + " " + statistics.minStepsForCancelling.appointmentEventWithPatientDto.patient.surname}
                             </td>
                             <td style={{ textAlign: "center" }}>
-                                {minStepCancelEvent.countSteps} steps
+                                {statistics.minStepsForCancelling.countSteps} steps
                             </td>                        
                         </tr>
                         <tr>
                             <td style={{ flexWrap: "wrap", wordWrap: "break-word", wordBreak: "break-word", width: '45%' }}>
-                            Cancelling with most number of steps was done by: {maxStepEvent.appointmentEventWithPatientDto.patient.name + " " + maxStepEvent.appointmentEventWithPatientDto.patient.surname}
+                            Cancelling with most number of steps was done by: {statistics.maxStepsForCancelling.appointmentEventWithPatientDto.patient.name + " " + statistics.maxStepsForCancelling.appointmentEventWithPatientDto.patient.surname}
                             </td>
                             <td style={{ textAlign: "center" }}>
-                                {maxStepCancelEvent.countSteps} steps
+                                {statistics.maxStepsForCancelling.countSteps} steps
                             </td>
                         </tr>
                         <tr>
@@ -115,7 +74,7 @@ class EventStatisticsTable extends Component {
                                 Average number of steps needed for cancelling: 
                             </td>
                             <td style={{ textAlign: "center" }}>
-                                {parseFloat(averageCancelEvent).toFixed(0)} steps
+                                {parseFloat(statistics.averageStepsForUnsuccessfulAttempt).toFixed(1)} steps
                             </td>
                         </tr>
                         <tr>
@@ -123,7 +82,7 @@ class EventStatisticsTable extends Component {
                                 Ratio of successful appointment shceduled:
                             </td>
                             <td style={{ textAlign: "center" }}>
-                                {succesRatioPercentage * 100} %
+                                {(statistics.successfulAttemptsRatio * 100).toFixed(1)} %
                             </td>
                         </tr>
                         <tr>
@@ -131,7 +90,55 @@ class EventStatisticsTable extends Component {
                         Step at which most cancellations happend:
                             </td>
                             <td style={{ textAlign: "center" }}>
-                            {mostCanceledStepActual}
+                            {statistics.mostCanceledStep}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style={{ flexWrap: "wrap", wordWrap: "break-word", wordBreak: "break-word", width: '45%' }}>
+                                Maximum time for scheduling:
+                            </td>
+                            <td style={{ textAlign: "center" }}>
+                            {statistics.maxTime.toFixed(1)} seconds
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style={{ flexWrap: "wrap", wordWrap: "break-word", wordBreak: "break-word", width: '45%' }}>
+                                Minimum time for scheduling:
+                            </td>
+                            <td style={{ textAlign: "center" }}>
+                                {statistics.minTime.toFixed(1)} seconds
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style={{ flexWrap: "wrap", wordWrap: "break-word", wordBreak: "break-word", width: '45%' }}>
+                                Average time for scheduling:
+                            </td>
+                            <td style={{ textAlign: "center" }}>
+                                {statistics.averageTime.toFixed(1)} seconds
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style={{ flexWrap: "wrap", wordWrap: "break-word", wordBreak: "break-word", width: '45%' }}>
+                                How many patients scheduled appointment in minimum steps:
+                            </td>
+                            <td style={{ textAlign: "center" }}>
+                                {statistics.howManySchedulesInMinimumSteps}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style={{ flexWrap: "wrap", wordWrap: "break-word", wordBreak: "break-word", width: '45%' }}>
+                                How many patients scheduled appointment in 5 to 7 steps:
+                            </td>
+                            <td style={{ textAlign: "center" }}>
+                                {statistics.howManySchedulesInMediumSteps}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style={{ flexWrap: "wrap", wordWrap: "break-word", wordBreak: "break-word", width: '45%' }}>
+                                How many patients scheduled appointment in more than 7 steps:
+                            </td>
+                            <td style={{ textAlign: "center" }}>
+                                {statistics.howManySchedulesInMoreSteps}
                             </td>
                         </tr>
                     </tbody>
@@ -145,6 +152,6 @@ class EventStatisticsTable extends Component {
 
 const mapStateToProps = (state) =>
 
-    ({ minStepEvent: state.reducer.minStepEvent, maxStepEvent: state.reducer.maxStepEvent, succesRatioPercentage: state.reducer.succesRatioPercentage, mostCanceledStepActual: state.reducer.mostCanceledStepActual, minStepCancelEvent: state.reducer.minStepCancelEvent, maxStepCancelEvent: state.reducer.maxStepCancelEvent, averageCreateEvent: state.reducer.averageCreateEvent, averageCancelEvent: state.reducer.averageCancelEvent })
+    ({ statistics: state.reducer.statistics})
 
-export default connect(mapStateToProps, { minSteps, maxSteps, succesRatio, mostCanceledStep, minStepsCancel, maxStepsCancel, averageCreate, averageCancel })(EventStatisticsTable);
+export default connect(mapStateToProps, { getStatistics })(EventStatisticsTable);

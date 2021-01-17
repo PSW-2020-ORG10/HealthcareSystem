@@ -39,14 +39,7 @@
     LOADED_THIRD_IMAGE,
     USER_LOGGEDIN,
     STORE_EVENT,
-    MIN_STEPS,
-    MAX_STEPS,
-    SUCCES_RATIO,
-    MOST_CANCELED_STEP,
-    MIN_STEPS_UNSUCCESSFUL,
-    MAX_STEPS_UNSUCCESSFUL,
-    AVERAGE_UNSUCCESSFUL,
-    AVERAGE_SUCCESSFUL
+    GET_STATISTICS
 } from "../types/types";
 import { parseStringToDate } from '../utilities/Utilities';
 
@@ -113,14 +106,7 @@ const initialState = {
     userCookie : {},
     userToken : "",
     appointmentEvent : {},
-    minStepEvent : [],
-    maxStepEvent : [],
-    succesRatioPercentage : [],
-    mostCanceledStepActual : [],
-    minStepCancelEvent : [],
-    maxStepCancelEvent : [],
-    averageCreateEvent : {},
-    averageCancelEvent : {}
+    statistics: []
 };
 
 
@@ -355,45 +341,10 @@ function reducer(state = initialState, action) {
                     ...state,
                     appointmentEvent: action.payload
                 };
-        case MIN_STEPS:
+        case GET_STATISTICS:
             return {
                 ...state,
-                minStepEvent: action.payload
-            };
-        case MAX_STEPS:
-            return {
-                ...state,
-                maxStepEvent: action.payload
-            };
-        case SUCCES_RATIO:
-            return {
-                ...state,
-                succesRatioPercentage: action.payload
-            };
-        case MOST_CANCELED_STEP:
-            return {
-                ...state,
-                mostCanceledStepActual: action.payload
-            };
-        case MIN_STEPS_UNSUCCESSFUL:
-            return {
-                ...state,
-                minStepCancelEvent: action.payload
-            };
-        case MAX_STEPS_UNSUCCESSFUL:
-            return {
-                ...state,
-                maxStepCancelEvent: action.payload
-            };
-        case AVERAGE_SUCCESSFUL:
-            return {
-                ...state,
-                averageCreateEvent: action.payload
-        };
-        case AVERAGE_UNSUCCESSFUL:
-            return {
-                ...state,
-                averageCancelEvent: action.payload
+                statistics: action.payload
             };
         default:
             return state;
