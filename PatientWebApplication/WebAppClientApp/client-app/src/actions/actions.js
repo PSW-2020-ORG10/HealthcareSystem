@@ -59,22 +59,8 @@
     USER_LOGGEDIN_ERROR,
     STORE_EVENT,
     STORE_EVENT_ERROR,
-    MIN_STEPS,
-    MIN_STEPS_ERROR,
-    MAX_STEPS,
-    MAX_STEPS_ERROR,
-    SUCCES_RATIO,
-    SUCCES_RATIO_ERROR,
-    MOST_CANCELED_STEP,
-    MOST_CANCELED_STEP_ERROR,
-    MIN_STEPS_UNSUCCESSFUL,
-    MIN_STEPS_UNSUCCESSFUL_ERROR,
-    MAX_STEPS_UNSUCCESSFUL,
-    MAX_STEPS_UNSUCCESSFUL_ERROR,
-    AVERAGE_UNSUCCESSFUL,
-    AVERAGE_UNSUCCESSFUL_ERROR,
-    AVERAGE_SUCCESSFUL,
-    AVERAGE_SUCCESSFUL_ERROR
+    GET_STATISTICS,
+    GET_STATISTICS_ERROR
 
 } from "../types/types"
 import axios from "axios";
@@ -953,169 +939,22 @@ export const storeEvent = (appointmentEvent) => async (dispatch) => {
     }
 };
 
-export const minSteps = () => async (dispatch) => {
+export const getStatistics = () => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.get("http://localhost:54689/api/doctorappointment/getStatisticsMinSteps",
+        const response = await axios.get("http://localhost:54689/api/doctorappointment/getStatistics",
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
           });
         debugger;
         dispatch({
-            type: MIN_STEPS,
+            type: GET_STATISTICS,
             payload: response.data,
         });
     } catch (e) {
         dispatch({
-            type: MIN_STEPS_ERROR,
-            payload: console.log(e),
-        });
-    }
-};
-
-export const maxSteps = () => async (dispatch) => {
-    try {
-        debugger;
-        const response = await axios.get("http://localhost:54689/api/doctorAppointment/getStatisticsMaxSteps",
-        {
-            headers: { "Access-Control-Allow-Origin": "*",
-                       "Authorization" :  "Bearer " + localStorage.getItem("token")}
-          });
-        debugger;
-        dispatch({
-            type: MAX_STEPS,
-            payload: response.data,
-        });
-    } catch (e) {
-        dispatch({
-            type: MAX_STEPS_ERROR,
-            payload: console.log(e),
-        });
-    }
-};
-
-export const succesRatio = () => async (dispatch) => {
-    try {
-        debugger;
-        const response = await axios.get("http://localhost:54689/api/doctorAppointment/getSuccessfulAttemptsRatio",
-        {
-            headers: { "Access-Control-Allow-Origin": "*",
-                       "Authorization" :  "Bearer " + localStorage.getItem("token")}
-          });
-        debugger;
-        dispatch({
-            type: SUCCES_RATIO,
-            payload: response.data,
-        });
-    } catch (e) {
-        dispatch({
-            type: SUCCES_RATIO_ERROR,
-            payload: console.log(e),
-        });
-    }
-};
-
-export const mostCanceledStep = () => async (dispatch) => {
-    try {
-        debugger;
-        const response = await axios.get("http://localhost:54689/api/doctorAppointment/getMostCanceledStep",
-        {
-            headers: { "Access-Control-Allow-Origin": "*",
-                       "Authorization" :  "Bearer " + localStorage.getItem("token")}
-          });
-        debugger;
-        dispatch({
-            type: MOST_CANCELED_STEP,
-            payload: response.data,
-        });
-    } catch (e) {
-        dispatch({
-            type: MOST_CANCELED_STEP_ERROR,
-            payload: console.log(e),
-        });
-    }
-};
-
-export const minStepsCancel = () => async (dispatch) => {
-    try {
-        debugger;
-        const response = await axios.get("http://localhost:54689/api/doctorappointment/getStatisticsMinStepsForCancelling",
-        {
-            headers: { "Access-Control-Allow-Origin": "*",
-                       "Authorization" :  "Bearer " + localStorage.getItem("token")}
-          });
-        debugger;
-        dispatch({
-            type: MIN_STEPS_UNSUCCESSFUL,
-            payload: response.data,
-        });
-    } catch (e) {
-        dispatch({
-            type: MIN_STEPS_UNSUCCESSFUL_ERROR,
-            payload: console.log(e),
-        });
-    }
-};
-
-export const maxStepsCancel = () => async (dispatch) => {
-    try {
-        debugger;
-        const response = await axios.get("http://localhost:54689/api/doctorAppointment/GetStatisticsMaxStepsForCancelling",
-        {
-            headers: { "Access-Control-Allow-Origin": "*",
-                       "Authorization" :  "Bearer " + localStorage.getItem("token")}
-          });
-        debugger;
-        dispatch({
-            type: MAX_STEPS_UNSUCCESSFUL,
-            payload: response.data,
-        });
-    } catch (e) {
-        dispatch({
-            type: MAX_STEPS_UNSUCCESSFUL_ERROR,
-            payload: console.log(e),
-        });
-    }
-};
-
-export const averageCreate = () => async (dispatch) => {
-    try {
-        debugger;
-        const response = await axios.get("http://localhost:54689/api/doctorAppointment/getAverageStepsForSuccessfulAttempt",
-        {
-            headers: { "Access-Control-Allow-Origin": "*",
-                       "Authorization" :  "Bearer " + localStorage.getItem("token")}
-          });
-        debugger;
-        dispatch({
-            type: AVERAGE_SUCCESSFUL,
-            payload: response.data,
-        });
-    } catch (e) {
-        dispatch({
-            type: AVERAGE_SUCCESSFUL_ERROR,
-            payload: console.log(e),
-        });
-    }
-};
-
-export const averageCancel = () => async (dispatch) => {
-    try {
-        debugger;
-        const response = await axios.get("http://localhost:54689/api/doctorAppointment/getAverageStepsForUnsuccessfulAttempt",
-        {
-            headers: { "Access-Control-Allow-Origin": "*",
-                       "Authorization" :  "Bearer " + localStorage.getItem("token")}
-          });
-        debugger;
-        dispatch({
-            type: AVERAGE_UNSUCCESSFUL,
-            payload: response.data,
-        });
-    } catch (e) {
-        dispatch({
-            type: AVERAGE_UNSUCCESSFUL_ERROR,
+            type: GET_STATISTICS_ERROR,
             payload: console.log(e),
         });
     }

@@ -156,13 +156,7 @@ namespace AppointmentMicroserviceApi.Controllers
         {
             if (appointmentSchedulingEventService != null)
             {
-                if (dto.EndPoint.Equals("start"))
-                {
-                    appointmentSchedulingEventService.Create(new AppointmentSchedulingEvent(dto.PatientId, dto.Step, dto.Action, dto.EndPoint, appointmentSchedulingEventService.FindNextAttempt()));
-                } else
-                {
-                    appointmentSchedulingEventService.Create(new AppointmentSchedulingEvent(dto.PatientId, dto.Step, dto.Action, dto.EndPoint, appointmentSchedulingEventService.FindNextAttempt() - 1));
-                }
+                appointmentSchedulingEventService.Create( dto.EndPoint.Equals("start") ? new AppointmentSchedulingEvent(dto.PatientId, dto.Step, dto.Action, dto.EndPoint, appointmentSchedulingEventService.FindNextAttempt()) : new AppointmentSchedulingEvent(dto.PatientId, dto.Step, dto.Action, dto.EndPoint, appointmentSchedulingEventService.FindNextAttempt() - 1));
             }
         }
 
@@ -174,74 +168,11 @@ namespace AppointmentMicroserviceApi.Controllers
             return Ok();
         }
 
-        [HttpGet("getStatisticsMinSteps")]
+        [HttpGet("getStatistics")]
         [Authorize(Roles = "admin")]
-        public IActionResult GetStatisticsEventsMinSteps()
-        {  
-            return Ok(CountStepsEventWithPatientAdapter.CountStepsEventDtoToCountStepsEventWithPatientDto(appointmentSchedulingEventService.GetStatisticsMinSteps()));
-        }
-
-        [HttpGet("getStatisticsMaxSteps")]
-        [Authorize(Roles = "admin")]
-        public IActionResult GetStatisticsEventsMaxSteps()
+        public IActionResult GetStatistics()
         {
-            return Ok(CountStepsEventWithPatientAdapter.CountStepsEventDtoToCountStepsEventWithPatientDto(appointmentSchedulingEventService.GetStatisticsMaxSteps()));
-        }
-
-        [HttpGet("getStatisticsOldPersonAverage")]
-        [Authorize(Roles = "admin")]
-        public IActionResult GetStatisticsEventsOldPerson()
-        {
-            return Ok(CountStepsEventWithPatientAdapter.CountStepsEventDtoToCountStepsEventWithPatientDto(appointmentSchedulingEventService.GetStatisticsMaxSteps()));
-        }
-
-        [HttpGet("getStatisticsYoungPersonAverage")]
-        [Authorize(Roles = "admin")]
-        public IActionResult GetStatisticsEventsYoungPerson()
-        {
-            return Ok(CountStepsEventWithPatientAdapter.CountStepsEventDtoToCountStepsEventWithPatientDto(appointmentSchedulingEventService.GetStatisticsMaxSteps()));
-        }
-
-        [HttpGet("getSuccessfulAttemptsRatio")]
-        [Authorize(Roles = "admin")]
-        public IActionResult GetSuccessfulAttemptsRatio()
-        {
-            return Ok(appointmentSchedulingEventService.GetSuccessfulAttemptsRatio());
-        }
-
-        [HttpGet("getMostCanceledStep")]
-        [Authorize(Roles = "admin")]
-        public IActionResult GetMostCanceledStep()
-        {
-            return Ok(appointmentSchedulingEventService.GetMostCanceledStep());
-        }
-
-        [HttpGet("getAverageStepsForSuccessfulAttempt")]
-        [Authorize(Roles = "admin")]
-        public IActionResult GetAverageStepsForSuccessfulAttempt()
-        {
-            return Ok(appointmentSchedulingEventService.GetAverageStepsForSuccessfulAttempt());
-        }
-
-        [HttpGet("getAverageStepsForUnsuccessfulAttempt")]
-        [Authorize(Roles = "admin")]
-        public IActionResult GetAverageStepsForUnsuccessfulAttempt()
-        {
-            return Ok(appointmentSchedulingEventService.GetAverageStepsForUnsuccessfulAttempt());
-        }
-
-        [HttpGet("getStatisticsMinStepsForCancelling")]
-        [Authorize(Roles = "admin")]
-        public IActionResult GetStatisticsMinStepsForCancelling()
-        {
-            return Ok(appointmentSchedulingEventService.GetStatisticsMinStepsForCancelling());
-        }
-
-        [HttpGet("GetStatisticsMaxStepsForCancelling")]
-        [Authorize(Roles = "admin")]
-        public IActionResult GetStatisticsMaxStepsForCancelling()
-        {
-            return Ok(appointmentSchedulingEventService.GetStatisticsMaxStepsForCancelling());
+            return Ok(new StatisticDto(CountStepsEventWithPatientAdapter.CountStepsEventDtoToCountStepsEventWithPatientDto(appointmentSchedulingEventService.GetStatisticsMinSteps()), CountStepsEventWithPatientAdapter.CountStepsEventDtoToCountStepsEventWithPatientDto(appointmentSchedulingEventService.GetStatisticsMaxSteps()), appointmentSchedulingEventService.GetSuccessfulAttemptsRatio(), appointmentSchedulingEventService.GetMostCanceledStep(), appointmentSchedulingEventService.GetAverageStepsForSuccessfulAttempt(), appointmentSchedulingEventService.GetAverageStepsForUnsuccessfulAttempt(), CountStepsEventWithPatientAdapter.CountStepsEventDtoToCountStepsEventWithPatientDto(appointmentSchedulingEventService.GetStatisticsMinStepsForCancelling()), CountStepsEventWithPatientAdapter.CountStepsEventDtoToCountStepsEventWithPatientDto(appointmentSchedulingEventService.GetStatisticsMaxStepsForCancelling()), appointmentSchedulingEventService.GetMaxTime(), appointmentSchedulingEventService.GetMinTime(), appointmentSchedulingEventService.GetAverageTime(), appointmentSchedulingEventService.GetHowManySchedulesInMinimumSteps(), appointmentSchedulingEventService.GetHowManySchedulesInMediumSteps(), appointmentSchedulingEventService.GetHowManySchedulesInMoreSteps()));
         }
     }
 }

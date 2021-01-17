@@ -235,7 +235,7 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api/doctorappointment/getStatisticsMinSteps",
+      "DownstreamPathTemplate": "/api/doctorappointment/getStatistics",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -243,87 +243,7 @@
           "Port": 53212
         }
       ],
-      "UpstreamPathTemplate": "/api/doctorappointment/getStatisticsMinSteps",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "TestKey",
-        "AllowedScopes": []
-      }
-    },
-    {
-      "DownstreamPathTemplate": "/api/doctorappointment/getStatisticsMaxSteps",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "appointmentmicroserviceapi",
-          "Port": 53212
-        }
-      ],
-      "UpstreamPathTemplate": "/api/doctorappointment/getStatisticsMaxSteps",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "TestKey",
-        "AllowedScopes": []
-      }
-    },
-    {
-      "DownstreamPathTemplate": "/api/doctorappointment/getStatisticsOldPersonAverage",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "appointmentmicroserviceapi",
-          "Port": 53212
-        }
-      ],
-      "UpstreamPathTemplate": "/api/doctorappointment/getStatisticsOldPersonAverage",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "TestKey",
-        "AllowedScopes": []
-      }
-    },
-    {
-      "DownstreamPathTemplate": "/api/doctorappointment/getStatisticsYoungPersonAverage",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "appointmentmicroserviceapi",
-          "Port": 53212
-        }
-      ],
-      "UpstreamPathTemplate": "/api/doctorappointment/getStatisticsYoungPersonAverage",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "TestKey",
-        "AllowedScopes": []
-      }
-    },
-    {
-      "DownstreamPathTemplate": "/api/doctorappointment/getSuccessfulAttemptsRatio",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "appointmentmicroserviceapi",
-          "Port": 53212
-        }
-      ],
-      "UpstreamPathTemplate": "/api/doctorappointment/getSuccessfulAttemptsRatio",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "TestKey",
-        "AllowedScopes": []
-      }
-    },
-    {
-      "DownstreamPathTemplate": "/api/doctorappointment/getMostCanceledStep",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "appointmentmicroserviceapi",
-          "Port": 53212
-        }
-      ],
-      "UpstreamPathTemplate": "/api/doctorappointment/getMostCanceledStep",
+      "UpstreamPathTemplate": "/api/doctorappointment/getStatistics",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "TestKey",

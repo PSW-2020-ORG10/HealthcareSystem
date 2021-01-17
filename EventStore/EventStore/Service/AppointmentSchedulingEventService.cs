@@ -71,5 +71,34 @@ namespace EventStore.Service
         {
             return _appointmentSchedulingEventRepository.GetStatisticsMaxStepsForCancelling();
         }
+
+        public double GetMaxTime()
+        {
+            return _appointmentSchedulingEventRepository.GetMaxTime();
+        }
+
+        public double GetMinTime()
+        {
+            return _appointmentSchedulingEventRepository.GetMinTime();
+        }
+
+        public double GetAverageTime()
+        {
+            return _appointmentSchedulingEventRepository.GetAverageTime();
+        }
+        public int GetHowManySchedulesInMinimumSteps()
+        {
+            return _appointmentSchedulingEventRepository.GetHowManySchedulesInMinimumSteps();
+        }
+
+        public int GetHowManySchedulesInMediumSteps()
+        {
+            return _appointmentSchedulingEventRepository.GetHowManySchedulesInMediumSteps();
+        }
+
+        public int GetHowManySchedulesInMoreSteps()
+        {
+            return _appointmentSchedulingEventRepository.GetHowManySchedulesInMoreSteps();
+        }
     }
 }
