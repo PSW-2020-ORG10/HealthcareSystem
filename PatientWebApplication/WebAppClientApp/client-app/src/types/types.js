@@ -72,3 +72,7 @@ export const MIN_STEPS_UNSUCCESSFUL = "minStepsCancel";
 export const MIN_STEPS_UNSUCCESSFUL_ERROR = "minStepsError";
 export const MAX_STEPS_UNSUCCESSFUL = "maxStepsCancel";
 export const MAX_STEPS_UNSUCCESSFUL_ERROR = "maxStepsError";
+export const AVERAGE_SUCCESSFUL = "averageCreate";
+export const AVERAGE_SUCCESSFUL_ERROR = "averageCreateError";
+export const AVERAGE_UNSUCCESSFUL = "averageCancel";
+export const AVERAGE_UNSUCCESSFUL_ERROR = "averageCancelError";

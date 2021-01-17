@@ -903,7 +903,7 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api/doctorappointment/GetStatisticsMaxStepsForCancelling",
+      "DownstreamPathTemplate": "/api/doctorappointment/getStatisticsMaxStepsForCancelling",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -911,7 +911,39 @@
           "Port": 53212
         }
       ],
-      "UpstreamPathTemplate": "/api/doctorappointment/getStatisticsMinStepsForCancelling",
+      "UpstreamPathTemplate": "/api/doctorappointment/getStatisticsMaxStepsForCancelling",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/doctorappointment/getAverageStepsForSuccessfulAttempt",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 53212
+        }
+      ],
+      "UpstreamPathTemplate": "/api/doctorappointment/getAverageStepsForSuccessfulAttempt",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/doctorappointment/getAverageStepsForUnsuccessfulAttempt",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 53212
+        }
+      ],
+      "UpstreamPathTemplate": "/api/doctorappointment/getAverageStepsForUnsuccessfulAttempt",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "TestKey",
