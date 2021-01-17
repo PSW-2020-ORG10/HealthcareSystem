@@ -71,6 +71,10 @@
     MIN_STEPS_UNSUCCESSFUL_ERROR,
     MAX_STEPS_UNSUCCESSFUL,
     MAX_STEPS_UNSUCCESSFUL_ERROR,
+    AVERAGE_UNSUCCESSFUL,
+    AVERAGE_UNSUCCESSFUL_ERROR,
+    AVERAGE_SUCCESSFUL,
+    AVERAGE_SUCCESSFUL_ERROR
 
 } from "../types/types"
 import axios from "axios";
@@ -1070,6 +1074,48 @@ export const maxStepsCancel = () => async (dispatch) => {
     } catch (e) {
         dispatch({
             type: MAX_STEPS_UNSUCCESSFUL_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const averageCreate = () => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.get("http://localhost:54689/api/doctorAppointment/getAverageStepsForSuccessfulAttempt",
+        {
+            headers: { "Access-Control-Allow-Origin": "*",
+                       "Authorization" :  "Bearer " + localStorage.getItem("token")}
+          });
+        debugger;
+        dispatch({
+            type: AVERAGE_SUCCESSFUL,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: AVERAGE_SUCCESSFUL_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const averageCancel = () => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.get("http://localhost:54689/api/doctorAppointment/getAverageStepsForUnsuccessfulAttempt",
+        {
+            headers: { "Access-Control-Allow-Origin": "*",
+                       "Authorization" :  "Bearer " + localStorage.getItem("token")}
+          });
+        debugger;
+        dispatch({
+            type: AVERAGE_UNSUCCESSFUL,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: AVERAGE_UNSUCCESSFUL_ERROR,
             payload: console.log(e),
         });
     }

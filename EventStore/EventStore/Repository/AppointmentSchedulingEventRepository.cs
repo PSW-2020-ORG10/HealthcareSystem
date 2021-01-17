@@ -122,7 +122,7 @@ namespace EventStore.Repository
                 }
             }
 
-            return (allSuccessfulAttempts > 0) ? allStepsInSuccessfulAttempts/allSuccessfulAttempts : 0;
+            return (allSuccessfulAttempts > 0) ? ((allStepsInSuccessfulAttempts/allSuccessfulAttempts)-2) : 0;
         }
 
         public double GetAverageStepsForUnsuccessfulAttempt()
@@ -157,7 +157,7 @@ namespace EventStore.Repository
                 }
             }
 
-            return (allUnsuccessfulAttempts > 0) ? allStepsInUnsuccessfulAttempts / allUnsuccessfulAttempts : 0;
+            return (allUnsuccessfulAttempts > 0) ? ((allStepsInUnsuccessfulAttempts / allUnsuccessfulAttempts)-1) : 0;
         }
 
         public CountStepsEventDto GetStatisticsMinStepsForCancelling()
