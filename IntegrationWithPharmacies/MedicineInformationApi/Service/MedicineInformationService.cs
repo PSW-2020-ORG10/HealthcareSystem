@@ -46,6 +46,22 @@ namespace MedicineInformationApi.Service
             return IMedicineWithQuantityRepository.GetAll();
         }
 
+        public List<MedicineName>  GetAllMedicinesFromDatabase()
+        {
+            List<MedicineInformation> medicines = MedicineWithQuantityRepository.GetAll();
+            return getMedicineNames(medicines);
+        }
+
+        public List<MedicineName> getMedicineNames(List<MedicineInformation> medicines)
+        {
+            List<MedicineName> medicineNames = new List<MedicineName>();
+            foreach(MedicineInformation medicine in medicines)
+            {
+                medicineNames.Add(new MedicineName(medicine.MedicineDescription.Name));
+            }
+            return medicineNames;
+        }
+
         public void UpdateMedicineQuantityUrgentOrder(String medicine)
         {
             String[] medicineParts = medicine.Split('_');
@@ -74,7 +90,6 @@ namespace MedicineInformationApi.Service
         public string GetMedicineDescriptionFromDatabase(string medicine)
         {
             MedicineInformation medicineWithQuantity = GetAll().SingleOrDefault(medicineName => medicineName.MedicineDescription.Name.Equals(medicine));
-            Console.WriteLine("ajkfhbkjsadnvjksdnvjkfnvjknfd kljv                " + medicineWithQuantity);
             return medicineWithQuantity == null || medicineWithQuantity.MedicineDescription.Description.Equals("") ? null : medicineWithQuantity.MedicineDescription.Description;
         }
 

@@ -13,11 +13,17 @@ namespace MedicineInformationApi.DbContextModel
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<MedicineDescription>().HasData(
-                new MedicineDescription("Andol", "Against pain",1)
+                new MedicineDescription("Paracetamol", "Paracetamol is a nonsteroidal anti-inflammatory drug (NSAID) used to treat mild-to-moderate pain, and helps to relieve symptoms of arthritis.", 1),
+                new MedicineDescription("Brufen", "Brufen is used to reduce fever and relieve mild to moderate pain.", 2),
+                new MedicineDescription("Defrinol", "Defrinol is used to treat certain types of bacterial infections.", 3),
+                new MedicineDescription("Pancef", "Pancef is indicated for: Headache, Colds & Influenza, Backache, Period Pain, Pain of Osteoarthritis, Muscle Pain, Toothache, Rheumatic Pain", 4)
             );
 
             modelBuilder.Entity<MedicineInformation>().HasData(
-                new MedicineInformation(1, 150)
+                new MedicineInformation(1, 150),
+                new MedicineInformation(2, 100),
+                new MedicineInformation(3, 44),
+                new MedicineInformation(4, 33)
             );
         }
     }

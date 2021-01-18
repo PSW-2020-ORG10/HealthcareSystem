@@ -1,0 +1,8 @@
+api4
+ Precription for medicine
+
+Patients name: Stefan
+Patients surname: Lelic
+Patients medical ID number: 212313
+Medication: Defrinol Quantity: 5
+Usage: once a day

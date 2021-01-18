@@ -51,11 +51,7 @@
                 <button class="button2" v-on:click="specification">Show selected medicine specification </button>
 
             </div>
-            <div class="row">
-                <button class="button2" v-on:click="specificationGrpc">Show selected medicine specification - GRPC</button>
-
-            </div>
-
+     
             <div v-if="showSpecification" class="row">
                 <div class="col-25" style="border:thick solid #000000">
                     {{medSpecification}}
@@ -83,7 +79,6 @@
 
                             <th style="width: 200px;" scope="col">Avaible</th>
                             <th style="width: 200px;" scope="col"></th>
-                            <th style="width: 200px;" scope="col"></th>
 
                         </tr>
                     </thead>
@@ -92,8 +87,7 @@
                             <td>{{pharmacy.name}}</td>
                             <td>{{selected}}</td>
                             <td><div style="background-color:lightgreen">YES</div></td>
-                            <td><button v-on:click="sendHttp($event, pharmacy.api)">Send(Http)</button></td>
-                            <td><button v-on:click="sendSftp($event, pharmacy.api)">Send(Sftp)</button></td>
+                            <td><button v-on:click="send($event, pharmacy.api)">Send</button></td>
                         </tr>
 
                     </tbody>
@@ -140,18 +134,7 @@
           
             specification: function () {
                 this.showSpecification = true;
-                this.axios.get('http://localhost:54679/api/sharingPrescription/http/description/' + this.selected)
-                    .then(res => {
-                        this.medSpecification = res.data;
-                    })
-                    .catch(res => {
-                        console.log(res);
-                    });
-            },
-
-            specificationGrpc: function () {
-                this.showSpecification = true;
-                this.axios.get('http://localhost:54679/api/sharingPrescription/grpc/description/' + this.selected)
+                this.axios.get('http://localhost:54679/api/sharingPrescription/description/' + this.selected)
                     .then(res => {
                         this.medSpecification = res.data;
                     })
@@ -176,29 +159,7 @@
             showMedId: function () {
                 this.medIdNumber = this.selectedPatient.medicalIdNumber;
             },
-            sendHttp: function (event,pharmacy2) {
-                const data = {
-                    pharmacy: pharmacy2,
-                    name: this.selectedPatient.firstName,
-                    surname: this.selectedPatient.secondName,
-                    medicalIDNumber: this.selectedPatient.medicalIdNumber,
-                    medicine: this.selected,
-                    quantity: this.quantity,
-                    usage: this.explanation
-                };
-                this.axios.post('http://localhost:54679/api/sharingPrescription/http', data)
-                    .then(res => {
-                        this.sent = true;
-                        this.notSent = false;
-                        console.log(res);
-                    })
-                    .catch(res => {
-                        this.sent = false;
-                        this.notSent = true;
-                        console.log(res);
-                    })
-            },
-            sendSftp: function (event, pharmacy2) {
+            send: function (event, pharmacy2) {
                 const data = {
                     pharmacy: pharmacy2,
                     name: this.selectedPatient.firstName,

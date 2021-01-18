@@ -23,8 +23,14 @@ namespace UrgentMedicineOrderApi.Controllers
             SmptServerService = new SmptServerService();
         }
 
-        [HttpGet("http/{medicine}")]
-        public IActionResult FormUrgentOrderHttp(String medicine)
+        [HttpGet("{medicine}")]
+        public IActionResult FormUrgentOrder(String medicine)
+        {
+            if (Startup.SystemEnvironment.Equals("Development")) return FormUrgentOrderGrpc(medicine);
+            return FormUrgentOrderHttp(medicine);
+        }
+
+        private IActionResult FormUrgentOrderHttp(string medicine)
         {
             List<MedicineName> pharmaciesWithMedicine = UrgentOrderService.CheckMedicineAvailability(medicine);
             if (pharmaciesWithMedicine == null) return BadRequest();
@@ -32,7 +38,6 @@ namespace UrgentMedicineOrderApi.Controllers
             return ForwardUrgentUrderHttp(medicine, pharmaciesWithMedicine);
         }
 
-        [HttpGet("grpc/{medicine}")]
         public IActionResult FormUrgentOrderGrpc(String medicine)
         {
             List<MedicineName> pharmaciesWithMedicine = UrgentOrderService.CheckMedicineAvailability(medicine);

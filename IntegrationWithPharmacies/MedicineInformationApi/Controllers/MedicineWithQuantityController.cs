@@ -48,5 +48,10 @@ namespace MedicineInformationApi.Controllers
         {
             return Ok(MedicineInformationService.GetMedicineDescriptionFromDatabase(medicine));
         }
+        [HttpGet("all")]
+        public IActionResult GetMedicineNames()
+        {
+            return Ok(MedicineInformationService.GetAllMedicinesFromDatabase());
+        }
     }
 }

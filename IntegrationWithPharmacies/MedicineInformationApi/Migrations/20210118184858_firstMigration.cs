@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MedicineInformationApi.Migrations
 {
-    public partial class fifthigration : Migration
+    public partial class firstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -42,12 +42,24 @@ namespace MedicineInformationApi.Migrations
             migrationBuilder.InsertData(
                 table: "MedicineInformations",
                 columns: new[] { "Id", "Quantity" },
-                values: new object[] { 1, 150 });
+                values: new object[,]
+                {
+                    { 1, 150 },
+                    { 2, 100 },
+                    { 3, 44 },
+                    { 4, 33 }
+                });
 
             migrationBuilder.InsertData(
                 table: "MedicineDescriptions",
                 columns: new[] { "Name", "Description", "MedicineInformationId" },
-                values: new object[] { "Andol", "Against pain", 1 });
+                values: new object[,]
+                {
+                    { "Paracetamol", "Paracetamol is a nonsteroidal anti-inflammatory drug (NSAID) used to treat mild-to-moderate pain, and helps to relieve symptoms of arthritis.", 1 },
+                    { "Brufen", "Brufen is used to reduce fever and relieve mild to moderate pain.", 2 },
+                    { "Defrinol", "Defrinol is used to treat certain types of bacterial infections.", 3 },
+                    { "Pancef", "Pancef is indicated for: Headache, Colds & Influenza, Backache, Period Pain, Pain of Osteoarthritis, Muscle Pain, Toothache, Rheumatic Pain", 4 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_MedicineDescriptions_MedicineInformationId",

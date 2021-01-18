@@ -37,9 +37,27 @@ namespace MedicineInformationApi.Migrations
                     b.HasData(
                         new
                         {
-                            Name = "Andol",
-                            Description = "Against pain",
+                            Name = "Paracetamol",
+                            Description = "Paracetamol is a nonsteroidal anti-inflammatory drug (NSAID) used to treat mild-to-moderate pain, and helps to relieve symptoms of arthritis.",
                             MedicineInformationId = 1
+                        },
+                        new
+                        {
+                            Name = "Brufen",
+                            Description = "Brufen is used to reduce fever and relieve mild to moderate pain.",
+                            MedicineInformationId = 2
+                        },
+                        new
+                        {
+                            Name = "Defrinol",
+                            Description = "Defrinol is used to treat certain types of bacterial infections.",
+                            MedicineInformationId = 3
+                        },
+                        new
+                        {
+                            Name = "Pancef",
+                            Description = "Pancef is indicated for: Headache, Colds & Influenza, Backache, Period Pain, Pain of Osteoarthritis, Muscle Pain, Toothache, Rheumatic Pain",
+                            MedicineInformationId = 4
                         });
                 });
 
@@ -61,6 +79,21 @@ namespace MedicineInformationApi.Migrations
                         {
                             Id = 1,
                             Quantity = 150
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Quantity = 100
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Quantity = 44
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Quantity = 33
                         });
                 });
 
