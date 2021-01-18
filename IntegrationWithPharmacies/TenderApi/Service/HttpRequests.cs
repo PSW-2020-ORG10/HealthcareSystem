@@ -43,7 +43,7 @@ namespace TenderApi.Service
         {
             WebClient client = new WebClient();
             client.Credentials = CredentialCache.DefaultCredentials;
-            client.UploadFile(new Uri(@"http://localhost:8082/download/file/http"), "POST", complete);
+            client.UploadFile(new Uri(@"http://localhost:8086/download/file/http"), "POST", complete);
             client.Dispose();
         }
         public static List<RegistrationInPharmacy> GetRegistrationsInPharmaciesAll()
@@ -52,7 +52,7 @@ namespace TenderApi.Service
         }
         public static IRestResponse<List<MedicineName>> FormMedicineFromIsaRequest()
         {
-            return new RestClient("http://localhost:8082").Get<List<MedicineName>>(new RestRequest("/medicineRequested"));
+            return new RestClient("http://localhost:8086").Get<List<MedicineName>>(new RestRequest("/medicineRequested"));
         }
     }
 }

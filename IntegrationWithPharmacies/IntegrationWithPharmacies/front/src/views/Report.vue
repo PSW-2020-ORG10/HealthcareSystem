@@ -32,12 +32,9 @@
 
 
             <div class="row">
-                <button class="button" v-on:click="send">Send SFTP</button>
+                <button class="button" v-on:click="send">Send</button>
             </div>
 
-            <div class="row">
-                <button class="button" v-on:click="sendHttp">Send HTTP</button>
-            </div>
         </div>
 
 
@@ -74,27 +71,6 @@
                         this.notSent = true;
                         console.log(res);
                     })
-
-
-            },
-            sendHttp: function () {
-                const date = {
-                    startDate: this.startDate,
-                    endDate: this.endDate
-                };
-                this.axios.post('http://localhost:54679/api/report/http', date)
-                    .then(res => {
-                        this.sent = true;
-                        this.notSent = false;
-                        console.log(res);
-                    })
-                    .catch(res => {
-                        this.sent = false;
-                        this.notSent = true;
-                        console.log(res);
-                    })
-
-
             }
 
         }

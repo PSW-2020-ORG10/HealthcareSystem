@@ -13,7 +13,7 @@
       "UpstreamHttpMethod": [ "POST", "GET" ]
     },
     {
-      "DownstreamPathTemplate": "/api/urgentOrder/http/{medicine}",
+      "DownstreamPathTemplate": "/api/urgentOrder/{medicine}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -21,19 +21,7 @@
           "Port": 59328
         }
       ],
-      "UpstreamPathTemplate": "/api/urgentOrder/http/{medicine}",
-      "UpstreamHttpMethod": [ "GET" ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/urgentOrder/grpc/{medicine}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 59328
-        }
-      ],
-      "UpstreamPathTemplate": "/api/urgentOrder/grpc/{medicine}",
+      "UpstreamPathTemplate": "/api/urgentOrder/{medicine}",
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
@@ -205,19 +193,7 @@
       "UpstreamHttpMethod": [ "POST" ]
     },
     {
-      "DownstreamPathTemplate": "/api/report/http",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 50921
-        }
-      ],
-      "UpstreamPathTemplate": "/api/report/http",
-      "UpstreamHttpMethod": [ "POST" ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/sharingPrescription/http/description/{medicine}",
+      "DownstreamPathTemplate": "/api/sharingPrescription/description/{medicine}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -225,19 +201,7 @@
           "Port": 63327
         }
       ],
-      "UpstreamPathTemplate": "/api/sharingPrescription/http/description/{medicine}",
-      "UpstreamHttpMethod": [ "GET" ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/sharingPrescription/grpc/description/{medicine}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 63327
-        }
-      ],
-      "UpstreamPathTemplate": "/api/sharingPrescription/grpc/description/{medicine}",
+      "UpstreamPathTemplate": "/api/sharingPrescription/description/{medicine}",
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
@@ -251,18 +215,6 @@
       ],
       "UpstreamPathTemplate": "/api/sharingPrescription/http/medicineAvailability/{medicine}",
       "UpstreamHttpMethod": [ "GET" ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/sharingPrescription/http",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 63327
-        }
-      ],
-      "UpstreamPathTemplate": "/api/sharingPrescription/http",
-      "UpstreamHttpMethod": [ "POST" ]
     },
     {
       "DownstreamPathTemplate": "/api/sharingPrescription",
@@ -322,7 +274,19 @@
         }
       ],
       "UpstreamPathTemplate": "/api/message",
-      "UpstreamHttpMethod": [ "GET","POST" ]
+      "UpstreamHttpMethod": [ "GET", "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/medicineWithQuantity/all",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 50482
+        }
+      ],
+      "UpstreamPathTemplate": "/api/medicineWithQuantity/all",
+      "UpstreamHttpMethod": [ "GET" ]
     }
 
   ]

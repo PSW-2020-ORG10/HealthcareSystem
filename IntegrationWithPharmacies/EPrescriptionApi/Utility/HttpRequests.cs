@@ -1,4 +1,5 @@
 ﻿using EPrescriptionApi.Model;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
@@ -18,37 +19,36 @@ namespace EPrescriptionApi.Utility
         private static readonly string PharmacyRegistrationUrl = Startup.Configuration["PharmacyRegistrationApi"];
 
         public HttpRequests() { }
-        public void UploadReportFile(String complete)
-        {
-            WebClient client = new WebClient();
-            client.Credentials = CredentialCache.DefaultCredentials;
-            client.UploadFile(new Uri(@"http://localhost:8082/download/file/http"), "POST", complete);
-            client.Dispose();
-        }
+    
         public void UploadPrescriptionFile(String complete)
         {
             WebClient client = new WebClient();
             client.Credentials = CredentialCache.DefaultCredentials;
-            client.UploadFile(new Uri(@"http://localhost:8082/download/prescription/http"), "POST", complete);
+            client.UploadFile(new Uri(@"http://localhost:8086/download/prescription/http"), "POST", complete);
             client.Dispose();
         }
-       
+
+        public List<MedicineName> GetAllMedicinesFromDatabase()
+        {
+            return new RestClient(MedicineInformationUrl).Get<List<MedicineName>>(new RestRequest("/api/medicineWithQuantity/all")).Data;
+        }
+
         public static String FormMedicineAvailabilityRequest(string medicine)
         {
-            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create("http://localhost:8082/medicinePharmacy/" + medicine);
+            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create("http://localhost:8086/medicinePharmacy/" + medicine);
             HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse();
             return new StreamReader(webResponse.GetResponseStream(), System.Text.Encoding.GetEncoding("utf-8")).ReadToEnd();
 
         }
         public static string FormMedicineDescriptionRequest(string medicine)
         {
-            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create("http://localhost:8082/description/medicine/" + medicine);
+            HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create("http://localhost:8086/description/medicine/" + medicine);
             HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse();
             return new StreamReader(webResponse.GetResponseStream(), System.Text.Encoding.GetEncoding("utf-8")).ReadToEnd();
         }
         public static IRestResponse<List<MedicineName>> FormMedicineFromIsaRequest()
         {
-            return new RestClient("http://localhost:8082").Get<List<MedicineName>>(new RestRequest("/medicineRequested"));
+            return new RestClient("http://localhost:8086").Get<List<MedicineName>>(new RestRequest("/medicineRequested"));
         }
         public String GetMedicineDescriptionFromApi(String medicine)
         {

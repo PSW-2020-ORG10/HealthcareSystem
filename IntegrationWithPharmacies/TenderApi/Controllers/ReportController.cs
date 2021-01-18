@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using TenderApi.DbContextModel;
 using TenderApi.Model;
 using TenderApi.Service;
@@ -24,16 +19,13 @@ namespace TenderApi.Controllers
         [HttpPost]
         public IActionResult Post(DateOfOrder date)
         {
-            if (ReportService.SendReportSftp(date)) return Ok();
-            return BadRequest();
-        }
-
-
-        [HttpPost("http")]
-        public IActionResult PostHttp(DateOfOrder date)
-        {
+            if (Startup.SystemEnvironment.Equals("Development"))
+            {
+                if (ReportService.SendReportSftp(date)) return Ok();
+                return BadRequest();
+            }
             if (ReportService.SendReportHttp(date)) return Ok();
-            return BadRequest();
+            return BadRequest();    
         }
     }
 }

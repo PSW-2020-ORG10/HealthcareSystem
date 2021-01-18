@@ -13,6 +13,8 @@ namespace PharmacyRegistrationApi
     {
         public static IConfiguration Configuration { get; private set; }
         public IWebHostEnvironment CurrentEnvironment { get; }
+        public String SystemEnvironment = "Production";
+
         public Startup(IConfiguration configuration, IWebHostEnvironment currentEnvironment)
         {
             Configuration = configuration;

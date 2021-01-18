@@ -11,6 +11,7 @@ namespace EPrescriptionApi.Controllers
     public class ActionsAndBenefitsController : ControllerBase
     {
         private HttpRequests HttpRequests { get; }
+
         public ActionsAndBenefitsController()
         {
             HttpRequests = new HttpRequests();

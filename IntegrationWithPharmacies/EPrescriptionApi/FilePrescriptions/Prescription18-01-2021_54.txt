@@ -1,0 +1,8 @@
+api1
+ Precription for medicine
+
+Patients name: Marko
+Patients surname: Markovic
+Patients medical ID number: 2112313
+Medication: Brufen Quantity: 2
+Usage: hk

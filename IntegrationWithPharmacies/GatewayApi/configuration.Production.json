@@ -205,19 +205,7 @@
       "UpstreamHttpMethod": [ "POST" ]
     },
     {
-      "DownstreamPathTemplate": "/api/report/http",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "tenderapi",
-          "Port": 50921
-        }
-      ],
-      "UpstreamPathTemplate": "/api/report/http",
-      "UpstreamHttpMethod": [ "POST" ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/sharingPrescription/http/description/{medicine}",
+      "DownstreamPathTemplate": "/api/sharingPrescription/description/{medicine}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -225,19 +213,7 @@
           "Port": 63327
         }
       ],
-      "UpstreamPathTemplate": "/api/sharingPrescription/http/description/{medicine}",
-      "UpstreamHttpMethod": [ "GET" ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/sharingPrescription/grpc/description/{medicine}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "eprescriptionapi",
-          "Port": 63327
-        }
-      ],
-      "UpstreamPathTemplate": "/api/sharingPrescription/grpc/description/{medicine}",
+      "UpstreamPathTemplate": "/api/sharingPrescription/description/{medicine}",
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
@@ -251,18 +227,6 @@
       ],
       "UpstreamPathTemplate": "/api/sharingPrescription/http/medicineAvailability/{medicine}",
       "UpstreamHttpMethod": [ "GET" ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/sharingPrescription/http",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "eprescriptionapi",
-          "Port": 63327
-        }
-      ],
-      "UpstreamPathTemplate": "/api/sharingPrescription/http",
-      "UpstreamHttpMethod": [ "POST" ]
     },
     {
       "DownstreamPathTemplate": "/api/sharingPrescription",
@@ -323,6 +287,18 @@
       ],
       "UpstreamPathTemplate": "/api/message",
       "UpstreamHttpMethod": [ "GET", "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/medicineWithQuantity/all",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "medicineinformationapi",
+          "Port": 50482
+        }
+      ],
+      "UpstreamPathTemplate": "/api/medicineWithQuantity/all",
+      "UpstreamHttpMethod": [ "GET" ]
     }
   ]
 }
