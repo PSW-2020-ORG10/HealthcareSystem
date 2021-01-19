@@ -22,6 +22,16 @@ namespace PatientWebApplicationTests
             foundPrescriptions.ShouldNotBeNull();
         }
 
+        [Fact]
+        public void Find_No_Prescription_By_AppointmentId()
+        {
+            PrescriptionService service = new PrescriptionService(CreateStubRepository());
+
+            Prescription foundPrescriptions = service.GetPrescriptionsForAppointment(2);
+
+            foundPrescriptions.ShouldBeNull();
+        }
+
         private static IPrescriptionRepository CreateStubRepository()
         {
             var stubRepository = new Mock<IPrescriptionRepository>();

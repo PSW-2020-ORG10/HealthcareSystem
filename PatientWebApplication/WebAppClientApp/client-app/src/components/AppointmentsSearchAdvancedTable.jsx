@@ -131,7 +131,7 @@ class AppointmentsSearchAdvancedTable extends Component {
         let doctor = ""
         return (
             <div>
-                {this.state.modalShow ? <ReferralModal show={this.state.modalShow} referral={this.state.referral} date={this.state.Date} isOperation={this.state.isOperation} onShowChange={this.displayModal.bind(this)} /> : null}
+                {this.state.modalShow ? <ReferralModal show={this.state.modalShow} referral={this.state.Referral} date={this.state.Date} isOperation={this.state.isOperation} onShowChange={this.displayModal.bind(this)} /> : null}
                 {this.state.modalPrescriptionShow ? <PrescriptionModal show={this.state.modalPrescriptionShow} date={this.state.Date} appointmentId={this.state.appointmentId} onShowChange={this.displayModalPrescription.bind(this)} /> : null}
                 <div className="field-wrap">
                     <td>
