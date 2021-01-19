@@ -100,7 +100,9 @@
             </div>
             <div class="row">
                 <label v-if="sent" style="color:lightgreen;font-size:25px;">Successfully sent prescription!</label>
-                <label v-if="notSent" style="color:red;font-size:25px;">Error occurred!</label>
+                <label v-if="notSent" style="color:red;font-size:25px;">Please try again later!</label>
+                <label v-if="notFilled" style="color:red;font-size:25px;">You must fill in all fields.</label>
+
             </div>
         </div>
     </div>
@@ -126,13 +128,18 @@
                 hidden: false,
                 medSpecification: "",
                 showTable: false,
-                showTableAvailability : false
+                showTableAvailability: false,
+                notFilled : false
               
             }
         },
         methods: {
           
             specification: function () {
+                if (this.selected === null) {
+                    this.notFilled = true;
+                    return;
+                }
                 this.showSpecification = true;
                 this.axios.get('http://localhost:54679/api/sharingPrescription/description/' + this.selected)
                     .then(res => {
@@ -145,7 +152,10 @@
 
             showAvailability: function () {
                 this.showTable = true;
-          
+                if (this.selected === null || this.quantity < 1) {
+                    this.notFilled = true;
+                    return;
+                }
                 this.axios.get('http://localhost:54679/api/sharingPrescription/http/medicineAvailability/'+this.selected + "_"+this.quantity)
                     .then(res => {
                         this.pharmacies = res.data;
@@ -160,6 +170,12 @@
                 this.medIdNumber = this.selectedPatient.medicalIdNumber;
             },
             send: function (event, pharmacy2) {
+                if (this.selected === null || this.selectedPatient === null || this.quantity < 1 || this.explanation === "") {
+                    this.sent = false;
+                    this.notSent = false;
+                    this.notFilled = true;
+                    return;
+                }
                 const data = {
                     pharmacy: pharmacy2,
                     name: this.selectedPatient.firstName,
@@ -172,12 +188,16 @@
                 this.axios.post('http://localhost:54679/api/sharingPrescription', data)
                     .then(res => {
                         this.sent = true;
+                        this.notFilled = false;
                         this.notSent = false;
                         console.log(res);
                     })
                     .catch(res => {
+                        alert("Sorry, you can not currently share prescription, please try later.");
                         this.sent = false;
                         this.notSent = true;
+                        this.notFilled = false;
+
                         console.log(res);
                     })
             },
@@ -185,20 +205,30 @@
 
         },
         mounted() {
-            this.axios.get('http://localhost:54679/api/sharingPrescription/medicinesIsa')
-                .then(res => {
-                    this.medications = res.data;
-                })
-                .catch(res => {
-                    console.log(res);
-                });
             this.axios.get('http://localhost:54679/api/patientUser/all')
                 .then(res => {
                     this.patients = res.data;
+                    if (res.status != 200) {
+                        alert("Sorry, can not currently show patients, please try later.");
+                    }
                 })
                 .catch(res => {
+                    alert("Sorry, can not currently show patients, please try later.");
                     console.log(res);
                 })
+            this.axios.get('http://localhost:54679/api/sharingPrescription/medicinesIsa')
+                .then(res => {
+                    this.medications = res.data;
+                    if (res.status != 200) {
+                        alert("Sorry, can not currently show medicines, please try later.");
+                    }
+                })
+                .catch(res => {
+                    alert("Sorry, can not currently show medicines, please try later.");
+
+                    console.log(res);
+                });
+           
         }
     }
 </script>

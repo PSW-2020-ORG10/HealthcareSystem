@@ -9,7 +9,7 @@ using TenderApi.DbContextModel;
 namespace TenderApi.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20210116152114_firstMigration")]
+    [Migration("20210119071756_firstMigration")]
     partial class firstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -66,7 +66,7 @@ namespace TenderApi.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("double");
 
-                    b.Property<int>("Quantity")
+                    b.Property<int>("RequiredQuantity")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -81,7 +81,7 @@ namespace TenderApi.Migrations
                             MedicineName = "Andol",
                             PharmacyTenderOfferId = 1,
                             Price = 1.0,
-                            Quantity = 1
+                            RequiredQuantity = 1
                         });
                 });
 

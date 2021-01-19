@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TenderApi.Adapter;
 using TenderApi.DbContextModel;
 using TenderApi.Dto;
@@ -47,6 +48,7 @@ namespace TenderApi.Service
         {
             foreach (MedicineTenderOffer medicineQuantity in tender.MedicinesWithQuantity)
             {
+                Console.WriteLine(medicineQuantity.RequiredQuantity);
                 Create(MedicineForTenderingAdapter.MedicineForebderingToMedicineForTenderingDto(new MedicineForTendering(medicineQuantity.MedicineName, medicineQuantity.RequiredQuantity, TenderService.getNextTenderId())));
             }
         }
