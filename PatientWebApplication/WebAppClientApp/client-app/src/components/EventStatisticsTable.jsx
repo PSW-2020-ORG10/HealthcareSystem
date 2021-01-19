@@ -90,7 +90,7 @@ class EventStatisticsTable extends Component {
                         Step at which most cancellations happend:
                             </td>
                             <td style={{ textAlign: "center" }}>
-                            {statistics.mostCanceledStep}
+                            {statistics.mostCanceledStep} step
                             </td>
                         </tr>
                         <tr>
@@ -122,7 +122,7 @@ class EventStatisticsTable extends Component {
                                 How many patients scheduled appointment in minimum steps:
                             </td>
                             <td style={{ textAlign: "center" }}>
-                                {statistics.howManySchedulesInMinimumSteps}
+                                {statistics.howManySchedulesInMinimumSteps} patient(s)
                             </td>
                         </tr>
                         <tr>
@@ -130,7 +130,7 @@ class EventStatisticsTable extends Component {
                                 How many patients scheduled appointment in 5 to 7 steps:
                             </td>
                             <td style={{ textAlign: "center" }}>
-                                {statistics.howManySchedulesInMediumSteps}
+                                {statistics.howManySchedulesInMediumSteps} patient(s)
                             </td>
                         </tr>
                         <tr>
@@ -138,7 +138,7 @@ class EventStatisticsTable extends Component {
                                 How many patients scheduled appointment in more than 7 steps:
                             </td>
                             <td style={{ textAlign: "center" }}>
-                                {statistics.howManySchedulesInMoreSteps}
+                                {statistics.howManySchedulesInMoreSteps} patient(s)
                             </td>
                         </tr>
                     </tbody>
