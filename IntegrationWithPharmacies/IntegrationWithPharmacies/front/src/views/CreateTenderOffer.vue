@@ -56,7 +56,7 @@
                                     <label>{{medicine.medicineName}}</label>
                                 </td>
                                 <td>
-                                    <label>{{medicine.quantity}}</label>
+                                    <label>{{medicine.requiredQuantity}}</label>
                                 </td>
                                 <td>
                                     <input type="text" v-model="medicine.availableQuantity">
@@ -92,7 +92,9 @@
                 </div>
                 <div class="row">
                     <label v-if="sent" style="color:lightgreen;font-size:25px;">Successfully sent offer!</label>
-                    <label v-if="notSent" style="color:red;font-size:25px;">Error occurred!</label>
+                    <label v-if="notSent" style="color:red;font-size:25px;">Please fill in all fields!</label>
+                    <label v-if="notFilled" style="color:red;font-size:25px;">You must fill in all fields.</label>
+
                 </div>
 
             </div>
@@ -107,6 +109,8 @@
 </template>
 
 <script>
+//import { forEach } from "core-js/fn/array";
+
 export default {
         data() {
             return {
@@ -120,7 +124,8 @@ export default {
                     date: "",
                     medicinesWithQuantity: [],
                     pharmacyName: ""
-                }
+                },
+                notFilled: false,
             }
         },
         methods: {
@@ -132,18 +137,38 @@ export default {
                         this.choosenTender = res.data;
                     })
                     .catch(res => {
+                        alert("Sorry, can not currently load choosen tender, please try later.")
                         console.log(res);
                     })
             },
             sendOffer: function () {
+              
+                if (this.choosenTender.pharmacyName === "") {
+                    this.sent = false;
+                    this.notSent = false;
+                    this.notFilled = true;
+                    return;
+                }
+                var medicinesTender = this.choosenTender.medicinesWithQuantity;
+                var i = 0;
+                for (i = 0; i < medicinesTender.length; i++) {
+                    if (medicinesTender[i].availableQuantity < 1 || medicinesTender[i].price < 1) {
+                        this.sent = false;
+                        this.notSent = false;
+                        this.notFilled = true;
+                        return;
+                    }
+                }
                 this.axios.post('http://localhost:54679/api/tender/offer', this.choosenTender)
                     .then(res => {
-                        this.sent = true;
+                        this.notFilled = false;
                         this.notSent = false;
+                        this.sent = true;
                         console.log(res);
 
                     })
                     .catch(res => {
+                        this.notFilled = false;
                         this.sent = false;
                         this.notSent = true;
                         console.log(res);

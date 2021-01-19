@@ -45,6 +45,8 @@
             <div class="row">
                 <label v-if="unique" style="color:lightgreen;font-size:25px;">Successfully saved api key!</label>
                 <label v-if="notUnique" style="color:red;font-size:25px;">This api key already exists!</label>
+                <label v-if="notFilled" style="color:red;font-size:25px;">You must fill in all input fields.</label>
+
             </div>
 
 
@@ -69,12 +71,19 @@
                 emptyStringError: false,
                 town: "",
                 name: "",
-                pharmacyEmail : ""
+                pharmacyEmail: "",
+                notFilled : false
                
             }
         },
         methods: {
             register: function () {
+                if (this.name === "" || this.town === "" || this.apiKey === "" || this.pharmacyEmail === "") {
+                    this.sent = false;
+                    this.notSent = false;
+                    this.notFilled = true;
+                    return;
+                }
                 const pharmacyInfo = {
                     apiKey: this.pharmacyApiKey,
                     email: this.pharmacyEmail
@@ -93,11 +102,14 @@
                     .then(res => {
                         this.unique = true;
                         this.notUnique = false;
+                        this.notFilled = false;
                         console.log(res);
                     })
                     .catch(res => {
-                        this.notUnique = true;
+                        this.notUnique = false;
                         this.unique = false;
+                        this.notFilled = false;
+                        alert("You can not currently register pharmacy, please try later.");
                         console.log(res);
                     })
 

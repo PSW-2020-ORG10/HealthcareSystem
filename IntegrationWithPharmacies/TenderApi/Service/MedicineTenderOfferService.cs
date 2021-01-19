@@ -28,16 +28,12 @@ namespace TenderApi.Service
             return MedicineTenderOfferRepository.GetAll();
         }
 
-        public MedicineTenderOffer Create(MedicineTenderOfferDto medicineTenderOfferDto)
-        {
-            return MedicineTenderOfferRepository.Create(MedicineTenderOfferAdapter.MedicineTenderOfferDtoToMedicineTenderOffer(medicineTenderOfferDto));
-        }
-
         public void CreateAllMedicineTenderOffers(List<MedicineTenderOffer> medicineTenderOffers)
         {
             foreach (MedicineTenderOffer medicineTenderOffer in medicineTenderOffers)
             {
-                Create(MedicineTenderOfferAdapter.MedicineTenderOfferToMedicineTenderOfferDto(new MedicineTenderOffer(medicineTenderOffer.MedicineName, medicineTenderOffer.RequiredQuantity, medicineTenderOffer.AvailableQuantity, medicineTenderOffer.Price, PharmacyTenderOfferRepository.getNextTenderPharmacyOfferId())));
+                medicineTenderOffer.PharmacyTenderOfferId = PharmacyTenderOfferRepository.getNextTenderPharmacyOfferId();
+                MedicineTenderOfferRepository.Create(medicineTenderOffer);
             }
         }
         public List<MedicineTenderOffer> GetMedicineOffersByPharmacyOfferId(int pahrmacyTenderOfferId)

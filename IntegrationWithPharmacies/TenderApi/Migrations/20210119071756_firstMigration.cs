@@ -30,7 +30,7 @@ namespace TenderApi.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     MedicineName = table.Column<string>(nullable: true),
-                    Quantity = table.Column<int>(nullable: false),
+                    RequiredQuantity = table.Column<int>(nullable: false),
                     AvailableQuantity = table.Column<int>(nullable: false),
                     Price = table.Column<double>(nullable: false),
                     PharmacyTenderOfferId = table.Column<int>(nullable: false)
@@ -76,7 +76,7 @@ namespace TenderApi.Migrations
 
             migrationBuilder.InsertData(
                 table: "MedicineTenderOffers",
-                columns: new[] { "Id", "AvailableQuantity", "MedicineName", "PharmacyTenderOfferId", "Price", "Quantity" },
+                columns: new[] { "Id", "AvailableQuantity", "MedicineName", "PharmacyTenderOfferId", "Price", "RequiredQuantity" },
                 values: new object[] { 1, 1, "Andol", 1, 1.0, 1 });
 
             migrationBuilder.InsertData(

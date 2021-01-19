@@ -42,11 +42,16 @@
         mounted() {
             this.axios.get('http://localhost:54679/api/actionsAndBenefits')
                 .then(res => {
+                    if (res.status != 200) {
+                        alert("Sorry, actions and benefits are not currently available, please try later.")
+                        return;
+                    }
                     this.actionsAndBenefits = res.data;
                     console.log(this.actionsAndBenefits);
 
                 })
                 .catch(res => {
+                    alert("Sorry, actions and benefits are not currently available, please try later.");
                     console.log(res);
                 })
         }
