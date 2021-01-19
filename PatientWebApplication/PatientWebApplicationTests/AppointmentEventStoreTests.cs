@@ -129,27 +129,65 @@ namespace PatientWebApplicationTests
             Assert.Equal(patients, 0);
         }
 
+        [Fact]
+        public void Find_Statistic_Minimum_Time()
+        {
+            AppointmentSchedulingEventService service = new AppointmentSchedulingEventService(CreateStubRepository());
+
+            double time = service.GetMinTime();
+
+            Assert.Equal(time, 55);
+        }
+
+        [Fact]
+        public void Find_Statistic_Maximum_Time()
+        {
+            AppointmentSchedulingEventService service = new AppointmentSchedulingEventService(CreateStubRepository());
+
+            double time = service.GetMaxTime();
+
+            Assert.Equal(time, 75);
+        }
+
+        [Fact]
+        public void Find_Statistic_Average_Time()
+        {
+            AppointmentSchedulingEventService service = new AppointmentSchedulingEventService(CreateStubRepository());
+
+            double time = service.GetAverageTime();
+
+            Assert.Equal(time, 65);
+        }
+
         private static IAppointmentSchedulingEventRepository CreateStubRepository()
         {
             var stubRepository = new Mock<IAppointmentSchedulingEventRepository>();
 
             var appointmentEvents = new List<AppointmentSchedulingEvent>();
 
-            AppointmentSchedulingEvent appointmentEvent1 = new AppointmentSchedulingEvent(Guid.NewGuid(), DateTime.UtcNow, 1, 0, "start", "start", 1);
-            AppointmentSchedulingEvent appointmentEvent2 = new AppointmentSchedulingEvent(Guid.NewGuid(), DateTime.UtcNow, 1, 1, "next", "", 1);
-            AppointmentSchedulingEvent appointmentEvent3 = new AppointmentSchedulingEvent(Guid.NewGuid(), DateTime.UtcNow, 1, 2, "previous", "", 1);
-            AppointmentSchedulingEvent appointmentEvent4 = new AppointmentSchedulingEvent(Guid.NewGuid(), DateTime.UtcNow, 1, 1, "next", "", 1);
-            AppointmentSchedulingEvent appointmentEvent5 = new AppointmentSchedulingEvent(Guid.NewGuid(), DateTime.UtcNow, 1, 2, "next", "", 1);
-            AppointmentSchedulingEvent appointmentEvent14 = new AppointmentSchedulingEvent(Guid.NewGuid(), DateTime.UtcNow, 1, 3, "next", "", 1);
-            AppointmentSchedulingEvent appointmentEvent6 = new AppointmentSchedulingEvent(Guid.NewGuid(), DateTime.UtcNow, 1, 4, "create", "end", 1);
-            AppointmentSchedulingEvent appointmentEvent7 = new AppointmentSchedulingEvent(Guid.NewGuid(), DateTime.UtcNow, 1, 4, "cancel", "end", 1);
+            DateTime date1 = new DateTime(2006, 3, 21, 2, 0, 0);
+            DateTime date2 = new DateTime(2006, 3, 21, 2, 0, 25);
+            DateTime date3 = new DateTime(2006, 3, 21, 2, 0, 40);
+            DateTime date4 = new DateTime(2006, 3, 21, 2, 0, 45);
+            DateTime date5 = new DateTime(2006, 3, 21, 2, 0, 55);
+            DateTime date6 = new DateTime(2006, 3, 21, 2, 1, 5);
+            DateTime date7 = new DateTime(2006, 3, 21, 2, 1, 15);
 
-            AppointmentSchedulingEvent appointmentEvent8 = new AppointmentSchedulingEvent(Guid.NewGuid(), DateTime.UtcNow, 1, 0, "start", "start", 2);
-            AppointmentSchedulingEvent appointmentEvent9 = new AppointmentSchedulingEvent(Guid.NewGuid(), DateTime.UtcNow, 1, 1, "next", "", 2);
-            AppointmentSchedulingEvent appointmentEvent10 = new AppointmentSchedulingEvent(Guid.NewGuid(), DateTime.UtcNow, 1, 2, "next", "", 2);
-            AppointmentSchedulingEvent appointmentEvent11 = new AppointmentSchedulingEvent(Guid.NewGuid(), DateTime.UtcNow, 1, 3, "next", "", 2);
-            AppointmentSchedulingEvent appointmentEvent12 = new AppointmentSchedulingEvent(Guid.NewGuid(), DateTime.UtcNow, 1, 4, "create", "end", 2);
-            AppointmentSchedulingEvent appointmentEvent13 = new AppointmentSchedulingEvent(Guid.NewGuid(), DateTime.UtcNow, 1, 4, "cancel", "end", 2);
+            AppointmentSchedulingEvent appointmentEvent1 = new AppointmentSchedulingEvent(Guid.NewGuid(), date1, 1, 0, "start", "start", 1);
+            AppointmentSchedulingEvent appointmentEvent2 = new AppointmentSchedulingEvent(Guid.NewGuid(), date2, 1, 1, "next", "", 1);
+            AppointmentSchedulingEvent appointmentEvent3 = new AppointmentSchedulingEvent(Guid.NewGuid(), date3, 1, 2, "previous", "", 1);
+            AppointmentSchedulingEvent appointmentEvent4 = new AppointmentSchedulingEvent(Guid.NewGuid(), date4, 1, 1, "next", "", 1);
+            AppointmentSchedulingEvent appointmentEvent5 = new AppointmentSchedulingEvent(Guid.NewGuid(), date5, 1, 2, "next", "", 1);
+            AppointmentSchedulingEvent appointmentEvent14 = new AppointmentSchedulingEvent(Guid.NewGuid(), date6, 1, 3, "next", "", 1);
+            AppointmentSchedulingEvent appointmentEvent6 = new AppointmentSchedulingEvent(Guid.NewGuid(), date7, 1, 4, "create", "end", 1);
+            AppointmentSchedulingEvent appointmentEvent7 = new AppointmentSchedulingEvent(Guid.NewGuid(), date7, 1, 4, "cancel", "end", 1);
+
+            AppointmentSchedulingEvent appointmentEvent8 = new AppointmentSchedulingEvent(Guid.NewGuid(), date1, 1, 0, "start", "start", 2);
+            AppointmentSchedulingEvent appointmentEvent9 = new AppointmentSchedulingEvent(Guid.NewGuid(), date2, 1, 1, "next", "", 2);
+            AppointmentSchedulingEvent appointmentEvent10 = new AppointmentSchedulingEvent(Guid.NewGuid(), date3, 1, 2, "next", "", 2);
+            AppointmentSchedulingEvent appointmentEvent11 = new AppointmentSchedulingEvent(Guid.NewGuid(), date4, 1, 3, "next", "", 2);
+            AppointmentSchedulingEvent appointmentEvent12 = new AppointmentSchedulingEvent(Guid.NewGuid(), date5, 1, 4, "create", "end", 2);
+            AppointmentSchedulingEvent appointmentEvent13 = new AppointmentSchedulingEvent(Guid.NewGuid(), date5, 1, 4, "cancel", "end", 2);
 
             AppointmentSchedulingEvent appointmentEvent15 = new AppointmentSchedulingEvent(Guid.NewGuid(), DateTime.UtcNow, 1, 0, "start", "start", 3);
             AppointmentSchedulingEvent appointmentEvent16 = new AppointmentSchedulingEvent(Guid.NewGuid(), DateTime.UtcNow, 1, 1, "next", "", 3);
