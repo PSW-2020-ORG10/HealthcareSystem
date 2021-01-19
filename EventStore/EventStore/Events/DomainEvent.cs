@@ -14,5 +14,11 @@ namespace EventStore.Events
             ID = Guid.NewGuid();
             TimeStamp = DateTime.UtcNow;
         }
+
+        public DomainEvent(Guid id, DateTime timespan)
+        {
+            ID = id;
+            TimeStamp = timespan;
+        }
     }
 }

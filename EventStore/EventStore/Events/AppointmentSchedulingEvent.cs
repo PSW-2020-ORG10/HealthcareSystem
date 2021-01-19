@@ -29,5 +29,14 @@ namespace EventStore.Events
             EndPoint = endPoint;
             Attempt = attempt;
         }
+
+        public AppointmentSchedulingEvent(Guid id, DateTime timespan, int patientId, int step, string action, string endPoint, long attempt) : base(id, timespan)
+        {
+            PatientId = patientId;
+            Step = step;
+            Action = action;
+            EndPoint = endPoint;
+            Attempt = attempt;
+        }
     }
 }

@@ -8,7 +8,7 @@ namespace EventStore.Service
     {
         DomainEvent Create(DomainEvent domainEvent);
         long FindNextAttempt();
-        IEnumerable<DomainEvent> GetAll();
+        List<AppointmentSchedulingEvent> GetAll();
         public CountStepsEventDto GetStatisticsMinSteps();
         public CountStepsEventDto GetStatisticsMaxSteps();
         public double GetSuccessfulAttemptsRatio();
