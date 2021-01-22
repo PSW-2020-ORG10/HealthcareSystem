@@ -35,9 +35,9 @@ namespace EventStore
 
         private string CreateConnectionStringFromEnvironment()
         {
-            string server = Environment.GetEnvironmentVariable("DATABASE_HOST") ?? "localhost";
+            string server = Environment.GetEnvironmentVariable("DATABASE_HOST_EVENT") ?? "localhost";
             string port = Environment.GetEnvironmentVariable("DATABASE_PORT") ?? "3306";
-            string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA") ?? "EventsDB";
+            string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA_EVENT") ?? "EventsDB";
             string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "root";
             string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "root";
 
@@ -48,7 +48,7 @@ namespace EventStore
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, EventDbContext dbContext)
         {
-            dbContext.Database.EnsureCreated();
+            //dbContext.Database.EnsureCreated();
 
             if (env.IsDevelopment())
             {

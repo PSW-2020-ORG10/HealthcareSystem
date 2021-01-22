@@ -36,9 +36,9 @@ namespace FeedbackMicroserviceApi
 
         private string CreateConnectionStringFromEnvironmentEventStore()
         {
-            string server = Environment.GetEnvironmentVariable("DATABASE_HOST") ?? "localhost";
+            string server = Environment.GetEnvironmentVariable("DATABASE_HOST_EVENT") ?? "localhost";
             string port = Environment.GetEnvironmentVariable("DATABASE_PORT") ?? "3306";
-            string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA") ?? "EventsDB";
+            string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA_EVENT") ?? "EventsDB";
             string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "root";
             string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "root";
 
@@ -46,8 +46,13 @@ namespace FeedbackMicroserviceApi
 
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        private string GetCurrentStage()
+        {
+         return Environment.GetEnvironmentVariable("STAGE") ?? "Testing";
+        }
+
+      // This method gets called by the runtime. Use this method to add services to the container.
+      public void ConfigureServices(IServiceCollection services)
         {
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
@@ -68,7 +73,7 @@ namespace FeedbackMicroserviceApi
              .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddAuthorization();
 
-            if (CurrentEnvironment.IsEnvironment("Testing"))
+            if (GetCurrentStage().Equals("Testing") && CurrentEnvironment.IsEnvironment("Testing"))
             {
                 services.AddDbContext<MyDbContext>(options =>
                     options.UseInMemoryDatabase("TestingDB").UseLazyLoadingProxies());
@@ -92,10 +97,10 @@ namespace FeedbackMicroserviceApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, MyDbContext dbContext)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, MyDbContext dbContext,EventDbContext eventDbContext)
         {
             dbContext.Database.EnsureCreated();
-
+            eventDbContext.Database.EnsureCreated();
             app.UseCors("MyPolicy");
             if (env.IsDevelopment())
             {
