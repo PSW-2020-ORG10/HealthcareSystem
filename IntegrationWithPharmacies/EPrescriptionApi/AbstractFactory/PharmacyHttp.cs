@@ -10,15 +10,33 @@ namespace EPrescriptionApi.AbstractFactory
 {
     public class PharmacyHttp : IPharmacyHttp
     {
+
+        private String Url { get; }
+
+        private SftpService SftpService { get; }
+        private HttpRequests HttpRequests { get; }
+        private SmptServerService SmptServerService { get; }
+
+        private PrescriptionFileService PrescriptionFileService { get; }
         public PharmacyHttp() { }
         public PharmacyHttp(String url, MyDbContext context)
         {
-           
+            SftpService = new SftpService();
+            HttpRequests = new HttpRequests();
+            SmptServerService = new SmptServerService();
+            PrescriptionFileService = new PrescriptionFileService(context);
         }
 
         public bool SendPrescription(EPrescription prescription)
         {
-            throw new NotImplementedException();
+            String prescriptionFile = PrescriptionFileService.CreatePrescription(prescription);
+            try
+            {
+                HttpRequests.UploadPrescriptionFile(prescriptionFile);
+                SmptServerService.SendEMailNotification(prescriptionFile);
+                return true;
+            }
+            catch (Exception e) { return false; }
         }
     }
 }

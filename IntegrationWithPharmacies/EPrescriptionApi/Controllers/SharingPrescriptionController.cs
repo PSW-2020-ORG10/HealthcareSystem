@@ -34,13 +34,10 @@ namespace EPrescriptionApi.Controllers
         [HttpPost]
         public IActionResult Post(EPrescription prescription)
         {
-            if (Startup.SystemEnvironment.Equals("Development"))
-            {
-                if (PrescriptionFileService.SendPrescriptionSftp(prescription)) return Ok();
-                return BadRequest();
-            }
-            if (PrescriptionFileService.SendPrescriptionHttp(prescription))return Ok();
+
+            if (PrescriptionFileService.SendPrescription(prescription)) return Ok();
             return BadRequest();
+
         }
 
         [HttpGet("description/{medicine}")]
