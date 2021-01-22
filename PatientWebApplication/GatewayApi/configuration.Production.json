@@ -1,6 +1,18 @@
 {
   "Routes": [
     {
+      "DownstreamPathTemplate": "/api/feedback/published",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "feedbackmicroserviceapi",
+          "Port": 58636
+        }
+      ],
+      "UpstreamPathTemplate": "/api/feedback/published",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+    },
+    {
       "DownstreamPathTemplate": "/api/doctorappointment/getAll",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -377,18 +389,6 @@
         "AuthenticationProviderKey": "TestKey",
         "AllowedScopes": []
       }
-    },
-    {
-      "DownstreamPathTemplate": "/api/feedback/published",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "feedbackmicroserviceapi",
-          "Port": 58636
-        }
-      ],
-      "UpstreamPathTemplate": "/api/feedback/published",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
     },
     {
       "DownstreamPathTemplate": "/api/feedback/{id}",

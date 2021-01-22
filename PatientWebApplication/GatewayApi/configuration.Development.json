@@ -1,6 +1,18 @@
 {
   "Routes": [
     {
+      "DownstreamPathTemplate": "/api/feedback/published",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 58636
+        }
+      ],
+      "UpstreamPathTemplate": "/api/feedback/published",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+    },
+    {
       "DownstreamPathTemplate": "/api/doctorappointment/getAll",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -393,18 +405,6 @@
         "AuthenticationProviderKey": "TestKey",
         "AllowedScopes": []
       }
-    },
-    {
-      "DownstreamPathTemplate": "/api/feedback/published",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 58636
-        }
-      ],
-      "UpstreamPathTemplate": "/api/feedback/published",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
     },
     {
       "DownstreamPathTemplate": "/api/appointmentSearch/search",

@@ -106,7 +106,7 @@ export const feedbackPublished = (id) => async (dispatch) => {
 export const loadedPublishedFeedback = () => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.get("http://localhost:58636/api/feedback/published",
+        const response = await axios.get("http://localhost:54689/api/feedback/published",
         {
             headers: { "Access-Control-Allow-Origin": "*"}
           }); 
