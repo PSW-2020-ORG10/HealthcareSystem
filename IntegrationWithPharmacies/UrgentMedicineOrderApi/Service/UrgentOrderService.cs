@@ -5,32 +5,64 @@ using UrgentMedicineOrderApi.DbContextModel;
 using UrgentMedicineOrderApi.Model;
 using UrgentMedicineOrderApi.Dto;
 using UrgentMedicineOrderApi.Adapter;
-
+using Microsoft.AspNetCore.Mvc;
+using UrgentMedicineOrderApi.AbstractFactory;
+using Castle.Core.Internal;
 
 namespace UrgentMedicineOrderApi.Service
 {
     public class UrgentOrderService
     {
-        private HttpRequests HttpService { get; }
+        private HttpRequests HttpRequests { get; }
         private MedicineAvailabilityTable MedicineAvailabilityTable { get; }
         public UrgentMedicineOrderRepository UrgentMedicineOrderRepository { get; }
         public IUrgentMedicineOrderRepository IUrgentMedicineOrderRepository { get; }
+        public PharmacyFactoryGrpcAndSftp PharmacyFactoryGrpcAndSftp { get; }
+        public PharmacyFactoryHttp PharmacyFactoryHttp { get; }
+        public MyDbContext Context { get; }
+
         public UrgentOrderService(MyDbContext context)
         {
-            HttpService = new HttpRequests();
+            HttpRequests = new HttpRequests();
             MedicineAvailabilityTable = new MedicineAvailabilityTable();
             UrgentMedicineOrderRepository = new UrgentMedicineOrderRepository(context);
+            PharmacyFactoryGrpcAndSftp = new PharmacyFactoryGrpcAndSftp();
+            PharmacyFactoryHttp = new PharmacyFactoryHttp();
+            Context = context;
         }
 
         public UrgentOrderService(IUrgentMedicineOrderRepository urgentMedicineOrderRepository)
         {
             IUrgentMedicineOrderRepository = urgentMedicineOrderRepository;
         }
-
         public UrgentMedicineOrder Create(UrgentMedicineOrderDto dto)
         {
             return UrgentMedicineOrderRepository.Create(UrgentMedicineOrderAdapter.UrgentMedicineOrderDtoUrgentMedicineOrder(dto));
         }
+        public String FormUrgentOrder(string medicine)
+        {
+            List<String> pharmacies = new List<String>();
+
+            foreach(RegistrationInPharmacy registrationInPharmacy in HttpRequests.GetRegistrationsInPharmaciesAll())
+            {
+                if(registrationInPharmacy.PharmacyConnectionInfo.ApiKey.Substring(registrationInPharmacy.PharmacyConnectionInfo.ApiKey.Length - 1).Equals("H"))
+                {
+                    IPharmacy ipharmacy = PharmacyFactoryHttp.GetIPharmacy(registrationInPharmacy.PharmacyConnectionInfo.Url, Context);
+                    
+                    if (!ipharmacy.CreateUrgentOrder(medicine).IsNullOrEmpty()) { pharmacies.Add(ipharmacy.CreateUrgentOrder(medicine)); }
+                }
+                else
+                {
+                    IPharmacy ipharmacy = PharmacyFactoryGrpcAndSftp.GetIPharmacy("",Context);
+                    if (!ipharmacy.CreateUrgentOrder(medicine).IsNullOrEmpty()) { pharmacies.Add(ipharmacy.CreateUrgentOrder(medicine)); }
+                }
+            }
+            if(pharmacies.Count!=0) { return pharmacies[0]; }
+            return null;
+
+        }
+
+       
 
         public List<UrgentMedicineOrder> GetAll()
         {
@@ -48,7 +80,7 @@ namespace UrgentMedicineOrderApi.Service
         {
             try
             {
-                HttpService.SendUrgentOrder(CreateOrder(order));
+                HttpRequests.SendUrgentOrder(CreateOrder(order));
                 return true;
             }
             catch (Exception e) { return false; }
@@ -77,6 +109,10 @@ namespace UrgentMedicineOrderApi.Service
         public List<MedicineName> CheckMedicineAvailability(string medicine)
         {
             return MedicineAvailabilityTable.FormMedicineAvailability(HttpRequests.FormMedicineAvailabilityRequest(medicine));
+        }
+        public List<MedicineName> CheckMedicineAvailability2(string medicine)
+        {
+            return MedicineAvailabilityTable.FormMedicineAvailability(HttpRequests.FormMedicineAvailabilityRequest2(medicine));
         }
     }
 }

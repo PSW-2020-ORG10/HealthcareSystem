@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace TenderApi.Model
+namespace UrgentMedicineOrderApi.Model
 {
     public class PharmacyConnectionInfo
     {

@@ -47,7 +47,8 @@ namespace MedicineInformationApi.Migrations
                     { 1, 150 },
                     { 2, 100 },
                     { 3, 44 },
-                    { 4, 33 }
+                    { 4, 33 },
+                    { 5, 30 }
                 });
 
             migrationBuilder.InsertData(
@@ -58,7 +59,8 @@ namespace MedicineInformationApi.Migrations
                     { "Paracetamol", "Paracetamol is a nonsteroidal anti-inflammatory drug (NSAID) used to treat mild-to-moderate pain, and helps to relieve symptoms of arthritis.", 1 },
                     { "Brufen", "Brufen is used to reduce fever and relieve mild to moderate pain.", 2 },
                     { "Defrinol", "Defrinol is used to treat certain types of bacterial infections.", 3 },
-                    { "Pancef", "Pancef is indicated for: Headache, Colds & Influenza, Backache, Period Pain, Pain of Osteoarthritis, Muscle Pain, Toothache, Rheumatic Pain", 4 }
+                    { "Pancef", "Pancef is indicated for: Headache, Colds & Influenza, Backache, Period Pain, Pain of Osteoarthritis, Muscle Pain, Toothache, Rheumatic Pain", 4 },
+                    { "Analgin", "Analgin is indicated for: Headache, Colds & Influenza, Backache, Period Pain, Pain of Osteoarthritis, Muscle Pain, Toothache, Rheumatic Pain", 5 }
                 });
 
             migrationBuilder.CreateIndex(

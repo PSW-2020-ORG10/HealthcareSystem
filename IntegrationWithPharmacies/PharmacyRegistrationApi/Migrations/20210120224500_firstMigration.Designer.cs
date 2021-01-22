@@ -8,7 +8,7 @@ using PharmacyRegistrationApi.DbContextModel;
 namespace PharmacyRegistrationApi.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20210116173549_firstMigration")]
+    [Migration("20210120224500_firstMigration")]
     partial class firstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,6 +29,9 @@ namespace PharmacyRegistrationApi.Migrations
                     b.Property<int>("RegistrationInPharmacyId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Url")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.HasKey("ApiKey");
 
                     b.HasIndex("RegistrationInPharmacyId")
@@ -39,9 +42,17 @@ namespace PharmacyRegistrationApi.Migrations
                     b.HasData(
                         new
                         {
-                            ApiKey = "api1",
+                            ApiKey = "65ftvyubuef74f8H",
                             Email = "jankovic1@gmail.com",
-                            RegistrationInPharmacyId = 1
+                            RegistrationInPharmacyId = 1,
+                            Url = "http://localhost:8086"
+                        },
+                        new
+                        {
+                            ApiKey = "65ftvyubuef74f8G",
+                            Email = "benu1@gmail.com",
+                            RegistrationInPharmacyId = 2,
+                            Url = "http://localhost:8082"
                         });
                 });
 
@@ -65,6 +76,11 @@ namespace PharmacyRegistrationApi.Migrations
                         {
                             Name = "Jankovic 1",
                             RegistrationInPharmacyId = 1
+                        },
+                        new
+                        {
+                            Name = "Benu 1",
+                            RegistrationInPharmacyId = 2
                         });
                 });
 
@@ -89,6 +105,12 @@ namespace PharmacyRegistrationApi.Migrations
                         {
                             id = 1,
                             PharmacyId = 1,
+                            Town = "Novi Sad"
+                        },
+                        new
+                        {
+                            id = 2,
+                            PharmacyId = 2,
                             Town = "Novi Sad"
                         });
                 });

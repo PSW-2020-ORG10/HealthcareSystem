@@ -58,6 +58,12 @@ namespace MedicineInformationApi.Migrations
                             Name = "Pancef",
                             Description = "Pancef is indicated for: Headache, Colds & Influenza, Backache, Period Pain, Pain of Osteoarthritis, Muscle Pain, Toothache, Rheumatic Pain",
                             MedicineInformationId = 4
+                        },
+                        new
+                        {
+                            Name = "Analgin",
+                            Description = "Analgin is indicated for: Headache, Colds & Influenza, Backache, Period Pain, Pain of Osteoarthritis, Muscle Pain, Toothache, Rheumatic Pain",
+                            MedicineInformationId = 5
                         });
                 });
 
@@ -94,6 +100,11 @@ namespace MedicineInformationApi.Migrations
                         {
                             Id = 4,
                             Quantity = 33
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Quantity = 30
                         });
                 });
 

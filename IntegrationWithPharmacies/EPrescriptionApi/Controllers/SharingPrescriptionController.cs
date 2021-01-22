@@ -28,8 +28,7 @@ namespace EPrescriptionApi.Controllers
         [HttpGet("medicinesIsa")]
         public IActionResult GetMedicinesFromIsa()
         {
-            if (Startup.SystemEnvironment.Equals("Development"))return Ok(HttpRequests.GetAllMedicinesFromDatabase());
-            else return Ok(HttpRequests.FormMedicineFromIsaRequest().Data);
+            return Ok(HttpRequests.GetAllMedicinesFromDatabase());
         }
 
         [HttpPost]
