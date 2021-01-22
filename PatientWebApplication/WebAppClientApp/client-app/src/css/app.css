@@ -93,11 +93,24 @@ div.a {
 }
 
 body {
+ /* background-image: url("/img/hospital.png");*/
   background-color: #fff;
   font-family: "Roboto", sans-serif;
   display: flex;
   flex-direction: column;
 }
+
+body.login {
+  background-image: url("/img/page.png");
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  flex-direction: column;
+  width: 1539px;
+  height: 468px;
+  margin-left: -225px;
+  margin-right: 425px;
+}
+
 
 .page-wrap {
   min-height: 100vh;
@@ -137,10 +150,11 @@ body {
   padding-bottom: 20px;
   background: #66a4fa no-repeat left bottom;
   background-size: cover;
+  
 }
 
 .header-blockquote {
-  max-width: 520px;
+  max-width: 570px;
   /*margin-left: auto;*/
   padding: 40px 0;
   text-align: left;
@@ -558,4 +572,40 @@ input[type="radio"] {
     background:#FCEDDA;
     color: #EE4E34;
     text-align: center;
+  }
+
+  .login{
+    background-image: url("/img/doctor1.png");
+    font-family: "Roboto", sans-serif;
+    display: flex;
+    flex-direction: column;
+    background-size: cover;
+  }
+
+  .login-header{
+    padding-top: 30px;
+    padding-bottom: -40px;
+    width: 1519px;
+    background: #66a4fa no-repeat left bottom;
+    background-size: cover;
+    margin-left: -205px;
+  }
+
+  .header-blockquote-login {
+    max-width: 570px;
+    margin-left: 220px;
+    padding: 40px 0;
+    text-align: center;
+  }
+
+  .color{
+    color: white;
+    font-size: 14pt;
+    font-style: inherit;
+    font-weight: 500;
+  }
+
+  .input-color{
+    background-color: white;
+    color: #66a4fa;
   }

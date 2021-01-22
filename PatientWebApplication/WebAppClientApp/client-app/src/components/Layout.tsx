@@ -30,7 +30,7 @@ export default (props: { children: React.ReactNode }) => (
     <NavMenu />
     <Container>
       <AuthRouteNotLogged exact path="/" Component={Home} />
-      <AuthRoutePatient path="/patient-feedback" Component={PatientFeedback} />
+      <AuthRouteNotLogged  path="/patient-feedback" Component={PatientFeedback} />
       <AuthRouteAdmin path="/admin-feedback" Component={AdminFeedback} />
       <AuthRoutePatient path="/create-feedback" Component={CreateFeedback} />
       <AuthRoutePatient
