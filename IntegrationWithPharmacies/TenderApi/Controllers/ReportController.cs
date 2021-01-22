@@ -19,13 +19,8 @@ namespace TenderApi.Controllers
         [HttpPost]
         public IActionResult Post(DateOfOrder date)
         {
-            if (Startup.SystemEnvironment.Equals("Development"))
-            {
-                if (ReportService.SendReportSftp(date)) return Ok();
-                return BadRequest();
-            }
-            if (ReportService.SendReportHttp(date)) return Ok();
-            return BadRequest();    
+            if(ReportService.SendReport(date)) return Ok();
+            return BadRequest();
         }
     }
 }

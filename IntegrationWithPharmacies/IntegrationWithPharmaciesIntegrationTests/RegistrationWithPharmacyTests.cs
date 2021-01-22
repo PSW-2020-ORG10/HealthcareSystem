@@ -28,7 +28,7 @@ namespace IntegrationWithPharmaciesIntegrationTests
         {
             RegistrationInPharmacyService registrationInPharmacyService = new RegistrationInPharmacyService(_context);
 
-            RegistrationInPharmacy registrationInPharmacy = registrationInPharmacyService.Create(new RegistrationInPharmacyDto(5, "Novi Sad", new PharmacyConnectionInfo("apisa12345", "email@gmail.com"), new PharmacyNameInfo("Jankovic 2")));
+            RegistrationInPharmacy registrationInPharmacy = registrationInPharmacyService.Create(new RegistrationInPharmacyDto(5, "Novi Sad", new PharmacyConnectionInfo("apisa12345", "email@gmail.com",""), new PharmacyNameInfo("Jankovic 2")));
             registrationInPharmacy.ShouldNotBeNull();
         }
         [Fact]
@@ -36,7 +36,7 @@ namespace IntegrationWithPharmaciesIntegrationTests
         {
             RegistrationInPharmacyService registrationInPharmacyService = new RegistrationInPharmacyService(_context);
 
-            RegistrationInPharmacy registrationInPharmacy = registrationInPharmacyService.Create(new RegistrationInPharmacyDto(5, "Novi Sad", new PharmacyConnectionInfo("apisa12345", "email@gmail.com"), new PharmacyNameInfo("Jankovic 2")));
+            RegistrationInPharmacy registrationInPharmacy = registrationInPharmacyService.Create(new RegistrationInPharmacyDto(5, "Novi Sad", new PharmacyConnectionInfo("apisa12345", "email@gmail.com",""), new PharmacyNameInfo("Jankovic 2")));
             registrationInPharmacy.ShouldBeNull();
         }
       

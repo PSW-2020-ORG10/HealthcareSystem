@@ -45,6 +45,7 @@ namespace PharmacyRegistrationApi.Migrations
                 {
                     ApiKey = table.Column<string>(nullable: false),
                     Email = table.Column<string>(nullable: true),
+                    Url = table.Column<string>(nullable: true),
                     RegistrationInPharmacyId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -64,14 +65,27 @@ namespace PharmacyRegistrationApi.Migrations
                 values: new object[] { 1, 1, "Novi Sad" });
 
             migrationBuilder.InsertData(
+                table: "Registrations",
+                columns: new[] { "id", "PharmacyId", "Town" },
+                values: new object[] { 2, 2, "Novi Sad" });
+
+            migrationBuilder.InsertData(
                 table: "PharmacyNameInfos",
                 columns: new[] { "Name", "RegistrationInPharmacyId" },
-                values: new object[] { "Jankovic 1", 1 });
+                values: new object[,]
+                {
+                    { "Jankovic 1", 1 },
+                    { "Benu 1", 2 }
+                });
 
             migrationBuilder.InsertData(
                 table: "RegistrationsInfo",
-                columns: new[] { "ApiKey", "Email", "RegistrationInPharmacyId" },
-                values: new object[] { "api1", "jankovic1@gmail.com", 1 });
+                columns: new[] { "ApiKey", "Email", "RegistrationInPharmacyId", "Url" },
+                values: new object[,]
+                {
+                    { "65ftvyubuef74f8H", "jankovic1@gmail.com", 1, "http://localhost:8086" },
+                    { "65ftvyubuef74f8G", "benu1@gmail.com", 2, "http://localhost:8082" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_PharmacyNameInfos_RegistrationInPharmacyId",
