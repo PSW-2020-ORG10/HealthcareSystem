@@ -87,9 +87,9 @@ export const feedbackCreated = (feedback) => async (dispatch) => {
 export const feedbackPublished = (id) => async (dispatch) => {
     try {
         debugger
-        const response = await axios.put("http://localhost:54689/api/feedback/" + id, /*{},*/ {
-                headers: { "Access-Control-Allow-Origin": "*"/*,
-    "Authorization": "Bearer " + localStorage.getItem('token')*/}
+        const response = await axios.put("http://localhost:54689/api/feedback/" + id, {}, {
+                headers: { "Access-Control-Allow-Origin": "*",
+    "Authorization": "Bearer " + localStorage.getItem('token')}
               }); 
         dispatch({
             type: FEEDBACK_PUBLISHED,
@@ -106,10 +106,9 @@ export const feedbackPublished = (id) => async (dispatch) => {
 export const loadedPublishedFeedback = () => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.get("http://localhost:54689/api/feedback/published",
+        const response = await axios.get("http://localhost:58636/api/feedback/published",
         {
-            headers: { "Access-Control-Allow-Origin": "*",
-                       "Authorization" :  "Bearer " + localStorage.getItem("token")}
+            headers: { "Access-Control-Allow-Origin": "*"}
           }); 
         debugger;
         dispatch({
