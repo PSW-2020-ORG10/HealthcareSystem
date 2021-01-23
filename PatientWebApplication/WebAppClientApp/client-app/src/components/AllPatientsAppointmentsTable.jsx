@@ -50,8 +50,8 @@ class AllPatientsAppointmentsTable extends Component {
                             <th style={{ textAlign: "center" }}></th>
                         </tr>
                     </thead>
+                    <tbody className="h-100">
                     {patientAppointmentsInTwoDaysList.map((f) => (
-                        <tbody key={f.id}>
                             <tr key={f.id}>                               
                                 <td style={{ textAlign: "left" }} >{f.doctor == null ? "" :f.doctor.name + ' ' + f.doctor.surname}</td>
                                 <td style={{ textAlign: "center" }} > {this.checkType(f)}</td >
@@ -60,10 +60,8 @@ class AllPatientsAppointmentsTable extends Component {
                                 <td style={{ textAlign: "right" }}><button disabled={true} className="btn btn-primary">Cancel</button></td >
                                 <td style={{ textAlign: "right" }}><button disabled={true} className="btn btn-primary">Fill Survey</button></td >
                             </tr>
-                        </tbody>
                     ))}
                     {patientAppointmentsInFutureList.map((f) => (
-                        <tbody key={f.id}>
                             <tr key={f.id}>
                                 <td style={{ textAlign: "left" }} >{f.doctor == null ? "" :f.doctor.name + ' ' + f.doctor.surname}</td>
                                 <td style={{ textAlign: "center" }} > {this.checkType(f)}</td >
@@ -72,8 +70,8 @@ class AllPatientsAppointmentsTable extends Component {
                                 <td style={{ textAlign: "right" }}><CancelAppointmentButton  appointment={f}> </CancelAppointmentButton></td >
                                 <td style={{ textAlign: "right" }}><button  disabled={true} className="btn btn-primary">Fill Survey</button></td >
                             </tr>
-                        </tbody>
                     ))}
+                    </tbody>
                 </table>
                 <div>
                     {this.state.modalSurveyShow ? <CreateSurveyForm show={this.state.modalSurveyShow} appointmentToSend={this.state.appointmentToSend} onShowChange={this.fillSurvey.bind(this)} /> : null}

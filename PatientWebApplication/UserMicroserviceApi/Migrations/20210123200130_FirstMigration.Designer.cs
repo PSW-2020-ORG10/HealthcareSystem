@@ -9,8 +9,8 @@ using UserMicroserviceApi.DbContextModel;
 namespace UserMicroserviceApi.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20210114134358_SecondMigration")]
-    partial class SecondMigration
+    [Migration("20210123200130_FirstMigration")]
+    partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -613,7 +613,7 @@ namespace UserMicroserviceApi.Migrations
                         new
                         {
                             Id = 22,
-                            Date = "16/01/2021",
+                            Date = "29/12/2020",
                             EmployeeId = 1,
                             IsOnDuty = true,
                             Room = "1",
@@ -622,6 +622,24 @@ namespace UserMicroserviceApi.Migrations
                         new
                         {
                             Id = 23,
+                            Date = "31/01/2021",
+                            EmployeeId = 1,
+                            IsOnDuty = true,
+                            Room = "1",
+                            ShiftId = 3
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Date = "16/01/2021",
+                            EmployeeId = 1,
+                            IsOnDuty = true,
+                            Room = "1",
+                            ShiftId = 3
+                        },
+                        new
+                        {
+                            Id = 25,
                             Date = "17/01/2021",
                             EmployeeId = 1,
                             IsOnDuty = true,
@@ -630,7 +648,7 @@ namespace UserMicroserviceApi.Migrations
                         },
                         new
                         {
-                            Id = 24,
+                            Id = 26,
                             Date = "18/01/2021",
                             EmployeeId = 1,
                             IsOnDuty = true,
@@ -639,7 +657,7 @@ namespace UserMicroserviceApi.Migrations
                         },
                         new
                         {
-                            Id = 25,
+                            Id = 27,
                             Date = "19/01/2021",
                             EmployeeId = 1,
                             IsOnDuty = true,
@@ -648,7 +666,7 @@ namespace UserMicroserviceApi.Migrations
                         },
                         new
                         {
-                            Id = 26,
+                            Id = 28,
                             Date = "20/01/2021",
                             EmployeeId = 1,
                             IsOnDuty = true,
@@ -657,7 +675,7 @@ namespace UserMicroserviceApi.Migrations
                         },
                         new
                         {
-                            Id = 27,
+                            Id = 29,
                             Date = "21/01/2021",
                             EmployeeId = 1,
                             IsOnDuty = true,
@@ -666,7 +684,7 @@ namespace UserMicroserviceApi.Migrations
                         },
                         new
                         {
-                            Id = 28,
+                            Id = 30,
                             Date = "22/01/2021",
                             EmployeeId = 1,
                             IsOnDuty = true,

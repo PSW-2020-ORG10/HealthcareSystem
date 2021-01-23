@@ -6,7 +6,7 @@
 }
 
 #appointmentTable {
-  height: 350px !important;
+  /* height: 350px !important; */
   overflow: scroll;
   overflow-x: hidden;
 }

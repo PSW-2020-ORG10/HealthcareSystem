@@ -2,17 +2,15 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UserMicroserviceApi.DbContextModel;
 
 namespace UserMicroserviceApi.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20210115192323_FirstMigration")]
-    partial class FirstMigration
+    partial class MyDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -622,10 +620,73 @@ namespace UserMicroserviceApi.Migrations
                         new
                         {
                             Id = 23,
-                            Date = "31/01/2020",
+                            Date = "31/01/2021",
                             EmployeeId = 1,
                             IsOnDuty = true,
                             Room = "1",
+                            ShiftId = 3
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Date = "16/01/2021",
+                            EmployeeId = 1,
+                            IsOnDuty = true,
+                            Room = "1",
+                            ShiftId = 3
+                        },
+                        new
+                        {
+                            Id = 25,
+                            Date = "17/01/2021",
+                            EmployeeId = 1,
+                            IsOnDuty = true,
+                            Room = "Ordination 1",
+                            ShiftId = 3
+                        },
+                        new
+                        {
+                            Id = 26,
+                            Date = "18/01/2021",
+                            EmployeeId = 1,
+                            IsOnDuty = true,
+                            Room = "Ordination 1",
+                            ShiftId = 3
+                        },
+                        new
+                        {
+                            Id = 27,
+                            Date = "19/01/2021",
+                            EmployeeId = 1,
+                            IsOnDuty = true,
+                            Room = "Ordination 1",
+                            ShiftId = 4
+                        },
+                        new
+                        {
+                            Id = 28,
+                            Date = "20/01/2021",
+                            EmployeeId = 1,
+                            IsOnDuty = true,
+                            Room = "Ordination 1",
+                            ShiftId = 3
+                        },
+                        new
+                        {
+                            Id = 29,
+                            Date = "21/01/2021",
+                            EmployeeId = 1,
+                            IsOnDuty = true,
+                            Room = "Ordination 1",
+                            ShiftId = 3
+                        },
+                        new
+                        {
+                            Id = 30,
+                            Date = "22/01/2021",
+                            EmployeeId = 1,
+                            IsOnDuty = true,
+                            Room = "Ordination 1",
                             ShiftId = 3
                         });
                 });

@@ -283,8 +283,15 @@ namespace UserMicroserviceApi.Migrations
                 columns: new[] { "Id", "Date", "EmployeeId", "IsOnDuty", "Room", "ShiftId" },
                 values: new object[,]
                 {
+                    { 20, "12/01/2021", 1, true, "Ordination 1", 4 },
                     { 12, "19/12/2020", 1, true, "Ordination 1", 4 },
-                    { 23, "31/01/2020", 1, true, "1", 3 },
+                    { 30, "22/01/2021", 1, true, "Ordination 1", 3 },
+                    { 29, "21/01/2021", 1, true, "Ordination 1", 3 },
+                    { 28, "20/01/2021", 1, true, "Ordination 1", 3 },
+                    { 26, "18/01/2021", 1, true, "Ordination 1", 3 },
+                    { 25, "17/01/2021", 1, true, "Ordination 1", 3 },
+                    { 24, "16/01/2021", 1, true, "1", 3 },
+                    { 23, "31/01/2021", 1, true, "1", 3 },
                     { 22, "29/12/2020", 1, true, "1", 3 },
                     { 15, "23/12/2020", 1, true, "Ordination 1", 3 },
                     { 14, "21/12/2020", 1, true, "Ordination 1", 3 },
@@ -304,8 +311,8 @@ namespace UserMicroserviceApi.Migrations
                     { 19, "23/12/2020", 4, true, "1", 1 },
                     { 18, "22/12/2020", 3, true, "1", 1 },
                     { 16, "23/12/2020", 2, true, "1", 1 },
-                    { 20, "12/01/2021", 1, true, "Ordination 1", 4 },
-                    { 21, "25/12/2020", 1, true, "1", 4 }
+                    { 21, "25/12/2020", 1, true, "1", 4 },
+                    { 27, "19/01/2021", 1, true, "Ordination 1", 4 }
                 });
 
             migrationBuilder.CreateIndex(
