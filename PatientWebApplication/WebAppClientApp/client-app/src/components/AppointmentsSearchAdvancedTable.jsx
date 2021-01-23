@@ -1,10 +1,11 @@
 ﻿import React, { Component } from "react"
-import { loadedAllPatientAppointments, advancedSearchPatientAppointments } from "../actions/actions"
+import { loadedAllPatientAppointments, advancedSearchPatientAppointments, loadedAllPatientAppointmentsWithoutSurvey } from "../actions/actions"
 import { connect } from "react-redux"
 import { wrap } from "module";
 import { showErrorToast, checkDateFormat } from "../utilities/Utilities"
 import PrescriptionModal from "./PrescriptionModal";
-import ReferralModal from "./ReferralModal"
+import ReferralModal from "./ReferralModal";
+import CreateSurveyForm from "./CreateSurveyForm";
 
 class AppointmentsSearchAdvancedTable extends Component {
     state = {
@@ -31,7 +32,9 @@ class AppointmentsSearchAdvancedTable extends Component {
         modalPrescriptionShow: false,
         appointmentId: "",
         referral: {},
-        isOperation: false
+        isOperation: false,
+        modalSurveyShow: false,
+        appointmentToSend: null
     };
 
     addSearchField = (event) => {
@@ -117,12 +120,17 @@ class AppointmentsSearchAdvancedTable extends Component {
 
     componentDidMount() {
         debugger;
-        this.props.advancedSearchPatientAppointments(this.state);;
+        this.props.advancedSearchPatientAppointments(this.state);
+        this.props.loadedAllPatientAppointmentsWithoutSurvey();
     }
 
     render() {
         debugger;
         if (this.props.patientAppointmentsList === undefined) {
+
+            return null;
+        }
+        if (this.props.appointmentsWithSurvey === undefined) {
 
             return null;
         }
@@ -133,6 +141,7 @@ class AppointmentsSearchAdvancedTable extends Component {
             <div>
                 {this.state.modalShow ? <ReferralModal show={this.state.modalShow} referral={this.state.Referral} date={this.state.Date} isOperation={this.state.isOperation} onShowChange={this.displayModal.bind(this)} /> : null}
                 {this.state.modalPrescriptionShow ? <PrescriptionModal show={this.state.modalPrescriptionShow} date={this.state.Date} appointmentId={this.state.appointmentId} onShowChange={this.displayModalPrescription.bind(this)} /> : null}
+                {this.state.modalSurveyShow ? <CreateSurveyForm show={this.state.modalSurveyShow} appointment={this.state.appointmentToSend}  onShowChange={this.fillSurvey.bind(this)} /> : null}
                 <div className="field-wrap">
                     <td>
                         <select
@@ -216,6 +225,7 @@ class AppointmentsSearchAdvancedTable extends Component {
                             <th style={{ textAlign: "center" }}>Room</th>
                             <th style={{ textAlign: "center" }}></th>
                             <th style={{ textAlign: "center" }}></th>
+                            <th style={{ textAlign: "center" }}></th>
                         </tr>
                     </thead>
                     {patientAppointmentsList.map((f) => (
@@ -228,6 +238,7 @@ class AppointmentsSearchAdvancedTable extends Component {
                                 <td style={{ textAlign: "center" }}>{f.roomId}</td >
                                 <td style={{ textAlign: "right" }}><button type="button" onClick={() => { this.displayModal(f) }} className="btn btn-primary">Report</button></td >
                                 <td style={{ textAlign: "right" }}><button onClick={() => { this.displayModalPrescription(f) }} className="btn btn-primary">Prescription</button></td >
+                                <td style={{ textAlign: "right" }}><button disabled={this.checkForSurvey(f)} onClick={() => this.fillSurvey(f)} className="btn btn-primary">Fill Survey</button></td >
                             </tr>
                         </tbody>
                     ))}
@@ -237,6 +248,22 @@ class AppointmentsSearchAdvancedTable extends Component {
 
 
         );
+    }
+
+    checkForSurvey(f){
+        debugger;
+        for (var index = 0; index < this.props.appointmentsWithSurvey.length; ++index) {
+            if (f.id === this.props.appointmentsWithSurvey[index].id) return true;
+        }
+        return false;
+    }
+
+    fillSurvey(f) {
+        this.setState({ modalSurveyShow: !this.state.modalSurveyShow })
+        if (f === undefined) {
+            return;
+        }  
+        this.setState({ appointmentToSend: f})
     }
 
     searchAppointments() {
@@ -293,6 +320,6 @@ class AppointmentsSearchAdvancedTable extends Component {
 
 const mapStateToProps = (state) =>
 
-    ({ patientAppointmentsList: state.reducer.patientAppointmentsList })
+    ({ patientAppointmentsList: state.reducer.patientAppointmentsList, appointmentsWithSurvey: state.reducer.patientAppointmentsWithoutSurveys })
 
-export default connect(mapStateToProps, { loadedAllPatientAppointments, advancedSearchPatientAppointments })(AppointmentsSearchAdvancedTable);
+export default connect(mapStateToProps, { loadedAllPatientAppointments, advancedSearchPatientAppointments, loadedAllPatientAppointmentsWithoutSurvey })(AppointmentsSearchAdvancedTable);

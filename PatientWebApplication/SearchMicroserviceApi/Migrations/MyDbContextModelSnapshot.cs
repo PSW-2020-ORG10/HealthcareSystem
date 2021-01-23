@@ -202,6 +202,102 @@ namespace SearchMicroserviceApi.Migrations
                             MedicineId = 4,
                             PrescriptionId = 6,
                             Quantity = 4
+                        },
+                        new
+                        {
+                            Id = 9,
+                            HowToUse = "Take one when body temperature exceedes 39 degrees",
+                            MedicineId = 2,
+                            PrescriptionId = 1,
+                            Quantity = 4
+                        },
+                        new
+                        {
+                            Id = 10,
+                            HowToUse = "Every 12 hours.",
+                            MedicineId = 3,
+                            PrescriptionId = 1,
+                            Quantity = 3
+                        },
+                        new
+                        {
+                            Id = 11,
+                            HowToUse = "Every 8 hours",
+                            MedicineId = 1,
+                            PrescriptionId = 2,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            Id = 12,
+                            HowToUse = "Whenever headache reapers",
+                            MedicineId = 2,
+                            PrescriptionId = 2,
+                            Quantity = 2
+                        },
+                        new
+                        {
+                            Id = 13,
+                            HowToUse = "Every 8 hours",
+                            MedicineId = 1,
+                            PrescriptionId = 3,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            Id = 14,
+                            HowToUse = "Whenever headache reapers",
+                            MedicineId = 2,
+                            PrescriptionId = 3,
+                            Quantity = 2
+                        },
+                        new
+                        {
+                            Id = 15,
+                            HowToUse = "Every 12 hours.",
+                            MedicineId = 3,
+                            PrescriptionId = 3,
+                            Quantity = 3
+                        },
+                        new
+                        {
+                            Id = 16,
+                            HowToUse = "Every 8 hours",
+                            MedicineId = 1,
+                            PrescriptionId = 4,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            Id = 17,
+                            HowToUse = "Whenever headache reapers",
+                            MedicineId = 2,
+                            PrescriptionId = 4,
+                            Quantity = 2
+                        },
+                        new
+                        {
+                            Id = 18,
+                            HowToUse = "Every 12 hours.",
+                            MedicineId = 3,
+                            PrescriptionId = 4,
+                            Quantity = 3
+                        },
+                        new
+                        {
+                            Id = 19,
+                            HowToUse = "Every 12 hours.",
+                            MedicineId = 3,
+                            PrescriptionId = 7,
+                            Quantity = 3
+                        },
+                        new
+                        {
+                            Id = 20,
+                            HowToUse = "Every 8 hours",
+                            MedicineId = 1,
+                            PrescriptionId = 7,
+                            Quantity = 1
                         });
                 });
 

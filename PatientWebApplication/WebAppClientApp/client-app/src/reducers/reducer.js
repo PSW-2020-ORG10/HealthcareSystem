@@ -237,11 +237,13 @@ function reducer(state = initialState, action) {
                 patientAppointmentsList: updateObjectInArray(state.patientAppointmentsList, action)
             };     
         case LOADED_ALL_PATIENT_APPOINTMENTS_WITH_SURVEYS:
+            debugger;
             return {
                 ...state,
                 patientAppointmentsWithSurveys: action.payload
             };     
         case LOADED_ALL_PATIENT_APPOINTMENTS_WITHOUT_SURVEYS:
+            debugger;
             return {
                 ...state,
                 patientAppointmentsWithoutSurveys: action.payload

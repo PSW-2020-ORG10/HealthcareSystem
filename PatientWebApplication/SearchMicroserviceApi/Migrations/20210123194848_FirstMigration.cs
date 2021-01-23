@@ -32,8 +32,9 @@ namespace SearchMicroserviceApi.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Patientsid = table.Column<int>(nullable: false),
                     IsUsed = table.Column<bool>(nullable: false),
-                    HowToUse = table.Column<string>(nullable: true),
-                    DoctorId = table.Column<int>(nullable: false)
+                    Comment = table.Column<string>(nullable: true),
+                    DoctorId = table.Column<int>(nullable: false),
+                    AppointmentId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -160,12 +161,24 @@ namespace SearchMicroserviceApi.Migrations
 
             migrationBuilder.InsertData(
                 table: "Prescriptions",
-                columns: new[] { "Id", "DoctorId", "HowToUse", "IsUsed", "Patientsid" },
+                columns: new[] { "Id", "AppointmentId", "Comment", "DoctorId", "IsUsed", "Patientsid" },
                 values: new object[,]
                 {
-                    { 5, 1, "In case of allergy, stop taking medicine immediately.", false, 1 },
-                    { 6, 1, "After finishing treatment, schedule control appointment.", true, 2 },
-                    { 7, 2, "If illnness stops, stop taking medicine.", true, 1 }
+                    { 14, 14, "After finishing treatment, schedule control appointment.", 1, true, 2 },
+                    { 13, 13, "In case of allergy, stop taking medicine immediately.", 1, false, 1 },
+                    { 12, 12, "If illnness stops, stop taking medicine.", 2, true, 1 },
+                    { 11, 11, "After finishing treatment, schedule control appointment.", 1, true, 2 },
+                    { 10, 10, "In case of allergy, stop taking medicine immediately.", 1, false, 1 },
+                    { 9, 9, "If illnness stops, stop taking medicine.", 2, true, 1 },
+                    { 8, 8, "After finishing treatment, schedule control appointment.", 1, true, 2 },
+                    { 6, 6, "If illnness stops, stop taking medicine.", 2, true, 1 },
+                    { 15, 15, "If illnness stops, stop taking medicine.", 2, true, 1 },
+                    { 5, 5, "After finishing treatment, schedule control appointment.", 1, true, 2 },
+                    { 4, 4, "In case of allergy, stop taking medicine immediately.", 1, false, 1 },
+                    { 3, 3, "If illnness stops, stop taking medicine.", 2, true, 1 },
+                    { 2, 2, "After finishing treatment, schedule control appointment.", 1, true, 2 },
+                    { 1, 1, "In case of allergy, stop taking medicine immediately.", 1, false, 1 },
+                    { 7, 7, "In case of allergy, stop taking medicine immediately.", 1, false, 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -178,14 +191,26 @@ namespace SearchMicroserviceApi.Migrations
                 columns: new[] { "Id", "HowToUse", "MedicineId", "PrescriptionId", "Quantity" },
                 values: new object[,]
                 {
-                    { 1, "Every 8 hours", 1, 5, 1 },
-                    { 2, "Whenever headache reapers", 2, 5, 2 },
-                    { 3, "Every 12 hours.", 3, 5, 3 },
-                    { 4, "When body temperature exceedes 39 degrees", 4, 5, 4 },
-                    { 5, "Every 8 hours", 1, 6, 1 },
-                    { 6, "Whenever headache reapers", 2, 6, 2 },
+                    { 18, "Every 12 hours.", 3, 4, 3 },
+                    { 8, "Take one when body temperature exceedes 39 degrees", 4, 6, 4 },
                     { 7, "Every 12 hours.", 3, 6, 3 },
-                    { 8, "When body temperature exceedes 39 degrees", 4, 6, 4 }
+                    { 6, "Whenever headache reapers", 2, 6, 2 },
+                    { 5, "Every 8 hours", 1, 6, 1 },
+                    { 4, "Take one when body temperature exceedes 39 degrees", 4, 5, 4 },
+                    { 3, "Every 12 hours.", 3, 5, 3 },
+                    { 2, "Whenever headache reapers", 2, 5, 2 },
+                    { 1, "Every 8 hours", 1, 5, 1 },
+                    { 19, "Every 12 hours.", 3, 7, 3 },
+                    { 20, "Every 8 hours", 1, 7, 1 },
+                    { 16, "Every 8 hours", 1, 4, 1 },
+                    { 15, "Every 12 hours.", 3, 3, 3 },
+                    { 14, "Whenever headache reapers", 2, 3, 2 },
+                    { 13, "Every 8 hours", 1, 3, 1 },
+                    { 12, "Whenever headache reapers", 2, 2, 2 },
+                    { 11, "Every 8 hours", 1, 2, 1 },
+                    { 10, "Every 12 hours.", 3, 1, 3 },
+                    { 9, "Take one when body temperature exceedes 39 degrees", 2, 1, 4 },
+                    { 17, "Whenever headache reapers", 2, 4, 2 }
                 });
 
             migrationBuilder.InsertData(

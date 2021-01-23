@@ -19,6 +19,9 @@ class AllPatientsAppointments extends React.PureComponent<CounterProps> {
       <React.Fragment>
         <Header title="My Appointments" description="All of my appointments." />
         <AppointmentMenu />
+        <br />
+        <br />
+        <AllPatientsAppointmentsTable></AllPatientsAppointmentsTable>
       </React.Fragment>
     );
   }

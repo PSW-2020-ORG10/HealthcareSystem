@@ -52,7 +52,19 @@ namespace SearchMicroserviceApi.DbContextModel
                new PrescribedMedicine(5, 1, 1, "Every 8 hours", 6),
                new PrescribedMedicine(6, 2, 2, "Whenever headache reapers", 6),
                new PrescribedMedicine(7, 3, 3, "Every 12 hours.", 6),
-               new PrescribedMedicine(8, 4, 4, "Take one when body temperature exceedes 39 degrees", 6)
+               new PrescribedMedicine(8, 4, 4, "Take one when body temperature exceedes 39 degrees", 6),
+               new PrescribedMedicine(9, 2, 4, "Take one when body temperature exceedes 39 degrees", 1),
+               new PrescribedMedicine(10, 3, 3, "Every 12 hours.", 1),
+               new PrescribedMedicine(11, 1, 1, "Every 8 hours", 2),
+               new PrescribedMedicine(12, 2, 2, "Whenever headache reapers", 2),
+               new PrescribedMedicine(13, 1, 1, "Every 8 hours", 3),
+               new PrescribedMedicine(14, 2, 2, "Whenever headache reapers", 3),
+               new PrescribedMedicine(15, 3, 3, "Every 12 hours.", 3),
+               new PrescribedMedicine(16, 1, 1, "Every 8 hours", 4),
+               new PrescribedMedicine(17, 2, 2, "Whenever headache reapers", 4),
+               new PrescribedMedicine(18, 3, 3, "Every 12 hours.", 4),
+               new PrescribedMedicine(19, 3, 3, "Every 12 hours.", 7),
+               new PrescribedMedicine(20, 1, 1, "Every 8 hours", 7)
            );
 
             modelBuilder.Entity<Prescription>().HasData(
