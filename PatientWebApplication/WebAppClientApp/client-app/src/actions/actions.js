@@ -58,7 +58,12 @@
     USER_LOGGEDIN,
     USER_LOGGEDIN_ERROR,
     PRESCRIPTION_LOADED,
-    PRESCRIPTION_LOADED_ERROR
+    PRESCRIPTION_LOADED_ERROR,
+    STORE_EVENT,
+    STORE_EVENT_ERROR,
+    GET_STATISTICS,
+    GET_STATISTICS_ERROR
+
 } from "../types/types"
 import axios from "axios";
 import { func } from "prop-types";
@@ -933,5 +938,48 @@ export const userLoggedIn = (user) => async (dispatch) => {
         return true;
     } catch (e) {
         console.log(e);
+    }
+};
+
+export const storeEvent = (appointmentEvent) => async (dispatch) => {
+    try {
+        debugger;
+        appointmentEvent.patientId = localStorage.getItem("patientId")
+        const response = await axios.post("http://localhost:54689/api/doctorappointment/storeEvent", appointmentEvent,
+        {
+            headers: { "Access-Control-Allow-Origin": "*",
+                       "Authorization" :  "Bearer " + localStorage.getItem("token")}
+          });
+        debugger;
+        dispatch({
+            type: STORE_EVENT,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: STORE_EVENT_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const getStatistics = () => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.get("http://localhost:54689/api/doctorappointment/getStatistics",
+        {
+            headers: { "Access-Control-Allow-Origin": "*",
+                       "Authorization" :  "Bearer " + localStorage.getItem("token")}
+          });
+        debugger;
+        dispatch({
+            type: GET_STATISTICS,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: GET_STATISTICS_ERROR,
+            payload: console.log(e),
+        });
     }
 };

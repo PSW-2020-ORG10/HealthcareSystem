@@ -95,6 +95,13 @@ namespace UserMicroserviceApi.DbContextModel
                 new Schedule(21, 1, "25/12/2020", true, 4, "1"),
                 new Schedule(22, 1, "29/12/2020", true, 3, "1"),
                 new Schedule(23, 1, "31/01/2021", true, 3, "1")
+                new Schedule(24, 1, "16/01/2021", true, 3, "1"),
+                new Schedule(25, 1, "17/01/2021", true, 3, "Ordination 1"),
+                new Schedule(26, 1, "18/01/2021", true, 3, "Ordination 1"),
+                new Schedule(27, 1, "19/01/2021", true, 4, "Ordination 1"),
+                new Schedule(28, 1, "20/01/2021", true, 3, "Ordination 1"),
+                new Schedule(29, 1, "21/01/2021", true, 3, "Ordination 1"),
+                new Schedule(30, 1, "22/01/2021", true, 3, "Ordination 1")
            );
 
             modelBuilder.Entity<ManagerUser>().HasData(

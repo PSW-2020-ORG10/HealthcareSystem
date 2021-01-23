@@ -219,6 +219,38 @@
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
     },
     {
+      "DownstreamPathTemplate": "/api/doctorappointment/storeEvent",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "appointmentmicroserviceapi",
+          "Port": 53212
+        }
+      ],
+      "UpstreamPathTemplate": "/api/doctorappointment/storeEvent",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/doctorappointment/getStatistics",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "appointmentmicroserviceapi",
+          "Port": 53212
+        }
+      ],
+      "UpstreamPathTemplate": "/api/doctorappointment/getStatistics",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
       "DownstreamPathTemplate": "/api/operation/getAll",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -673,6 +705,18 @@
         "AuthenticationProviderKey": "TestKey",
         "AllowedScopes": []
       }
+    },
+    {
+      "DownstreamPathTemplate": "/api/patientUser/getOneEventDto/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "usermicroserviceapi",
+          "Port": 53236
+        }
+      ],
+      "UpstreamPathTemplate": "/api/patientUser/getOneEventDto/{id}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
     },
     {
       "DownstreamPathTemplate": "/api/patientUser/find/{id}",

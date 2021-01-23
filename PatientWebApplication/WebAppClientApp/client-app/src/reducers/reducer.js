@@ -38,7 +38,9 @@
     LOADED_SECOND_IMAGE,
     LOADED_THIRD_IMAGE,
     USER_LOGGEDIN,
-    PRESCRIPTION_LOADED
+    PRESCRIPTION_LOADED,
+    STORE_EVENT,
+    GET_STATISTICS
 } from "../types/types";
 import { parseStringToDate } from '../utilities/Utilities';
 
@@ -104,7 +106,9 @@ const initialState = {
     loadedAllMessagesList: [],
     userCookie : {},
     userToken : "",
-    appointmentPrescription : {}      
+    appointmentPrescription : {},  
+    appointmentEvent : {},
+    statistics: []
 };
 
 
@@ -342,6 +346,16 @@ function reducer(state = initialState, action) {
                 ...state,
                 appointmentPrescription: action.payload
             }; 
+        case STORE_EVENT:
+                return {
+                    ...state,
+                    appointmentEvent: action.payload
+                };
+        case GET_STATISTICS:
+            return {
+                ...state,
+                statistics: action.payload
+            };
         default:
             return state;
     }

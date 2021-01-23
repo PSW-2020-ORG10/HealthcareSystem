@@ -60,3 +60,7 @@ export const USER_LOGGEDIN = "userLoggedIn";
 export const USER_LOGGEDIN_ERROR = "userLoggedInError";
 export const PRESCRIPTION_LOADED = "prescriptionLoaded";
 export const PRESCRIPTION_LOADED_ERROR = "prescriptionLoadedError";
+export const STORE_EVENT = "storeEvent";
+export const STORE_EVENT_ERROR = "storeEventError";
+export const GET_STATISTICS = "getStatistics";
+export const GET_STATISTICS_ERROR = "getStatisticsError";

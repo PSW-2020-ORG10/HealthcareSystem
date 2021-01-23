@@ -153,6 +153,17 @@ export default class NavMenu extends React.PureComponent<
                   ) : null}
                 </NavItem>
                 <NavItem>
+                  {localStorage.getItem("role") === "admin" ? (
+                    <NavLink
+                      tag={Link}
+                      className="text-dark"
+                      to="/event-statistics"
+                    >
+                      Event Statistics
+                    </NavLink>
+                  ) : null}
+                </NavItem>
+                <NavItem>
                   {localStorage.getItem("token") === "" ? null : (
                     <Button
                       className="btn btn-lg btn-primary"
