@@ -110,6 +110,18 @@ namespace UserMicroserviceApi.Controllers
             return Ok(patient);
         }
 
+        [HttpGet("getOneEventDto/{id}")]
+        [AllowAnonymous]
+        public IActionResult GetOneEventDto(int id)
+        {
+            PatientUser patient = PatientService.GetOne(id);
+            if (id < 0 && patient == null)
+            {
+                return BadRequest();
+            }
+            return Ok(MicroservicePatientUserAdapter.PatientToMicroservicePatinentUserDto(patient));
+        }
+
         [HttpGet("find/{id}")]
         [Authorize(Roles = "patient")]
         public IActionResult GetOnePatient(int id)
@@ -162,6 +174,12 @@ namespace UserMicroserviceApi.Controllers
             PatientUser patient = PatientService.BlockPatient(patientId);
             if (patient == null) return BadRequest();
             return Ok(patient);
+        }
+
+        [HttpGet("all")]       // GET /api/patient/all
+        public IActionResult GetWithoutAuthorization()
+        {
+            return Ok(PatientService.GetAll());
         }
     }
 }

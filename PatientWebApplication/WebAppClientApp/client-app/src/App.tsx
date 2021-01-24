@@ -24,6 +24,7 @@ import ScheduleAppointment from "./components/ScheduleAppointment";
 import { AuthRouteAdmin } from "./AuthRouteAdmin";
 import { AuthRoutePatient } from "./AuthRoutePatient";
 import { AuthRouteNotLogged } from "./AuthRouteNotLogged";
+import EventStatistics from "./components/EventStatistics";
 
 export default () => (
   <Layout>
@@ -55,6 +56,7 @@ export default () => (
     <AuthRoutePatient path="/create-survey" Component={CreateSurvey} />
     <AuthRouteAdmin path="/rates-doctor" Component={DoctorRates} />
     <AuthRouteAdmin path="/rates-general" Component={AllRates} />
+    <AuthRouteAdmin path="/event-statistics" Component={EventStatistics} />
     <AuthRoutePatient
       path="/choose-appointment-type"
       Component={ChooseAppointmentType}

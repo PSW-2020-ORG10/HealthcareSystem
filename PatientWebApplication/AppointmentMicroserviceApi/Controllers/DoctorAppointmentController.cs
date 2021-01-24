@@ -3,6 +3,11 @@ using System.Threading.Tasks;
 using AppointmentMicroserviceApi.Adapters;
 using AppointmentMicroserviceApi.Dtos;
 using AppointmentMicroserviceApi.Service;
+using EventStore.Dtos;
+using EventStore.EventDBContext;
+using EventStore.Events;
+using EventStore.Repository;
+using EventStore.Service;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using DoctorAppointment = AppointmentMicroserviceApi.Patient.DoctorAppointment;
@@ -18,11 +23,13 @@ namespace AppointmentMicroserviceApi.Controllers
     {
         /// <value>Property <c>RegularAppointmentService</c> represents the service used for handling business logic.</value>
         private RegularAppointmentService regularAppointmentService;
+        private AppointmentSchedulingEventService appointmentSchedulingEventService;
 
         /// <summary>This constructor initiates the DoctorAppointmentController's appointment service.</summary>
-        public DoctorAppointmentController(MyDbContext dbContext)
+        public DoctorAppointmentController(MyDbContext dbContext, EventDbContext eventDbContext = null)
         {
             regularAppointmentService = new RegularAppointmentService(dbContext);
+            appointmentSchedulingEventService = eventDbContext != null ? new AppointmentSchedulingEventService(new AppointmentSchedulingEventRepository(eventDbContext)) : null;
         }
 
         [HttpGet("getAll")]
@@ -143,6 +150,29 @@ namespace AppointmentMicroserviceApi.Controllers
         public IActionResult GetAppointmentsForPatientDtoSimple(int patientId)
         {
             return Ok( new AppointmentAdapter().ConvertAppointmentListToAppointmentDtoList(regularAppointmentService.GetAppointmentsForPatient(patientId)));
+        }
+
+        private void CreateAppointmentSchedulingEvent(AppointmentSchedulingEventDto dto)
+        {
+            if (appointmentSchedulingEventService != null)
+            {
+                appointmentSchedulingEventService.Create( dto.EndPoint.Equals("start") ? new AppointmentSchedulingEvent(dto.PatientId, dto.Step, dto.Action, dto.EndPoint, appointmentSchedulingEventService.FindNextAttempt()) : new AppointmentSchedulingEvent(dto.PatientId, dto.Step, dto.Action, dto.EndPoint, appointmentSchedulingEventService.FindNextAttempt() - 1));
+            }
+        }
+
+        [HttpPost("storeEvent")]
+        [Authorize(Roles = "patient")]
+        public IActionResult StoreAppointmentSchedulingEvent(AppointmentSchedulingEventDto dto)
+        {
+            CreateAppointmentSchedulingEvent(dto);
+            return Ok();
+        }
+
+        [HttpGet("getStatistics")]
+        [Authorize(Roles = "admin")]
+        public IActionResult GetStatistics()
+        {
+            return Ok(new StatisticDto(CountStepsEventWithPatientAdapter.CountStepsEventDtoToCountStepsEventWithPatientDto(appointmentSchedulingEventService.GetStatisticsMinSteps()), CountStepsEventWithPatientAdapter.CountStepsEventDtoToCountStepsEventWithPatientDto(appointmentSchedulingEventService.GetStatisticsMaxSteps()), appointmentSchedulingEventService.GetSuccessfulAttemptsRatio(), appointmentSchedulingEventService.GetMostCanceledStep(), appointmentSchedulingEventService.GetAverageStepsForSuccessfulAttempt(), appointmentSchedulingEventService.GetAverageStepsForUnsuccessfulAttempt(), CountStepsEventWithPatientAdapter.CountStepsEventDtoToCountStepsEventWithPatientDto(appointmentSchedulingEventService.GetStatisticsMinStepsForCancelling()), CountStepsEventWithPatientAdapter.CountStepsEventDtoToCountStepsEventWithPatientDto(appointmentSchedulingEventService.GetStatisticsMaxStepsForCancelling()), appointmentSchedulingEventService.GetMaxTime(), appointmentSchedulingEventService.GetMinTime(), appointmentSchedulingEventService.GetAverageTime(), appointmentSchedulingEventService.GetHowManySchedulesInMinimumSteps(), appointmentSchedulingEventService.GetHowManySchedulesInMediumSteps(), appointmentSchedulingEventService.GetHowManySchedulesInMoreSteps()));
         }
     }
 }

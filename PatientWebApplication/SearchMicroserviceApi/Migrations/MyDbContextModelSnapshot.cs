@@ -18,7 +18,7 @@ namespace SearchMicroserviceApi.Migrations
 
             modelBuilder.Entity("SearchMicroserviceApi.Model.Equipment", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -26,13 +26,13 @@ namespace SearchMicroserviceApi.Migrations
                         .IsRequired()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("name")
+                    b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("quantity")
+                    b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Equipment");
 
@@ -41,15 +41,15 @@ namespace SearchMicroserviceApi.Migrations
                     b.HasData(
                         new
                         {
-                            id = 1,
-                            name = "Equipment name",
-                            quantity = 1
+                            Id = 100,
+                            Name = "Equipment name",
+                            Quantity = 1
                         });
                 });
 
             modelBuilder.Entity("SearchMicroserviceApi.Model.ModelEquipment", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -59,7 +59,7 @@ namespace SearchMicroserviceApi.Migrations
                     b.Property<int>("RoomId")
                         .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.HasIndex("RoomId");
 
@@ -68,7 +68,7 @@ namespace SearchMicroserviceApi.Migrations
 
             modelBuilder.Entity("SearchMicroserviceApi.Model.ModelMedicine", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -78,7 +78,7 @@ namespace SearchMicroserviceApi.Migrations
                     b.Property<int>("RoomId")
                         .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.HasIndex("RoomId");
 
@@ -87,7 +87,7 @@ namespace SearchMicroserviceApi.Migrations
 
             modelBuilder.Entity("SearchMicroserviceApi.Model.ModelRoom", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -97,7 +97,7 @@ namespace SearchMicroserviceApi.Migrations
                     b.Property<int>("EquipmentId")
                         .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.HasIndex("EquipmentId");
 
@@ -106,91 +106,386 @@ namespace SearchMicroserviceApi.Migrations
                     b.HasData(
                         new
                         {
-                            id = 1,
+                            Id = 1,
                             Data = "data",
                             EquipmentId = 1
                         });
                 });
 
-            modelBuilder.Entity("SearchMicroserviceApi.Model.Prescription", b =>
+            modelBuilder.Entity("SearchMicroserviceApi.Model.PrescribedMedicine", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<string>("HowToUse")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("MedicineId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PrescriptionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MedicineId");
+
+                    b.HasIndex("PrescriptionId");
+
+                    b.ToTable("PrescribedMedicines");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            HowToUse = "Every 8 hours",
+                            MedicineId = 1,
+                            PrescriptionId = 5,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            HowToUse = "Whenever headache reapers",
+                            MedicineId = 2,
+                            PrescriptionId = 5,
+                            Quantity = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            HowToUse = "Every 12 hours.",
+                            MedicineId = 3,
+                            PrescriptionId = 5,
+                            Quantity = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            HowToUse = "Take one when body temperature exceedes 39 degrees",
+                            MedicineId = 4,
+                            PrescriptionId = 5,
+                            Quantity = 4
+                        },
+                        new
+                        {
+                            Id = 5,
+                            HowToUse = "Every 8 hours",
+                            MedicineId = 1,
+                            PrescriptionId = 6,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            Id = 6,
+                            HowToUse = "Whenever headache reapers",
+                            MedicineId = 2,
+                            PrescriptionId = 6,
+                            Quantity = 2
+                        },
+                        new
+                        {
+                            Id = 7,
+                            HowToUse = "Every 12 hours.",
+                            MedicineId = 3,
+                            PrescriptionId = 6,
+                            Quantity = 3
+                        },
+                        new
+                        {
+                            Id = 8,
+                            HowToUse = "Take one when body temperature exceedes 39 degrees",
+                            MedicineId = 4,
+                            PrescriptionId = 6,
+                            Quantity = 4
+                        },
+                        new
+                        {
+                            Id = 9,
+                            HowToUse = "Take one when body temperature exceedes 39 degrees",
+                            MedicineId = 2,
+                            PrescriptionId = 1,
+                            Quantity = 4
+                        },
+                        new
+                        {
+                            Id = 10,
+                            HowToUse = "Every 12 hours.",
+                            MedicineId = 3,
+                            PrescriptionId = 1,
+                            Quantity = 3
+                        },
+                        new
+                        {
+                            Id = 11,
+                            HowToUse = "Every 8 hours",
+                            MedicineId = 1,
+                            PrescriptionId = 2,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            Id = 12,
+                            HowToUse = "Whenever headache reapers",
+                            MedicineId = 2,
+                            PrescriptionId = 2,
+                            Quantity = 2
+                        },
+                        new
+                        {
+                            Id = 13,
+                            HowToUse = "Every 8 hours",
+                            MedicineId = 1,
+                            PrescriptionId = 3,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            Id = 14,
+                            HowToUse = "Whenever headache reapers",
+                            MedicineId = 2,
+                            PrescriptionId = 3,
+                            Quantity = 2
+                        },
+                        new
+                        {
+                            Id = 15,
+                            HowToUse = "Every 12 hours.",
+                            MedicineId = 3,
+                            PrescriptionId = 3,
+                            Quantity = 3
+                        },
+                        new
+                        {
+                            Id = 16,
+                            HowToUse = "Every 8 hours",
+                            MedicineId = 1,
+                            PrescriptionId = 4,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            Id = 17,
+                            HowToUse = "Whenever headache reapers",
+                            MedicineId = 2,
+                            PrescriptionId = 4,
+                            Quantity = 2
+                        },
+                        new
+                        {
+                            Id = 18,
+                            HowToUse = "Every 12 hours.",
+                            MedicineId = 3,
+                            PrescriptionId = 4,
+                            Quantity = 3
+                        },
+                        new
+                        {
+                            Id = 19,
+                            HowToUse = "Every 12 hours.",
+                            MedicineId = 3,
+                            PrescriptionId = 7,
+                            Quantity = 3
+                        },
+                        new
+                        {
+                            Id = 20,
+                            HowToUse = "Every 8 hours",
+                            MedicineId = 1,
+                            PrescriptionId = 7,
+                            Quantity = 1
+                        });
+                });
+
+            modelBuilder.Entity("SearchMicroserviceApi.Model.Prescription", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("AppointmentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<int>("DoctorId")
                         .HasColumnType("int");
 
-                    b.Property<string>("comment")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<bool>("isUsed")
+                    b.Property<bool>("IsUsed")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("patientsid")
+                    b.Property<int>("Patientsid")
                         .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Prescriptions");
 
                     b.HasData(
                         new
                         {
-                            id = 5,
+                            Id = 1,
+                            AppointmentId = 1,
+                            Comment = "In case of allergy, stop taking medicine immediately.",
                             DoctorId = 1,
-                            comment = "Use every day",
-                            isUsed = false,
-                            patientsid = 1
+                            IsUsed = false,
+                            Patientsid = 1
                         },
                         new
                         {
-                            id = 6,
+                            Id = 2,
+                            AppointmentId = 2,
+                            Comment = "After finishing treatment, schedule control appointment.",
                             DoctorId = 1,
-                            comment = "When needed",
-                            isUsed = true,
-                            patientsid = 2
+                            IsUsed = true,
+                            Patientsid = 2
                         },
                         new
                         {
-                            id = 7,
+                            Id = 3,
+                            AppointmentId = 3,
+                            Comment = "If illnness stops, stop taking medicine.",
                             DoctorId = 2,
-                            comment = "On every 12 hours",
-                            isUsed = true,
-                            patientsid = 1
+                            IsUsed = true,
+                            Patientsid = 1
                         },
                         new
                         {
-                            id = 8,
+                            Id = 4,
+                            AppointmentId = 4,
+                            Comment = "In case of allergy, stop taking medicine immediately.",
                             DoctorId = 1,
-                            comment = "After lunch",
-                            isUsed = true,
-                            patientsid = 1
+                            IsUsed = false,
+                            Patientsid = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AppointmentId = 5,
+                            Comment = "After finishing treatment, schedule control appointment.",
+                            DoctorId = 1,
+                            IsUsed = true,
+                            Patientsid = 2
+                        },
+                        new
+                        {
+                            Id = 6,
+                            AppointmentId = 6,
+                            Comment = "If illnness stops, stop taking medicine.",
+                            DoctorId = 2,
+                            IsUsed = true,
+                            Patientsid = 1
+                        },
+                        new
+                        {
+                            Id = 7,
+                            AppointmentId = 7,
+                            Comment = "In case of allergy, stop taking medicine immediately.",
+                            DoctorId = 1,
+                            IsUsed = false,
+                            Patientsid = 1
+                        },
+                        new
+                        {
+                            Id = 8,
+                            AppointmentId = 8,
+                            Comment = "After finishing treatment, schedule control appointment.",
+                            DoctorId = 1,
+                            IsUsed = true,
+                            Patientsid = 2
+                        },
+                        new
+                        {
+                            Id = 9,
+                            AppointmentId = 9,
+                            Comment = "If illnness stops, stop taking medicine.",
+                            DoctorId = 2,
+                            IsUsed = true,
+                            Patientsid = 1
+                        },
+                        new
+                        {
+                            Id = 10,
+                            AppointmentId = 10,
+                            Comment = "In case of allergy, stop taking medicine immediately.",
+                            DoctorId = 1,
+                            IsUsed = false,
+                            Patientsid = 1
+                        },
+                        new
+                        {
+                            Id = 11,
+                            AppointmentId = 11,
+                            Comment = "After finishing treatment, schedule control appointment.",
+                            DoctorId = 1,
+                            IsUsed = true,
+                            Patientsid = 2
+                        },
+                        new
+                        {
+                            Id = 12,
+                            AppointmentId = 12,
+                            Comment = "If illnness stops, stop taking medicine.",
+                            DoctorId = 2,
+                            IsUsed = true,
+                            Patientsid = 1
+                        },
+                        new
+                        {
+                            Id = 13,
+                            AppointmentId = 13,
+                            Comment = "In case of allergy, stop taking medicine immediately.",
+                            DoctorId = 1,
+                            IsUsed = false,
+                            Patientsid = 1
+                        },
+                        new
+                        {
+                            Id = 14,
+                            AppointmentId = 14,
+                            Comment = "After finishing treatment, schedule control appointment.",
+                            DoctorId = 1,
+                            IsUsed = true,
+                            Patientsid = 2
+                        },
+                        new
+                        {
+                            Id = 15,
+                            AppointmentId = 15,
+                            Comment = "If illnness stops, stop taking medicine.",
+                            DoctorId = 2,
+                            IsUsed = true,
+                            Patientsid = 1
                         });
                 });
 
             modelBuilder.Entity("SearchMicroserviceApi.Model.Room", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<bool>("forUse")
+                    b.Property<bool>("ForUse")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<string>("typeOfRoom")
+                    b.Property<string>("TypeOfRoom")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Rooms");
 
                     b.HasData(
                         new
                         {
-                            id = 1,
-                            forUse = true,
-                            typeOfRoom = "typeOfRoom"
+                            Id = 1,
+                            ForUse = true,
+                            TypeOfRoom = "typeOfRoom"
                         });
                 });
 
@@ -198,62 +493,39 @@ namespace SearchMicroserviceApi.Migrations
                 {
                     b.HasBaseType("SearchMicroserviceApi.Model.Equipment");
 
-                    b.Property<int>("PrescriptionId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("description")
+                    b.Property<string>("Description")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<int>("doctorId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("isConfirmed")
-                        .HasColumnType("tinyint(1)");
-
-                    b.HasIndex("PrescriptionId");
 
                     b.HasDiscriminator().HasValue("Medicine");
 
                     b.HasData(
                         new
                         {
-                            id = 51,
-                            name = "Pancef",
-                            quantity = 44,
-                            PrescriptionId = 5,
-                            description = "For temperature",
-                            doctorId = 1,
-                            isConfirmed = false
+                            Id = 1,
+                            Name = "Pancef 300mg",
+                            Quantity = 44,
+                            Description = "For temperature"
                         },
                         new
                         {
-                            id = 52,
-                            name = "Defrinol",
-                            quantity = 2,
-                            PrescriptionId = 7,
-                            description = "For headache",
-                            doctorId = 1,
-                            isConfirmed = false
+                            Id = 2,
+                            Name = "Defrinol 100mg",
+                            Quantity = 2,
+                            Description = "For headache"
                         },
                         new
                         {
-                            id = 53,
-                            name = "Brufen",
-                            quantity = 2,
-                            PrescriptionId = 8,
-                            description = "For illness",
-                            doctorId = 1,
-                            isConfirmed = false
+                            Id = 3,
+                            Name = "Brufen 200mg",
+                            Quantity = 2,
+                            Description = "For illness"
                         },
                         new
                         {
-                            id = 54,
-                            name = "Paracetamol",
-                            quantity = 4,
-                            PrescriptionId = 6,
-                            description = "For illness",
-                            doctorId = 1,
-                            isConfirmed = false
+                            Id = 4,
+                            Name = "Paracetamol 200mg",
+                            Quantity = 4,
+                            Description = "For temperature"
                         });
                 });
 
@@ -261,7 +533,7 @@ namespace SearchMicroserviceApi.Migrations
                 {
                     b.HasBaseType("SearchMicroserviceApi.Model.Medicine");
 
-                    b.Property<double>("price")
+                    b.Property<double>("Price")
                         .HasColumnType("double");
 
                     b.HasDiscriminator().HasValue("OfferedMedicines");
@@ -270,7 +542,7 @@ namespace SearchMicroserviceApi.Migrations
             modelBuilder.Entity("SearchMicroserviceApi.Model.ModelEquipment", b =>
                 {
                     b.HasOne("SearchMicroserviceApi.Model.Room", "Room")
-                        .WithMany("equipment")
+                        .WithMany("Equipment")
                         .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -279,7 +551,7 @@ namespace SearchMicroserviceApi.Migrations
             modelBuilder.Entity("SearchMicroserviceApi.Model.ModelMedicine", b =>
                 {
                     b.HasOne("SearchMicroserviceApi.Model.Room", "Room")
-                        .WithMany("medicine")
+                        .WithMany("Medicine")
                         .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -288,15 +560,21 @@ namespace SearchMicroserviceApi.Migrations
             modelBuilder.Entity("SearchMicroserviceApi.Model.ModelRoom", b =>
                 {
                     b.HasOne("SearchMicroserviceApi.Model.Equipment", "Equipment")
-                        .WithMany("room")
+                        .WithMany("Room")
                         .HasForeignKey("EquipmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SearchMicroserviceApi.Model.Medicine", b =>
+            modelBuilder.Entity("SearchMicroserviceApi.Model.PrescribedMedicine", b =>
                 {
-                    b.HasOne("SearchMicroserviceApi.Model.Prescription", "Prescription")
+                    b.HasOne("SearchMicroserviceApi.Model.Medicine", "Medicine")
+                        .WithMany()
+                        .HasForeignKey("MedicineId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SearchMicroserviceApi.Model.Prescription", null)
                         .WithMany("Medicines")
                         .HasForeignKey("PrescriptionId")
                         .OnDelete(DeleteBehavior.Cascade)

@@ -7,5 +7,6 @@ namespace SearchMicroserviceApi.Repository
     {
         List<Prescription> GetAll();
         List<Prescription> GetPrescriptionsForPatient(int idPatient);
+        Prescription GetPrescriptionsForAppointment(int idAppointment);
     }
 }

@@ -4,7 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using UserMicroserviceApi.Adapters;
 using UserMicroserviceApi.DbContextModel;
+using UserMicroserviceApi.Dtos;
+using UserMicroserviceApi.Model;
 using UserMicroserviceApi.Repository;
 using UserMicroserviceApi.Service;
 
@@ -29,6 +32,21 @@ namespace UserMicroserviceApi.Controllers
         public IActionResult Get()
         {
             return Ok(messageService.GetAll());
+        }
+
+        [HttpPost]
+        public IActionResult Post(MessageDto dto)
+        {
+            Message message = messageService.Create(dto);
+
+            if (message == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                return Ok(MessageAdapter.MessageDTOtoMessage(dto));
+            }
         }
     }
 }

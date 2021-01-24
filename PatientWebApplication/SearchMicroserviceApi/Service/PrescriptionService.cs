@@ -172,7 +172,7 @@ namespace SearchMicroserviceApi.Service
         {
             if (!UtilityMethods.CheckIfStringIsEmpty(searchField))
             {
-                prescriptions = prescriptions.Where(prescription => prescription.Medicines.Any(medicine => medicine.Name.Contains(searchField))).ToList();
+                prescriptions = prescriptions.Where(prescription => prescription.Medicines.Any(medicine => medicine.Medicine.Name.Contains(searchField))).ToList();
             }
 
             return prescriptions;
@@ -236,10 +236,15 @@ namespace SearchMicroserviceApi.Service
         {
             if (!UtilityMethods.CheckIfStringIsEmpty(prescriptionSearchDto.Medicines))
             {
-                prescriptions = prescriptions.Where(prescription => prescription.Medicines.Any(medicine => medicine.Name.Contains(prescriptionSearchDto.Medicines))).ToList();
+                prescriptions = prescriptions.Where(prescription => prescription.Medicines.Any(medicine => medicine.Medicine.Name.Contains(prescriptionSearchDto.Medicines))).ToList();
             }
 
             return prescriptions;
+        }
+
+        public Prescription GetPrescriptionsForAppointment(int idAppointment)
+        {
+            return PrescriptionRepository.GetPrescriptionsForAppointment(idAppointment);
         }
     }
 }

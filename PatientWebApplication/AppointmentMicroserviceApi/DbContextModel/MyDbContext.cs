@@ -22,23 +22,23 @@ namespace AppointmentMicroserviceApi.DbContextModel
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Referral>().HasData(
-                new Referral(1, "Aspirin", "25/02/2020", 3, "classify", "Patient had slight heart arrhythmia.", 1),
-                new Referral(2, "Brufen", "11/05/2020", 1, "Appointment", "Patient had cold.", 2),
-                new Referral(3, "Aspirin", "25/02/2020", 3, "classify", "Patient had slight heart arrhythmia.", 3),
-                new Referral(4, "Brufen", "11/05/2020", 1, "Appointment", "Patient had cold.", 4),
-                new Referral(5, "Aspirin", "25/02/2020", 3, "classify", "Patient had slight heart arrhythmia.", 5),
-                new Referral(6, "Brufen", "11/05/2020", 1, "Appointment", "Patient had cold.", 6),
-                new Referral(7, "Aspirin", "25/02/2020", 3, "classify", "Patient had slight heart arrhythmia.", 7),
-                new Referral(8, "Brufen", "11/05/2020", 1, "Appointment", "Patient had cold.", 8),
-                new Referral(9, "Aspirin", "25/02/2020", 3, "classify", "Patient had slight heart arrhythmia.", 9),
-                new Referral(10, "Brufen", "11/05/2020", 1, "Appointment", "Patient had cold.", 10),
-                new Referral(11, "Aspirin", "25/02/2020", 3, "classify", "Patient had slight heart arrhythmia.", 11),
-                new Referral(12, "Brufen", "11/05/2020", 1, "Appointment", "Patient had cold.", 12)
+                new Referral(1, "Pneumonia", "Patient had temperature taken. Temperature was 39.6 degrees. Listened to patients breathing. Breathing was slightly constricted. Established that patient has lighter case of pneumonia. Sent home for home treatment.", 1),
+                new Referral(2, "Concussion", "Patient had visible gash on back of his head. Patient complains of blurred vision. Established that patient has concussion. Left for a night of hospital observation", 2),
+                new Referral(3, "Pneumonia", "Patient had temperature taken. Temperature was 39.6 degrees. Listened to patients breathing. Breathing was slightly constricted. Established that patient has lighter case of pneumonia. Sent home for home treatment.", 3),
+                new Referral(4, "Concussion", "Patient had visible gash on back of his head. Patient complains of blurred vision. Established that patient has concussion. Left for a night of hospital observation", 4),
+                new Referral(5, "Pneumonia", "Patient had temperature taken. Temperature was 39.6 degrees. Listened to patients breathing. Breathing was slightly constricted. Established that patient has lighter case of pneumonia. Sent home for home treatment.", 5),
+                new Referral(6, "Concussion", "Patient had visible gash on back of his head. Patient complains of blurred vision. Established that patient has concussion. Left for a night of hospital observation", 6),
+                new Referral(7, "Pneumonia", "Patient had temperature taken. Temperature was 39.6 degrees. Listened to patients breathing. Breathing was slightly constricted. Established that patient has lighter case of pneumonia. Sent home for home treatment.", 7),
+                new Referral(8, "Concussion", "Patient had visible gash on back of his head. Patient complains of blurred vision. Established that patient has concussion. Left for a night of hospital observation", 8),
+                new Referral(9, "Pneumonia", "Patient had temperature taken. Temperature was 39.6 degrees. Listened to patients breathing. Breathing was slightly constricted. Established that patient has lighter case of pneumonia. Sent home for home treatment.", 9),
+                new Referral(10, "Concussion", "Patient had visible gash on back of his head. Patient complains of blurred vision. Established that patient has concussion. Left for a night of hospital observation", 10),
+                new Referral(11, "Pneumonia", "Patient had temperature taken. Temperature was 39.6 degrees. Listened to patients breathing. Breathing was slightly constricted. Established that patient has lighter case of pneumonia. Sent home for home treatment.", 11),
+                new Referral(12, "Concussion", "Patient had visible gash on back of his head. Patient complains of blurred vision. Established that patient has concussion. Left for a night of hospital observation", 12)
            );
 
             modelBuilder.Entity<OperationReferral>().HasData(
-                new OperationReferral(1, "Hemomycin", "15/09/2020", 1, "Operation", "Operation was successfull.", 1),
-                new OperationReferral(2, "Amoxicillin", "18/10/2020", 3, "Operation", "Patient lost a lot of blood.", 2)
+                new OperationReferral(1, "Bilateral upper eyelid dermatochalasis", "This 65-year-old female demonstrates conditions described above of excess and redundant eyelid skin with puffiness and has requested surgical correction. The face was prepped and draped in the usual sterile manner. After waiting a period of approximately ten minutes for adequate vasoconstriction, the previously outlined excessive skin of the right upper eyelid was excised with blunt dissection. At the end of the operation the patientʼs vision and extraocular muscle movements were checked and found to be intact. The patient was released to return home in satisfactory condition.", 1),
+                new OperationReferral(2, " Stage IV breast cancer with left breast mass.", "The patient was brought into the operative room and placed on the operative table in the supine position. General endotracheal anesthesia was administered, and the patient was prepped and draped in the usual sterile fashion. A large lumpectomy was performed around the palpable mass extending down to the level of the muscle. The wound was then closed in two layers approximating the deep dermal layer with 3-0 Vicryl and the skin with 4-0 Monocryl. Steri-Strips and dressings were applied. The patient was extubated and transported to the recovery area in stable condition.", 2)
           );
 
             modelBuilder.Entity<Operation>().HasData(

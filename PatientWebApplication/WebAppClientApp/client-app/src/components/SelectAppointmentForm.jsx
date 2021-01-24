@@ -44,7 +44,7 @@ class SelectAppointmentForm extends Component {
         if (this.state.timesDisabled == 0) this.props.disableSchedule();
         debugger;
         return (
-            this.props.availableAppointments.length == 0 ? <h3 style={{ marginTop: "40px" }}>Sorry, there are no available appointments!</h3> :
+            this.props.availableAppointments.length === 0 ? <h3 style={{ marginTop: "40px" }}>Sorry, there are no available appointments!</h3> :
                     <div style={{ marginTop: "40px" }} id="appointmentTable">
                         <table className='table allAppointments'>
                             <thead>

@@ -616,6 +616,78 @@ namespace UserMicroserviceApi.Migrations
                             IsOnDuty = true,
                             Room = "1",
                             ShiftId = 3
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Date = "31/01/2021",
+                            EmployeeId = 1,
+                            IsOnDuty = true,
+                            Room = "1",
+                            ShiftId = 3
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Date = "16/01/2021",
+                            EmployeeId = 1,
+                            IsOnDuty = true,
+                            Room = "1",
+                            ShiftId = 3
+                        },
+                        new
+                        {
+                            Id = 25,
+                            Date = "17/01/2021",
+                            EmployeeId = 1,
+                            IsOnDuty = true,
+                            Room = "Ordination 1",
+                            ShiftId = 3
+                        },
+                        new
+                        {
+                            Id = 26,
+                            Date = "18/01/2021",
+                            EmployeeId = 1,
+                            IsOnDuty = true,
+                            Room = "Ordination 1",
+                            ShiftId = 3
+                        },
+                        new
+                        {
+                            Id = 27,
+                            Date = "19/01/2021",
+                            EmployeeId = 1,
+                            IsOnDuty = true,
+                            Room = "Ordination 1",
+                            ShiftId = 4
+                        },
+                        new
+                        {
+                            Id = 28,
+                            Date = "20/01/2021",
+                            EmployeeId = 1,
+                            IsOnDuty = true,
+                            Room = "Ordination 1",
+                            ShiftId = 3
+                        },
+                        new
+                        {
+                            Id = 29,
+                            Date = "21/01/2021",
+                            EmployeeId = 1,
+                            IsOnDuty = true,
+                            Room = "Ordination 1",
+                            ShiftId = 3
+                        },
+                        new
+                        {
+                            Id = 30,
+                            Date = "22/01/2021",
+                            EmployeeId = 1,
+                            IsOnDuty = true,
+                            Room = "Ordination 1",
+                            ShiftId = 3
                         });
                 });
 

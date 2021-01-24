@@ -3,6 +3,7 @@ import { loadedAllPatientReports, simpleSearchAppointments } from "../actions/ac
 import { connect } from "react-redux"
 import { wrap } from "module";
 import axios from "axios";
+import { storeEvent } from "../actions/actions"
 import RecommendedAppointmentScheduling from "./RecommendedAppointmentScheduling"
 import ScheduleRegularAppointmentModal from './ScheduleRegularAppointmentModal';
 import { ToastContainer, toast } from 'react-toastify';
@@ -40,6 +41,9 @@ class AppointmentMenu extends Component {
     displayModal() {
         debugger;
         console.log()
+        if (this.state.modalShow == false){
+            this.props.storeEvent({step: 0, action: "start", endpoint: "start"});
+        }
         this.setState({ modalShow: !this.state.modalShow })
     }
 
@@ -50,4 +54,4 @@ const mapStateToProps = (state) => ({
 
 });
 
-export default connect(mapStateToProps, {})(AppointmentMenu);
+export default connect(mapStateToProps, { storeEvent })(AppointmentMenu);

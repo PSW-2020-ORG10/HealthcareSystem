@@ -1,8 +1,0 @@
-api1
- Precription for medicine
-
-Patients name: Stefan
-Patients surname: Lelic
-Patients medical ID number: 212313
-Medication: Brufen Quantity: 3
-Usage: 3 times a day

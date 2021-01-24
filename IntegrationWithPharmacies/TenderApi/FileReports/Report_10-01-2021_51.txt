@@ -1,0 +1,12 @@
+api1;api5;api3;!    Report about consumption of medicine
+
+
+
+     Medicine name: Defrinol
+     Ordered quantity: 500 (Date:  1/2/2021 12:00:00 AM)
+
+     Medicine name: Paracetamol
+     Ordered quantity: 50 (Date:  1/2/2021 12:00:00 AM)
+
+
+   Total ordered quatity: 550

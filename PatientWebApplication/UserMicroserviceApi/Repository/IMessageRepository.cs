@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UserMicroserviceApi.Model;
 
-namespace HealthClinic.CL.Repository
+namespace UserMicroserviceApi.Repository
 {
     public interface IMessageRepository
     {

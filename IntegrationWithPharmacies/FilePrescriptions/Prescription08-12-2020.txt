@@ -1,7 +1,0 @@
-          Precription for medicine
-
-Patients name: Ana
-Patients surname: Anic
-Patients medical ID number: med123
-Medication: Defrinol     Quantity: 2
-Usage: Twice a day
