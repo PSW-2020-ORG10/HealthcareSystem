@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UrgentMedicineOrderApi.Adapter;
 using UrgentMedicineOrderApi.DbContextModel;
@@ -8,17 +7,15 @@ using UrgentMedicineOrderApi.Service;
 
 namespace UrgentMedicineOrderApi.AbstractFactory
 {
-    public class PharmacyGrpcSftp : IPharmacyHttp
+    public class PharmacyGrpcSftp : IPharmacyGrpcSftp
     {
-        public String Url; 
         private HttpRequests HttpRequests { get; }
         private UrgentOrderService UrgentOrderService { get; }
         private SmptServerService SmptServerService { get; }
         private MedicineAvailabilityTable MedicineAvailabilityTable { get; }
         public PharmacyGrpcSftp() { }
-        public PharmacyGrpcSftp(string url, MyDbContext context)
+        public PharmacyGrpcSftp(MyDbContext context)
         {
-            Url = url;
             HttpRequests = new HttpRequests();
             SmptServerService = new SmptServerService();
             MedicineAvailabilityTable = new MedicineAvailabilityTable();
@@ -35,10 +32,10 @@ namespace UrgentMedicineOrderApi.AbstractFactory
             List<MedicineName> pharmaciesWithMedicine = UrgentOrderService.CheckMedicineAvailability2(medicine);
             if (pharmaciesWithMedicine == null) return null;
             HttpRequests.UpdateMedicineQuantity(medicine);
-            return ForwardUrgentUrderGrpc(medicine, pharmaciesWithMedicine);
+            return ForwardUrgentOrderGrpc(medicine, pharmaciesWithMedicine);
         }
 
-        private String ForwardUrgentUrderGrpc(string medicine, List<MedicineName> pharmaciesWithMedicine)
+        public String ForwardUrgentOrderGrpc(string medicine, List<MedicineName> pharmaciesWithMedicine)
         {
             UrgentMedicineOrder urgentMedicineOrder = UrgentOrderService.CreateUrgentOrder(medicine, pharmaciesWithMedicine);
             if (UrgentOrderService.SendOrderGrpc(urgentMedicineOrder)) return CretaeUrgenMedicinetOrder(pharmaciesWithMedicine, urgentMedicineOrder);
@@ -50,5 +47,6 @@ namespace UrgentMedicineOrderApi.AbstractFactory
             SmptServerService.SendEMailNotificationForUrgentOrdee(urgentMedicineOrder, pharmaciesWithMedicine[0].Name);
             return pharmaciesWithMedicine[0].Name;
         }
+
     }
 }

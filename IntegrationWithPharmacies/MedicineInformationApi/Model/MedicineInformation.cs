@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace MedicineInformationApi.Model
 {
     public class MedicineInformation : Entity
@@ -21,6 +23,5 @@ namespace MedicineInformationApi.Model
             MedicineDescription = medicineDescription;
             Quantity = quantity;
         }
-
     }
 }

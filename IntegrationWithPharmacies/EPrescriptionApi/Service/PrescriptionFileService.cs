@@ -3,25 +3,20 @@ using EPrescriptionApi.DbContextModel;
 using EPrescriptionApi.Model;
 using EPrescriptionApi.Utility;
 using System;
+using System.Net.Http.Headers;
 
 namespace EPrescriptionApi.Service
 {
     public class PrescriptionFileService
     {
-        private SftpService SftpService { get; }
         private HelperFunctions HelperFunctions { get; }
-        private HttpRequests HttpRequests { get; }
-        private SmptServerService SmptServerService { get; }
         private MyDbContext Context { get; }
         public PharmacyFactoryGrpcAndSftp PharmacyFactoryGrpcAndSftp { get; }
         public PharmacyFactoryHttp PharmacyFactoryHttp { get; }
 
         public PrescriptionFileService() { }
         public PrescriptionFileService(MyDbContext context) {
-            SftpService = new SftpService();
             HelperFunctions = new HelperFunctions();
-            HttpRequests = new HttpRequests();
-            SmptServerService = new SmptServerService();
             Context = context;
             PharmacyFactoryGrpcAndSftp = new PharmacyFactoryGrpcAndSftp();
             PharmacyFactoryHttp = new PharmacyFactoryHttp();
@@ -29,32 +24,22 @@ namespace EPrescriptionApi.Service
 
         public Boolean SendPrescription(EPrescription prescription)
         {
-
             try
             {
-                foreach (RegistrationInPharmacy registrationInPharmacy in HttpRequests.GetPharmacyRegistrations())
-                {
-                    if (registrationInPharmacy.PharmacyConnectionInfo.ApiKey.Substring(registrationInPharmacy.PharmacyConnectionInfo.ApiKey.Length - 1).Equals("H"))
-                    {
-                        IPharmacy ipharmacy = PharmacyFactoryHttp.GetIPharmacy(registrationInPharmacy.PharmacyConnectionInfo.Url, Context);
-
-                        ipharmacy.SendPrescription(prescription);
-                    }
-                    else
-                    {
-                        IPharmacy ipharmacy = PharmacyFactoryGrpcAndSftp.GetIPharmacy("", Context);
-                        ipharmacy.SendPrescription(prescription);
-                    }
-                }
+                foreach (RegistrationInPharmacy registrationInPharmacy in HttpRequests.GetPharmacyRegistrations()) DefineTypeOfApiKey(prescription, registrationInPharmacy);
                 return true;
             }
-            catch (Exception e)
-            {
-                return false;
-            }
+            catch (Exception e) { return false; }
         }
 
-
+        private void DefineTypeOfApiKey(EPrescription prescription, RegistrationInPharmacy registrationInPharmacy)
+        {
+            if (registrationInPharmacy.PharmacyConnectionInfo.ApiKey.Substring(registrationInPharmacy.PharmacyConnectionInfo.ApiKey.Length - 1).Equals("H"))
+            {
+                new PharmacyHttp(Context).SendPrescription(prescription);
+            }
+            else new PharmacyGrpcSftp(Context).SendPrescription(prescription);
+        }
 
         public String CreatePrescription(EPrescription prescription)
         {
@@ -67,7 +52,5 @@ namespace EPrescriptionApi.Service
         {
             return prescription.Pharmacy + " Precription for medicine\n\nPatients name: " + prescription.Name + "\nPatients surname: " + prescription.Surname + "\nPatients medical ID number: " + prescription.MedicalIDNumber + "\nMedication: " + prescription.Medicine + " Quantity: " + prescription.Quantity + "\nUsage: " + prescription.Usage + "\n";
         }
-     
-
     }
 }

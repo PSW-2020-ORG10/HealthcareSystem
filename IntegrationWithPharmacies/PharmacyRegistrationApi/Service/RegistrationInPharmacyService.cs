@@ -31,7 +31,7 @@ namespace PharmacyRegistrationApi.Service
         {
             RegistrationInPharmacy registration = RegistrationInPharmacyAdapter.RegistrationDtoToRegistration(dto);
             if (isApiKeyUnique(registration.PharmacyConnectionInfo.ApiKey))  return RegistrationInPharmacyRepository.Create(registration); 
-             return null;
+            return null;
         }
         public bool isApiKeyUnique(String apiKey)
         {

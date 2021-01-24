@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using TenderApi.AbstractFactory;
 using TenderApi.DbContextModel;
 using TenderApi.Model;
-using TenderApi.Utility;
 
 namespace TenderApi.Service
 {
@@ -24,28 +22,19 @@ namespace TenderApi.Service
         {
             try
             {
-                foreach (RegistrationInPharmacy registrationInPharmacy in HttpRequests.GetRegistrationsInPharmaciesAll())
-                {
-                    if (registrationInPharmacy.PharmacyConnectionInfo.ApiKey.Substring(registrationInPharmacy.PharmacyConnectionInfo.ApiKey.Length - 1).Equals("H"))
-                    {
-                        IPharmacy ipharmacy = PharmacyFactoryHttp.GetIPharmacy(registrationInPharmacy.PharmacyConnectionInfo.Url, Context);
-
-                        ipharmacy.SendReport(date);
-                    }
-                    else
-                    {
-                        IPharmacy ipharmacy = PharmacyFactoryGrpcAndSftp.GetIPharmacy("", Context);
-                        ipharmacy.SendReport(date);
-                    }
-                }
+                foreach (RegistrationInPharmacy registrationInPharmacy in HttpRequests.GetRegistrationsInPharmaciesAll()) DefineTyepOfApiKey(date, registrationInPharmacy);
                 return true;
             }
-            catch(Exception e)
-            {
-                return false;
-            }
+            catch(Exception e){ return false; }
         }
 
-      
+        private void DefineTyepOfApiKey(DateOfOrder date, RegistrationInPharmacy registrationInPharmacy)
+        {
+            if (registrationInPharmacy.PharmacyConnectionInfo.ApiKey.Substring(registrationInPharmacy.PharmacyConnectionInfo.ApiKey.Length - 1).Equals("H"))
+            {
+                PharmacyFactoryHttp.GetIPharmacy(Context).SendReport(date);
+            }
+            else PharmacyFactoryGrpcAndSftp.GetIPharmacy(Context).SendReport(date);
+        }
     }
 }

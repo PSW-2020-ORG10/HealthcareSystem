@@ -16,7 +16,7 @@ namespace TenderApi.AbstractFactory
         private ReportText ReportText { get; }
 
         public PharmacyGrpcSftp() { }
-        public PharmacyGrpcSftp(string url, MyDbContext context)
+        public PharmacyGrpcSftp(MyDbContext context)
         {
             SftpService = new SftpService();
             HttpRequests = new HttpRequests();
