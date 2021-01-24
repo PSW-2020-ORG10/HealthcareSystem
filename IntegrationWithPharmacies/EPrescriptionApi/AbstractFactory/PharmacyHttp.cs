@@ -10,17 +10,15 @@ namespace EPrescriptionApi.AbstractFactory
 {
     public class PharmacyHttp : IPharmacyHttp
     {
-
-        private String Url { get; }
-
         private SftpService SftpService { get; }
         private HttpRequests HttpRequests { get; }
         private SmptServerService SmptServerService { get; }
 
         private PrescriptionFileService PrescriptionFileService { get; }
         public PharmacyHttp() { }
-        public PharmacyHttp(String url, MyDbContext context)
+        public PharmacyHttp(MyDbContext context)
         {
+            Console.WriteLine("***************************************          TUUUUUUUUUU");
             SftpService = new SftpService();
             HttpRequests = new HttpRequests();
             SmptServerService = new SmptServerService();

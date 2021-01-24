@@ -14,25 +14,20 @@ namespace UrgentMedicineOrderApi.AbstractFactory
         private UrgentOrderService UrgentOrderService { get; }
         private SmptServerService SmptServerService { get; }
         private MedicineAvailabilityTable MedicineAvailabilityTable { get; }
-        private String Url { get; }
        
-
         public PharmacyHttp() { }
-        public PharmacyHttp(String url, MyDbContext context)
+        public PharmacyHttp(MyDbContext context)
         {
             HttpRequests = new HttpRequests();
             SmptServerService = new SmptServerService();
             MedicineAvailabilityTable = new MedicineAvailabilityTable();
             UrgentOrderService = new UrgentOrderService(context);
-            Url = url;
-         
-
         }
         public String CreateUrgentOrder(String medicine)
         {
             return FormUrgentOrderHttp(medicine);
         }
-        private String FormUrgentOrderHttp(string medicine)
+        public String FormUrgentOrderHttp(String medicine)
         {
             List<MedicineName> pharmaciesWithMedicine = CheckMedicineAvailability(medicine);
             if (pharmaciesWithMedicine == null) return null;
@@ -40,7 +35,7 @@ namespace UrgentMedicineOrderApi.AbstractFactory
             return ForwardUrgentUrderHttp(medicine, pharmaciesWithMedicine);
         }
 
-        private String ForwardUrgentUrderHttp(string medicine, List<MedicineName> pharmaciesWithMedicine)
+        private String ForwardUrgentUrderHttp(String medicine, List<MedicineName> pharmaciesWithMedicine)
         {
             UrgentMedicineOrder urgentMedicineOrder = UrgentOrderService.CreateUrgentOrder(medicine, pharmaciesWithMedicine);
             if (UrgentOrderService.SendOrderHttp(urgentMedicineOrder)) return CretaeUrgenMedicinetOrder(pharmaciesWithMedicine, urgentMedicineOrder);
@@ -53,11 +48,9 @@ namespace UrgentMedicineOrderApi.AbstractFactory
             SmptServerService.SendEMailNotificationForUrgentOrdee(urgentMedicineOrder, pharmaciesWithMedicine[0].Name);
             return pharmaciesWithMedicine[0].Name;
         }
-        public List<MedicineName> CheckMedicineAvailability(string medicine)
+        public List<MedicineName> CheckMedicineAvailability(String medicine)
         {
             return MedicineAvailabilityTable.FormMedicineAvailability(HttpRequests.FormMedicineAvailabilityRequest(medicine));
         }
-
-     
     }
 }

@@ -5,7 +5,6 @@ using UrgentMedicineOrderApi.DbContextModel;
 using UrgentMedicineOrderApi.Model;
 using UrgentMedicineOrderApi.Dto;
 using UrgentMedicineOrderApi.Adapter;
-using Microsoft.AspNetCore.Mvc;
 using UrgentMedicineOrderApi.AbstractFactory;
 using Castle.Core.Internal;
 
@@ -45,24 +44,35 @@ namespace UrgentMedicineOrderApi.Service
 
             foreach(RegistrationInPharmacy registrationInPharmacy in HttpRequests.GetRegistrationsInPharmaciesAll())
             {
-                if(registrationInPharmacy.PharmacyConnectionInfo.ApiKey.Substring(registrationInPharmacy.PharmacyConnectionInfo.ApiKey.Length - 1).Equals("H"))
-                {
-                    IPharmacy ipharmacy = PharmacyFactoryHttp.GetIPharmacy(registrationInPharmacy.PharmacyConnectionInfo.Url, Context);
-                    
-                    if (!ipharmacy.CreateUrgentOrder(medicine).IsNullOrEmpty()) { pharmacies.Add(ipharmacy.CreateUrgentOrder(medicine)); }
-                }
-                else
-                {
-                    IPharmacy ipharmacy = PharmacyFactoryGrpcAndSftp.GetIPharmacy("",Context);
-                    if (!ipharmacy.CreateUrgentOrder(medicine).IsNullOrEmpty()) { pharmacies.Add(ipharmacy.CreateUrgentOrder(medicine)); }
-                }
+                DefineTyepOfApiKey(medicine, pharmacies, registrationInPharmacy);
             }
-            if(pharmacies.Count!=0) { return pharmacies[0]; }
+            if (pharmacies.Count!=0) { return pharmacies[0]; }
             return null;
 
         }
 
-       
+        private void DefineTyepOfApiKey(String medicine, List<string> pharmacies, RegistrationInPharmacy registrationInPharmacy)
+        {
+            if (registrationInPharmacy.PharmacyConnectionInfo.ApiKey.Substring(registrationInPharmacy.PharmacyConnectionInfo.ApiKey.Length - 1).Equals("H"))
+            {
+                UrgentOrderForHttps(medicine, pharmacies, registrationInPharmacy);
+            }
+            else UrgentOrderForSftpGrpc(medicine, pharmacies);
+            
+        }
+
+        private void UrgentOrderForSftpGrpc(String medicine, List<string> pharmacies)
+        {
+            IPharmacy ipharmacy = PharmacyFactoryGrpcAndSftp.GetIPharmacy(Context);
+            if (!ipharmacy.CreateUrgentOrder(medicine).IsNullOrEmpty()) { pharmacies.Add(ipharmacy.CreateUrgentOrder(medicine)); }
+        }
+
+        private void UrgentOrderForHttps(string medicine, List<string> pharmacies, RegistrationInPharmacy registrationInPharmacy)
+        {
+            IPharmacy ipharmacy = PharmacyFactoryHttp.GetIPharmacy(Context);
+
+            if (!ipharmacy.CreateUrgentOrder(medicine).IsNullOrEmpty()) { pharmacies.Add(ipharmacy.CreateUrgentOrder(medicine)); }
+        }
 
         public List<UrgentMedicineOrder> GetAll()
         {

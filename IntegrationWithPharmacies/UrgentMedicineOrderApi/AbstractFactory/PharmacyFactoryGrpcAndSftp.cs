@@ -5,9 +5,9 @@ namespace UrgentMedicineOrderApi.AbstractFactory
 {
     public class PharmacyFactoryGrpcAndSftp : AbstractFactory
     {
-        public override IPharmacy GetIPharmacy(string url, MyDbContext context)
+        public override IPharmacy GetIPharmacy(MyDbContext context)
         {
-            return new PharmacyGrpcSftp(url, context);
+            return new PharmacyGrpcSftp(context);
         }
     }
 }

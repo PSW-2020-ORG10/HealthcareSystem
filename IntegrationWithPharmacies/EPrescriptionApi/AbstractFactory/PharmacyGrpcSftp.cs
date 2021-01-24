@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using EPrescriptionApi.DbContextModel;
 using EPrescriptionApi.Model;
 using EPrescriptionApi.Service;
@@ -16,19 +14,14 @@ namespace EPrescriptionApi.AbstractFactory
         private SmptServerService SmptServerService { get; }
         private PrescriptionFileService PrescriptionFileService { get; }
 
-        public PharmacyGrpcSftp() {
-            
-        }
+        public PharmacyGrpcSftp() { }
 
-        public PharmacyGrpcSftp(string url, MyDbContext context) {
-
+        public PharmacyGrpcSftp( MyDbContext context) {
             SftpService = new SftpService();
             HttpRequests = new HttpRequests();
             SmptServerService = new SmptServerService();
             PrescriptionFileService = new PrescriptionFileService(context);
         }
-
-
 
         public bool SendPrescription(EPrescription prescription)
         {
