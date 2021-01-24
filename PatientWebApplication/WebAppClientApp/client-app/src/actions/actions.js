@@ -57,6 +57,8 @@
     LOADED_THIRD_IMAGE,
     USER_LOGGEDIN,
     USER_LOGGEDIN_ERROR,
+    PRESCRIPTION_LOADED,
+    PRESCRIPTION_LOADED_ERROR,
     STORE_EVENT,
     STORE_EVENT_ERROR,
     GET_STATISTICS,
@@ -192,6 +194,28 @@ export const loadedAllPatientPrescriptions = () => async (dispatch) => {
         });
     }
 };
+
+export const loadedPrescriptionFromAppointment = (appointmentid) => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.get("http://localhost:54689/api/prescription/appointment/" + appointmentid,
+        {
+            headers: { "Access-Control-Allow-Origin": "*",
+                       "Authorization" :  "Bearer " + localStorage.getItem("token")}
+          }); 
+        debugger;
+        dispatch({
+            type: PRESCRIPTION_LOADED,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: PRESCRIPTION_LOADED_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
 
 
 export const patientRegistered = (patient) => async (dispatch) => {

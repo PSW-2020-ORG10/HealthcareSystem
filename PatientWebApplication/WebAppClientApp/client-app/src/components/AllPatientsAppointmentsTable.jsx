@@ -18,21 +18,11 @@ class AllPatientsAppointmentsTable extends Component {
     };
     componentDidMount() {
         debugger;
-        this.props.loadedAllPatientAppointmentsWithSurvey();
-        this.props.loadedAllPatientAppointmentsWithoutSurvey();
         this.props.loadedAllPatientAppointmentsInTwoDays();
         this.props.loadedAllPatientAppointmentsInFuture();
     }
 
     render() {
-        if (this.props.patientAppointmentsWithSurveys === undefined) {
-
-            return null;
-        }
-        if (this.props.patientAppointmentsWithoutSurveys === undefined) {
-
-            return null;
-        }
         if (this.props.patientAppointmentsInTwoDaysList === undefined) {
 
             return null;
@@ -42,8 +32,6 @@ class AllPatientsAppointmentsTable extends Component {
             return null;
         }
 
-        const patientAppointmentsWithSurveys = this.props.patientAppointmentsWithSurveys;
-        const patientAppointmentsWithoutSurveys = this.props.patientAppointmentsWithoutSurveys;
         const patientAppointmentsInTwoDaysList = this.props.patientAppointmentsInTwoDaysList;
         const patientAppointmentsInFutureList = this.props.patientAppointmentsInFutureList;
         debugger;
@@ -62,32 +50,8 @@ class AllPatientsAppointmentsTable extends Component {
                             <th style={{ textAlign: "center" }}></th>
                         </tr>
                     </thead>
-                    {patientAppointmentsWithSurveys.map((f) => (
-                        <tbody key={f.id}>
-                            <tr key={f.id}>
-                                <td style={{ textAlign: "left" }} >{f.doctor == null ? "" : f.doctor.name + ' ' + f.doctor.surname}</td>
-                                <td style={{ textAlign: "center" }} > {this.checkType(f)}</td >
-                                <td style={{ textAlign: "center" }}>{f.date}</td >
-                                <td style={{ textAlign: "center" }}>{f.start}</td >
-                                <td style={{ textAlign: "right" }}><button disabled={f.referral.length == 0} onClick={() => { this.displayModal(f) }} className="btn btn-primary">Details</button></td >
-                                <td style={{ textAlign: "right" }}><button onClick={() => this.fillSurvey(f)} className="btn btn-primary">Fill Survey</button></td >
-                            </tr>
-                        </tbody>
-                    ))}
-                    {patientAppointmentsWithoutSurveys.map((f) => (
-                        <tbody key={f.id}>
-                            <tr key={f.id}>
-                                <td style={{ textAlign: "left" }} >{f.doctor == null ? "" :f.doctor.name + ' ' + f.doctor.surname}</td>
-                                <td style={{ textAlign: "center" }} > {this.checkType(f)}</td >
-                                <td style={{ textAlign: "center" }}>{f.date}</td >
-                                <td style={{ textAlign: "center" }}>{f.start}</td >
-                                <td style={{ textAlign: "right" }}><button disabled={f.referral.length == 0} onClick={() => { this.displayModal(f) }} className="btn btn-primary">Details</button></td >
-                                <td style={{ textAlign: "right" }}><button disabled={true} className="btn btn-primary">Fill Survey</button></td >
-                            </tr>
-                        </tbody>
-                    ))}
+                    <tbody className="h-100">
                     {patientAppointmentsInTwoDaysList.map((f) => (
-                        <tbody key={f.id}>
                             <tr key={f.id}>                               
                                 <td style={{ textAlign: "left" }} >{f.doctor == null ? "" :f.doctor.name + ' ' + f.doctor.surname}</td>
                                 <td style={{ textAlign: "center" }} > {this.checkType(f)}</td >
@@ -96,10 +60,8 @@ class AllPatientsAppointmentsTable extends Component {
                                 <td style={{ textAlign: "right" }}><button disabled={true} className="btn btn-primary">Cancel</button></td >
                                 <td style={{ textAlign: "right" }}><button disabled={true} className="btn btn-primary">Fill Survey</button></td >
                             </tr>
-                        </tbody>
                     ))}
                     {patientAppointmentsInFutureList.map((f) => (
-                        <tbody key={f.id}>
                             <tr key={f.id}>
                                 <td style={{ textAlign: "left" }} >{f.doctor == null ? "" :f.doctor.name + ' ' + f.doctor.surname}</td>
                                 <td style={{ textAlign: "center" }} > {this.checkType(f)}</td >
@@ -108,8 +70,8 @@ class AllPatientsAppointmentsTable extends Component {
                                 <td style={{ textAlign: "right" }}><CancelAppointmentButton  appointment={f}> </CancelAppointmentButton></td >
                                 <td style={{ textAlign: "right" }}><button  disabled={true} className="btn btn-primary">Fill Survey</button></td >
                             </tr>
-                        </tbody>
                     ))}
+                    </tbody>
                 </table>
                 <div>
                     {this.state.modalSurveyShow ? <CreateSurveyForm show={this.state.modalSurveyShow} appointmentToSend={this.state.appointmentToSend} onShowChange={this.fillSurvey.bind(this)} /> : null}

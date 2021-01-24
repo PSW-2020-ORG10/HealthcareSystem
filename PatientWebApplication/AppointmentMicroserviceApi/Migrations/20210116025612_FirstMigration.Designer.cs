@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AppointmentMicroserviceApi.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20210109164522_FifthMigration")]
-    partial class FifthMigration
+    [Migration("20210116025612_FirstMigration")]
+    partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace AppointmentMicroserviceApi.Migrations
 
             modelBuilder.Entity("AppointmentMicroserviceApi.Doctor.Operation", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -30,6 +30,9 @@ namespace AppointmentMicroserviceApi.Migrations
 
                     b.Property<int>("DoctorUserId")
                         .HasColumnType("int");
+
+                    b.Property<TimeSpan>("End")
+                        .HasColumnType("time(6)");
 
                     b.Property<int>("PatientUserId")
                         .HasColumnType("int");
@@ -40,61 +43,49 @@ namespace AppointmentMicroserviceApi.Migrations
                     b.Property<TimeSpan>("Start")
                         .HasColumnType("time(6)");
 
-                    b.Property<TimeSpan>("end")
-                        .HasColumnType("time(6)");
-
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Operations");
 
                     b.HasData(
                         new
                         {
-                            id = 1,
+                            Id = 1,
                             Date = "23/12/2020",
                             DoctorUserId = 1,
+                            End = new TimeSpan(0, 15, 0, 0, 0),
                             PatientUserId = 2,
                             RoomId = "room1",
-                            Start = new TimeSpan(0, 14, 0, 0, 0),
-                            end = new TimeSpan(0, 15, 0, 0, 0)
+                            Start = new TimeSpan(0, 14, 0, 0, 0)
                         },
                         new
                         {
-                            id = 2,
+                            Id = 2,
                             Date = "03/10/2020",
                             DoctorUserId = 2,
+                            End = new TimeSpan(0, 15, 15, 0, 0),
                             PatientUserId = 1,
                             RoomId = "room1",
-                            Start = new TimeSpan(0, 15, 0, 0, 0),
-                            end = new TimeSpan(0, 15, 15, 0, 0)
+                            Start = new TimeSpan(0, 15, 0, 0, 0)
                         });
                 });
 
             modelBuilder.Entity("AppointmentMicroserviceApi.Doctor.OperationReferral", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<string>("Diagnosis")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<int>("OperationId")
                         .HasColumnType("int");
 
-                    b.Property<string>("classify")
+                    b.Property<string>("Procedure")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("comment")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<string>("medicine")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<int>("quantityPerDay")
-                        .HasColumnType("int");
-
-                    b.Property<string>("takeMedicineUntil")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.HasIndex("OperationId")
                         .IsUnique();
@@ -104,51 +95,36 @@ namespace AppointmentMicroserviceApi.Migrations
                     b.HasData(
                         new
                         {
-                            id = 1,
+                            Id = 1,
+                            Diagnosis = "Bilateral upper eyelid dermatochalasis",
                             OperationId = 1,
-                            classify = "Operation",
-                            comment = "Operation was successfull.",
-                            medicine = "Hemomycin",
-                            quantityPerDay = 1,
-                            takeMedicineUntil = "15/09/2020"
+                            Procedure = "This 65-year-old female demonstrates conditions described above of excess and redundant eyelid skin with puffiness and has requested surgical correction. The face was prepped and draped in the usual sterile manner. After waiting a period of approximately ten minutes for adequate vasoconstriction, the previously outlined excessive skin of the right upper eyelid was excised with blunt dissection. At the end of the operation the patientʼs vision and extraocular muscle movements were checked and found to be intact. The patient was released to return home in satisfactory condition."
                         },
                         new
                         {
-                            id = 2,
+                            Id = 2,
+                            Diagnosis = " Stage IV breast cancer with left breast mass.",
                             OperationId = 2,
-                            classify = "Operation",
-                            comment = "Patient lost a lot of blood.",
-                            medicine = "Amoxicillin",
-                            quantityPerDay = 3,
-                            takeMedicineUntil = "18/10/2020"
+                            Procedure = "The patient was brought into the operative room and placed on the operative table in the supine position. General endotracheal anesthesia was administered, and the patient was prepped and draped in the usual sterile fashion. A large lumpectomy was performed around the palpable mass extending down to the level of the muscle. The wound was then closed in two layers approximating the deep dermal layer with 3-0 Vicryl and the skin with 4-0 Monocryl. Steri-Strips and dressings were applied. The patient was extubated and transported to the recovery area in stable condition."
                         });
                 });
 
             modelBuilder.Entity("AppointmentMicroserviceApi.Doctor.Referral", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<int>("AppointmentId")
                         .HasColumnType("int");
 
-                    b.Property<string>("classify")
+                    b.Property<string>("Diagnosis")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("comment")
+                    b.Property<string>("Procedure")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("medicine")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.Property<int>("quantityPerDay")
-                        .HasColumnType("int");
-
-                    b.Property<string>("takeMedicineUntil")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.HasIndex("AppointmentId");
 
@@ -157,129 +133,93 @@ namespace AppointmentMicroserviceApi.Migrations
                     b.HasData(
                         new
                         {
-                            id = 1,
+                            Id = 1,
                             AppointmentId = 1,
-                            classify = "classify",
-                            comment = "Patient had slight heart arrhythmia.",
-                            medicine = "Aspirin",
-                            quantityPerDay = 3,
-                            takeMedicineUntil = "25/02/2020"
+                            Diagnosis = "Pneumonia",
+                            Procedure = "Patient had temperature taken. Temperature was 39.6 degrees. Listened to patients breathing. Breathing was slightly constricted. Established that patient has lighter case of pneumonia. Sent home for home treatment."
                         },
                         new
                         {
-                            id = 2,
+                            Id = 2,
                             AppointmentId = 2,
-                            classify = "Appointment",
-                            comment = "Patient had cold.",
-                            medicine = "Brufen",
-                            quantityPerDay = 1,
-                            takeMedicineUntil = "11/05/2020"
+                            Diagnosis = "Concussion",
+                            Procedure = "Patient had visible gash on back of his head. Patient complains of blurred vision. Established that patient has concussion. Left for a night of hospital observation"
                         },
                         new
                         {
-                            id = 3,
+                            Id = 3,
                             AppointmentId = 3,
-                            classify = "classify",
-                            comment = "Patient had slight heart arrhythmia.",
-                            medicine = "Aspirin",
-                            quantityPerDay = 3,
-                            takeMedicineUntil = "25/02/2020"
+                            Diagnosis = "Pneumonia",
+                            Procedure = "Patient had temperature taken. Temperature was 39.6 degrees. Listened to patients breathing. Breathing was slightly constricted. Established that patient has lighter case of pneumonia. Sent home for home treatment."
                         },
                         new
                         {
-                            id = 4,
+                            Id = 4,
                             AppointmentId = 4,
-                            classify = "Appointment",
-                            comment = "Patient had cold.",
-                            medicine = "Brufen",
-                            quantityPerDay = 1,
-                            takeMedicineUntil = "11/05/2020"
+                            Diagnosis = "Concussion",
+                            Procedure = "Patient had visible gash on back of his head. Patient complains of blurred vision. Established that patient has concussion. Left for a night of hospital observation"
                         },
                         new
                         {
-                            id = 5,
+                            Id = 5,
                             AppointmentId = 5,
-                            classify = "classify",
-                            comment = "Patient had slight heart arrhythmia.",
-                            medicine = "Aspirin",
-                            quantityPerDay = 3,
-                            takeMedicineUntil = "25/02/2020"
+                            Diagnosis = "Pneumonia",
+                            Procedure = "Patient had temperature taken. Temperature was 39.6 degrees. Listened to patients breathing. Breathing was slightly constricted. Established that patient has lighter case of pneumonia. Sent home for home treatment."
                         },
                         new
                         {
-                            id = 6,
+                            Id = 6,
                             AppointmentId = 6,
-                            classify = "Appointment",
-                            comment = "Patient had cold.",
-                            medicine = "Brufen",
-                            quantityPerDay = 1,
-                            takeMedicineUntil = "11/05/2020"
+                            Diagnosis = "Concussion",
+                            Procedure = "Patient had visible gash on back of his head. Patient complains of blurred vision. Established that patient has concussion. Left for a night of hospital observation"
                         },
                         new
                         {
-                            id = 7,
+                            Id = 7,
                             AppointmentId = 7,
-                            classify = "classify",
-                            comment = "Patient had slight heart arrhythmia.",
-                            medicine = "Aspirin",
-                            quantityPerDay = 3,
-                            takeMedicineUntil = "25/02/2020"
+                            Diagnosis = "Pneumonia",
+                            Procedure = "Patient had temperature taken. Temperature was 39.6 degrees. Listened to patients breathing. Breathing was slightly constricted. Established that patient has lighter case of pneumonia. Sent home for home treatment."
                         },
                         new
                         {
-                            id = 8,
+                            Id = 8,
                             AppointmentId = 8,
-                            classify = "Appointment",
-                            comment = "Patient had cold.",
-                            medicine = "Brufen",
-                            quantityPerDay = 1,
-                            takeMedicineUntil = "11/05/2020"
+                            Diagnosis = "Concussion",
+                            Procedure = "Patient had visible gash on back of his head. Patient complains of blurred vision. Established that patient has concussion. Left for a night of hospital observation"
                         },
                         new
                         {
-                            id = 9,
+                            Id = 9,
                             AppointmentId = 9,
-                            classify = "classify",
-                            comment = "Patient had slight heart arrhythmia.",
-                            medicine = "Aspirin",
-                            quantityPerDay = 3,
-                            takeMedicineUntil = "25/02/2020"
+                            Diagnosis = "Pneumonia",
+                            Procedure = "Patient had temperature taken. Temperature was 39.6 degrees. Listened to patients breathing. Breathing was slightly constricted. Established that patient has lighter case of pneumonia. Sent home for home treatment."
                         },
                         new
                         {
-                            id = 10,
+                            Id = 10,
                             AppointmentId = 10,
-                            classify = "Appointment",
-                            comment = "Patient had cold.",
-                            medicine = "Brufen",
-                            quantityPerDay = 1,
-                            takeMedicineUntil = "11/05/2020"
+                            Diagnosis = "Concussion",
+                            Procedure = "Patient had visible gash on back of his head. Patient complains of blurred vision. Established that patient has concussion. Left for a night of hospital observation"
                         },
                         new
                         {
-                            id = 11,
+                            Id = 11,
                             AppointmentId = 11,
-                            classify = "classify",
-                            comment = "Patient had slight heart arrhythmia.",
-                            medicine = "Aspirin",
-                            quantityPerDay = 3,
-                            takeMedicineUntil = "25/02/2020"
+                            Diagnosis = "Pneumonia",
+                            Procedure = "Patient had temperature taken. Temperature was 39.6 degrees. Listened to patients breathing. Breathing was slightly constricted. Established that patient has lighter case of pneumonia. Sent home for home treatment."
                         },
                         new
                         {
-                            id = 12,
+                            Id = 12,
                             AppointmentId = 12,
-                            classify = "Appointment",
-                            comment = "Patient had cold.",
-                            medicine = "Brufen",
-                            quantityPerDay = 1,
-                            takeMedicineUntil = "11/05/2020"
+                            Diagnosis = "Concussion",
+                            Procedure = "Patient had visible gash on back of his head. Patient complains of blurred vision. Established that patient has concussion. Left for a night of hospital observation"
                         });
                 });
 
             modelBuilder.Entity("AppointmentMicroserviceApi.Patient.DoctorAppointment", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -304,14 +244,14 @@ namespace AppointmentMicroserviceApi.Migrations
                     b.Property<TimeSpan>("Start")
                         .HasColumnType("time(6)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("DoctorAppointments");
 
                     b.HasData(
                         new
                         {
-                            id = 1,
+                            Id = 1,
                             Date = "23/12/2020",
                             DoctorUserId = 1,
                             IsCanceled = false,
@@ -321,7 +261,7 @@ namespace AppointmentMicroserviceApi.Migrations
                         },
                         new
                         {
-                            id = 2,
+                            Id = 2,
                             Date = "23/12/2020",
                             DoctorUserId = 2,
                             IsCanceled = false,
@@ -331,37 +271,37 @@ namespace AppointmentMicroserviceApi.Migrations
                         },
                         new
                         {
-                            id = 3,
+                            Id = 3,
                             Date = "23/12/2020",
                             DoctorUserId = 2,
-                            IsCanceled = true,
+                            IsCanceled = false,
                             PatientUserId = 1,
                             RoomId = "1",
                             Start = new TimeSpan(0, 15, 0, 0, 0)
                         },
                         new
                         {
-                            id = 4,
+                            Id = 4,
                             Date = "23/12/2020",
                             DoctorUserId = 2,
-                            IsCanceled = true,
+                            IsCanceled = false,
                             PatientUserId = 1,
                             RoomId = "1",
                             Start = new TimeSpan(0, 15, 45, 0, 0)
                         },
                         new
                         {
-                            id = 5,
+                            Id = 5,
                             Date = "22/12/2020",
                             DoctorUserId = 1,
-                            IsCanceled = true,
+                            IsCanceled = false,
                             PatientUserId = 1,
                             RoomId = "1",
                             Start = new TimeSpan(0, 12, 0, 0, 0)
                         },
                         new
                         {
-                            id = 6,
+                            Id = 6,
                             Date = "22/12/2020",
                             DoctorUserId = 3,
                             IsCanceled = false,
@@ -371,7 +311,7 @@ namespace AppointmentMicroserviceApi.Migrations
                         },
                         new
                         {
-                            id = 7,
+                            Id = 7,
                             Date = "07/02/2031",
                             DoctorUserId = 3,
                             IsCanceled = false,
@@ -381,7 +321,7 @@ namespace AppointmentMicroserviceApi.Migrations
                         },
                         new
                         {
-                            id = 8,
+                            Id = 8,
                             Date = "07/12/2020",
                             DoctorUserId = 2,
                             IsCanceled = false,
@@ -391,7 +331,7 @@ namespace AppointmentMicroserviceApi.Migrations
                         },
                         new
                         {
-                            id = 9,
+                            Id = 9,
                             Date = "05/12/2030",
                             DoctorUserId = 1,
                             IsCanceled = false,
@@ -401,7 +341,7 @@ namespace AppointmentMicroserviceApi.Migrations
                         },
                         new
                         {
-                            id = 10,
+                            Id = 10,
                             Date = "11/11/2030",
                             DoctorUserId = 2,
                             IsCanceled = false,
@@ -411,7 +351,7 @@ namespace AppointmentMicroserviceApi.Migrations
                         },
                         new
                         {
-                            id = 11,
+                            Id = 11,
                             Date = "14/03/2016",
                             DoctorUserId = 1,
                             IsCanceled = false,
@@ -421,163 +361,196 @@ namespace AppointmentMicroserviceApi.Migrations
                         },
                         new
                         {
-                            id = 12,
+                            Id = 12,
                             Date = "11/11/2010",
                             DoctorUserId = 2,
                             IsCanceled = false,
                             PatientUserId = 2,
                             RoomId = "B3",
                             Start = new TimeSpan(0, 0, 0, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 13,
+                            CancelDateString = "09/01/2021",
+                            Date = "23/12/2020",
+                            DoctorUserId = 2,
+                            IsCanceled = true,
+                            PatientUserId = 3,
+                            RoomId = "1",
+                            Start = new TimeSpan(0, 15, 0, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 14,
+                            CancelDateString = "09/01/2021",
+                            Date = "23/12/2020",
+                            DoctorUserId = 2,
+                            IsCanceled = true,
+                            PatientUserId = 3,
+                            RoomId = "1",
+                            Start = new TimeSpan(0, 15, 45, 0, 0)
+                        },
+                        new
+                        {
+                            Id = 15,
+                            CancelDateString = "09/01/2021",
+                            Date = "22/12/2020",
+                            DoctorUserId = 1,
+                            IsCanceled = true,
+                            PatientUserId = 3,
+                            RoomId = "1",
+                            Start = new TimeSpan(0, 12, 0, 0, 0)
                         });
                 });
 
             modelBuilder.Entity("AppointmentMicroserviceApi.Patient.Question", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("answer")
+                    b.Property<string>("Answer")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("name")
+                    b.Property<string>("Name")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Questions");
 
                     b.HasData(
                         new
                         {
-                            id = 1,
-                            answer = "Answer",
-                            name = "Name"
+                            Id = 1,
+                            Answer = "Answer",
+                            Name = "Name"
                         });
                 });
 
             modelBuilder.Entity("AppointmentMicroserviceApi.Patient.Survey", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("appointmentId")
+                    b.Property<int>("AppointmentId")
                         .HasColumnType("int");
 
-                    b.Property<int>("doctorsKnowledge")
+                    b.Property<int>("DoctorsKnowledge")
                         .HasColumnType("int");
 
-                    b.Property<int>("doctorsPoliteness")
+                    b.Property<int>("DoctorsPoliteness")
                         .HasColumnType("int");
 
-                    b.Property<int>("doctorsProfessionalism")
+                    b.Property<int>("DoctorsProfessionalism")
                         .HasColumnType("int");
 
-                    b.Property<int>("doctorsSkill")
+                    b.Property<int>("DoctorsSkill")
                         .HasColumnType("int");
 
-                    b.Property<int>("doctorsTechnicality")
+                    b.Property<int>("DoctorsTechnicality")
                         .HasColumnType("int");
 
-                    b.Property<int>("doctorsWorkingPace")
+                    b.Property<int>("DoctorsWorkingPace")
                         .HasColumnType("int");
 
-                    b.Property<int>("hospitalEnvironment")
+                    b.Property<int>("HospitalEnvironment")
                         .HasColumnType("int");
 
-                    b.Property<int>("hospitalEquipment")
+                    b.Property<int>("HospitalEquipment")
                         .HasColumnType("int");
 
-                    b.Property<int>("hospitalHygiene")
+                    b.Property<int>("HospitalHygiene")
                         .HasColumnType("int");
 
-                    b.Property<int>("hospitalPrices")
+                    b.Property<int>("HospitalPrices")
                         .HasColumnType("int");
 
-                    b.Property<int>("hospitalWaitingTime")
+                    b.Property<int>("HospitalWaitingTime")
                         .HasColumnType("int");
 
-                    b.Property<int>("medicalStaffsKnowledge")
+                    b.Property<int>("MedicalStaffsKnowledge")
                         .HasColumnType("int");
 
-                    b.Property<int>("medicalStaffsPoliteness")
+                    b.Property<int>("MedicalStaffsPoliteness")
                         .HasColumnType("int");
 
-                    b.Property<int>("medicalStaffsProfessionalism")
+                    b.Property<int>("MedicalStaffsProfessionalism")
                         .HasColumnType("int");
 
-                    b.Property<int>("medicalStaffsSkill")
+                    b.Property<int>("MedicalStaffsSkill")
                         .HasColumnType("int");
 
-                    b.Property<int>("medicalStaffsTechnicality")
+                    b.Property<int>("MedicalStaffsTechnicality")
                         .HasColumnType("int");
 
-                    b.Property<int>("medicalStaffsWorkingPace")
+                    b.Property<int>("MedicalStaffsWorkingPace")
                         .HasColumnType("int");
 
-                    b.Property<int>("patientId")
+                    b.Property<int>("PatientId")
                         .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.HasIndex("appointmentId");
+                    b.HasIndex("AppointmentId");
 
                     b.ToTable("Surveys");
 
                     b.HasData(
                         new
                         {
-                            id = 1,
-                            appointmentId = 3,
-                            doctorsKnowledge = 4,
-                            doctorsPoliteness = 5,
-                            doctorsProfessionalism = 4,
-                            doctorsSkill = 5,
-                            doctorsTechnicality = 4,
-                            doctorsWorkingPace = 5,
-                            hospitalEnvironment = 3,
-                            hospitalEquipment = 3,
-                            hospitalHygiene = 2,
-                            hospitalPrices = 2,
-                            hospitalWaitingTime = 5,
-                            medicalStaffsKnowledge = 5,
-                            medicalStaffsPoliteness = 5,
-                            medicalStaffsProfessionalism = 4,
-                            medicalStaffsSkill = 5,
-                            medicalStaffsTechnicality = 5,
-                            medicalStaffsWorkingPace = 4,
-                            patientId = 1
+                            Id = 1,
+                            AppointmentId = 3,
+                            DoctorsKnowledge = 4,
+                            DoctorsPoliteness = 5,
+                            DoctorsProfessionalism = 4,
+                            DoctorsSkill = 5,
+                            DoctorsTechnicality = 4,
+                            DoctorsWorkingPace = 5,
+                            HospitalEnvironment = 3,
+                            HospitalEquipment = 3,
+                            HospitalHygiene = 2,
+                            HospitalPrices = 2,
+                            HospitalWaitingTime = 5,
+                            MedicalStaffsKnowledge = 5,
+                            MedicalStaffsPoliteness = 5,
+                            MedicalStaffsProfessionalism = 4,
+                            MedicalStaffsSkill = 5,
+                            MedicalStaffsTechnicality = 5,
+                            MedicalStaffsWorkingPace = 4,
+                            PatientId = 1
                         },
                         new
                         {
-                            id = 2,
-                            appointmentId = 4,
-                            doctorsKnowledge = 5,
-                            doctorsPoliteness = 5,
-                            doctorsProfessionalism = 4,
-                            doctorsSkill = 1,
-                            doctorsTechnicality = 3,
-                            doctorsWorkingPace = 5,
-                            hospitalEnvironment = 1,
-                            hospitalEquipment = 3,
-                            hospitalHygiene = 3,
-                            hospitalPrices = 3,
-                            hospitalWaitingTime = 5,
-                            medicalStaffsKnowledge = 5,
-                            medicalStaffsPoliteness = 2,
-                            medicalStaffsProfessionalism = 2,
-                            medicalStaffsSkill = 2,
-                            medicalStaffsTechnicality = 4,
-                            medicalStaffsWorkingPace = 3,
-                            patientId = 1
+                            Id = 2,
+                            AppointmentId = 4,
+                            DoctorsKnowledge = 5,
+                            DoctorsPoliteness = 5,
+                            DoctorsProfessionalism = 4,
+                            DoctorsSkill = 1,
+                            DoctorsTechnicality = 3,
+                            DoctorsWorkingPace = 5,
+                            HospitalEnvironment = 1,
+                            HospitalEquipment = 3,
+                            HospitalHygiene = 3,
+                            HospitalPrices = 3,
+                            HospitalWaitingTime = 5,
+                            MedicalStaffsKnowledge = 5,
+                            MedicalStaffsPoliteness = 2,
+                            MedicalStaffsProfessionalism = 2,
+                            MedicalStaffsSkill = 2,
+                            MedicalStaffsTechnicality = 4,
+                            MedicalStaffsWorkingPace = 3,
+                            PatientId = 1
                         });
                 });
 
             modelBuilder.Entity("AppointmentMicroserviceApi.Doctor.OperationReferral", b =>
                 {
                     b.HasOne("AppointmentMicroserviceApi.Doctor.Operation", null)
-                        .WithOne("operationReferral")
+                        .WithOne("OperationReferral")
                         .HasForeignKey("AppointmentMicroserviceApi.Doctor.OperationReferral", "OperationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -586,7 +559,7 @@ namespace AppointmentMicroserviceApi.Migrations
             modelBuilder.Entity("AppointmentMicroserviceApi.Doctor.Referral", b =>
                 {
                     b.HasOne("AppointmentMicroserviceApi.Patient.DoctorAppointment", null)
-                        .WithMany("referral")
+                        .WithMany("Referral")
                         .HasForeignKey("AppointmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -594,9 +567,9 @@ namespace AppointmentMicroserviceApi.Migrations
 
             modelBuilder.Entity("AppointmentMicroserviceApi.Patient.Survey", b =>
                 {
-                    b.HasOne("AppointmentMicroserviceApi.Patient.DoctorAppointment", "appointment")
+                    b.HasOne("AppointmentMicroserviceApi.Patient.DoctorAppointment", "Appointment")
                         .WithMany()
-                        .HasForeignKey("appointmentId")
+                        .HasForeignKey("AppointmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

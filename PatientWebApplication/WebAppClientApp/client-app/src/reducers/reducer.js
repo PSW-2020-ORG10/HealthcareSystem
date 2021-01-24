@@ -38,6 +38,7 @@
     LOADED_SECOND_IMAGE,
     LOADED_THIRD_IMAGE,
     USER_LOGGEDIN,
+    PRESCRIPTION_LOADED,
     STORE_EVENT,
     GET_STATISTICS
 } from "../types/types";
@@ -105,6 +106,7 @@ const initialState = {
     loadedAllMessagesList: [],
     userCookie : {},
     userToken : "",
+    appointmentPrescription : {},  
     appointmentEvent : {},
     statistics: []
 };
@@ -239,11 +241,13 @@ function reducer(state = initialState, action) {
                 patientAppointmentsList: updateObjectInArray(state.patientAppointmentsList, action)
             };     
         case LOADED_ALL_PATIENT_APPOINTMENTS_WITH_SURVEYS:
+            debugger;
             return {
                 ...state,
                 patientAppointmentsWithSurveys: action.payload
             };     
         case LOADED_ALL_PATIENT_APPOINTMENTS_WITHOUT_SURVEYS:
+            debugger;
             return {
                 ...state,
                 patientAppointmentsWithoutSurveys: action.payload
@@ -336,6 +340,12 @@ function reducer(state = initialState, action) {
                 userToken: action.payload.token,
                 userCookie: user
             };
+        case PRESCRIPTION_LOADED:
+            debugger;
+            return {
+                ...state,
+                appointmentPrescription: action.payload
+            }; 
         case STORE_EVENT:
                 return {
                     ...state,

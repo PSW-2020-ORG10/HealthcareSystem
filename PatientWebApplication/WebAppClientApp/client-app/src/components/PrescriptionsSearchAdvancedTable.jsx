@@ -152,7 +152,7 @@ class PrescriptionsSearchAdvancedTable extends Component {
                          />
                     </td>
                     <td>
-                        <button className="btn btn-primary" onClick={this.addSearchField}>Add New Field</button>
+                        <button className="btn btn-primary ml-3" onClick={this.addSearchField}>Add New Field</button>
                     </td>
                 </div>
 
@@ -201,7 +201,7 @@ class PrescriptionsSearchAdvancedTable extends Component {
                 </div>
 
                 <div className="btn-wrap align-right">
-                    <button className="btn btn-primary btn-block btn-lg mb-4" /*disabled={this.state.defaultLogicOperator.length <= this.state.forAdding || this.state.restRoles.length <= this.state.forAdding}*/ onClick={this.searchPrescriptions.bind(this)}>Search</button>
+                    <button className="btn btn-primary btn-block btn-lg mb-4" onClick={this.searchPrescriptions.bind(this)}>Search</button>
                 </div>
 
                 <table className='table allPrescriptions' >
@@ -217,11 +217,11 @@ class PrescriptionsSearchAdvancedTable extends Component {
                         <tbody key={f.id}>
                             <tr key={f.id}>
                                 <td style={{ textAlign: "left" }} >
-                                    {f.medicines !== undefined ? f.medicines.map((m, i) => (
-                                        f.medicines.length === i + 1 ?
-                                            [medicines, m.name, ''].join('') :
-                                            [medicines, m.name, ', '].join('')
-                                    )) : medicines = "Empty"}
+                                    {f.medicines.length !== 0 ? f.medicines.map((m, i) => (
+                                        f.medicines.length === i + 1 ? 
+                                        [medicines, m.medicine.name, ''].join('') :
+                                        [medicines, m.medicine.name, ', '].join('')
+                                    )) : "Empty"}
                                 </td>
                                 <td style={{ textAlign: "center" }} > {f.isUsed ? "Used" : "Not used"}</td >
                                 <td style={{ textAlign: "center" }}>{f.comment}</td >

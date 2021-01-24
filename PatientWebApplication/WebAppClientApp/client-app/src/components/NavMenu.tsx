@@ -82,7 +82,7 @@ export default class NavMenu extends React.PureComponent<
                       className="text-dark"
                       to="/reports-simple"
                     >
-                      Appointment Reports Search
+                      Appointment Reports
                     </NavLink>
                   ) : null}
                 </NavItem>
