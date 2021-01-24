@@ -133,7 +133,7 @@ services:
 
 
   react:
-    image: velickotam/healthcaresystem:react_latest
+    image: react
     container_name: react
     stdin_open: true
     restart: on-failure

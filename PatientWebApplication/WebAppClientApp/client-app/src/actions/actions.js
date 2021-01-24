@@ -895,7 +895,7 @@ export const loadedImageForThirdAd = (fileName) => async (dispatch) => {
 export const userLoggedIn = (user) => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.post("http://localhost:54689/api/login", user,
+       const response = await axios.post(process.env.REACT_APP_GATEWAY+"/login", user,
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
