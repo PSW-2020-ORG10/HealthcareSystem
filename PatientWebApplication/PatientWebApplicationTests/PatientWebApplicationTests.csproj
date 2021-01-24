@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\EventStore\EventStore\EventStore.csproj" />
     <ProjectReference Include="..\AppointmentMicroserviceApi\AppointmentMicroserviceApi.csproj" />
     <ProjectReference Include="..\FeedbackMicroserviceApi\FeedbackMicroserviceApi.csproj" />
     <ProjectReference Include="..\SearchMicroserviceApi\SearchMicroserviceApi.csproj" />

@@ -37,7 +37,9 @@
     LOADED_ALL_MESSAGES,
     LOADED_SECOND_IMAGE,
     LOADED_THIRD_IMAGE,
-    USER_LOGGEDIN
+    USER_LOGGEDIN,
+    STORE_EVENT,
+    GET_STATISTICS
 } from "../types/types";
 import { parseStringToDate } from '../utilities/Utilities';
 
@@ -102,7 +104,9 @@ const initialState = {
     loadedThirdImage : "",
     loadedAllMessagesList: [],
     userCookie : {},
-    userToken : ""      
+    userToken : "",
+    appointmentEvent : {},
+    statistics: []
 };
 
 
@@ -331,6 +335,16 @@ function reducer(state = initialState, action) {
                 ...state,
                 userToken: action.payload.token,
                 userCookie: user
+            };
+        case STORE_EVENT:
+                return {
+                    ...state,
+                    appointmentEvent: action.payload
+                };
+        case GET_STATISTICS:
+            return {
+                ...state,
+                statistics: action.payload
             };
         default:
             return state;
