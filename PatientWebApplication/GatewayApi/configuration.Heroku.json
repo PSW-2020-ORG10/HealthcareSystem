@@ -1,0 +1,774 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/doctorappointment/getAll",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/doctorappointment/getAll",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET", "OPTIONS" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/doctorappointment/getAllDto",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/doctorappointment/getAllDto",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/doctorappointment/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/doctorappointment/{id}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/doctorappointment/patient",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/doctorappointment/patient",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/doctorappointment/patientInTwoDays/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/doctorappointment/patientInTwoDays/{id}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/doctorappointment/patientInFuture/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/doctorappointment/patientInFuture/{id}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/doctorappointment/{appointmentId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/doctorappointment/{appointmentId}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/doctorappointment/recommend",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/doctorappointment/recommend",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/doctorappointment/availableappointments",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/doctorappointment/availableappointments",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/doctorappointment/",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/doctorappointment/",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/doctorappointment/appointmentsForDoctor/{doctorId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/doctorappointment/appointmentsForDoctor/{doctorId}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/doctorappointment/appointmentsForPatient/{patientId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/doctorappointment/appointmentsForPatient/{patientId}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/doctorappointment/appointmentsForPatientDto/{patientId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/doctorappointment/appointmentsForPatientDto/{patientId}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/doctorappointment/appointmentsForPatientDtoSimple/{patientId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/doctorappointment/appointmentsForPatientDtoSimple/{patientId}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/operation/getAll",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/operation/getAll",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET", "OPTIONS" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/operation/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/operation/{id}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/operation/search",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/operation/search",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/operation/operationsForDoctor/{doctorId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/operation/operationsForDoctor/{doctorId}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/survey/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/survey/{id}",
+      "UpstreamHttpMethod": [ "POST", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/survey",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/survey",
+      "UpstreamHttpMethod": [ "POST", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/survey/getWithSurveys/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/survey/getWithSurveys/{id}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/survey/getRates",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/survey/getRates",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/survey/getDoctorRates",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "appointmentapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/survey/getDoctorRates",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/feedback",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "feedbackapi-org10.herokuapp.com",
+            "Port": 443
+
+         }
+      ],
+      "UpstreamPathTemplate": "/api/feedback",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/feedback/published",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "feedbackapi-org10.herokuapp.com",
+            "Port": 443
+
+         }
+      ],
+      "UpstreamPathTemplate": "/api/feedback/published",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/feedback/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "feedbackapi-org10.herokuapp.com",
+            "Port": 443
+
+         }
+      ],
+      "UpstreamPathTemplate": "/api/feedback/{id}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/appointmentSearch/search",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "searchapi-org10.herokuapp.com",
+            "Port": 443
+
+         }
+      ],
+      "UpstreamPathTemplate": "/api/appointmentSearch/search",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/appointmentSearch/advancedsearch",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "searchapi-org10.herokuapp.com",
+            "Port": 443
+
+         }
+      ],
+      "UpstreamPathTemplate": "/api/appointmentSearch/advancedsearch",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/prescription",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "searchapi-org10.herokuapp.com",
+            "Port": 443
+
+         }
+      ],
+      "UpstreamPathTemplate": "/api/prescription",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/prescription/patient/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "searchapi-org10.herokuapp.com",
+            "Port": 443
+
+         }
+      ],
+      "UpstreamPathTemplate": "/api/prescription/patient/{id}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/prescription/search",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "searchapi-org10.herokuapp.com",
+            "Port": 443
+
+         }
+      ],
+      "UpstreamPathTemplate": "/api/prescription/search",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/prescription/advancedsearch",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "searchapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/prescription/advancedsearch",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/doctor",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "userapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/doctor",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/doctor/available",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "userapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/doctor/available",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/doctor/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "userapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/doctor/{id}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/doctor/appointment/{doctorId}/{time}/{date}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "userapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/doctor/appointment/{doctorId}/{time}/{date}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/doctor/operation/{doctorId}/{time}/{date}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "userapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/doctor/operation/{doctorId}/{time}/{date}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/employeesSchedule",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "userapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/employeesSchedule",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/patientUser",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "userapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/patientUser",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/patientUser/image",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "userapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/patientUser/image",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/patientUser/getimage",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "userapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/patientUser/getimage",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/patientUser/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "userapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/patientUser/{id}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/patientUser/getOne/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "userapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/patientUser/getOne/{id}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/patientUser/find/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "userapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/patientUser/find/{id}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/patientUser/findDto/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "userapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/patientUser/findDto/{id}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/patientUser",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "userapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/patientUser",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/patientUser/malicious",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "userapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/patientUser/malicious",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/patientUser/{patientId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "userapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/patientUser/{patientId}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/login",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "userapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/login",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/login",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+         {
+            "Host": "userapi-org10.herokuapp.com",
+            "Port": 443
+         }
+      ],
+      "UpstreamPathTemplate": "/api/login",
+      "UpstreamHttpMethod": [ "POST" ]
+    }
+  ]
+}

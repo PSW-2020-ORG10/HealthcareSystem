@@ -58,7 +58,8 @@
       "eject": "react-scripts eject",
       "lint": "eslint ./src/**/*.ts ./src/**/*.tsx"
    },
-  "eslintConfig": {
+   "proxy": "https://healthcare-system-org10.herokuapp.com/api",
+   "eslintConfig": {
     "extends": "react-app"
   },
   "browserslist": [
