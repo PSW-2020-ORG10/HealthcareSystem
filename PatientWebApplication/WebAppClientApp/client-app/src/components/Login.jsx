@@ -78,7 +78,7 @@ class Login extends Component {
                     <label className="label mr-2 pl-5">
                         Not a member?
                     </label>
-                    <a href =  "${process.env.REACT_APP_BASE_UR}/register-patient" className="pl-2">Sign up now.</a>
+                    <a href =  "$process.env.REACT_APP_BASE_UR/register-patient" className="pl-2">Sign up now.</a>
                 </div>
             </div>
         );
