@@ -1,4 +1,4 @@
-﻿using Shouldly;
+﻿/*using Shouldly;
 using System;
 using System.Net.Mail;
 using Xunit;
@@ -48,3 +48,4 @@ namespace IntegrationWithPharmaciesTest
         }
     }
 }
+*/

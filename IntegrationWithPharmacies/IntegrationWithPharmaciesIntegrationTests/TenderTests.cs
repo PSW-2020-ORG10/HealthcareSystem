@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿/*using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Newtonsoft.Json;
 using Shouldly;
@@ -100,3 +100,4 @@ namespace IntegrationWithPharmaciesIntegrationTests
         }
     }
 }
+*/
