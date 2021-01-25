@@ -51,7 +51,7 @@
   },
    "scripts": {
       "start": "node server.js",
-      "build": "REACT_APP_GATEWAY=http://localhost:54689/api react-scripts build",
+      "build": "REACT_APP_GATEWAY=https://gatewayapi-org10.herokuapp.com/api react-scripts build",
       "test": "cross-env CI=true react-scripts test --env=jsdom",
       "eject": "react-scripts eject",
       "lint": "eslint ./src/**/*.ts ./src/**/*.tsx"
