@@ -50,7 +50,7 @@
     "typescript": "3.6.4"
   },
    "scripts": {
-      "start": "node server.js",
+      "start": "REACT_APP_GATEWAY=https://gatewayapi-org10.herokuapp.com/api node server.js",
       "build": "REACT_APP_GATEWAY=https://gatewayapi-org10.herokuapp.com/api react-scripts build",
       "test": "cross-env CI=true react-scripts test --env=jsdom",
       "eject": "react-scripts eject",
