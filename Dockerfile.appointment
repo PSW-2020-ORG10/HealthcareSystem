@@ -6,9 +6,11 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["AppointmentMicroserviceApi.csproj", ""]
-RUN dotnet restore "AppointmentMicroserviceApi.csproj"
+COPY ["PatientWebApplication/AppointmentMicroserviceApi/AppointmentMicroserviceApi.csproj", "PatientWebApplication/AppointmentMicroserviceApi/"]
+COPY ["EventStore/EventStore/EventStore.csproj", "EventStore/EventStore/"]
+RUN dotnet restore "PatientWebApplication/AppointmentMicroserviceApi/AppointmentMicroserviceApi.csproj"
 COPY . .
+WORKDIR "/src/PatientWebApplication/AppointmentMicroserviceApi"
 RUN dotnet build "AppointmentMicroserviceApi.csproj" -c Release -o /app/build
 
 FROM build AS publish
