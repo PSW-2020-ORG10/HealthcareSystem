@@ -1,6 +1,18 @@
 {
   "Routes": [
     {
+      "DownstreamPathTemplate": "/api/feedback/published",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "feedbackmicroserviceapi",
+          "Port": 58636
+        }
+      ],
+      "UpstreamPathTemplate": "/api/feedback/published",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ]
+    },
+    {
       "DownstreamPathTemplate": "/api/doctorappointment/getAll",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -411,22 +423,6 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api/feedback/published",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "feedbackmicroserviceapi",
-          "Port": 58636
-        }
-      ],
-      "UpstreamPathTemplate": "/api/feedback/published",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "TestKey",
-        "AllowedScopes": []
-      }
-    },
-    {
       "DownstreamPathTemplate": "/api/feedback/{id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -485,6 +481,22 @@
       ],
       "UpstreamPathTemplate": "/api/prescription",
       "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/prescription/appointment/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "searchmicroserviceapi",
+          "Port": 53174
+        }
+      ],
+      "UpstreamPathTemplate": "/api/prescription/appointment/{id}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "TestKey",
         "AllowedScopes": []

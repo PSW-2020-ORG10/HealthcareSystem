@@ -13,7 +13,7 @@ namespace AppointmentMicroserviceApi.Adapters
         public AppointmentDto AppointmentToAppointmenDto(DoctorAppointment appointment)
         {
             MicroserviceDoctorDto doctor = Utility.HttpRequests.GetDoctorByIdAsync(appointment.DoctorUserId).Result;
-            return new AppointmentDto(doctor.Name + " " + doctor.Surname, appointment.Referral, appointment.Date);
+            return new AppointmentDto(doctor.Name + " " + doctor.Surname, appointment.Referral, appointment.Date, appointment.Id);
         }
 
         /// <summary>This method creates List of <c>AppointmentDto</c> from provided <paramref name="appointments"/>.</summary>

@@ -109,11 +109,11 @@ class PrescriptionsSearchSimpleTable extends Component {
                         <tbody key={f.id}>
                             <tr key={f.id}>
                                 <td style={{ textAlign: "left" }} >
-                                    {f.medicines !== undefined ? f.medicines.map((m, i) => (
+                                    {f.medicines.length !== 0 ? f.medicines.map((m, i) => (
                                         f.medicines.length === i + 1 ? 
-                                            [medicines, m.name, ''].join('') :
-                                        [medicines, m.name, ', '].join('')
-                                    )) : medicines = "Empty"}
+                                        [medicines, m.medicine.name, ''].join('') :
+                                        [medicines, m.medicine.name, ', '].join('')
+                                    )) : "Empty"}
                                 </td>
                                 <td style={{ textAlign: "center" }} > {f.isUsed ? "Used" : "Not used"}</td >
                                 <td style={{ textAlign: "center" }}>{f.comment}</td >

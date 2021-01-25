@@ -4,9 +4,9 @@ import { connect } from "react-redux";
 class Header extends Component {
     render() {
         return (
-            <header className="header">
+            <header className="login-header">
                 <div className="wrap">
-                    <div className="header-blockquote">
+                    <div className="header-blockquote-login">
                         <h1 className="header-quote">{this.props.title}</h1>
                         <div className="header-cite">- {this.props.description}</div>
                     </div>

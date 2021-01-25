@@ -1,5 +1,5 @@
 ﻿import React, { Component } from "react"
-import { loadedAllPatientReports, simpleSearchAppointments } from "../actions/actions"
+import { loadedAllPatientReports, simpleSearchAppointments, loadedAllPatientAppointmentsWithoutSurvey } from "../actions/actions"
 import { connect } from "react-redux"
 import { wrap } from "module";
 import axios from "axios";
@@ -7,6 +7,8 @@ import ReferralModal from "./ReferralModal"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
 import { showErrorToast, checkDateFormat } from "../utilities/Utilities"
+import PrescriptionModal from "./PrescriptionModal";
+import CreateSurveyForm from "./CreateSurveyForm";
 
 class AppointmentReportSimpleSearchTable extends Component {
     state = {
@@ -17,12 +19,18 @@ class AppointmentReportSimpleSearchTable extends Component {
         PatientId: 2,
         Referral: null,
         Date: "",
-        modalShow: false
+        modalShow: false,
+        modalPrescriptionShow: false,
+        appointmentId: "",
+        isOperation: false,
+        modalSurveyShow: false,
+        appointmentToSend: null
     };
 
     componentDidMount() {
         debugger;
-        this.props.loadedAllPatientReports(2);
+        this.props.loadedAllPatientReports();
+        this.props.loadedAllPatientAppointmentsWithoutSurvey();
     }
 
     handleChange = (event) => {
@@ -37,11 +45,17 @@ class AppointmentReportSimpleSearchTable extends Component {
     }
 
     render() {
+        if (this.props.appointmentsWithSurvey === undefined) {
+
+            return null;
+        }
         const patientAppointments = this.props.patientAppointments;
         debugger;
         return (
             <div>
-                {this.state.modalShow ? <ReferralModal show={this.state.modalShow} referral={this.state.Referral} date={this.state.Date} onShowChange={this.displayModal.bind(this)} /> : null}
+                {this.state.modalShow ? <ReferralModal show={this.state.modalShow} referral={this.state.Referral} date={this.state.Date} isOperation={this.state.isOperation} onShowChange={this.displayModal.bind(this)} /> : null}
+                {this.state.modalPrescriptionShow ? <PrescriptionModal show={this.state.modalPrescriptionShow} date={this.state.Date} appointmentId={this.state.appointmentId} onShowChange={this.displayModalPrescription.bind(this)} /> : null}
+                {this.state.modalSurveyShow ? <CreateSurveyForm show={this.state.modalSurveyShow} appointment={this.state.appointmentToSend}  onShowChange={this.fillSurvey.bind(this)} /> : null}
                 <div className="field-wrap">
                     <label className="label" htmlFor="">
                         Doctor name and surname:
@@ -108,6 +122,8 @@ class AppointmentReportSimpleSearchTable extends Component {
                             <th style={{ textAlign: "center" }}>Type</th>
                             <th style={{ textAlign: "center" }}>Date</th>
                             <th style={{ textAlign: "center" }}></th>
+                            <th style={{ textAlign: "center" }}></th>
+                            <th style={{ textAlign: "center" }}></th>
                         </tr>
                     </thead>
                     {patientAppointments.map((f) => (
@@ -116,7 +132,9 @@ class AppointmentReportSimpleSearchTable extends Component {
                                 <td style={{ textAlign: "left" }} >{f.doctorNameAndSurname}</td>
                                 <td style={{ textAlign: "center" }} > {this.checkType(f)}</td >
                                 <td style={{ textAlign: "center" }}>{f.date}</td >
-                                <td style={{ textAlign: "right" }}><button onClick={() => { this.displayModal(f) }} className="btn btn-primary">Details</button></td >
+                                <td style={{ textAlign: "right" }}><button onClick={() => { this.displayModal(f) }} className="btn btn-primary">Report</button></td >
+                                <td style={{ textAlign: "right" }}><button onClick={() => { this.displayModalPrescription(f) }} className="btn btn-primary">Prescription</button></td >
+                                <td style={{ textAlign: "right" }}><button disabled={this.checkForSurvey(f)} onClick={() => this.fillSurvey(f)} className="btn btn-primary">Fill Survey</button></td >
                             </tr>
                         </tbody>
                     ))}
@@ -129,6 +147,38 @@ class AppointmentReportSimpleSearchTable extends Component {
         
     }
 
+    checkForSurvey(f){
+        if (typeof f.operationReferral !== 'undefined') {
+            return true;
+        }
+        for (var index = 0; index < this.props.appointmentsWithSurvey.length; ++index) {
+            if (f.id === this.props.appointmentsWithSurvey[index].id) return true;
+        }
+        return false;
+    }
+
+    fillSurvey(f) {
+        this.setState({ modalSurveyShow: !this.state.modalSurveyShow })
+        if (f === undefined) {
+            return;
+        }  
+        this.setState({ appointmentToSend: f})
+    }
+
+
+    displayModalPrescription(f) {
+        debugger;
+        this.setState({ modalPrescriptionShow: !this.state.modalPrescriptionShow });
+        if (f === undefined) {
+            return;
+        }
+        else{
+            debugger;
+            this.setState({ appointmentId : f.id,  Date: f.date })
+        }
+        
+    }
+
     displayModal(f) {
         debugger;
         console.log(f)
@@ -137,15 +187,14 @@ class AppointmentReportSimpleSearchTable extends Component {
             return;
         }
         else if (typeof f.referral !== 'undefined') {
-            this.setState({ Referral: f.referral[0], Date: f.date })
+            this.setState({ Referral: f.referral[0], Date: f.date, isOperation: false })
         }
         else if (typeof f.operationReferral !== 'undefined') {
-            this.setState({ Referral: f.operationReferral, Date: f.date })
+            this.setState({ Referral: f.operationReferral, Date: f.date, isOperation: true })
         }
     }
 
     checkType(f) {
-        debugger;
         console.log(typeof f.operationReferral); 
         let type = typeof f.operationReferral
         console.log(type !== 'undefined');
@@ -173,6 +222,6 @@ class AppointmentReportSimpleSearchTable extends Component {
 
 const mapStateToProps = (state) =>
 
-    ({ patientAppointments: state.reducer.patientAppointments })
+    ({ patientAppointments: state.reducer.patientAppointments, appointmentsWithSurvey: state.reducer.patientAppointmentsWithoutSurveys })
 
-export default connect(mapStateToProps, { loadedAllPatientReports, simpleSearchAppointments })(AppointmentReportSimpleSearchTable);
+export default connect(mapStateToProps, { loadedAllPatientReports, simpleSearchAppointments, loadedAllPatientAppointmentsWithoutSurvey })(AppointmentReportSimpleSearchTable);

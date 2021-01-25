@@ -40,5 +40,10 @@ namespace SearchMicroserviceApi.Repository
         {
             return dbContext.Prescriptions.ToList().FindAll(prescription => prescription.Patientsid == idPatient);
         }
+
+        public Prescription GetPrescriptionsForAppointment(int idAppointment)
+        {
+            return dbContext.Prescriptions.SingleOrDefault(prescription => prescription.AppointmentId == idAppointment);
+        }
     }
 }

@@ -1,9 +1,11 @@
 ﻿import React, { Component } from "react"
-import { loadedAllPatientAppointments, advancedSearchPatientAppointments } from "../actions/actions"
+import { loadedAllPatientAppointments, advancedSearchPatientAppointments, loadedAllPatientAppointmentsWithoutSurvey } from "../actions/actions"
 import { connect } from "react-redux"
 import { wrap } from "module";
 import { showErrorToast, checkDateFormat } from "../utilities/Utilities"
-
+import PrescriptionModal from "./PrescriptionModal";
+import ReferralModal from "./ReferralModal";
+import CreateSurveyForm from "./CreateSurveyForm";
 
 class AppointmentsSearchAdvancedTable extends Component {
     state = {
@@ -24,7 +26,15 @@ class AppointmentsSearchAdvancedTable extends Component {
         help: [],
         helpOper: [],
         helpRest: [],
-        helpForFirst: false
+        helpForFirst: false,
+        Date: "",
+        modalShow: false,
+        modalPrescriptionShow: false,
+        appointmentId: "",
+        referral: {},
+        isOperation: false,
+        modalSurveyShow: false,
+        appointmentToSend: null
     };
 
     addSearchField = (event) => {
@@ -110,7 +120,8 @@ class AppointmentsSearchAdvancedTable extends Component {
 
     componentDidMount() {
         debugger;
-        this.props.advancedSearchPatientAppointments(this.state);;
+        this.props.advancedSearchPatientAppointments(this.state);
+        this.props.loadedAllPatientAppointmentsWithoutSurvey();
     }
 
     render() {
@@ -119,13 +130,18 @@ class AppointmentsSearchAdvancedTable extends Component {
 
             return null;
         }
+        if (this.props.appointmentsWithSurvey === undefined) {
+
+            return null;
+        }
 
         const patientAppointmentsList = this.props.patientAppointmentsList;
         let doctor = ""
         return (
-
-
             <div>
+                {this.state.modalShow ? <ReferralModal show={this.state.modalShow} referral={this.state.Referral} date={this.state.Date} isOperation={this.state.isOperation} onShowChange={this.displayModal.bind(this)} /> : null}
+                {this.state.modalPrescriptionShow ? <PrescriptionModal show={this.state.modalPrescriptionShow} date={this.state.Date} appointmentId={this.state.appointmentId} onShowChange={this.displayModalPrescription.bind(this)} /> : null}
+                {this.state.modalSurveyShow ? <CreateSurveyForm show={this.state.modalSurveyShow} appointment={this.state.appointmentToSend}  onShowChange={this.fillSurvey.bind(this)} /> : null}
                 <div className="field-wrap">
                     <td>
                         <select
@@ -148,6 +164,9 @@ class AppointmentsSearchAdvancedTable extends Component {
                             name={this.state.first}
                             onChange={this.handleChange}
                         />
+                    </td>
+                    <td>
+                        <button className="btn btn-primary ml-3" onClick={this.addSearchField}>Add New Field</button>
                     </td>
                 </div>
 
@@ -192,11 +211,10 @@ class AppointmentsSearchAdvancedTable extends Component {
                             </td>
                         </div>
                     ))}
-                    <button className="btn btn-primary" onClick={this.addSearchField}>Add New Field</button>
                 </div>
 
                 <div className="btn-wrap align-right">
-                    <button className="btn btn-primary" /*disabled={this.state.defaultLogicOperator.length <= this.state.forAdding || this.state.restRoles.length <= this.state.forAdding}*/ onClick={this.searchAppointments.bind(this)}>Search</button>
+                    <button className="btn btn-primary btn-block btn-lg mb-4" /*disabled={this.state.defaultLogicOperator.length <= this.state.forAdding || this.state.restRoles.length <= this.state.forAdding}*/ onClick={this.searchAppointments.bind(this)}>Search</button>
                 </div>
 
                 <table className='table allAppointments' >
@@ -205,6 +223,9 @@ class AppointmentsSearchAdvancedTable extends Component {
                             <th style={{ textAlign: "left" }}>Doctor</th>
                             <th style={{ textAlign: "center" }}>Date</th>
                             <th style={{ textAlign: "center" }}>Room</th>
+                            <th style={{ textAlign: "center" }}></th>
+                            <th style={{ textAlign: "center" }}></th>
+                            <th style={{ textAlign: "center" }}></th>
                         </tr>
                     </thead>
                     {patientAppointmentsList.map((f) => (
@@ -215,6 +236,9 @@ class AppointmentsSearchAdvancedTable extends Component {
                                 </td>
                                 <td style={{ textAlign: "center" }} > {f.date}</td >
                                 <td style={{ textAlign: "center" }}>{f.roomId}</td >
+                                <td style={{ textAlign: "right" }}><button type="button" onClick={() => { this.displayModal(f) }} className="btn btn-primary">Report</button></td >
+                                <td style={{ textAlign: "right" }}><button onClick={() => { this.displayModalPrescription(f) }} className="btn btn-primary">Prescription</button></td >
+                                <td style={{ textAlign: "right" }}><button disabled={this.checkForSurvey(f)} onClick={() => this.fillSurvey(f)} className="btn btn-primary">Fill Survey</button></td >
                             </tr>
                         </tbody>
                     ))}
@@ -224,6 +248,22 @@ class AppointmentsSearchAdvancedTable extends Component {
 
 
         );
+    }
+
+    checkForSurvey(f){
+        debugger;
+        for (var index = 0; index < this.props.appointmentsWithSurvey.length; ++index) {
+            if (f.id === this.props.appointmentsWithSurvey[index].id) return true;
+        }
+        return false;
+    }
+
+    fillSurvey(f) {
+        this.setState({ modalSurveyShow: !this.state.modalSurveyShow })
+        if (f === undefined) {
+            return;
+        }  
+        this.setState({ appointmentToSend: f})
     }
 
     searchAppointments() {
@@ -245,6 +285,33 @@ class AppointmentsSearchAdvancedTable extends Component {
         }
     }
 
+    displayModalPrescription(f) {
+        debugger;
+        this.setState({ modalPrescriptionShow: !this.state.modalPrescriptionShow });
+        if (f === undefined) {
+            return;
+        }
+        else{
+            debugger;
+            this.setState({ appointmentId : f.id,  Date: f.date })
+        }
+        
+    }
+
+    displayModal(f) {
+        debugger;
+        console.log(f)
+        this.setState({ modalShow: !this.state.modalShow })
+        if (f === undefined) {
+            return;
+        }
+        else if (typeof f.referrals !== 'undefined') {
+            this.setState({ Referral: f.referrals[0], Date: f.date, isOperation: false })
+        }
+        else if (typeof f.operationReferral !== 'undefined') {
+            this.setState({ Referral: f.operationReferral, Date: f.date, isOperation: true })
+        }
+    }
 
 
 
@@ -253,6 +320,6 @@ class AppointmentsSearchAdvancedTable extends Component {
 
 const mapStateToProps = (state) =>
 
-    ({ patientAppointmentsList: state.reducer.patientAppointmentsList })
+    ({ patientAppointmentsList: state.reducer.patientAppointmentsList, appointmentsWithSurvey: state.reducer.patientAppointmentsWithoutSurveys })
 
-export default connect(mapStateToProps, { loadedAllPatientAppointments, advancedSearchPatientAppointments })(AppointmentsSearchAdvancedTable);
+export default connect(mapStateToProps, { loadedAllPatientAppointments, advancedSearchPatientAppointments, loadedAllPatientAppointmentsWithoutSurvey })(AppointmentsSearchAdvancedTable);
