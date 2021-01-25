@@ -811,7 +811,7 @@ export const loadedImage = (fileName) => async (dispatch) => {
 
 export const loadedImageForAds = (fileName) => async (dispatch) => {
     try {
-       const response = await axios.get("process.env.REACT_APP_GATEWAY+"/patientuser/getimage/" + fileName,
+       const response = await axios.get(process.env.REACT_APP_GATEWAY+"/patientuser/getimage/" + fileName,
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -833,7 +833,7 @@ export const loadedImageForAds = (fileName) => async (dispatch) => {
 export const loadedAllMessages = () => async (dispatch) => {
     try {
         debugger;
-       const response = await axios.get("process.env.REACT_APP_GATEWAY+"/message",
+       const response = await axios.get(process.env.REACT_APP_GATEWAY+"/message",
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
