@@ -24,13 +24,14 @@ import Counter from "./Counter";
 import { AuthRouteAdmin } from "../AuthRouteAdmin";
 import { AuthRoutePatient } from "../AuthRoutePatient";
 import { AuthRouteNotLogged } from "../AuthRouteNotLogged";
+import EventStatistics from "./EventStatistics";
 
 export default (props: { children: React.ReactNode }) => (
   <React.Fragment>
     <NavMenu />
     <Container>
       <AuthRouteNotLogged exact path="/" Component={Home} />
-      <AuthRoutePatient path="/patient-feedback" Component={PatientFeedback} />
+      <AuthRouteNotLogged  path="/patient-feedback" Component={PatientFeedback} />
       <AuthRouteAdmin path="/admin-feedback" Component={AdminFeedback} />
       <AuthRoutePatient path="/create-feedback" Component={CreateFeedback} />
       <AuthRoutePatient
@@ -57,6 +58,7 @@ export default (props: { children: React.ReactNode }) => (
       <AuthRoutePatient path="/create-survey" Component={CreateSurvey} />
       <AuthRouteAdmin path="/rates-doctor" Component={DoctorRates} />
       <AuthRouteAdmin path="/rates-general" Component={AllRates} />
+      <AuthRouteAdmin path="/event-statistics" Component={EventStatistics} />
       <AuthRoutePatient
         path="/choose-appointment-type"
         Component={ChooseAppointmentType}

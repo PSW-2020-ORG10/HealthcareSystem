@@ -56,7 +56,14 @@
     LOADED_SECOND_IMAGE,
     LOADED_THIRD_IMAGE,
     USER_LOGGEDIN,
-    USER_LOGGEDIN_ERROR
+    USER_LOGGEDIN_ERROR,
+    PRESCRIPTION_LOADED,
+    PRESCRIPTION_LOADED_ERROR,
+    STORE_EVENT,
+    STORE_EVENT_ERROR,
+    GET_STATISTICS,
+    GET_STATISTICS_ERROR
+
 } from "../types/types"
 import axios from "axios";
 import { func } from "prop-types";
@@ -89,7 +96,7 @@ export const feedbackPublished = (id) => async (dispatch) => {
         debugger
        const response = await axios.put(process.env.REACT_APP_GATEWAY +"/feedback/" + id, {}, {
                 headers: { "Access-Control-Allow-Origin": "*",
-                "Authorization": "Bearer " + localStorage.getItem('token')}
+    "Authorization": "Bearer " + localStorage.getItem('token')}
               }); 
         dispatch({
             type: FEEDBACK_PUBLISHED,
@@ -108,8 +115,7 @@ export const loadedPublishedFeedback = () => async (dispatch) => {
         debugger;
        const response = await axios.get(process.env.REACT_APP_GATEWAY +"/feedback/published",
         {
-            headers: { "Access-Control-Allow-Origin": "*",
-                       "Authorization" :  "Bearer " + localStorage.getItem("token")}
+            headers: { "Access-Control-Allow-Origin": "*"}
           }); 
         debugger;
         dispatch({
@@ -187,6 +193,28 @@ export const loadedAllPatientPrescriptions = () => async (dispatch) => {
         });
     }
 };
+
+export const loadedPrescriptionFromAppointment = (appointmentid) => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.get("http://localhost:54689/api/prescription/appointment/" + appointmentid,
+        {
+            headers: { "Access-Control-Allow-Origin": "*",
+                       "Authorization" :  "Bearer " + localStorage.getItem("token")}
+          }); 
+        debugger;
+        dispatch({
+            type: PRESCRIPTION_LOADED,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: PRESCRIPTION_LOADED_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
 
 
 export const patientRegistered = (patient) => async (dispatch) => {
@@ -909,5 +937,48 @@ export const userLoggedIn = (user) => async (dispatch) => {
         return true;
     } catch (e) {
         console.log(e);
+    }
+};
+
+export const storeEvent = (appointmentEvent) => async (dispatch) => {
+    try {
+        debugger;
+        appointmentEvent.patientId = localStorage.getItem("patientId")
+        const response = await axios.post("http://localhost:54689/api/doctorappointment/storeEvent", appointmentEvent,
+        {
+            headers: { "Access-Control-Allow-Origin": "*",
+                       "Authorization" :  "Bearer " + localStorage.getItem("token")}
+          });
+        debugger;
+        dispatch({
+            type: STORE_EVENT,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: STORE_EVENT_ERROR,
+            payload: console.log(e),
+        });
+    }
+};
+
+export const getStatistics = () => async (dispatch) => {
+    try {
+        debugger;
+        const response = await axios.get("http://localhost:54689/api/doctorappointment/getStatistics",
+        {
+            headers: { "Access-Control-Allow-Origin": "*",
+                       "Authorization" :  "Bearer " + localStorage.getItem("token")}
+          });
+        debugger;
+        dispatch({
+            type: GET_STATISTICS,
+            payload: response.data,
+        });
+    } catch (e) {
+        dispatch({
+            type: GET_STATISTICS_ERROR,
+            payload: console.log(e),
+        });
     }
 };

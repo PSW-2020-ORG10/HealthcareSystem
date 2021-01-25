@@ -11,6 +11,7 @@ namespace EventStore.EventDBContext
     public class EventDbContext: DbContext
     {
         public DbSet<FeedbackSubmittedEvent> FeedbackSubmittedEvents { get; set; }
+        public DbSet<AppointmentSchedulingEvent> AppointmentSchedulingEvents { get; set; }
 
         public EventDbContext(DbContextOptions options)
         {
@@ -48,6 +49,16 @@ namespace EventStore.EventDBContext
                 entity.Property(e => e.FeedbackID).IsRequired();
                 entity.Property(e => e.Message).IsRequired();
                 entity.Property(e => e.PatientID).IsRequired();
+            });
+
+            modelBuilder.Entity<AppointmentSchedulingEvent>(entity =>
+            {
+                entity.HasKey(e => e.ID);
+                entity.Property(e => e.TimeStamp).IsRequired();
+                entity.Property(e => e.PatientId).IsRequired();
+                entity.Property(e => e.Step).IsRequired();
+                entity.Property(e => e.Action).IsRequired();
+                entity.Property(e => e.EndPoint).IsRequired();
             });
         }
     }

@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Text;
+using EventStore.EventDBContext;
 
 namespace AppointmentMicroserviceApi
 {
@@ -38,8 +39,20 @@ namespace AppointmentMicroserviceApi
             return Environment.GetEnvironmentVariable("STAGE") ?? "Testing";
         }
 
-      // This method gets called by the runtime. Use this method to add services to the container.
-      public void ConfigureServices(IServiceCollection services)
+        private string CreateConnectionStringFromEnvironmentEventStore()
+        {
+            string server = Environment.GetEnvironmentVariable("DATABASE_HOST") ?? "localhost";
+            string port = Environment.GetEnvironmentVariable("DATABASE_PORT") ?? "3306";
+            string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA") ?? "EventsDB";
+            string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "root";
+            string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "root";
+
+            return $"server={server};port={port};database={database};user={user};password={password}";
+
+        }
+
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
         {
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
@@ -69,6 +82,10 @@ namespace AppointmentMicroserviceApi
             {
                 services.AddDbContext<MyDbContext>(options =>
                 options.UseMySql(CreateConnectionStringFromEnvironment(),
+                builder => builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null)).UseLazyLoadingProxies());
+
+                services.AddDbContext<EventDbContext>(options =>
+                options.UseMySql(CreateConnectionStringFromEnvironmentEventStore(),
                 builder => builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null)).UseLazyLoadingProxies());
             }
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>

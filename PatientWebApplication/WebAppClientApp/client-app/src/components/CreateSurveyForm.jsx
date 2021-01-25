@@ -83,7 +83,7 @@ class CreateSurveyForm extends Component {
             return null;
         }
         const appointmentSurveyList = this.props.appointmentSurveyList;
-
+        debugger;
         return (
                 <Modal isOpen={this.state.modalShow} centered={true}>
                 <ModalHeader toggle={this.toggle.bind(this)}> </ModalHeader>
@@ -99,7 +99,7 @@ class CreateSurveyForm extends Component {
                                 <h2 className="label"></h2>
                                 <h2 className="label">RATE DOCTORS: </h2>
                                 <div className="field-wrap">
-                                <label className="label">Doctor: {this.props.appointment.doctor.name + ' ' + this.props.appointment.doctor.surname} </label>
+                                <label className="label">Doctor: {this.props.appointment.doctorNameAndSurname} </label>
                                 
 
                                 </div>    
@@ -965,7 +965,9 @@ class CreateSurveyForm extends Component {
         this.setState({ modalShow: false });
         this.props.onShowChange();
         this.props.surveyCreated({ patientId: this.state.patientId, appointmentId: this.state.appointmentId, doctorsProfessionalism: this.state.doctorsProfessionalism, doctorsPoliteness: this.state.doctorsPoliteness, doctorsTechnicality: this.state.doctorsTechnicality, doctorsSkill: this.state.doctorsSkill, doctorsKnowledge: this.state.doctorsKnowledge, doctorsWorkingPace: this.state.doctorsWorkingPace, medicalStaffsProfessionalism: this.state.medicalStaffsProfessionalism, medicalStaffsPoliteness: this.state.medicalStaffsPoliteness, medicalStaffsTechnicality: this.state.medicalStaffsTechnicality, medicalStaffsSkill: this.state.medicalStaffsSkill, medicalStaffsKnowledge: this.state.medicalStaffsKnowledge, medicalStaffsWorkingPace: this.state.medicalStaffsWorkingPace, hospitalEnvironment: this.state.hospitalEnvironment, hospitalEquipment: this.state.hospitalEquipment, hospitalHygiene: this.state.hospitalHygiene, hospitalPrices: this.state.hospitalPrices, hospitalWaitingTime: this.state.hospitalWaitingTime })     
-        window.location.href =  process.env.REACT_APP_BASE_URL + "/my-appointments";
+
+        window.location.href = process.env.REACT_APP_BASE_URL + "/reports-simple";
+
     }
 
 }

@@ -1,4 +1,4 @@
-﻿#datepickerInput {
+#datepickerInput {
   border: solid grey 1px;
   width: 400px !important;
   font-size: 24px;
@@ -6,7 +6,7 @@
 }
 
 #appointmentTable {
-  height: 350px !important;
+  /* height: 350px !important; */
   overflow: scroll;
   overflow-x: hidden;
 }
@@ -89,15 +89,28 @@ input:focus {
 ## Main
 --------------------------------------------------------------*/
 div.a {
-    height: 270px;
+  height: 270px;
 }
 
 body {
+ /* background-image: url("/img/hospital.png");*/
   background-color: #fff;
   font-family: "Roboto", sans-serif;
   display: flex;
   flex-direction: column;
 }
+
+body.login {
+  background-image: url("/img/page.png");
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  flex-direction: column;
+  width: 1539px;
+  height: 468px;
+  margin-left: -225px;
+  margin-right: 425px;
+}
+
 
 .page-wrap {
   min-height: 100vh;
@@ -137,10 +150,11 @@ body {
   padding-bottom: 20px;
   background: #66a4fa no-repeat left bottom;
   background-size: cover;
+  
 }
 
 .header-blockquote {
-  max-width: 520px;
+  max-width: 570px;
   /*margin-left: auto;*/
   padding: 40px 0;
   text-align: left;
@@ -221,6 +235,20 @@ body {
 .custom-modal-style {
   width: 1500px;
   height: 802px;
+}
+
+.modal-textarea-diagnosis {
+  width: 100%;
+  height: 100px;
+  resize: none;
+  background: #fff;
+}
+
+.modal-textarea-procedure {
+  width: 100%;
+  height: 300px;
+  resize: none;
+  background: #fff;
 }
 
 /*--------------------------------------------------------------
@@ -559,3 +587,54 @@ input[type="radio"] {
     color: #EE4E34;
     text-align: center;
   }
+
+  .login{
+    background-image: url("/img/doctor1.png");
+    font-family: "Roboto", sans-serif;
+    display: flex;
+    flex-direction: column;
+    background-size: cover;
+  }
+
+  .login-header{
+    padding-top: 30px;
+    padding-bottom: -40px;
+    width: 1519px;
+    background: #66a4fa no-repeat left bottom;
+    background-size: cover;
+    margin-left: -205px;
+  }
+
+  .header-blockquote-login {
+    max-width: 570px;
+    margin-left: 220px;
+    padding: 40px 0;
+    text-align: center;
+  }
+
+  .color{
+    color: white;
+    font-size: 14pt;
+    font-style: inherit;
+    font-weight: 500;
+  }
+
+  .input-color{
+    background-color: white;
+    color: #66a4fa;
+  }
+
+
+.each-slide span {
+  padding: 20px;
+  font-size: 20px;
+  background: #fcedda;
+  color: #ee4e34;
+  text-align: center;
+}
+
+.modal-header {
+  background-color: #1b6ec2;
+  text-align: left;
+  color: white;
+}

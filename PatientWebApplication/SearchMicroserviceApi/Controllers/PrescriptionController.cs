@@ -59,5 +59,12 @@ namespace SearchMicroserviceApi.Controllers
         {
             return Ok(MicroservicePrescriptionAdapter.PrescriptionListToMicroservicePrescriptionDtoList(PrescriptionService.AdvancedSearchPrescriptions(dto)));
         }
+
+        [HttpGet("appointment/{id}")]       // GET /api/prescription/patient
+        [Authorize(Roles = "patient")]
+        public IActionResult GetPrescriptionsForAppointment(int id)
+        {
+            return Ok(MicroservicePrescriptionAdapter.PrescriptionToMicroservicePrescriptionDto(PrescriptionService.GetPrescriptionsForAppointment(id)));
+        }
     }
 }

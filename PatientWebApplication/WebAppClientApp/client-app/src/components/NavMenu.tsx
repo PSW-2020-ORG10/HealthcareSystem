@@ -82,7 +82,7 @@ export default class NavMenu extends React.PureComponent<
                       className="text-dark"
                       to="/reports-simple"
                     >
-                      Appointment Reports Search
+                      Appointment Reports
                     </NavLink>
                   ) : null}
                 </NavItem>
@@ -149,6 +149,17 @@ export default class NavMenu extends React.PureComponent<
                       to="/malicious-patient"
                     >
                       Malicious patient
+                    </NavLink>
+                  ) : null}
+                </NavItem>
+                <NavItem>
+                  {localStorage.getItem("role") === "admin" ? (
+                    <NavLink
+                      tag={Link}
+                      className="text-dark"
+                      to="/event-statistics"
+                    >
+                      Event Statistics
                     </NavLink>
                   ) : null}
                 </NavItem>

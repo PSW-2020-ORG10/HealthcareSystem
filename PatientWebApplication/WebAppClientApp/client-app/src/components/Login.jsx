@@ -41,14 +41,16 @@ class Login extends Component {
 
     render() { 
         return ( 
-            <div>
+    <header className="login-header" >   
+        <body >
+            <div className="login">
                 <div className="field-wrap row d-flex justify-content-center mt-5">
-                    <label className="label text-left mr-2 pt-3" htmlFor="">
+                    <label className="label text-left mr-2 pt-3 color" htmlFor="">
                         Email:
                     </label>
                     <input
                         id="email"
-                        className="field-center"
+                        className="field-center color input-color"
                         type="text"
                         value={this.state.email}
                         name="email"
@@ -57,12 +59,12 @@ class Login extends Component {
                 </div>
 
                 <div className="field-wrap row d-flex justify-content-center">
-                    <label className="label mr-2 pt-3" htmlFor="">
+                    <label className="label mr-2 pt-3 color" htmlFor="">
                         Password:
                     </label>
                     <input
                         id="password"
-                        className="field-center2"
+                        className="field-center2 color input-color"
                         type="password"
                         value={this.state.password}
                         name="password"
@@ -74,13 +76,21 @@ class Login extends Component {
                     <Button id="submit" className="btn btn-lg btn-primary btn-block button-wrap" disabled={this.state.email === '' || this.state.password === ''} onClick={this.login.bind(this)}>Login</Button>
                 </div>
 
-                <div className="field-wrap row d-flex justify-content-center mt-5">
-                    <label className="label mr-2 pl-5">
+                <div className="field-wrap row d-flex justify-content-center mt-2 color">
+                    <label className="label mr-2 pl-5 color">
                         Not a member?
                     </label>
-                    <a href =  "$process.env.REACT_APP_BASE_UR/register-patient" className="pl-2">Sign up now.</a>
+
+                    <a href = "http://localhost:3000/register-patient" className="pl-2">Sign up now.</a>
+                    <label className="label mr-2 pl-5 color">
+                        Useful feedback?
+                    </label>
+                    <a href = "http://localhost:3000/patient-feedback" className="pl-2">Read it now.</a>
+
                 </div>
             </div>
+        </body>   
+    </header>     
         );
     }
 }

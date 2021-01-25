@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FeedbackMicroserviceApi.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20210103221157_FirstMigration")]
+    [Migration("20210115192713_FirstMigration")]
     partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,7 +21,7 @@ namespace FeedbackMicroserviceApi.Migrations
 
             modelBuilder.Entity("FeedbackMicroserviceApi.Model.Feedback", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -43,14 +43,14 @@ namespace FeedbackMicroserviceApi.Migrations
                     b.Property<int>("PatientId")
                         .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Feedbacks");
 
                     b.HasData(
                         new
                         {
-                            id = 1,
+                            Id = 1,
                             Date = new DateTime(2020, 11, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsAnonymous = true,
                             IsPublic = true,
@@ -60,7 +60,7 @@ namespace FeedbackMicroserviceApi.Migrations
                         },
                         new
                         {
-                            id = 2,
+                            Id = 2,
                             Date = new DateTime(2019, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsAnonymous = false,
                             IsPublic = false,
@@ -70,7 +70,7 @@ namespace FeedbackMicroserviceApi.Migrations
                         },
                         new
                         {
-                            id = 3,
+                            Id = 3,
                             Date = new DateTime(2020, 2, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsAnonymous = false,
                             IsPublic = true,
@@ -80,7 +80,7 @@ namespace FeedbackMicroserviceApi.Migrations
                         },
                         new
                         {
-                            id = 4,
+                            Id = 4,
                             Date = new DateTime(2020, 9, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsAnonymous = false,
                             IsPublic = true,

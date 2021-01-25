@@ -44,7 +44,7 @@ namespace FeedbackMicroserviceApi.Controllers
         /// <summary> This method is calling <c>FeedbackService</c> to get list of all published <c>Feedback</c>. </summary>
         /// <returns> 200 Ok with list of published feedback. </returns>
         [HttpGet("published")]       // GET /api/feedback/published
-        [Authorize(Roles = "patient, admin")]
+        [AllowAnonymous] 
         public IActionResult GetPublished()
         {
             return Ok(FeedbackAdapter.FeedbackListToMicroserviceFeedbackDtoList(FeedbackService.GetPublished()));

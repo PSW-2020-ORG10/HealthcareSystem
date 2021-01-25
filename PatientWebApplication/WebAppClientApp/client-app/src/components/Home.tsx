@@ -6,7 +6,7 @@ import Login from './Login'
 const Home = () => (
   <React.Fragment>
                 <Header title="Welcome to Health Clinic!" description="Please Login" />
-                <Login/>
+                <Login/>  
             </React.Fragment>
 );
 
