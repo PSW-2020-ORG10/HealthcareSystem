@@ -61,7 +61,7 @@ class RegisterPatient extends Component {
             const res = await axios({
 
                 method: 'post',
-                url: 'http://localhost:53236/api/patientuser/image',
+                url: process.env.REACT_APP_USERAPI_URL + '/patientuser/image',
                 data: formData,
                 headers: { 'Content-Type': 'multipart/form-data', "Access-Control-Allow-Origin": "*"}
             })

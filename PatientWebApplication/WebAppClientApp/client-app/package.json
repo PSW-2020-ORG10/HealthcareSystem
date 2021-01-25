@@ -50,10 +50,10 @@
     "typescript": "3.6.4"
   },
    "scripts": {
-      "start": "REACT_APP_GATEWAY=http://localhost:54689/api  REACT_APP_BASE_URL=http://localhost:3000/api node server.js",
-      "heroku-start": "REACT_APP_GATEWAY=https://gatewayapi-org10.herokuapp.com/api  REACT_APP_BASE_URL=https://healthcare-system-org10.herokuapp.com node server.js",
-      "build": "REACT_APP_GATEWAY=http://localhost:54689/api  REACT_APP_BASE_URL=http://localhost:3000/api react-scripts build",
-      "heroku-build": "REACT_APP_GATEWAY=https://gatewayapi-org10.herokuapp.com/api  REACT_APP_BASE_URL=https://healthcare-system-org10.herokuapp.com react-scripts build",
+      "start": "REACT_APP_GATEWAY=http://localhost:54689/api  REACT_APP_BASE_URL=http://localhost:3000 REACT_APP_USERAPI_URL=http://localhost:53236/api node server.js",
+      "heroku-start": "REACT_APP_GATEWAY=https://gatewayapi-org10.herokuapp.com/api  REACT_APP_BASE_URL=https://healthcare-system-org10.herokuapp.com REACT_APP_USERAPI_URL=https://userapi-org10.herokuapp.com/api node server.js",
+      "build": "REACT_APP_GATEWAY=http://localhost:54689/api  REACT_APP_BASE_URL=http://localhost:3000 REACT_APP_USERAPI_URL=http://localhost:53236/api REACT_APP_USERAPI_URL=http://localhost:53236/api react-scripts build",
+      "heroku-build": "REACT_APP_GATEWAY=https://gatewayapi-org10.herokuapp.com/api  REACT_APP_BASE_URL=https://healthcare-system-org10.herokuapp.com REACT_APP_USERAPI_URL=https://userapi-org10.herokuapp.com/api react-scripts build",
       "test": "cross-env CI=true react-scripts test --env=jsdom",
       "eject": "react-scripts eject",
       "lint": "eslint ./src/**/*.ts ./src/**/*.tsx"
