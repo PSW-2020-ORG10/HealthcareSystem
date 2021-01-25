@@ -29,9 +29,9 @@ class Login extends Component {
         successful = await this.props.userLoggedIn(this.state);
         if(successful === true){
             if(localStorage.getItem("role") === 'admin'){
-                window.location.href = "http://localhost:3000/admin-feedback";
+                window.location.href = REACT_APP_BASE_URL + "/admin-feedback";
             }else if(localStorage.getItem("role") === 'patient') {
-                window.location.href = "http://localhost:3000/patient-homepage";
+                window.location.href =  REACT_APP_BASE_URL + "/patient-homepage";
             }
             return;
         }
@@ -78,7 +78,7 @@ class Login extends Component {
                     <label className="label mr-2 pl-5">
                         Not a member?
                     </label>
-                    <a href = "http://localhost:3000/register-patient" className="pl-2">Sign up now.</a>
+                    <a href =  REACT_APP_BASE_URL + "/register-patient" className="pl-2">Sign up now.</a>
                 </div>
             </div>
         );

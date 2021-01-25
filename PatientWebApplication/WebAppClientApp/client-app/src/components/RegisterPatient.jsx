@@ -397,7 +397,7 @@ class RegisterPatient extends Component {
                 toast.success("Registration successful!", {
                     position: toast.POSITION.TOP_RIGHT
                 });
-                window.location.href = "http://localhost:3000";
+                window.location.href = REACT_APP_BASE_URL;
                 return;
             }
             else {
