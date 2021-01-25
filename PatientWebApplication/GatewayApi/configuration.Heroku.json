@@ -236,7 +236,7 @@
          "DownstreamHostAndPorts": [
             {
                "Host": "appointmentapi-org10.herokuapp.com",
-               "Port": 433
+               "Port": 443
             }
          ],
          "UpstreamPathTemplate": "/api/doctorappointment/storeEvent",
@@ -252,7 +252,7 @@
          "DownstreamHostAndPorts": [
             {
                "Host": "appointmentapi-org10.herokuapp.com",
-               "Port": 433
+               "Port": 443
             }
          ],
          "UpstreamPathTemplate": "/api/doctorappointment/getStatistics",
