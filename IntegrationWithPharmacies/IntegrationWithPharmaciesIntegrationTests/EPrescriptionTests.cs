@@ -1,4 +1,4 @@
-﻿using EPrescriptionApi.Model;
+﻿/*using EPrescriptionApi.Model;
 using EPrescriptionApi;
 using MedicineInformationApi.DbContextModel;
 using MedicineInformationApi.Model;
@@ -14,7 +14,7 @@ using Xunit;
 namespace IntegrationWithPharmaciesIntegrationTests
 {
     public class EPrescriptionTests
-    {/*
+    {
         private readonly HttpClient _client;
         private readonly MyDbContext _context;
 
@@ -53,6 +53,7 @@ namespace IntegrationWithPharmaciesIntegrationTests
             response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
         }
         
-        */
+        
     }
 }
+*/

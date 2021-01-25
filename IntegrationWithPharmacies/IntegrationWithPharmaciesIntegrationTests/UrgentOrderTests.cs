@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿/*using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Shouldly;
 using System.Net;
@@ -13,7 +13,7 @@ using Xunit;
 namespace IntegrationWithPharmaciesIntegrationTests
 {
     public class UrgentOrderTests
-    {/*
+    {
         private readonly HttpClient _client;
         private MyDbContext _context;
 
@@ -49,6 +49,7 @@ namespace IntegrationWithPharmaciesIntegrationTests
             _context.SaveChanges();
             var response = await _client.GetAsync("http://localhost:57942/api/sharingPrescription/http/description/Brufen");
             response.StatusCode.ShouldBe(HttpStatusCode.OK);
-        }*/
+        }
     }
 }
+*/

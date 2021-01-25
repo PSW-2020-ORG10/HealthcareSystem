@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Hosting;
+/*using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using PharmacyRegistrationApi.DbContextModel;
 using PharmacyRegistrationApi.Dtos;
@@ -41,4 +41,4 @@ namespace IntegrationWithPharmaciesIntegrationTests
         }
       
     }
-}
+}*/
