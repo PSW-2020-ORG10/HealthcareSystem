@@ -13,7 +13,7 @@ namespace PatientWebAppSeleniumTests.Pages
     class AppointmentsPage
     {
         private readonly IWebDriver driver;
-        public const string URI = "http://localhost:3000/my-appointments";
+        public const string URI = "https://healthcare-system-org10.herokuapp.com/my-appointments";
         private IWebElement Table => driver.FindElement(By.Id("appointmentTable"));
         private ReadOnlyCollection<IWebElement> Rows => driver.FindElements(By.XPath("//table[@id='appointmentTable']/tbody/tr"));
         private IWebElement elementOldPage => driver.FindElements(By.Name("cancelButton"))[1];

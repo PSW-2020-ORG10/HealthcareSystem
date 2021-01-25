@@ -13,7 +13,7 @@ namespace PatientWebAppSeleniumTests.Pages
     public class FeedbackPage
     {
         private readonly IWebDriver driver;
-        public const string URI = "http://localhost:3000/admin-feedback";
+        public const string URI = "https://healthcare-system-org10.herokuapp.com/admin-feedback";
         private IWebElement Table => driver.FindElement(By.Id("feedbackTable"));
         private ReadOnlyCollection<IWebElement> Rows => driver.FindElements(By.XPath("//table[@id='feedbackTable']/tbody/tr"));
         private IWebElement LastRowMessage => driver.FindElement(By.XPath("(//table[@id='feedbackTable']/tbody/tr)[last()]/td[1]"));

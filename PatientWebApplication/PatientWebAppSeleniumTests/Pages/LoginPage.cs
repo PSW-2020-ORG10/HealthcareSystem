@@ -9,7 +9,7 @@ namespace PatientWebAppSeleniumTests.Pages
     public class LoginPage
     {
         private readonly IWebDriver driver;
-        public const string URI = "http://localhost:3000/";
+        public const string URI = "https://healthcare-system-org10.herokuapp.com/";
         private IWebElement EmailElement => driver.FindElement(By.Id("email"));
         private IWebElement PasswordElement => driver.FindElement(By.Id("password"));
         private IWebElement SubmitButtonElement => driver.FindElement(By.Id("submit"));
