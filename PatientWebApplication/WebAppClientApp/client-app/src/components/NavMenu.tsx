@@ -24,7 +24,7 @@ export default class NavMenu extends React.PureComponent<
     localStorage.setItem("token", "");
     localStorage.setItem("patientId", "");
     localStorage.setItem("role", "");
-    window.location.href = "http://localhost:3000";
+    window.location.href = "" + process.env.REACT_APP_BASE_URL;
   }
 
   public render() {
