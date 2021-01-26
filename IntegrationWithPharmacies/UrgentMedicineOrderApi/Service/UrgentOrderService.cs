@@ -46,9 +46,7 @@ namespace UrgentMedicineOrderApi.Service
             {
                 DefineTyepOfApiKey(medicine, pharmacies, registrationInPharmacy);
             }
-            if (pharmacies.Count!=0) { return pharmacies[0]; }
-            return null;
-
+            return (pharmacies.Count != 0) ? pharmacies[0] : null;
         }
 
         private void DefineTyepOfApiKey(String medicine, List<string> pharmacies, RegistrationInPharmacy registrationInPharmacy)

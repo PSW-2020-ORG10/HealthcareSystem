@@ -18,7 +18,6 @@ namespace EPrescriptionApi.AbstractFactory
         public PharmacyHttp() { }
         public PharmacyHttp(MyDbContext context)
         {
-            Console.WriteLine("***************************************          TUUUUUUUUUU");
             SftpService = new SftpService();
             HttpRequests = new HttpRequests();
             SmptServerService = new SmptServerService();
