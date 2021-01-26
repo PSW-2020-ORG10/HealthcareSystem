@@ -41,7 +41,7 @@ namespace PatientWebAppSeleniumTests.Pages
 
         public void EnsurePageIsDisplayed()
         {
-            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 20));
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 40));
             wait.Until(condition =>
             {
                 try

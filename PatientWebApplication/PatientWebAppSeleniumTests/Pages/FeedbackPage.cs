@@ -25,7 +25,7 @@ namespace PatientWebAppSeleniumTests.Pages
 
         public void EnsurePageIsDisplayed()
         {
-            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 20));
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 40));
             wait.Until(condition =>
             {
                 try
@@ -45,7 +45,7 @@ namespace PatientWebAppSeleniumTests.Pages
 
         public void EnsurePageIsDisplayedSecond(int number)
         {
-            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 20));
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 40));
             wait.Until(condition =>
             {
                 try
@@ -75,7 +75,7 @@ namespace PatientWebAppSeleniumTests.Pages
 
         public string GetLastRowMessage()
         {
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(40));
             wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("(//table[@id='feedbackTable']/tbody/tr)[last()]/td[1]")));
             return LastRowMessage.Text;
         }
@@ -102,7 +102,7 @@ namespace PatientWebAppSeleniumTests.Pages
 
         public void LastPublishButtonClick()
         {
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(40));
             wait.Until(ExpectedConditions.ElementToBeClickable(LastRowButton));
             LastRowButton.Click();
         }

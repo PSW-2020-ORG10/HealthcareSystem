@@ -23,7 +23,7 @@ class CancelAppointmentButton extends Component {
         });
         debugger;
         this.props.cancelAppointment(this.props.appointment.id);
-        window.location.href = "http://localhost:3000/my-appointments";           
+        window.location.href = process.env.REACT_APP_BASE_URL + "/my-appointments";           
     }
 }
 

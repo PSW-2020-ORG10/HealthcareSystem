@@ -24,7 +24,7 @@ namespace PatientWebAppSeleniumTests.Pages
 
         public void EnsurePageIsDisplayed()
         {
-            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 20));
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 40));
             wait.Until(condition =>
             {
                 try
@@ -120,7 +120,7 @@ namespace PatientWebAppSeleniumTests.Pages
 
         public void WaitForFormSubmit()
         {
-            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 20));
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 40));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe("https://healthcare-system-org10.herokuapp.com/patient-homepage"));
         }
 

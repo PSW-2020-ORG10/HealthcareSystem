@@ -51,13 +51,13 @@ namespace PatientWebAppSeleniumTests.Pages
 
         public void WaitForFormSubmit()
         {
-            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 20));
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 40));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe("https://healthcare-system-org10.herokuapp.com/patient-homepage"));
         }
 
         public void WaitForFormSubmitAdmin()
         {
-            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 20));
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 40));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe("https://healthcare-system-org10.herokuapp.com/admin-feedback"));
         }
 
