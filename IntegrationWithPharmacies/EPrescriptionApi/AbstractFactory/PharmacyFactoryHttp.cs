@@ -7,7 +7,6 @@ namespace EPrescriptionApi.AbstractFactory
     {
         public override IPharmacy GetIPharmacy(MyDbContext context)
         {
-            Console.WriteLine("OVDE SAM GAAAAAAAAAAAAAAAAAAAAAA");
             return new PharmacyHttp(context);
         }
 

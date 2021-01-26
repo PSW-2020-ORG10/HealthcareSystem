@@ -48,8 +48,7 @@ namespace TenderApi.Service
         {
             foreach (MedicineTenderOffer medicineQuantity in tender.MedicinesWithQuantity)
             {
-                Console.WriteLine(medicineQuantity.RequiredQuantity);
-                Create(MedicineForTenderingAdapter.MedicineForebderingToMedicineForTenderingDto(new MedicineForTendering(medicineQuantity.MedicineName, medicineQuantity.RequiredQuantity, TenderService.getNextTenderId())));
+                Create(MedicineForTenderingAdapter.MedicineForebderingToMedicineForTenderingDto(new MedicineForTendering(medicineQuantity.MedicineName, medicineQuantity.RequiredQuantity, TenderService.GetNextTenderId())));
             }
         }
     }

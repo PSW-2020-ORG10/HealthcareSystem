@@ -8,7 +8,7 @@ namespace UrgentMedicineOrderApi.Service
     public class SmptServerService
     {
         public SmptServerService() { }
-        public void SendEMailNotificationForUrgentOrdee(UrgentMedicineOrder urgentMedicineOrder, string pharmacyName)
+        public void SendEMailNotificationForUrgentOrder(UrgentMedicineOrder urgentMedicineOrder, string pharmacyName)
         {
             try { SendMail(urgentMedicineOrder, pharmacyName); }
             catch (SmtpException exception) { Console.WriteLine(exception.Message); }
@@ -34,9 +34,7 @@ namespace UrgentMedicineOrderApi.Service
 
         private static string FormBodyOfMailMessage(UrgentMedicineOrder urgentMedicineOrder, string pharmacyName)
         {
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append("Medicine is ordered from: " + pharmacyName + "\n" + "Requested medicine: " + urgentMedicineOrder.Name + ", quantity:  " + urgentMedicineOrder.Quantity + " \n");
-            return stringBuilder.ToString();
+            return "Medicine is ordered from: " + pharmacyName + "\n" + "Requested medicine: " + urgentMedicineOrder.Name + ", quantity: " + urgentMedicineOrder.Quantity + " \n";
         }
 
     }

@@ -30,10 +30,9 @@ namespace PharmacyRegistrationApi.Service
         public RegistrationInPharmacy Create(RegistrationInPharmacyDto dto)
         {
             RegistrationInPharmacy registration = RegistrationInPharmacyAdapter.RegistrationDtoToRegistration(dto);
-            if (isApiKeyUnique(registration.PharmacyConnectionInfo.ApiKey))  return RegistrationInPharmacyRepository.Create(registration); 
-            return null;
+            return IsApiKeyUnique(registration.PharmacyConnectionInfo.ApiKey) ? RegistrationInPharmacyRepository.Create(registration) : null;
         }
-        public bool isApiKeyUnique(String apiKey)
+        public bool IsApiKeyUnique(String apiKey)
         {
             foreach(RegistrationInPharmacy registration in GetAll())
             {
@@ -46,7 +45,7 @@ namespace PharmacyRegistrationApi.Service
             return IRegistrationRepository.GetAll();
         }
 
-        public RegistrationInPharmacy getPharmacyApiKey(String apiKey)
+        public RegistrationInPharmacy GetPharmacyApiKey(String apiKey)
         {
             foreach (RegistrationInPharmacy registration in IRegistrationRepository.GetAll())
             {
@@ -62,7 +61,7 @@ namespace PharmacyRegistrationApi.Service
             }
             return null;
         }
-        public RegistrationInPharmacy createIRegistration(RegistrationInPharmacyDto dto)
+        public RegistrationInPharmacy CreateIRegistration(RegistrationInPharmacyDto dto)
         {
             foreach (RegistrationInPharmacy registrationIRepo in IRegistrationRepository.GetAll())
             {

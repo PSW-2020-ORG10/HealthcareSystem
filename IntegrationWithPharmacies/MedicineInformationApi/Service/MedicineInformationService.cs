@@ -12,16 +12,16 @@ namespace MedicineInformationApi.Service
     public class MedicineInformationService : IMedicineInformationService
     {
         public MedicineInformationRepository MedicineWithQuantityRepository { get; }
-        public IMedicineInformationRepository IMedicineWithQuantityRepository { get; }
+        public IMedicineInformationRepository _medicineWithQuantityRepository { get; }
         public MedicineInformationService() { }
 
         public MedicineInformationService(MyDbContext context)
         {
             MedicineWithQuantityRepository = new MedicineInformationRepository(context);
         }
-        public MedicineInformationService(IMedicineInformationRepository mdicineWithQuantityRepository)
+        public MedicineInformationService(IMedicineInformationRepository medicineWithQuantityRepository)
         {
-            IMedicineWithQuantityRepository = mdicineWithQuantityRepository;
+            _medicineWithQuantityRepository = medicineWithQuantityRepository;
         }
 
 
@@ -43,13 +43,12 @@ namespace MedicineInformationApi.Service
 
         public List<MedicineInformation> GetAllForStub()
         {
-            return IMedicineWithQuantityRepository.GetAll();
+            return _medicineWithQuantityRepository.GetAll();
         }
 
         public List<MedicineName>  GetAllMedicinesFromDatabase()
         {
-            List<MedicineInformation> medicines = MedicineWithQuantityRepository.GetAll();
-            return getMedicineNames(medicines);
+            return getMedicineNames(MedicineWithQuantityRepository.GetAll());
         }
 
         public List<MedicineName> getMedicineNames(List<MedicineInformation> medicines)
@@ -77,7 +76,7 @@ namespace MedicineInformationApi.Service
 
         public MedicineInformation CreateIMedicineDescription(MedicineInformationDto dto)
         {
-            MedicineInformation medicineWithQuantity = IMedicineWithQuantityRepository.GetAll().SingleOrDefault(medicine => CheckMedicineNameEquality(dto, medicine));
+            MedicineInformation medicineWithQuantity = _medicineWithQuantityRepository.GetAll().SingleOrDefault(medicine => CheckMedicineNameEquality(dto, medicine));
             return (medicineWithQuantity == null ? MedicineInformationAdapter.MedicineWithQuantityDtoToMedicineWithQuantity(dto) : null);
         }
 

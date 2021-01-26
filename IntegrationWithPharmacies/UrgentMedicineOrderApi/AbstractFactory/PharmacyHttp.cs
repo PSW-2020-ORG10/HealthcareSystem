@@ -38,14 +38,13 @@ namespace UrgentMedicineOrderApi.AbstractFactory
         private String ForwardUrgentUrderHttp(String medicine, List<MedicineName> pharmaciesWithMedicine)
         {
             UrgentMedicineOrder urgentMedicineOrder = UrgentOrderService.CreateUrgentOrder(medicine, pharmaciesWithMedicine);
-            if (UrgentOrderService.SendOrderHttp(urgentMedicineOrder)) return CretaeUrgenMedicinetOrder(pharmaciesWithMedicine, urgentMedicineOrder);
-            return null;
+            return UrgentOrderService.SendOrderHttp(urgentMedicineOrder) ? CretaeUrgenMedicinetOrder(pharmaciesWithMedicine, urgentMedicineOrder) : null;
         }
 
         private String CretaeUrgenMedicinetOrder(List<MedicineName> pharmaciesWithMedicine, UrgentMedicineOrder urgentMedicineOrder)
         {
             UrgentOrderService.Create(UrgentMedicineOrderAdapter.UrgentMedicineOrderToUrgentMedicineOrderDto(urgentMedicineOrder));
-            SmptServerService.SendEMailNotificationForUrgentOrdee(urgentMedicineOrder, pharmaciesWithMedicine[0].Name);
+            SmptServerService.SendEMailNotificationForUrgentOrder(urgentMedicineOrder, pharmaciesWithMedicine[0].Name);
             return pharmaciesWithMedicine[0].Name;
         }
         public List<MedicineName> CheckMedicineAvailability(String medicine)

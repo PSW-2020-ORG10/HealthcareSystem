@@ -42,7 +42,7 @@ namespace TenderApi.Service
         {
             return ITenderRepository.GetAll();
         }
-        public int getNextTenderId()
+        public int GetNextTenderId()
         {
             return GetAll().Max(tender => tender.Id);
         }
