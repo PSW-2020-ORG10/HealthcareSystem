@@ -45,7 +45,7 @@ class SelectAppointmentForm extends Component {
         debugger;
         return (
             this.props.availableAppointments.length === 0 ? <h3 style={{ marginTop: "40px" }}>Sorry, there are no available appointments!</h3> :
-                    <div style={{ marginTop: "40px" }} id="appointmentTable">
+                    <div style={{ marginTop: "40px" }} className='regularAppointmentTable'>
                         <table className='table allAppointments'>
                             <thead>
                                 <tr>

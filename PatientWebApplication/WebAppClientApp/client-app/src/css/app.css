@@ -6,7 +6,12 @@
 }
 
 #appointmentTable {
-  /* height: 350px !important; */
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.regularAppointmentTable {
+  height: 350px !important;
   overflow: scroll;
   overflow-x: hidden;
 }
@@ -588,6 +593,12 @@ input[type="radio"] {
     text-align: center;
   }
 
+  .modal-header {
+    background-color: #1b6ec2;
+    text-align: left;
+    color: white;
+  }
+
   .login{
     background-image: url("/img/doctor1.png");
     font-family: "Roboto", sans-serif;
@@ -625,16 +636,6 @@ input[type="radio"] {
   }
 
 
-.each-slide span {
-  padding: 20px;
-  font-size: 20px;
-  background: #fcedda;
-  color: #ee4e34;
-  text-align: center;
-}
 
-.modal-header {
-  background-color: #1b6ec2;
-  text-align: left;
-  color: white;
-}
+
+
