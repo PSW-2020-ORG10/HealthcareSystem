@@ -25,14 +25,14 @@ namespace PharmacyRegistrationApi.Repository
             return DbContext.Registrations.ToList();
         }
        
-        public RegistrationInPharmacy getPharmacyApiKey(String apiKey)
+        public RegistrationInPharmacy GetPharmacyApiKey(String apiKey)
         {
-            return DbContext.Registrations.ToList().SingleOrDefault(registration => registration.ApiKey == apiKey);
+            return DbContext.Registrations.ToList().SingleOrDefault(registration => registration.PharmacyConnectionInfo.ApiKey == apiKey);
         }
         public Boolean Remove(String apiKey)
         {
             try {
-                DbContext.Registrations.Remove(DbContext.Registrations.ToList().SingleOrDefault(registration => registration.ApiKey == apiKey));
+                DbContext.Registrations.Remove(DbContext.Registrations.ToList().SingleOrDefault(registration => registration.PharmacyConnectionInfo.ApiKey == apiKey));
                 return true;
             }
             catch {return false; }

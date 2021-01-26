@@ -15,7 +15,7 @@ namespace IntegrationWithPharmaciesTest
         public static IRegistrationInPharmacyRepository Create_stub_repository()
         {
             var stubRepository = new Mock<IRegistrationInPharmacyRepository>();
-            RegistrationInPharmacy registrationInPharmacy = new RegistrationInPharmacy(4,5,"apisa12345","Jankovic 2","Novi Sad");
+            RegistrationInPharmacy registrationInPharmacy = new RegistrationInPharmacy(4,5,"Novi Sad", new PharmacyConnectionInfo("apisa12345", "email@gmail.com",""), new PharmacyNameInfo("Jankovic 2"));
 
             var registrationsInPharmacies = new List<RegistrationInPharmacy>();
             registrationsInPharmacies.Add(registrationInPharmacy);
@@ -29,7 +29,7 @@ namespace IntegrationWithPharmaciesTest
         {
             RegistrationInPharmacyService service = new RegistrationInPharmacyService(Create_stub_repository());
 
-            RegistrationInPharmacy foundRegistration = service.getPharmacyApiKey("apisa12345");
+            RegistrationInPharmacy foundRegistration = service.GetPharmacyApiKey("apisa12345");
 
             Assert.NotNull(foundRegistration);
         }
@@ -38,7 +38,7 @@ namespace IntegrationWithPharmaciesTest
         {
             RegistrationInPharmacyService service = new RegistrationInPharmacyService(Create_stub_repository());
 
-            RegistrationInPharmacy foundRegistration = service.getPharmacyApiKey("apisa99");
+            RegistrationInPharmacy foundRegistration = service.GetPharmacyApiKey("apisa99");
 
             foundRegistration.ShouldBeNull();
         }
@@ -47,7 +47,7 @@ namespace IntegrationWithPharmaciesTest
         {
             RegistrationInPharmacyService service = new RegistrationInPharmacyService(Create_stub_repository());
 
-            RegistrationInPharmacy registrationInPharmacy = service.createIRegistration(new RegistrationInPharmacyDto(3, "ffafsfa","Jankovic","Bg"));
+            RegistrationInPharmacy registrationInPharmacy = service.CreateIRegistration(new RegistrationInPharmacyDto(3,"Bg", new PharmacyConnectionInfo("fffffff", "email@gmail.com",""), new PharmacyNameInfo("Jankovic")));
 
             registrationInPharmacy.ShouldNotBeNull();
         }
@@ -56,7 +56,7 @@ namespace IntegrationWithPharmaciesTest
         {
             RegistrationInPharmacyService service = new RegistrationInPharmacyService(Create_stub_repository());
 
-            RegistrationInPharmacy registrationInPharmacy = service.createIRegistration(new RegistrationInPharmacyDto(33, "apisa12345","Jankovic","NS"));
+            RegistrationInPharmacy registrationInPharmacy = service.CreateIRegistration(new RegistrationInPharmacyDto(33,"NS", new PharmacyConnectionInfo("apisa12345", "email@gmail.com",""), new PharmacyNameInfo("Jankovic")));
 
             registrationInPharmacy.ShouldBeNull();
         }

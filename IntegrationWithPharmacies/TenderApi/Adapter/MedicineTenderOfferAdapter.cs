@@ -7,12 +7,12 @@ namespace TenderApi.Adapter
     {
         public static MedicineTenderOffer MedicineTenderOfferDtoToMedicineTenderOffer(MedicineTenderOfferDto dto)
         {
-            return new MedicineTenderOffer(dto.MedicineName, dto.Quantity, dto.AvailableQuantity, dto.Price, dto.PharmacyTenderOfferId);
+            return new MedicineTenderOffer(dto.MedicineName, dto.RequiredQuantity, dto.AvailableQuantity, dto.Price, dto.PharmacyTenderOfferId);
         }
 
         public static MedicineTenderOfferDto MedicineTenderOfferToMedicineTenderOfferDto(MedicineTenderOffer medicine)
         {
-            return new MedicineTenderOfferDto(medicine.MedicineName, medicine.Quantity, medicine.AvailableQuantity, medicine.Price, medicine.PharmacyTenderOfferId);
+            return new MedicineTenderOfferDto(medicine.MedicineName, medicine.RequiredQuantity, medicine.AvailableQuantity, medicine.Price, medicine.PharmacyTenderOfferId);
         }
     }
 }

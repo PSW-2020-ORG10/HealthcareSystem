@@ -28,16 +28,12 @@ namespace TenderApi.Service
             return MedicineTenderOfferRepository.GetAll();
         }
 
-        public MedicineTenderOffer Create(MedicineTenderOfferDto medicineTenderOfferDto)
-        {
-            return MedicineTenderOfferRepository.Create(MedicineTenderOfferAdapter.MedicineTenderOfferDtoToMedicineTenderOffer(medicineTenderOfferDto));
-        }
-
         public void CreateAllMedicineTenderOffers(List<MedicineTenderOffer> medicineTenderOffers)
         {
             foreach (MedicineTenderOffer medicineTenderOffer in medicineTenderOffers)
             {
-                Create(MedicineTenderOfferAdapter.MedicineTenderOfferToMedicineTenderOfferDto(new MedicineTenderOffer(medicineTenderOffer.MedicineName, medicineTenderOffer.Quantity, medicineTenderOffer.AvailableQuantity, medicineTenderOffer.Price, PharmacyTenderOfferRepository.getNextTenderPharmacyOfferId())));
+                medicineTenderOffer.PharmacyTenderOfferId = PharmacyTenderOfferRepository.getNextTenderPharmacyOfferId();
+                MedicineTenderOfferRepository.Create(medicineTenderOffer);
             }
         }
         public List<MedicineTenderOffer> GetMedicineOffersByPharmacyOfferId(int pahrmacyTenderOfferId)
@@ -52,9 +48,9 @@ namespace TenderApi.Service
             }
         }
 
-        private void CheckMedicineInDB(List<MedicineWithQuantity> medicineWithQuantities, MedicineTenderOffer medicineTenderOffer)
+        private void CheckMedicineInDB(List<MedicineInformation> medicineInformations, MedicineTenderOffer medicineTenderOffer)
         {
-            MedicineWithQuantity medicine = medicineWithQuantities.SingleOrDefault(medicineName => medicineName.Name == medicineTenderOffer.MedicineName);
+            MedicineInformation medicine = medicineInformations.SingleOrDefault(medicineName => medicineName.MedicineDescription.Name.Equals(medicineTenderOffer.MedicineName));
             if (medicine != null) HttpRequests.UpdateMedicine(medicineTenderOffer, medicine);
             else { _ = HttpRequests.CreateNewMedicineWithQuantityAsync(medicineTenderOffer); }
         }

@@ -51,11 +51,7 @@
                 <button class="button2" v-on:click="specification">Show selected medicine specification </button>
 
             </div>
-            <div class="row">
-                <button class="button2" v-on:click="specificationGrpc">Show selected medicine specification - GRPC</button>
-
-            </div>
-
+     
             <div v-if="showSpecification" class="row">
                 <div class="col-25" style="border:thick solid #000000">
                     {{medSpecification}}
@@ -83,7 +79,6 @@
 
                             <th style="width: 200px;" scope="col">Avaible</th>
                             <th style="width: 200px;" scope="col"></th>
-                            <th style="width: 200px;" scope="col"></th>
 
                         </tr>
                     </thead>
@@ -92,8 +87,7 @@
                             <td>{{pharmacy.name}}</td>
                             <td>{{selected}}</td>
                             <td><div style="background-color:lightgreen">YES</div></td>
-                            <td><button v-on:click="sendHttp($event, pharmacy.api)">Send(Http)</button></td>
-                            <td><button v-on:click="sendSftp($event, pharmacy.api)">Send(Sftp)</button></td>
+                            <td><button v-on:click="send($event, pharmacy.api)">Send</button></td>
                         </tr>
 
                     </tbody>
@@ -106,7 +100,9 @@
             </div>
             <div class="row">
                 <label v-if="sent" style="color:lightgreen;font-size:25px;">Successfully sent prescription!</label>
-                <label v-if="notSent" style="color:red;font-size:25px;">Error occurred!</label>
+                <label v-if="notSent" style="color:red;font-size:25px;">Please try again later!</label>
+                <label v-if="notFilled" style="color:red;font-size:25px;">You must fill in all fields.</label>
+
             </div>
         </div>
     </div>
@@ -132,26 +128,20 @@
                 hidden: false,
                 medSpecification: "",
                 showTable: false,
-                showTableAvailability : false
+                showTableAvailability: false,
+                notFilled : false
               
             }
         },
         methods: {
           
             specification: function () {
+                if (this.selected === null) {
+                    this.notFilled = true;
+                    return;
+                }
                 this.showSpecification = true;
-                this.axios.get('http://localhost:54679/api/sharingPrescription/http/description/' + this.selected)
-                    .then(res => {
-                        this.medSpecification = res.data;
-                    })
-                    .catch(res => {
-                        console.log(res);
-                    });
-            },
-
-            specificationGrpc: function () {
-                this.showSpecification = true;
-                this.axios.get('http://localhost:54679/api/sharingPrescription/grpc/description/' + this.selected)
+                this.axios.get('http://localhost:54679/api/sharingPrescription/description/' + this.selected)
                     .then(res => {
                         this.medSpecification = res.data;
                     })
@@ -162,7 +152,10 @@
 
             showAvailability: function () {
                 this.showTable = true;
-          
+                if (this.selected === null || this.quantity < 1) {
+                    this.notFilled = true;
+                    return;
+                }
                 this.axios.get('http://localhost:54679/api/sharingPrescription/http/medicineAvailability/'+this.selected + "_"+this.quantity)
                     .then(res => {
                         this.pharmacies = res.data;
@@ -176,29 +169,13 @@
             showMedId: function () {
                 this.medIdNumber = this.selectedPatient.medicalIdNumber;
             },
-            sendHttp: function (event,pharmacy2) {
-                const data = {
-                    pharmacy: pharmacy2,
-                    name: this.selectedPatient.firstName,
-                    surname: this.selectedPatient.secondName,
-                    medicalIDNumber: this.selectedPatient.medicalIdNumber,
-                    medicine: this.selected,
-                    quantity: this.quantity,
-                    usage: this.explanation
-                };
-                this.axios.post('http://localhost:54679/api/sharingPrescription/http', data)
-                    .then(res => {
-                        this.sent = true;
-                        this.notSent = false;
-                        console.log(res);
-                    })
-                    .catch(res => {
-                        this.sent = false;
-                        this.notSent = true;
-                        console.log(res);
-                    })
-            },
-            sendSftp: function (event, pharmacy2) {
+            send: function (event, pharmacy2) {
+                if (this.selected === null || this.selectedPatient === null || this.quantity < 1 || this.explanation === "") {
+                    this.sent = false;
+                    this.notSent = false;
+                    this.notFilled = true;
+                    return;
+                }
                 const data = {
                     pharmacy: pharmacy2,
                     name: this.selectedPatient.firstName,
@@ -211,12 +188,16 @@
                 this.axios.post('http://localhost:54679/api/sharingPrescription', data)
                     .then(res => {
                         this.sent = true;
+                        this.notFilled = false;
                         this.notSent = false;
                         console.log(res);
                     })
                     .catch(res => {
+                        alert("Sorry, you can not currently share prescription, please try later.");
                         this.sent = false;
                         this.notSent = true;
+                        this.notFilled = false;
+
                         console.log(res);
                     })
             },
@@ -224,20 +205,30 @@
 
         },
         mounted() {
-            this.axios.get('http://localhost:54679/api/sharingPrescription/medicinesIsa')
-                .then(res => {
-                    this.medications = res.data;
-                })
-                .catch(res => {
-                    console.log(res);
-                });
             this.axios.get('http://localhost:54679/api/patientUser/all')
                 .then(res => {
                     this.patients = res.data;
+                    if (res.status != 200) {
+                        alert("Sorry, can not currently show patients, please try later.");
+                    }
                 })
                 .catch(res => {
+                    alert("Sorry, can not currently show patients, please try later.");
                     console.log(res);
                 })
+            this.axios.get('http://localhost:54679/api/sharingPrescription/medicinesIsa')
+                .then(res => {
+                    this.medications = res.data;
+                    if (res.status != 200) {
+                        alert("Sorry, can not currently show medicines, please try later.");
+                    }
+                })
+                .catch(res => {
+                    alert("Sorry, can not currently show medicines, please try later.");
+
+                    console.log(res);
+                });
+           
         }
     }
 </script>

@@ -69,7 +69,7 @@
                     </thead>
                     <tr v-for="med in medicationQuantityList" :key="med.medicineName">
                         <td>{{med.medicineName}}</td>
-                        <td>{{med.quantity}}</td>
+                        <td>{{med.requiredQuantity}}</td>
                     </tr>
                 </table>
             </div>
@@ -91,6 +91,8 @@
             <div class="row">
                 <label v-if="sent" style="color:lightgreen;font-size:25px;">Successfully published tender!</label>
                 <label v-if="notSent" style="color:red;font-size:25px;">Error occurred!</label>
+                <label v-if="notFilled" style="color:red;font-size:25px;">You must fill in all fields.</label>
+
             </div>
 
         </div>
@@ -142,7 +144,7 @@
                                         <label>{{medicine.medicineName}}</label>
                                     </td>
                                     <td>
-                                        <label>{{medicine.quantity}}</label>
+                                        <label>{{medicine.requiredQuantity}}</label>
                                     </td>
                                 </tr>
                             </tbody>
@@ -255,7 +257,7 @@
                 showCreateNewTender: false,
                 medications: [],
                 medicineName: "",
-                quantity: "",
+                quantity: 0,
                 medicationQuantityList: [],
                 medicine: "",
                 endDate: "",
@@ -281,7 +283,8 @@
                     id: 0,
                     pharmacyTenderOfferId:0,
                     pharmacyName: ""
-                }
+                },
+                notFilled: false
             }
         },
         methods: {
@@ -303,11 +306,17 @@
                 this.showTable = true;
                 const medicineWithQuantity = {
                     medicineName: this.medicine,
-                    quantity: this.quantity,
+                    requiredQuantity: this.quantity,
                 };
                 this.medicationQuantityList.push(medicineWithQuantity)
             },
             publishTender: function () {
+                if (this.medicationQuantityList === undefined || this.medicationQuantityList.length == 0 || this.endDate === "") {
+                    this.notFilled = true;
+                    this.sent = false;
+                    this.notSent = false;
+                    return;
+                }
                 const tender = {
                     medicinesWithQuantity: this.medicationQuantityList,
                     date: this.endDate,
@@ -317,11 +326,14 @@
                     .then(res => {
                         this.sent = true;
                         this.notSent = false;
+                        this.notFilled = false;
                         console.log(res);
                     })
                     .catch(res => {
                         this.sent = false;
                         this.notSent = true;
+                        this.notFilled = false;
+                        alert("Sorry, can not currently publish tender, please try later.")
                         console.log(res);
                     })
             },
@@ -368,18 +380,26 @@
 
         },
         mounted() {
-            this.axios.get('http://localhost:54679/api/tender/medicinesIsa')
+            this.axios.get('http://localhost:54679/api/sharingPrescription/medicinesIsa')
                 .then(res => {
                     this.medications = res.data;
+                    if (res.status != 200) {
+                        alert("Sorry, can not currently show medicines, please try later.");
+                    }
                 })
                 .catch(res => {
+                    alert("Sorry, can not currently show medicines, please try later.");
+
                     console.log(res);
                 });
             this.axios.get('http://localhost:54679/api/tender/active')
                 .then(response => {
                     this.activeTenders = response.data;
-                });
+                }).catch(res => {
+                    alert("Sorry, can not currently show active tenders, please try later.");
 
+                    console.log(res);
+                });
 
 
         }

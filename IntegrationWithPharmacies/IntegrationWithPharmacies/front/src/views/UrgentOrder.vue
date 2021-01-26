@@ -18,11 +18,13 @@
                 <label for="lname">Quantity:</label>
                 <input type="number" id="quantity" name="quantity" v-model="quantity" placeholder="quantity...">
                 <label style="color:sandybrown;font-size:15px;font-weight:normal">When it's urgent, procurement will be sent to first found pharmacy that has requested medicine.</label><br />
-                <button class="button" v-on:click="sendHttp">Send HTTP</button>
-                <button class="button" v-on:click="sendGRpc">Send gRPC</button>
+                <button class="button" v-on:click="send">Send</button>
+             
                 <div class="row">
                     <label v-if="sent" style="color:green;font-size:25px;">Successfully sent to pharmacy {{pharmacy}} </label>
                     <label v-if="notSent" style="color:red;font-size:25px;">Sorry. There is no pharmacy with this quantity of selected medicine!</label>
+                    <label v-if="notFilled" style="color:red;font-size:25px;">You must fill in all fields.</label>
+
                 </div>
             </div>
 
@@ -47,47 +49,49 @@ export default {
                 notSent: false,
                 showForm : false,
                 showReport: false,
-                pharmacy : ""
+                pharmacy: "",
+                notFilled : false
       
                 }
         },
         methods: {
-            sendHttp: function () {
-                this.axios.get('http://localhost:54679/api/urgentOrder/http/' + this.medicine + "_" + this.quantity)
+            send: function () {
+                if (this.medicine === "" || this.quantity < 1) {
+                    this.sent = false;
+                    this.notSent = false;
+                    this.notFilled = true;
+                    return;
+                }
+                this.axios.get('http://localhost:54679/api/urgentOrder/' + this.medicine + "_" + this.quantity)
                     .then(res => {
                         this.pharmacy = res.data;
                         this.sent = true;
                         this.notSent = false;
+                        this.notFilled = false;
 
                     })
                     .catch(res => {
                         this.sent = false;
                         this.notSent = true;
+                        this.notFilled = false;
+
+                        alert("Sorry, can not currently send order, please try later.");
                         console.log(res);
                     });              
-            },
-            sendGRpc: function () {
-                this.axios.get('http://localhost:54679/api/urgentOrder/grpc/' + this.medicine + "_" + this.quantity)
-                    .then(res => {
-                        this.pharmacy = res.data;
-                        this.sent = true;
-                        this.notSent = false;
-
-                    })
-                    .catch(res => {
-                        this.sent = false;
-                        this.notSent = true;
-                        console.log(res);
-                    });       
             }
         },
 
         mounted() {
-            this.axios.get('http://localhost:54679/api/tender/medicinesIsa')
+            this.axios.get('http://localhost:54679/api/sharingPrescription/medicinesIsa')
                 .then(res => {
                     this.medications = res.data;
+                    if (res.status != 200) {
+                        alert("Sorry, can not currently show medicines, please try later.");
+                    }
                 })
                 .catch(res => {
+                    alert("Sorry, can not currently show medicines, please try later.");
+
                     console.log(res);
                 });
   

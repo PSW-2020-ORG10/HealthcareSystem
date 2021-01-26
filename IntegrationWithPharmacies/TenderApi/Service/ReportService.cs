@@ -1,56 +1,40 @@
 ﻿using System;
+using TenderApi.AbstractFactory;
 using TenderApi.DbContextModel;
 using TenderApi.Model;
-using TenderApi.Utility;
 
 namespace TenderApi.Service
 {
     public class ReportService
     {
-        private HelperFunctions HelperFunctions { get; }
-        private SftpService SftpService { get; }
-        private HttpRequests HttpRequests { get; }
-        private ReportText ReportText { get; }
-        private SmptServerService SmptServerService { get; }
+        public PharmacyFactoryGrpcAndSftp PharmacyFactoryGrpcAndSftp { get; }
+        public PharmacyFactoryHttp PharmacyFactoryHttp { get; }
+        private MyDbContext Context { get; }
 
         public ReportService(MyDbContext context)
         {
-            SftpService = new SftpService();
-            HelperFunctions = new HelperFunctions();
-            HttpRequests = new HttpRequests();
-            ReportText = new ReportText(context);
-            SmptServerService = new SmptServerService();
+            PharmacyFactoryGrpcAndSftp = new PharmacyFactoryGrpcAndSftp();
+            PharmacyFactoryHttp = new PharmacyFactoryHttp();
+            Context = context;
         }
-        public Boolean SendReportSftp(DateOfOrder date)
+
+        public Boolean SendReport(DateOfOrder date)
         {
             try
             {
-                String report = CreateReport(date);
-                String[] reportParts = report.Split('\\');
-                SftpService.UploadFile(report, @"\pub\" + reportParts[1]);
-                SmptServerService.SendEMailNotification(report, "report");
-
+                foreach (RegistrationInPharmacy registrationInPharmacy in HttpRequests.GetRegistrationsInPharmaciesAll()) DefineTyepOfApiKey(date, registrationInPharmacy);
                 return true;
             }
-            catch (Exception e) { return false; }
+            catch(Exception e){ return false; }
         }
-        public Boolean SendReportHttp(DateOfOrder date)
+
+        private void DefineTyepOfApiKey(DateOfOrder date, RegistrationInPharmacy registrationInPharmacy)
         {
-            String report = CreateReport(date);
-            try
+            if (registrationInPharmacy.PharmacyConnectionInfo.ApiKey.Substring(registrationInPharmacy.PharmacyConnectionInfo.ApiKey.Length - 1).Equals("H"))
             {
-                HttpRequests.UploadReportFile(report);
-                SmptServerService.SendEMailNotification(report, "report");
-                return true;
+                PharmacyFactoryHttp.GetIPharmacy(Context).SendReport(date);
             }
-            catch (Exception e) { return false; }
-        }
-
-        public String CreateReport(DateOfOrder date)
-        {
-            String complete = @"FileReports\Report_" + DateTime.Now.ToString("dd-MM-yyyy") + "_" + HelperFunctions.GetRandomNumber() + ".txt";
-            System.IO.File.WriteAllText(complete, ReportText.GetRegistredPharmacies() + "!    Report about consumption of medicine\n\n\n" + ReportText.getReportText(date));
-            return complete;
+            else PharmacyFactoryGrpcAndSftp.GetIPharmacy(Context).SendReport(date);
         }
     }
 }

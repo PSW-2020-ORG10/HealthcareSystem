@@ -25,13 +25,18 @@ namespace TenderApi.Utility
         {
             DbContext = new MyDbContext(new DbContextOptionsBuilder<MyDbContext>().UseMySql("Server=localhost;port=3306;Database=MYSQLHealtcareDB;user=root;password=root").UseLazyLoadingProxies().Options);
         }
-
+        public String CreateReport(DateOfOrder date)
+        {
+            String complete = @"FileReports\Report_" + DateTime.Now.ToString("dd-MM-yyyy") + "_" + HelperFunctions.GetRandomNumber() + ".txt";
+            System.IO.File.WriteAllText(complete, GetRegistredPharmacies() + "!    Report about consumption of medicine\n\n\n" + getReportText(date));
+            return complete;
+        }
         public String GetRegistredPharmacies()
         {
             StringBuilder stringBuilder = new StringBuilder();
             foreach (RegistrationInPharmacy registration in HttpRequests.GetRegistrationsInPharmaciesAll())
             {
-                stringBuilder.Append(registration.ApiKey + ";");
+                stringBuilder.Append(registration.PharmacyConnectionInfo.ApiKey + ";");
             }
             return stringBuilder.ToString();
         }

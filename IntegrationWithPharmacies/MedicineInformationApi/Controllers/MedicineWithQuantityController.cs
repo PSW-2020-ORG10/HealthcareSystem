@@ -10,43 +10,48 @@ namespace MedicineInformationApi.Controllers
     [ApiController]
     public class MedicineWithQuantityController : ControllerBase
     {  
-        private MedicineWithQuantityService MedicineWithQuantityService { get; }
+        private MedicineInformationService MedicineInformationService { get; }
 
         public MedicineWithQuantityController(MyDbContext context)
         {
-            MedicineWithQuantityService = new MedicineWithQuantityService(context);
+            MedicineInformationService = new MedicineInformationService(context);
         }
 
         [HttpPut("{medicine}")]
         public IActionResult UpdateMedicineQuantity(String medicine)
         {
-            MedicineWithQuantityService.UpdateMedicineQuantityUrgentOrder(medicine);
+            MedicineInformationService.UpdateMedicineQuantityUrgentOrder(medicine);
             return Ok();
         }
 
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(MedicineWithQuantityService.GetAll());
+            return Ok(MedicineInformationService.GetAll());
         }
 
         [HttpPost]
-        public IActionResult Post(MedicineWithQuantityDto dto)
+        public IActionResult Post(MedicineInformationDto dto)
         {
-            MedicineWithQuantityService.CreateMedicineWithDescription(dto);
+            MedicineInformationService.CreateMedicineWithDescription(dto);
             return Ok();
         }
         [HttpGet("{medicineId}/{quantity}")]
         public IActionResult UpdateMedicineQuantity(int medicineId, int quantity)
         {
-            MedicineWithQuantityService.UpdateQuantity(medicineId, quantity);
+            MedicineInformationService.UpdateQuantity(medicineId, quantity);
             return Ok();
         }
 
         [HttpGet("description/{medicine}")]
         public IActionResult GetMedicineDescription(String medicine)
         {
-            return Ok(MedicineWithQuantityService.GetMedicineDescriptionFromDatabase(medicine));
+            return Ok(MedicineInformationService.GetMedicineDescriptionFromDatabase(medicine));
+        }
+        [HttpGet("all")]
+        public IActionResult GetMedicineNames()
+        {
+            return Ok(MedicineInformationService.GetAllMedicinesFromDatabase());
         }
     }
 }

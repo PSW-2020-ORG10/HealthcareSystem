@@ -27,17 +27,16 @@
 
             <div class="row">
                 <label v-if="sent" style="color:blue;font-size:25px;">Successfully sent report to pharmacies!</label>
-                <label v-if="notSent" style="color:red;font-size:25px;">Error occured while sending report!</label>
+                <label v-if="notSent" style="color:red;font-size:25px;">Please try again later!</label>
+                <label v-if="notFilled" style="color:red;font-size:25px;">You must enter start and end date in format  01/01/2020.</label>
+
             </div>
 
 
             <div class="row">
-                <button class="button" v-on:click="send">Send SFTP</button>
+                <button class="button" v-on:click="send">Send</button>
             </div>
 
-            <div class="row">
-                <button class="button" v-on:click="sendHttp">Send HTTP</button>
-            </div>
         </div>
 
 
@@ -54,11 +53,18 @@
                 sent: false,
                 notSent: false,
                 emptyStringError: false,
+                notFilled : false
 
             }
         },
         methods: {
             send: function () {
+                if (this.startDate === "" || this.endDate === "") {
+                    this.sent = false;
+                    this.notSent = false;
+                    this.notFilled = true;
+                    return;
+                }
                 const date = {
                     startDate: this.startDate,
                     endDate: this.endDate
@@ -67,34 +73,17 @@
                     .then(res => {
                         this.sent = true;
                         this.notSent = false;
+                        this.notFilled = false;
                         console.log(res);
                     })
                     .catch(res => {
                         this.sent = false;
                         this.notSent = true;
+                        this.notFilled = false;
+
+                        alert("Sorry, you can not currently send report, please try later.");
                         console.log(res);
                     })
-
-
-            },
-            sendHttp: function () {
-                const date = {
-                    startDate: this.startDate,
-                    endDate: this.endDate
-                };
-                this.axios.post('http://localhost:54679/api/report/http', date)
-                    .then(res => {
-                        this.sent = true;
-                        this.notSent = false;
-                        console.log(res);
-                    })
-                    .catch(res => {
-                        this.sent = false;
-                        this.notSent = true;
-                        console.log(res);
-                    })
-
-
             }
 
         }

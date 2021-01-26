@@ -34,8 +34,19 @@
 
             </div>
             <div class="row">
+                <div class="col-25">
+                    <label for="apiKey">Pharmacy email:</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" v-model="pharmacyEmail" name="pharmacyEmail" placeholder="Enter pharmacy email..">
+                </div>
+
+            </div>
+            <div class="row">
                 <label v-if="unique" style="color:lightgreen;font-size:25px;">Successfully saved api key!</label>
                 <label v-if="notUnique" style="color:red;font-size:25px;">This api key already exists!</label>
+                <label v-if="notFilled" style="color:red;font-size:25px;">You must fill in all input fields.</label>
+
             </div>
 
 
@@ -59,27 +70,46 @@
                 notUnique: false,
                 emptyStringError: false,
                 town: "",
-                name : ""
+                name: "",
+                pharmacyEmail: "",
+                notFilled : false
                
             }
         },
         methods: {
-               register: function () {
-                const pharmacy = {
+            register: function () {
+                if (this.name === "" || this.town === "" || this.apiKey === "" || this.pharmacyEmail === "") {
+                    this.sent = false;
+                    this.notSent = false;
+                    this.notFilled = true;
+                    return;
+                }
+                const pharmacyInfo = {
                     apiKey: this.pharmacyApiKey,
-                    pharmacyId: 1253,
+                    email: this.pharmacyEmail
+                }
+
+                const pharmacyName = {
                     name: this.name,
-                    town : this.town
+                }
+                const pharmacy = {
+                    pharmacyId: 1253,
+                    town: this.town,
+                    pharmacyConnectionInfo: pharmacyInfo,
+                    pharmacyNameInfo: pharmacyName
                 };
                 this.axios.post('http://localhost:54679/api/registration', pharmacy)
                     .then(res => {
                         this.unique = true;
                         this.notUnique = false;
+                        this.notFilled = false;
                         console.log(res);
                     })
                     .catch(res => {
-                        this.notUnique = true;
+                        this.notUnique = false;
                         this.unique = false;
+                        this.notFilled = false;
+                        alert("You can not currently register pharmacy, please try later.");
                         console.log(res);
                     })
 

@@ -15,7 +15,7 @@ namespace EPrescriptionApi.Controllers
     public class SharingPrescriptionController : Controller
     {
         private PrescriptionFileService PrescriptionFileService { get; }
-        private MedicineAvailabilityTable MedicineAvailabilityTable { get; } 
+        private MedicineAvailabilityTable MedicineAvailabilityTable { get; }
         private HttpRequests HttpRequests { get; }
 
         public SharingPrescriptionController()
@@ -28,25 +28,26 @@ namespace EPrescriptionApi.Controllers
         [HttpGet("medicinesIsa")]
         public IActionResult GetMedicinesFromIsa()
         {
-            return Ok(HttpRequests.FormMedicineFromIsaRequest().Data);
+            return Ok(HttpRequests.GetAllMedicinesFromDatabase());
         }
 
         [HttpPost]
         public IActionResult Post(EPrescription prescription)
-        {         
-            if (PrescriptionFileService.SendPrescriptionSftp(prescription)) return Ok();
-            return BadRequest();
-        }
-
-        [HttpPost("http")]
-        public IActionResult PostHttp(EPrescription prescription)
         {
-            if (PrescriptionFileService.SendPrescriptionHttp(prescription)) return Ok();
+
+            if (PrescriptionFileService.SendPrescription(prescription)) return Ok();
             return BadRequest();
+
         }
 
-        [HttpGet("http/description/{medicine}")]
+        [HttpGet("description/{medicine}")]
         public IActionResult GetMedicineDescription(String medicine)
+        {
+            if (Startup.SystemEnvironment.Equals("Production")) return GetMedicineDescriptionHttp(medicine);
+            return GetMedicineDescriptionGrpc(medicine);
+        }
+
+        private IActionResult GetMedicineDescriptionHttp(string medicine)
         {
             String medicineDescription = HttpRequests.GetMedicineDescriptionFromApi(medicine);
             if (medicineDescription.IsNullOrEmpty()) return GetMedicineDescriptionFromIsaHttpAsync(medicine);
@@ -61,7 +62,6 @@ namespace EPrescriptionApi.Controllers
             return BadRequest();
         }
        
-        [HttpGet("grpc/description/{medicine}")]
         public IActionResult GetMedicineDescriptionGrpc(string medicine)
         {
             String medicineDescription = HttpRequests.GetMedicineDescriptionFromApi(medicine);
