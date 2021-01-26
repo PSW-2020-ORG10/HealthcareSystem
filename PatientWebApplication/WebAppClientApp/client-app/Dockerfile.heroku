@@ -5,5 +5,5 @@ COPY package-lock.json /app/package-lock.json
 RUN apk --no-cache add --virtual builds-deps build-base python
 RUN npm install
 COPY . /app
-RUN npm run heroku-build
-CMD ["npm","heroku-start"]
+RUN npm run build
+CMD ["npm","start"]

@@ -10,7 +10,7 @@ namespace PatientWebAppSeleniumTests.Pages
     public class CreateFeedbackPage
     {
         private readonly IWebDriver driver;
-        public const string URI = "http://localhost:3000/create-feedback";
+        public const string URI = "https://healthcare-system-org10.herokuapp.com/create-feedback";
         private IWebElement MessageElement => driver.FindElement(By.Id("message"));
         private IWebElement IsAnonymousElement => driver.FindElement(By.Id("isAnonymous"));
         private IWebElement IsPublicElement => driver.FindElement(By.Id("isPublic"));
