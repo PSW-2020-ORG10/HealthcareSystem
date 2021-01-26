@@ -48,10 +48,10 @@ namespace MedicineInformationApi.Service
 
         public List<MedicineName>  GetAllMedicinesFromDatabase()
         {
-            return getMedicineNames(MedicineWithQuantityRepository.GetAll());
+            return GetMedicineNames(MedicineWithQuantityRepository.GetAll());
         }
 
-        public List<MedicineName> getMedicineNames(List<MedicineInformation> medicines)
+        public List<MedicineName> GetMedicineNames(List<MedicineInformation> medicines)
         {
             List<MedicineName> medicineNames = new List<MedicineName>();
             foreach(MedicineInformation medicine in medicines)

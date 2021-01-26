@@ -38,9 +38,9 @@ namespace UrgentMedicineOrderApi.AbstractFactory
         public String ForwardUrgentOrderGrpc(string medicine, List<MedicineName> pharmaciesWithMedicine)
         {
             UrgentMedicineOrder urgentMedicineOrder = UrgentOrderService.CreateUrgentOrder(medicine, pharmaciesWithMedicine);
-            return UrgentOrderService.SendOrderGrpc(urgentMedicineOrder) ? CretaeUrgenMedicinetOrder(pharmaciesWithMedicine, urgentMedicineOrder) : null;
+            return UrgentOrderService.SendOrderGrpc(urgentMedicineOrder) ? CreateUrgenMedicineOrder(pharmaciesWithMedicine, urgentMedicineOrder) : null;
         }
-        private String CretaeUrgenMedicinetOrder(List<MedicineName> pharmaciesWithMedicine, UrgentMedicineOrder urgentMedicineOrder)
+        private String CreateUrgenMedicineOrder(List<MedicineName> pharmaciesWithMedicine, UrgentMedicineOrder urgentMedicineOrder)
         {
             UrgentOrderService.Create(UrgentMedicineOrderAdapter.UrgentMedicineOrderToUrgentMedicineOrderDto(urgentMedicineOrder));
             SmptServerService.SendEMailNotificationForUrgentOrder(urgentMedicineOrder, pharmaciesWithMedicine[0].Name);

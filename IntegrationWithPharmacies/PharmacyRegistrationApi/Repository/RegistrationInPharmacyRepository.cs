@@ -25,7 +25,7 @@ namespace PharmacyRegistrationApi.Repository
             return DbContext.Registrations.ToList();
         }
        
-        public RegistrationInPharmacy getPharmacyApiKey(String apiKey)
+        public RegistrationInPharmacy GetPharmacyApiKey(String apiKey)
         {
             return DbContext.Registrations.ToList().SingleOrDefault(registration => registration.PharmacyConnectionInfo.ApiKey == apiKey);
         }

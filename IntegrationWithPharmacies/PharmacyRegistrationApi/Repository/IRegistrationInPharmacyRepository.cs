@@ -10,7 +10,7 @@ namespace PharmacyRegistrationApi.Repository
 
         List<RegistrationInPharmacy> GetAll();
 
-        RegistrationInPharmacy getPharmacyApiKey(String apiKey);
+        RegistrationInPharmacy GetPharmacyApiKey(String apiKey);
        
     }
 
