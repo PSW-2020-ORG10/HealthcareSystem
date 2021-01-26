@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   appointmentmicroserviceapi:
-    image: appointment
+    image: velickotam/healthcaresystem:appointmentapi_latest
     container_name: appointmentmicroserviceapi
     restart: on-failure
     networks:
@@ -24,7 +24,7 @@ services:
       - appointmentmicroserviceapi:/app/sql
 
   gatewayapi:
-    image: gateway
+    image: velickotam/healthcaresystem:gatewayapi_latest
     container_name: gatewayapi
     restart: on-failure
     environment:
@@ -46,7 +46,7 @@ services:
       - usermicroserviceapi
 
   searchmicroserviceapi:
-    image:  search
+    image:  velickotam/healthcaresystem:searchapi_latest
     container_name: searchmicroserviceapi
     restart: on-failure
     networks:
@@ -68,7 +68,7 @@ services:
       - searchmicroserviceapi:/app/sql
 
   feedbackmicroserviceapi:
-    image: feedback
+    image: velickotam/healthcaresystem:feedbackapi_latest
     container_name: feedbackmicroserviceapi
     restart: on-failure
     networks:
@@ -93,7 +93,7 @@ services:
 
 
   usermicroserviceapi:
-    image: user
+    image: velickotam/healthcaresystem:userapi_latest
     container_name: usermicroserviceapi
     restart: on-failure
     networks:
@@ -133,7 +133,7 @@ services:
 
 
   react:
-    image: react
+    image: velickotam/healthcaresystem:react_latest
     container_name: react
     stdin_open: true
     restart: on-failure
