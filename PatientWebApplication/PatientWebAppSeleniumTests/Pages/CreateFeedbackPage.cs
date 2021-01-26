@@ -121,7 +121,7 @@ namespace PatientWebAppSeleniumTests.Pages
         public void WaitForFormSubmit()
         {
             var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 20));
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe("http://localhost:3000/patient-homepage"));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe("https://healthcare-system-org10.herokuapp.com/patient-homepage"));
         }
 
         public void Navigate() => driver.Navigate().GoToUrl(URI);
