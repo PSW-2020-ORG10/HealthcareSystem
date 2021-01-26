@@ -7,7 +7,10 @@ import { checkEmailFormat, showErrorToastEmail, showUnsuccessfulLoginToast } fro
 class Login extends Component {
     state = { 
         email: "",
-        password: ""
+        password: "",
+        SignUp: "" + process.env.REACT_APP_BASE_URL + "/register-patient",
+        ReadIt: "" + process.env.REACT_APP_BASE_URL + "/patient-feedback"
+
     }
 
     handleChange = (event) => {
@@ -29,9 +32,9 @@ class Login extends Component {
         successful = await this.props.userLoggedIn(this.state);
         if(successful === true){
             if(localStorage.getItem("role") === 'admin'){
-                window.location.href = "http://localhost:3000/admin-feedback";
+                window.location.href = process.env.REACT_APP_BASE_URL + "/admin-feedback";
             }else if(localStorage.getItem("role") === 'patient') {
-                window.location.href = "http://localhost:3000/patient-homepage";
+                window.location.href =  process.env.REACT_APP_BASE_URL + "/patient-homepage";
             }
             return;
         }
@@ -80,11 +83,13 @@ class Login extends Component {
                     <label className="label mr-2 pl-5 color">
                         Not a member?
                     </label>
-                    <a href = "http://localhost:3000/register-patient" className="pl-2">Sign up now.</a>
+
+                    <a href = {this.state.SignUp} className="pl-2">Sign up now.</a>
                     <label className="label mr-2 pl-5 color">
                         Useful feedback?
                     </label>
-                    <a href = "http://localhost:3000/patient-feedback" className="pl-2">Read it now.</a>
+                    <a href = {this.state.ReadIt} className="pl-2">Read it now.</a>
+
                 </div>
             </div>
         </body>   

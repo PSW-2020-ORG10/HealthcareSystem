@@ -22,7 +22,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/getAll",
-      "UpstreamHttpMethod": [ "POST", "PUT", "GET", "OPTIONS" ],
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET"],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "TestKey",
         "AllowedScopes": []

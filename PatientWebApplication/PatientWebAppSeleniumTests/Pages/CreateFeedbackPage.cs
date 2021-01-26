@@ -10,7 +10,7 @@ namespace PatientWebAppSeleniumTests.Pages
     public class CreateFeedbackPage
     {
         private readonly IWebDriver driver;
-        public const string URI = "http://localhost:3000/create-feedback";
+        public const string URI = "https://healthcare-system-org10.herokuapp.com/create-feedback";
         private IWebElement MessageElement => driver.FindElement(By.Id("message"));
         private IWebElement IsAnonymousElement => driver.FindElement(By.Id("isAnonymous"));
         private IWebElement IsPublicElement => driver.FindElement(By.Id("isPublic"));
@@ -24,7 +24,7 @@ namespace PatientWebAppSeleniumTests.Pages
 
         public void EnsurePageIsDisplayed()
         {
-            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 20));
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 120));
             wait.Until(condition =>
             {
                 try
@@ -120,8 +120,8 @@ namespace PatientWebAppSeleniumTests.Pages
 
         public void WaitForFormSubmit()
         {
-            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 20));
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe("http://localhost:3000/patient-homepage"));
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 120));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe("https://healthcare-system-org10.herokuapp.com/patient-homepage"));
         }
 
         public void Navigate() => driver.Navigate().GoToUrl(URI);

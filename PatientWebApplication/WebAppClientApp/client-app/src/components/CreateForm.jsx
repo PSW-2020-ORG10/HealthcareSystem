@@ -86,7 +86,7 @@ class CreateForm extends Component {
             isPublic: false
         })
 
-        window.location.href = "http://localhost:3000/patient-homepage";
+        window.location.href =  process.env.REACT_APP_BASE_URL + "/patient-homepage";
     }
 
 }

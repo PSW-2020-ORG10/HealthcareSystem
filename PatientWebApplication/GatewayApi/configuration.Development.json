@@ -234,10 +234,10 @@
       "DownstreamPathTemplate": "/api/doctorappointment/storeEvent",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
-        {
-          "Host": "appointmentmicroserviceapi",
-          "Port": 53212
-        }
+         {
+            "Host": "localhost",
+            "Port": 53212
+         }
       ],
       "UpstreamPathTemplate": "/api/doctorappointment/storeEvent",
       "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],

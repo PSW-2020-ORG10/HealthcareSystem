@@ -6,9 +6,13 @@
     "axios": "^0.21.1",
     "bootstrap": "^4.3.1",
     "connected-react-router": "6.5.2",
+    "express": "^4.17.1",
+    "express-favicon": "^2.0.1",
     "history": "4.10.1",
     "jquery": "^3.5.1",
     "merge": "1.2.1",
+    "node-modules": "^1.0.1",
+    "path": "^0.12.7",
     "popper.js": "^1.16.0",
     "react": "16.11.0",
     "react-datepicker": "^3.3.0",
@@ -19,6 +23,7 @@
     "react-scripts": "^3.4.1",
     "react-slideshow-image": "^3.4.3",
     "react-stepper-horizontal": "^1.0.11",
+    "react-toastify": "6.2.0",
     "reactstrap": "8.1.1",
     "redux": "4.0.4",
     "redux-thunk": "2.3.0",
@@ -44,14 +49,17 @@
     "nan": "^2.14.1",
     "typescript": "3.6.4"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "cross-env CI=true react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "lint": "eslint ./src/**/*.ts ./src/**/*.tsx"
-  },
-  "eslintConfig": {
+   "scripts": {
+      "dev1": "REACT_APP_GATEWAY=http://localhost:54689/api  REACT_APP_BASE_URL=http://localhost:3000 REACT_APP_USERAPI_URL=http://localhost:53236/api node server.js",
+      "start": "REACT_APP_GATEWAY=https://gatewayapi-org10.herokuapp.com/api  REACT_APP_BASE_URL=https://healthcare-system-org10.herokuapp.com REACT_APP_USERAPI_URL=https://userapi-org10.herokuapp.com/api node server.js",
+      "dev2": "REACT_APP_GATEWAY=http://localhost:54689/api  REACT_APP_BASE_URL=http://localhost:3000 REACT_APP_USERAPI_URL=http://localhost:53236/api REACT_APP_USERAPI_URL=http://localhost:53236/api react-scripts build",
+      "build": "REACT_APP_GATEWAY=https://gatewayapi-org10.herokuapp.com/api  REACT_APP_BASE_URL=https://healthcare-system-org10.herokuapp.com REACT_APP_USERAPI_URL=https://userapi-org10.herokuapp.com/api react-scripts build",
+      "test": "cross-env CI=true react-scripts test --env=jsdom",
+      "eject": "react-scripts eject",
+      "lint": "eslint ./src/**/*.ts ./src/**/*.tsx"
+   },
+   "proxy": "https://healthcare-system-org10.herokuapp.com/api",
+   "eslintConfig": {
     "extends": "react-app"
   },
   "browserslist": [

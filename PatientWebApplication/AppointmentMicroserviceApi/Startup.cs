@@ -34,6 +34,11 @@ namespace AppointmentMicroserviceApi
             return $"server={server};port={port};database={database};user={user};password={password}";
         }
 
+        private string GetCurrentStage()
+        {
+            return Environment.GetEnvironmentVariable("STAGE") ?? "Testing";
+        }
+
         private string CreateConnectionStringFromEnvironmentEventStore()
         {
             string server = Environment.GetEnvironmentVariable("DATABASE_HOST") ?? "localhost";
@@ -68,7 +73,7 @@ namespace AppointmentMicroserviceApi
              .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddAuthorization();
 
-            if (CurrentEnvironment.IsEnvironment("Testing"))
+            if (GetCurrentStage().Equals("Testing") && CurrentEnvironment.IsEnvironment("Testing"))
             {
                 services.AddDbContext<MyDbContext>(options =>
                     options.UseInMemoryDatabase("TestingDB").UseLazyLoadingProxies());

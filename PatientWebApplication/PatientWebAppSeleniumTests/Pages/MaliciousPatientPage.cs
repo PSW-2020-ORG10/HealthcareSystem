@@ -11,7 +11,7 @@ namespace PatientWebAppSeleniumTests.Pages
     class MaliciousPatientPage
     {
         private readonly IWebDriver driver;
-        public const string URI = "http://localhost:3000/malicious-patient";
+        public const string URI = "https://healthcare-system-org10.herokuapp.com/malicious-patient";
         private IWebElement Table => driver.FindElement(By.Id("maliciousPatientTable"));
         private ReadOnlyCollection<IWebElement> Rows => driver.FindElements(By.XPath("//table[@id='maliciousPatientTable']/tbody/tr"));
         private IWebElement SubmitButtonElement => driver.FindElement(By.XPath("(//table[@id='maliciousPatientTable']/tbody/tr)[last()]/td[4]/button"));
@@ -44,7 +44,7 @@ namespace PatientWebAppSeleniumTests.Pages
 
         public void EnsurePageIsDisplayed()
         {
-            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 20));
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 120));
             wait.Until(condition =>
             {
                 try

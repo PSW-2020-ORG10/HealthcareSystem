@@ -23,7 +23,7 @@ class BlockPatientButton extends Component {
         });
         debugger;
         this.props.blockPatient(this.props.patient.id); 
-        window.location.href = "http://localhost:3000/malicious-patient";
+        window.location.href = process.env.REACT_APP_BASE_URL + "/malicious-patient";
     }
 }
 

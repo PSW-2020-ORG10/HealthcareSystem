@@ -61,7 +61,7 @@ class RegisterPatient extends Component {
             const res = await axios({
 
                 method: 'post',
-                url: 'http://localhost:53236/api/patientuser/image',
+                url: process.env.REACT_APP_USERAPI_URL + '/patientuser/image',
                 data: formData,
                 headers: { 'Content-Type': 'multipart/form-data', "Access-Control-Allow-Origin": "*"}
             })
@@ -397,7 +397,7 @@ class RegisterPatient extends Component {
                 toast.success("Registration successful!", {
                     position: toast.POSITION.TOP_RIGHT
                 });
-                window.location.href = "http://localhost:3000";
+                window.location.href = process.env.REACT_APP_BASE_URL;
                 return;
             }
             else {

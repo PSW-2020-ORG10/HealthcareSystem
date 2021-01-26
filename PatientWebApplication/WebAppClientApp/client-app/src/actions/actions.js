@@ -73,7 +73,7 @@ export const feedbackCreated = (feedback) => async (dispatch) => {
     try {
         debugger;
         feedback.patientId = localStorage.getItem('patientId');
-        await axios.post("http://localhost:54689/api/feedback", feedback,
+       await axios.post(process.env.REACT_APP_GATEWAY +"/feedback", feedback,
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -94,7 +94,7 @@ export const feedbackCreated = (feedback) => async (dispatch) => {
 export const feedbackPublished = (id) => async (dispatch) => {
     try {
         debugger
-        const response = await axios.put("http://localhost:54689/api/feedback/" + id, {}, {
+       const response = await axios.put(process.env.REACT_APP_GATEWAY +"/feedback/" + id, {}, {
                 headers: { "Access-Control-Allow-Origin": "*",
     "Authorization": "Bearer " + localStorage.getItem('token')}
               }); 
@@ -113,7 +113,7 @@ export const feedbackPublished = (id) => async (dispatch) => {
 export const loadedPublishedFeedback = () => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.get("http://localhost:54689/api/feedback/published",
+       const response = await axios.get(process.env.REACT_APP_GATEWAY +"/feedback/published",
         {
             headers: { "Access-Control-Allow-Origin": "*"}
           }); 
@@ -133,7 +133,7 @@ export const loadedPublishedFeedback = () => async (dispatch) => {
 export const loadedAllFeedback = () => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.get("http://localhost:54689/api/feedback",
+       const response = await axios.get(process.env.REACT_APP_GATEWAY +"/feedback",
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -154,7 +154,7 @@ export const loadedAllFeedback = () => async (dispatch) => {
 export const loadedAllPrescriptions = () => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.get("http://localhost:54689/api/prescription",
+       const response = await axios.get(process.env.REACT_APP_GATEWAY +"/prescription",
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -176,7 +176,7 @@ export const loadedAllPatientPrescriptions = () => async (dispatch) => {
     try {
         debugger;
         var id = localStorage.getItem("patientId")
-        const response = await axios.get("http://localhost:54689/api/prescription/patient/" + id,
+       const response = await axios.get(process.env.REACT_APP_GATEWAY +"/prescription/patient/" + id,
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -197,7 +197,7 @@ export const loadedAllPatientPrescriptions = () => async (dispatch) => {
 export const loadedPrescriptionFromAppointment = (appointmentid) => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.get("http://localhost:54689/api/prescription/appointment/" + appointmentid,
+        const response = await axios.get(process.env.REACT_APP_GATEWAY + "/prescription/appointment/" + appointmentid,
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -220,7 +220,7 @@ export const loadedPrescriptionFromAppointment = (appointmentid) => async (dispa
 export const patientRegistered = (patient) => async (dispatch) => {
     try {
         debugger;
-        await axios.post("http://localhost:54689/api/patientuser", patient,
+       await axios.post(process.env.REACT_APP_GATEWAY +"/patientuser", patient,
         {
             headers: { "Access-Control-Allow-Origin": "*" },
           });
@@ -243,7 +243,7 @@ export const simpleSearchPatientPrescriptions = (prescription) => async (dispatc
     try {
         debugger;
         prescription.patientId = localStorage.getItem("patientId");
-        const response = await axios.post("http://localhost:54689/api/prescription/search", prescription,
+       const response = await axios.post(process.env.REACT_APP_GATEWAY +"/prescription/search", prescription,
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -265,7 +265,7 @@ export const findOnePatient = (id) => async (dispatch) => {
     try {
         debugger;
         var id = localStorage.getItem("patientId")
-        await axios.get("http://localhost:54689/api/patientuser/getOne/" + id,
+       await axios.get(process.env.REACT_APP_GATEWAY +"/patientuser/getOne/" + id,
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -275,7 +275,7 @@ export const findOnePatient = (id) => async (dispatch) => {
                 type: FIND_ONE_PATIENT,
                 payload: response.data,
             });
-            axios.get("http://localhost:53236/api/patientuser/getimage/" + response.data.file,
+           axios.get(process.env.REACT_APP_GATEWAY +"/patientuser/getimage/" + response.data.file,
             {
                 headers: { "Access-Control-Allow-Origin": "*",
                            "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -300,7 +300,7 @@ export const advancedSearchPatientPrescriptions = (prescription) => async (dispa
     try {
         prescription.patientId = localStorage.getItem("patientId")
         debugger;
-        const response = await axios.post("http://localhost:54689/api/prescription/advancedsearch", prescription,
+       const response = await axios.post(process.env.REACT_APP_GATEWAY +"/prescription/advancedsearch", prescription,
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -320,12 +320,12 @@ export const advancedSearchPatientPrescriptions = (prescription) => async (dispa
 export const loadedAllPatientReports = (patientId) => async (dispatch) => {
     patientId = localStorage.getItem("patientId");
     try {
-        axios.all(  [axios.get('http://localhost:54689/api/doctorappointment/' + patientId,
+       axios.all([axios.get(process.env.REACT_APP_GATEWAY +'/doctorappointment/' + patientId,
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
           }),
-                     axios.get('http://localhost:54689/api/operation/' + patientId,
+           axios.get(process.env.REACT_APP_GATEWAY +'/operation/' + patientId,
                      {
                         headers: { "Access-Control-Allow-Origin": "*",
                                    "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -354,12 +354,12 @@ export const simpleSearchAppointments  = (searchDto) => async (dispatch) => {
     debugger;
     searchDto.patientId = localStorage.getItem("patientId");
     try {
-        axios.all([axios.post('http://localhost:54689/api/appointmentSearch/search', searchDto,
+       axios.all([axios.post(process.env.REACT_APP_GATEWAY +'/appointmentSearch/search', searchDto,
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
           }),
-            axios.post('http://localhost:54689/api/operation/search',  searchDto,
+           axios.post(process.env.REACT_APP_GATEWAY +'/operation/search',  searchDto,
             {
                 headers: { "Access-Control-Allow-Origin": "*",
                            "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -387,7 +387,7 @@ export const simpleSearchAppointments  = (searchDto) => async (dispatch) => {
 export const loadedAppointmentSurvey = () => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.get("http://localhost:54689/api/survey",
+       const response = await axios.get(process.env.REACT_APP_GATEWAY +"/survey",
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -409,7 +409,7 @@ export const surveyCreated = (survey) => async (dispatch) => {
     survey.patientId = localStorage.getItem("patientId");
     try {
         debugger;
-        await axios.post("http://localhost:54689/api/survey", survey,
+       await axios.post(process.env.REACT_APP_GATEWAY +"/survey", survey,
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -431,7 +431,7 @@ export const advancedSearchPatientAppointments = (appointment) => async (dispatc
     try {
         debugger;
         appointment.patientId = localStorage.getItem("patientId")
-        const response = await axios.post("http://localhost:54689/api/appointmentsearch/advancedsearch", appointment,
+       const response = await axios.post(process.env.REACT_APP_GATEWAY +"/appointmentsearch/advancedsearch", appointment,
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -452,7 +452,7 @@ export const advancedSearchPatientAppointments = (appointment) => async (dispatc
 export const loadedAllPatientAppointments = () => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.get("http://localhost:54689/api/doctorappointment/patient",
+       const response = await axios.get(process.env.REACT_APP_GATEWAY +"/doctorappointment/patient",
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -473,7 +473,7 @@ export const loadedAllPatientAppointments = () => async (dispatch) => {
 export const loadedAllRates = () => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.get("http://localhost:54689/api/survey/getRates",
+       const response = await axios.get(process.env.REACT_APP_GATEWAY +"/survey/getRates",
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -494,7 +494,7 @@ export const loadedAllRates = () => async (dispatch) => {
 export const loadedAllDoctorRates = () => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.get("http://localhost:54689/api/survey/getDoctorRates",
+       const response = await axios.get(process.env.REACT_APP_GATEWAY +"/survey/getDoctorRates",
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -515,7 +515,7 @@ export const loadedAllDoctorRates = () => async (dispatch) => {
 export const loadedAllAvailableDoctors = (specialty, date, patientId) => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.get("http://localhost:54689/api/doctor/available?specialty=" + specialty+ "&date=" + date + "&patientId=" + patientId,
+       const response = await axios.get(process.env.REACT_APP_GATEWAY +"/doctor/available?specialty=" + specialty+ "&date=" + date + "&patientId=" + patientId,
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -537,7 +537,7 @@ export const loadedAllPatientAppointmentsInTwoDays = () => async (dispatch) => {
     try {
         debugger;
         var id = localStorage.getItem("patientId")
-        const response = await axios.get("http://localhost:54689/api/doctorappointment/patientInTwoDays/" + id,
+       const response = await axios.get(process.env.REACT_APP_GATEWAY +"/doctorappointment/patientInTwoDays/" + id,
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -559,7 +559,7 @@ export const loadedAllAvailableAppointments = (dto) => async (dispatch) => {
     try {
         debugger;
         dto.patientId = localStorage.getItem("patientId")
-        const response = await axios.post("http://localhost:54689/api/doctorappointment/availableappointments", dto,
+       const response = await axios.post(process.env.REACT_APP_GATEWAY +"/doctorappointment/availableappointments", dto,
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -580,7 +580,7 @@ export const loadedAllPatientAppointmentsInFuture = () => async (dispatch) => {
     try {
         debugger;
         var id = localStorage.getItem("patientId")
-        const response = await axios.get("http://localhost:54689/api/doctorappointment/patientInFuture/" + id,
+       const response = await axios.get(process.env.REACT_APP_GATEWAY +"/doctorappointment/patientInFuture/" + id,
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -602,7 +602,7 @@ export const appointmentScheduled = (appointment) => async (dispatch) => {
     try {
         debugger;
         appointment.patientUserId = localStorage.getItem("patientId")
-        const response = await axios.post("http://localhost:54689/api/doctorappointment", appointment,
+       const response = await axios.post(process.env.REACT_APP_GATEWAY +"/doctorappointment", appointment,
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -623,7 +623,7 @@ export const appointmentScheduled = (appointment) => async (dispatch) => {
 export const cancelAppointment = (appointmentId) => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.put("http://localhost:54689/api/doctorappointment/" + appointmentId, {},
+       const response = await axios.put(process.env.REACT_APP_GATEWAY +"/doctorappointment/" + appointmentId, {},
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -645,7 +645,7 @@ export const loadedAllPatientAppointmentsWithSurvey = () => async (dispatch) => 
     try {
         debugger;
         var id = localStorage.getItem("patientId")
-        const response = await axios.get("http://localhost:54689/api/survey/" + id,
+       const response = await axios.get(process.env.REACT_APP_GATEWAY +"/survey/" + id,
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -667,7 +667,7 @@ export const loadedAllPatientAppointmentsWithoutSurvey = () => async (dispatch) 
     try {
         debugger;
         var id = localStorage.getItem("patientId")
-        const response = await axios.get("http://localhost:54689/api/survey/getWithSurveys/" + id,
+       const response = await axios.get(process.env.REACT_APP_GATEWAY +"/survey/getWithSurveys/" + id,
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -688,7 +688,7 @@ export const loadedAllPatientAppointmentsWithoutSurvey = () => async (dispatch) 
 export const loadedAllDoctors = () => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.get("http://localhost:54689/api/doctor",
+       const response = await axios.get(process.env.REACT_APP_GATEWAY +"/doctor",
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -711,7 +711,7 @@ export const recommendAppointment = (appointment) => async (dispatch) => {
     try {
         debugger;
         appointment.patientId = localStorage.getItem("patientId");
-        const response = await axios.post("http://localhost:54689/api/doctorappointment/recommend", appointment,
+       const response = await axios.post(process.env.REACT_APP_GATEWAY +"/doctorappointment/recommend", appointment,
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -734,7 +734,7 @@ export const createRecommendAppointment = (appointment) => async (dispatch) => {
     try {
         debugger;
         appointment.patientUserId = localStorage.getItem("patientId");
-        const response = await axios.post("http://localhost:54689/api/doctorappointment", appointment,
+       const response = await axios.post(process.env.REACT_APP_GATEWAY +"/doctorappointment", appointment,
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -756,7 +756,7 @@ export const createRecommendAppointment = (appointment) => async (dispatch) => {
 export const loadedAllPatients = () => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.get("http://localhost:54689/api/patientuser",
+       const response = await axios.get(process.env.REACT_APP_GATEWAY +"/patientuser",
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -777,7 +777,7 @@ export const loadedAllPatients = () => async (dispatch) => {
 export const blockPatient = (patientId) => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.put("http://localhost:54689/api/patientuser/" + patientId, {},
+       const response = await axios.put(process.env.REACT_APP_GATEWAY +"/patientuser/" + patientId, {},
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -798,7 +798,7 @@ export const blockPatient = (patientId) => async (dispatch) => {
 export const loadedMaliciousPatients = () => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.get("http://localhost:54689/api/patientuser/malicious",
+       const response = await axios.get(process.env.REACT_APP_GATEWAY +"/patientuser/malicious",
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -819,7 +819,7 @@ export const loadedMaliciousPatients = () => async (dispatch) => {
 export const loadedImage = (fileName) => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.get("http://localhost:54689/api/patientuser/getimage/" + fileName,
+       const response = await axios.get(process.env.REACT_APP_GATEWAY +"/patientuser/getimage/" + fileName,
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -839,7 +839,7 @@ export const loadedImage = (fileName) => async (dispatch) => {
 
 export const loadedImageForAds = (fileName) => async (dispatch) => {
     try {
-        const response = await axios.get("http://localhost:54689/api/patientuser/getimage/" + fileName,
+       const response = await axios.get(process.env.REACT_APP_GATEWAY+"/patientuser/getimage/" + fileName,
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -861,7 +861,7 @@ export const loadedImageForAds = (fileName) => async (dispatch) => {
 export const loadedAllMessages = () => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.get("http://localhost:53236/api/message",
+       const response = await axios.get(process.env.REACT_APP_GATEWAY+"/message",
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -881,7 +881,7 @@ export const loadedAllMessages = () => async (dispatch) => {
 
 export const loadedImageForSecondAd = (fileName) => async (dispatch) => {
     try {
-        const response = await axios.get("http://localhost:54689/api/patientuser/getimage/" + fileName,
+       const response = await axios.get(process.env.REACT_APP_GATEWAY +"/patientuser/getimage/" + fileName,
         {
             headers: { "Access-Control-Allow-Origin": "*",
             "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -902,7 +902,7 @@ export const loadedImageForSecondAd = (fileName) => async (dispatch) => {
 
 export const loadedImageForThirdAd = (fileName) => async (dispatch) => {
     try {
-        const response = await axios.get("http://localhost:54689/api/patientuser/getimage/" + fileName,
+       const response = await axios.get(process.env.REACT_APP_GATEWAY +"/patientuser/getimage/" + fileName,
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -923,7 +923,7 @@ export const loadedImageForThirdAd = (fileName) => async (dispatch) => {
 export const userLoggedIn = (user) => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.post("http://localhost:54689/api/login", user,
+       const response = await axios.post(process.env.REACT_APP_GATEWAY+"/login", user,
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -944,7 +944,7 @@ export const storeEvent = (appointmentEvent) => async (dispatch) => {
     try {
         debugger;
         appointmentEvent.patientId = localStorage.getItem("patientId")
-        const response = await axios.post("http://localhost:54689/api/doctorappointment/storeEvent", appointmentEvent,
+        const response = await axios.post(process.env.REACT_APP_GATEWAY + "/doctorappointment/storeEvent", appointmentEvent,
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}
@@ -965,7 +965,7 @@ export const storeEvent = (appointmentEvent) => async (dispatch) => {
 export const getStatistics = () => async (dispatch) => {
     try {
         debugger;
-        const response = await axios.get("http://localhost:54689/api/doctorappointment/getStatistics",
+        const response = await axios.get(process.env.REACT_APP_GATEWAY + "/doctorappointment/getStatistics",
         {
             headers: { "Access-Control-Allow-Origin": "*",
                        "Authorization" :  "Bearer " + localStorage.getItem("token")}

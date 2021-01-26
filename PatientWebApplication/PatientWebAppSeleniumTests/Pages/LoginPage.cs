@@ -9,7 +9,7 @@ namespace PatientWebAppSeleniumTests.Pages
     public class LoginPage
     {
         private readonly IWebDriver driver;
-        public const string URI = "http://localhost:3000/";
+        public const string URI = "https://healthcare-system-org10.herokuapp.com/";
         private IWebElement EmailElement => driver.FindElement(By.Id("email"));
         private IWebElement PasswordElement => driver.FindElement(By.Id("password"));
         private IWebElement SubmitButtonElement => driver.FindElement(By.Id("submit"));
@@ -51,14 +51,14 @@ namespace PatientWebAppSeleniumTests.Pages
 
         public void WaitForFormSubmit()
         {
-            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 20));
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe("http://localhost:3000/patient-homepage"));
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 120));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe("https://healthcare-system-org10.herokuapp.com/patient-homepage"));
         }
 
         public void WaitForFormSubmitAdmin()
         {
-            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 20));
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe("http://localhost:3000/admin-feedback"));
+            var wait = new WebDriverWait(driver, new TimeSpan(0, 0, 120));
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.UrlToBe("https://healthcare-system-org10.herokuapp.com/admin-feedback"));
         }
 
         public void Navigate() => driver.Navigate().GoToUrl(URI);
