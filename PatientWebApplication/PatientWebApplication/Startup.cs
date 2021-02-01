@@ -1,5 +1,5 @@
+using EventStore.EventDBContext;
 using FluentValidation.AspNetCore;
-using HealthClinic.CL.DbContextModel;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PatientWebApplication.Validators;
+using System;
 
 namespace PatientWebApplication
 {
@@ -20,6 +21,35 @@ namespace PatientWebApplication
         {
             Configuration = configuration;
             CurrentEnvironment = currentEnvironment;
+            
+        }
+
+        private string CreateConnectionStringFromEnvironment()
+        {
+            string server = Environment.GetEnvironmentVariable("DATABASE_HOST") ?? "localhost";
+            string port = Environment.GetEnvironmentVariable("DATABASE_PORT") ?? "3306";
+            string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA") ?? "MYSQLHealtcareDB";
+            string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "root";
+            string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "root";
+            
+            return $"server={server};port={port};database={database};user={user};password={password}";
+        }
+
+        
+        private string GetCurrentStage(){
+               return Environment.GetEnvironmentVariable("STAGE") ?? "Testing";  
+        }
+
+        private string CreateConnectionStringFromEnvironmentEventStore()
+        {
+            string server = Environment.GetEnvironmentVariable("DATABASE_HOST") ?? "localhost";
+            string port = Environment.GetEnvironmentVariable("DATABASE_PORT") ?? "3306";
+            string database = Environment.GetEnvironmentVariable("DATABASE_SCHEMA") ?? "EventsDB";
+            string user = Environment.GetEnvironmentVariable("DATABASE_USERNAME") ?? "root";
+            string password = Environment.GetEnvironmentVariable("DATABASE_PASSWORD") ?? "root";
+
+            return $"server={server};port={port};database={database};user={user};password={password}";
+
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -37,7 +67,7 @@ namespace PatientWebApplication
                options.RegisterValidatorsFromAssemblyContaining<Startup>();
            });
 
-            if (CurrentEnvironment.IsEnvironment("Testing"))
+            if (GetCurrentStage().Equals("Testing") && CurrentEnvironment.IsEnvironment("Testing"))
             {
                 services.AddDbContext<MyDbContext>(options =>
                     options.UseInMemoryDatabase("TestingDB").UseLazyLoadingProxies());
@@ -45,7 +75,12 @@ namespace PatientWebApplication
             else
             {
                 services.AddDbContext<MyDbContext>(options =>
-                options.UseMySql(ConfigurationExtensions.GetConnectionString(Configuration, "MyDbContextConnectionString")).UseLazyLoadingProxies());
+                options.UseMySql(CreateConnectionStringFromEnvironment(),
+                   builder => builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null)).UseLazyLoadingProxies());
+
+                services.AddDbContext<EventDbContext>(options =>
+                options.UseMySql(CreateConnectionStringFromEnvironmentEventStore(),
+                   builder => builder.EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null)).UseLazyLoadingProxies());
             }
 
             // In production, the React files will be served from this directory
@@ -53,11 +88,15 @@ namespace PatientWebApplication
             {
                 configuration.RootPath = "ClientApp/build";
             });
+
+            services.AddOcelot();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, MyDbContext dbContext)
         {
+            dbContext.Database.EnsureCreated();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -71,13 +110,7 @@ namespace PatientWebApplication
             //app.UseSpaStaticFiles();
 
             app.UseRouting();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}");
-            });
+            app.UseOcelot().Wait();
 
             app.UseSpa(spa =>
             {
@@ -88,6 +121,13 @@ namespace PatientWebApplication
                     spa.UseReactDevelopmentServer(npmScript: "start");
                 }
             });
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+
+            app.UseOcelot().Wait();
         }
     }
 }

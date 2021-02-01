@@ -1,27 +1,8 @@
-using HealthClinic.CL.DbContextModel;
-using HealthClinic.CL.Dtos;
-using HealthClinic.CL.Model.Doctor;
-using HealthClinic.CL.Model.Employee;
-using HealthClinic.CL.Model.Patient;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.AspNetCore.TestHost;
-using Newtonsoft.Json;
-using PatientWebApplication;
-using Shouldly;
-using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
-
-namespace PatientWebApplicationIntegrationTests
+/*namespace PatientWebApplicationIntegrationTests
 {
     public class ScheduleRegularAppointmentsTests
     {
-        /*private readonly HttpClient _client;
+        private readonly HttpClient _client;
         private readonly MyDbContext _context;
         public ScheduleRegularAppointmentsTests()
         {
@@ -72,6 +53,7 @@ namespace PatientWebApplicationIntegrationTests
             var stringContent = new StringContent(JsonConvert.SerializeObject(new DoctorAppointment(0, new TimeSpan(15, 30, 0), "23/12/2020", 2, 2, new List<Referral>(), "Ordination 1")), Encoding.UTF8, "application/json");
             var response = await _client.PostAsync("http://localhost:60198/api/doctorappointment", stringContent);
             response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
-        }*/
+        }
     }
 }
+*/

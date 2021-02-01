@@ -1,11 +1,8 @@
-﻿using HealthClinic.CL.Model.Patient;
-using HealthClinic.CL.Repository;
-using HealthClinic.CL.Service;
-using Moq;
+﻿using Moq;
 using Shouldly;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using UserMicroserviceApi.Model;
+using UserMicroserviceApi.Repository;
+using UserMicroserviceApi.Service;
 using Xunit;
 
 namespace PatientWebApplicationTests
@@ -17,7 +14,7 @@ namespace PatientWebApplicationTests
         public void Find_Patient()
         {
             var mockVerify = new Mock<IEmailVerificationService>();
-            PatientService service = new PatientService(CreateStubRepository(), mockVerify.Object, new RegularAppointmentService(new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorService(new OperationRepository(), new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorRepository()), new PatientsRepository(), new OperationService(new OperationRepository())));
+            PatientService service = new PatientService(CreateStubRepository(), mockVerify.Object);
 
             PatientUser foundPatient = service.GetOne(1);
 
@@ -28,7 +25,7 @@ namespace PatientWebApplicationTests
         public void Find_Not_Patient()
         {
             var mockVerify = new Mock<IEmailVerificationService>();
-            PatientService service = new PatientService(CreateStubRepository(), mockVerify.Object, new RegularAppointmentService(new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorService(new OperationRepository(), new AppointmentRepository(), new EmployeesScheduleRepository(), new DoctorRepository()), new PatientsRepository(), new OperationService(new OperationRepository())));
+            PatientService service = new PatientService(CreateStubRepository(), mockVerify.Object);
 
             PatientUser foundPatient = service.GetOne(2);
 

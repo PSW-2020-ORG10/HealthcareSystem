@@ -1,0 +1,294 @@
+﻿{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/registration",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 59278
+        }
+      ],
+      "UpstreamPathTemplate": "/api/registration",
+      "UpstreamHttpMethod": [ "POST", "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/urgentOrder/{medicine}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 59328
+        }
+      ],
+      "UpstreamPathTemplate": "/api/urgentOrder/{medicine}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/medicineWithQuantity/{medicine}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 50482
+        }
+      ],
+      "UpstreamPathTemplate": "/api/medicineWithQuantity/{medicine}",
+      "UpstreamHttpMethod": [ "PUT" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/medicineWithQuantity",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 50482
+        }
+      ],
+      "UpstreamPathTemplate": "/api/medicineWithQuantity",
+      "UpstreamHttpMethod": [ "POST", "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/medicineWithQuantity/{medicineId}/{quantity}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 50482
+        }
+      ],
+      "UpstreamPathTemplate": "/api/medicineWithQuantity/{medicineId}/{quantity}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/medicineWithQuantity/description/{medicine}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 50482
+        }
+      ],
+      "UpstreamPathTemplate": "/api/medicineWithQuantity/description/{medicine}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/tender",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 50921
+        }
+      ],
+      "UpstreamPathTemplate": "/api/tender",
+      "UpstreamHttpMethod": [ "POST", "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/tender/active",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 50921
+        }
+      ],
+      "UpstreamPathTemplate": "/api/tender/active",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/tender/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 50921
+        }
+      ],
+      "UpstreamPathTemplate": "/api/tender/{id}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/tender/offer",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 50921
+        }
+      ],
+      "UpstreamPathTemplate": "/api/tender/offer",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/tender/allPharmacyOffers/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 50921
+        }
+      ],
+      "UpstreamPathTemplate": "/api/tender/allPharmacyOffers/{id}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/tender/pharmacyOffer/{offerId}/{tenderId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 50921
+        }
+      ],
+      "UpstreamPathTemplate": "/api/tender/pharmacyOffer/{offerId}/{tenderId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/tender/acceptOffer/{offerId}/{tenderId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 50921
+        }
+      ],
+      "UpstreamPathTemplate": "/api/tender/acceptOffer/{offerId}/{tenderId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/tender/medicineForTender",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 50921
+        }
+      ],
+      "UpstreamPathTemplate": "/api/tender/medicineForTender",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/tender/medicinesIsa",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 50921
+        }
+      ],
+      "UpstreamPathTemplate": "/api/tender/medicinesIsa",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/report",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 50921
+        }
+      ],
+      "UpstreamPathTemplate": "/api/report",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/sharingPrescription/description/{medicine}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 63327
+        }
+      ],
+      "UpstreamPathTemplate": "/api/sharingPrescription/description/{medicine}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/sharingPrescription/http/medicineAvailability/{medicine}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 63327
+        }
+      ],
+      "UpstreamPathTemplate": "/api/sharingPrescription/http/medicineAvailability/{medicine}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/sharingPrescription",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 63327
+        }
+      ],
+      "UpstreamPathTemplate": "/api/sharingPrescription",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/sharingPrescription/medicinesIsa",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 63327
+        }
+      ],
+      "UpstreamPathTemplate": "/api/sharingPrescription/medicinesIsa",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/actionsAndBenefits",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 63327
+        }
+      ],
+      "UpstreamPathTemplate": "/api/actionsAndBenefits",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/patientUser/all",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 53236
+        }
+      ],
+      "UpstreamPathTemplate": "/api/patientUser/all",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/message",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 53236
+        }
+      ],
+      "UpstreamPathTemplate": "/api/message",
+      "UpstreamHttpMethod": [ "GET", "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/medicineWithQuantity/all",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 50482
+        }
+      ],
+      "UpstreamPathTemplate": "/api/medicineWithQuantity/all",
+      "UpstreamHttpMethod": [ "GET" ]
+    }
+
+  ]
+}
+
